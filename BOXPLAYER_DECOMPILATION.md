@@ -643,5 +643,245 @@ Plugins are loaded dynamically via `QPluginLoader` in `PlayerFactory`. Each plug
 | `fpga::HRecvCard` | libFPGADriver | Receiving card parameter management |
 | `fpga::HTask` | libFPGADriver | FPGA task scheduling |
 | `fpga::HUpgrade` | libFPGADriver | FPGA firmware upgrade |
-| `fpga::HStatus` | libFPGADriver | FPGA health/status monitoring |
+| `fpga::HStatus` | libFPGADriver | FPGA health/status monitoring (states: kIdleStatus, kEnterWizard, kUpgradeFPGA, kEnterRC) |
 | `sdk::HFPGAMonitor` | libSDKServices | FPGA monitoring service |
+
+---
+
+## GPU Rendering Pipeline (libMainWindowRender.so)
+
+The PX30 version uses **DRM/KMS direct rendering** with OpenGL ES 2.0 - NOT software Qt rendering:
+
+```
+1. Opens /dev/dri/card0 (DRM device)
+2. Creates GBM (Generic Buffer Manager) surface
+3. EGL context bound to GBM surface
+4. Custom GLSL vertex/fragment shaders:
+   - Texture mapping (s_texture1, s_texture2, s_textureIndex)
+   - UV coordinate transforms for area positioning
+   - Dazzle effects (transition animations)
+   - Screen rotation (0/90/180/270)
+   - HSV-to-RGB color conversion in shader
+   - Alpha blending for layer compositing
+5. glReadPixels for screenshots
+6. Page flip to DRM framebuffer
+7. FPGA reads pixel data from framebuffer
+```
+
+**Key Rendering Classes:**
+- `HRenderEngine` - Main render loop with async message queue
+- `HRenderTools` - EGL context management, shader compilation, texture management
+- `HRenderData` - Program/scene state for GPU
+- `HMessageQueue` - Async render command queue
+- `HPictureSession` - Image layer rendering
+- `HAreaSession` - Area region compositing
+- Effects: `CenterEffect`, `DoorEffect` transitions
+
+**Render thread runs at max scheduler priority.**
+
+---
+
+## SDK XML Protocol (Complete Method Reference)
+
+### Protocol Format
+```xml
+<!-- Request from HDPlayer -->
+<?xml version="1.0" encoding="utf-8"?>
+<sdk guid="##GUID">
+    <in method="MethodName">
+        <param attr="value"/>
+    </in>
+</sdk>
+
+<!-- Response from BoxSDK -->
+<?xml version="1.0" encoding="utf-8"?>
+<sdk guid="##GUID">
+    <out method="MethodName" result="kSuccess">
+        <data/>
+    </out>
+</sdk>
+```
+
+### Complete SDK Method List
+
+#### HMGeneral (General Device)
+| Method | Direction | Description |
+|--------|-----------|-------------|
+| `GetDeviceInfo` | GET | Device model, version, screen size |
+| `GetDeviceName` | GET | User-assigned device name |
+| `SetDeviceName` | SET | Change device name |
+| `GetHardwareInfo` | GET | CPU, RAM, storage info |
+| `GetSDKTcpServer` | GET | SDK server port/config |
+| `SetSDKTcpServer` | SET | Change SDK server config |
+| `GetAdminModeInfo` | GET | Admin mode status |
+| `SetAdminModeInfo` | SET | Enable/disable admin mode |
+| `UnlockAdminModePassword` | SET | Unlock with password |
+| `GetScreenshot2` | GET | Capture current display |
+| `GetSystemVolume` | GET | Audio volume |
+| `SetSystemVolume` | SET | Change volume |
+| `GetDataSourceInfo` | GET | External data source config |
+| `SetDataSourceInfo` | SET | Configure data sources |
+| `ReloadDeviceID` | SET | Reload device ID from storage |
+
+#### HMProgram (Program Management)
+| Method | Direction | Description |
+|--------|-----------|-------------|
+| `GetAllProgram` | GET | List all programs |
+| `GetProgram` | GET | Get specific program |
+| `AddProgram` | SET | Upload new program |
+| `UpdateProgram` | SET | Update existing program |
+| `DeleteProgram` | SET | Delete program |
+| `SwitchProgram` | SET | Switch active program |
+| `RealTimeUpdate` | SET | Live update content |
+| `InsertPlayProgram` | SET | Insert priority program |
+| `ScreenRotation` | SET | Rotate screen (0/90/180/270) |
+| `GetCurrentPlayProgramGUID` | GET | Currently playing program |
+| `ModifyProgram` | SET | Modify program in-place |
+| `DeleteNotCiteFile` | SET | Clean unreferenced files |
+
+#### HMHwSet (FPGA Hardware Settings)
+| Method | Direction | Description |
+|--------|-----------|-------------|
+| `GetSDKFPGAConfig` | GET | Read FPGA configuration |
+| `SetSDKFPGAConfig` | SET | Write FPGA configuration |
+| `GetBoxHwConfig` | GET | Read hardware config XML |
+| `SetBoxHwConfig` | SET | Write hardware config |
+| `SaveBoxHwConfig` | SET | Persist to flash |
+| `ReplaceBoxHwConfig` | SET | Full replacement |
+| `SmartSetting` | SET | Auto-configure for module type |
+| `SmartDrawLine` | SET | Smart line drawing test |
+
+#### HMLight (Brightness)
+| Method | Direction | Description |
+|--------|-----------|-------------|
+| `GetLuminancePloy` | GET | Brightness schedule/policy |
+| `SetLuminancePloy` | SET | Set brightness schedule |
+
+#### HMScreenOnoff (Screen Schedule)
+| Method | Direction | Description |
+|--------|-----------|-------------|
+| `GetSwitchTime` | GET | On/off schedule |
+| `SetSwitchTime` | SET | Set on/off schedule |
+| `OpenScreen` | SET | Turn on immediately |
+| `CloseScreen` | SET | Turn off immediately |
+
+#### HMTime (Time Sync)
+| Method | Direction | Description |
+|--------|-----------|-------------|
+| `GetTimeInfo` | GET | Current time, timezone, NTP |
+| `SetTimeInfo` | SET | Set time, timezone, NTP server |
+
+#### HMEthernet (Network)
+| Method | Direction | Description |
+|--------|-----------|-------------|
+| `GetEth0Info` | GET | Ethernet IP/mask/gateway |
+| `SetEth0Info` | SET | Configure ethernet |
+| `GetPppoeInfo` | GET | PPPoE status |
+| `GetWifiInfo` | GET | WiFi configuration |
+| `SetWifiInfo` | SET | Configure WiFi |
+| `GetNetworkInfo` | GET | Full network status |
+
+#### HMSensor (Sensors/Modbus)
+| Method | Direction | Description |
+|--------|-----------|-------------|
+| `GetSensorInfo` | GET | Sensor configuration |
+| `GetCurrentSensorValue` | GET | Live sensor readings |
+| `GetGPSInfo` | GET | GPS coordinates |
+| `GetRelayInfo` | GET | Relay states |
+| `SetRelayInfo` | SET | Configure relays |
+| `SetRelayStatusInfo` | SET | Toggle relay |
+| `GetSerialSDK` | GET | Serial SDK config |
+| `SetSerialSDK` | SET | Configure serial SDK |
+
+#### HMLicense (Licensing)
+| Method | Direction | Description |
+|--------|-----------|-------------|
+| `GetLicense` | GET | Current license |
+| `SetLicense` | SET | Apply license |
+| `ClearLicense` | SET | Remove license |
+| `CheckSuperCode` | SET | Validate super code |
+
+#### HMUpgrade (Firmware)
+| Method | Direction | Description |
+|--------|-----------|-------------|
+| `FirmwareUpgrade` | SET | Start OTA upgrade |
+| `ExcuteUpgradeShell` | SET | Run upgrade script |
+| `GetUpgradeResult` | GET | Upgrade status |
+
+---
+
+## BoxHwConfig XML Tags (Complete FPGA Configuration)
+
+These XML tags define the complete LED panel hardware configuration:
+
+```
+BoxHwConfig, CardInfo, Card, ModuleType, DriveChipType,
+CellWidth, CellHight, CellScanRow, ScanMode, MoreThan16Scan,
+ESignal, Chip595, Chip5958, DecodingMode, DataPolarity, OEPolarity,
+SignalColor, CellNullNum, LookUpTab, RefreshRate, R_Acc,
+GrayLevel, LuminanceLevel, Frequency, PriorityMode,
+RGB20, DSignalExtended, RGB24, RGB28, RGB32,
+GamaValue, RedCorrection, GreenCorrection, BlueCorrection,
+DutyCycle, BV, Phase, Afterglow, OM,
+PwmRedCurrent, PwmGreenCurrent, PwmBlueCurrent,
+SPWMMode, FMPWMMultiplier, DoubleRefreshRate, GCLKMultiplier,
+PwmFrequency, F_Frame, Brightness,
+NetcardCtrlRect, ModeSwitchPlan, Rotation,
+SendCardMode, NetCardCtrlMode, AsyncPriorityMode, EnSendcardOnly,
+RecvCardChoose, RgbCtrlWidth, RgbCtrlHeight, BrightnessSetMode,
+UDefGamaList, GamaTab, EnOutputDefinition, OutputDefinition,
+PwmChipType, PWMICRedReg1-3, PWMICGreenReg1-3, PWMICBlueReg1-3
+```
+
+---
+
+## Cloud Platform API Endpoints
+
+| Endpoint | Purpose |
+|----------|---------|
+| `/api/DeviceApi/Register` | Device registration |
+| `/api/DeviceApi/Heartbeat` | JSON heartbeat with status |
+| `/api/DeviceApi/ReportProgram` | Report playing program |
+| `/api/DeviceApi/ReportAllInfo` | Full device info report |
+| `/api/DeviceApi/ReportTaskResult` | Task execution result |
+| `/api/DeviceApi/ReportGpsInfo` | GPS location data |
+| `/api/DeviceApi/HistorySensor` | Historical sensor data |
+| `/api/DeviceApi/upload` | File upload |
+| `/api/led/hdSet/change/report` | HDSet config change notification |
+
+**Remote Access:** ngrok tunnel to `ngrok1.huidu.cn:4443` (port 29001 → local telnet)
+
+---
+
+## Key File Paths on Device
+
+| Path | Purpose |
+|------|---------|
+| `/root/Box/` | Main installation directory |
+| `/root/Box/BoxPlayer/` | Player binaries and libraries |
+| `/root/Box/BoxPlayer/plugins/` | Content rendering plugins |
+| `/root/Box/System/` | System binaries |
+| `/root/Box/SystemConfig/` | System config (process_info.xml, dev_type) |
+| `/root/Box/config/` | Device config (dev_info.xml, hwsetting/, send_card_cfg.xml) |
+| `/root/Box/data/` | Runtime data (id, permanentConfig.xml, license.ini) |
+| `/root/Box/data/id` | Device ID (format: `D15-XXXXXX`) |
+| `/root/Box/project/` | Program files, logs, API |
+| `/root/Box/version/` | Version tracking files |
+| `/root/Box/image/` | Status icons and clock faces |
+| `/root/Box/lib/` | Qt libraries, fonts |
+| `/boot/fpga.img` | FPGA firmware image |
+| `/boot/httpApi` | HTTP API enable flag |
+| `/boot/omsEnable` | OMS cloud service enable flag |
+| `/boot/rotation/` | Screen rotation config (0-3) |
+| `/dev/ttyS1` | FPGA serial communication port |
+| `/dev/watchdog` | Hardware watchdog |
+| `/dev/dri/card0` | DRM graphics device |
+| `/mnt/usb_storage` | USB disk mount point |
+| `/root/upgrade.status` | Upgrade status (0=upgrading, 1=complete) |
+
+---
+
+## Supported Media Types
+- **Video:** mp4, mkv, avi, flv, 3gp, dat, ts, mpg, f4v
+- **Image:** jpg, jpeg, png, bmp, tiff, gif
+- **Playback modes:** Normal, Sync, 12V (vehicle power), Immediate (priority), Bus station, GPS-triggered

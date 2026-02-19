@@ -143,6 +143,11 @@ notify = "7"                                             # File watching (USB di
 thiserror = "2"                                          # Error types
 anyhow = "1"                                             # Error handling
 toml = "0.8"                                             # Config files
+drm = "0.12"                                             # DRM/KMS framebuffer
+gbm = "0.16"                                             # GBM buffer management
+# glow = "0.14"                                          # OpenGL ES 2.0 (if GPU rendering)
+mlua = { version = "0.10", features = ["lua51"] }        # Lua 5.1 (hwSetting.lua compat)
+ffmpeg-next = "7"                                        # FFmpeg video decoding
 ```
 
 ---
@@ -153,15 +158,18 @@ toml = "0.8"                                             # Config files
 **Goal: Display a static image on LED panel**
 
 1. **FPGA Serial Driver** (`fpga/serial.rs`, `fpga/core.rs`)
-   - Open `/dev/cyclone4-0`
+   - Open `/dev/ttyS1` (PX30) or `/dev/cyclone4-0` (RK3288)
    - Implement serial protocol (reverse-engineer from binary analysis)
    - Send raw pixel data to FPGA
    - Read FPGA status/version
 
-2. **Framebuffer Renderer** (`render/engine.rs`, `render/surface.rs`)
-   - Create offscreen pixel buffer (equivalent to Qt `-platform offscreen`)
-   - Render solid color / test pattern
-   - Convert RGB to FPGA pixel format
+2. **DRM/KMS Framebuffer Renderer** (`render/engine.rs`, `render/surface.rs`)
+   - Open `/dev/dri/card0` via DRM/KMS (use `drm-rs` crate)
+   - Create GBM surface with EGL context
+   - OpenGL ES 2.0 rendering via `glow` or `wgpu`
+   - Custom shaders for texture mapping, rotation, alpha blending
+   - Page flip to DRM framebuffer
+   - Alternatively: `tiny-skia` for CPU software rendering (simpler, no GPU dependency)
 
 3. **Image Plugin** (`render/plugins/image.rs`)
    - Load PNG/JPG/BMP

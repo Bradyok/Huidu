@@ -1,0 +1,70 @@
+[package]
+name = "huidu-player"
+version = "0.1.0"
+edition = "2024"
+description = "Huidu LED sign player - Rust reproduction of BoxPlayer"
+
+[dependencies]
+# Async runtime
+tokio = { version = "1", features = ["full"] }
+
+# Serialization
+serde = { version = "1", features = ["derive"] }
+
+# XML parsing (program files + network protocol)
+quick-xml = { version = "0.37", features = ["serialize"] }
+
+# Image loading/manipulation
+image = "0.25"
+
+# 2D software rendering (QPainter replacement)
+tiny-skia = "0.11"
+
+# Font loading
+rusttype = "0.9"
+
+# Logging
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+# HTTP client (cloud API, weather, etc.)
+reqwest = { version = "0.12", features = ["json"] }
+
+# Date/time
+chrono = "0.4"
+
+# GIF decoding
+gif = "0.13"
+
+# Error handling
+thiserror = "2"
+anyhow = "1"
+
+# CLI args
+clap = { version = "4", features = ["derive"] }
+
+# UUID generation (for GUIDs)
+uuid = { version = "1", features = ["v4"] }
+
+# MD5 hashing (file transfers)
+md5 = "0.7"
+
+# Byte order (little-endian protocol)
+byteorder = "1"
+
+[target.'cfg(unix)'.dependencies]
+# Serial port (FPGA comm) - only on Linux
+serialport = "4"
+
+# DRM/KMS framebuffer - only on Linux
+# drm = "0.12"
+# gbm = "0.16"
+
+# Unix APIs
+nix = { version = "0.29", features = ["net", "fs"] }
+
+[profile.release]
+opt-level = "z"
+lto = true
+strip = true
+panic = "abort"

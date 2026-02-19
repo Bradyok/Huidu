@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<screen timeStamps="1708300000">
+  <program guid="demo-001" name="Demo Program" type="normal">
+    <!-- Full-screen clock area -->
+    <area guid="area-clock" name="Clock" alpha="255">
+      <rectangle x="0" y="0" width="128" height="32"/>
+      <resources>
+        <clock guid="clk-1" type="digital">
+          <date format="1" color="#00ff00" display="true"/>
+          <time format="1" color="#ffffff" display="true"/>
+        </clock>
+      </resources>
+    </area>
+
+    <!-- Scrolling text banner -->
+    <area guid="area-text" name="Banner" alpha="255">
+      <rectangle x="0" y="32" width="128" height="16"/>
+      <resources>
+        <text guid="txt-1" singleLine="true">
+          <string>Welcome to Huidu LED Player - Rust Edition!</string>
+          <effect in="21" out="0" inSpeed="3" outSpeed="0" duration="0"/>
+          <font size="14" color="#ff0000"/>
+          <style align="left" valign="middle"/>
+        </text>
+      </resources>
+    </area>
+
+    <!-- Static text -->
+    <area guid="area-info" name="Info" alpha="255">
+      <rectangle x="0" y="48" width="128" height="16"/>
+      <resources>
+        <text guid="txt-2" singleLine="false">
+          <string>huidu-player v0.1</string>
+          <font size="12" color="#ffff00"/>
+          <style align="center" valign="middle"/>
+        </text>
+      </resources>
+    </area>
+  </program>
+</screen>
