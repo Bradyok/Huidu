@@ -15,7 +15,7 @@ impl StorageService {
     }
 
     /// Save screen XML to the program directory
-    pub fn save_program(&self, screen: &Screen, xml: &str) -> anyhow::Result<()> {
+    pub fn save_program(&self, _screen: &Screen, xml: &str) -> anyhow::Result<()> {
         std::fs::create_dir_all(&self.program_dir)?;
 
         // Save as current_program.xml

@@ -15,7 +15,7 @@ pub async fn handle_sdk_command(
     xml: &str,
     session: &Session,
     player_tx: &mpsc::Sender<PlayerCommand>,
-    program_dir: &str,
+    _program_dir: &str,
     services: &Arc<RwLock<ServicesState>>,
     screen_width: u32,
     screen_height: u32,

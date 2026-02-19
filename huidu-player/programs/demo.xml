@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <screen timeStamps="1708300000">
   <program guid="demo-001" name="Demo Program" type="normal">
-    <!-- Full-screen clock area -->
+    <playControl duration="00:00:15" count="0"/>
+
+    <!-- Clock area (top) -->
     <area guid="area-clock" name="Clock" alpha="255">
-      <rectangle x="0" y="0" width="128" height="32"/>
+      <rectangle x="0" y="0" width="128" height="28"/>
       <resources>
         <clock guid="clk-1" type="digital">
           <date format="1" color="#00ff00" display="true"/>
@@ -12,9 +14,9 @@
       </resources>
     </area>
 
-    <!-- Scrolling text banner -->
+    <!-- Scrolling text banner (middle) -->
     <area guid="area-text" name="Banner" alpha="255">
-      <rectangle x="0" y="32" width="128" height="16"/>
+      <rectangle x="0" y="28" width="128" height="18"/>
       <resources>
         <text guid="txt-1" singleLine="true">
           <string>Welcome to Huidu LED Player - Rust Edition!</string>
@@ -25,13 +27,41 @@
       </resources>
     </area>
 
-    <!-- Static text -->
+    <!-- Static text (bottom) -->
     <area guid="area-info" name="Info" alpha="255">
-      <rectangle x="0" y="48" width="128" height="16"/>
+      <rectangle x="0" y="46" width="128" height="18"/>
       <resources>
         <text guid="txt-2" singleLine="false">
           <string>huidu-player v0.1</string>
           <font size="12" color="#ffff00"/>
+          <style align="center" valign="middle"/>
+        </text>
+        <text guid="txt-3" singleLine="false">
+          <string>Olympian LED</string>
+          <effect in="17" out="17" inSpeed="3" outSpeed="3" duration="30"/>
+          <font size="12" color="#00ffff"/>
+          <style align="center" valign="middle"/>
+        </text>
+      </resources>
+    </area>
+  </program>
+
+  <program guid="demo-002" name="Second Program" type="normal">
+    <playControl duration="00:00:10" count="0"/>
+
+    <area guid="area-main" name="Main" alpha="255">
+      <rectangle x="0" y="0" width="128" height="64"/>
+      <resources>
+        <text guid="txt-4" singleLine="false">
+          <string>PROGRAM 2</string>
+          <effect in="17" out="17" inSpeed="2" outSpeed="2" duration="40"/>
+          <font size="24" color="#ff8800"/>
+          <style align="center" valign="middle"/>
+        </text>
+        <text guid="txt-5" singleLine="false">
+          <string>RUST PLAYER</string>
+          <effect in="1" out="2" inSpeed="3" outSpeed="3" duration="40"/>
+          <font size="22" color="#00ff88"/>
           <style align="center" valign="middle"/>
         </text>
       </resources>

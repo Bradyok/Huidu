@@ -1,6 +1,6 @@
 /// Transition effects for content item entrance/exit animations.
 /// Implements the 30 effect types from the Huidu protocol.
-use tiny_skia::{Color, Pixmap, PixmapPaint, Transform};
+use tiny_skia::{Pixmap, PixmapPaint, Transform};
 
 /// Effect state for an area's content playlist
 pub struct EffectState {

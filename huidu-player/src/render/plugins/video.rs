@@ -90,7 +90,7 @@ impl VideoRenderer {
         self.render_placeholder(filename)
     }
 
-    fn render_placeholder(&self, filename: &str) -> Option<Pixmap> {
+    fn render_placeholder(&self, _filename: &str) -> Option<Pixmap> {
         let w = 320u32;
         let h = 240u32;
         let mut pixmap = Pixmap::new(w, h)?;

@@ -1,7 +1,8 @@
 /// Main player — orchestrates program loading, rendering, and output.
 use anyhow::{Context, Result};
 use std::path::Path;
-use tokio::sync::mpsc;
+use std::sync::Arc;
+use tokio::sync::{mpsc, RwLock};
 use tokio::time::{self, Duration};
 use tracing::{debug, info, warn};
 
@@ -9,6 +10,7 @@ use crate::config::{OutputMode, PlayerConfig};
 use crate::program::model::{Program, Screen};
 use crate::program::parser;
 use crate::render::engine::RenderEngine;
+use crate::services::manager::ServicesState;
 
 /// Commands sent from the protocol server to the player
 #[derive(Debug)]
@@ -24,40 +26,45 @@ pub enum PlayerCommand {
 pub struct Player {
     config: PlayerConfig,
     engine: RenderEngine,
-    /// Currently loaded programs
     programs: Vec<Program>,
-    /// Index of currently playing program
     current_program: usize,
-    /// Channel for receiving commands from protocol server
+    /// Time (in frames) when current program started
+    program_start_frame: u64,
     command_rx: mpsc::Receiver<PlayerCommand>,
-    /// Sender clone for giving to the protocol server
     command_tx: mpsc::Sender<PlayerCommand>,
-    /// Screen on/off state
     screen_on: bool,
+    /// Shared services state
+    services: Arc<RwLock<ServicesState>>,
 }
 
 impl Player {
     pub fn new(config: PlayerConfig) -> Self {
         let (tx, rx) = mpsc::channel(64);
         let engine = RenderEngine::new(config.width, config.height, config.fps);
+        let services = Arc::new(RwLock::new(ServicesState::new(config.program_dir.clone())));
 
         Self {
             config,
             engine,
             programs: Vec::new(),
             current_program: 0,
+            program_start_frame: 0,
             command_rx: rx,
             command_tx: tx,
             screen_on: true,
+            services,
         }
     }
 
-    /// Get a clone of the command sender for the protocol server
     pub fn program_sender(&self) -> mpsc::Sender<PlayerCommand> {
         self.command_tx.clone()
     }
 
-    /// Load programs from a directory (looks for *.xml files)
+    pub fn services(&self) -> Arc<RwLock<ServicesState>> {
+        self.services.clone()
+    }
+
+    /// Load programs from a directory
     pub fn load_programs_from_dir(&mut self, dir: &str) -> Result<()> {
         let path = Path::new(dir);
         if !path.exists() {
@@ -90,6 +97,11 @@ impl Player {
             anyhow::bail!("No program XML files found in {}", dir);
         }
 
+        // Initialize rendering for first program
+        if !self.programs.is_empty() {
+            self.engine.reset_for_program(&self.programs[0]);
+        }
+
         info!("Loaded {} total programs from {}", self.programs.len(), dir);
         Ok(())
     }
@@ -112,9 +124,9 @@ impl Player {
         loop {
             tokio::select! {
                 _ = interval.tick() => {
-                    // Process any pending commands
+                    // Process pending commands
                     while let Ok(cmd) = self.command_rx.try_recv() {
-                        self.handle_command(cmd);
+                        self.handle_command(cmd, frames_rendered);
                     }
 
                     // Render frame
@@ -123,77 +135,104 @@ impl Player {
                         let program = &self.programs[self.current_program];
                         self.engine.render_frame(program, &program_dir);
 
-                        // Output the frame
                         match self.config.output_mode {
                             OutputMode::Png => {
-                                if frames_rendered == 0 || frames_rendered % (self.config.fps as u64 * 5) == 0 {
+                                // Save every 5 seconds
+                                if frames_rendered == 0
+                                    || frames_rendered % (self.config.fps as u64 * 5) == 0
+                                {
                                     let output_path = self.config.output_path.clone();
-                                    self.engine.save_png(&output_path)
-                                        .context("Failed to save PNG output")?;
-                                    debug!("Saved frame {} to {}", frames_rendered, output_path.display());
+                                    self.engine
+                                        .save_png(&output_path)
+                                        .context("Failed to save PNG")?;
+                                    debug!("Saved frame {}", frames_rendered);
                                 }
                             }
                             OutputMode::Raw => {
-                                let data = self.engine.pixels();
                                 use std::io::Write;
-                                std::io::stdout().write_all(data).ok();
+                                std::io::stdout().write_all(self.engine.pixels()).ok();
                             }
                             OutputMode::Framebuffer => {
-                                // TODO: DRM/KMS output for production
-                                debug!("Framebuffer output not yet implemented");
+                                // TODO: DRM/KMS output
                             }
                         }
 
                         frames_rendered += 1;
 
-                        // Check if we should advance to next program
-                        // (simplified: advance every 10 seconds if multiple programs)
-                        if self.programs.len() > 1 {
-                            let secs = frames_rendered / self.config.fps as u64;
-                            let prog_idx = (secs / 10) as usize % self.programs.len();
-                            if prog_idx != self.current_program {
-                                self.current_program = prog_idx;
-                                info!("Switching to program {}/{}: '{}'",
-                                    self.current_program + 1,
-                                    self.programs.len(),
-                                    self.programs[self.current_program].name
-                                );
-                            }
-                        }
-                    }
-
-                    // In PNG mode, exit after rendering first frame if no server
-                    if matches!(self.config.output_mode, OutputMode::Png)
-                        && frames_rendered > 0
-                        && self.programs.is_empty()
-                    {
-                        break;
+                        // Program rotation based on play control
+                        self.check_program_rotation(frames_rendered);
                     }
                 }
             }
         }
-
-        Ok(())
     }
 
-    fn handle_command(&mut self, cmd: PlayerCommand) {
+    fn handle_command(&mut self, cmd: PlayerCommand, current_frame: u64) {
         match cmd {
             PlayerCommand::LoadScreen(screen) => {
-                info!(
-                    "Loading new screen with {} program(s)",
-                    screen.programs.len()
-                );
+                info!("Loading new screen with {} program(s)", screen.programs.len());
                 self.programs = screen.programs;
                 self.current_program = 0;
+                self.program_start_frame = current_frame;
+                if !self.programs.is_empty() {
+                    self.engine.reset_for_program(&self.programs[0]);
+                }
             }
             PlayerCommand::SetBrightness(level) => {
-                info!("Setting brightness to {}", level);
-                // TODO: FPGA brightness control
+                info!("Brightness: {}", level);
+                self.engine.set_brightness(level);
             }
             PlayerCommand::ScreenPower(on) => {
-                info!("Screen power: {}", if on { "ON" } else { "OFF" });
+                info!("Screen: {}", if on { "ON" } else { "OFF" });
                 self.screen_on = on;
             }
         }
+    }
+
+    /// Check if it's time to rotate to the next program
+    fn check_program_rotation(&mut self, current_frame: u64) {
+        if self.programs.len() <= 1 {
+            return;
+        }
+
+        let program = &self.programs[self.current_program];
+
+        // Use play control duration if specified, otherwise default 10s
+        let duration_secs = if let Some(ref pc) = program.play_control {
+            parse_duration_secs(&pc.duration).unwrap_or(10)
+        } else {
+            10
+        };
+
+        let frames_per_program = duration_secs as u64 * self.config.fps as u64;
+        let elapsed = current_frame - self.program_start_frame;
+
+        if elapsed >= frames_per_program {
+            let next = (self.current_program + 1) % self.programs.len();
+            if next != self.current_program {
+                self.current_program = next;
+                self.program_start_frame = current_frame;
+                self.engine.reset_for_program(&self.programs[next]);
+                info!(
+                    "Program {}/{}: '{}'",
+                    self.current_program + 1,
+                    self.programs.len(),
+                    self.programs[self.current_program].name
+                );
+            }
+        }
+    }
+}
+
+/// Parse "HH:MM:SS" duration to seconds
+fn parse_duration_secs(s: &str) -> Option<u32> {
+    let parts: Vec<&str> = s.split(':').collect();
+    if parts.len() == 3 {
+        let h: u32 = parts[0].parse().ok()?;
+        let m: u32 = parts[1].parse().ok()?;
+        let s: u32 = parts[2].parse().ok()?;
+        Some(h * 3600 + m * 60 + s)
+    } else {
+        None
     }
 }
