@@ -105,18 +105,18 @@ async fn main() -> Result<()> {
         })
     };
 
-    // Start UDP discovery responder
+    // Start UDP discovery on port 9527 (Huidu discovery port)
     let discovery_handle = {
-        let port = args.port;
         let ip = protocol::discovery::get_local_ip();
         let device_info = protocol::discovery::DeviceInfo {
             device_id: args.device_id.clone(),
             ip_address: ip,
             screen_width: args.width as u16,
             screen_height: args.height as u16,
+            player_name: "BoxPlayer".to_string(),
         };
         tokio::spawn(async move {
-            if let Err(e) = protocol::discovery::run(port, device_info).await {
+            if let Err(e) = protocol::discovery::run(device_info).await {
                 tracing::error!("UDP discovery error: {}", e);
             }
         })
