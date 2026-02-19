@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE log4c SYSTEM "">
+
+<log4c version="1.2.3">
+    <config>
+        <bufsize>0</bufsize>
+        <debug level="2"/>
+        <nocleanup>0</nocleanup>
+        <reread>1</reread>
+    </config>
+    <category name="root" priority="notice"/>
+    <category name="BoxIOServices.log" priority="all" appender="stdout"/>
+	<category name="BoxUpgrade.log" priority="all" appender="stdout"/>
+    <rollingpolicy name="approllingpolicy" type="sizewin" maxsize="102400" maxnum="1" />
+	<!-- layout="dated" Ìí¼ÓÏÔÊ¾ÈÕÆÚ -->
+	<appender name="infofileappender" type="rollingfile" logdir="/root/Box/BoxIOServices" prefix="LogBoxIOService" layout="dated" rollingpolicy="approllingpolicy" />
+	<category name="BoxIOServices.log.Box" priority="all" appender="infofileappender" />
+   <rollingpolicy name="wirerollingpolicy" type="sizewin" maxsize="102400" maxnum="10" />
+   <appender name="wirerollingfileappender" type="rollingfile" logdir="/root/Box/project/log" prefix="wirelog" layout="none" rollingpolicy="wirerollingpolicy" />
+   <category name="Wlog" priority="all" appender="wirerollingfileappender" />
+</log4c>

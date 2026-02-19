@@ -1,0 +1,35 @@
+<?xml version='1.0'?>
+<Weather>
+  <WindDirection>
+    <Direction Name="无持续风向" ID="0"/>
+    <Direction Name="东北风" ID="1"/>
+    <Direction Name="东风" ID="2"/>
+    <Direction Name="东南风" ID="3"/>
+    <Direction Name="南风" ID="4"/>
+    <Direction Name="西南风" ID="5"/>
+    <Direction Name="西风" ID="6"/>
+    <Direction Name="西北风" ID="7"/>
+    <Direction Name="北风" ID="8"/>
+    <Direction Name="旋转风" ID="9"/>
+    <Direction Name="微风" ID="10"/>
+  </WindDirection>
+  <UV>
+    <Class Name="最弱" ID="0"/>
+    <Class Name="弱" ID="1"/>
+    <Class Name="中等" ID="2"/>
+    <Class Name="强" ID="3"/>
+    <Class Name="很强" ID="4"/>
+  </UV>
+  <WindSpeed>
+    <Speed Name="0" ID="微风" IDen="Breeze"/>
+    <Speed Name="1" ID="3-4级" IDen="Wind 3-4 level"/>
+    <Speed Name="2" ID="4-5级" IDen="Wind 4-5 level"/>
+    <Speed Name="3" ID="5-6级" IDen="Wind 5-6 level"/>
+    <Speed Name="4" ID="6-7级" IDen="Wind 6-7 level"/>
+    <Speed Name="5" ID="7-8级" IDen="Wind 7-8 level"/>
+    <Speed Name="6" ID="8-9级" IDen="Wind 8-9 level"/>
+    <Speed Name="7" ID="9-10级" IDen="Wind 9-10 level"/>
+    <Speed Name="8" ID="10-11级" IDen="Wind 10-11 level"/>
+    <Speed Name="9" ID="11-12级" IDen="Wind 11-12 level"/>
+  </WindSpeed>
+</Weather>

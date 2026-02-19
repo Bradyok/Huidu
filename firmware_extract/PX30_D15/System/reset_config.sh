@@ -1,0 +1,1 @@
+tar xvf /root/Box/SystemConfig/config.tar.gz  /root/Box/config/

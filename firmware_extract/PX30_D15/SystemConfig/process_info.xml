@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Application>
+    <ApplicationItem RunShell="/root/Box/BoxPlayer/runBoxSDK.sh" RollbackShell="NULL" ProcessName="BoxSDK" PthreadInfo = "BoxSDK"/>
+	<ApplicationItem RunShell="/root/Box/BoxPlayer/runBoxPlayer.sh" RollbackShell="NULL"   ProcessName="BoxPlayer" PthreadInfo = "BoxPlayer"/>
+</Application>
