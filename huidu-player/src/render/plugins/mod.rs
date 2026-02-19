@@ -1,6 +1,8 @@
 pub mod clock;
+pub mod gif;
 pub mod image;
 pub mod text;
+pub mod video;
 
 use tiny_skia::Pixmap;
 
@@ -8,8 +10,6 @@ use crate::program::model::ContentItem;
 
 /// Trait for content renderer plugins
 pub trait ContentRenderer {
-    /// Render this content item onto the given pixmap at the given area bounds.
-    /// Returns true if the content changed (needs redraw).
     fn render(
         &mut self,
         item: &ContentItem,
