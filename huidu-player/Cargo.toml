@@ -52,9 +52,15 @@ md5 = "0.7"
 # Byte order (little-endian protocol)
 byteorder = "1"
 
+# Base64 encoding (screenshot response)
+base64 = "0.22"
+
 [target.'cfg(unix)'.dependencies]
 # Serial port (FPGA comm) - only on Linux
 serialport = "4"
+
+# C standard library bindings (used by FPGA serial close(2))
+libc = "0.2"
 
 # DRM/KMS framebuffer - only on Linux
 # drm = "0.12"

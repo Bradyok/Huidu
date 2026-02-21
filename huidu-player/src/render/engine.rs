@@ -13,10 +13,34 @@ use crate::render::plugins::text::TextRenderer;
 use crate::render::plugins::video::VideoRenderer;
 use crate::render::plugins::ContentRenderer;
 
+/// Rotate raw RGBA pixel data by multiples of 90°.
+fn rotate_pixels(src: &[u8], src_w: u32, src_h: u32, degrees: u16) -> (u32, u32, Vec<u8>) {
+    let (dst_w, dst_h) = match degrees {
+        90 | 270 => (src_h, src_w),
+        _ => (src_w, src_h),
+    };
+    let mut dst = vec![0u8; (dst_w * dst_h * 4) as usize];
+    for y in 0..src_h {
+        for x in 0..src_w {
+            let si = ((y * src_w + x) * 4) as usize;
+            let (dx, dy) = match degrees {
+                90  => (src_h - 1 - y, x),
+                180 => (src_w - 1 - x, src_h - 1 - y),
+                270 => (y, src_w - 1 - x),
+                _   => (x, y),
+            };
+            let di = ((dy * dst_w + dx) * 4) as usize;
+            dst[di..di + 4].copy_from_slice(&src[si..si + 4]);
+        }
+    }
+    (dst_w, dst_h, dst)
+}
+
 /// Per-area state for content cycling
 struct AreaState {
     /// Which content item is currently displayed (index into resources)
     current_item: usize,
+    /// Effect state for the current transition
     effect: EffectState,
 }
 
@@ -34,6 +58,8 @@ pub struct RenderEngine {
     ms_per_frame: u64,
     /// Software brightness level (0-100)
     brightness: u8,
+    /// Screen rotation in degrees (0 / 90 / 180 / 270)
+    rotation: u16,
 }
 
 impl RenderEngine {
@@ -51,6 +77,7 @@ impl RenderEngine {
             frame: 0,
             ms_per_frame: 1000 / fps as u64,
             brightness: 100,
+            rotation: 0,
         }
     }
 
@@ -58,15 +85,51 @@ impl RenderEngine {
         self.brightness = level.min(100);
     }
 
-    /// Reset area states when a new program is loaded
-    pub fn reset_for_program(&mut self, program: &Program) {
+    pub fn set_rotation(&mut self, degrees: u16) {
+        self.rotation = degrees % 360;
+    }
+
+    pub fn rotation(&self) -> u16 {
+        self.rotation
+    }
+
+    /// Encode the current framebuffer as PNG bytes (with rotation applied).
+    pub fn screenshot_png(&self) -> Vec<u8> {
+        let (w, h, pixels) = if self.rotation != 0 {
+            rotate_pixels(self.framebuffer.data(), self.framebuffer.width(), self.framebuffer.height(), self.rotation)
+        } else {
+            (self.framebuffer.width(), self.framebuffer.height(), self.framebuffer.data().to_vec())
+        };
+        // tiny-skia uses premultiplied RGBA; convert back to straight alpha for PNG
+        let mut straight = pixels.clone();
+        for chunk in straight.chunks_exact_mut(4) {
+            let a = chunk[3] as f32 / 255.0;
+            if a > 0.0 {
+                chunk[0] = (chunk[0] as f32 / a).min(255.0) as u8;
+                chunk[1] = (chunk[1] as f32 / a).min(255.0) as u8;
+                chunk[2] = (chunk[2] as f32 / a).min(255.0) as u8;
+            }
+        }
+        if let Some(img) = image::RgbaImage::from_raw(w, h, straight) {
+            let mut cursor = std::io::Cursor::new(Vec::new());
+            if img.write_to(&mut cursor, image::ImageFormat::Png).is_ok() {
+                return cursor.into_inner();
+            }
+        }
+        Vec::new()
+    }
+
+    /// Reset area states when a new program is loaded.
+    /// `start_ms` should be the current render clock so that effect phases are
+    /// anchored to the present rather than to time zero.
+    pub fn reset_for_program(&mut self, program: &Program, start_ms: u64) {
         self.area_states.clear();
         for area in &program.areas {
             let items = &area.resources.items;
             let effect = if !items.is_empty() {
-                get_effect_for_item(&items[0])
+                get_effect_for_item(&items[0], start_ms)
             } else {
-                EffectState::new(0, 0, 0, 0, 50)
+                EffectState::new(0, 0, 0, 0, 50, start_ms)
             };
             self.area_states.push(AreaState {
                 current_item: 0,
@@ -81,7 +144,7 @@ impl RenderEngine {
 
         // Initialize area states if needed
         if self.area_states.len() != program.areas.len() {
-            self.reset_for_program(program);
+            self.reset_for_program(program, elapsed_ms);
         }
 
         self.framebuffer.fill(Color::BLACK);
@@ -128,7 +191,7 @@ impl RenderEngine {
                 // Advance to next content item
                 area_state.current_item = (area_state.current_item + 1) % items.len();
                 let next_item = &items[area_state.current_item];
-                let eff = get_effect_for_item(next_item);
+                let eff = get_effect_for_item(next_item, elapsed_ms);
                 area_state.effect.reset(
                     eff.effect_in,
                     eff.effect_out,
@@ -225,9 +288,15 @@ impl RenderEngine {
     }
 
     pub fn save_png(&self, path: &Path) -> Result<()> {
-        self.framebuffer
-            .save_png(path)
-            .map_err(|e| anyhow::anyhow!("Failed to save PNG: {}", e))
+        if self.rotation == 0 {
+            self.framebuffer
+                .save_png(path)
+                .map_err(|e| anyhow::anyhow!("Failed to save PNG: {}", e))
+        } else {
+            let png = self.screenshot_png();
+            std::fs::write(path, &png)?;
+            Ok(())
+        }
     }
 
     pub fn width(&self) -> u32 {
@@ -239,8 +308,8 @@ impl RenderEngine {
     }
 }
 
-/// Extract effect params from a content item
-fn get_effect_for_item(item: &ContentItem) -> EffectState {
+/// Extract effect params from a content item, anchored to `start_ms`.
+fn get_effect_for_item(item: &ContentItem, start_ms: u64) -> EffectState {
     let eff = match item {
         ContentItem::Image(i) => i.effect.as_ref(),
         ContentItem::Text(t) => t.effect.as_ref(),
@@ -249,7 +318,7 @@ fn get_effect_for_item(item: &ContentItem) -> EffectState {
     };
 
     match eff {
-        Some(e) => EffectState::new(e.effect_in, e.effect_out, e.in_speed, e.out_speed, e.duration),
-        None => EffectState::new(0, 0, 0, 0, 50), // default 5 seconds, immediate
+        Some(e) => EffectState::new(e.effect_in, e.effect_out, e.in_speed, e.out_speed, e.duration, start_ms),
+        None => EffectState::new(0, 0, 0, 0, 50, start_ms), // default 5 seconds, immediate
     }
 }

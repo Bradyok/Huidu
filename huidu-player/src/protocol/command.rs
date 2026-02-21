@@ -1,6 +1,7 @@
 /// SDK XML command handler — routes incoming commands to appropriate handlers.
 /// Implements the full Huidu SDK command set based on binary analysis.
 use anyhow::Result;
+use base64::Engine as _;
 use std::sync::Arc;
 use tokio::sync::{mpsc, RwLock};
 use tracing::{info, warn};
@@ -24,29 +25,32 @@ pub async fn handle_sdk_command(
     info!("SDK command: {}", method);
     let guid = &session.guid;
 
-    match method.as_str() {
-        // --- Version Negotiation ---
-        "QueryIFVersion" | "queryIFVersion" | "GetIFVersion" => Ok(format!(
-            "<?xml version=\"1.0\" encoding=\"utf-8\"?>\
-             <sdk guid=\"{guid}\"><out method=\"QueryIFVersion\">\
-             <version value=\"0x1000000\"/></out></sdk>"
-        )),
+    macro_rules! ok {
+        ($body:expr) => {
+            Ok(format!(
+                "<?xml version=\"1.0\" encoding=\"utf-8\"?>\
+                 <sdk guid=\"{guid}\"><out method=\"{method}\">{}<result value=\"0\"/></out></sdk>",
+                $body
+            ))
+        };
+    }
 
-        // --- Program Management ---
+    match method.as_str() {
+        // ── Version Negotiation ────────────────────────────────────────────────
+        "QueryIFVersion" | "queryIFVersion" | "GetIFVersion" => ok!(
+            "<version value=\"0x1000000\"/>"
+        ),
+
+        // ── Program Management ─────────────────────────────────────────────────
         "AddProgram" | "addProgram" => {
             match parser::parse_program_xml(xml) {
                 Ok(screen) => {
-                    // Save to disk
                     {
                         let state = services.read().await;
                         let _ = state.storage.save_program(&screen, xml);
                     }
                     player_tx.send(PlayerCommand::LoadScreen(screen)).await.ok();
-                    Ok(format!(
-                        "<?xml version=\"1.0\" encoding=\"utf-8\"?>\
-                         <sdk guid=\"{guid}\"><out method=\"AddProgram\">\
-                         <result value=\"0\"/></out></sdk>"
-                    ))
+                    ok!("")
                 }
                 Err(e) => {
                     warn!("Failed to parse AddProgram: {}", e);
@@ -68,11 +72,7 @@ pub async fn handle_sdk_command(
                         let _ = state.storage.save_program(&screen, xml);
                     }
                     player_tx.send(PlayerCommand::LoadScreen(screen)).await.ok();
-                    Ok(format!(
-                        "<?xml version=\"1.0\" encoding=\"utf-8\"?>\
-                         <sdk guid=\"{guid}\"><out method=\"UpdateProgram\">\
-                         <result value=\"0\"/></out></sdk>"
-                    ))
+                    ok!("")
                 }
                 Err(e) => {
                     warn!("Failed to parse UpdateProgram: {}", e);
@@ -97,41 +97,142 @@ pub async fn handle_sdk_command(
                 }))
                 .await
                 .ok();
-            Ok(format!(
-                "<?xml version=\"1.0\" encoding=\"utf-8\"?>\
-                 <sdk guid=\"{guid}\"><out method=\"DeleteProgram\">\
-                 <result value=\"0\"/></out></sdk>"
-            ))
+            ok!("")
         }
 
-        // --- Screen Control ---
+        "GetAllProgram" | "getAllProgram" => {
+            let state = services.read().await;
+            let mut items = String::new();
+            for p in &state.programs {
+                items.push_str(&format!(
+                    "<program guid=\"{}\" name=\"{}\"/>",
+                    p.guid, p.name
+                ));
+            }
+            ok!(&items)
+        }
+
+        "GetProgram" | "getProgram" => {
+            // Return the XML for the requested program, or empty if not found
+            let req_guid = extract_attr(xml, "program", "guid").unwrap_or_default();
+            let state = services.read().await;
+            let found = state.programs.iter().any(|p| p.guid == req_guid);
+            if found {
+                // Load the raw XML from disk
+                let raw = state
+                    .storage
+                    .load_current_program()
+                    .map(|_| {
+                        // Re-read the file for the raw XML
+                        let path = state.storage.program_dir().join("current_program.xml");
+                        std::fs::read_to_string(path).unwrap_or_default()
+                    })
+                    .unwrap_or_default();
+                ok!(&raw)
+            } else {
+                ok!("")
+            }
+        }
+
+        "SwitchProgram" | "switchProgram" => {
+            let target_guid = extract_attr(xml, "program", "guid").unwrap_or_default();
+            if !target_guid.is_empty() {
+                player_tx
+                    .send(PlayerCommand::SwitchProgram(target_guid))
+                    .await
+                    .ok();
+            }
+            ok!("")
+        }
+
+        "GetCurrentPlayProgramGUID" | "getCurrentPlayProgramGUID" => {
+            let state = services.read().await;
+            let g = &state.current_program_guid;
+            ok!(&format!("<program guid=\"{g}\"/>"))
+        }
+
+        "RealTimeUpdate" | "realTimeUpdate" => {
+            // Treated the same as UpdateProgram for now
+            match parser::parse_program_xml(xml) {
+                Ok(screen) => {
+                    player_tx.send(PlayerCommand::LoadScreen(screen)).await.ok();
+                    ok!("")
+                }
+                Err(e) => {
+                    warn!("RealTimeUpdate parse error: {}", e);
+                    ok!("")
+                }
+            }
+        }
+
+        "InsertPlayProgram" | "insertPlayProgram" => {
+            // Priority insert — treated as LoadScreen for now
+            match parser::parse_program_xml(xml) {
+                Ok(screen) => {
+                    player_tx.send(PlayerCommand::LoadScreen(screen)).await.ok();
+                    ok!("")
+                }
+                Err(_) => ok!(""),
+            }
+        }
+
+        "ModifyProgram" | "modifyProgram" => {
+            // In-place modification — treated as UpdateProgram for now
+            match parser::parse_program_xml(xml) {
+                Ok(screen) => {
+                    player_tx.send(PlayerCommand::LoadScreen(screen)).await.ok();
+                    ok!("")
+                }
+                Err(_) => ok!(""),
+            }
+        }
+
+        "DeleteNotCiteFile" | "deleteNotCiteFile" => {
+            // Delete files in the program dir that are not referenced by current programs.
+            // For simplicity: list all files and keep only current_program.xml.
+            let state = services.read().await;
+            let files = state.storage.list_files();
+            for f in &files {
+                if f != "current_program.xml" && f != "screenshot.png" {
+                    let _ = state.storage.delete_file(f);
+                }
+            }
+            ok!("")
+        }
+
+        // ── Screen Control ─────────────────────────────────────────────────────
         "OpenScreen" | "openScreen" => {
             player_tx.send(PlayerCommand::ScreenPower(true)).await.ok();
-            Ok(format!(
-                "<?xml version=\"1.0\" encoding=\"utf-8\"?>\
-                 <sdk guid=\"{guid}\"><out method=\"OpenScreen\">\
-                 <result value=\"0\"/></out></sdk>"
-            ))
+            ok!("")
         }
 
         "CloseScreen" | "closeScreen" => {
             player_tx.send(PlayerCommand::ScreenPower(false)).await.ok();
-            Ok(format!(
-                "<?xml version=\"1.0\" encoding=\"utf-8\"?>\
-                 <sdk guid=\"{guid}\"><out method=\"CloseScreen\">\
-                 <result value=\"0\"/></out></sdk>"
-            ))
+            ok!("")
         }
 
-        // --- Brightness ---
+        "ScreenRotation" | "screenRotation" => {
+            // <rotate value="90"/> or <rotation value="90"/>
+            let deg = extract_attr(xml, "rotate", "value")
+                .or_else(|| extract_attr(xml, "rotation", "value"))
+                .and_then(|v| v.parse::<u16>().ok())
+                .unwrap_or(0);
+            player_tx.send(PlayerCommand::SetRotation(deg)).await.ok();
+            ok!("")
+        }
+
+        "GetScreenRotation" | "getScreenRotation" => {
+            let state = services.read().await;
+            let r = state.rotation;
+            ok!(&format!("<rotation value=\"{r}\"/>"))
+        }
+
+        // ── Brightness ─────────────────────────────────────────────────────────
         "GetLuminancePloy" | "getLuminancePloy" => {
             let state = services.read().await;
             let level = state.brightness.get_level();
-            Ok(format!(
-                "<?xml version=\"1.0\" encoding=\"utf-8\"?>\
-                 <sdk guid=\"{guid}\"><out method=\"GetLuminancePloy\">\
-                 <luminance mode=\"manual\" value=\"{level}\"/>\
-                 <result value=\"0\"/></out></sdk>"
+            ok!(&format!(
+                "<luminance mode=\"manual\" value=\"{level}\"/>"
             ))
         }
 
@@ -143,14 +244,10 @@ pub async fn handle_sdk_command(
                     player_tx.send(PlayerCommand::SetBrightness(level)).await.ok();
                 }
             }
-            Ok(format!(
-                "<?xml version=\"1.0\" encoding=\"utf-8\"?>\
-                 <sdk guid=\"{guid}\"><out method=\"SetLuminancePloy\">\
-                 <result value=\"0\"/></out></sdk>"
-            ))
+            ok!("")
         }
 
-        // --- Screen Schedule ---
+        // ── Screen Schedule ────────────────────────────────────────────────────
         "GetSwitchTime" | "getSwitchTime" => {
             let state = services.read().await;
             let entries = state.screen_schedule.get_schedule();
@@ -161,36 +258,26 @@ pub async fn handle_sdk_command(
                     i, entry.on_time, entry.off_time, entry.days
                 ));
             }
-            Ok(format!(
-                "<?xml version=\"1.0\" encoding=\"utf-8\"?>\
-                 <sdk guid=\"{guid}\"><out method=\"GetSwitchTime\">\
-                 {items}<result value=\"0\"/></out></sdk>"
-            ))
+            ok!(&items)
         }
 
         "SetSwitchTime" | "setSwitchTime" => {
-            // Parse schedule entries from XML
             let entries = extract_schedule_entries(xml);
             {
                 let mut state = services.write().await;
                 state.screen_schedule.set_schedule(entries);
             }
-            Ok(format!(
-                "<?xml version=\"1.0\" encoding=\"utf-8\"?>\
-                 <sdk guid=\"{guid}\"><out method=\"SetSwitchTime\">\
-                 <result value=\"0\"/></out></sdk>"
-            ))
+            ok!("")
         }
 
-        // --- Time ---
+        // ── Time ───────────────────────────────────────────────────────────────
         "GetTimeInfo" | "getTimeInfo" => {
             let now = chrono::Local::now();
             let dt = now.format("%Y-%m-%d %H:%M:%S").to_string();
-            Ok(format!(
-                "<?xml version=\"1.0\" encoding=\"utf-8\"?>\
-                 <sdk guid=\"{guid}\"><out method=\"GetTimeInfo\">\
-                 <time value=\"{dt}\"/>\
-                 <result value=\"0\"/></out></sdk>"
+            let state = services.read().await;
+            let ntp = &state.ntp_server;
+            ok!(&format!(
+                "<time value=\"{dt}\"/><ntp enable=\"true\" server=\"{ntp}\"/>"
             ))
         }
 
@@ -198,57 +285,101 @@ pub async fn handle_sdk_command(
             if let Some(time_val) = extract_attr(xml, "time", "value") {
                 crate::services::time_sync::TimeSyncService::set_time(&time_val).await;
             }
-            Ok(format!(
-                "<?xml version=\"1.0\" encoding=\"utf-8\"?>\
-                 <sdk guid=\"{guid}\"><out method=\"SetTimeInfo\">\
-                 <result value=\"0\"/></out></sdk>"
+            if let Some(ntp_server) = extract_attr(xml, "ntp", "server") {
+                let mut state = services.write().await;
+                state.ntp_server = ntp_server;
+            }
+            ok!("")
+        }
+
+        // ── Device Info ────────────────────────────────────────────────────────
+        "GetDeviceInfo" | "getDeviceInfo" => {
+            let state = services.read().await;
+            let name = &state.device_name;
+            ok!(&format!(
+                "<deviceInfo cpu=\"RustPlayer\" model=\"huidu-player\" \
+                 fpgaVersion=\"1.0.0\" screenWidth=\"{screen_width}\" \
+                 screenHeight=\"{screen_height}\" deviceID=\"RUST-001\" name=\"{name}\"/>"
             ))
         }
 
-        // --- Device Info ---
-        "GetDeviceInfo" | "getDeviceInfo" => Ok(format!(
-            "<?xml version=\"1.0\" encoding=\"utf-8\"?>\
-             <sdk guid=\"{guid}\"><out method=\"GetDeviceInfo\">\
-             <deviceInfo cpu=\"RustPlayer\" model=\"huidu-player\" \
-             fpgaVersion=\"1.0.0\" screenWidth=\"{screen_width}\" \
-             screenHeight=\"{screen_height}\" deviceID=\"RUST-001\"/>\
-             <result value=\"0\"/></out></sdk>"
-        )),
+        "GetDeviceName" | "getDeviceName" => {
+            let state = services.read().await;
+            let name = &state.device_name;
+            ok!(&format!("<name value=\"{name}\"/>"))
+        }
 
-        // --- Font Management ---
+        "SetDeviceName" | "setDeviceName" => {
+            if let Some(name) = extract_attr(xml, "name", "value") {
+                let mut state = services.write().await;
+                state.device_name = name;
+            }
+            ok!("")
+        }
+
+        "GetHardwareInfo" | "getHardwareInfo" => {
+            ok!(
+                "<hardware cpu=\"aarch64\" ram=\"512\" storage=\"8192\" \
+                 cpuUsage=\"5\" memUsage=\"15\" temperature=\"40\"/>"
+            )
+        }
+
+        // ── Screenshot ─────────────────────────────────────────────────────────
+        "GetScreenshot2" | "getScreenshot2" | "GetScreenshot" | "getScreenshot" => {
+            let state = services.read().await;
+            let buf = state.screenshot.lock().await;
+            if buf.is_empty() {
+                ok!("<screenshot format=\"png\" data=\"\"/>")
+            } else {
+                let b64 = base64::engine::general_purpose::STANDARD.encode(&*buf);
+                ok!(&format!("<screenshot format=\"png\" data=\"{b64}\"/>"))
+            }
+        }
+
+        // ── Font Management ────────────────────────────────────────────────────
         "GetAllFontInfo" | "getAllFontInfo" => {
-            // Return list of available fonts
-            Ok(format!(
-                "<?xml version=\"1.0\" encoding=\"utf-8\"?>\
-                 <sdk guid=\"{guid}\"><out method=\"GetAllFontInfo\">\
-                 <font name=\"Arial\" index=\"0\"/>\
-                 <font name=\"DejaVu Sans\" index=\"1\"/>\
-                 <result value=\"0\"/></out></sdk>"
-            ))
+            ok!(
+                "<font name=\"Arial\" index=\"0\"/>\
+                 <font name=\"DejaVu Sans\" index=\"1\"/>"
+            )
         }
 
-        // --- Network Config ---
+        // ── Network Config ─────────────────────────────────────────────────────
         "GetEth0Info" | "getEth0Info" => {
             let ip = crate::protocol::discovery::get_local_ip();
-            Ok(format!(
-                "<?xml version=\"1.0\" encoding=\"utf-8\"?>\
-                 <sdk guid=\"{guid}\"><out method=\"GetEth0Info\">\
-                 <eth0 dhcp=\"true\" ip=\"{ip}\" mask=\"255.255.255.0\" \
-                 gateway=\"\" dns=\"8.8.8.8\"/>\
-                 <result value=\"0\"/></out></sdk>"
+            ok!(&format!(
+                "<eth0 dhcp=\"true\" ip=\"{ip}\" mask=\"255.255.255.0\" \
+                 gateway=\"\" dns=\"8.8.8.8\"/>"
             ))
         }
 
         "SetEth0Info" | "setEth0Info" => {
-            info!("SetEth0Info received (network config change)");
-            Ok(format!(
-                "<?xml version=\"1.0\" encoding=\"utf-8\"?>\
-                 <sdk guid=\"{guid}\"><out method=\"SetEth0Info\">\
-                 <result value=\"0\"/></out></sdk>"
+            info!("SetEth0Info received (network config change, not applied)");
+            ok!("")
+        }
+
+        "GetPppoeInfo" | "getPppoeInfo" => {
+            ok!("<pppoe enable=\"false\" user=\"\" password=\"\" status=\"disconnected\"/>")
+        }
+
+        "GetWifiInfo" | "getWifiInfo" => {
+            ok!("<wifi enable=\"false\" ssid=\"\" password=\"\" status=\"disconnected\"/>")
+        }
+
+        "SetWifiInfo" | "setWifiInfo" => {
+            info!("SetWifiInfo received (not applied on this platform)");
+            ok!("")
+        }
+
+        "GetNetworkInfo" | "getNetworkInfo" => {
+            let ip = crate::protocol::discovery::get_local_ip();
+            ok!(&format!(
+                "<network eth0Connected=\"true\" wifiConnected=\"false\" internet=\"false\" \
+                 ip=\"{ip}\"/>"
             ))
         }
 
-        // --- File Management ---
+        // ── File Management ────────────────────────────────────────────────────
         "GetFiles" | "getFiles" => {
             let state = services.read().await;
             let files = state.storage.list_files();
@@ -256,82 +387,190 @@ pub async fn handle_sdk_command(
             for f in &files {
                 items.push_str(&format!("<file name=\"{f}\"/>"));
             }
-            Ok(format!(
-                "<?xml version=\"1.0\" encoding=\"utf-8\"?>\
-                 <sdk guid=\"{guid}\"><out method=\"GetFiles\">\
-                 {items}<result value=\"0\"/></out></sdk>"
-            ))
+            ok!(&items)
         }
 
         "DeleteFiles" | "deleteFiles" => {
-            // Extract filenames to delete
             let filenames = extract_file_list(xml);
             let state = services.read().await;
             for f in &filenames {
                 let _ = state.storage.delete_file(f);
             }
-            Ok(format!(
-                "<?xml version=\"1.0\" encoding=\"utf-8\"?>\
-                 <sdk guid=\"{guid}\"><out method=\"DeleteFiles\">\
-                 <result value=\"0\"/></out></sdk>"
+            ok!("")
+        }
+
+        // ── Boot Logo ──────────────────────────────────────────────────────────
+        "GetBootLogo" | "getBootLogo" => {
+            ok!("<bootLogo name=\"\"/>")
+        }
+
+        "SetBootLogoName" | "setBootLogoName" | "ClearBootLogo" | "clearBootLogo" => ok!(""),
+
+        // ── TCP Server Config ──────────────────────────────────────────────────
+        "GetSDKTcpServer" | "getSDKTcpServer" => {
+            ok!("<server ip=\"\" port=\"10001\" enable=\"true\"/>")
+        }
+
+        "SetSDKTcpServer" | "setSDKTcpServer" => ok!(""),
+
+        // ── FPGA Hardware Config ───────────────────────────────────────────────
+        "GetBoxHwConfig" | "getBoxHwConfig" | "GetSDKFPGAConfig" | "getSDKFPGAConfig" => {
+            let state = services.read().await;
+            let cfg = state.fpga_config.clone();
+            ok!(&cfg)
+        }
+
+        "SetBoxHwConfig" | "setBoxHwConfig" | "SaveBoxHwConfig" | "saveBoxHwConfig"
+        | "ReplaceBoxHwConfig" | "replaceBoxHwConfig" => {
+            // Extract the BoxHwConfig element if present
+            if let Some(start) = xml.find("<BoxHwConfig") {
+                if let Some(end) = xml[start..].find("</BoxHwConfig>") {
+                    let config_xml = &xml[start..start + end + "</BoxHwConfig>".len()];
+                    let mut state = services.write().await;
+                    state.fpga_config = config_xml.to_string();
+                }
+            }
+            ok!("")
+        }
+
+        "SetSDKFPGAConfig" | "setSDKFPGAConfig" => {
+            info!("SetSDKFPGAConfig received (FPGA hardware driver not yet implemented)");
+            ok!("")
+        }
+
+        "SmartSetting" | "smartSetting" | "SmartDrawLine" | "smartDrawLine" => ok!(""),
+
+        // ── License ────────────────────────────────────────────────────────────
+        "GetLicense" | "getLicense" => {
+            let state = services.read().await;
+            let lic = &state.license;
+            let valid = !lic.is_empty();
+            ok!(&format!(
+                "<license value=\"{lic}\" valid=\"{valid}\"/>"
             ))
         }
 
-        // --- Boot Logo ---
-        "GetBootLogo" | "getBootLogo" => Ok(format!(
-            "<?xml version=\"1.0\" encoding=\"utf-8\"?>\
-             <sdk guid=\"{guid}\"><out method=\"GetBootLogo\">\
-             <bootLogo name=\"\"/>\
-             <result value=\"0\"/></out></sdk>"
-        )),
+        "SetLicense" | "setLicense" => {
+            if let Some(lic) = extract_attr(xml, "license", "value") {
+                let mut state = services.write().await;
+                state.license = lic;
+            }
+            ok!("")
+        }
 
-        "SetBootLogoName" | "setBootLogoName" | "ClearBootLogo" | "clearBootLogo" => Ok(format!(
-            "<?xml version=\"1.0\" encoding=\"utf-8\"?>\
-             <sdk guid=\"{guid}\"><out method=\"{method}\">\
-             <result value=\"0\"/></out></sdk>"
-        )),
+        "ClearLicense" | "clearLicense" => {
+            let mut state = services.write().await;
+            state.license = String::new();
+            ok!("")
+        }
 
-        // --- TCP Server Config ---
-        "GetSDKTcpServer" | "getSDKTcpServer" => Ok(format!(
-            "<?xml version=\"1.0\" encoding=\"utf-8\"?>\
-             <sdk guid=\"{guid}\"><out method=\"GetSDKTcpServer\">\
-             <server ip=\"\" port=\"10001\" enable=\"true\"/>\
-             <result value=\"0\"/></out></sdk>"
-        )),
+        "CheckSuperCode" | "checkSuperCode" => {
+            // Always accept the super code in this open-source reproduction
+            ok!("<superCode valid=\"true\"/>")
+        }
 
-        "SetSDKTcpServer" | "setSDKTcpServer" => Ok(format!(
-            "<?xml version=\"1.0\" encoding=\"utf-8\"?>\
-             <sdk guid=\"{guid}\"><out method=\"SetSDKTcpServer\">\
-             <result value=\"0\"/></out></sdk>"
-        )),
+        // ── Admin Mode ─────────────────────────────────────────────────────────
+        "GetAdminModeInfo" | "getAdminModeInfo" => {
+            let state = services.read().await;
+            let admin = state.admin_mode;
+            ok!(&format!("<adminMode enable=\"{admin}\"/>"))
+        }
 
-        // --- Wifi ---
-        "GetWifiInfo" | "getWifiInfo" => Ok(format!(
-            "<?xml version=\"1.0\" encoding=\"utf-8\"?>\
-             <sdk guid=\"{guid}\"><out method=\"GetWifiInfo\">\
-             <wifi enable=\"false\" ssid=\"\" password=\"\"/>\
-             <result value=\"0\"/></out></sdk>"
-        )),
+        "SetAdminModeInfo" | "setAdminModeInfo" => {
+            if let Some(v) = extract_attr(xml, "adminMode", "enable") {
+                let mut state = services.write().await;
+                state.admin_mode = v == "true" || v == "1";
+            }
+            ok!("")
+        }
 
-        "SetWifiInfo" | "setWifiInfo" => Ok(format!(
-            "<?xml version=\"1.0\" encoding=\"utf-8\"?>\
-             <sdk guid=\"{guid}\"><out method=\"SetWifiInfo\">\
-             <result value=\"0\"/></out></sdk>"
-        )),
+        "UnlockAdminModePassword" | "unlockAdminModePassword" => ok!(""),
 
-        // --- Catch-all ---
+        // ── Volume ─────────────────────────────────────────────────────────────
+        "GetSystemVolume" | "getSystemVolume" => {
+            let state = services.read().await;
+            let vol = state.volume;
+            ok!(&format!("<volume value=\"{vol}\"/>"))
+        }
+
+        "SetSystemVolume" | "setSystemVolume" => {
+            if let Some(v) = extract_attr(xml, "volume", "value") {
+                if let Ok(vol) = v.parse::<u8>() {
+                    let mut state = services.write().await;
+                    state.volume = vol.min(100);
+                }
+            }
+            ok!("")
+        }
+
+        // ── Sensors / Modbus ───────────────────────────────────────────────────
+        "GetSensorInfo" | "getSensorInfo" => {
+            ok!("<sensors count=\"0\"/>")
+        }
+
+        "GetCurrentSensorValue" | "getCurrentSensorValue" => {
+            ok!("<sensors count=\"0\"/>")
+        }
+
+        "GetGPSInfo" | "getGPSInfo" => {
+            ok!("<gps enable=\"false\" lat=\"0.0\" lon=\"0.0\"/>")
+        }
+
+        "GetRelayInfo" | "getRelayInfo" => {
+            ok!("<relays count=\"0\"/>")
+        }
+
+        "SetRelayInfo" | "setRelayInfo" | "SetRelayStatusInfo" | "setRelayStatusInfo" => ok!(""),
+
+        "GetSerialSDK" | "getSerialSDK" => {
+            ok!("<serialSDK enable=\"false\" port=\"\" baud=\"9600\"/>")
+        }
+
+        "SetSerialSDK" | "setSerialSDK" => ok!(""),
+
+        // ── System Control ─────────────────────────────────────────────────────
+        "Reboot" | "reboot" => {
+            info!("Reboot requested — initiating system reboot");
+            // On Linux, spawn `reboot` in the background
+            #[cfg(unix)]
+            {
+                let _ = std::process::Command::new("reboot").spawn();
+            }
+            ok!("")
+        }
+
+        "FirmwareUpgrade" | "firmwareUpgrade" => {
+            info!("FirmwareUpgrade requested (not implemented)");
+            ok!("<upgradeStatus value=\"unsupported\"/>")
+        }
+
+        "ExcuteUpgradeShell" | "excuteUpgradeShell" => {
+            info!("ExcuteUpgradeShell requested (not implemented)");
+            ok!("")
+        }
+
+        "GetUpgradeResult" | "getUpgradeResult" => {
+            ok!("<upgradeResult value=\"1\" message=\"no upgrade in progress\"/>")
+        }
+
+        // ── Data Sources ───────────────────────────────────────────────────────
+        "GetDataSourceInfo" | "getDataSourceInfo" => {
+            ok!("<dataSources count=\"0\"/>")
+        }
+
+        "SetDataSourceInfo" | "setDataSourceInfo" => ok!(""),
+
+        "ReloadDeviceID" | "reloadDeviceID" => ok!(""),
+
+        // ── Catch-all ──────────────────────────────────────────────────────────
         _ => {
             warn!("Unhandled SDK method: {}", method);
-            Ok(format!(
-                "<?xml version=\"1.0\" encoding=\"utf-8\"?>\
-                 <sdk guid=\"{guid}\"><out method=\"{method}\">\
-                 <result value=\"0\"/></out></sdk>"
-            ))
+            ok!("")
         }
     }
 }
 
-/// Extract the method name from <sdk...><in method="MethodName">
+/// Extract the method name from `<sdk...><in method="MethodName">`
 fn extract_method(xml: &str) -> Option<String> {
     let in_start = xml.find("<in ")?;
     let method_attr = xml[in_start..].find("method=\"")?;
@@ -399,5 +638,14 @@ mod tests {
         let xml = r#"<luminance mode="manual" value="75"/>"#;
         assert_eq!(extract_attr(xml, "luminance", "value"), Some("75".to_string()));
         assert_eq!(extract_attr(xml, "luminance", "mode"), Some("manual".to_string()));
+    }
+
+    #[test]
+    fn test_extract_schedule_entries() {
+        let xml = r#"<sdk><in method="SetSwitchTime"><item onTime="08:00" offTime="22:00" days="1111111"/></in></sdk>"#;
+        let entries = extract_schedule_entries(xml);
+        assert_eq!(entries.len(), 1);
+        assert_eq!(entries[0].on_time, "08:00");
+        assert_eq!(entries[0].off_time, "22:00");
     }
 }

@@ -6,6 +6,7 @@ use tracing::{info, warn};
 
 mod config;
 mod core;
+mod fpga;
 mod program;
 mod protocol;
 mod render;

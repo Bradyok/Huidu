@@ -33,12 +33,16 @@ pub enum EffectPhase {
 }
 
 impl EffectState {
-    pub fn new(effect_in: u8, effect_out: u8, in_speed: u8, out_speed: u8, duration_tenths: u32) -> Self {
+    /// Create a new effect state, starting at `start_ms` elapsed time.
+    /// Passing the current render clock avoids the effect immediately skipping its
+    /// entrance animation because `phase_start_ms` would otherwise be 0 while the
+    /// render clock is already well past that.
+    pub fn new(effect_in: u8, effect_out: u8, in_speed: u8, out_speed: u8, duration_tenths: u32, start_ms: u64) -> Self {
         Self {
             current_index: 0,
             phase: EffectPhase::Entering,
             progress: 0.0,
-            phase_start_ms: 0,
+            phase_start_ms: start_ms,
             display_duration_ms: duration_tenths as u64 * 100,
             effect_in,
             effect_out,

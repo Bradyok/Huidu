@@ -786,11 +786,13 @@ name = "huidu-player"
 version = "0.1.0"
 dependencies = [
  "anyhow",
+ "base64",
  "byteorder",
  "chrono",
  "clap",
  "gif 0.13.3",
  "image",
+ "libc",
  "md5",
  "nix 0.29.0",
  "quick-xml",
