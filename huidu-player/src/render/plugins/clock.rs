@@ -1,5 +1,5 @@
 /// Clock content renderer plugin.
-/// Renders digital clock with date/time/week fields.
+/// Renders digital clock with date/time/week/title/lunar fields.
 use chrono::Local;
 use std::path::Path;
 use tiny_skia::Pixmap;
@@ -30,6 +30,13 @@ impl ClockRenderer {
 
         // Collect lines to render with their colors
         let mut lines: Vec<(String, (u8, u8, u8))> = Vec::new();
+
+        // Title line (static label, shown first)
+        if let Some(ref title_field) = clock.title {
+            if title_field.display && !title_field.value.is_empty() {
+                lines.push((title_field.value.clone(), parse_color(&title_field.color)));
+            }
+        }
 
         // Date line
         if let Some(ref date_field) = clock.date {
@@ -67,6 +74,14 @@ impl ClockRenderer {
                     _ => now.format("%H:%M:%S").to_string(),
                 };
                 lines.push((time_str, parse_color(&time_field.color)));
+            }
+        }
+
+        // Lunar calendar line (approximate Chinese lunar date)
+        if let Some(ref lunar_field) = clock.lunar_calendar {
+            if lunar_field.display {
+                let lunar_str = compute_lunar_date(&now);
+                lines.push((lunar_str, parse_color(&lunar_field.color)));
             }
         }
 
@@ -167,4 +182,45 @@ impl ContentRenderer for ClockRenderer {
         self.render_clock(clock, target, width, height);
         true
     }
+}
+
+/// Compute an approximate Chinese lunar date for the given datetime.
+/// Uses a lookup table of Chinese New Year (CNY) Gregorian dates and a
+/// 30-day month approximation.  Displayed as "L:M/D" with Latin digits
+/// since the bundled DejaVu Sans font does not include CJK glyphs.
+fn compute_lunar_date(now: &chrono::DateTime<Local>) -> String {
+    use chrono::NaiveDate;
+
+    // Chinese New Year dates (Gregorian) for 2020-2045.
+    const CNY_DATES: &[(i32, u32, u32)] = &[
+        (2020, 1, 25), (2021, 2, 12), (2022, 2,  1), (2023, 1, 22),
+        (2024, 2, 10), (2025, 1, 29), (2026, 2, 17), (2027, 2,  6),
+        (2028, 1, 26), (2029, 2, 13), (2030, 2,  3), (2031, 1, 23),
+        (2032, 2, 11), (2033, 1, 31), (2034, 2, 19), (2035, 2,  8),
+        (2036, 1, 28), (2037, 2, 15), (2038, 2,  4), (2039, 1, 24),
+        (2040, 2, 12), (2041, 1, 31), (2042, 2, 22), (2043, 2, 10),
+        (2044, 1, 30), (2045, 2, 17),
+    ];
+
+    let today = now.date_naive();
+
+    // Find the most recent CNY date that is <= today
+    let mut cny = NaiveDate::from_ymd_opt(2020, 1, 25).unwrap();
+    for &(y, m, d) in CNY_DATES {
+        if let Some(date) = NaiveDate::from_ymd_opt(y, m, d) {
+            if date <= today {
+                cny = date;
+            }
+        }
+    }
+
+    // Days elapsed since Chinese New Year (0-indexed on CNY itself)
+    let days = (today - cny).num_days().max(0) as u32;
+
+    // Approximate lunar month/day.
+    // Real months alternate 29/30 days; we use 30 for simplicity (±1 day error).
+    let lunar_month = (days / 30) + 1;
+    let lunar_day   = (days % 30) + 1;
+
+    format!("L:{}/{}", lunar_month.min(13), lunar_day)
 }

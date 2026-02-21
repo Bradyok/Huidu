@@ -8,14 +8,16 @@
     <!-- Rainbow neon border around this program -->
     <border index="8" effect="rainbow" speed="6"/>
 
-    <!-- Digital clock (top half) -->
+    <!-- Digital clock (top half) — title, date, week, time, lunar calendar -->
     <area guid="area-clock" name="Clock" alpha="255">
       <rectangle x="0" y="0" width="128" height="36"/>
       <resources>
         <clock guid="clk-1" type="digital">
+          <title value="LED PLAYER" color="#ffaa00" display="true"/>
           <date format="1" color="#00ff88" display="true"/>
           <week color="#88ffff" display="true"/>
           <time format="1" color="#ffffff" display="true"/>
+          <lunarCalendar color="#ff88ff" display="true"/>
         </clock>
       </resources>
     </area>
@@ -131,32 +133,56 @@ Compatible</string>
     </area>
   </program>
 
-  <!-- ── Program 4: Alternating border + dual text ─────────────────────── -->
+  <!-- ── Program 4: Rainbow + alternating border ───────────────────────── -->
   <program guid="demo-004" name="Dual Zones" type="normal">
     <playControl duration="00:00:12" count="0"/>
 
     <border index="12" speed="5"/>
 
+    <!-- Top ticker: animated rainbow colour per character -->
     <area guid="area-top" name="Top" alpha="255">
       <rectangle x="0" y="0" width="128" height="32"/>
       <resources>
         <text guid="txt-top" singleLine="true">
           <string>RUST EDITION ◆ HUIDU LED PLAYER ◆ </string>
           <effect in="21" out="0" inSpeed="3" outSpeed="0" duration="0"/>
-          <font size="13" color="#ff4400"/>
+          <font size="13" color="rainbow"/>
           <style align="left" valign="middle"/>
         </text>
       </resources>
     </area>
 
+    <!-- Bottom ticker: gradient from cyan to magenta -->
     <area guid="area-bot" name="Bottom" alpha="255">
       <rectangle x="0" y="32" width="128" height="32"/>
       <resources>
         <text guid="txt-bot" singleLine="true">
           <string>★ OPEN SOURCE ★ aarch64 ★ armv7 ★ </string>
           <effect in="22" out="0" inSpeed="3" outSpeed="0" duration="0"/>
-          <font size="13" color="#0088ff"/>
+          <font size="13" color="gradient:#00ffff:#ff00ff"/>
           <style align="left" valign="middle"/>
+        </text>
+      </resources>
+    </area>
+  </program>
+
+  <!-- ── Program 5: Flash text + sparkle border ────────────────────────── -->
+  <program guid="demo-005" name="Flash Demo" type="normal">
+    <playControl duration="00:00:10" count="0"/>
+
+    <border index="13" speed="5"/>
+
+    <area guid="area-flash" name="FlashText" alpha="255">
+      <rectangle x="0" y="0" width="128" height="64"/>
+      <resources>
+        <!-- Flashing between red and yellow — 2 Hz alternation -->
+        <text guid="txt-flash" singleLine="false">
+          <string>FLASH
+TEXT
+DEMO</string>
+          <effect in="17" out="17" inSpeed="3" outSpeed="3" duration="0"/>
+          <font size="18" color="flash:#ff2200:#ffff00"/>
+          <style align="center" valign="middle"/>
         </text>
       </resources>
     </area>

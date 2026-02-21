@@ -113,25 +113,10 @@ pub async fn handle_sdk_command(
         }
 
         "GetProgram" | "getProgram" => {
-            // Return the XML for the requested program, or empty if not found
             let req_guid = extract_attr(xml, "program", "guid").unwrap_or_default();
             let state = services.read().await;
-            let found = state.programs.iter().any(|p| p.guid == req_guid);
-            if found {
-                // Load the raw XML from disk
-                let raw = state
-                    .storage
-                    .load_current_program()
-                    .map(|_| {
-                        // Re-read the file for the raw XML
-                        let path = state.storage.program_dir().join("current_program.xml");
-                        std::fs::read_to_string(path).unwrap_or_default()
-                    })
-                    .unwrap_or_default();
-                ok!(&raw)
-            } else {
-                ok!("")
-            }
+            let raw = state.storage.load_program_xml_by_guid(&req_guid).unwrap_or_default();
+            ok!(&raw)
         }
 
         "SwitchProgram" | "switchProgram" => {
@@ -188,12 +173,17 @@ pub async fn handle_sdk_command(
         }
 
         "DeleteNotCiteFile" | "deleteNotCiteFile" => {
-            // Delete files in the program dir that are not referenced by current programs.
-            // For simplicity: list all files and keep only current_program.xml.
+            // Delete files not referenced by the currently loaded programs.
             let state = services.read().await;
+            // Build the set of XML filenames that correspond to active programs.
+            let active: std::collections::HashSet<String> = state
+                .programs
+                .iter()
+                .map(|p| crate::services::storage::StorageService::filename_for_guid(&p.guid))
+                .collect();
             let files = state.storage.list_files();
             for f in &files {
-                if f != "current_program.xml" && f != "screenshot.png" {
+                if !active.contains(f) && f != "screenshot.png" {
                     let _ = state.storage.delete_file(f);
                 }
             }
