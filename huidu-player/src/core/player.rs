@@ -7,6 +7,7 @@ use tokio::time::{self, Duration};
 use tracing::{debug, info, warn};
 
 use crate::config::{OutputMode, PlayerConfig};
+use crate::fpga::driver::FpgaDriver;
 use crate::program::model::{Program, Screen};
 use crate::program::parser;
 use crate::render::engine::RenderEngine;
@@ -30,6 +31,8 @@ pub enum PlayerCommand {
 pub struct Player {
     config: PlayerConfig,
     engine: RenderEngine,
+    /// FPGA hardware driver (no-op if FPGA unavailable or non-Linux build)
+    fpga: FpgaDriver,
     programs: Vec<Program>,
     current_program: usize,
     /// Time (in frames) when current program started
@@ -55,6 +58,7 @@ impl Player {
         Self {
             config,
             engine,
+            fpga: FpgaDriver::open(),
             programs: Vec::new(),
             current_program: 0,
             program_start_frame: 0,
@@ -145,6 +149,9 @@ impl Player {
                         let program = &self.programs[self.current_program];
                         self.engine.render_frame(program, &program_dir);
 
+                        let w = self.engine.width();
+                        let h = self.engine.height();
+
                         match self.config.output_mode {
                             OutputMode::Png => {
                                 // Save every 5 seconds
@@ -166,8 +173,11 @@ impl Player {
                                 std::io::stdout().write_all(self.engine.pixels()).ok();
                             }
                             OutputMode::Framebuffer => {
-                                // TODO: DRM/KMS output
-                                // Update screenshot every 5 seconds even in framebuffer mode
+                                // Send rendered frame to FPGA LED panels
+                                let pixels = self.engine.pixels().to_vec();
+                                self.fpga.send_frame(&pixels, w, h);
+
+                                // Update screenshot periodically even in framebuffer mode
                                 if frames_rendered % (self.config.fps as u64 * 5) == 0 {
                                     self.update_screenshot().await;
                                 }
@@ -210,6 +220,7 @@ impl Player {
             PlayerCommand::SetBrightness(level) => {
                 info!("Brightness: {}", level);
                 self.engine.set_brightness(level);
+                self.fpga.set_brightness(level);
             }
             PlayerCommand::ScreenPower(on) => {
                 info!("Screen: {}", if on { "ON" } else { "OFF" });

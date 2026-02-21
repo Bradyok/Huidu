@@ -228,23 +228,44 @@ pub async fn handle_sdk_command(
         }
 
         // ── Brightness ─────────────────────────────────────────────────────────
-        "GetLuminancePloy" | "getLuminancePloy" => {
-            let state = services.read().await;
-            let level = state.brightness.get_level();
-            ok!(&format!(
-                "<luminance mode=\"manual\" value=\"{level}\"/>"
-            ))
-        }
-
         "SetLuminancePloy" | "setLuminancePloy" => {
-            if let Some(val) = extract_attr(xml, "luminance", "value") {
-                if let Ok(level) = val.parse::<u8>() {
-                    let mut state = services.write().await;
-                    state.brightness.set_level(level);
-                    player_tx.send(PlayerCommand::SetBrightness(level)).await.ok();
+            let mode = extract_attr(xml, "luminance", "mode").unwrap_or_default();
+            if mode == "auto" {
+                // Extract brightness schedule: <item time="HH:MM" level="N"/>
+                let entries = extract_brightness_schedule(xml);
+                let mut state = services.write().await;
+                state.brightness.set_schedule(entries);
+            } else {
+                // Manual mode: <luminance mode="manual" value="N"/>
+                if let Some(val) = extract_attr(xml, "luminance", "value") {
+                    if let Ok(level) = val.parse::<u8>() {
+                        let mut state = services.write().await;
+                        state.brightness.set_level(level);
+                        drop(state);
+                        player_tx.send(PlayerCommand::SetBrightness(level)).await.ok();
+                    }
                 }
             }
             ok!("")
+        }
+
+        "GetLuminancePloy" | "getLuminancePloy" => {
+            let state = services.read().await;
+            let level = state.brightness.get_level();
+            let schedule = state.brightness.get_schedule();
+            if schedule.is_empty() {
+                ok!(&format!("<luminance mode=\"manual\" value=\"{level}\"/>"))
+            } else {
+                let mut items = String::from("<luminance mode=\"auto\">");
+                for e in schedule {
+                    items.push_str(&format!(
+                        "<item time=\"{:02}:{:02}\" level=\"{}\"/>",
+                        e.hour, e.minute, e.level
+                    ));
+                }
+                items.push_str("</luminance>");
+                ok!(&items)
+            }
         }
 
         // ── Screen Schedule ────────────────────────────────────────────────────
@@ -296,10 +317,11 @@ pub async fn handle_sdk_command(
         "GetDeviceInfo" | "getDeviceInfo" => {
             let state = services.read().await;
             let name = &state.device_name;
+            let dev_id = if state.device_id.is_empty() { "RUST-001" } else { &state.device_id };
             ok!(&format!(
                 "<deviceInfo cpu=\"RustPlayer\" model=\"huidu-player\" \
                  fpgaVersion=\"1.0.0\" screenWidth=\"{screen_width}\" \
-                 screenHeight=\"{screen_height}\" deviceID=\"RUST-001\" name=\"{name}\"/>"
+                 screenHeight=\"{screen_height}\" deviceID=\"{dev_id}\" name=\"{name}\"/>"
             ))
         }
 
@@ -605,6 +627,27 @@ fn extract_schedule_entries(xml: &str) -> Vec<crate::services::screen_schedule::
             days,
         });
         search_from = abs_pos + 5;
+    }
+    entries
+}
+
+/// Extract brightness schedule entries from SetLuminancePloy XML.
+/// Expected: `<item time="HH:MM" level="N"/>` elements inside `<luminance mode="auto">`.
+fn extract_brightness_schedule(
+    xml: &str,
+) -> Vec<crate::services::brightness::BrightnessScheduleEntry> {
+    let mut entries = Vec::new();
+    let mut from = 0;
+    while let Some(pos) = xml[from..].find("<item ") {
+        let abs = from + pos;
+        let time_str = extract_attr(&xml[abs..], "item", "time").unwrap_or_default();
+        let level_str = extract_attr(&xml[abs..], "item", "level").unwrap_or_default();
+        let level: u8 = level_str.parse().unwrap_or(100);
+        let parts: Vec<&str> = time_str.split(':').collect();
+        let hour: u8 = parts.first().and_then(|s| s.parse().ok()).unwrap_or(0);
+        let minute: u8 = parts.get(1).and_then(|s| s.parse().ok()).unwrap_or(0);
+        entries.push(crate::services::brightness::BrightnessScheduleEntry { hour, minute, level });
+        from = abs + 6;
     }
     entries
 }
