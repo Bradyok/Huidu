@@ -1,70 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
 <screen timeStamps="1708300000">
-  <program guid="demo-001" name="Demo Program" type="normal">
+
+  <!-- ── Program 1: Clock + scrolling ticker ──────────────────────────── -->
+  <program guid="demo-001" name="Clock Display" type="normal">
     <playControl duration="00:00:15" count="0"/>
 
-    <!-- Clock area (top) -->
+    <!-- Rainbow neon border around this program -->
+    <border index="8" effect="rainbow" speed="6"/>
+
+    <!-- Digital clock (top half) -->
     <area guid="area-clock" name="Clock" alpha="255">
-      <rectangle x="0" y="0" width="128" height="28"/>
+      <rectangle x="0" y="0" width="128" height="36"/>
       <resources>
         <clock guid="clk-1" type="digital">
-          <date format="1" color="#00ff00" display="true"/>
+          <date format="1" color="#00ff88" display="true"/>
+          <week color="#88ffff" display="true"/>
           <time format="1" color="#ffffff" display="true"/>
         </clock>
       </resources>
     </area>
 
-    <!-- Scrolling text banner (middle) -->
-    <area guid="area-text" name="Banner" alpha="255">
-      <rectangle x="0" y="28" width="128" height="18"/>
+    <!-- Scrolling ticker (bottom) -->
+    <area guid="area-ticker" name="Ticker" alpha="255">
+      <rectangle x="0" y="36" width="128" height="16"/>
       <resources>
-        <text guid="txt-1" singleLine="true">
-          <string>Welcome to Huidu LED Player - Rust Edition!</string>
+        <text guid="txt-ticker" singleLine="true">
+          <string>Huidu LED Player ★ Rust Edition ★ Open Source ★ ARM Linux ★</string>
           <effect in="21" out="0" inSpeed="3" outSpeed="0" duration="0"/>
-          <font size="14" color="#ff0000"/>
+          <font size="12" color="#ffff00"/>
+          <style align="left" valign="middle"/>
+        </text>
+      </resources>
+    </area>
+  </program>
+
+  <!-- ── Program 2: Multi-content fade cycling ──────────────────────────── -->
+  <program guid="demo-002" name="Info Slides" type="normal">
+    <playControl duration="00:00:20" count="0"/>
+
+    <!-- Breathing cyan border -->
+    <border index="10" effect="breathing" speed="4"/>
+
+    <area guid="area-main" name="Main" alpha="255">
+      <rectangle x="0" y="0" width="128" height="64"/>
+      <resources>
+
+        <!-- Slide 1: Product name -->
+        <text guid="txt-s1" singleLine="false">
+          <string>huidu-player
+v0.1.0
+Rust</string>
+          <effect in="17" out="17" inSpeed="3" outSpeed="3" duration="40"/>
+          <font size="16" color="#ff8800"/>
+          <style align="center" valign="middle"/>
+        </text>
+
+        <!-- Slide 2: Slide in from right -->
+        <text guid="txt-s2" singleLine="false">
+          <string>OPEN SOURCE
+LED Controller</string>
+          <effect in="21" out="22" inSpeed="3" outSpeed="3" duration="40"/>
+          <font size="14" color="#00ffff"/>
+          <style align="center" valign="middle"/>
+        </text>
+
+        <!-- Slide 3: Up enter -->
+        <text guid="txt-s3" singleLine="false">
+          <string>ARM Linux
+PX30 / RK3288</string>
+          <effect in="23" out="24" inSpeed="3" outSpeed="3" duration="40"/>
+          <font size="14" color="#00ff88"/>
+          <style align="center" valign="middle"/>
+        </text>
+
+        <!-- Slide 4: Horizontal shutter -->
+        <text guid="txt-s4" singleLine="false">
+          <string>Huidu SDK
+Compatible</string>
+          <effect in="18" out="19" inSpeed="3" outSpeed="3" duration="40"/>
+          <font size="14" color="#ff88ff"/>
+          <style align="center" valign="middle"/>
+        </text>
+
+      </resources>
+    </area>
+  </program>
+
+  <!-- ── Program 3: Analog clock + table ───────────────────────────────── -->
+  <program guid="demo-003" name="Clock + Table" type="normal">
+    <playControl duration="00:00:15" count="0"/>
+
+    <!-- Chase border (neon bead running around display) -->
+    <border index="9" speed="7"/>
+
+    <!-- Analog clock (left half) -->
+    <area guid="area-analog" name="AnalogClock" alpha="255">
+      <rectangle x="0" y="0" width="60" height="64"/>
+      <resources>
+        <analogClock guid="aclock-1">
+          <effect in="17" out="17" inSpeed="2" outSpeed="2" duration="0"/>
+        </analogClock>
+      </resources>
+    </area>
+
+    <!-- Table scoreboard (right half) -->
+    <area guid="area-table" name="Scores" alpha="255">
+      <rectangle x="62" y="0" width="66" height="64"/>
+      <resources>
+        <table guid="tbl-1" cols="2" rows="5">
+          <style textColor="#ffffff" borderColor="#445566"
+                 headerBgColor="#223366" fontSize="9" headerRow="true"/>
+          <row>
+            <cell color="#aaccff" bold="true">Team</cell>
+            <cell color="#aaccff" bold="true">Score</cell>
+          </row>
+          <row>
+            <cell>Alpha</cell><cell color="#ffff44">142</cell>
+          </row>
+          <row>
+            <cell>Beta</cell><cell color="#ff8844">137</cell>
+          </row>
+          <row>
+            <cell>Gamma</cell><cell color="#44ff88">128</cell>
+          </row>
+          <row>
+            <cell>Delta</cell><cell>115</cell>
+          </row>
+        </table>
+      </resources>
+    </area>
+  </program>
+
+  <!-- ── Program 4: Alternating border + dual text ─────────────────────── -->
+  <program guid="demo-004" name="Dual Zones" type="normal">
+    <playControl duration="00:00:12" count="0"/>
+
+    <border index="12" speed="5"/>
+
+    <area guid="area-top" name="Top" alpha="255">
+      <rectangle x="0" y="0" width="128" height="32"/>
+      <resources>
+        <text guid="txt-top" singleLine="true">
+          <string>RUST EDITION ◆ HUIDU LED PLAYER ◆ </string>
+          <effect in="21" out="0" inSpeed="3" outSpeed="0" duration="0"/>
+          <font size="13" color="#ff4400"/>
           <style align="left" valign="middle"/>
         </text>
       </resources>
     </area>
 
-    <!-- Static text (bottom) -->
-    <area guid="area-info" name="Info" alpha="255">
-      <rectangle x="0" y="46" width="128" height="18"/>
+    <area guid="area-bot" name="Bottom" alpha="255">
+      <rectangle x="0" y="32" width="128" height="32"/>
       <resources>
-        <text guid="txt-2" singleLine="false">
-          <string>huidu-player v0.1</string>
-          <font size="12" color="#ffff00"/>
-          <style align="center" valign="middle"/>
-        </text>
-        <text guid="txt-3" singleLine="false">
-          <string>Olympian LED</string>
-          <effect in="17" out="17" inSpeed="3" outSpeed="3" duration="30"/>
-          <font size="12" color="#00ffff"/>
-          <style align="center" valign="middle"/>
+        <text guid="txt-bot" singleLine="true">
+          <string>★ OPEN SOURCE ★ aarch64 ★ armv7 ★ </string>
+          <effect in="22" out="0" inSpeed="3" outSpeed="0" duration="0"/>
+          <font size="13" color="#0088ff"/>
+          <style align="left" valign="middle"/>
         </text>
       </resources>
     </area>
   </program>
 
-  <program guid="demo-002" name="Second Program" type="normal">
-    <playControl duration="00:00:10" count="0"/>
-
-    <area guid="area-main" name="Main" alpha="255">
-      <rectangle x="0" y="0" width="128" height="64"/>
-      <resources>
-        <text guid="txt-4" singleLine="false">
-          <string>PROGRAM 2</string>
-          <effect in="17" out="17" inSpeed="2" outSpeed="2" duration="40"/>
-          <font size="24" color="#ff8800"/>
-          <style align="center" valign="middle"/>
-        </text>
-        <text guid="txt-5" singleLine="false">
-          <string>RUST PLAYER</string>
-          <effect in="1" out="2" inSpeed="3" outSpeed="3" duration="40"/>
-          <font size="22" color="#00ff88"/>
-          <style align="center" valign="middle"/>
-        </text>
-      </resources>
-    </area>
-  </program>
 </screen>

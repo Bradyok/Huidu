@@ -292,19 +292,95 @@ pub fn apply_effect(
             // Not clear area — draw without clearing
             draw_full(content, target);
         }
-        21..=24 => {
-            // Series move (continuous scroll) — handled by the content renderer itself
-            // Just draw the full content
-            draw_full(content, target);
+        21 => {
+            // LeftSeriesMove: enters from right, exits to left
+            let offset = match phase {
+                EffectPhase::Entering => ((1.0 - progress) * width as f32) as i32,
+                EffectPhase::Exiting => -((progress * width as f32) as i32),
+                _ => 0,
+            };
+            target.draw_pixmap(offset, 0, content.as_ref(), &PixmapPaint::default(), Transform::identity(), None);
+        }
+        22 => {
+            // RightSeriesMove: enters from left, exits to right
+            let offset = match phase {
+                EffectPhase::Entering => -((1.0 - progress) * width as f32) as i32,
+                EffectPhase::Exiting => (progress * width as f32) as i32,
+                _ => 0,
+            };
+            target.draw_pixmap(offset, 0, content.as_ref(), &PixmapPaint::default(), Transform::identity(), None);
+        }
+        23 => {
+            // UpSeriesMove: enters from bottom, exits to top
+            let offset = match phase {
+                EffectPhase::Entering => ((1.0 - progress) * height as f32) as i32,
+                EffectPhase::Exiting => -((progress * height as f32) as i32),
+                _ => 0,
+            };
+            target.draw_pixmap(0, offset, content.as_ref(), &PixmapPaint::default(), Transform::identity(), None);
+        }
+        24 => {
+            // DownSeriesMove: enters from top, exits to bottom
+            let offset = match phase {
+                EffectPhase::Entering => -((1.0 - progress) * height as f32) as i32,
+                EffectPhase::Exiting => (progress * height as f32) as i32,
+                _ => 0,
+            };
+            target.draw_pixmap(0, offset, content.as_ref(), &PixmapPaint::default(), Transform::identity(), None);
         }
         25 => {
-            // Random — pick a random effect based on time
-            let pseudo_type = ((progress * 17.0) as u8 % 17) + 1;
+            // Random — deterministic pseudo-random based on progress bucket
+            let pseudo_type = (progress * 24.0) as u8 % 24 + 1;
             apply_effect(pseudo_type, progress, phase, content, target, width, height);
         }
-        26..=29 => {
-            // Head-to-tail series move — same as series move for now
-            draw_full(content, target);
+        26 => {
+            // HtLeftSeriesMove — head-to-tail left: same as 21 with tail overlap
+            let offset = match phase {
+                EffectPhase::Entering => ((1.0 - progress) * width as f32) as i32,
+                EffectPhase::Exiting => -((progress * width as f32) as i32),
+                _ => 0,
+            };
+            target.draw_pixmap(offset, 0, content.as_ref(), &PixmapPaint::default(), Transform::identity(), None);
+            // Tail: show copy wrapping from the other side
+            if phase == EffectPhase::Entering && progress < 0.5 {
+                target.draw_pixmap(offset - width as i32, 0, content.as_ref(), &PixmapPaint::default(), Transform::identity(), None);
+            }
+        }
+        27 => {
+            // HtRightSeriesMove
+            let offset = match phase {
+                EffectPhase::Entering => -((1.0 - progress) * width as f32) as i32,
+                EffectPhase::Exiting => (progress * width as f32) as i32,
+                _ => 0,
+            };
+            target.draw_pixmap(offset, 0, content.as_ref(), &PixmapPaint::default(), Transform::identity(), None);
+            if phase == EffectPhase::Entering && progress < 0.5 {
+                target.draw_pixmap(offset + width as i32, 0, content.as_ref(), &PixmapPaint::default(), Transform::identity(), None);
+            }
+        }
+        28 => {
+            // HtUpSeriesMove
+            let offset = match phase {
+                EffectPhase::Entering => ((1.0 - progress) * height as f32) as i32,
+                EffectPhase::Exiting => -((progress * height as f32) as i32),
+                _ => 0,
+            };
+            target.draw_pixmap(0, offset, content.as_ref(), &PixmapPaint::default(), Transform::identity(), None);
+            if phase == EffectPhase::Entering && progress < 0.5 {
+                target.draw_pixmap(0, offset - height as i32, content.as_ref(), &PixmapPaint::default(), Transform::identity(), None);
+            }
+        }
+        29 => {
+            // HtDownSeriesMove
+            let offset = match phase {
+                EffectPhase::Entering => -((1.0 - progress) * height as f32) as i32,
+                EffectPhase::Exiting => (progress * height as f32) as i32,
+                _ => 0,
+            };
+            target.draw_pixmap(0, offset, content.as_ref(), &PixmapPaint::default(), Transform::identity(), None);
+            if phase == EffectPhase::Entering && progress < 0.5 {
+                target.draw_pixmap(0, offset + height as i32, content.as_ref(), &PixmapPaint::default(), Transform::identity(), None);
+            }
         }
         _ => {
             draw_full(content, target);
