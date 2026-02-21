@@ -1,4 +1,5 @@
 pub mod brightness;
+pub mod cloud_api;
 pub mod manager;
 pub mod screen_schedule;
 pub mod storage;

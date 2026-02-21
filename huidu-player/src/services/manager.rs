@@ -53,6 +53,10 @@ pub struct ServicesState {
     /// Use Arc<Mutex<…>> so it can be written from the async render loop and read
     /// by the async command handler without nesting locks inside ServicesState.
     pub screenshot: Arc<Mutex<Vec<u8>>>,
+
+    // Cloud OMS
+    pub cloud_url: String,
+    pub device_id: String,
 }
 
 impl ServicesState {
@@ -71,6 +75,8 @@ impl ServicesState {
             current_program_guid: String::new(),
             fpga_config: default_fpga_config(),
             screenshot: Arc::new(Mutex::new(Vec::new())),
+            cloud_url: String::new(),
+            device_id: String::new(),
         }
     }
 }
@@ -106,4 +112,13 @@ pub async fn start_services(
     tokio::spawn(async move {
         UsbDiskService::run(tx, dir).await;
     });
+
+    // Cloud OMS heartbeat
+    let (cloud_url, device_id) = {
+        let s = state.read().await;
+        (s.cloud_url.clone(), s.device_id.clone())
+    };
+    if !cloud_url.is_empty() {
+        crate::services::cloud_api::CloudApiService::start(state, cloud_url, device_id);
+    }
 }

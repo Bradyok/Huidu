@@ -1,16 +1,21 @@
 /// Rendering engine — composites areas onto a framebuffer using tiny-skia.
-/// Handles content cycling with transition effects.
+/// Handles content cycling with transition effects, animated borders, and
+/// all content-type plugins.
 use anyhow::Result;
 use std::path::Path;
 use tiny_skia::{Color, Pixmap, PixmapPaint, Transform};
 
 use crate::program::model::{ContentItem, Program};
+use crate::render::border;
 use crate::render::effects::{self, EffectPhase, EffectState};
+use crate::render::plugins::analog_clock::AnalogClockRenderer;
 use crate::render::plugins::clock::ClockRenderer;
 use crate::render::plugins::gif::GifRenderer;
 use crate::render::plugins::image::ImageRenderer;
+use crate::render::plugins::table::TableRenderer;
 use crate::render::plugins::text::TextRenderer;
 use crate::render::plugins::video::VideoRenderer;
+use crate::render::plugins::weather::WeatherRenderer;
 use crate::render::plugins::ContentRenderer;
 
 /// Rotate raw RGBA pixel data by multiples of 90°.
@@ -24,10 +29,10 @@ fn rotate_pixels(src: &[u8], src_w: u32, src_h: u32, degrees: u16) -> (u32, u32,
         for x in 0..src_w {
             let si = ((y * src_w + x) * 4) as usize;
             let (dx, dy) = match degrees {
-                90  => (src_h - 1 - y, x),
+                90 => (src_h - 1 - y, x),
                 180 => (src_w - 1 - x, src_h - 1 - y),
                 270 => (y, src_w - 1 - x),
-                _   => (x, y),
+                _ => (x, y),
             };
             let di = ((dy * dst_w + dx) * 4) as usize;
             dst[di..di + 4].copy_from_slice(&src[si..si + 4]);
@@ -49,21 +54,28 @@ pub struct RenderEngine {
     area_surfaces: Vec<Pixmap>,
     content_surfaces: Vec<Pixmap>,
     area_states: Vec<AreaState>,
+    // -- content renderers --
     image_renderer: ImageRenderer,
     text_renderer: TextRenderer,
     clock_renderer: ClockRenderer,
     gif_renderer: GifRenderer,
     video_renderer: VideoRenderer,
+    table_renderer: TableRenderer,
+    weather_renderer: WeatherRenderer,
+    analog_clock_renderer: AnalogClockRenderer,
+    // -- display state --
     frame: u64,
     ms_per_frame: u64,
     /// Software brightness level (0-100)
     brightness: u8,
     /// Screen rotation in degrees (0 / 90 / 180 / 270)
     rotation: u16,
+    /// Weather API base URL (passed through to WeatherRenderer)
+    weather_url: String,
 }
 
 impl RenderEngine {
-    pub fn new(width: u32, height: u32, fps: u32) -> Self {
+    pub fn new(width: u32, height: u32, fps: u32, weather_url: String) -> Self {
         Self {
             framebuffer: Pixmap::new(width, height).expect("Failed to create framebuffer"),
             area_surfaces: Vec::new(),
@@ -74,10 +86,14 @@ impl RenderEngine {
             clock_renderer: ClockRenderer::new(),
             gif_renderer: GifRenderer::new(),
             video_renderer: VideoRenderer::new(),
+            table_renderer: TableRenderer::new(),
+            weather_renderer: WeatherRenderer::new(weather_url.clone()),
+            analog_clock_renderer: AnalogClockRenderer::new(),
             frame: 0,
-            ms_per_frame: 1000 / fps as u64,
+            ms_per_frame: 1000 / fps.max(1) as u64,
             brightness: 100,
             rotation: 0,
+            weather_url,
         }
     }
 
@@ -96,9 +112,18 @@ impl RenderEngine {
     /// Encode the current framebuffer as PNG bytes (with rotation applied).
     pub fn screenshot_png(&self) -> Vec<u8> {
         let (w, h, pixels) = if self.rotation != 0 {
-            rotate_pixels(self.framebuffer.data(), self.framebuffer.width(), self.framebuffer.height(), self.rotation)
+            rotate_pixels(
+                self.framebuffer.data(),
+                self.framebuffer.width(),
+                self.framebuffer.height(),
+                self.rotation,
+            )
         } else {
-            (self.framebuffer.width(), self.framebuffer.height(), self.framebuffer.data().to_vec())
+            (
+                self.framebuffer.width(),
+                self.framebuffer.height(),
+                self.framebuffer.data().to_vec(),
+            )
         };
         // tiny-skia uses premultiplied RGBA; convert back to straight alpha for PNG
         let mut straight = pixels.clone();
@@ -112,7 +137,10 @@ impl RenderEngine {
         }
         if let Some(img) = image::RgbaImage::from_raw(w, h, straight) {
             let mut cursor = std::io::Cursor::new(Vec::new());
-            if img.write_to(&mut cursor, image::ImageFormat::Png).is_ok() {
+            if img
+                .write_to(&mut cursor, image::ImageFormat::Png)
+                .is_ok()
+            {
                 return cursor.into_inner();
             }
         }
@@ -142,7 +170,7 @@ impl RenderEngine {
     pub fn render_frame(&mut self, program: &Program, program_dir: &Path) -> &[u8] {
         let elapsed_ms = self.frame * self.ms_per_frame;
 
-        // Initialize area states if needed
+        // Initialize area states if count changed
         if self.area_states.len() != program.areas.len() {
             self.reset_for_program(program, elapsed_ms);
         }
@@ -183,12 +211,11 @@ impl RenderEngine {
                 continue;
             }
 
-            // Update effect state and check if we should advance
+            // Update effect state and advance content item if done
             let area_state = &mut self.area_states[i];
             let should_advance = area_state.effect.update(elapsed_ms);
 
             if should_advance && items.len() > 1 {
-                // Advance to next content item
                 area_state.current_item = (area_state.current_item + 1) % items.len();
                 let next_item = &items[area_state.current_item];
                 let eff = get_effect_for_item(next_item, elapsed_ms);
@@ -205,35 +232,24 @@ impl RenderEngine {
             let current_idx = area_state.current_item;
             let item = &items[current_idx];
 
-            // Render content into content surface
+            // Render content into the content surface
             content_surface.fill(Color::TRANSPARENT);
-            match item {
-                ContentItem::Image(_) => {
-                    self.image_renderer.render(
-                        item, content_surface, 0, 0, w, h, elapsed_ms, program_dir,
-                    );
-                }
-                ContentItem::Text(_) => {
-                    self.text_renderer.render(
-                        item, content_surface, 0, 0, w, h, elapsed_ms, program_dir,
-                    );
-                }
-                ContentItem::Clock(_) => {
-                    self.clock_renderer.render(
-                        item, content_surface, 0, 0, w, h, elapsed_ms, program_dir,
-                    );
-                }
-                ContentItem::Gif(_) => {
-                    self.gif_renderer.render(
-                        item, content_surface, 0, 0, w, h, elapsed_ms, program_dir,
-                    );
-                }
-                ContentItem::Video(_) => {
-                    self.video_renderer.render(
-                        item, content_surface, 0, 0, w, h, elapsed_ms, program_dir,
-                    );
-                }
-            }
+            dispatch_render(
+                item,
+                content_surface,
+                w,
+                h,
+                elapsed_ms,
+                program_dir,
+                &mut self.image_renderer,
+                &mut self.text_renderer,
+                &mut self.clock_renderer,
+                &mut self.gif_renderer,
+                &mut self.video_renderer,
+                &mut self.table_renderer,
+                &mut self.weather_renderer,
+                &mut self.analog_clock_renderer,
+            );
 
             // Apply transition effect
             let effect_type = match area_state.effect.phase {
@@ -266,6 +282,32 @@ impl RenderEngine {
                 Transform::identity(),
                 None,
             );
+
+            // Per-area border (drawn directly on the framebuffer at area position)
+            if let Some(ref b) = area.border {
+                if b.index != 0 || !b.effect.is_empty() {
+                    // Build a temporary surface the size of the area, draw the
+                    // border into it, then composite onto the framebuffer.
+                    let mut bsurface =
+                        Pixmap::new(w, h).unwrap_or_else(|| Pixmap::new(1, 1).unwrap());
+                    border::draw_border(&mut bsurface, b, elapsed_ms);
+                    self.framebuffer.draw_pixmap(
+                        rect.x,
+                        rect.y,
+                        bsurface.as_ref(),
+                        &PixmapPaint::default(),
+                        Transform::identity(),
+                        None,
+                    );
+                }
+            }
+        }
+
+        // Full-screen program-level border (drawn last, on top of everything)
+        if let Some(ref b) = program.border {
+            if b.index != 0 || !b.effect.is_empty() {
+                border::draw_border(&mut self.framebuffer, b, elapsed_ms);
+            }
         }
 
         // Apply software brightness
@@ -308,17 +350,80 @@ impl RenderEngine {
     }
 }
 
+// ---------------------------------------------------------------------------
+// Content dispatch
+// ---------------------------------------------------------------------------
+
+#[allow(clippy::too_many_arguments)]
+fn dispatch_render(
+    item: &ContentItem,
+    surface: &mut Pixmap,
+    w: u32,
+    h: u32,
+    elapsed_ms: u64,
+    program_dir: &Path,
+    image: &mut ImageRenderer,
+    text: &mut TextRenderer,
+    clock: &mut ClockRenderer,
+    gif: &mut GifRenderer,
+    video: &mut VideoRenderer,
+    table: &mut TableRenderer,
+    weather: &mut WeatherRenderer,
+    analog_clock: &mut AnalogClockRenderer,
+) {
+    match item {
+        ContentItem::Image(_) => {
+            image.render(item, surface, 0, 0, w, h, elapsed_ms, program_dir);
+        }
+        ContentItem::Text(_) => {
+            text.render(item, surface, 0, 0, w, h, elapsed_ms, program_dir);
+        }
+        ContentItem::Clock(_) => {
+            clock.render(item, surface, 0, 0, w, h, elapsed_ms, program_dir);
+        }
+        ContentItem::Gif(_) => {
+            gif.render(item, surface, 0, 0, w, h, elapsed_ms, program_dir);
+        }
+        ContentItem::Video(_) => {
+            video.render(item, surface, 0, 0, w, h, elapsed_ms, program_dir);
+        }
+        ContentItem::Table(_) => {
+            table.render(item, surface, 0, 0, w, h, elapsed_ms, program_dir);
+        }
+        ContentItem::Weather(_) => {
+            weather.render(item, surface, 0, 0, w, h, elapsed_ms, program_dir);
+        }
+        ContentItem::AnalogClock(_) => {
+            analog_clock.render(item, surface, 0, 0, w, h, elapsed_ms, program_dir);
+        }
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Effect extraction
+// ---------------------------------------------------------------------------
+
 /// Extract effect params from a content item, anchored to `start_ms`.
 fn get_effect_for_item(item: &ContentItem, start_ms: u64) -> EffectState {
     let eff = match item {
         ContentItem::Image(i) => i.effect.as_ref(),
         ContentItem::Text(t) => t.effect.as_ref(),
         ContentItem::Gif(g) => g.effect.as_ref(),
+        ContentItem::Table(t) => t.effect.as_ref(),
+        ContentItem::Weather(w) => w.effect.as_ref(),
+        ContentItem::AnalogClock(a) => a.effect.as_ref(),
         _ => None,
     };
 
     match eff {
-        Some(e) => EffectState::new(e.effect_in, e.effect_out, e.in_speed, e.out_speed, e.duration, start_ms),
-        None => EffectState::new(0, 0, 0, 0, 50, start_ms), // default 5 seconds, immediate
+        Some(e) => EffectState::new(
+            e.effect_in,
+            e.effect_out,
+            e.in_speed,
+            e.out_speed,
+            e.duration,
+            start_ms,
+        ),
+        None => EffectState::new(0, 0, 0, 0, 50, start_ms),
     }
 }

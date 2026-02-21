@@ -1,8 +1,11 @@
+pub mod analog_clock;
 pub mod clock;
 pub mod gif;
 pub mod image;
+pub mod table;
 pub mod text;
 pub mod video;
+pub mod weather;
 
 use tiny_skia::Pixmap;
 

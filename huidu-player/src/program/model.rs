@@ -152,6 +152,12 @@ pub enum ContentItem {
     Clock(ClockContent),
     #[serde(rename = "gif")]
     Gif(GifContent),
+    #[serde(rename = "table")]
+    Table(TableContent),
+    #[serde(rename = "weather")]
+    Weather(WeatherContent),
+    #[serde(rename = "analogClock")]
+    AnalogClock(AnalogClockContent),
 }
 
 /// Transition/animation effect
@@ -352,6 +358,107 @@ pub struct GifContent {
     pub name: String,
     pub effect: Option<Effect>,
     pub file: FileRef,
+}
+
+// -- Table content --
+
+/// Table/grid content item (libtable_plugin.so)
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct TableContent {
+    #[serde(rename = "@guid")]
+    pub guid: String,
+    #[serde(rename = "@name", default)]
+    pub name: String,
+    /// Number of columns
+    #[serde(rename = "@cols", default = "default_table_cols")]
+    pub cols: u32,
+    /// Number of rows
+    #[serde(rename = "@rows", default = "default_table_rows")]
+    pub rows: u32,
+    pub effect: Option<Effect>,
+    pub style: Option<TableStyle>,
+    #[serde(rename = "row", default)]
+    pub data_rows: Vec<TableRow>,
+}
+
+fn default_table_cols() -> u32 { 4 }
+fn default_table_rows() -> u32 { 4 }
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct TableStyle {
+    #[serde(rename = "@textColor", default = "default_color")]
+    pub text_color: String,
+    #[serde(rename = "@borderColor", default = "default_color")]
+    pub border_color: String,
+    #[serde(rename = "@headerBgColor", default)]
+    pub header_bg_color: String,
+    #[serde(rename = "@bgColor", default)]
+    pub bg_color: String,
+    #[serde(rename = "@fontSize", default = "default_font_size")]
+    pub font_size: f32,
+    #[serde(rename = "@headerRow", default)]
+    pub header_row: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct TableRow {
+    #[serde(rename = "cell", default)]
+    pub cells: Vec<TableCell>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct TableCell {
+    #[serde(rename = "$value", default)]
+    pub text: String,
+    #[serde(rename = "@color", default)]
+    pub color: String,
+    #[serde(rename = "@bold", default)]
+    pub bold: bool,
+}
+
+// -- Weather content --
+
+/// Weather widget content item (libweather_plugin.so)
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct WeatherContent {
+    #[serde(rename = "@guid")]
+    pub guid: String,
+    #[serde(rename = "@name", default)]
+    pub name: String,
+    /// City name for display
+    #[serde(rename = "@city", default)]
+    pub city: String,
+    /// City/location code (Huidu or OpenWeatherMap city ID)
+    #[serde(rename = "@cityCode", default)]
+    pub city_code: String,
+    /// Language code ("en", "zh", etc.)
+    #[serde(rename = "@lang", default = "default_weather_lang")]
+    pub lang: String,
+    /// Update interval in minutes
+    #[serde(rename = "@updateInterval", default = "default_update_interval")]
+    pub update_interval: u32,
+    pub effect: Option<Effect>,
+    pub font: Option<FontSpec>,
+}
+
+fn default_weather_lang() -> String { "en".to_string() }
+fn default_update_interval() -> u32 { 30 }
+
+// -- Analog clock --
+
+/// Analog clock content item (uses clock face image files)
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct AnalogClockContent {
+    #[serde(rename = "@guid")]
+    pub guid: String,
+    #[serde(rename = "@name", default)]
+    pub name: String,
+    #[serde(rename = "@timezone", default)]
+    pub timezone: String,
+    /// Background image filename
+    #[serde(rename = "@bgImage", default)]
+    pub bg_image: String,
+    pub effect: Option<Effect>,
 }
 
 // -- Helpers --

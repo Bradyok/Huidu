@@ -45,9 +45,20 @@ struct Args {
     #[arg(long, default_value = "output.png")]
     output_path: String,
 
-    /// Device ID for network discovery
+    /// Device ID for network discovery and cloud reporting
     #[arg(long, default_value = "RUST-001")]
     device_id: String,
+
+    /// Cloud OMS base URL (empty = cloud disabled)
+    /// Example: http://cloud.example.com
+    #[arg(long, default_value = "")]
+    cloud_url: String,
+
+    /// Weather API base URL (empty = weather widget disabled)
+    /// Supports {city} placeholder.
+    /// Example: https://wttr.in/{city}?format=j1
+    #[arg(long, default_value = "")]
+    weather_url: String,
 
     /// Log level
     #[arg(long, default_value = "info")]
@@ -74,7 +85,7 @@ async fn main() -> Result<()> {
         args.device_id,
     );
 
-    let mut player = Player::new(config::PlayerConfig {
+    let cfg = config::PlayerConfig {
         width: args.width,
         height: args.height,
         fps: args.fps,
@@ -82,7 +93,20 @@ async fn main() -> Result<()> {
         port: args.port,
         output_mode: args.output.parse().unwrap_or_default(),
         output_path: args.output_path.clone().into(),
-    });
+        device_id: args.device_id.clone(),
+        cloud_url: args.cloud_url.clone(),
+        weather_url: args.weather_url.clone(),
+    };
+
+    let mut player = Player::new(cfg);
+
+    // Propagate cloud + device info into the shared services state
+    {
+        let svc = player.services();
+        let mut state = svc.write().await;
+        state.cloud_url = args.cloud_url.clone();
+        state.device_id = args.device_id.clone();
+    }
 
     // Load any existing programs from disk
     if let Err(e) = player.load_programs_from_dir(&args.program_dir) {
@@ -123,7 +147,7 @@ async fn main() -> Result<()> {
         })
     };
 
-    // Start background services (scheduling, NTP, USB disk)
+    // Start background services (scheduling, NTP, USB disk, cloud)
     let program_dir = args.program_dir.clone().into();
     services::manager::start_services(services, player.program_sender(), program_dir).await;
 

@@ -44,7 +44,12 @@ pub struct Player {
 impl Player {
     pub fn new(config: PlayerConfig) -> Self {
         let (tx, rx) = mpsc::channel(64);
-        let engine = RenderEngine::new(config.width, config.height, config.fps);
+        let engine = RenderEngine::new(
+            config.width,
+            config.height,
+            config.fps,
+            config.weather_url.clone(),
+        );
         let services = Arc::new(RwLock::new(ServicesState::new(config.program_dir.clone())));
 
         Self {
