@@ -405,7 +405,40 @@ pub fn get_network_info() -> String {
     String::new()
 }
 
-// (get_wifi_info, set_wifi, get_upgrade_result, firmware_upgrade already defined above)
+// ── PPPoE ─────────────────────────────────────────────────────────────────────
+
+pub fn get_pppoe_info() -> String {
+    String::new()
+}
+
+pub fn set_pppoe_info(enable: bool, user: &str, password: &str) -> String {
+    format!(
+        "<pppoe enable=\"{}\" user=\"{}\" password=\"{}\"/>",
+        if enable { "true" } else { "false" },
+        xml::xml_escape(user),
+        xml::xml_escape(password),
+    )
+}
+
+// ── Admin Password ────────────────────────────────────────────────────────────
+
+/// Unlock admin mode by sending the current password.
+pub fn unlock_admin_password(password: &str) -> String {
+    format!("<password value=\"{}\"/>", xml::xml_escape(password))
+}
+
+/// Set (or clear) the admin unlock password.
+/// Pass an empty string to remove the password requirement.
+pub fn set_admin_password(password: &str) -> String {
+    format!("<password value=\"{}\"/>", xml::xml_escape(password))
+}
+
+// ── Screen Test ───────────────────────────────────────────────────────────────
+
+/// Trigger the SmartDrawLine color-bar test pattern for the specified seconds.
+pub fn smart_draw_line() -> String {
+    String::new()
+}
 
 // ─────────────────────────────────────────────────────────────────────────────
 #[cfg(test)]

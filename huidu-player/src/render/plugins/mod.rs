@@ -2,14 +2,23 @@ pub mod analog_clock;
 pub mod calendar;
 pub mod clock;
 pub mod countdown;
+pub mod document;
+pub mod external_data;
 pub mod gif;
 pub mod image;
+pub mod livestream;
+pub mod modbus_display;
+pub mod net_text;
 pub mod neon;
 pub mod qrcode;
+pub mod rss;
+pub mod sensor;
 pub mod table;
 pub mod text;
+pub mod text3d;
 pub mod video;
 pub mod weather;
+pub mod web;
 
 use tiny_skia::Pixmap;
 

@@ -27,15 +27,18 @@ pub enum OutputMode {
     Framebuffer,
     /// Output raw RGBA pixels to stdout (for piping to another tool)
     Raw,
+    /// DRM/KMS direct rendering (Linux LED display)
+    Drm,
 }
 
 impl std::str::FromStr for OutputMode {
     type Err = String;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s.to_lowercase().as_str() {
-            "png"                          => Ok(OutputMode::Png),
-            "framebuffer" | "fb" | "drm"  => Ok(OutputMode::Framebuffer),
-            "raw" | "stdout"               => Ok(OutputMode::Raw),
+            "png"                => Ok(OutputMode::Png),
+            "framebuffer" | "fb" => Ok(OutputMode::Framebuffer),
+            "drm" | "dri"        => Ok(OutputMode::Drm),
+            "raw" | "stdout"     => Ok(OutputMode::Raw),
             _ => Err(format!("Unknown output mode: {s}")),
         }
     }

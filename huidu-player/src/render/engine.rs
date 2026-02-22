@@ -12,14 +12,22 @@ use crate::render::plugins::analog_clock::AnalogClockRenderer;
 use crate::render::plugins::calendar::CalendarRenderer;
 use crate::render::plugins::clock::ClockRenderer;
 use crate::render::plugins::countdown::CountdownRenderer;
+use crate::render::plugins::document::DocumentRenderer;
+use crate::render::plugins::external_data::ExternalDataRenderer;
 use crate::render::plugins::gif::GifRenderer;
 use crate::render::plugins::image::ImageRenderer;
+use crate::render::plugins::livestream::LiveStreamRenderer;
+use crate::render::plugins::modbus_display::ModbusDisplayRenderer;
 use crate::render::plugins::neon::NeonRenderer;
 use crate::render::plugins::qrcode::QrCodeRenderer;
+use crate::render::plugins::rss::RssRenderer;
+use crate::render::plugins::sensor::SensorRenderer;
 use crate::render::plugins::table::TableRenderer;
 use crate::render::plugins::text::TextRenderer;
+use crate::render::plugins::text3d::Text3DRenderer;
 use crate::render::plugins::video::VideoRenderer;
 use crate::render::plugins::weather::WeatherRenderer;
+use crate::render::plugins::web::WebRenderer;
 use crate::render::plugins::ContentRenderer;
 
 /// Rotate raw RGBA pixel data by multiples of 90°.
@@ -85,9 +93,19 @@ pub struct RenderEngine {
     qrcode_renderer: QrCodeRenderer,
     calendar_renderer: CalendarRenderer,
     countdown_renderer: CountdownRenderer,
+    web_renderer: WebRenderer,
+    rss_renderer: RssRenderer,
+    external_data_renderer: ExternalDataRenderer,
+    document_renderer: DocumentRenderer,
+    livestream_renderer: LiveStreamRenderer,
+    modbus_display_renderer: ModbusDisplayRenderer,
+    sensor_renderer: SensorRenderer,
+    text3d_renderer: Text3DRenderer,
     // -- display state --
     frame: u64,
     ms_per_frame: u64,
+    /// Frame number at which the active test pattern expires.  `None` = inactive.
+    test_until_frame: Option<u64>,
     /// Software brightness level (0-100)
     brightness: u8,
     /// Pre-computed lookup table for brightness scaling.
@@ -119,8 +137,17 @@ impl RenderEngine {
             qrcode_renderer: QrCodeRenderer::new(),
             calendar_renderer: CalendarRenderer::new(),
             countdown_renderer: CountdownRenderer::new(),
+            web_renderer: WebRenderer::new(),
+            rss_renderer: RssRenderer::new(),
+            external_data_renderer: ExternalDataRenderer::new(),
+            document_renderer: DocumentRenderer::new(),
+            livestream_renderer: LiveStreamRenderer::new(),
+            modbus_display_renderer: ModbusDisplayRenderer::new(),
+            sensor_renderer: SensorRenderer::new(),
+            text3d_renderer: Text3DRenderer::new(),
             frame: 0,
             ms_per_frame: 1000 / fps.max(1) as u64,
+            test_until_frame: None,
             brightness: 100,
             brightness_lut: build_brightness_lut(100),
             rotation: 0,
@@ -135,6 +162,41 @@ impl RenderEngine {
 
     pub fn set_rotation(&mut self, degrees: u16) {
         self.rotation = degrees % 360;
+    }
+
+    /// Activate a SMPTE color-bar test pattern for `duration_frames` frames.
+    /// Pass `None` to cancel an active test pattern immediately.
+    pub fn set_test_pattern(&mut self, duration_frames: Option<u64>) {
+        self.test_until_frame = duration_frames.map(|d| self.frame + d);
+    }
+
+    /// Fill the framebuffer with SMPTE-style vertical color bars.
+    fn render_test_pattern(&mut self) {
+        const BARS: [(u8, u8, u8); 8] = [
+            (255, 255, 255), // white
+            (255, 255,   0), // yellow
+            (  0, 255, 255), // cyan
+            (  0, 255,   0), // green
+            (255,   0, 255), // magenta
+            (255,   0,   0), // red
+            (  0,   0, 255), // blue
+            (  0,   0,   0), // black
+        ];
+        let w = self.framebuffer.width();
+        let h = self.framebuffer.height();
+        let bar_w = (w / 8).max(1);
+        let data = self.framebuffer.data_mut();
+        for y in 0..h {
+            for x in 0..w {
+                let bar = (x / bar_w).min(7) as usize;
+                let (r, g, b) = BARS[bar];
+                let i = ((y * w + x) * 4) as usize;
+                data[i]     = r;
+                data[i + 1] = g;
+                data[i + 2] = b;
+                data[i + 3] = 255;
+            }
+        }
     }
 
     /// Push a fresh snapshot of named data sources to all renderers that support variables.
@@ -208,6 +270,18 @@ impl RenderEngine {
 
     /// Render a complete frame for the given program.
     pub fn render_frame(&mut self, program: &Program, program_dir: &Path) -> &[u8] {
+        // Test pattern takes priority over normal content for its duration.
+        if let Some(until) = self.test_until_frame {
+            if self.frame < until {
+                self.framebuffer.fill(Color::BLACK);
+                self.render_test_pattern();
+                self.frame += 1;
+                return self.framebuffer.data();
+            } else {
+                self.test_until_frame = None;
+            }
+        }
+
         let elapsed_ms = self.frame * self.ms_per_frame;
 
         // Initialize area states if count changed
@@ -296,6 +370,14 @@ impl RenderEngine {
                 &mut self.qrcode_renderer,
                 &mut self.calendar_renderer,
                 &mut self.countdown_renderer,
+                &mut self.web_renderer,
+                &mut self.rss_renderer,
+                &mut self.external_data_renderer,
+                &mut self.document_renderer,
+                &mut self.livestream_renderer,
+                &mut self.modbus_display_renderer,
+                &mut self.sensor_renderer,
+                &mut self.text3d_renderer,
             );
 
             // Apply transition effect
@@ -458,6 +540,14 @@ fn dispatch_render(
     qrcode: &mut QrCodeRenderer,
     calendar: &mut CalendarRenderer,
     countdown: &mut CountdownRenderer,
+    web: &mut WebRenderer,
+    rss: &mut RssRenderer,
+    external_data: &mut ExternalDataRenderer,
+    document: &mut DocumentRenderer,
+    livestream: &mut LiveStreamRenderer,
+    modbus_display: &mut ModbusDisplayRenderer,
+    sensor: &mut SensorRenderer,
+    text3d: &mut Text3DRenderer,
 ) {
     match item {
         ContentItem::Image(_) => {
@@ -496,6 +586,30 @@ fn dispatch_render(
         ContentItem::Countdown(_) => {
             countdown.render(item, surface, 0, 0, w, h, elapsed_ms, program_dir);
         }
+        ContentItem::Web(_) => {
+            web.render(item, surface, 0, 0, w, h, elapsed_ms, program_dir);
+        }
+        ContentItem::Rss(_) => {
+            rss.render(item, surface, 0, 0, w, h, elapsed_ms, program_dir);
+        }
+        ContentItem::ExternalData(_) => {
+            external_data.render(item, surface, 0, 0, w, h, elapsed_ms, program_dir);
+        }
+        ContentItem::LiveStream(_) => {
+            livestream.render(item, surface, 0, 0, w, h, elapsed_ms, program_dir);
+        }
+        ContentItem::Modbus(_) => {
+            modbus_display.render(item, surface, 0, 0, w, h, elapsed_ms, program_dir);
+        }
+        ContentItem::Sensor(_) => {
+            sensor.render(item, surface, 0, 0, w, h, elapsed_ms, program_dir);
+        }
+        ContentItem::Text3D(_) => {
+            text3d.render(item, surface, 0, 0, w, h, elapsed_ms, program_dir);
+        }
+        ContentItem::Document(_) => {
+            document.render(item, surface, 0, 0, w, h, elapsed_ms, program_dir);
+        }
     }
 }
 
@@ -516,6 +630,14 @@ fn get_effect_for_item(item: &ContentItem, start_ms: u64) -> EffectState {
         ContentItem::QrCode(q) => q.effect.as_ref(),
         ContentItem::Calendar(c) => c.effect.as_ref(),
         ContentItem::Countdown(c) => c.effect.as_ref(),
+        ContentItem::Web(w) => w.effect.as_ref(),
+        ContentItem::Rss(r) => r.effect.as_ref(),
+        ContentItem::ExternalData(e) => e.effect.as_ref(),
+        ContentItem::LiveStream(l) => l.effect.as_ref(),
+        ContentItem::Modbus(m) => m.effect.as_ref(),
+        ContentItem::Sensor(s) => s.effect.as_ref(),
+        ContentItem::Text3D(t) => t.effect.as_ref(),
+        ContentItem::Document(d) => d.effect.as_ref(),
         _ => None,
     };
 

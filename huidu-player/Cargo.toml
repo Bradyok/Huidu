@@ -53,6 +53,9 @@ uuid = { version = "1", features = ["v4"] }
 # MD5 hashing (file transfers)
 md5 = "0.7"
 
+# SHA-256 hashing (admin password)
+sha2 = "0.10"
+
 # Byte order (little-endian protocol)
 byteorder = "1"
 

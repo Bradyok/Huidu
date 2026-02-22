@@ -167,6 +167,30 @@ pub enum ContentItem {
     Calendar(CalendarContent),
     #[serde(rename = "countdownTimer")]
     Countdown(CountdownContent),
+    /// Web page ticker (web_plugin.dll / libweb_plugin.so)
+    #[serde(rename = "webPage")]
+    Web(WebContent),
+    /// RSS / Atom feed ticker (libNetworkData_plugin.so)
+    #[serde(rename = "rss")]
+    Rss(RssContent),
+    /// External data (DynamicData_plugin.dll / libDynamicData_plugin.so)
+    #[serde(rename = "externalData")]
+    ExternalData(ExternalDataContent),
+    /// Live stream (RTSP/RTMP/HTTP video)
+    #[serde(rename = "liveStream")]
+    LiveStream(LiveStreamContent),
+    /// Modbus TCP data display
+    #[serde(rename = "modbus")]
+    Modbus(ModbusContent),
+    /// Hardware sensor display
+    #[serde(rename = "sensor")]
+    Sensor(SensorContent),
+    /// 3D animated text
+    #[serde(rename = "text3D")]
+    Text3D(Text3DContent),
+    /// Document/presentation renderer
+    #[serde(rename = "document")]
+    Document(DocumentContent),
 }
 
 /// Transition/animation effect
@@ -492,6 +516,10 @@ pub struct WeatherContent {
     pub temp_unit: String,
     pub effect: Option<Effect>,
     pub font: Option<FontSpec>,
+    #[serde(default = "default_true")]
+    pub show_icon: bool,
+    #[serde(default)]
+    pub show_aqi: bool,
 }
 
 fn default_weather_lang() -> String { "en".to_string() }
@@ -612,6 +640,8 @@ pub struct CalendarContent {
     #[serde(rename = "@fontSize", default = "default_cal_font_size")]
     pub font_size: f32,
     pub effect: Option<Effect>,
+    #[serde(default)]
+    pub show_lunar: bool,
 }
 
 fn default_today_color() -> String { "#ffff00".to_string() }
@@ -659,6 +689,227 @@ pub struct CountdownContent {
 fn default_countdown_format() -> String { "H:M:S".to_string() }
 fn default_countdown_font_size() -> f32 { 16.0 }
 fn default_urgent_color() -> String { "#ff2200".to_string() }
+
+// -- Web page --
+
+/// Web-page content item.  Fetches a URL and renders its text as a ticker.
+/// Equivalent to `web_plugin.dll` / `libweb_plugin.so`.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct WebContent {
+    #[serde(rename = "@guid")]
+    pub guid: String,
+    #[serde(rename = "@name", default)]
+    pub name: String,
+    /// URL to fetch
+    #[serde(rename = "@url", default)]
+    pub url: String,
+    /// Refresh interval in minutes (default 5)
+    #[serde(rename = "@updateInterval", default = "default_web_interval")]
+    pub update_interval: u32,
+    /// Scroll speed in pixels/second (0 = static)
+    #[serde(rename = "@scrollSpeed", default = "default_scroll_speed")]
+    pub scroll_speed: u32,
+    #[serde(rename = "@scrollDir", default = "default_scroll_dir")]
+    pub scroll_dir: String,
+    pub font: Option<FontSpec>,
+    pub effect: Option<Effect>,
+}
+
+fn default_web_interval() -> u32 { 5 }
+
+// -- RSS / Atom feed --
+
+/// RSS/Atom feed content item.  Equivalent to `libNetworkData_plugin.so`.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct RssContent {
+    #[serde(rename = "@guid")]
+    pub guid: String,
+    #[serde(rename = "@name", default)]
+    pub name: String,
+    /// Feed URL
+    #[serde(rename = "@url", default)]
+    pub url: String,
+    /// Refresh interval in minutes (default 10)
+    #[serde(rename = "@updateInterval", default = "default_rss_interval")]
+    pub update_interval: u32,
+    /// Maximum number of items to show (default 10)
+    #[serde(rename = "@itemCount", default = "default_item_count")]
+    pub item_count: usize,
+    /// Separator between item titles (default " | ")
+    #[serde(rename = "@separator", default = "default_separator")]
+    pub separator: String,
+    /// Scroll speed in pixels/second (default 50)
+    #[serde(rename = "@scrollSpeed", default = "default_scroll_speed")]
+    pub scroll_speed: u32,
+    pub font: Option<FontSpec>,
+    pub effect: Option<Effect>,
+}
+
+fn default_rss_interval() -> u32 { 10 }
+fn default_item_count() -> usize { 10 }
+fn default_separator() -> String { " | ".to_string() }
+
+// -- External data --
+
+/// External data content item (JSON/XML/text URL with path extraction).
+/// Equivalent to `DynamicData_plugin.dll` / `libDynamicData_plugin.so`.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ExternalDataContent {
+    #[serde(rename = "@guid")]
+    pub guid: String,
+    #[serde(rename = "@name", default)]
+    pub name: String,
+    /// Data URL (JSON/XML/plain-text endpoint)
+    #[serde(rename = "@url", default)]
+    pub url: String,
+    /// Dot-notation JSON path or XML tag name (e.g. `"main.temp"` or `"temperature"`)
+    #[serde(rename = "@path", default)]
+    pub path: String,
+    /// Display format: use `{value}` as placeholder (e.g. `"Temp: {value}°C"`)
+    #[serde(rename = "@format", default)]
+    pub format: String,
+    /// Refresh interval in minutes (default 5)
+    #[serde(rename = "@updateInterval", default = "default_web_interval")]
+    pub update_interval: u32,
+    /// Scroll speed in pixels/second (0 = static, default)
+    #[serde(rename = "@scrollSpeed", default)]
+    pub scroll_speed: u32,
+    pub font: Option<FontSpec>,
+    pub effect: Option<Effect>,
+}
+
+// -- Live Stream content --
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct LiveStreamContent {
+    #[serde(rename = "@guid")]
+    pub guid: String,
+    #[serde(rename = "@name", default)]
+    pub name: String,
+    #[serde(rename = "@url", default)]
+    pub url: String,
+    #[serde(rename = "@reconnect", default = "default_true")]
+    pub reconnect: bool,
+    pub font: Option<FontSpec>,
+    pub effect: Option<Effect>,
+}
+
+// -- Modbus content --
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ModbusContent {
+    #[serde(rename = "@guid")]
+    pub guid: String,
+    #[serde(rename = "@name", default)]
+    pub name: String,
+    #[serde(rename = "@host", default)]
+    pub host: String,
+    #[serde(rename = "@port", default = "default_modbus_port")]
+    pub port: u16,
+    #[serde(rename = "@slave", default = "default_modbus_slave")]
+    pub slave: u8,
+    #[serde(rename = "@register", default)]
+    pub register: u16,
+    #[serde(rename = "@type", default = "default_register_type")]
+    pub register_type: String,
+    #[serde(rename = "@count", default = "default_modbus_count")]
+    pub count: u16,
+    #[serde(rename = "@format", default)]
+    pub format: String,
+    #[serde(rename = "@scale", default = "default_scale")]
+    pub scale: f64,
+    #[serde(rename = "@updateInterval", default = "default_modbus_interval")]
+    pub update_interval: u32,
+    #[serde(rename = "@scrollSpeed", default)]
+    pub scroll_speed: u32,
+    pub font: Option<FontSpec>,
+    pub effect: Option<Effect>,
+}
+
+fn default_modbus_port() -> u16 { 502 }
+fn default_modbus_slave() -> u8 { 1 }
+fn default_register_type() -> String { "holding".to_string() }
+fn default_modbus_count() -> u16 { 1 }
+fn default_scale() -> f64 { 1.0 }
+fn default_modbus_interval() -> u32 { 5 }
+
+// -- Sensor content --
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct SensorContent {
+    #[serde(rename = "@guid")]
+    pub guid: String,
+    #[serde(rename = "@name", default)]
+    pub name: String,
+    #[serde(rename = "@type", default = "default_sensor_type")]
+    pub sensor_type: String,
+    #[serde(rename = "@device", default)]
+    pub device: String,
+    #[serde(rename = "@format", default = "default_sensor_format")]
+    pub format: String,
+    #[serde(rename = "@updateInterval", default = "default_sensor_interval")]
+    pub update_interval: u32,
+    #[serde(rename = "@scrollSpeed", default)]
+    pub scroll_speed: u32,
+    pub font: Option<FontSpec>,
+    pub effect: Option<Effect>,
+}
+
+fn default_sensor_type() -> String { "ds18b20".to_string() }
+fn default_sensor_format() -> String { "{value}".to_string() }
+fn default_sensor_interval() -> u32 { 30 }
+
+// -- 3D Text content --
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct Text3DContent {
+    #[serde(rename = "@guid")]
+    pub guid: String,
+    #[serde(rename = "@name", default)]
+    pub name: String,
+    #[serde(rename = "@text", default)]
+    pub text: String,
+    #[serde(rename = "@color", default = "default_text3d_color")]
+    pub color: String,
+    #[serde(rename = "@depthColor", default = "default_depth_color")]
+    pub depth_color: String,
+    #[serde(rename = "@fontSize", default = "default_text3d_font_size")]
+    pub font_size: f32,
+    #[serde(rename = "@rotateSpeed", default = "default_rotate_speed")]
+    pub rotate_speed: f32,
+    /// "rotate_y" | "rotate_x" | "pulse" | "wave"
+    #[serde(rename = "@effect3d", default = "default_effect_3d")]
+    pub effect_3d: String,
+    pub font: Option<FontSpec>,
+    pub effect: Option<Effect>,
+}
+
+fn default_text3d_color() -> String { "#ff4400".to_string() }
+fn default_depth_color() -> String { "#882200".to_string() }
+fn default_text3d_font_size() -> f32 { 20.0 }
+fn default_rotate_speed() -> f32 { 1.0 }
+fn default_effect_3d() -> String { "rotate_y".to_string() }
+
+// -- Document content --
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct DocumentContent {
+    #[serde(rename = "@guid")]
+    pub guid: String,
+    #[serde(rename = "@name", default)]
+    pub name: String,
+    #[serde(rename = "@file", default)]
+    pub file: String,
+    #[serde(rename = "@pageDuration", default = "default_page_duration")]
+    pub page_duration: u32,
+    #[serde(rename = "@fit", default = "default_fit")]
+    pub fit: String,
+    #[serde(rename = "@loopPages", default = "default_true")]
+    pub loop_pages: bool,
+    pub effect: Option<Effect>,
+}
+
+fn default_page_duration() -> u32 { 5 }
 
 // -- Helpers --
 

@@ -8,6 +8,7 @@ use tracing::info;
 
 use crate::core::player::PlayerCommand;
 use crate::services::brightness::BrightnessService;
+use crate::services::modbus_service::ModbusSourceConfig;
 use crate::services::screen_schedule::ScreenScheduleService;
 use crate::services::storage::StorageService;
 use crate::services::time_sync::TimeSyncService;
@@ -42,7 +43,63 @@ pub struct DeviceState {
     /// Status of the most recent firmware upgrade attempt.
     #[serde(default)]
     pub upgrade_status: UpgradeStatus,
+
+    // Network — WiFi
+    #[serde(default)]
+    pub wifi_ssid: String,
+    #[serde(default)]
+    pub wifi_password: String,
+    #[serde(default)]
+    pub wifi_enable: bool,
+
+    // Network — Ethernet (eth0)
+    #[serde(default = "default_eth0_dhcp")]
+    pub eth0_dhcp: bool,
+    #[serde(default)]
+    pub eth0_ip: String,
+    #[serde(default = "default_eth0_mask")]
+    pub eth0_mask: String,
+    #[serde(default)]
+    pub eth0_gateway: String,
+    #[serde(default = "default_dns")]
+    pub eth0_dns: String,
+
+    // Network — PPPoE
+    #[serde(default)]
+    pub pppoe_enable: bool,
+    #[serde(default)]
+    pub pppoe_user: String,
+    #[serde(default)]
+    pub pppoe_password: String,
+
+    /// SHA-256 hex hash of the admin unlock password.
+    /// Empty string means no password is required.
+    #[serde(default)]
+    pub admin_password_hash: String,
+
+    // Hardware sensors / relay
+    #[serde(default)]
+    pub relay_pins: Vec<u32>,
+    // GPS
+    #[serde(default)]
+    pub gps_device: String,
+    // Modem
+    #[serde(default)]
+    pub modem_device: String,
+    #[serde(default)]
+    pub modem_apn: String,
+    #[serde(default)]
+    pub modem_user: String,
+    #[serde(default)]
+    pub modem_password: String,
+    // Modbus sources
+    #[serde(default)]
+    pub modbus_sources: Vec<ModbusSourceConfig>,
 }
+
+fn default_eth0_dhcp() -> bool { true }
+fn default_eth0_mask() -> String { "255.255.255.0".to_string() }
+fn default_dns() -> String { "8.8.8.8".to_string() }
 
 impl Default for DeviceState {
     fn default() -> Self {
@@ -60,6 +117,25 @@ impl Default for DeviceState {
             boot_logo: None,
             data_sources: HashMap::new(),
             upgrade_status: UpgradeStatus::Idle,
+            wifi_ssid: String::new(),
+            wifi_password: String::new(),
+            wifi_enable: false,
+            eth0_dhcp: true,
+            eth0_ip: String::new(),
+            eth0_mask: "255.255.255.0".to_string(),
+            eth0_gateway: String::new(),
+            eth0_dns: "8.8.8.8".to_string(),
+            pppoe_enable: false,
+            pppoe_user: String::new(),
+            pppoe_password: String::new(),
+            admin_password_hash: String::new(),
+            relay_pins: Vec::new(),
+            gps_device: String::new(),
+            modem_device: String::new(),
+            modem_apn: String::new(),
+            modem_user: String::new(),
+            modem_password: String::new(),
+            modbus_sources: Vec::new(),
         }
     }
 }
@@ -131,6 +207,39 @@ pub struct ServicesState {
     /// Cancellation token for the main runtime.  The FirmwareUpgrade handler
     /// cancels this to trigger a graceful restart after staging the upgrade.
     pub shutdown_token: Option<CancellationToken>,
+
+    // Network — WiFi (persisted config)
+    pub wifi_ssid: String,
+    pub wifi_password: String,
+    pub wifi_enable: bool,
+
+    // Network — Ethernet (persisted config)
+    pub eth0_dhcp: bool,
+    pub eth0_ip: String,
+    pub eth0_mask: String,
+    pub eth0_gateway: String,
+    pub eth0_dns: String,
+
+    // Network — PPPoE (persisted config)
+    pub pppoe_enable: bool,
+    pub pppoe_user: String,
+    pub pppoe_password: String,
+
+    /// SHA-256 hex hash of the admin unlock password.
+    pub admin_password_hash: String,
+
+    // Hardware relay pins
+    pub relay_pins: Vec<u32>,
+    // GPS
+    pub gps_device: String,
+    pub gps_reading: crate::services::gps::GpsReading,
+    // Modem
+    pub modem_device: String,
+    pub modem_apn: String,
+    pub modem_user: String,
+    pub modem_password: String,
+    // Modbus polling sources
+    pub modbus_sources: Vec<ModbusSourceConfig>,
 }
 
 impl ServicesState {
@@ -157,6 +266,26 @@ impl ServicesState {
             data_sources: HashMap::new(),
             upgrade_status: UpgradeStatus::Idle,
             shutdown_token: None,
+            wifi_ssid: String::new(),
+            wifi_password: String::new(),
+            wifi_enable: false,
+            eth0_dhcp: true,
+            eth0_ip: String::new(),
+            eth0_mask: "255.255.255.0".to_string(),
+            eth0_gateway: String::new(),
+            eth0_dns: "8.8.8.8".to_string(),
+            pppoe_enable: false,
+            pppoe_user: String::new(),
+            pppoe_password: String::new(),
+            admin_password_hash: String::new(),
+            relay_pins: Vec::new(),
+            gps_device: String::new(),
+            gps_reading: crate::services::gps::GpsReading::default(),
+            modem_device: String::new(),
+            modem_apn: String::new(),
+            modem_user: String::new(),
+            modem_password: String::new(),
+            modbus_sources: Vec::new(),
         }
     }
 
@@ -186,6 +315,25 @@ impl ServicesState {
                     self.data_sources = s.data_sources;
                 }
                 self.upgrade_status = s.upgrade_status;
+                self.wifi_ssid = s.wifi_ssid;
+                self.wifi_password = s.wifi_password;
+                self.wifi_enable = s.wifi_enable;
+                self.eth0_dhcp = s.eth0_dhcp;
+                self.eth0_ip = s.eth0_ip;
+                self.eth0_mask = s.eth0_mask;
+                self.eth0_gateway = s.eth0_gateway;
+                self.eth0_dns = s.eth0_dns;
+                self.pppoe_enable = s.pppoe_enable;
+                self.pppoe_user = s.pppoe_user;
+                self.pppoe_password = s.pppoe_password;
+                self.admin_password_hash = s.admin_password_hash;
+                self.relay_pins = s.relay_pins;
+                self.gps_device = s.gps_device;
+                self.modem_device = s.modem_device;
+                self.modem_apn = s.modem_apn;
+                self.modem_user = s.modem_user;
+                self.modem_password = s.modem_password;
+                self.modbus_sources = s.modbus_sources;
                 info!("Restored device state from {}", path.display());
             }
     }
@@ -207,6 +355,25 @@ impl ServicesState {
             boot_logo: self.boot_logo.clone(),
             data_sources: self.data_sources.clone(),
             upgrade_status: self.upgrade_status.clone(),
+            wifi_ssid: self.wifi_ssid.clone(),
+            wifi_password: self.wifi_password.clone(),
+            wifi_enable: self.wifi_enable,
+            eth0_dhcp: self.eth0_dhcp,
+            eth0_ip: self.eth0_ip.clone(),
+            eth0_mask: self.eth0_mask.clone(),
+            eth0_gateway: self.eth0_gateway.clone(),
+            eth0_dns: self.eth0_dns.clone(),
+            pppoe_enable: self.pppoe_enable,
+            pppoe_user: self.pppoe_user.clone(),
+            pppoe_password: self.pppoe_password.clone(),
+            admin_password_hash: self.admin_password_hash.clone(),
+            relay_pins: self.relay_pins.clone(),
+            gps_device: self.gps_device.clone(),
+            modem_device: self.modem_device.clone(),
+            modem_apn: self.modem_apn.clone(),
+            modem_user: self.modem_user.clone(),
+            modem_password: self.modem_password.clone(),
+            modbus_sources: self.modbus_sources.clone(),
         };
         if let Ok(json) = serde_json::to_string_pretty(&s)
             && let Err(e) = std::fs::write(&path, json) {
@@ -265,6 +432,24 @@ pub async fn start_services(
     };
     if !cloud_url.is_empty() {
         let tok = cancel.clone();
-        crate::services::cloud_api::CloudApiService::start(state, cloud_url, device_id, tok);
+        crate::services::cloud_api::CloudApiService::start(state.clone(), cloud_url, device_id, tok);
     }
+
+    // Modbus polling service
+    let tok = cancel.clone();
+    let state2 = state.clone();
+    tokio::spawn(async move {
+        crate::services::modbus_service::ModbusService::run(state2, tok).await;
+    });
+
+    // GPS service (no-op on non-Unix)
+    let gps_device = {
+        let s = state.read().await;
+        s.gps_device.clone()
+    };
+    let tok = cancel.clone();
+    let state3 = state.clone();
+    tokio::spawn(async move {
+        crate::services::gps::run(gps_device, state3, tok).await;
+    });
 }

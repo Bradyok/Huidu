@@ -508,4 +508,97 @@ mod tests {
             assert!(!p.areas.is_empty(), "program {} has no areas", p.guid);
         }
     }
+
+    #[test]
+    fn test_parse_web_page() {
+        let xml = r##"
+        <screen>
+          <program guid="p1" type="normal">
+            <area guid="a1">
+              <rectangle x="0" y="0" width="256" height="32"/>
+              <resources>
+                <webPage guid="wp-1"
+                         url="https://example.com"
+                         updateInterval="3"
+                         scrollSpeed="60"/>
+              </resources>
+            </area>
+          </program>
+        </screen>
+        "##;
+
+        let screen = parse_program_xml(xml).unwrap();
+        let area = &screen.programs[0].areas[0];
+        if let crate::program::model::ContentItem::Web(w) = &area.resources.items[0] {
+            assert_eq!(w.url, "https://example.com");
+            assert_eq!(w.update_interval, 3);
+            assert_eq!(w.scroll_speed, 60);
+        } else {
+            panic!("Expected Web item");
+        }
+    }
+
+    #[test]
+    fn test_parse_rss_feed() {
+        let xml = r##"
+        <screen>
+          <program guid="p1" type="normal">
+            <area guid="a1">
+              <rectangle x="0" y="0" width="512" height="32"/>
+              <resources>
+                <rss guid="rss-1"
+                     url="https://feeds.example.com/rss"
+                     updateInterval="15"
+                     itemCount="5"
+                     separator=" — "
+                     scrollSpeed="80"/>
+              </resources>
+            </area>
+          </program>
+        </screen>
+        "##;
+
+        let screen = parse_program_xml(xml).unwrap();
+        let area = &screen.programs[0].areas[0];
+        if let crate::program::model::ContentItem::Rss(r) = &area.resources.items[0] {
+            assert_eq!(r.url, "https://feeds.example.com/rss");
+            assert_eq!(r.update_interval, 15);
+            assert_eq!(r.item_count, 5);
+            assert_eq!(r.separator, " — ");
+            assert_eq!(r.scroll_speed, 80);
+        } else {
+            panic!("Expected Rss item");
+        }
+    }
+
+    #[test]
+    fn test_parse_external_data() {
+        let xml = r##"
+        <screen>
+          <program guid="p1" type="normal">
+            <area guid="a1">
+              <rectangle x="0" y="0" width="256" height="32"/>
+              <resources>
+                <externalData guid="ed-1"
+                              url="https://api.example.com/data.json"
+                              path="current.value"
+                              format="Value: {value}"
+                              updateInterval="2"/>
+              </resources>
+            </area>
+          </program>
+        </screen>
+        "##;
+
+        let screen = parse_program_xml(xml).unwrap();
+        let area = &screen.programs[0].areas[0];
+        if let crate::program::model::ContentItem::ExternalData(e) = &area.resources.items[0] {
+            assert_eq!(e.url, "https://api.example.com/data.json");
+            assert_eq!(e.path, "current.value");
+            assert_eq!(e.format, "Value: {value}");
+            assert_eq!(e.update_interval, 2);
+        } else {
+            panic!("Expected ExternalData item");
+        }
+    }
 }

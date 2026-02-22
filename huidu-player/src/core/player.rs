@@ -9,9 +9,11 @@ use tracing::{debug, info, warn};
 
 use crate::audio::BackgroundMusicPlayer;
 use crate::config::{OutputMode, PlayerConfig};
+use crate::core::sync_clock::SyncClock;
 use crate::fpga::driver::FpgaDriver;
 use crate::program::model::{Program, Screen};
 use crate::program::parser;
+use crate::render::drm_output::DrmOutput;
 use crate::render::engine::RenderEngine;
 use crate::services::manager::{ProgramInfo, ServicesState};
 
@@ -34,6 +36,8 @@ pub enum PlayerCommand {
     SetVolume(u8),
     /// Insert programs at high priority — plays once then resumes the normal playlist.
     InsertProgram(Vec<Program>),
+    /// Show a SMPTE color-bar test pattern for `seconds` seconds (0 = cancel).
+    ScreenTest(u32),
 }
 
 pub struct Player {
@@ -63,6 +67,10 @@ pub struct Player {
     priority_return_idx: usize,
     /// `program_start_frame` saved when priority started.
     priority_return_start_frame: u64,
+    /// DRM output (Unix only)
+    drm_output: Option<DrmOutput>,
+    /// Sync clock for multi-device synchronization
+    sync_clock: Option<Arc<SyncClock>>,
 }
 
 impl Player {
@@ -93,6 +101,8 @@ impl Player {
             priority_start_frame: 0,
             priority_return_idx: 0,
             priority_return_start_frame: 0,
+            drm_output: None,
+            sync_clock: None,
         }
     }
 
@@ -102,6 +112,22 @@ impl Player {
 
     pub fn services(&self) -> Arc<RwLock<ServicesState>> {
         self.services.clone()
+    }
+
+    pub fn setup_drm(&mut self, device: &str) {
+        match DrmOutput::open(device, self.config.width, self.config.height) {
+            Ok(drm) => {
+                self.drm_output = Some(drm);
+                info!("DRM output initialized: {}", device);
+            }
+            Err(e) => {
+                tracing::warn!("DRM output unavailable: {}", e);
+            }
+        }
+    }
+
+    pub fn set_sync_clock(&mut self, clock: Arc<SyncClock>) {
+        self.sync_clock = Some(clock);
     }
 
     /// Load programs from a directory
@@ -243,6 +269,15 @@ impl Player {
                                     self.update_screenshot().await;
                                 }
                             }
+                            OutputMode::Drm => {
+                                let pixels = self.engine.pixels().to_vec();
+                                if let Some(ref mut drm) = self.drm_output {
+                                    drm.present(&pixels);
+                                }
+                                if frames_rendered.is_multiple_of(self.config.fps as u64) {
+                                    self.update_screenshot().await;
+                                }
+                            }
                         }
 
                         frames_rendered += 1;
@@ -290,6 +325,15 @@ impl Player {
                                 let h = self.engine.height();
                                 self.fpga.send_frame(&pixels, w, h);
                                 if frames_rendered.is_multiple_of(fps) {
+                                    self.update_screenshot().await;
+                                }
+                            }
+                            OutputMode::Drm => {
+                                let pixels = self.engine.pixels().to_vec();
+                                if let Some(ref mut drm) = self.drm_output {
+                                    drm.present(&pixels);
+                                }
+                                if frames_rendered.is_multiple_of(self.config.fps as u64) {
                                     self.update_screenshot().await;
                                 }
                             }
@@ -386,6 +430,12 @@ impl Player {
                 let elapsed_ms = current_frame * (1000 / self.config.fps as u64);
                 self.engine.reset_for_program(&self.priority_programs[0], elapsed_ms);
                 info!("Priority insert: '{}'", self.priority_programs[0].name);
+            }
+
+            PlayerCommand::ScreenTest(secs) => {
+                let frames = secs as u64 * self.config.fps as u64;
+                self.engine.set_test_pattern(if secs > 0 { Some(frames) } else { None });
+                info!("Screen test pattern: {}s", secs);
             }
 
             PlayerCommand::DeleteProgram(guid) => {

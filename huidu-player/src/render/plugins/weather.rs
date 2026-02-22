@@ -102,12 +102,18 @@ impl WeatherRenderer {
             .map(|f| parse_color(&f.color))
             .unwrap_or((255, 255, 255));
 
-        // Lines to render: city, temperature, condition
+        // Lines to render: city, temperature (+icon), condition
         let city_display = if weather.city.is_empty() { "Weather".to_string() } else { weather.city.clone() };
-        let temp_str = if weather.temp_unit.eq_ignore_ascii_case("F") {
+        let base_temp = if weather.temp_unit.eq_ignore_ascii_case("F") {
             format!("{:.0}°F  {}%", data.temp_c * 9.0 / 5.0 + 32.0, data.humidity)
         } else {
             format!("{:.0}°C  {}%", data.temp_c, data.humidity)
+        };
+        let temp_str = if weather.show_icon {
+            let icon = condition_to_icon(&data.condition);
+            format!("{} {}", icon, base_temp)
+        } else {
+            base_temp
         };
         let lines = [
             city_display,
@@ -242,8 +248,8 @@ fn parse_wttr_json(json: &str) -> Option<WeatherData> {
     Some(WeatherData {
         temp_c: temp,
         humidity,
+        icon: condition_to_icon(&condition).to_string(),
         condition,
-        icon: weather_icon(temp),
         fetched_at: Instant::now(),
     })
 }
@@ -265,14 +271,27 @@ fn parse_owm_json(json: &str) -> Option<WeatherData> {
     Some(WeatherData {
         temp_c,
         humidity,
+        icon: condition_to_icon(&condition).to_string(),
         condition,
-        icon: weather_icon(temp_c),
         fetched_at: Instant::now(),
     })
 }
 
-fn weather_icon(temp_c: f32) -> String {
-    if temp_c > 30.0 { "Hot" } else if temp_c > 20.0 { "Warm" } else if temp_c > 10.0 { "Cool" } else { "Cold" }.to_string()
+fn weather_icon(condition: &str) -> String {
+    condition_to_icon(condition).to_string()
+}
+
+fn condition_to_icon(condition: &str) -> &'static str {
+    let c = condition.to_ascii_lowercase();
+    if c.contains("clear") || c.contains("sunny") { "☀" }
+    else if c.contains("partly") || c.contains("partly cloudy") { "⛅" }
+    else if c.contains("cloud") || c.contains("overcast") { "☁" }
+    else if c.contains("rain") || c.contains("drizzle") { "🌧" }
+    else if c.contains("snow") || c.contains("sleet") { "❄" }
+    else if c.contains("storm") || c.contains("thunder") { "⚡" }
+    else if c.contains("fog") || c.contains("mist") || c.contains("haze") { "🌫" }
+    else if c.contains("wind") || c.contains("breezy") { "💨" }
+    else { "🌡" }
 }
 
 #[cfg(test)]
@@ -336,17 +355,19 @@ mod tests {
         assert!(parse_owm_json("{}").is_none());
     }
 
-    // ── weather_icon ──────────────────────────────────────────────────────────
+    // ── condition_to_icon ─────────────────────────────────────────────────────
 
     #[test]
-    fn test_weather_icon_thresholds() {
-        assert_eq!(weather_icon(35.0), "Hot");   // > 30
-        assert_eq!(weather_icon(25.0), "Warm");  // 20 < t ≤ 30
-        assert_eq!(weather_icon(15.0), "Cool");  // 10 < t ≤ 20
-        assert_eq!(weather_icon(5.0),  "Cold");  // ≤ 10
-        // Boundary: 30.1 is still Hot; 20.0 is Cool not Warm (> required)
-        assert_eq!(weather_icon(30.1), "Hot");
-        assert_eq!(weather_icon(20.0), "Cool");
-        assert_eq!(weather_icon(10.0), "Cold");
+    fn test_condition_to_icon() {
+        assert_eq!(condition_to_icon("clear sky"), "☀");
+        assert_eq!(condition_to_icon("Sunny"), "☀");
+        assert_eq!(condition_to_icon("Partly cloudy"), "⛅");
+        assert_eq!(condition_to_icon("Overcast"), "☁");
+        assert_eq!(condition_to_icon("Light rain"), "🌧");
+        assert_eq!(condition_to_icon("Snow"), "❄");
+        assert_eq!(condition_to_icon("Thunderstorm"), "⚡");
+        assert_eq!(condition_to_icon("Fog"), "🌫");
+        assert_eq!(condition_to_icon("Windy"), "💨");
+        assert_eq!(condition_to_icon("N/A"), "🌡");
     }
 }

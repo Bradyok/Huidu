@@ -464,21 +464,34 @@ pub async fn handle_sdk_command(
 
         // ── Font Management ────────────────────────────────────────────────────
         "GetAllFontInfo" | "getAllFontInfo" => {
-            ok!(
-                "<font name=\"Arial\" index=\"0\"/>\
-                 <font name=\"DejaVu Sans\" index=\"1\"/>"
-            )
+            let fonts = tokio::task::spawn_blocking(scan_system_fonts).await.unwrap_or_default();
+            let mut items = String::new();
+            items.push_str("<font name=\"DejaVuSans\" index=\"0\"/>");
+            for (i, name) in fonts.iter().enumerate() {
+                items.push_str(&format!("<font name=\"{}\" index=\"{}\"/>", xml_esc(name), i + 1));
+            }
+            ok!(&items)
         }
 
         // ── Network Config ─────────────────────────────────────────────────────
         "GetEth0Info" | "getEth0Info" => {
+            let (dhcp, p_mask, p_gateway, p_dns) = {
+                let s = services.read().await;
+                (s.eth0_dhcp, s.eth0_mask.clone(), s.eth0_gateway.clone(), s.eth0_dns.clone())
+            };
+            // Always report the live IP; use persisted values for the rest.
             let ip = crate::protocol::discovery::get_local_ip();
-            let (mask, gateway, dns) = tokio::task::spawn_blocking(read_eth0_full_config)
-                .await
-                .unwrap_or_else(|_| ("255.255.255.0".to_string(), String::new(), "8.8.8.8".to_string()));
+            let (mask, gateway, dns) = if dhcp {
+                tokio::task::spawn_blocking(read_eth0_full_config)
+                    .await
+                    .unwrap_or_else(|_| (p_mask, p_gateway, p_dns))
+            } else {
+                (p_mask, p_gateway, p_dns)
+            };
             ok!(&format!(
-                "<eth0 dhcp=\"true\" ip=\"{ip}\" mask=\"{mask}\" \
-                 gateway=\"{gateway}\" dns=\"{dns}\"/>"
+                "<eth0 dhcp=\"{dhcp}\" ip=\"{ip}\" mask=\"{mask}\" \
+                 gateway=\"{gateway}\" dns=\"{dns}\"/>",
+                dhcp = if dhcp { "true" } else { "false" }
             ))
         }
 
@@ -489,49 +502,115 @@ pub async fn handle_sdk_command(
             let gateway = extract_attr(xml, "eth0", "gateway").unwrap_or_default();
             let dns     = extract_attr(xml, "eth0", "dns").unwrap_or_default();
             info!("SetEth0Info: dhcp={dhcp} ip={ip} mask={mask} gw={gateway} dns={dns}");
+            {
+                let mut state = services.write().await;
+                state.eth0_dhcp = dhcp;
+                state.eth0_ip = ip.clone();
+                state.eth0_mask = mask.clone();
+                state.eth0_gateway = gateway.clone();
+                state.eth0_dns = dns.clone();
+                state.save_persisted();
+            }
             tokio::task::spawn_blocking(move || apply_eth0_config(dhcp, &ip, &mask, &gateway, &dns)).await.ok();
             ok!("")
         }
 
         "GetPppoeInfo" | "getPppoeInfo" => {
-            ok!("<pppoe enable=\"false\" user=\"\" password=\"\" status=\"disconnected\"/>")
+            let (enable, user, pass) = {
+                let s = services.read().await;
+                (s.pppoe_enable, s.pppoe_user.clone(), s.pppoe_password.clone())
+            };
+            let status = if enable { "connected" } else { "disconnected" };
+            ok!(&format!(
+                "<pppoe enable=\"{enable}\" user=\"{user}\" password=\"{pass}\" status=\"{status}\"/>",
+                enable = if enable { "true" } else { "false" },
+                user = xml_esc(&user),
+                pass = xml_esc(&pass),
+            ))
+        }
+
+        "SetPppoeInfo" | "setPppoeInfo" => {
+            let enable   = extract_attr(xml, "pppoe", "enable").map(|v| v == "true").unwrap_or(false);
+            let user     = extract_attr(xml, "pppoe", "user").unwrap_or_default();
+            let password = extract_attr(xml, "pppoe", "password").unwrap_or_default();
+            info!("SetPppoeInfo: enable={enable} user={user}");
+            let mut state = services.write().await;
+            state.pppoe_enable = enable;
+            state.pppoe_user = user;
+            state.pppoe_password = password;
+            state.save_persisted();
+            ok!("")
         }
 
         "GetWifiInfo" | "getWifiInfo" => {
-            let (ssid, status) = tokio::task::spawn_blocking(read_wifi_status)
+            let (p_ssid, p_pass, p_enable) = {
+                let s = services.read().await;
+                (s.wifi_ssid.clone(), s.wifi_password.clone(), s.wifi_enable)
+            };
+            // Check live status from OS
+            let (live_ssid, status) = tokio::task::spawn_blocking(read_wifi_status)
                 .await
                 .unwrap_or_else(|_| (String::new(), "disconnected".to_string()));
-            let enable = !ssid.is_empty();
-            let ssid = xml_esc(&ssid);
+            // Prefer live SSID if connected; fall back to persisted
+            let ssid = if !live_ssid.is_empty() { live_ssid } else { p_ssid };
+            let enable = p_enable || !ssid.is_empty();
             ok!(&format!(
-                "<wifi enable=\"{enable}\" ssid=\"{ssid}\" password=\"\" status=\"{status}\"/>"
+                "<wifi enable=\"{enable}\" ssid=\"{ssid}\" password=\"{pass}\" status=\"{status}\"/>",
+                enable = if enable { "true" } else { "false" },
+                ssid = xml_esc(&ssid),
+                pass = xml_esc(&p_pass),
             ))
         }
 
         "SetWifiInfo" | "setWifiInfo" => {
             let ssid     = extract_attr(xml, "wifi", "ssid").unwrap_or_default();
             let password = extract_attr(xml, "wifi", "password").unwrap_or_default();
-            if ssid.is_empty() {
-                ok!("")
-            } else {
+            let enable   = extract_attr(xml, "wifi", "enable")
+                .map(|v| v != "false" && v != "0")
+                .unwrap_or(true);
+            {
+                let mut state = services.write().await;
+                state.wifi_ssid = ssid.clone();
+                state.wifi_password = password.clone();
+                state.wifi_enable = enable;
+                state.save_persisted();
+            }
+            if enable && !ssid.is_empty() {
                 info!("SetWifiInfo: connecting to SSID '{ssid}'");
                 tokio::task::spawn_blocking(move || apply_wifi_config(&ssid, &password)).await.ok();
-                ok!("")
             }
+            ok!("")
         }
 
         "GetNetworkInfo" | "getNetworkInfo" => {
             let ip = crate::protocol::discovery::get_local_ip();
             let eth0 = ip != "0.0.0.0";
+            // Check live WiFi status
+            let wifi_connected = tokio::task::spawn_blocking(|| {
+                read_wifi_status().1 == "connected"
+            }).await.unwrap_or(false);
             // Quick internet check — try TCP connect to 8.8.8.8:53 (500 ms timeout)
             let internet = tokio::time::timeout(
                 std::time::Duration::from_millis(500),
                 tokio::net::TcpStream::connect("8.8.8.8:53"),
             ).await.map(|r| r.is_ok()).unwrap_or(false);
+            // Modem signal strength (if configured)
+            let modem_device = {
+                let s = services.read().await;
+                s.modem_device.clone()
+            };
+            let modem_signal = if modem_device.is_empty() {
+                0i32
+            } else {
+                tokio::task::spawn_blocking(move || {
+                    crate::services::modem::get_modem_info(&modem_device).signal_rssi
+                }).await.unwrap_or(0)
+            };
             ok!(&format!(
-                "<network eth0Connected=\"{eth0}\" wifiConnected=\"false\" \
-                 internet=\"{internet}\" ip=\"{ip}\"/>",
+                "<network eth0Connected=\"{eth0}\" wifiConnected=\"{wifi}\" \
+                 internet=\"{internet}\" ip=\"{ip}\" modemSignal=\"{modem_signal}\"/>",
                 eth0 = if eth0 { "true" } else { "false" },
+                wifi = if wifi_connected { "true" } else { "false" },
                 internet = if internet { "true" } else { "false" },
             ))
         }
@@ -657,7 +736,19 @@ pub async fn handle_sdk_command(
             ok!("")
         }
 
-        "SmartSetting" | "smartSetting" | "SmartDrawLine" | "smartDrawLine" => ok!(""),
+        "SmartSetting" | "smartSetting" => {
+            // Auto-configure hardware for the LED module type specified in the XML.
+            // In software mode we acknowledge the command; no FPGA configuration needed.
+            info!("SmartSetting: hardware auto-config acknowledged");
+            ok!("")
+        }
+
+        "SmartDrawLine" | "smartDrawLine" => {
+            // Display a SMPTE color-bar test pattern for 10 seconds.
+            info!("SmartDrawLine: starting 10-second color-bar test pattern");
+            player_tx.send(PlayerCommand::ScreenTest(10)).await.ok();
+            ok!("")
+        }
 
         // ── License ────────────────────────────────────────────────────────────
         "GetLicense" | "getLicense" => {
@@ -704,7 +795,43 @@ pub async fn handle_sdk_command(
             ok!("")
         }
 
-        "UnlockAdminModePassword" | "unlockAdminModePassword" => ok!(""),
+        "UnlockAdminModePassword" | "unlockAdminModePassword" => {
+            let password = extract_attr(xml, "password", "value").unwrap_or_default();
+            let hash_stored = services.read().await.admin_password_hash.clone();
+            let unlocked = if hash_stored.is_empty() {
+                // No password set — always succeed
+                true
+            } else {
+                sha256_hex(password.as_bytes()) == hash_stored
+            };
+            if unlocked {
+                let mut state = services.write().await;
+                state.admin_mode = true;
+                state.save_persisted();
+                info!("Admin mode unlocked via password");
+                ok!("<adminMode enable=\"true\"/>")
+            } else {
+                warn!("UnlockAdminModePassword: wrong password");
+                Ok(format!(
+                    "<?xml version=\"1.0\" encoding=\"utf-8\"?>\
+                     <sdk guid=\"{guid}\"><out method=\"{method}\">\
+                     <result value=\"1\" message=\"wrong password\"/></out></sdk>"
+                ))
+            }
+        }
+
+        "SetAdminModePassword" | "setAdminModePassword" => {
+            let password = extract_attr(xml, "password", "value").unwrap_or_default();
+            let mut state = services.write().await;
+            state.admin_password_hash = if password.is_empty() {
+                String::new()
+            } else {
+                sha256_hex(password.as_bytes())
+            };
+            state.save_persisted();
+            info!("Admin password {}", if password.is_empty() { "cleared" } else { "updated" });
+            ok!("")
+        }
 
         // ── Volume ─────────────────────────────────────────────────────────────
         "GetSystemVolume" | "getSystemVolume" | "GetVolume" | "getVolume" => {
@@ -737,20 +864,84 @@ pub async fn handle_sdk_command(
         }
 
         "GetGPSInfo" | "getGPSInfo" => {
-            ok!("<gps enable=\"false\" lat=\"0.0\" lon=\"0.0\"/>")
+            let reading = {
+                let s = services.read().await;
+                s.gps_reading.clone()
+            };
+            ok!(&reading.to_xml())
         }
 
         "GetRelayInfo" | "getRelayInfo" => {
-            ok!("<relays count=\"0\"/>")
+            let pins = {
+                let s = services.read().await;
+                s.relay_pins.clone()
+            };
+            let relays = tokio::task::spawn_blocking(move || {
+                crate::services::gpio::get_relay_states(&pins)
+            }).await.unwrap_or_default();
+            let mut items = String::new();
+            for (i, r) in relays.iter().enumerate() {
+                items.push_str(&format!(
+                    "<relay index=\"{}\" pin=\"{}\" state=\"{}\"/>",
+                    i, r.pin, if r.state { "on" } else { "off" }
+                ));
+            }
+            ok!(&format!("<relays count=\"{}\">{}</relays>", relays.len(), items))
         }
 
-        "SetRelayInfo" | "setRelayInfo" | "SetRelayStatusInfo" | "setRelayStatusInfo" => ok!(""),
+        "SetRelayInfo" | "setRelayInfo" | "SetRelayStatusInfo" | "setRelayStatusInfo" => {
+            let index = extract_attr(xml, "relay", "index")
+                .and_then(|v| v.parse::<usize>().ok())
+                .unwrap_or(0);
+            let state_val = extract_attr(xml, "relay", "state")
+                .map(|v| v == "on" || v == "1" || v == "true")
+                .unwrap_or(false);
+            let pins = {
+                let s = services.read().await;
+                s.relay_pins.clone()
+            };
+            tokio::task::spawn_blocking(move || {
+                crate::services::gpio::set_relay(&pins, index, state_val);
+            }).await.ok();
+            ok!("")
+        }
 
         "GetSerialSDK" | "getSerialSDK" => {
             ok!("<serialSDK enable=\"false\" port=\"\" baud=\"9600\"/>")
         }
 
         "SetSerialSDK" | "setSerialSDK" => ok!(""),
+
+        "GetModemInfo" | "getModemInfo" => {
+            let device = {
+                let s = services.read().await;
+                s.modem_device.clone()
+            };
+            let info = tokio::task::spawn_blocking(move || {
+                if device.is_empty() {
+                    crate::services::modem::ModemInfo::default()
+                } else {
+                    crate::services::modem::get_modem_info(&device)
+                }
+            }).await.unwrap_or_default();
+            ok!(&info.to_xml())
+        }
+
+        "SetModemInfo" | "setModemInfo" => {
+            let device = extract_attr(xml, "modem", "device").unwrap_or_default();
+            let apn    = extract_attr(xml, "modem", "apn").unwrap_or_default();
+            let user   = extract_attr(xml, "modem", "user").unwrap_or_default();
+            let pass   = extract_attr(xml, "modem", "password").unwrap_or_default();
+            {
+                let mut s = services.write().await;
+                if !device.is_empty() { s.modem_device = device; }
+                if !apn.is_empty() { s.modem_apn = apn; }
+                if !user.is_empty() { s.modem_user = user; }
+                if !pass.is_empty() { s.modem_password = pass; }
+                s.save_persisted();
+            }
+            ok!("")
+        }
 
         // ── System Control ─────────────────────────────────────────────────────
         "Reboot" | "reboot" | "RebootDevice" | "rebootDevice" => {
@@ -1353,6 +1544,49 @@ fn extract_file_list(xml: &str) -> Vec<String> {
     files
 }
 
+fn scan_system_fonts() -> Vec<String> {
+    let mut names: Vec<String> = Vec::new();
+    let font_dirs: &[&str] = &[
+        #[cfg(unix)]
+        "/usr/share/fonts",
+        #[cfg(unix)]
+        "/usr/local/share/fonts",
+        #[cfg(windows)]
+        r"C:\Windows\Fonts",
+    ];
+
+    for dir in font_dirs {
+        scan_font_dir(std::path::Path::new(dir), &mut names);
+    }
+
+    names.sort();
+    names.dedup();
+    names
+}
+
+fn scan_font_dir(dir: &std::path::Path, names: &mut Vec<String>) {
+    let Ok(entries) = std::fs::read_dir(dir) else { return; };
+    for entry in entries.flatten() {
+        let path = entry.path();
+        if path.is_dir() {
+            scan_font_dir(&path, names);
+        } else {
+            let ext = path.extension().and_then(|e| e.to_str()).unwrap_or("").to_lowercase();
+            if matches!(ext.as_str(), "ttf" | "otf" | "ttc") {
+                if let Some(stem) = path.file_stem().and_then(|s| s.to_str()) {
+                    names.push(stem.to_string());
+                }
+            }
+        }
+    }
+}
+
+/// Compute the SHA-256 hex digest of `data`.
+fn sha256_hex(data: &[u8]) -> String {
+    use sha2::{Digest, Sha256};
+    format!("{:x}", Sha256::digest(data))
+}
+
 /// Escape the five predefined XML entities so that any string is safe to
 /// embed inside an XML attribute value (double-quoted).
 ///
@@ -1553,5 +1787,39 @@ mod tests {
     #[test]
     fn test_mask_to_prefix_len_invalid_defaults_24() {
         assert_eq!(mask_to_prefix_len("not.a.mask"), 24);
+    }
+
+    // ── sha256_hex ────────────────────────────────────────────────────────────
+
+    #[test]
+    fn test_sha256_hex_known_vector() {
+        // SHA-256("") = e3b0c44298fc1c149...
+        let h = sha256_hex(b"");
+        assert!(h.starts_with("e3b0c44298fc1c149"), "got: {h}");
+        assert_eq!(h.len(), 64);
+    }
+
+    #[test]
+    fn test_sha256_hex_password() {
+        let h1 = sha256_hex(b"secret123");
+        let h2 = sha256_hex(b"secret123");
+        assert_eq!(h1, h2, "same input → same hash");
+        assert_ne!(h1, sha256_hex(b"wrong"), "different input → different hash");
+    }
+
+    // ── extract_attr for pppoe / wifi ─────────────────────────────────────────
+
+    #[test]
+    fn test_extract_pppoe_attrs() {
+        let xml = r#"<in method="SetPppoeInfo"><pppoe enable="true" user="isp@example.com" password="pass"/></in>"#;
+        assert_eq!(extract_attr(xml, "pppoe", "enable"), Some("true".to_string()));
+        assert_eq!(extract_attr(xml, "pppoe", "user"), Some("isp@example.com".to_string()));
+    }
+
+    #[test]
+    fn test_extract_wifi_enable_attr() {
+        let xml = r#"<in method="SetWifiInfo"><wifi ssid="MyNet" password="pw" enable="false"/></in>"#;
+        assert_eq!(extract_attr(xml, "wifi", "enable"), Some("false".to_string()));
+        assert_eq!(extract_attr(xml, "wifi", "ssid"), Some("MyNet".to_string()));
     }
 }

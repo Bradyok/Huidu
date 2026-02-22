@@ -1,8 +1,13 @@
 pub mod brightness;
 pub mod cloud_api;
+pub mod gpio;
+pub mod gps;
 pub mod manager;
+pub mod modbus_service;
+pub mod modem;
 pub mod screen_schedule;
 pub mod storage;
+pub mod sync_service;
 pub mod time_sync;
 pub mod upgrade;
 pub mod usb_disk;

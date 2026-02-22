@@ -569,6 +569,43 @@ impl Client {
         Ok(())
     }
 
+    /// Get PPPoE connection configuration.
+    pub async fn get_pppoe_info(&mut self) -> Result<String> {
+        let xml = self.sdk_cmd("GetPppoeInfo", &command::get_pppoe_info()).await?;
+        Ok(xml)
+    }
+
+    /// Set PPPoE connection configuration.
+    pub async fn set_pppoe_info(&mut self, enable: bool, user: &str, password: &str) -> Result<()> {
+        self.sdk_cmd("SetPppoeInfo", &command::set_pppoe_info(enable, user, password)).await?;
+        Ok(())
+    }
+
+    /// Unlock admin mode using the device's configured password.
+    /// Returns `true` if the password was accepted.
+    pub async fn unlock_admin_password(&mut self, password: &str) -> Result<bool> {
+        let xml = self.sdk_cmd(
+            "UnlockAdminModePassword",
+            &command::unlock_admin_password(password),
+        ).await?;
+        // Success: <adminMode enable="true"/>  Failure: <result value="1" .../>
+        let accepted = xml.contains("adminMode") || !xml.contains("value=\"1\"");
+        Ok(accepted)
+    }
+
+    /// Set or clear the admin unlock password.
+    /// Pass an empty string to remove the password requirement.
+    pub async fn set_admin_password(&mut self, password: &str) -> Result<()> {
+        self.sdk_cmd("SetAdminModePassword", &command::set_admin_password(password)).await?;
+        Ok(())
+    }
+
+    /// Trigger a SmartDrawLine color-bar test pattern on the display.
+    pub async fn screen_test(&mut self) -> Result<()> {
+        self.sdk_cmd("SmartDrawLine", &command::smart_draw_line()).await?;
+        Ok(())
+    }
+
     /// Get the firmware upgrade result.
     pub async fn get_upgrade_result(&mut self) -> Result<String> {
         let xml = self.sdk_cmd("GetUpgradeResult", &command::get_upgrade_result()).await?;

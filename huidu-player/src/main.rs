@@ -65,6 +65,22 @@ struct Args {
     /// Log level
     #[arg(long, default_value = "info")]
     log_level: String,
+
+    /// DRM device path (for drm output mode)
+    #[arg(long, default_value = "/dev/dri/card0")]
+    drm_device: String,
+
+    /// Sync mode: none, master, or slave
+    #[arg(long, default_value = "none")]
+    sync_mode: String,
+
+    /// UDP port for multi-device sync
+    #[arg(long, default_value_t = 9528)]
+    sync_port: u16,
+
+    /// Multicast group for sync
+    #[arg(long, default_value = "224.0.0.100")]
+    sync_group: String,
 }
 
 #[tokio::main]
@@ -101,6 +117,11 @@ async fn main() -> Result<()> {
     };
 
     let mut player = Player::new(cfg);
+
+    // Set up DRM output if requested
+    if args.output == "drm" {
+        player.setup_drm(&args.drm_device);
+    }
 
     // Propagate cloud + device info and restore persisted state
     let (restored_brightness, restored_rotation, restored_volume) = {
@@ -215,6 +236,27 @@ async fn main() -> Result<()> {
     // Start background services (scheduling, NTP, USB disk, cloud)
     let program_dir = args.program_dir.clone().into();
     services::manager::start_services(services, player.program_sender(), program_dir, cancel.clone()).await;
+
+    // Set up multi-device sync
+    let sync_mode: crate::services::sync_service::SyncMode = args.sync_mode.parse().unwrap_or(crate::services::sync_service::SyncMode::None);
+    if sync_mode != crate::services::sync_service::SyncMode::None {
+        let clock = crate::core::sync_clock::SyncClock::new();
+        match sync_mode {
+            crate::services::sync_service::SyncMode::Master => {
+                crate::services::sync_service::SyncService::start_master(
+                    clock.clone(), &args.sync_group, args.sync_port, cancel.clone()
+                );
+            }
+            crate::services::sync_service::SyncMode::Slave => {
+                let tx = player.program_sender();
+                crate::services::sync_service::SyncService::start_slave(
+                    clock.clone(), &args.sync_group, args.sync_port, cancel.clone(), tx
+                );
+            }
+            crate::services::sync_service::SyncMode::None => {}
+        }
+        player.set_sync_clock(clock);
+    }
 
     // Run the render loop — exits when cancel fires (Ctrl-C / SIGTERM).
     player.run(cancel).await?;

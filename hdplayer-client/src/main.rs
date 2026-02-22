@@ -282,6 +282,38 @@ enum Commands {
         dns: String,
     },
 
+    /// Get PPPoE connection information
+    GetPppoe,
+
+    /// Configure PPPoE connection
+    SetPppoe {
+        /// Enable PPPoE
+        #[arg(long)]
+        enable: bool,
+        /// PPPoE username
+        #[arg(long, default_value = "")]
+        user: String,
+        /// PPPoE password
+        #[arg(long, default_value = "")]
+        password: String,
+    },
+
+    /// Unlock admin mode using the device password
+    UnlockAdmin {
+        /// Admin password
+        password: String,
+    },
+
+    /// Set the admin unlock password (empty string removes the password)
+    SetAdminPassword {
+        /// New password (omit or leave empty to clear)
+        #[arg(default_value = "")]
+        password: String,
+    },
+
+    /// Show a color-bar test pattern on the display for 10 seconds
+    ScreenTest,
+
     /// Get SDK protocol version from device
     SdkVersion,
 
@@ -860,6 +892,47 @@ async fn main() -> anyhow::Result<()> {
             } else {
                 println!("Network set: IP={ip}/{mask}  gateway={gateway}  DNS={dns}");
             }
+        }
+
+        Commands::GetPppoe => {
+            let xml = client.get_pppoe_info().await?;
+            let get = |a: &str| hdplayer_client::xml::get_attr(&xml, a).unwrap_or("?");
+            println!("PPPoE enabled: {}", get("enable"));
+            println!("User:          {}", get("user"));
+            println!("Status:        {}", get("status"));
+        }
+
+        Commands::SetPppoe { enable, user, password } => {
+            client.set_pppoe_info(*enable, user, password).await?;
+            if *enable {
+                println!("PPPoE enabled for user '{user}'.");
+            } else {
+                println!("PPPoE disabled.");
+            }
+        }
+
+        Commands::UnlockAdmin { password } => {
+            let ok = client.unlock_admin_password(password).await?;
+            if ok {
+                println!("Admin mode unlocked.");
+            } else {
+                eprintln!("Wrong password — admin mode not unlocked.");
+                std::process::exit(1);
+            }
+        }
+
+        Commands::SetAdminPassword { password } => {
+            client.set_admin_password(password).await?;
+            if password.is_empty() {
+                println!("Admin password cleared (no password required).");
+            } else {
+                println!("Admin password updated.");
+            }
+        }
+
+        Commands::ScreenTest => {
+            client.screen_test().await?;
+            println!("Color-bar test pattern started (10 seconds).");
         }
 
         Commands::SdkVersion => {
