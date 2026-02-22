@@ -188,8 +188,65 @@ DEMO</string>
     </area>
   </program>
 
-  <!-- ── Program 6: Neon shapes showcase ────────────────────────────────── -->
-  <program guid="demo-006" name="Neon Shapes" type="normal">
+  <!-- ── Program 6: Extended colour effects showcase ─────────────────────── -->
+  <program guid="demo-006b" name="Colour Effects" type="normal">
+    <playControl duration="00:00:20" count="0"/>
+
+    <border index="8" effect="rainbow" speed="5"/>
+
+    <area guid="area-ce" name="ColourEffects" alpha="255">
+      <rectangle x="0" y="0" width="128" height="64"/>
+      <resources>
+
+        <!-- Slide 1: rainbow-r (right-to-left rainbow) -->
+        <text guid="txt-ce1" singleLine="true">
+          <string>RAINBOW REVERSE ★ </string>
+          <effect in="21" out="0" inSpeed="3" outSpeed="0" duration="40"/>
+          <font size="13" color="rainbow-r"/>
+          <style align="left" valign="middle"/>
+        </text>
+
+        <!-- Slide 2: wave between magenta and cyan -->
+        <text guid="txt-ce2" singleLine="false">
+          <string>WAVE
+EFFECT</string>
+          <effect in="17" out="17" inSpeed="3" outSpeed="3" duration="40"/>
+          <font size="18" color="wave:#ff00ff:#00ffff"/>
+          <style align="center" valign="middle"/>
+        </text>
+
+        <!-- Slide 3: random golden-angle hue per character -->
+        <text guid="txt-ce3" singleLine="false">
+          <string>RANDOM
+COLORS</string>
+          <effect in="23" out="24" inSpeed="3" outSpeed="3" duration="40"/>
+          <font size="18" color="random"/>
+          <style align="center" valign="middle"/>
+        </text>
+
+        <!-- Slide 4: chase highlight in white -->
+        <text guid="txt-ce4" singleLine="true">
+          <string>★ CHASE EFFECT ★ </string>
+          <effect in="22" out="0" inSpeed="3" outSpeed="0" duration="40"/>
+          <font size="13" color="chase:#ffffff"/>
+          <style align="left" valign="middle"/>
+        </text>
+
+        <!-- Slide 5: strobe in lime green -->
+        <text guid="txt-ce5" singleLine="false">
+          <string>STROBE
+DEMO</string>
+          <effect in="18" out="19" inSpeed="3" outSpeed="3" duration="40"/>
+          <font size="18" color="strobe:#00ff44"/>
+          <style align="center" valign="middle"/>
+        </text>
+
+      </resources>
+    </area>
+  </program>
+
+  <!-- ── Program 7: Neon shapes showcase ────────────────────────────────── -->
+  <program guid="demo-007" name="Neon Shapes" type="normal">
     <playControl duration="00:00:15" count="0"/>
 
     <border index="9" speed="8"/>

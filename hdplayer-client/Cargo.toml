@@ -1,0 +1,40 @@
+[package]
+name = "hdplayer-client"
+version = "0.1.0"
+edition = "2021"
+description = "Rust client library reproducing Huidu HDPlayer control software"
+authors = ["Huidu Reverse Engineering Project"]
+
+[[bin]]
+name = "hdplayer-client"
+path = "src/main.rs"
+
+[lib]
+name = "hdplayer_client"
+path = "src/lib.rs"
+
+[dependencies]
+tokio = { version = "1", features = ["full"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+quick-xml = { version = "0.37", features = ["serialize"] }
+uuid = { version = "1", features = ["v4"] }
+md5 = "0.7"
+chrono = { version = "0.4", features = ["serde"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+clap = { version = "4", features = ["derive"] }
+thiserror = "1"
+bytes = "1"
+tokio-util = { version = "0.7", features = ["codec"] }
+futures = "0.3"
+byteorder = "1"
+base64 = "0.22"
+reqwest = { version = "0.12", features = ["json"] }
+anyhow = "1"
+
+[profile.release]
+opt-level = "z"
+lto = true
+strip = true
+panic = "abort"

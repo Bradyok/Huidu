@@ -17,24 +17,45 @@ use crate::render::plugins::ContentRenderer;
 enum ColorMode {
     /// Solid single colour.
     Solid(u8, u8, u8),
-    /// Animated HSV rainbow — hue shifts with glyph index and time.
+    /// Animated HSV rainbow left-to-right — hue shifts with glyph index and time.
     Rainbow,
+    /// Animated HSV rainbow right-to-left.
+    RainbowReverse,
     /// Static linear gradient from one colour to another.
     Gradient(u8, u8, u8, u8, u8, u8),
+    /// Sine-wave oscillation between two colours per character.
+    Wave(u8, u8, u8, u8, u8, u8),
     /// Two colours alternating at ~2 Hz.
     Flash(u8, u8, u8, u8, u8, u8),
+    /// Each glyph gets a distinct hue via the golden-angle HSV distribution.
+    Random,
+    /// Bright highlight chases left-to-right across the text (~1 cycle/2 s).
+    Chase(u8, u8, u8),
+    /// Each character flickers independently at ~5 Hz with a prime phase offset.
+    Strobe(u8, u8, u8),
 }
 
 /// Decode the colour string into a `ColorMode`.
 /// Special values:
-///   `"rainbow"`                       → animated HSV rainbow
+///   `"rainbow"`                       → animated HSV rainbow (L→R)
+///   `"rainbow-r"`                     → animated HSV rainbow (R→L)
 ///   `"gradient:#RRGGBB:#RRGGBB"`      → linear gradient
+///   `"wave:#RRGGBB:#RRGGBB"`          → sine wave between two colours
 ///   `"flash:#RRGGBB:#RRGGBB"`         → flashing alternation
+///   `"random"`                        → golden-angle HSV per character
+///   `"chase:#RRGGBB"`                 → sweeping highlight in given colour
+///   `"strobe:#RRGGBB"`                → per-char flicker in given colour
 ///   anything else                     → solid hex colour
 fn parse_color_mode(s: &str) -> ColorMode {
     let s = s.trim();
     if s.eq_ignore_ascii_case("rainbow") {
         return ColorMode::Rainbow;
+    }
+    if s.eq_ignore_ascii_case("rainbow-r") {
+        return ColorMode::RainbowReverse;
+    }
+    if s.eq_ignore_ascii_case("random") {
+        return ColorMode::Random;
     }
     if let Some(rest) = s.strip_prefix("gradient:").or_else(|| s.strip_prefix("Gradient:")) {
         let parts: Vec<&str> = rest.splitn(2, ':').collect();
@@ -44,6 +65,14 @@ fn parse_color_mode(s: &str) -> ColorMode {
             return ColorMode::Gradient(r1, g1, b1, r2, g2, b2);
         }
     }
+    if let Some(rest) = s.strip_prefix("wave:").or_else(|| s.strip_prefix("Wave:")) {
+        let parts: Vec<&str> = rest.splitn(2, ':').collect();
+        if parts.len() == 2 {
+            let (r1, g1, b1) = parse_color(parts[0]);
+            let (r2, g2, b2) = parse_color(parts[1]);
+            return ColorMode::Wave(r1, g1, b1, r2, g2, b2);
+        }
+    }
     if let Some(rest) = s.strip_prefix("flash:").or_else(|| s.strip_prefix("Flash:")) {
         let parts: Vec<&str> = rest.splitn(2, ':').collect();
         if parts.len() == 2 {
@@ -51,6 +80,14 @@ fn parse_color_mode(s: &str) -> ColorMode {
             let (r2, g2, b2) = parse_color(parts[1]);
             return ColorMode::Flash(r1, g1, b1, r2, g2, b2);
         }
+    }
+    if let Some(rest) = s.strip_prefix("chase:").or_else(|| s.strip_prefix("Chase:")) {
+        let (r, g, b) = parse_color(rest);
+        return ColorMode::Chase(r, g, b);
+    }
+    if let Some(rest) = s.strip_prefix("strobe:").or_else(|| s.strip_prefix("Strobe:")) {
+        let (r, g, b) = parse_color(rest);
+        return ColorMode::Strobe(r, g, b);
     }
     let (r, g, b) = parse_color(s);
     ColorMode::Solid(r, g, b)
@@ -74,6 +111,14 @@ fn glyph_color(mode: ColorMode, glyph_idx: usize, total: usize, elapsed_ms: u64)
             hsv_to_rgb(hue, 1.0, 1.0)
         }
 
+        ColorMode::RainbowReverse => {
+            // Same as Rainbow but position runs right-to-left.
+            let pos_t = 1.0 - glyph_idx as f32 / total.max(1) as f32;
+            let time_t = (elapsed_ms as f32 / 3000.0).fract();
+            let hue = ((pos_t + time_t).fract()) * 360.0;
+            hsv_to_rgb(hue, 1.0, 1.0)
+        }
+
         ColorMode::Gradient(r1, g1, b1, r2, g2, b2) => {
             let t = if total <= 1 {
                 0.0f32
@@ -84,12 +129,58 @@ fn glyph_color(mode: ColorMode, glyph_idx: usize, total: usize, elapsed_ms: u64)
             (lerp(r1, r2), lerp(g1, g2), lerp(b1, b2))
         }
 
+        ColorMode::Wave(r1, g1, b1, r2, g2, b2) => {
+            // Each glyph's colour oscillates on a sine wave between the two
+            // colours. Phase is offset per character so the wave travels.
+            let phase = glyph_idx as f32 * 0.5;
+            let t_raw = (elapsed_ms as f32 / 1000.0 + phase).sin();
+            let t = (t_raw + 1.0) * 0.5; // remap [-1,1] → [0,1]
+            let lerp = |a: u8, b: u8| (a as f32 + (b as f32 - a as f32) * t) as u8;
+            (lerp(r1, r2), lerp(g1, g2), lerp(b1, b2))
+        }
+
         ColorMode::Flash(r1, g1, b1, r2, g2, b2) => {
             // Toggle every 500 ms (2 Hz).
             if (elapsed_ms / 500) % 2 == 0 {
                 (r1, g1, b1)
             } else {
                 (r2, g2, b2)
+            }
+        }
+
+        ColorMode::Random => {
+            // Assign each glyph a distinct, stable hue using the golden angle
+            // (137.508°). The whole palette rotates slowly with time.
+            let hue = (glyph_idx as f32 * 137.508 + elapsed_ms as f32 / 40.0) % 360.0;
+            hsv_to_rgb(hue, 1.0, 1.0)
+        }
+
+        ColorMode::Chase(r, g, b) => {
+            // A bright highlight travels from left to right across the text,
+            // completing one pass every 2 s. Characters away from the highlight
+            // show at ~15% brightness; the peak glyph is full brightness.
+            let cycle = (elapsed_ms as f32 / 2000.0).fract();
+            let highlight_pos = cycle * total.max(1) as f32;
+            let dist = (glyph_idx as f32 - highlight_pos).abs();
+            // Gaussian-like falloff over ±3 characters.
+            let factor = (-dist * dist / 4.0).exp() * 0.85 + 0.15;
+            (
+                (r as f32 * factor) as u8,
+                (g as f32 * factor) as u8,
+                (b as f32 * factor) as u8,
+            )
+        }
+
+        ColorMode::Strobe(r, g, b) => {
+            // Each character flickers at ~5 Hz using a prime-number phase offset
+            // so no two adjacent characters are in sync.
+            const PRIMES: [u64; 16] = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53];
+            let prime = PRIMES[glyph_idx % PRIMES.len()];
+            let on = ((elapsed_ms / 100).wrapping_add(prime)) % 2 == 0;
+            if on {
+                (r, g, b)
+            } else {
+                (0, 0, 0)
             }
         }
     }

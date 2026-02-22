@@ -1,133 +1,96 @@
 /// Video content renderer plugin.
-/// Displays the first frame of a video as a still image.
-/// Full video decoding would require gstreamer or ffmpeg integration.
+///
+/// Uses ffmpeg (CLI) to decode video files into raw RGBA frames, then plays
+/// them back by selecting the correct frame on each render call based on
+/// `elapsed_ms`.  Frames are decoded once at first use and cached in memory.
+///
+/// Limits:
+///   - Output framerate is fixed at 25 fps (40 ms/frame).
+///   - At most MAX_FRAMES frames are decoded per video (caps very long clips).
+///   - Frames are scaled to the area dimensions at decode time.
+///   - Aspect-ratio mode (`aspectRatio="true"`) letterboxes/pillarboxes.
+///
+/// If ffmpeg is not on PATH the renderer falls back to a static placeholder.
 use std::collections::HashMap;
+use std::io::Read;
 use std::path::Path;
-use std::process::Command;
+use std::process::{Command, Stdio};
 use tiny_skia::{Pixmap, PixmapPaint, Transform};
-use tracing::{debug, warn};
+use tracing::{debug, info, warn};
 
 use crate::program::model::ContentItem;
 use crate::render::plugins::ContentRenderer;
 
+/// Output framerate used for all decoded videos.
+const OUTPUT_FPS: u64 = 25;
+/// ms per decoded frame.
+const FRAME_MS: u64 = 1000 / OUTPUT_FPS;
+/// Maximum frames decoded per video (~72 s at 25 fps).
+const MAX_FRAMES: usize = 1800;
+
+// ── Decoded video cache ───────────────────────────────────────────────────────
+
+/// All decoded frames for one video at one resolution.
+struct DecodedVideo {
+    width: u32,
+    height: u32,
+    /// Raw premultiplied-RGBA pixel data, one `Vec<u8>` per frame.
+    frames: Vec<Vec<u8>>,
+}
+
+impl DecodedVideo {
+    /// Select the frame that should be displayed at `elapsed_ms`, looping.
+    fn frame_at(&self, elapsed_ms: u64) -> &[u8] {
+        let idx = ((elapsed_ms / FRAME_MS) as usize) % self.frames.len();
+        &self.frames[idx]
+    }
+}
+
+/// Cache key: file path + target dimensions (aspect-ratio flag changes dims).
+#[derive(Hash, PartialEq, Eq, Clone)]
+struct VideoKey {
+    path: String,
+    width: u32,
+    height: u32,
+}
+
+// ── Renderer ─────────────────────────────────────────────────────────────────
+
 pub struct VideoRenderer {
-    /// Cache first frame thumbnails
-    thumbnails: HashMap<String, Option<Pixmap>>,
+    cache: HashMap<VideoKey, Option<DecodedVideo>>,
 }
 
 impl VideoRenderer {
     pub fn new() -> Self {
         Self {
-            thumbnails: HashMap::new(),
+            cache: HashMap::new(),
         }
     }
 
-    fn get_thumbnail(&mut self, filename: &str, program_dir: &Path) -> Option<&Pixmap> {
-        if !self.thumbnails.contains_key(filename) {
-            let thumb = self.extract_first_frame(filename, program_dir);
-            self.thumbnails.insert(filename.to_string(), thumb);
-        }
-        self.thumbnails.get(filename).and_then(|t| t.as_ref())
-    }
-
-    /// Try to extract the first frame using ffmpeg CLI
-    fn extract_first_frame(&self, filename: &str, program_dir: &Path) -> Option<Pixmap> {
+    /// Return cached video (or decode it now).  Returns `None` if ffmpeg is
+    /// unavailable or the file cannot be decoded.
+    fn get_video(
+        &mut self,
+        filename: &str,
+        program_dir: &Path,
+        target_w: u32,
+        target_h: u32,
+        aspect_ratio: bool,
+    ) -> Option<&DecodedVideo> {
         let video_path = program_dir.join(filename);
-        if !video_path.exists() {
-            warn!("Video file not found: {}", video_path.display());
-            return None;
+        let key = VideoKey {
+            path: video_path.to_string_lossy().into_owned(),
+            width: target_w,
+            height: target_h,
+        };
+
+        if !self.cache.contains_key(&key) {
+            let decoded = decode_video(&video_path, target_w, target_h, aspect_ratio);
+            self.cache.insert(key.clone(), decoded);
         }
 
-        // Try ffmpeg to extract first frame as PNG to temp file
-        let temp_path = std::env::temp_dir().join(format!("huidu_thumb_{}.png", md5_hash(filename)));
-
-        let result = Command::new("ffmpeg")
-            .args([
-                "-y",
-                "-i", &video_path.to_string_lossy(),
-                "-vframes", "1",
-                "-f", "image2",
-                &temp_path.to_string_lossy(),
-            ])
-            .stdout(std::process::Stdio::null())
-            .stderr(std::process::Stdio::null())
-            .status();
-
-        match result {
-            Ok(status) if status.success() => {
-                debug!("Extracted video thumbnail: {}", temp_path.display());
-                // Load the extracted PNG
-                match image::open(&temp_path) {
-                    Ok(img) => {
-                        let rgba = img.to_rgba8();
-                        let (w, h) = (rgba.width(), rgba.height());
-                        if let Some(mut pixmap) = Pixmap::new(w, h) {
-                            let data = pixmap.data_mut();
-                            for (i, pixel) in rgba.pixels().enumerate() {
-                                let a = pixel[3] as f32 / 255.0;
-                                data[i * 4] = (pixel[0] as f32 * a) as u8;
-                                data[i * 4 + 1] = (pixel[1] as f32 * a) as u8;
-                                data[i * 4 + 2] = (pixel[2] as f32 * a) as u8;
-                                data[i * 4 + 3] = pixel[3];
-                            }
-                            let _ = std::fs::remove_file(&temp_path);
-                            return Some(pixmap);
-                        }
-                    }
-                    Err(e) => warn!("Failed to load extracted frame: {}", e),
-                }
-                let _ = std::fs::remove_file(&temp_path);
-            }
-            Ok(_) => {
-                debug!("ffmpeg failed to extract frame from {}", filename);
-            }
-            Err(_) => {
-                debug!("ffmpeg not available, video thumbnail extraction disabled");
-            }
-        }
-
-        // Fallback: render a "VIDEO" placeholder
-        self.render_placeholder(filename)
+        self.cache.get(&key).and_then(|v| v.as_ref())
     }
-
-    fn render_placeholder(&self, _filename: &str) -> Option<Pixmap> {
-        let w = 320u32;
-        let h = 240u32;
-        let mut pixmap = Pixmap::new(w, h)?;
-
-        // Fill with dark gray
-        let data = pixmap.data_mut();
-        for i in 0..(w * h) as usize {
-            data[i * 4] = 30;     // R
-            data[i * 4 + 1] = 30; // G
-            data[i * 4 + 2] = 30; // B
-            data[i * 4 + 3] = 255;
-        }
-
-        // Draw a simple play triangle in the center
-        let cx = w as i32 / 2;
-        let cy = h as i32 / 2;
-        let size = 30i32;
-        for y in (cy - size)..=(cy + size) {
-            let dy = (y - cy).abs();
-            let half_w = size - dy;
-            for x in (cx - size / 3)..(cx - size / 3 + half_w) {
-                if x >= 0 && x < w as i32 && y >= 0 && y < h as i32 {
-                    let idx = ((y * w as i32 + x) * 4) as usize;
-                    data[idx] = 200;
-                    data[idx + 1] = 200;
-                    data[idx + 2] = 200;
-                    data[idx + 3] = 255;
-                }
-            }
-        }
-
-        Some(pixmap)
-    }
-}
-
-fn md5_hash(s: &str) -> String {
-    format!("{:x}", md5::compute(s.as_bytes()))
 }
 
 impl ContentRenderer for VideoRenderer {
@@ -139,7 +102,7 @@ impl ContentRenderer for VideoRenderer {
         _y: i32,
         width: u32,
         height: u32,
-        _elapsed_ms: u64,
+        elapsed_ms: u64,
         program_dir: &Path,
     ) -> bool {
         let video = match item {
@@ -147,32 +110,209 @@ impl ContentRenderer for VideoRenderer {
             _ => return false,
         };
 
-        let thumb = match self.get_thumbnail(&video.file.name, program_dir) {
-            Some(t) => t,
+        let decoded = match self.get_video(
+            &video.file.name,
+            program_dir,
+            width,
+            height,
+            video.aspect_ratio,
+        ) {
+            Some(d) => d,
             None => return false,
         };
 
-        let scale_x = width as f32 / thumb.width() as f32;
-        let scale_y = height as f32 / thumb.height() as f32;
-
-        let (sx, sy) = if video.aspect_ratio {
-            let s = scale_x.min(scale_y);
-            (s, s)
+        // Build a Pixmap view over the selected frame and blit it.
+        let frame_data = decoded.frame_at(elapsed_ms);
+        if let Some(frame_pixmap) =
+            Pixmap::from_vec(frame_data.to_vec(), tiny_skia::IntSize::from_wh(decoded.width, decoded.height).unwrap())
+        {
+            target.draw_pixmap(
+                0, 0,
+                frame_pixmap.as_ref(),
+                &PixmapPaint::default(),
+                Transform::identity(),
+                None,
+            );
+            true
         } else {
-            (scale_x, scale_y)
-        };
+            false
+        }
+    }
+}
 
-        let offset_x = ((width as f32 - thumb.width() as f32 * sx) / 2.0) as i32;
-        let offset_y = ((height as f32 - thumb.height() as f32 * sy) / 2.0) as i32;
+// ── ffmpeg decoding ───────────────────────────────────────────────────────────
 
-        target.draw_pixmap(
-            offset_x, offset_y,
-            thumb.as_ref(),
-            &PixmapPaint::default(),
-            Transform::from_scale(sx, sy),
-            None,
-        );
+/// Decode up to MAX_FRAMES frames from `video_path` at the given target
+/// resolution using ffmpeg.  Returns `None` if ffmpeg is unavailable or the
+/// file cannot be read.
+fn decode_video(
+    video_path: &Path,
+    target_w: u32,
+    target_h: u32,
+    aspect_ratio: bool,
+) -> Option<DecodedVideo> {
+    if !video_path.exists() {
+        warn!("Video file not found: {}", video_path.display());
+        return Some(make_placeholder(target_w, target_h));
+    }
 
-        true
+    // Build the scale filter.  With aspect_ratio we letterbox/pillarbox;
+    // without it we stretch to fill exactly.
+    let vf = if aspect_ratio {
+        format!(
+            "scale={w}:{h}:force_original_aspect_ratio=decrease,\
+             pad={w}:{h}:(ow-iw)/2:(oh-ih)/2:black,\
+             fps={fps}",
+            w = target_w,
+            h = target_h,
+            fps = OUTPUT_FPS,
+        )
+    } else {
+        format!(
+            "scale={w}:{h},fps={fps}",
+            w = target_w,
+            h = target_h,
+            fps = OUTPUT_FPS,
+        )
+    };
+
+    info!(
+        "Decoding video {} at {}x{} (aspect_ratio={}) …",
+        video_path.display(), target_w, target_h, aspect_ratio
+    );
+
+    let mut child = match Command::new("ffmpeg")
+        .args([
+            "-i",
+            &video_path.to_string_lossy(),
+            "-vf",
+            &vf,
+            "-vframes",
+            &MAX_FRAMES.to_string(),
+            "-f",
+            "rawvideo",
+            "-pix_fmt",
+            "rgba",
+            "pipe:1",
+        ])
+        .stdout(Stdio::piped())
+        .stderr(Stdio::null())
+        .spawn()
+    {
+        Ok(c) => c,
+        Err(_) => {
+            warn!("ffmpeg not available — video playback disabled");
+            return Some(make_placeholder(target_w, target_h));
+        }
+    };
+
+    let frame_bytes = (target_w * target_h * 4) as usize;
+    let mut frames: Vec<Vec<u8>> = Vec::new();
+
+    if let Some(mut stdout) = child.stdout.take() {
+        let mut buf = vec![0u8; frame_bytes];
+        loop {
+            match read_exact_or_eof(&mut stdout, &mut buf) {
+                ReadResult::Full => {
+                    // Convert straight RGBA → premultiplied RGBA (tiny-skia).
+                    let mut premul = buf.clone();
+                    for px in premul.chunks_exact_mut(4) {
+                        let a = px[3] as f32 / 255.0;
+                        px[0] = (px[0] as f32 * a) as u8;
+                        px[1] = (px[1] as f32 * a) as u8;
+                        px[2] = (px[2] as f32 * a) as u8;
+                    }
+                    frames.push(premul);
+                    if frames.len() >= MAX_FRAMES {
+                        break;
+                    }
+                }
+                ReadResult::Eof => break,
+                ReadResult::Error => break,
+            }
+        }
+    }
+
+    let _ = child.wait();
+
+    if frames.is_empty() {
+        debug!("ffmpeg produced no frames for {}", video_path.display());
+        return Some(make_placeholder(target_w, target_h));
+    }
+
+    info!(
+        "Decoded {} frames from {} ({}x{})",
+        frames.len(),
+        video_path.display(),
+        target_w,
+        target_h,
+    );
+
+    Some(DecodedVideo {
+        width: target_w,
+        height: target_h,
+        frames,
+    })
+}
+
+// ── I/O helpers ──────────────────────────────────────────────────────────────
+
+enum ReadResult {
+    Full,
+    Eof,
+    Error,
+}
+
+/// Read exactly `buf.len()` bytes.  Returns Eof if the stream ends before the
+/// buffer is filled (partial frame = discard), Error on I/O failure.
+fn read_exact_or_eof(reader: &mut dyn Read, buf: &mut [u8]) -> ReadResult {
+    let mut filled = 0;
+    while filled < buf.len() {
+        match reader.read(&mut buf[filled..]) {
+            Ok(0) => return ReadResult::Eof,
+            Ok(n) => filled += n,
+            Err(_) => return ReadResult::Error,
+        }
+    }
+    ReadResult::Full
+}
+
+// ── Placeholder ───────────────────────────────────────────────────────────────
+
+/// Return a single-frame "VIDEO" placeholder used when ffmpeg is not available.
+fn make_placeholder(w: u32, h: u32) -> DecodedVideo {
+    let mut pixels = vec![0u8; (w * h * 4) as usize];
+
+    // Dark charcoal background
+    for px in pixels.chunks_exact_mut(4) {
+        px[0] = 25;
+        px[1] = 25;
+        px[2] = 30;
+        px[3] = 255;
+    }
+
+    // Simple play-triangle in the centre
+    let cx = w as i32 / 2;
+    let cy = h as i32 / 2;
+    let sz = (h as i32 / 4).max(4);
+    for dy in -sz..=sz {
+        let half = sz - dy.abs();
+        for dx in (-sz / 3)..((-sz / 3) + half) {
+            let px = cx + dx;
+            let py = cy + dy;
+            if px >= 0 && px < w as i32 && py >= 0 && py < h as i32 {
+                let i = ((py * w as i32 + px) * 4) as usize;
+                pixels[i] = 180;
+                pixels[i + 1] = 180;
+                pixels[i + 2] = 180;
+                pixels[i + 3] = 255;
+            }
+        }
+    }
+
+    DecodedVideo {
+        width: w,
+        height: h,
+        frames: vec![pixels],
     }
 }
