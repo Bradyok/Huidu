@@ -24,6 +24,9 @@ pub struct DeviceState {
     pub rotation: u16,
     pub admin_mode: bool,
     pub ntp_server: String,
+    /// UTC offset in whole hours (-12 … +14).  0 = UTC (default).
+    #[serde(default)]
+    pub timezone_offset: i8,
     #[serde(default)]
     pub license: String,
     #[serde(default)]
@@ -50,6 +53,7 @@ impl Default for DeviceState {
             rotation: 0,
             admin_mode: false,
             ntp_server: "pool.ntp.org".to_string(),
+            timezone_offset: 0,
             license: String::new(),
             brightness_schedule: Vec::new(),
             screen_schedule: Vec::new(),
@@ -93,6 +97,8 @@ pub struct ServicesState {
 
     // Time
     pub ntp_server: String,
+    /// UTC offset in whole hours (-12 … +14).  0 = UTC (default).
+    pub timezone_offset: i8,
 
     // Currently loaded programs
     pub programs: Vec<ProgramInfo>,
@@ -140,6 +146,7 @@ impl ServicesState {
             admin_mode: false,
             license: String::new(),
             ntp_server: "pool.ntp.org".to_string(),
+            timezone_offset: 0,
             programs: Vec::new(),
             current_program_guid: String::new(),
             fpga_config: default_fpga_config(),
@@ -164,6 +171,7 @@ impl ServicesState {
                 self.rotation = s.rotation;
                 self.admin_mode = s.admin_mode;
                 self.ntp_server = s.ntp_server;
+                self.timezone_offset = s.timezone_offset;
                 if !s.license.is_empty() {
                     self.license = s.license;
                 }
@@ -192,6 +200,7 @@ impl ServicesState {
             rotation: self.rotation,
             admin_mode: self.admin_mode,
             ntp_server: self.ntp_server.clone(),
+            timezone_offset: self.timezone_offset,
             license: self.license.clone(),
             brightness_schedule: self.brightness.get_schedule().to_vec(),
             screen_schedule: self.screen_schedule.get_schedule().to_vec(),

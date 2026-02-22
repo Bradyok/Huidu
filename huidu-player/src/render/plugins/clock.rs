@@ -2,16 +2,37 @@
 ///
 /// Renders digital clock with date/time/week/title/lunar fields.
 ///
+/// Supports `timezone` (UTC offset in hours, e.g. "8" for UTC+8) and
+/// `adjust` (seconds added to the displayed time) from the model.
+///
 /// ## Per-second Pixmap cache
 /// At 60 fps the clock display is identical for all 60 frames within each
 /// second.  The renderer caches the fully-rendered Pixmap and copies it on
 /// cache hits, avoiding 59 out of 60 font-layout + rasterisation rounds.
-use chrono::{Local, Timelike};
+use chrono::{Datelike, FixedOffset, Local, Timelike, Utc};
 use std::path::Path;
 use tiny_skia::Pixmap;
 
 use crate::program::model::{parse_color, ClockContent, ContentItem};
 use crate::render::plugins::ContentRenderer;
+
+/// Compute the displayed time for a clock, applying `timezone` (UTC offset
+/// hours, e.g. "8" or "-5.5") and `adjust` (integer seconds to add).
+/// Falls back to local time when either field is empty or unparseable.
+fn clock_now(timezone: &str, adjust: &str) -> chrono::DateTime<FixedOffset> {
+    let now_utc = Utc::now();
+    let adjust_secs = adjust.parse::<i64>().unwrap_or(0);
+    let adjusted = now_utc + chrono::Duration::seconds(adjust_secs);
+    if timezone.is_empty() {
+        // Use system local timezone
+        adjusted.with_timezone(Local::now().offset())
+    } else {
+        let tz_secs = (timezone.parse::<f32>().unwrap_or(0.0) * 3600.0) as i32;
+        let offset = FixedOffset::east_opt(tz_secs)
+            .unwrap_or_else(|| *Local::now().offset());
+        adjusted.with_timezone(&offset)
+    }
+}
 
 pub struct ClockRenderer {
     font: rusttype::Font<'static>,
@@ -46,7 +67,7 @@ impl ClockRenderer {
         width: u32,
         height: u32,
     ) {
-        let now = Local::now();
+        let now = clock_now(&clock.timezone, &clock.adjust);
         let current_second = now.second() as u8;
 
         // ── Cache hit: same clock, same second, same area size ───────────────
@@ -104,7 +125,7 @@ fn render_clock_into(
     target: &mut Pixmap,
     width: u32,
     height: u32,
-    now: &chrono::DateTime<Local>,
+    now: &chrono::DateTime<FixedOffset>,
 ) {
     let mut lines: Vec<(String, (u8, u8, u8))> = Vec::new();
 
@@ -126,8 +147,11 @@ fn render_clock_into(
     if let Some(ref f) = clock.week
         && f.display {
             let s = match f.format.as_str() {
-                "2" => now.format("%A").to_string(),
-                "3" => now.format("%a").to_string(),
+                // "1" = full English name (Monday … Sunday)  [default]
+                // "2" = abbreviated name (Mon … Sun)
+                // "3" = day number (1=Monday … 7=Sunday)
+                "2" => now.format("%a").to_string(),
+                "3" => now.weekday().number_from_monday().to_string(),
                 _   => now.format("%A").to_string(),
             };
             lines.push((s, parse_color(&f.color)));
@@ -201,7 +225,7 @@ fn render_clock_into(
 
 // ── Lunar date approximation ──────────────────────────────────────────────────
 
-fn compute_lunar_date(now: &chrono::DateTime<Local>) -> String {
+fn compute_lunar_date(now: &chrono::DateTime<FixedOffset>) -> String {
     use chrono::NaiveDate;
     const CNY: &[(i32, u32, u32)] = &[
         (2020,1,25),(2021,2,12),(2022,2,1),(2023,1,22),
@@ -223,4 +247,50 @@ fn compute_lunar_date(now: &chrono::DateTime<Local>) -> String {
     }
     let days = (today - cny).num_days().max(0) as u32;
     format!("L:{}/{}", ((days / 30) + 1).min(13), (days % 30) + 1)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn clock_now_empty_timezone_uses_local() {
+        // Should not panic and should return a plausible hour (0-23)
+        let t = clock_now("", "");
+        assert!(t.hour() < 24);
+    }
+
+    #[test]
+    fn clock_now_utc_plus8() {
+        // UTC+8 and UTC+0 should be 8 hours apart (mod 24)
+        let t_utc = clock_now("0", "0");
+        let t_cst = clock_now("8", "0");
+        let diff = (t_cst.hour() as i32 - t_utc.hour() as i32).rem_euclid(24);
+        assert_eq!(diff, 8, "UTC+8 should be 8 hours ahead of UTC+0");
+    }
+
+    #[test]
+    fn clock_now_adjust_adds_seconds() {
+        let base = clock_now("0", "0");
+        let adj  = clock_now("0", "3600"); // +1 hour
+        let diff = (adj.hour() as i32 - base.hour() as i32).rem_euclid(24);
+        assert_eq!(diff, 1, "+3600 adjust should advance hour by 1");
+    }
+
+    #[test]
+    fn clock_now_invalid_timezone_falls_back_to_local() {
+        // "xyz" is not a valid float; should fall back without panic
+        let t = clock_now("xyz", "");
+        assert!(t.hour() < 24);
+    }
+
+    #[test]
+    fn week_format_number_from_monday() {
+        // Just sanity-check the Datelike API used in week format "3"
+        use chrono::{Datelike, Weekday};
+        let mon = chrono::NaiveDate::from_ymd_opt(2024, 1, 1).unwrap(); // Monday
+        assert_eq!(mon.weekday().number_from_monday(), 1);
+        let sun = chrono::NaiveDate::from_ymd_opt(2024, 1, 7).unwrap(); // Sunday
+        assert_eq!(sun.weekday().number_from_monday(), 7);
+    }
 }

@@ -15,6 +15,22 @@ use tiny_skia::{Pixmap, PixmapPaint, Transform};
 use crate::program::model::{parse_color, AnalogClockContent, ContentItem};
 use crate::render::plugins::ContentRenderer;
 
+/// Compute the displayed time for an analog clock, honoring the `timezone`
+/// attribute (UTC offset in hours, e.g. "8" for UTC+8).
+fn clock_now_analog(timezone: &str) -> (u32, u32, u32) {
+    use chrono::{FixedOffset, Local, Timelike, Utc};
+    let utc = Utc::now();
+    let dt = if timezone.is_empty() {
+        utc.with_timezone(Local::now().offset())
+    } else {
+        let tz_secs = (timezone.parse::<f32>().unwrap_or(0.0) * 3600.0) as i32;
+        let offset = FixedOffset::east_opt(tz_secs)
+            .unwrap_or_else(|| *Local::now().offset());
+        utc.with_timezone(&offset)
+    };
+    (dt.hour() % 12, dt.minute(), dt.second())
+}
+
 /// Maximum number of background images kept in memory at once.
 const MAX_CACHE: usize = 16;
 
@@ -102,11 +118,8 @@ impl AnalogClockRenderer {
             }
         }
 
-        // ── Current local time ───────────────────────────────────────────────
-        let now = chrono::Local::now();
-        let hour   = now.hour() % 12;
-        let minute = now.minute();
-        let second = now.second();
+        // ── Current time (honoring timezone attribute) ───────────────────────
+        let (hour, minute, second) = clock_now_analog(&clock.timezone);
 
         // Hand angles (from 12 o'clock = -PI/2, clockwise)
         let h_angle = (hour as f32 + minute as f32 / 60.0) * PI / 6.0 - PI / 2.0;
@@ -313,5 +326,4 @@ fn draw_line(
     }
 }
 
-// Bring chrono's time traits into scope for .hour(), .minute(), .second()
-use chrono::Timelike;
+

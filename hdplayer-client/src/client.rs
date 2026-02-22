@@ -409,6 +409,12 @@ impl Client {
         Ok(())
     }
 
+    /// Set device timezone (UTC offset in whole hours, e.g. 8 for UTC+8).
+    pub async fn set_timezone(&mut self, offset: i8) -> Result<()> {
+        self.sdk_cmd("SetTimeInfo", &command::set_time_zone(offset)).await?;
+        Ok(())
+    }
+
     // ── FPGA Config ───────────────────────────────────────────────────────
 
     pub async fn get_fpga_config(&mut self) -> Result<String> {

@@ -258,9 +258,19 @@ pub async fn handle_sdk_command(
             let mode = extract_attr(xml, "luminance", "mode").unwrap_or_default();
             if mode == "auto" {
                 let entries = extract_brightness_schedule(xml);
-                let mut state = services.write().await;
-                state.brightness.set_schedule(entries);
-                state.save_persisted();
+                // Apply immediately at the current time, then persist.
+                let new_level = {
+                    let mut state = services.write().await;
+                    let old = state.brightness.get_level();
+                    state.brightness.set_schedule(entries);
+                    state.brightness.check_schedule();
+                    let new = state.brightness.get_level();
+                    state.save_persisted();
+                    (new != old).then_some(new)
+                };
+                if let Some(level) = new_level {
+                    player_tx.send(PlayerCommand::SetBrightness(level)).await.ok();
+                }
             } else {
                 // Manual mode: <luminance mode="manual" value="N"/>
                 if let Some(val) = extract_attr(xml, "luminance", "value")
@@ -337,19 +347,31 @@ pub async fn handle_sdk_command(
             let dt = now.format("%Y-%m-%d %H:%M:%S").to_string();
             let state = services.read().await;
             let ntp = xml_esc(&state.ntp_server);
+            let tz = state.timezone_offset;
             ok!(&format!(
-                "<time value=\"{dt}\"/><ntp enable=\"true\" server=\"{ntp}\"/>"
+                "<time value=\"{dt}\" timezone=\"{tz}\"/><ntp enable=\"true\" server=\"{ntp}\"/>"
             ))
         }
 
         "SetTimeInfo" | "setTimeInfo" => {
+            let mut needs_save = false;
             if let Some(time_val) = extract_attr(xml, "time", "value") {
                 crate::services::time_sync::TimeSyncService::set_time(&time_val).await;
             }
-            if let Some(ntp_server) = extract_attr(xml, "ntp", "server") {
+            {
                 let mut state = services.write().await;
-                state.ntp_server = ntp_server;
-                state.save_persisted();
+                if let Some(ntp_server) = extract_attr(xml, "ntp", "server") {
+                    state.ntp_server = ntp_server;
+                    needs_save = true;
+                }
+                if let Some(tz_val) = extract_attr(xml, "timezone", "value")
+                    && let Ok(tz) = tz_val.parse::<i8>() {
+                        state.timezone_offset = tz.clamp(-12, 14);
+                        needs_save = true;
+                    }
+                if needs_save {
+                    state.save_persisted();
+                }
             }
             ok!("")
         }
@@ -1429,6 +1451,21 @@ mod tests {
         let xml = r#"<luminance mode="manual"><brightness value="75"/></luminance>"#;
         let entries = extract_brightness_schedule(xml);
         assert!(entries.is_empty());
+    }
+
+    // ── SetTimeInfo timezone parsing ─────────────────────────────────────────
+
+    #[test]
+    fn test_extract_timezone_attr() {
+        let xml = r#"<in method="SetTimeInfo"><timezone value="8"/></in>"#;
+        assert_eq!(extract_attr(xml, "timezone", "value"), Some("8".to_string()));
+    }
+
+    #[test]
+    fn test_extract_timezone_attr_negative() {
+        let xml = r#"<in method="SetTimeInfo"><timezone value="-5"/></in>"#;
+        let v = extract_attr(xml, "timezone", "value").unwrap_or_default();
+        assert_eq!(v.parse::<i8>().unwrap(), -5);
     }
 
     // ── extract_file_list ─────────────────────────────────────────────────────

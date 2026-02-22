@@ -588,19 +588,22 @@ pub fn is_program_schedulable(program: &Program) -> bool {
                 }
     }
 
-    // ── Time range ──────────────────────────────────────────────────────────
+    // ── Time range (supports midnight-crossing windows) ─────────────────────
     if let Some(ref time) = pc.time {
         let cur_secs = now.hour() * 3600 + now.minute() * 60 + now.second();
-        if !time.start.is_empty()
-            && let Some(start_s) = parse_hm_secs(&time.start)
-                && cur_secs < start_s {
-                    return false;
-                }
-        if !time.end.is_empty()
-            && let Some(end_s) = parse_hm_secs(&time.end)
-                && cur_secs > end_s {
-                    return false;
-                }
+        // Empty start/end means no lower/upper bound; default to fully-open window.
+        let start_s = parse_hm_secs(&time.start).unwrap_or(0);
+        let end_s   = parse_hm_secs(&time.end).unwrap_or(86400);
+        let in_range = if start_s <= end_s {
+            // Normal same-day window: e.g. 08:00–22:00
+            cur_secs >= start_s && cur_secs < end_s
+        } else {
+            // Midnight-crossing window: e.g. 22:00–06:00
+            cur_secs >= start_s || cur_secs < end_s
+        };
+        if !in_range {
+            return false;
+        }
     }
 
     // ── Week filter ─────────────────────────────────────────────────────────
@@ -786,6 +789,30 @@ mod tests {
         });
         let prog = make_program(Some(pc));
         assert!(!is_program_schedulable(&prog));
+    }
+
+    /// Verify the midnight-crossing logic directly (without relying on wall clock).
+    #[test]
+    fn test_midnight_crossing_time_range_logic() {
+        // on=22:00 (79200), off=06:00 (21600) → crossing window
+        let start_s: u32 = 22 * 3600;
+        let end_s:   u32 = 6 * 3600;
+        assert!(start_s > end_s, "sanity: crossing window");
+
+        let in_range = |cur: u32| -> bool {
+            if start_s <= end_s {
+                cur >= start_s && cur < end_s
+            } else {
+                cur >= start_s || cur < end_s
+            }
+        };
+
+        assert!(in_range(23 * 3600), "23:00 should be in range");
+        assert!(in_range(0),          "00:00 should be in range");
+        assert!(in_range(3 * 3600),   "03:00 should be in range");
+        assert!(!in_range(6 * 3600),  "06:00 should be out of range (exclusive)");
+        assert!(!in_range(12 * 3600), "12:00 should be out of range");
+        assert!(!in_range(21 * 3600), "21:00 should be out of range");
     }
 
     #[test]

@@ -111,6 +111,13 @@ enum Commands {
     /// Sync device time to current local time
     SyncTime,
 
+    /// Set device timezone (UTC offset in whole hours, e.g. 8 for UTC+8, -5 for UTC-5)
+    SetTimezone {
+        /// UTC offset hours (-12 to +14)
+        #[arg(allow_hyphen_values = true)]
+        offset: i8,
+    },
+
     /// Get Ethernet configuration
     GetNetwork,
 
@@ -486,6 +493,11 @@ async fn main() -> anyhow::Result<()> {
             println!("Time synced.");
         }
 
+        Commands::SetTimezone { offset } => {
+            client.set_timezone(*offset).await?;
+            println!("Timezone set to UTC{:+}.", offset);
+        }
+
         Commands::GetNetwork => {
             let cfg = client.get_eth0_info().await?;
             println!("DHCP:    {}", if cfg.dhcp { "enabled" } else { "disabled" });
@@ -617,7 +629,9 @@ async fn main() -> anyhow::Result<()> {
             let xml = client.get_time_info().await?;
             let time = hdplayer_client::xml::get_attr(&xml, "value").unwrap_or("?");
             let ntp  = hdplayer_client::xml::get_attr(&xml, "server").unwrap_or("");
+            let tz   = hdplayer_client::xml::get_attr(&xml, "timezone").unwrap_or("0");
             println!("Device time: {time}");
+            println!("UTC offset:  UTC{:+}", tz.parse::<i8>().unwrap_or(0));
             if !ntp.is_empty() { println!("NTP server:  {ntp}"); }
         }
 
