@@ -94,6 +94,12 @@ impl FpgaSerial {
         self.write_raw(&pkt)
     }
 
+    /// Send a configuration register block to the FPGA.
+    pub fn send_config(&mut self, payload: &[u8]) -> Result<()> {
+        let pkt = build_packet(CMD_SET_CONFIG, payload);
+        self.write_raw(&pkt)
+    }
+
     /// Send a complete RGBA framebuffer to the FPGA.
     ///
     /// The framebuffer is `width * height * 4` bytes in RGBA order (premultiplied).

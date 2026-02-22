@@ -38,6 +38,10 @@ pub enum PlayerCommand {
     InsertProgram(Vec<Program>),
     /// Show a SMPTE color-bar test pattern for `seconds` seconds (0 = cancel).
     ScreenTest(u32),
+    /// Soft-reload: update program list without resetting effect state for unchanged items.
+    SoftLoadScreen(Screen),
+    /// Apply FPGA hardware config from BoxHwConfig XML string.
+    ApplyFpgaConfig(String),
 }
 
 pub struct Player {
@@ -436,6 +440,38 @@ impl Player {
                 let frames = secs as u64 * self.config.fps as u64;
                 self.engine.set_test_pattern(if secs > 0 { Some(frames) } else { None });
                 info!("Screen test pattern: {}s", secs);
+            }
+
+            PlayerCommand::SoftLoadScreen(screen) => {
+                info!("Soft-reloading screen with {} program(s)", screen.programs.len());
+                let new_programs = screen.programs;
+                // Try to keep the current program index pointing at the same GUID.
+                let current_guid = self.programs.get(self.current_program)
+                    .map(|p| p.guid.clone())
+                    .unwrap_or_default();
+                let new_idx = new_programs.iter().position(|p| p.guid == current_guid)
+                    .unwrap_or(0);
+                self.programs = new_programs;
+                // Only reset engine if the current program GUID changed.
+                if new_idx != self.current_program
+                    || self.programs.get(new_idx).map(|p| &p.guid) != Some(&current_guid)
+                {
+                    self.current_program = new_idx;
+                    self.program_start_frame = current_frame;
+                    let elapsed_ms = current_frame * (1000 / self.config.fps as u64);
+                    if let Some(p) = self.programs.get(new_idx) {
+                        self.engine.reset_for_program(p, elapsed_ms);
+                    }
+                } else {
+                    self.current_program = new_idx;
+                }
+                self.sync_programs_to_services(new_idx);
+            }
+
+            PlayerCommand::ApplyFpgaConfig(cfg_xml) => {
+                use crate::fpga::params::FpgaConfig;
+                let cfg = FpgaConfig::from_xml(&cfg_xml);
+                self.fpga.apply_config(cfg);
             }
 
             PlayerCommand::DeleteProgram(guid) => {

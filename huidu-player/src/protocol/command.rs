@@ -168,7 +168,7 @@ pub async fn handle_sdk_command(
             // Treated the same as UpdateProgram for now
             match parser::parse_program_xml(xml) {
                 Ok(screen) => {
-                    player_tx.send(PlayerCommand::LoadScreen(screen)).await.ok();
+                    player_tx.send(PlayerCommand::SoftLoadScreen(screen)).await.ok();
                     ok!("")
                 }
                 Err(e) => {
@@ -203,21 +203,59 @@ pub async fn handle_sdk_command(
         }
 
         "DeleteNotCiteFile" | "deleteNotCiteFile" => {
-            // Delete XML program files not referenced by the currently loaded programs.
-            // Media files (images, videos, audio) and config files are preserved.
+            // Delete unreferenced files from the program directory.
+            // "Referenced" = any file whose name appears in an active program's XML.
             let state = services.read().await;
-            let active: std::collections::HashSet<String> = state
+            // Collect active program XML filenames
+            let active_xml: std::collections::HashSet<String> = state
                 .programs
                 .iter()
                 .map(|p| crate::services::storage::StorageService::filename_for_guid(&p.guid))
                 .collect();
-            let files = state.storage.list_files();
-            for f in &files {
-                // Only remove XML program files; preserve device_state.json and media
-                if f.ends_with(".xml") && f != "device_state.json" && !active.contains(f) {
-                    let _ = state.storage.delete_file(f);
+            // Build set of all filenames referenced inside active XML files
+            let mut referenced: std::collections::HashSet<String> = active_xml.clone();
+            referenced.insert("device_state.json".to_string());
+            let program_dir = state.storage.program_dir().to_path_buf();
+            // Parse active XML files to find referenced media filenames
+            for xml_name in &active_xml {
+                let xml_path = program_dir.join(xml_name);
+                if let Ok(content) = std::fs::read_to_string(&xml_path) {
+                    // Extract all name="..." attribute values from the XML
+                    let mut rest = content.as_str();
+                    while let Some(pos) = rest.find("name=\"") {
+                        let after = &rest[pos + 6..];
+                        if let Some(end) = after.find('"') {
+                            let fname = after[..end].trim().to_string();
+                            if !fname.is_empty() && fname.contains('.') {
+                                referenced.insert(fname);
+                            }
+                        }
+                        rest = &rest[pos + 6..];
+                    }
+                    // Also scan src="..." attributes (used by some content types)
+                    let mut rest2 = content.as_str();
+                    while let Some(pos) = rest2.find("src=\"") {
+                        let after = &rest2[pos + 5..];
+                        if let Some(end) = after.find('"') {
+                            let fname = after[..end].trim().to_string();
+                            if !fname.is_empty() && fname.contains('.') {
+                                referenced.insert(fname);
+                            }
+                        }
+                        rest2 = &rest2[pos + 5..];
+                    }
                 }
             }
+            let files = state.storage.list_files();
+            let mut deleted = 0usize;
+            for f in &files {
+                if !referenced.contains(f.as_str()) {
+                    if let Ok(_) = state.storage.delete_file(f) {
+                        deleted += 1;
+                    }
+                }
+            }
+            info!("DeleteNotCiteFile: removed {} unreferenced files", deleted);
             ok!("")
         }
 
@@ -534,11 +572,21 @@ pub async fn handle_sdk_command(
             let user     = extract_attr(xml, "pppoe", "user").unwrap_or_default();
             let password = extract_attr(xml, "pppoe", "password").unwrap_or_default();
             info!("SetPppoeInfo: enable={enable} user={user}");
-            let mut state = services.write().await;
-            state.pppoe_enable = enable;
-            state.pppoe_user = user;
-            state.pppoe_password = password;
-            state.save_persisted();
+            {
+                let mut state = services.write().await;
+                state.pppoe_enable = enable;
+                state.pppoe_user = user.clone();
+                state.pppoe_password = password.clone();
+                state.save_persisted();
+            }
+            // Activate or deactivate PPPoE connection on Linux
+            if enable {
+                let user_owned = user.clone();
+                let pass_owned = password.clone();
+                tokio::task::spawn_blocking(move || apply_pppoe_config(true, &user_owned, &pass_owned)).await.ok();
+            } else {
+                tokio::task::spawn_blocking(move || apply_pppoe_config(false, "", "")).await.ok();
+            }
             ok!("")
         }
 
@@ -855,12 +903,16 @@ pub async fn handle_sdk_command(
         }
 
         // ── Sensors / Modbus ───────────────────────────────────────────────────
-        "GetSensorInfo" | "getSensorInfo" => {
-            ok!("<sensors count=\"0\"/>")
-        }
-
-        "GetCurrentSensorValue" | "getCurrentSensorValue" => {
-            ok!("<sensors count=\"0\"/>")
+        "GetSensorInfo" | "getSensorInfo" | "GetCurrentSensorValue" | "getCurrentSensorValue" => {
+            let readings = tokio::task::spawn_blocking(read_sensor_data).await.unwrap_or_default();
+            let mut items = String::new();
+            for (name, value) in &readings {
+                items.push_str(&format!(
+                    "<sensor name=\"{}\" value=\"{}\"/>",
+                    xml_esc(name), xml_esc(value)
+                ));
+            }
+            ok!(&format!("<sensors count=\"{}\">{}</sensors>", readings.len(), items))
         }
 
         "GetGPSInfo" | "getGPSInfo" => {
@@ -1102,6 +1154,100 @@ pub async fn handle_sdk_command(
                     state.device_id = new_id;
                 }
             }
+            ok!("")
+        }
+
+        // ── NTP Server ────────────────────────────────────────────────────────
+        "GetNtpServer" | "getNtpServer" => {
+            let state = services.read().await;
+            let server = xml_esc(&state.ntp_server);
+            ok!(&format!("<ntp server=\"{server}\"/>"))
+        }
+
+        "SetNtpServer" | "setNtpServer" => {
+            if let Some(server) = extract_attr(xml, "ntp", "server") {
+                let mut state = services.write().await;
+                state.ntp_server = server.clone();
+                state.save_persisted();
+                // Attempt to sync now
+                drop(state);
+                let _srv = server.clone();
+                tokio::task::spawn_blocking(move || {
+                    #[cfg(unix)]
+                    let _ = std::process::Command::new("ntpdate").args(["-u", &srv]).status();
+                }).await.ok();
+            }
+            ok!("")
+        }
+
+        // ── Timezone ──────────────────────────────────────────────────────────
+        "GetTimezone" | "getTimezone" => {
+            let state = services.read().await;
+            let offset = state.timezone_offset;
+            ok!(&format!("<timezone value=\"{offset}\"/>"))
+        }
+
+        "SetTimezone" | "setTimezone" => {
+            if let Some(tz_val) = extract_attr(xml, "timezone", "value") {
+                if let Ok(offset) = tz_val.parse::<i8>() {
+                    let mut state = services.write().await;
+                    state.timezone_offset = offset.clamp(-12, 14);
+                    state.save_persisted();
+                } else {
+                    // Treat as IANA name (e.g. "Asia/Shanghai")
+                    let _tz_owned = tz_val.clone();
+                    tokio::task::spawn_blocking(move || {
+                        #[cfg(unix)]
+                        let _ = std::process::Command::new("timedatectl")
+                            .args(["set-timezone", &tz_owned])
+                            .status();
+                    }).await.ok();
+                }
+            }
+            ok!("")
+        }
+
+        // ── USB Disk ──────────────────────────────────────────────────────────
+        "GetUSBDiskInfo" | "getUSBDiskInfo" => {
+            let disks = tokio::task::spawn_blocking(scan_usb_disks).await.unwrap_or_default();
+            let mut items = String::new();
+            for (name, total, free) in &disks {
+                items.push_str(&format!(
+                    "<disk name=\"{}\" total=\"{}\" free=\"{}\"/>",
+                    xml_esc(name), total, free
+                ));
+            }
+            ok!(&format!("<usbDisks count=\"{}\">{}</usbDisks>", disks.len(), items))
+        }
+
+        // ── FPGA Reload ───────────────────────────────────────────────────────
+        "ReloadFPGAParam" | "reloadFPGAParam" | "ReloadBoxHwConfig" | "reloadBoxHwConfig" => {
+            let cfg_xml = services.read().await.fpga_config.clone();
+            if !cfg_xml.is_empty() {
+                player_tx.send(PlayerCommand::ApplyFpgaConfig(cfg_xml)).await.ok();
+            }
+            ok!("")
+        }
+
+        // ── Font reload ───────────────────────────────────────────────────────
+        "ReloadAllFonts" | "reloadAllFonts" => {
+            info!("ReloadAllFonts: acknowledged (font cache refreshes on next program load)");
+            ok!("")
+        }
+
+        // ── Incremental data source update ────────────────────────────────────
+        "UpdateDynamicData" | "updateDynamicData" => {
+            // Merges (per-key update) rather than replacing the whole map
+            let sources = extract_data_sources(xml);
+            let count = sources.len();
+            {
+                let mut state = services.write().await;
+                for (k, v) in sources {
+                    state.data_sources.insert(k, v);
+                }
+                state.save_persisted();
+            }
+            info!("UpdateDynamicData: {} key(s) updated", count);
             ok!("")
         }
 
@@ -1601,6 +1747,127 @@ fn xml_esc(s: &str) -> String {
      .replace('>', "&gt;")
      .replace('"', "&quot;")
      .replace('\'', "&apos;")
+}
+
+/// Activate or deactivate a PPPoE connection.
+/// On Linux, uses `nmcli` (NetworkManager) or `pon`/`poff` (pppd).
+fn apply_pppoe_config(enable: bool, user: &str, _password: &str) {
+    #[cfg(unix)]
+    {
+        if enable {
+            // Try nmcli first
+            let status = std::process::Command::new("nmcli")
+                .args(["con", "up", "type", "pppoe"])
+                .status();
+            if status.is_err() || !status.map(|s| s.success()).unwrap_or(false) {
+                // Fall back to pppd/pon
+                let _ = std::process::Command::new("pon")
+                    .args([user])
+                    .status();
+            }
+        } else {
+            let _ = std::process::Command::new("nmcli")
+                .args(["con", "down", "type", "pppoe"])
+                .status();
+            let _ = std::process::Command::new("poff")
+                .args(["-a"])
+                .status();
+        }
+    }
+    #[cfg(not(unix))]
+    let _ = (enable, user);
+}
+
+/// Read available system sensor values.
+/// Returns a list of (name, value) pairs.
+fn read_sensor_data() -> Vec<(String, String)> {
+    #[allow(unused_mut)]
+    let mut readings: Vec<(String, String)> = Vec::new();
+
+    // CPU temperature
+    #[cfg(unix)]
+    for zone in 0..4u8 {
+        let path = format!("/sys/class/thermal/thermal_zone{}/temp", zone);
+        if let Ok(s) = std::fs::read_to_string(&path) {
+            if let Ok(milli) = s.trim().parse::<i32>() {
+                let name = format!("cpu_temp_{}", zone);
+                let value = format!("{:.1}", milli as f32 / 1000.0);
+                readings.push((name, value));
+                break; // Only report first zone as "cpu_temp"
+            }
+        }
+    }
+
+    // DS18B20 1-wire temperature sensors
+    #[cfg(unix)]
+    if let Ok(entries) = std::fs::read_dir("/sys/bus/w1/devices") {
+        for entry in entries.flatten() {
+            let path = entry.path();
+            let name = path.file_name()
+                .and_then(|n| n.to_str())
+                .unwrap_or("")
+                .to_string();
+            if name.starts_with("28-") {
+                let slave = path.join("w1_slave");
+                if let Ok(content) = std::fs::read_to_string(&slave) {
+                    // Parse "t=21500" from the file
+                    if let Some(t_pos) = content.find("t=") {
+                        let t_str = &content[t_pos + 2..];
+                        let t_str = t_str.trim().split_whitespace().next().unwrap_or("0");
+                        if let Ok(milli) = t_str.parse::<i32>() {
+                            let value = format!("{:.3}", milli as f32 / 1000.0);
+                            readings.push((name, value));
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    readings
+}
+
+/// Scan for mounted USB mass storage devices.
+/// Returns list of (mount_point, total_bytes, free_bytes).
+fn scan_usb_disks() -> Vec<(String, u64, u64)> {
+    #[allow(unused_mut)]
+    let mut disks: Vec<(String, u64, u64)> = Vec::new();
+
+    #[cfg(unix)]
+    {
+        // Check /proc/mounts for USB-backed filesystems
+        if let Ok(mounts) = std::fs::read_to_string("/proc/mounts") {
+            for line in mounts.lines() {
+                let parts: Vec<&str> = line.split_whitespace().collect();
+                if parts.len() < 2 {
+                    continue;
+                }
+                let dev = parts[0];
+                let mount = parts[1];
+                // USB mass storage appears as /dev/sd* or /dev/mmcblk*
+                if !dev.starts_with("/dev/sd") && !dev.starts_with("/dev/mmcblk") {
+                    continue;
+                }
+                // Skip root filesystem
+                if mount == "/" {
+                    continue;
+                }
+                use std::os::unix::ffi::OsStrExt;
+                let mut stat: libc::statvfs = unsafe { std::mem::zeroed() };
+                let path = std::path::Path::new(mount);
+                let c_path = std::ffi::CString::new(path.as_os_str().as_bytes())
+                    .unwrap_or_default();
+                if unsafe { libc::statvfs(c_path.as_ptr(), &mut stat) } == 0 {
+                    let block = stat.f_frsize as u64;
+                    let total = stat.f_blocks as u64 * block;
+                    let free = stat.f_bavail as u64 * block;
+                    disks.push((mount.to_string(), total, free));
+                }
+            }
+        }
+    }
+
+    disks
 }
 
 #[cfg(test)]

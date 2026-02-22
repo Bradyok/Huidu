@@ -19,6 +19,102 @@ use tiny_skia::Pixmap;
 use crate::program::model::{parse_color, ContentItem, TextContent};
 use crate::render::plugins::ContentRenderer;
 
+
+// ── Font cache ──────────────────────────────────────────────────────────────────────────────
+
+/// Lazy-loading system font cache.
+///
+/// Scans system font directories on first use and loads fonts by name on demand.
+/// All loaded fonts are stored as `Font<'static>` via owned `Vec<u8>` data.
+struct FontCache {
+    /// Maps lowercase font stem name → loaded font.
+    fonts: HashMap<String, rusttype::Font<'static>>,
+    /// Maps lowercase font stem name → filesystem path.
+    font_paths: HashMap<String, std::path::PathBuf>,
+    /// Whether the font directory scan has been done.
+    scanned: bool,
+}
+
+impl FontCache {
+    fn new() -> Self {
+        Self {
+            fonts: HashMap::new(),
+            font_paths: HashMap::new(),
+            scanned: false,
+        }
+    }
+
+    /// Ensure the font directory has been scanned.
+    fn ensure_scanned(&mut self) {
+        if self.scanned {
+            return;
+        }
+        self.scanned = true;
+
+        let dirs: &[&str] = &[
+            #[cfg(unix)]
+            "/usr/share/fonts",
+            #[cfg(unix)]
+            "/usr/local/share/fonts",
+            #[cfg(windows)]
+            r"C:\Windows\Fonts",
+        ];
+
+        for dir in dirs {
+            self.scan_dir(std::path::Path::new(dir));
+        }
+    }
+
+    fn scan_dir(&mut self, dir: &std::path::Path) {
+        let Ok(entries) = std::fs::read_dir(dir) else { return };
+        for entry in entries.flatten() {
+            let path = entry.path();
+            if path.is_dir() {
+                self.scan_dir(&path);
+            } else {
+                let ext = path.extension()
+                    .and_then(|e| e.to_str())
+                    .unwrap_or("")
+                    .to_lowercase();
+                if matches!(ext.as_str(), "ttf" | "otf") {
+                    if let Some(stem) = path.file_stem().and_then(|s| s.to_str()) {
+                        let key = stem.to_lowercase();
+                        self.font_paths.entry(key).or_insert_with(|| path.clone());
+                    }
+                }
+            }
+        }
+    }
+
+    /// Get a font by name.  Returns `None` if the name is not found or the
+    /// file cannot be loaded (caller should fall back to the embedded font).
+    fn get(&mut self, name: &str) -> Option<&rusttype::Font<'static>> {
+        self.ensure_scanned();
+
+        let key = name.to_lowercase();
+
+        // Already loaded?
+        if self.fonts.contains_key(&key) {
+            return self.fonts.get(&key);
+        }
+
+        // Find the path (try exact key, then partial match)
+        let path = self.font_paths.get(&key).cloned().or_else(|| {
+            // Partial match: look for a font whose stem contains `key`
+            self.font_paths
+                .iter()
+                .find(|(k, _)| k.contains(key.as_str()))
+                .map(|(_, v)| v.clone())
+        })?;
+
+        // Load and cache
+        let data = std::fs::read(&path).ok()?;
+        let font = rusttype::Font::try_from_vec(data)?;
+        self.fonts.insert(key.clone(), font);
+        self.fonts.get(&key)
+    }
+}
+
 // ── Colour mode ──────────────────────────────────────────────────────────────
 
 /// Per-character colour mode decoded from the FontSpec `color` string.
@@ -592,6 +688,7 @@ fn blit_animated(
 
 pub struct TextRenderer {
     font: rusttype::Font<'static>,
+    font_cache: FontCache,
     cache: HashMap<TextCacheKey, TextLayoutCache>,
     /// Current data source values, updated each second by the player.
     data_sources: HashMap<String, String>,
@@ -602,7 +699,7 @@ impl TextRenderer {
         let font_data = include_bytes!("../../../assets/DejaVuSans.ttf");
         let font = rusttype::Font::try_from_bytes(font_data as &[u8])
             .expect("Failed to load built-in font");
-        Self { font, cache: HashMap::new(), data_sources: HashMap::new() }
+        Self { font, font_cache: FontCache::new(), cache: HashMap::new(), data_sources: HashMap::new() }
     }
 
     /// Replace the stored data sources with a fresh snapshot.
@@ -641,6 +738,16 @@ impl TextRenderer {
         }
 
         // ── Font spec ────────────────────────────────────────────────────────
+        // Resolve the font: try system font cache first, fall back to embedded.
+        let requested_font_name = text.font.as_ref().map(|f| f.name.as_str()).unwrap_or("");
+        let active_font: &rusttype::Font<'static> = if requested_font_name.is_empty()
+            || requested_font_name.eq_ignore_ascii_case("DejaVuSans")
+            || requested_font_name.eq_ignore_ascii_case("default")
+        {
+            &self.font
+        } else {
+            self.font_cache.get(requested_font_name).unwrap_or(&self.font)
+        };
         let font_spec = text.font.as_ref();
         let font_size = font_spec.map(|f| f.size).unwrap_or(12.0);
         let color_mode =
@@ -692,11 +799,11 @@ impl TextRenderer {
         let layout: &TextLayoutCache = if is_dynamic {
             let time_expanded = expand_variables(content_str);
             let expanded = expand_ds_tokens(&time_expanded, &self.data_sources);
-            layout_owned = build_layout_cache(&self.font, &expanded, text, width, height, word_wrap);
+            layout_owned = build_layout_cache(active_font, &expanded, text, width, height, word_wrap);
             &layout_owned
         } else {
             if !self.cache.contains_key(&cache_key) {
-                let entry = build_layout_cache(&self.font, content_str, text, width, height, word_wrap);
+                let entry = build_layout_cache(active_font, content_str, text, width, height, word_wrap);
                 self.cache.insert(cache_key.clone(), entry);
             }
             &self.cache[&cache_key]

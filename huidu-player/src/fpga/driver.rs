@@ -76,7 +76,40 @@ impl FpgaDriver {
     /// Apply a new hardware configuration (e.g. from SetBoxHwConfig command).
     pub fn apply_config(&mut self, cfg: FpgaConfig) {
         self.config = cfg;
-        // TODO: send config registers to FPGA over serial once protocol is known
+        if let Some(ref mut serial) = self.serial {
+            // Serialize config into a best-effort binary payload.
+            // Format: each register as (id: u8, value: u32 LE) pairs.
+            // Register IDs (best-effort from binary analysis):
+            //   0x01 = display width     0x02 = display height
+            //   0x03 = brightness        0x04 = rotation
+            //   0x05 = scan_type         0x06 = pixel_frequency (MHz)
+            //   0x07 = gray_level        0x08 = refresh_rate
+            //   0x09 = red_correction    0x0A = green_correction
+            //   0x0B = blue_correction
+            let sc = &self.config.send_card;
+            let rv = self.config.recv_cards.first();
+            let mut payload: Vec<u8> = Vec::with_capacity(64);
+            let mut push_reg = |id: u8, val: u32| {
+                payload.push(id);
+                payload.extend_from_slice(&val.to_le_bytes());
+            };
+            push_reg(0x01, sc.width);
+            push_reg(0x02, sc.height);
+            push_reg(0x03, sc.brightness as u32);
+            push_reg(0x04, sc.rotation as u32);
+            push_reg(0x09, sc.red_correction as u32);
+            push_reg(0x0A, sc.green_correction as u32);
+            push_reg(0x0B, sc.blue_correction as u32);
+            if let Some(rc) = rv {
+                push_reg(0x05, rc.scan_type as u32);
+                push_reg(0x06, rc.frequency as u32);
+                push_reg(0x07, rc.gray_level as u32);
+                push_reg(0x08, rc.refresh_rate as u32);
+            }
+            if let Err(e) = serial.send_config(&payload) {
+                warn!("FPGA apply_config error: {}", e);
+            }
+        }
         info!(
             "FPGA config applied ({}x{}, brightness {}%)",
             self.config.send_card.width,
