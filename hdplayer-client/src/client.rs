@@ -20,8 +20,8 @@ use crate::xml;
 /// Default TCP port for Huidu BoxPlayer SDK protocol.
 pub const DEFAULT_PORT: u16 = 10001;
 
-/// SDK protocol version negotiated at connection start.
-pub const SDK_VERSION: u32 = 1_000_000;
+/// SDK protocol version sent in SdkServiceAsk (confirmed from HCatNet.dll analysis).
+pub const SDK_VERSION: u32 = huidu_protocol::packet::SDK_CLIENT_VERSION;
 
 /// Heartbeat interval.
 pub const HEARTBEAT_INTERVAL: Duration = Duration::from_secs(30);
@@ -167,15 +167,9 @@ impl Client {
     ///   Request:  [u32 total_xml_len][u32 chunk_index=0][xml_bytes...]
     ///   Response: [u32 total_xml_len][u32 chunk_index=0][xml_bytes...]
     async fn sdk_cmd(&mut self, method: &str, body: &str) -> Result<String> {
+        use crate::protocol::sdk_cmd_ask_payload;
         let xml_str = xml::sdk_request(&self.client_guid, method, body);
-        let xml_bytes = xml_str.as_bytes();
-
-        // Build payload with [u32 total_len][u32 index=0] prefix
-        let mut payload = Vec::with_capacity(8 + xml_bytes.len());
-        payload.extend_from_slice(&(xml_bytes.len() as u32).to_le_bytes());
-        payload.extend_from_slice(&0u32.to_le_bytes()); // chunk index 0
-        payload.extend_from_slice(xml_bytes);
-
+        let payload = sdk_cmd_ask_payload(&xml_str);
         let pkt = Packet::new(Command::SdkCmdAsk, payload);
         self.send_packet(&pkt).await?;
 
@@ -185,12 +179,11 @@ impl Client {
             match resp.command {
                 Command::SdkCmdAnswer => {
                     // Strip the [u32 total_len][u32 index] 8-byte prefix from response
-                    if resp.payload.len() < 8 {
-                        return Err(Error::Protocol(
+                    let xml_bytes = crate::protocol::parse_sdk_cmd_payload(&resp.payload)
+                        .ok_or_else(|| Error::Protocol(
                             format!("SdkCmdAnswer too short: {} bytes", resp.payload.len())
-                        ));
-                    }
-                    let response_xml = String::from_utf8_lossy(&resp.payload[8..]).into_owned();
+                        ))?;
+                    let response_xml = String::from_utf8_lossy(xml_bytes).into_owned();
                     debug!("SDK response for {method}: {} bytes", response_xml.len());
                     xml::parse_result(&response_xml)?;
                     return Ok(response_xml);
@@ -370,10 +363,10 @@ impl Client {
 
     /// Set screen on/off schedule.
     ///
-    /// `days`: 7-character string of '0'/'1' for Mon–Sun (e.g. `"1111100"` = weekdays only).
-    /// Pass `"1111111"` or any invalid string to apply every day.
-    pub async fn set_switch_time(&mut self, enabled: bool, on: &str, off: &str, days: &str) -> Result<()> {
-        self.sdk_cmd("SetSwitchTime", &command::set_switch_time(enabled, on, off, days)).await?;
+    /// Each entry is `(on_time, off_time, days)` where `days` is a 7-char '0'/'1' string
+    /// for Mon–Sun (e.g. `"1111100"` = weekdays only). Pass an empty slice to clear.
+    pub async fn set_switch_time(&mut self, entries: &[(&str, &str, &str)]) -> Result<()> {
+        self.sdk_cmd("SetSwitchTime", &command::set_switch_time(entries)).await?;
         Ok(())
     }
 

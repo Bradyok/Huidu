@@ -1251,6 +1251,83 @@ pub async fn handle_sdk_command(
             ok!("")
         }
 
+        // ── Modbus data sources ───────────────────────────────────────────────
+        "GetModbusInfo" | "getModbusInfo" => {
+            let sources = services.read().await.modbus_sources.clone();
+            let mut items = String::new();
+            for (i, s) in sources.iter().enumerate() {
+                items.push_str(&format!(
+                    "<source index=\"{i}\" name=\"{}\" host=\"{}\" port=\"{}\" \
+                     slave=\"{}\" register=\"{}\" scale=\"{}\"/>",
+                    xml_esc(&s.name), xml_esc(&s.host), s.port,
+                    s.slave, s.register, s.scale
+                ));
+            }
+            ok!(&format!("<modbusSources count=\"{}\">{}</modbusSources>", sources.len(), items))
+        }
+
+        "SetModbusInfo" | "setModbusInfo" => {
+            use crate::services::modbus_service::ModbusSourceConfig;
+            // Parse <source name="..." host="..." port="..." slave="..." register="..." scale="..."/>
+            let mut sources: Vec<ModbusSourceConfig> = Vec::new();
+            let mut rest = xml;
+            while let Some(pos) = rest.find("<source ") {
+                let tag_end = rest[pos..].find('>').unwrap_or(rest.len() - pos) + pos;
+                let tag = &rest[pos..=tag_end];
+                let get = |attr: &str| -> String {
+                    let needle = format!("{attr}=\"");
+                    tag.find(&needle)
+                        .and_then(|p| {
+                            let s = p + needle.len();
+                            tag[s..].find('"').map(|e| tag[s..s + e].to_string())
+                        })
+                        .unwrap_or_default()
+                };
+                let name = get("name");
+                let host = get("host");
+                let port: u16 = get("port").parse().unwrap_or(502);
+                let slave: u8 = get("slave").parse().unwrap_or(1);
+                let register: u16 = get("register").parse().unwrap_or(0);
+                let scale: f64 = get("scale").parse().unwrap_or(1.0);
+                let interval_secs: u64 = get("interval").parse().unwrap_or(5);
+                if !host.is_empty() {
+                    sources.push(ModbusSourceConfig { host, port, slave, register, name, scale, interval_secs });
+                }
+                rest = &rest[tag_end..];
+            }
+            {
+                let mut state = services.write().await;
+                state.modbus_sources = sources.clone();
+                state.save_persisted();
+            }
+            info!("SetModbusInfo: {} source(s) configured", sources.len());
+            ok!("")
+        }
+
+        // ── Network real-time stats ───────────────────────────────────────────
+        "GetNetworkRealTimeInfo" | "getNetworkRealTimeInfo" => {
+            let stats = tokio::task::spawn_blocking(read_network_stats).await.unwrap_or_default();
+            let mut items = String::new();
+            for (iface, rx_bytes, tx_bytes) in &stats {
+                items.push_str(&format!(
+                    "<iface name=\"{}\" rxBytes=\"{}\" txBytes=\"{}\"/>",
+                    xml_esc(iface), rx_bytes, tx_bytes
+                ));
+            }
+            ok!(&format!("<networkStats count=\"{}\">{}</networkStats>", stats.len(), items))
+        }
+
+        // ── Screen test pattern ───────────────────────────────────────────────
+        "ScreenTest" | "screenTest" => {
+            let secs: u32 = extract_attr(xml, "screenTest", "seconds")
+                .or_else(|| extract_attr(xml, "screenTest", "duration"))
+                .and_then(|v| v.parse().ok())
+                .unwrap_or(10);
+            player_tx.send(PlayerCommand::ScreenTest(secs)).await.ok();
+            info!("ScreenTest: {} seconds", secs);
+            ok!("")
+        }
+
         // ── Catch-all ──────────────────────────────────────────────────────────
         _ => {
             warn!("Unhandled SDK method: {}", method);
@@ -1776,6 +1853,26 @@ fn apply_pppoe_config(enable: bool, user: &str, _password: &str) {
     }
     #[cfg(not(unix))]
     let _ = (enable, user);
+}
+
+/// Read per-interface network byte counters from /proc/net/dev.
+/// Returns list of (interface_name, rx_bytes, tx_bytes).
+fn read_network_stats() -> Vec<(String, u64, u64)> {
+    let mut stats = Vec::new();
+    #[cfg(unix)]
+    if let Ok(content) = std::fs::read_to_string("/proc/net/dev") {
+        for line in content.lines().skip(2) {
+            let parts: Vec<&str> = line.split_whitespace().collect();
+            if parts.len() < 10 { continue; }
+            let iface = parts[0].trim_end_matches(':');
+            let rx_bytes: u64 = parts[1].parse().unwrap_or(0);
+            let tx_bytes: u64 = parts[9].parse().unwrap_or(0);
+            if iface != "lo" {
+                stats.push((iface.to_string(), rx_bytes, tx_bytes));
+            }
+        }
+    }
+    stats
 }
 
 /// Read available system sensor values.

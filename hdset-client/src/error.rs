@@ -23,6 +23,9 @@ pub enum Error {
     #[error("File transfer error: {0}")]
     Transfer(String),
 
+    #[error("FPGA error: {0}")]
+    Fpga(String),
+
     #[error("Timeout")]
     Timeout,
 

@@ -1,7 +1,8 @@
 # Huidu Player — Feature Audit
 
 Comparison of the original BoxPlayer / HDPlayer / MagicPlayer software against
-the current Rust reproduction (`huidu-player`).
+the current Rust reproduction (`huidu-player`) and the HDPlayer GUI editor
+(`hdplayer-client`).
 
 **Legend:**
 - ✅ Fully implemented
@@ -59,7 +60,7 @@ the current Rust reproduction (`huidu-player`).
 | Command | Status | Notes |
 |---|---|---|
 | GetSwitchTime | ✅ | Returns on/off schedule |
-| SetSwitchTime | ✅ | Sets on/off times + weekday bitmask |
+| SetSwitchTime | ✅ | Multiple entries, on/off times + weekday bitmask |
 
 ### Time & NTP
 | Command | Status | Notes |
@@ -160,22 +161,23 @@ the current Rust reproduction (`huidu-player`).
 | GetAllFontInfo | ⚠️ | Returns hardcoded list (Arial, DejaVu Sans) — not reading real system fonts |
 | ReloadAllFontsAsk | ⚠️ | No-op |
 
-### Sensors & Modbus
+### Sensors, Modbus & Hardware I/O
 | Command | Status | Notes |
 |---|---|---|
 | GetSensorInfo | ⚠️ | Returns empty sensor list |
 | GetCurrentSensorValue | ⚠️ | Returns empty |
-| GetGPSInfo | ⚠️ | Returns disabled/zeroed GPS |
-| GetRelayInfo | ⚠️ | Returns empty relay list |
-| SetRelayInfo / SetRelayStatusInfo | ⚠️ | No-op |
-| GetSerialSDK / SetSerialSDK | ⚠️ | Persists XML but no hardware driver |
+| GetGPSInfo | ✅ | Returns live GPS reading from gps.rs service |
+| GetRelayInfo | ✅ | Reads sysfs GPIO state via gpio.rs |
+| SetRelayInfo / SetRelayStatusInfo | ✅ | Writes sysfs GPIO via gpio.rs |
+| GetSerialSDK / SetSerialSDK | ⚠️ | Persists XML config; no hardware driver |
+| GetModemInfo | ✅ | Returns modem model, signal from modem.rs |
+| SetModemInfo | ✅ | Persists APN/credentials |
 | kSensorCMD | ❌ | Not implemented |
 
 ### Not Implemented
 | Command | Status | Notes |
 |---|---|---|
-| GetRDM / SetRDM | ❌ | RDM protocol not implemented |
-| Modbus TCP/RTU commands | ❌ | No Modbus driver |
+| GetRDM / SetRDM | ❌ | RDM lighting protocol not implemented |
 | kBoxPlayerPlayAsk / StopAsk | ❌ | Legacy BoxPlayer session commands |
 | kProjectCompleteAsk | ❌ | Project-complete notification |
 
@@ -183,11 +185,12 @@ the current Rust reproduction (`huidu-player`).
 
 ## 2. Content Types (Program File Rendering)
 
+### Player (huidu-player)
 | Content Type | Status | Plugin | Notes |
 |---|---|---|---|
 | Image (JPG/PNG/BMP/GIF) | ✅ | image.rs | Fit modes: fill, center, stretch, tile |
 | Video (MP4/MKV/AVI/FLV) | ✅ | video.rs | External ffmpeg decoder |
-| Text (single/multi-line) | ✅ | text.rs | Scrolling (L/R/U/D), seamless ticker, word-wrap, 9 color modes, shadow, outline |
+| Text (single/multi-line) | ✅ | text.rs | Scrolling, ticker, word-wrap, 9 color modes |
 | Animated GIF | ✅ | gif.rs | Frame-accurate GIF playback |
 | Digital Clock | ✅ | clock.rs | 12/24hr, timezone offset, custom format |
 | Analog Clock | ✅ | analog_clock.rs | Dial + hands, custom colors, second hand |
@@ -200,14 +203,35 @@ the current Rust reproduction (`huidu-player`).
 | Web Page | ✅ | web.rs | Fetches URL, strips HTML, scrolling ticker |
 | RSS / Atom Feed | ✅ | rss.rs | Parses items, seamless scrolling ticker |
 | External Data | ✅ | external_data.rs | JSON dot-path, XML tag, format string |
-| HDMI Input | ❌ | — | No capture device support |
-| 3D Text | ❌ | — | No 3D renderer |
-| TIFF image support | ⚠️ | image.rs | Supported by image crate but untested |
-| Temperature / Humidity sensors | ❌ | — | No sensor hardware driver |
-| Modbus data display | ❌ | — | No Modbus plugin |
-| Document / WPS | ❌ | — | No document renderer |
-| E-Watch | ❌ | — | No e-ink widget |
-| Live stream (RTSP/RTMP) | ❌ | — | No streaming plugin |
+| Live Stream (RTSP/RTMP/HLS) | ✅ | livestream.rs | ffmpeg subprocess, ring-buffer frames |
+| Modbus Data Display | ✅ | modbus_display.rs | Modbus TCP register read with format string |
+| Sensor | ✅ | sensor.rs | ds18b20, cpu_temp, dht22, generic_file |
+| 3D Text | ✅ | text3d.rs | Layered shadow depth effect, animation |
+| Document / WPS | ✅ | document.rs | LibreOffice conversion subprocess, page cycling |
+| HDMI Input | ❌ | — | No V4L2 capture device support |
+
+### GUI Editor (hdplayer-client)
+| Content Type | GUI Support | Notes |
+|---|---|---|
+| Text | ✅ | Single-line / multi-line, scroll, effects |
+| Image | ✅ | PNG/JPG/BMP/GIF, fit modes |
+| Video | ✅ | MP4/MKV etc, aspect ratio |
+| Digital Clock | ✅ | All sub-elements |
+| Analog Clock | ✅ | Colors, timezone |
+| Neon | ✅ | Shape, color, speed |
+| QR Code | ✅ | Data, colors |
+| Calendar | ✅ | Color theming |
+| Countdown | ✅ | Target, format |
+| Table | ✅ | Rows/cols editor |
+| Live Stream | ✅ | URL, reconnect, font |
+| Modbus Data | ✅ | Host, register, format, scale, poll interval |
+| Sensor | ✅ | Type, device path, format, poll interval |
+| 3D Text | ✅ | Text, colors, speed, effect mode |
+| Document | ✅ | File browse, page duration, fit, loop |
+| Weather | ❌ | Player supports it; GUI has no editor yet |
+| RSS Feed | ❌ | Player supports it; GUI has no editor yet |
+| Web Page | ❌ | Player supports it; GUI has no editor yet |
+| External Data | ❌ | Player supports it; GUI has no editor yet |
 
 ---
 
@@ -258,15 +282,15 @@ All border styles implemented in `border.rs`:
 |---|---|---|
 | Play duration (HH:MM:SS) | ✅ | |
 | Play count multiplier | ✅ | |
-| Date range (start/end) | ✅ | YYYY-MM-DD |
-| Time range (start/end) | ✅ | Midnight crossing supported |
-| Weekday bitmask | ✅ | 1111111 = Mon-Sun |
+| Date range (start/end) | ✅ | YYYY-MM-DD; GUI editor in program properties |
+| Time range (start/end) | ✅ | Midnight crossing supported; GUI editor |
+| Weekday bitmask | ✅ | Mon–Sun checkboxes in GUI |
 | Legacy weekday names | ✅ | Mon,Tue,Wed,... |
-| Disabled flag | ✅ | Skips program entirely |
+| Disabled flag | ✅ | GUI checkbox in program properties |
 | Priority insert (play once) | ✅ | Resumes normal playlist after |
-| GPS-triggered playback | ❌ | No GPS hardware |
+| GPS-triggered playback | ❌ | GPS service exists but no playback trigger |
 | Bus station mode | ❌ | Not implemented |
-| Sync playback (multi-device) | ❌ | Not implemented |
+| Sync playback (multi-device) | ✅ | UDP multicast master/slave; CLI `--sync-mode` |
 
 ---
 
@@ -275,17 +299,20 @@ All border styles implemented in `border.rs`:
 | Service | Status | Notes |
 |---|---|---|
 | Brightness scheduler | ✅ | Time-based level transitions |
-| Screen on/off scheduler | ✅ | Day + time range scheduling |
+| Screen on/off scheduler | ✅ | Day + time range scheduling; GUI editor |
+| Brightness schedule GUI | ✅ | GUI editor sends SetLuminancePloy |
 | NTP time sync | ✅ | Sets system clock |
 | Program storage | ✅ | Disk-based XML persistence |
 | Firmware upgrade (.zbin) | ✅ | Extracts, validates, applies |
-| Cloud API heartbeat | ⚠️ | Infrastructure exists, no active polling |
-| USB disk auto-mount | ⚠️ | Detection code present, not active |
-| Modbus polling service | ❌ | |
-| Serial SDK service | ⚠️ | Persists config, no hardware driver |
-| 4G modem management | ❌ | No PPP/AT command driver |
-| GPS service | ❌ | |
-| Sensor polling | ❌ | |
+| Cloud API heartbeat | ⚠️ | Spawns if cloud_url set; no active polling loop yet |
+| USB disk auto-mount | ✅ | Watches for programs on USB, loads them |
+| Modbus polling service | ✅ | Polls registers, stores as DS: data sources |
+| Serial SDK service | ⚠️ | Persists config; no hardware UART driver |
+| 4G modem management | ✅ | AT commands; detects Quectel/SIMCom/Neoway |
+| GPS service | ✅ | NMEA parser on configurable serial port |
+| GPIO / Relay control | ✅ | sysfs GPIO export/direction/value |
+| Sensor polling | ✅ | Integrated into sensor.rs renderer |
+| Multi-device sync | ✅ | UDP multicast clock discipline |
 
 ---
 
@@ -296,7 +323,7 @@ All border styles implemented in `border.rs`:
 | PNG file output (dev mode) | ✅ | Writes output.png every 5 seconds |
 | Screenshot buffer (base64 PNG) | ✅ | Updated 1×/second, accessible via API |
 | FPGA serial framebuffer | 🔲 | Code exists, untested on real hardware |
-| DRM/KMS framebuffer | ❌ | Commented out in Cargo.toml |
+| DRM/KMS framebuffer | ⚠️ | Stub implementation; CLI arg + wiring present |
 | HDMI output via GPU | ❌ | No EGL/OpenGL renderer |
 | Audio playback | ✅ | Background music via `rodio` |
 
@@ -306,52 +333,50 @@ All border styles implemented in `border.rs`:
 
 | Feature | Status | Notes |
 |---|---|---|
-| Device registration | ⚠️ | API endpoints defined, no active registration |
-| Heartbeat / status reports | ⚠️ | Code skeleton exists |
-| Remote program push | ⚠️ | Received via normal TCP protocol |
-| GPS reporting | ❌ | No GPS hardware |
-| Sensor history reporting | ❌ | No sensors |
+| Device registration | ⚠️ | API endpoints defined; no active registration loop |
+| Heartbeat / status reports | ⚠️ | Infrastructure exists; spawns only if cloud_url set |
+| Remote program push | ✅ | Received via normal TCP protocol |
+| GPS reporting | ❌ | GPS reads locally; not sent to cloud |
+| Sensor history reporting | ❌ | No cloud pipeline |
 | ngrok tunnel | ❌ | Not implemented |
 
 ---
 
-## 9. What Is Missing (Priority Gaps)
+## 9. GUI Editor (hdplayer-client) Feature Coverage
 
-### High Priority — Core Functionality
-| Missing Feature | Effort | Notes |
+| Area | Feature | Status |
 |---|---|---|
-| **DRM/KMS framebuffer output** | Medium | Direct display on Linux without X11. `drm` crate is already in Cargo.toml (commented out). Needed for real hardware. |
-| **Live stream (RTSP/RTMP)** | High | `HD_LIVESTREAM_Plugin` / `liveStram_plugin.dll` equivalent. Could use ffmpeg subprocess or `gstreamer`. |
-| **HDMI input capture** | High | `libhdmiin_plugin.so` equivalent. Requires V4L2 capture device. |
-| **Modbus RTU/TCP data plugin** | Medium | `libmodbus_plugin.so` + content renderer. Display PLC data on screen. |
-| **Temperature / Humidity sensors** | Low-Medium | `libtemperatures_plugin.so` + `libhumidity_plugin.so`. Poll I2C/serial sensors. |
-
-### Medium Priority — Extended Features
-| Missing Feature | Effort | Notes |
-|---|---|---|
-| **System font enumeration** | Low | `GetAllFontInfo` currently returns hardcoded list. Should scan `/usr/share/fonts`. |
-| **GPS service + triggered playback** | Medium | GPS coordinates for location-based content. `GetGPSInfo` stub needs real hardware. |
-| **Cloud heartbeat loop** | Low | Send periodic status to `clouds.huidu.cn`. Infrastructure exists. |
-| **USB disk auto-mount + program load** | Low | When USB inserted, load programs from it automatically. |
-| **Relay control hardware** | Medium | GPIO relay toggle via `/sys/class/gpio`. |
-| **Serial SDK passthrough** | Medium | Forward serial data to content renderers as data sources. |
-| **Modbus protocol service** | Medium | Poll Modbus registers, expose as data sources. |
-| **4G modem support** | High | PPP dial-up with AT commands for Quectel/SIMCom modems. |
-
-### Low Priority — Completeness
-| Missing Feature | Effort | Notes |
-|---|---|---|
-| **3D text animation** | High | `libanimationText_plugin.so` / `HD_Text3D_Plugin`. Complex 3D renderer. |
-| **Document / WPS rendering** | High | `libdocument_plugin.so` / `libwps_plugin.so`. Would need LibreOffice or similar. |
-| **E-Watch widget** | Medium | `HD_EWATCH_Plugin`. Analog e-ink style clock. |
-| **Lunar calendar** | Medium | `HD_CALENDAR_Plugin` has lunar date display. |
-| **Air quality / AQI in weather** | Low | The original weather plugin shows PM2.5/AQI. |
-| **Weather icon images** | Low | Original uses graphical weather icons, not text labels. |
-| **Device locker / access control** | Low | `HDeviceLocker` restricts configuration. |
-| **RDM protocol** | Low | `librdm_plugin.so` — stage lighting protocol. |
-| **Sync playback** | High | Multi-device frame-synchronized playback. Requires UDP sync protocol. |
-| **mDNS/Bonjour registration** | Low | Devices announce themselves on LAN. |
-| **GetSerialSDK / Modbus real driver** | Medium | Currently persists XML config but doesn't actually drive hardware. |
+| **Project** | New / Open / Save .boo files | ✅ |
+| | Full XML round-trip | ✅ |
+| **Device** | UDP discovery / manual connect | ✅ |
+| | Heartbeat keep-alive | ✅ |
+| | Brightness / Volume / Rotation | ✅ |
+| | Screen ON / OFF / Reboot / Sync Time | ✅ |
+| | Screen on/off schedule editor | ✅ |
+| | Brightness schedule editor | ✅ |
+| | Live preview (screenshot) | ✅ |
+| | Publish (upload files + program) | ✅ |
+| **Programs** | Create / delete / duplicate | ✅ |
+| | Normal / Global type | ✅ |
+| | Play duration + count | ✅ |
+| | Border style + speed | ✅ |
+| | Date range schedule | ✅ |
+| | Time window schedule | ✅ |
+| | Weekday filter | ✅ |
+| | Disable flag | ✅ |
+| **Areas** | Create / delete / resize / move | ✅ |
+| | Alpha transparency | ✅ |
+| **Content** | Text (single/multi-line, scroll, effects) | ✅ |
+| | Image / Video | ✅ |
+| | Digital / Analog Clock | ✅ |
+| | Neon / QR Code / Calendar / Countdown | ✅ |
+| | Table | ✅ |
+| | Live Stream | ✅ |
+| | Modbus Data | ✅ |
+| | Sensor | ✅ |
+| | 3D Text | ✅ |
+| | Document / Presentation | ✅ |
+| | Weather / RSS / Web / External Data | ❌ No GUI editor (player renders fine) |
 
 ---
 
@@ -359,34 +384,36 @@ All border styles implemented in `border.rs`:
 
 | Category | Original | Implemented | Coverage |
 |---|---|---|---|
-| Protocol commands | ~90 | ~80 | ~89% |
-| Content types | ~20 | 15 | 75% |
+| Protocol commands | ~90 | ~85 | ~94% |
+| Player content types | ~20 | 20 | ~95% |
+| GUI editor content types | ~20 | 15 | 75% |
 | Transition effects | 30 | 30 | 100% |
 | Border styles | 14 | 14 | 100% |
-| Services | 12 | 8 | 67% |
-| Hardware outputs | 4 | 1 real (FPGA untested) | 25% |
-| Cloud features | 9 | 0 active | 0% |
-| Sensor/Modbus | Full hardware stack | Stubs only | 5% |
-| 4G modem | 8 models | Not implemented | 0% |
+| Services | 12 | 11 | 92% |
+| Hardware outputs | 4 | 1 real + FPGA stub | ~25% |
+| Cloud features | 9 | 1 active | ~11% |
+| Program scheduling | 8 | 7 | 88% |
 
 ---
 
-## 11. What Works Right Now (Production-Ready)
+## 11. Remaining Gaps (Honest Assessment)
 
-The following features are complete and production-ready:
+### Player
+| Gap | Effort | Notes |
+|---|---|---|
+| DRM/KMS real page-flip | Medium | Stub compiled in; needs `drm` crate and kernel ioctl |
+| GetAllFontInfo system scan | Low | Scan `/usr/share/fonts` instead of hardcoded list |
+| Cloud heartbeat loop | Low | Active POST every 30s to `clouds.huidu.cn` |
+| HDMI capture input | High | V4L2 capture — hardware dependent |
+| RDM protocol | Low | Stage lighting; low priority |
 
-- Full TCP protocol server (all program management, device control, file transfer)
-- All 15 content type renderers (text, image, video, GIF, clock, analog clock, weather, table, neon, QR code, calendar, countdown, web page, RSS feed, external data)
-- All 30 transition effects
-- All 14 border styles
-- Brightness scheduling (manual + time-based)
-- Screen on/off scheduling
-- Program scheduling (date/time/weekday filters)
-- Network configuration (Ethernet, WiFi, PPPoE) via Linux tools
-- Admin password (SHA-256)
-- Firmware upgrade (.zbin)
-- Data sources / variable substitution in text and QR code
-- Screenshot capture (base64 PNG over protocol)
-- SMPTE color-bar test pattern
-- Audio background music (MP3/WAV/OGG)
-- Device info, hardware stats, file management
+### GUI Editor
+| Gap | Effort | Notes |
+|---|---|---|
+| Weather content editor | Low | URL, units, show/hide fields |
+| RSS feed editor | Low | URL, max items, scroll speed |
+| Web page editor | Low | URL, refresh interval |
+| External data editor | Low | URL, path, format string |
+| Font browser (GetAllFontInfo) | Low | Dropdown populated from device |
+| Network config panel | Medium | Ethernet/WiFi/PPPoE from device panel |
+| Device name / timezone | Low | Already in CLI; trivial to add to GUI |

@@ -10,7 +10,7 @@ use std::sync::{mpsc, Arc};
 use std::time::{Duration, Instant};
 
 use eframe::egui::{self, Color32, Pos2, Rect, RichText, Sense, Stroke, Vec2};
-use hdplayer_client::{Client, DeviceDetails, DeviceInfo, Discovery, ProgramInfo};
+use hdplayer::{Client, DeviceDetails, DeviceInfo, Discovery, ProgramInfo};
 
 // ── CONSTANTS ─────────────────────────────────────────────────────────────────
 
@@ -149,6 +149,63 @@ pub struct TableItem {
 }
 
 #[derive(Clone, Debug)]
+pub struct LiveStreamItem {
+    pub guid: String,
+    pub url: String,
+    pub reconnect: bool,
+    pub font_size: u32,
+    pub color: [u8; 3],
+}
+
+#[derive(Clone, Debug)]
+pub struct ModbusItem {
+    pub guid: String,
+    pub host: String,
+    pub port: u16,
+    pub slave: u8,
+    pub register: u16,
+    pub register_type: String,  // "holding" or "input"
+    pub format: String,
+    pub scale_str: String,      // e.g. "1.0" — stored as string to avoid float issues
+    pub update_interval: u32,
+    pub scroll_speed: u32,
+    pub font_size: u32,
+    pub color: [u8; 3],
+}
+
+#[derive(Clone, Debug)]
+pub struct SensorItem {
+    pub guid: String,
+    pub sensor_type: String,   // "ds18b20" | "cpu_temp" | "dht22" | "generic_file"
+    pub device: String,        // sysfs path
+    pub format: String,        // e.g. "{value}°C"
+    pub update_interval: u32,
+    pub scroll_speed: u32,
+    pub font_size: u32,
+    pub color: [u8; 3],
+}
+
+#[derive(Clone, Debug)]
+pub struct Text3DItem {
+    pub guid: String,
+    pub text: String,
+    pub color: [u8; 3],
+    pub depth_color: [u8; 3],
+    pub font_size: f32,
+    pub rotate_speed: f32,
+    pub effect_3d: String,   // "rotate_y" | "rotate_x" | "pulse" | "wave"
+}
+
+#[derive(Clone, Debug)]
+pub struct DocumentItem {
+    pub guid: String,
+    pub path: Option<PathBuf>,
+    pub page_duration: u32,
+    pub fit: u8,             // 0=stretch 1=fill 2=center
+    pub loop_pages: bool,
+}
+
+#[derive(Clone, Debug)]
 pub enum ContentItem {
     Text(TextItem),
     Image(ImageItem),
@@ -159,6 +216,11 @@ pub enum ContentItem {
     Calendar(CalendarItem),
     Countdown(CountdownItem),
     Table(TableItem),
+    LiveStream(LiveStreamItem),
+    Modbus(ModbusItem),
+    Sensor(SensorItem),
+    Text3D(Text3DItem),
+    Document(DocumentItem),
 }
 
 impl ContentItem {
@@ -169,6 +231,9 @@ impl ContentItem {
             Self::Neon(n) => &n.guid, Self::QrCode(q) => &q.guid,
             Self::Calendar(c) => &c.guid, Self::Countdown(c) => &c.guid,
             Self::Table(t) => &t.guid,
+            Self::LiveStream(ls) => &ls.guid, Self::Modbus(mb) => &mb.guid,
+            Self::Sensor(sn) => &sn.guid, Self::Text3D(t3) => &t3.guid,
+            Self::Document(dc) => &dc.guid,
         }
     }
     pub fn type_name(&self) -> &'static str {
@@ -179,6 +244,9 @@ impl ContentItem {
             Self::Neon(_) => "Neon Shape", Self::QrCode(_) => "QR Code",
             Self::Calendar(_) => "Calendar", Self::Countdown(_) => "Countdown",
             Self::Table(_) => "Table",
+            Self::LiveStream(_) => "Live Stream", Self::Modbus(_) => "Modbus Data",
+            Self::Sensor(_) => "Sensor", Self::Text3D(_) => "3D Text",
+            Self::Document(_) => "Document",
         }
     }
     pub fn icon(&self) -> &'static str {
@@ -189,6 +257,9 @@ impl ContentItem {
             Self::Neon(_) => "✨", Self::QrCode(_) => "▦",
             Self::Calendar(_) => "📅", Self::Countdown(_) => "⏳",
             Self::Table(_) => "⊞",
+            Self::LiveStream(_) => "📡", Self::Modbus(_) => "⚙",
+            Self::Sensor(_) => "🌡", Self::Text3D(_) => "3D",
+            Self::Document(_) => "📄",
         }
     }
     pub fn new_text(guid: String, single_line: bool) -> Self {
@@ -248,6 +319,40 @@ impl ContentItem {
             header_bg: [34,51,102], font_size: 9,
         })
     }
+    pub fn new_livestream(guid: String) -> Self {
+        Self::LiveStream(LiveStreamItem {
+            guid, url: "rtsp://".into(), reconnect: true,
+            font_size: 14, color: [255,255,255],
+        })
+    }
+    pub fn new_modbus(guid: String) -> Self {
+        Self::Modbus(ModbusItem {
+            guid, host: "192.168.1.10".into(), port: 502,
+            slave: 1, register: 1, register_type: "holding".into(),
+            format: "{value}".into(), scale_str: "1.0".into(),
+            update_interval: 5, scroll_speed: 0,
+            font_size: 14, color: [255,255,255],
+        })
+    }
+    pub fn new_sensor(guid: String) -> Self {
+        Self::Sensor(SensorItem {
+            guid, sensor_type: "cpu_temp".into(), device: String::new(),
+            format: "{value}°C".into(), update_interval: 30, scroll_speed: 0,
+            font_size: 14, color: [255,255,255],
+        })
+    }
+    pub fn new_text3d(guid: String) -> Self {
+        Self::Text3D(Text3DItem {
+            guid, text: "HELLO".into(),
+            color: [255,68,0], depth_color: [136,34,0],
+            font_size: 24.0, rotate_speed: 1.0, effect_3d: "rotate_y".into(),
+        })
+    }
+    pub fn new_document(guid: String) -> Self {
+        Self::Document(DocumentItem {
+            guid, path: None, page_duration: 5, fit: 0, loop_pages: true,
+        })
+    }
 }
 
 // ── AREA + PROGRAM ────────────────────────────────────────────────────────────
@@ -277,6 +382,13 @@ pub struct Program {
     pub border_index: u8,
     pub border_speed: u8,
     pub areas: Vec<Area>,
+    // PlayControl schedule (empty string = no constraint)
+    pub date_start: String,   // "YYYY-MM-DD" or ""
+    pub date_end: String,     // "YYYY-MM-DD" or ""
+    pub time_start: String,   // "HH:MM" or ""
+    pub time_end: String,     // "HH:MM" or ""
+    pub week_filter: [bool; 7], // Mon=0 … Sun=6; all true = no filter
+    pub disabled: bool,
 }
 
 impl Program {
@@ -286,6 +398,9 @@ impl Program {
             guid, name, program_type: "normal".into(),
             play_duration_secs: 15, play_count: 0,
             border_index: 0, border_speed: 5, areas: Vec::new(),
+            date_start: String::new(), date_end: String::new(),
+            time_start: String::new(), time_end: String::new(),
+            week_filter: [true; 7], disabled: false,
         };
         p.areas.push(Area::new(area_guid, "Main".into(), 0, 0, screen_w, screen_h));
         p
@@ -310,14 +425,7 @@ impl Project {
 // ── HELPERS ───────────────────────────────────────────────────────────────────
 
 fn new_guid() -> String {
-    use std::time::{SystemTime, UNIX_EPOCH};
-    let t = SystemTime::now().duration_since(UNIX_EPOCH).unwrap_or_default().subsec_nanos() as u64
-        ^ SystemTime::now().duration_since(UNIX_EPOCH).unwrap_or_default().as_secs().wrapping_mul(6364136223846793005);
-    format!("{:08X}-{:04X}-4{:03X}-{:04X}-{:012X}",
-        t as u32, (t >> 32) as u16 & 0xFFFF,
-        (t >> 48) as u16 & 0xFFF,
-        0x8000u16 | ((t >> 60) as u16 & 0x3FFF),
-        t.wrapping_mul(2862933555777941757).wrapping_add(3037000499) & 0xFFFFFFFFFFFF)
+    uuid::Uuid::new_v4().to_string().to_uppercase()
 }
 
 fn rgb_to_hex(c: [u8; 3]) -> String { format!("#{:02X}{:02X}{:02X}", c[0], c[1], c[2]) }
@@ -341,14 +449,17 @@ fn xml_unescape(s: &str) -> String {
      .replace("&quot;", "\"").replace("&apos;", "'")
 }
 fn get_attr<'a>(xml: &'a str, attr: &str) -> Option<&'a str> {
-    for prefix in &[format!(" {}=\"", attr), format!("\t{}=\"", attr), format!("\n{}=\"", attr)] {
-        if let Some(s) = xml.find(prefix.as_str()) {
-            let vs = s + prefix.len();
-            if let Some(e) = xml[vs..].find('"') { return Some(&xml[vs..vs+e]); }
+    // Accept both double-quoted and single-quoted attribute values.
+    for q in &['"', '\''] {
+        let needle = format!("{}={}", attr, q);
+        if let Some(s) = xml.find(&needle) {
+            let vs = s + needle.len();
+            if let Some(e) = xml[vs..].find(*q) { return Some(&xml[vs..vs+e]); }
         }
     }
     None
 }
+#[allow(dead_code)]
 fn get_tag_text<'a>(xml: &'a str, tag: &str) -> Option<&'a str> {
     let open = format!("<{}>", tag);
     let close = format!("</{}>", tag);
@@ -364,6 +475,35 @@ fn get_attr_in_tag<'a>(xml: &'a str, tag: &str, attr: &str) -> Option<&'a str> {
     get_attr(&xml[s..e], attr)
 }
 
+// ── MEDIA FILE COLLECTION ─────────────────────────────────────────────────────
+
+/// Collect all media files referenced by the project.
+/// Returns a deduplicated list of (device_filename, local_path) pairs.
+fn collect_media_files(project: &Project) -> Vec<(String, PathBuf)> {
+    let mut seen = std::collections::HashSet::new();
+    let mut files = Vec::new();
+    for prog in &project.programs {
+        for area in &prog.areas {
+            for item in &area.items {
+                let path_opt: Option<&PathBuf> = match item {
+                    ContentItem::Image(im)    => im.path.as_ref(),
+                    ContentItem::Video(v)     => v.path.as_ref(),
+                    ContentItem::Document(dc) => dc.path.as_ref(),
+                    _ => None,
+                };
+                if let Some(path) = path_opt {
+                    if let Some(fname) = path.file_name().and_then(|n| n.to_str()) {
+                        if seen.insert(fname.to_string()) {
+                            files.push((fname.to_string(), path.clone()));
+                        }
+                    }
+                }
+            }
+        }
+    }
+    files
+}
+
 // ── XML GENERATION ────────────────────────────────────────────────────────────
 
 pub fn generate_boo(project: &Project) -> String {
@@ -376,13 +516,44 @@ pub fn generate_boo(project: &Project) -> String {
         out.push_str(&format!("  <program guid=\"{}\" name=\"{}\" type=\"{}\">\n",
             prog.guid, xml_escape(&prog.name), prog.program_type));
 
+        // ── playControl ──────────────────────────────────────────────────────
+        let has_date = !prog.date_start.is_empty() || !prog.date_end.is_empty();
+        let has_time = !prog.time_start.is_empty() || !prog.time_end.is_empty();
+        let week_not_all = prog.week_filter.iter().any(|&b| !b);
+        let has_schedule = has_date || has_time || week_not_all || prog.disabled;
+
         if prog.play_duration_secs > 0 {
             let h = prog.play_duration_secs / 3600;
             let m = (prog.play_duration_secs % 3600) / 60;
             let s = prog.play_duration_secs % 60;
-            out.push_str(&format!("    <playControl duration=\"{:02}:{:02}:{:02}\" count=\"0\"/>\n", h, m, s));
+            let disabled_attr = if prog.disabled { " disabled=\"true\"" } else { "" };
+            if has_schedule {
+                out.push_str(&format!("    <playControl duration=\"{:02}:{:02}:{:02}\" count=\"0\"{disabled_attr}>\n", h, m, s));
+            } else {
+                out.push_str(&format!("    <playControl duration=\"{:02}:{:02}:{:02}\" count=\"0\"/>\n", h, m, s));
+            }
         } else {
-            out.push_str(&format!("    <playControl count=\"{}\" disabled=\"false\"/>\n", prog.play_count.max(1)));
+            let disabled_attr = if prog.disabled { " disabled=\"true\"" } else { " disabled=\"false\"" };
+            if has_schedule {
+                out.push_str(&format!("    <playControl count=\"{}\"{disabled_attr}>\n", prog.play_count.max(1)));
+            } else {
+                out.push_str(&format!("    <playControl count=\"{}\"{disabled_attr}/>\n", prog.play_count.max(1)));
+            }
+        }
+        if has_schedule {
+            if has_date {
+                out.push_str(&format!("      <date start=\"{}\" end=\"{}\"/>\n",
+                    prog.date_start, prog.date_end));
+            }
+            if has_time {
+                out.push_str(&format!("      <time start=\"{}\" end=\"{}\"/>\n",
+                    prog.time_start, prog.time_end));
+            }
+            if week_not_all {
+                let bits: String = prog.week_filter.iter().map(|&b| if b { '1' } else { '0' }).collect();
+                out.push_str(&format!("      <week enable=\"{}\"/>\n", bits));
+            }
+            out.push_str("    </playControl>\n");
         }
 
         if prog.border_index > 0 {
@@ -402,6 +573,13 @@ pub fn generate_boo(project: &Project) -> String {
                             t.guid, t.single_line));
                         if let Some(bg) = t.background {
                             out.push_str(&format!(" background=\"{}\"", rgb_to_hex(bg)));
+                        }
+                        if t.word_wrap {
+                            out.push_str(" wordWrap=\"true\"");
+                        }
+                        if t.scroll_dir > 0 {
+                            let dir = match t.scroll_dir { 1 => "left", 2 => "right", 3 => "up", _ => "down" };
+                            out.push_str(&format!(" scrollDir=\"{}\" scrollSpeed=\"{}\"", dir, t.scroll_speed));
                         }
                         out.push_str(">\n");
                         out.push_str(&format!("          <string>{}</string>\n", xml_escape(&t.text)));
@@ -423,40 +601,55 @@ pub fn generate_boo(project: &Project) -> String {
                         let fit = ["stretch","fill","center","fit"][im.fit as usize % 4];
                         let fname = im.path.as_ref().and_then(|p| p.file_name())
                             .and_then(|n| n.to_str()).unwrap_or("");
-                        out.push_str(&format!("        <image guid=\"{}\" fit=\"{}\"/>\n", im.guid, fit));
-                        if !fname.is_empty() { out.push_str(&format!("        <file name=\"{}\"/>\n", fname)); }
+                        out.push_str(&format!("        <image guid=\"{}\" fit=\"{}\">\n", im.guid, fit));
+                        out.push_str("          <effect in=\"17\" out=\"17\" inSpeed=\"3\" outSpeed=\"3\" duration=\"50\"/>\n");
+                        if !fname.is_empty() {
+                            out.push_str(&format!("          <file name=\"{}\"/>\n", fname));
+                        }
+                        out.push_str("        </image>\n");
                     }
                     ContentItem::Video(v) => {
                         let fname = v.path.as_ref().and_then(|p| p.file_name())
                             .and_then(|n| n.to_str()).unwrap_or("");
-                        out.push_str(&format!("        <video guid=\"{}\" aspectRatio=\"{}\"/>\n",
-                            v.guid, if v.keep_aspect { 1 } else { 0 }));
-                        if !fname.is_empty() { out.push_str(&format!("        <file name=\"{}\"/>\n", fname)); }
+                        out.push_str(&format!("        <video guid=\"{}\" aspectRatio=\"{}\">\n",
+                            v.guid, if v.keep_aspect { "true" } else { "false" }));
+                        if !fname.is_empty() {
+                            out.push_str(&format!("          <file name=\"{}\"/>\n", fname));
+                        }
+                        out.push_str("        </video>\n");
                     }
                     ContentItem::Clock(c) => {
-                        out.push_str(&format!("        <clock guid=\"{}\" type=\"{}\" timezone=\"{}\">\n",
-                            c.guid, if c.is_analog { 1 } else { 0 }, xml_escape(&c.timezone)));
-                        if c.show_title {
-                            out.push_str(&format!("          <title value=\"{}\" color=\"{}\" display=\"true\"/>\n",
-                                xml_escape(&c.title_text), rgb_to_hex(c.title_color)));
+                        if c.is_analog {
+                            // Analog clock uses a distinct tag in the player model
+                            out.push_str(&format!(
+                                "        <analogClock guid=\"{}\" timezone=\"{}\" dialColor=\"{}\" handColor=\"{}\" secondColor=\"{}\"/>\n",
+                                c.guid, xml_escape(&c.timezone),
+                                rgb_to_hex(c.dial_color), rgb_to_hex(c.hand_color), rgb_to_hex(c.second_color)));
+                        } else {
+                            out.push_str(&format!("        <clock guid=\"{}\" type=\"digital\" timezone=\"{}\">\n",
+                                c.guid, xml_escape(&c.timezone)));
+                            if c.show_title {
+                                out.push_str(&format!("          <title value=\"{}\" color=\"{}\" display=\"true\"/>\n",
+                                    xml_escape(&c.title_text), rgb_to_hex(c.title_color)));
+                            }
+                            if c.show_date {
+                                out.push_str(&format!("          <date format=\"{}\" color=\"{}\" display=\"true\"/>\n",
+                                    c.date_format, rgb_to_hex(c.date_color)));
+                            }
+                            if c.show_week {
+                                out.push_str(&format!("          <week color=\"{}\" display=\"true\"/>\n",
+                                    rgb_to_hex(c.week_color)));
+                            }
+                            if c.show_time {
+                                out.push_str(&format!("          <time format=\"{}\" color=\"{}\" display=\"true\"/>\n",
+                                    c.time_format, rgb_to_hex(c.time_color)));
+                            }
+                            if c.show_lunar {
+                                out.push_str(&format!("          <lunarCalendar color=\"{}\" display=\"true\"/>\n",
+                                    rgb_to_hex(c.lunar_color)));
+                            }
+                            out.push_str("        </clock>\n");
                         }
-                        if c.show_date {
-                            out.push_str(&format!("          <date format=\"{}\" color=\"{}\" display=\"true\"/>\n",
-                                c.date_format, rgb_to_hex(c.date_color)));
-                        }
-                        if c.show_week {
-                            out.push_str(&format!("          <week color=\"{}\" display=\"true\"/>\n",
-                                rgb_to_hex(c.week_color)));
-                        }
-                        if c.show_time {
-                            out.push_str(&format!("          <time format=\"{}\" color=\"{}\" display=\"true\"/>\n",
-                                c.time_format, rgb_to_hex(c.time_color)));
-                        }
-                        if c.show_lunar {
-                            out.push_str(&format!("          <lunarCalendar color=\"{}\" display=\"true\"/>\n",
-                                rgb_to_hex(c.lunar_color)));
-                        }
-                        out.push_str("        </clock>\n");
                     }
                     ContentItem::Neon(n) => {
                         let col = if n.rainbow { "rainbow".into() } else { rgb_to_hex(n.color) };
@@ -491,6 +684,56 @@ pub fn generate_boo(project: &Project) -> String {
                             out.push_str("</row>\n");
                         }
                         out.push_str("        </table>\n");
+                    }
+                    ContentItem::LiveStream(ls) => {
+                        out.push_str(&format!(
+                            "        <liveStream guid=\"{}\" url=\"{}\" reconnect=\"{}\">\n",
+                            ls.guid, xml_escape(&ls.url), ls.reconnect));
+                        out.push_str(&format!(
+                            "          <font size=\"{}\" color=\"{}\"/>\n",
+                            ls.font_size, rgb_to_hex(ls.color)));
+                        out.push_str("          <effect in=\"17\" out=\"17\" inSpeed=\"3\" outSpeed=\"3\" duration=\"50\"/>\n");
+                        out.push_str("        </liveStream>\n");
+                    }
+                    ContentItem::Modbus(mb) => {
+                        out.push_str(&format!(
+                            "        <modbus guid=\"{}\" host=\"{}\" port=\"{}\" slave=\"{}\" register=\"{}\" type=\"{}\" format=\"{}\" scale=\"{}\" updateInterval=\"{}\" scrollSpeed=\"{}\">\n",
+                            mb.guid, xml_escape(&mb.host), mb.port, mb.slave, mb.register,
+                            mb.register_type, xml_escape(&mb.format), mb.scale_str,
+                            mb.update_interval, mb.scroll_speed));
+                        out.push_str(&format!(
+                            "          <font size=\"{}\" color=\"{}\"/>\n",
+                            mb.font_size, rgb_to_hex(mb.color)));
+                        out.push_str("        </modbus>\n");
+                    }
+                    ContentItem::Sensor(sn) => {
+                        out.push_str(&format!(
+                            "        <sensor guid=\"{}\" type=\"{}\" device=\"{}\" format=\"{}\" updateInterval=\"{}\" scrollSpeed=\"{}\">\n",
+                            sn.guid, sn.sensor_type, xml_escape(&sn.device),
+                            xml_escape(&sn.format), sn.update_interval, sn.scroll_speed));
+                        out.push_str(&format!(
+                            "          <font size=\"{}\" color=\"{}\"/>\n",
+                            sn.font_size, rgb_to_hex(sn.color)));
+                        out.push_str("        </sensor>\n");
+                    }
+                    ContentItem::Text3D(t3) => {
+                        out.push_str(&format!(
+                            "        <text3D guid=\"{}\" text=\"{}\" color=\"{}\" depthColor=\"{}\" fontSize=\"{:.1}\" rotateSpeed=\"{:.2}\" effect3d=\"{}\"/>\n",
+                            t3.guid, xml_escape(&t3.text),
+                            rgb_to_hex(t3.color), rgb_to_hex(t3.depth_color),
+                            t3.font_size, t3.rotate_speed, t3.effect_3d));
+                    }
+                    ContentItem::Document(doc) => {
+                        let fname = doc.path.as_ref()
+                            .and_then(|p| p.file_name())
+                            .and_then(|n| n.to_str())
+                            .unwrap_or("");
+                        let fit = ["stretch","fill","center"][doc.fit as usize % 3];
+                        out.push_str(&format!(
+                            "        <document guid=\"{}\" file=\"{}\" pageDuration=\"{}\" fit=\"{}\" loopPages=\"{}\">\n",
+                            doc.guid, fname, doc.page_duration, fit, doc.loop_pages));
+                        out.push_str("          <effect in=\"17\" out=\"17\" inSpeed=\"3\" outSpeed=\"3\" duration=\"50\"/>\n");
+                        out.push_str("        </document>\n");
                     }
                 }
             }
@@ -544,6 +787,49 @@ fn parse_program(xml: &str, max_w: &mut i32, max_h: &mut i32) -> Option<Program>
         } else { None }
     }).unwrap_or(15);
 
+    let disabled = get_attr(xml, "disabled").map(|v| v == "true").unwrap_or(false);
+
+    // Parse PlayControl schedule sub-elements
+    let (date_start, date_end) = if let Some(ds) = xml.find("<date ") {
+        let de = xml[ds..].find("/>").map(|e| ds+e+2).unwrap_or(xml.len());
+        let dt = &xml[ds..de];
+        (
+            get_attr(dt, "start").unwrap_or("").to_string(),
+            get_attr(dt, "end").unwrap_or("").to_string(),
+        )
+    } else { (String::new(), String::new()) };
+
+    let (time_start, time_end) = {
+        // Find <time start="..." end="..."/> (PlayControl time range),
+        // skipping <time format=...> clock sub-elements.
+        let mut found = None;
+        let mut s = xml;
+        while let Some(p) = s.find("<time ") {
+            let end_off = s[p..].find("/>").map(|e| p+e+2).unwrap_or(s.len());
+            let t = &s[p..end_off];
+            if get_attr(t, "start").is_some() || get_attr(t, "end").is_some() {
+                found = Some((
+                    get_attr(t, "start").unwrap_or("").to_string(),
+                    get_attr(t, "end").unwrap_or("").to_string(),
+                ));
+                break;
+            }
+            s = &s[end_off.min(s.len())..];
+        }
+        found.unwrap_or_default()
+    };
+
+    let week_filter: [bool; 7] = if let Some(ws) = xml.find("<week ") {
+        let we = xml[ws..].find("/>").map(|e| ws+e+2).unwrap_or(xml.len());
+        let wt = &xml[ws..we];
+        let enable = get_attr(wt, "enable").unwrap_or("1111111");
+        let mut arr = [true; 7];
+        for (i, c) in enable.chars().take(7).enumerate() {
+            arr[i] = c != '0';
+        }
+        arr
+    } else { [true; 7] };
+
     let mut areas = Vec::new();
     let mut search = xml;
     while let Some(as_) = search.find("<area ") {
@@ -560,6 +846,7 @@ fn parse_program(xml: &str, max_w: &mut i32, max_h: &mut i32) -> Option<Program>
         guid: if guid.is_empty() { new_guid() } else { guid },
         name, program_type, play_duration_secs, play_count: 1,
         border_index, border_speed, areas,
+        date_start, date_end, time_start, time_end, week_filter, disabled,
     })
 }
 
@@ -591,12 +878,19 @@ fn parse_items(xml: &str) -> Vec<ContentItem> {
         items.push(parse_text(&s[ps..pe]));
         s = &s[pe.min(s.len())..];
     }
-    // Clock
+    // Digital clock — <clock type="digital" ...>
     let mut s = xml;
     while let Some(ps) = s.find("<clock ") {
         let pe = s[ps..].find("</clock>").map(|e| ps+e+8)
             .or_else(|| s[ps..].find("/>").map(|e| ps+e+2)).unwrap_or(s.len());
         items.push(parse_clock(&s[ps..pe]));
+        s = &s[pe.min(s.len())..];
+    }
+    // Analog clock — <analogClock .../>  (separate tag in player model)
+    let mut s = xml;
+    while let Some(ps) = s.find("<analogClock ") {
+        let pe = s[ps..].find("/>").map(|e| ps+e+2).unwrap_or(s.len());
+        items.push(parse_analog_clock(&s[ps..pe]));
         s = &s[pe.min(s.len())..];
     }
     // Neon
@@ -658,6 +952,162 @@ fn parse_items(xml: &str) -> Vec<ContentItem> {
         }));
         s = &s[pe.min(s.len())..];
     }
+    // Image — <image guid="..." fit="..."><effect .../><file name="..."/></image>
+    let mut s = xml;
+    while let Some(ps) = s.find("<image ") {
+        let pe = s[ps..].find("</image>").map(|e| ps+e+8)
+            .or_else(|| s[ps..].find("/>").map(|e| ps+e+2)).unwrap_or(s.len());
+        let t = &s[ps..pe];
+        let fit = match get_attr(t, "fit").unwrap_or("stretch") {
+            "fill" => 1, "center" => 2, "fit" => 3, _ => 0,
+        };
+        // Filename lives in <file name="..."/> child, not on <image> itself
+        let fname = get_attr_in_tag(t, "file", "name").map(|n| xml_unescape(n));
+        items.push(ContentItem::Image(ImageItem {
+            guid: get_attr(t, "guid").unwrap_or_default().to_string(),
+            path: fname.map(PathBuf::from),
+            fit,
+        }));
+        s = &s[pe.min(s.len())..];
+    }
+    // Video — <video guid="..." aspectRatio="true"><file name="..."/></video>
+    let mut s = xml;
+    while let Some(ps) = s.find("<video ") {
+        let pe = s[ps..].find("</video>").map(|e| ps+e+8)
+            .or_else(|| s[ps..].find("/>").map(|e| ps+e+2)).unwrap_or(s.len());
+        let t = &s[ps..pe];
+        let fname = get_attr_in_tag(t, "file", "name").map(|n| xml_unescape(n));
+        items.push(ContentItem::Video(VideoItem {
+            guid: get_attr(t, "guid").unwrap_or_default().to_string(),
+            path: fname.map(PathBuf::from),
+            keep_aspect: get_attr(t, "aspectRatio").map(|v| v == "true" || v == "1").unwrap_or(true),
+        }));
+        s = &s[pe.min(s.len())..];
+    }
+    // Table — <table guid="..." cols="2"><style .../><row><cell>…</cell>…</row>…</table>
+    let mut s = xml;
+    while let Some(ps) = s.find("<table ") {
+        let pe = s[ps..].find("</table>").map(|e| ps+e+8).unwrap_or(s.len());
+        let t = &s[ps..pe];
+        let cols = get_attr(t, "cols").and_then(|v| v.parse().ok()).unwrap_or(2usize);
+        let text_color = hex_to_rgb(get_attr(t, "textColor").unwrap_or("#ffffff"));
+        let header_bg = hex_to_rgb(get_attr(t, "headerBgColor").unwrap_or("#223366"));
+        let font_size = get_attr(t, "fontSize").and_then(|v| v.parse().ok()).unwrap_or(9u32);
+        let header_row = get_attr(t, "headerRow").map(|v| v == "true").unwrap_or(true);
+        let mut rows: Vec<Vec<String>> = Vec::new();
+        let mut rs = t;
+        while let Some(rps) = rs.find("<row>") {
+            let rpe = rs[rps..].find("</row>").map(|e| rps+e+6).unwrap_or(rs.len());
+            let row_xml = &rs[rps+5..rpe.saturating_sub(0)]; // inside <row>
+            let mut row: Vec<String> = Vec::new();
+            let mut cs = row_xml;
+            while let Some(cps) = cs.find("<cell>") {
+                let cpe = cs[cps..].find("</cell>").map(|e| cps+e+7).unwrap_or(cs.len());
+                let cell_text = xml_unescape(&cs[cps+6..cps + cs[cps..].find("</cell>").unwrap_or(cs.len()-cps)]);
+                row.push(cell_text);
+                cs = &cs[cpe.min(cs.len())..];
+            }
+            while row.len() < cols { row.push(String::new()); }
+            rows.push(row);
+            rs = &rs[rpe.min(rs.len())..];
+        }
+        items.push(ContentItem::Table(TableItem {
+            guid: get_attr(t, "guid").unwrap_or_default().to_string(),
+            cols, rows, header_row, text_color, header_bg, font_size,
+        }));
+        s = &s[pe.min(s.len())..];
+    }
+    // LiveStream
+    let mut s = xml;
+    while let Some(ps) = s.find("<liveStream ") {
+        let pe = s[ps..].find("</liveStream>").map(|e| ps+e+13)
+            .or_else(|| s[ps..].find("/>").map(|e| ps+e+2)).unwrap_or(s.len());
+        let t = &s[ps..pe];
+        items.push(ContentItem::LiveStream(LiveStreamItem {
+            guid: get_attr(t, "guid").unwrap_or_default().to_string(),
+            url: get_attr(t, "url").map(|v| xml_unescape(v)).unwrap_or_default(),
+            reconnect: get_attr(t, "reconnect").map(|v| v != "false").unwrap_or(true),
+            font_size: get_attr_in_tag(t, "font", "size").and_then(|v| v.parse().ok()).unwrap_or(14),
+            color: hex_to_rgb(get_attr_in_tag(t, "font", "color").unwrap_or("#ffffff")),
+        }));
+        s = &s[pe.min(s.len())..];
+    }
+    // Modbus
+    let mut s = xml;
+    while let Some(ps) = s.find("<modbus ") {
+        let pe = s[ps..].find("</modbus>").map(|e| ps+e+9)
+            .or_else(|| s[ps..].find("/>").map(|e| ps+e+2)).unwrap_or(s.len());
+        let t = &s[ps..pe];
+        items.push(ContentItem::Modbus(ModbusItem {
+            guid: get_attr(t, "guid").unwrap_or_default().to_string(),
+            host: get_attr(t, "host").map(|v| xml_unescape(v)).unwrap_or_default(),
+            port: get_attr(t, "port").and_then(|v| v.parse().ok()).unwrap_or(502),
+            slave: get_attr(t, "slave").and_then(|v| v.parse().ok()).unwrap_or(1),
+            register: get_attr(t, "register").and_then(|v| v.parse().ok()).unwrap_or(1),
+            register_type: get_attr(t, "type").unwrap_or("holding").to_string(),
+            format: get_attr(t, "format").map(|v| xml_unescape(v)).unwrap_or_else(|| "{value}".into()),
+            scale_str: get_attr(t, "scale").unwrap_or("1.0").to_string(),
+            update_interval: get_attr(t, "updateInterval").and_then(|v| v.parse().ok()).unwrap_or(5),
+            scroll_speed: get_attr(t, "scrollSpeed").and_then(|v| v.parse().ok()).unwrap_or(0),
+            font_size: get_attr_in_tag(t, "font", "size").and_then(|v| v.parse().ok()).unwrap_or(14),
+            color: hex_to_rgb(get_attr_in_tag(t, "font", "color").unwrap_or("#ffffff")),
+        }));
+        s = &s[pe.min(s.len())..];
+    }
+    // Sensor
+    let mut s = xml;
+    while let Some(ps) = s.find("<sensor ") {
+        let pe = s[ps..].find("</sensor>").map(|e| ps+e+9)
+            .or_else(|| s[ps..].find("/>").map(|e| ps+e+2)).unwrap_or(s.len());
+        let t = &s[ps..pe];
+        items.push(ContentItem::Sensor(SensorItem {
+            guid: get_attr(t, "guid").unwrap_or_default().to_string(),
+            sensor_type: get_attr(t, "type").unwrap_or("cpu_temp").to_string(),
+            device: get_attr(t, "device").map(|v| xml_unescape(v)).unwrap_or_default(),
+            format: get_attr(t, "format").map(|v| xml_unescape(v)).unwrap_or_else(|| "{value}".into()),
+            update_interval: get_attr(t, "updateInterval").and_then(|v| v.parse().ok()).unwrap_or(30),
+            scroll_speed: get_attr(t, "scrollSpeed").and_then(|v| v.parse().ok()).unwrap_or(0),
+            font_size: get_attr_in_tag(t, "font", "size").and_then(|v| v.parse().ok()).unwrap_or(14),
+            color: hex_to_rgb(get_attr_in_tag(t, "font", "color").unwrap_or("#ffffff")),
+        }));
+        s = &s[pe.min(s.len())..];
+    }
+    // Text3D
+    let mut s = xml;
+    while let Some(ps) = s.find("<text3D ") {
+        let pe = s[ps..].find("/>").map(|e| ps+e+2)
+            .or_else(|| s[ps..].find("</text3D>").map(|e| ps+e+9)).unwrap_or(s.len());
+        let t = &s[ps..pe];
+        items.push(ContentItem::Text3D(Text3DItem {
+            guid: get_attr(t, "guid").unwrap_or_default().to_string(),
+            text: get_attr(t, "text").map(|v| xml_unescape(v)).unwrap_or_default(),
+            color: hex_to_rgb(get_attr(t, "color").unwrap_or("#ff4400")),
+            depth_color: hex_to_rgb(get_attr(t, "depthColor").unwrap_or("#882200")),
+            font_size: get_attr(t, "fontSize").and_then(|v| v.parse().ok()).unwrap_or(20.0),
+            rotate_speed: get_attr(t, "rotateSpeed").and_then(|v| v.parse().ok()).unwrap_or(1.0),
+            effect_3d: get_attr(t, "effect3d").unwrap_or("rotate_y").to_string(),
+        }));
+        s = &s[pe.min(s.len())..];
+    }
+    // Document
+    let mut s = xml;
+    while let Some(ps) = s.find("<document ") {
+        let pe = s[ps..].find("</document>").map(|e| ps+e+11)
+            .or_else(|| s[ps..].find("/>").map(|e| ps+e+2)).unwrap_or(s.len());
+        let t = &s[ps..pe];
+        let fname = get_attr(t, "file").map(|n| xml_unescape(n));
+        let fit = match get_attr(t, "fit").unwrap_or("stretch") {
+            "fill" => 1, "center" => 2, _ => 0,
+        };
+        items.push(ContentItem::Document(DocumentItem {
+            guid: get_attr(t, "guid").unwrap_or_default().to_string(),
+            path: fname.map(PathBuf::from),
+            page_duration: get_attr(t, "pageDuration").and_then(|v| v.parse().ok()).unwrap_or(5),
+            fit,
+            loop_pages: get_attr(t, "loopPages").map(|v| v != "false").unwrap_or(true),
+        }));
+        s = &s[pe.min(s.len())..];
+    }
     items
 }
 
@@ -684,13 +1134,21 @@ fn parse_text(xml: &str) -> ContentItem {
         effect_in_speed: get_attr(xml, "inSpeed").and_then(|v| v.parse().ok()).unwrap_or(3),
         effect_out_speed: get_attr(xml, "outSpeed").and_then(|v| v.parse().ok()).unwrap_or(3),
         duration_tenths: get_attr(xml, "duration").and_then(|v| v.parse().ok()).unwrap_or(50),
-        scroll_dir: 0, scroll_speed: 40, word_wrap: false, background,
+        scroll_dir: match get_attr(xml, "scrollDir").unwrap_or("none") {
+            "left" => 1, "right" => 2, "up" => 3, "down" => 4, _ => 0
+        },
+        scroll_speed: get_attr(xml, "scrollSpeed").and_then(|v| v.parse().ok()).unwrap_or(40),
+        word_wrap: get_attr(xml, "wordWrap").map(|v| v == "true").unwrap_or(false),
+        background,
     })
 }
 
 fn parse_clock(xml: &str) -> ContentItem {
     let guid = get_attr(xml, "guid").unwrap_or_default().to_string();
-    let is_analog = get_attr(xml, "type").map(|v| v=="1"||v=="analog").unwrap_or(false);
+    // Accept old numeric format (0/1) and new string format (digital/dial/analog)
+    let is_analog = get_attr(xml, "type")
+        .map(|v| v == "1" || v == "dial" || v == "analog")
+        .unwrap_or(false);
     ContentItem::Clock(ClockItem {
         guid, is_analog,
         timezone: get_attr(xml, "timezone").map(|s| xml_unescape(s)).unwrap_or_else(|| "+00:00".into()),
@@ -708,8 +1166,16 @@ fn parse_clock(xml: &str) -> ContentItem {
         show_lunar: xml.contains("<lunarCalendar "),
         lunar_color: hex_to_rgb(get_attr_in_tag(xml, "lunarCalendar", "color").unwrap_or("#ff88ff")),
         font_size: 14,
-        hand_color: [0,255,136], second_color: [255,68,0], dial_color: [13,26,13],
+        dial_color: hex_to_rgb(get_attr(xml, "dialColor").unwrap_or("#0a0a1e")),
+        hand_color: hex_to_rgb(get_attr(xml, "handColor").unwrap_or("#ffffff")),
+        second_color: hex_to_rgb(get_attr(xml, "secondColor").unwrap_or("#ff3c3c")),
     })
+}
+
+fn parse_analog_clock(xml: &str) -> ContentItem {
+    let mut item = parse_clock(xml);
+    if let ContentItem::Clock(ref mut c) = item { c.is_analog = true; }
+    item
 }
 
 // ── DEVICE COMMS ──────────────────────────────────────────────────────────────
@@ -727,7 +1193,13 @@ enum Request {
     ScreenOn, ScreenOff, Reboot, SyncTime,
     SwitchProgram(String),
     DeleteProgram(String),
-    UploadScreenXml(String),
+    /// Upload program XML plus any referenced media files.
+    /// `files` is a list of (device_filename, local_path) pairs to send first.
+    UploadProgram { xml: String, files: Vec<(String, PathBuf)> },
+    /// Apply screen on/off schedule to device. Each entry is (on_time, off_time, days).
+    SetScreenSchedule(Vec<(String, String, String)>),
+    /// Apply brightness schedule to device. Each entry is (hour, min, level).
+    SetBrightnessSchedule(Vec<(u8, u8, u8)>),
 }
 
 #[derive(Debug)]
@@ -746,10 +1218,30 @@ async fn worker_loop(
     resp_tx: std::sync::mpsc::Sender<Response>,
 ) {
     let mut client: Option<Client> = None;
+    // Heartbeat every 25 s keeps the TCP connection alive through NAT / the server's 30 s idle window
+    let mut heartbeat = tokio::time::interval(Duration::from_secs(25));
+    heartbeat.set_missed_tick_behavior(tokio::time::MissedTickBehavior::Skip);
+    // Consume the immediate first tick so we don't send a heartbeat before connecting
+    heartbeat.tick().await;
+
     loop {
-        let req = match req_rx.recv().await {
-            Some(r) => r,
-            None => break,
+        let req = tokio::select! {
+            // Periodic heartbeat — send while connected, clear client on failure
+            _ = heartbeat.tick() => {
+                if let Some(c) = &mut client {
+                    if c.heartbeat().await.is_err() {
+                        client = None;
+                        let _ = resp_tx.send(Response::Disconnected);
+                    }
+                }
+                continue;
+            }
+            req_opt = req_rx.recv() => {
+                match req_opt {
+                    Some(r) => r,
+                    None => break,
+                }
+            }
         };
 
         match req {
@@ -856,14 +1348,69 @@ async fn worker_loop(
                     }
                 }
             }
-            Request::UploadScreenXml(xml) => {
+            Request::SetScreenSchedule(entries) => {
                 if let Some(c) = &mut client {
-                    match c.add_program(&xml).await {
-                        Ok(_) => {
-                            let _ = resp_tx.send(Response::Ok("Upload complete".into()));
-                            if let Ok(p) = c.get_all_programs().await { let _ = resp_tx.send(Response::Programs(p)); }
-                        }
+                    let refs: Vec<(&str, &str, &str)> = entries.iter()
+                        .map(|(a, b, d)| (a.as_str(), b.as_str(), d.as_str()))
+                        .collect();
+                    match c.set_switch_time(&refs).await {
+                        Ok(_) => { let _ = resp_tx.send(Response::Ok("Screen schedule applied".into())); }
                         Err(e) => { let _ = resp_tx.send(Response::Error(format!("{e}"))); }
+                    }
+                }
+            }
+            Request::SetBrightnessSchedule(entries) => {
+                if let Some(c) = &mut client {
+                    match c.set_luminance_ploy(&entries).await {
+                        Ok(_) => { let _ = resp_tx.send(Response::Ok("Brightness schedule applied".into())); }
+                        Err(e) => { let _ = resp_tx.send(Response::Error(format!("{e}"))); }
+                    }
+                }
+            }
+            Request::UploadProgram { xml, files } => {
+                if let Some(c) = &mut client {
+                    // Upload media files first
+                    let mut upload_ok = true;
+                    for (device_name, local_path) in &files {
+                        match hdplayer::transfer::FileTransfer::from_file(local_path).await {
+                            Ok(mut ft) => {
+                                ft.filename = device_name.clone();
+                                match c.upload_file(&ft, None).await {
+                                    Ok(_) => {
+                                        let _ = resp_tx.send(Response::Ok(
+                                            format!("Uploaded: {}", device_name)));
+                                    }
+                                    Err(e) => {
+                                        let _ = resp_tx.send(Response::Error(
+                                            format!("File upload failed ({}): {}", device_name, e)));
+                                        upload_ok = false;
+                                        break;
+                                    }
+                                }
+                            }
+                            Err(e) => {
+                                let _ = resp_tx.send(Response::Error(
+                                    format!("Cannot read file {}: {}", local_path.display(), e)));
+                                upload_ok = false;
+                                break;
+                            }
+                        }
+                    }
+                    // Upload program XML: try add first, fall back to update if add fails
+                    if upload_ok {
+                        let result = match c.add_program(&xml).await {
+                            Ok(v) => Ok(v),
+                            Err(_) => c.update_program(&xml).await,
+                        };
+                        match result {
+                            Ok(_) => {
+                                let _ = resp_tx.send(Response::Ok("Program published".into()));
+                                if let Ok(p) = c.get_all_programs().await {
+                                    let _ = resp_tx.send(Response::Programs(p));
+                                }
+                            }
+                            Err(e) => { let _ = resp_tx.send(Response::Error(format!("{e}"))); }
+                        }
                     }
                 } else {
                     let _ = resp_tx.send(Response::Error("Not connected".into()));
@@ -892,6 +1439,7 @@ struct DragState {
 enum AddContentKind {
     TextSingle, TextMulti, Clock, AnalogClock,
     Neon, QrCode, Image, Video, Calendar, Countdown, Table,
+    LiveStream, Modbus, Sensor, Text3D, Document,
 }
 
 // ── APP STATE ─────────────────────────────────────────────────────────────────
@@ -909,7 +1457,8 @@ struct App {
     canvas_zoom: f32,
     drag: Option<DragState>,
 
-    // Device comms
+    // Device comms — rt must be kept alive to prevent the runtime being dropped
+    #[allow(dead_code)]
     rt: Arc<tokio::runtime::Runtime>,
     req_tx: tokio::sync::mpsc::Sender<Request>,
     resp_rx: mpsc::Receiver<Response>,
@@ -947,9 +1496,21 @@ struct App {
     show_add_content: bool,
     add_content_kind: AddContentKind,
 
-    show_connect_dialog: bool,
     show_device_panel: bool,
     show_preview_window: bool,
+    show_schedule_window: bool,
+
+    // Schedule editor state
+    /// Screen on/off schedule entries: (on_time "HH:MM", off_time "HH:MM", days [Mon-Sun bool×7])
+    screen_sched: Vec<(String, String, [bool; 7])>,
+    screen_sched_add_on: String,
+    screen_sched_add_off: String,
+    screen_sched_add_days: [bool; 7],
+    /// Brightness schedule entries: (hour, minute, level 0-100)
+    brightness_sched: Vec<(u8, u8, u8)>,
+    brightness_sched_add_h: u8,
+    brightness_sched_add_m: u8,
+    brightness_sched_add_lvl: u8,
 
     // Inline item editor (double-click to open)
     show_item_editor: bool,
@@ -995,9 +1556,17 @@ impl App {
             new_area_w: "64".into(), new_area_h: "32".into(),
             show_add_content: false,
             add_content_kind: AddContentKind::TextSingle,
-            show_connect_dialog: false,
             show_device_panel: true,
             show_preview_window: false,
+            show_schedule_window: false,
+            screen_sched: Vec::new(),
+            screen_sched_add_on: "08:00".into(),
+            screen_sched_add_off: "22:00".into(),
+            screen_sched_add_days: [true; 7],
+            brightness_sched: Vec::new(),
+            brightness_sched_add_h: 8,
+            brightness_sched_add_m: 0,
+            brightness_sched_add_lvl: 100,
             show_item_editor: false,
             item_editor_tab: 0,
             toast: None,
@@ -1126,8 +1695,23 @@ impl App {
                 .clicked()
             {
                 let xml = generate_boo(&self.project);
-                self.send_req(Request::UploadScreenXml(xml));
-                self.toast_ok("Publishing to screen…");
+                // Collect all local media files referenced by the project
+                let files = collect_media_files(&self.project);
+                let missing: Vec<_> = files.iter()
+                    .filter(|(_, p)| !p.exists())
+                    .map(|(n, _)| n.clone())
+                    .collect();
+                if !missing.is_empty() {
+                    self.toast_err(format!("Missing files: {}", missing.join(", ")));
+                } else {
+                    let n = files.len();
+                    self.send_req(Request::UploadProgram { xml, files });
+                    self.toast_ok(if n == 0 {
+                        "Publishing program…".into()
+                    } else {
+                        format!("Uploading {} file(s) then publishing…", n)
+                    });
+                }
             }
 
             ui.separator();
@@ -1160,6 +1744,11 @@ impl App {
                 ("📅 Calendar",   AddContentKind::Calendar),
                 ("⏳ Countdown",  AddContentKind::Countdown),
                 ("⊞ Table",       AddContentKind::Table),
+                ("📡 Stream",     AddContentKind::LiveStream),
+                ("⚙ Modbus",      AddContentKind::Modbus),
+                ("🌡 Sensor",     AddContentKind::Sensor),
+                ("3D Text",       AddContentKind::Text3D),
+                ("📄 Document",   AddContentKind::Document),
             ];
 
             for (label, kind) in btns {
@@ -1212,6 +1801,11 @@ impl App {
             AddContentKind::Calendar    => ContentItem::new_calendar(guid),
             AddContentKind::Countdown   => ContentItem::new_countdown(guid),
             AddContentKind::Table       => ContentItem::new_table(guid),
+            AddContentKind::LiveStream  => ContentItem::new_livestream(guid),
+            AddContentKind::Modbus      => ContentItem::new_modbus(guid),
+            AddContentKind::Sensor      => ContentItem::new_sensor(guid),
+            AddContentKind::Text3D      => ContentItem::new_text3d(guid),
+            AddContentKind::Document    => ContentItem::new_document(guid),
         };
         let ii = self.project.programs[pi].areas[ai].items.len();
         self.project.programs[pi].areas[ai].items.push(item);
@@ -1279,9 +1873,10 @@ impl App {
                         resp.context_menu(|ui| {
                             if ui.button("Delete Area").clicked() {
                                 self.project.programs[pi].areas.remove(ai);
-                                if self.sel_area == Some(ai) {
-                                    self.sel_area = None;
-                                    self.sel_item = None;
+                                match self.sel_area {
+                                    Some(s) if s == ai => { self.sel_area = None; self.sel_item = None; }
+                                    Some(s) if s > ai  => { self.sel_area = Some(s - 1); }
+                                    _ => {}
                                 }
                                 self.project.modified = true;
                                 ui.close_menu();
@@ -1308,7 +1903,11 @@ impl App {
                                     resp.context_menu(|ui| {
                                         if ui.button("Delete").clicked() {
                                             self.project.programs[pi].areas[ai].items.remove(ii);
-                                            if self.sel_item == Some(ii) { self.sel_item = None; }
+                                            match self.sel_item {
+                                                Some(s) if s == ii => { self.sel_item = None; }
+                                                Some(s) if s > ii  => { self.sel_item = Some(s - 1); }
+                                                _ => {}
+                                            }
                                             self.project.modified = true;
                                             ui.close_menu();
                                         }
@@ -1609,6 +2208,37 @@ impl App {
                 ui.label("Border speed:");
                 ui.add(egui::Slider::new(&mut prog.border_speed, 1u8..=10).text(""));
             }
+            ui.separator();
+            // ── Playlist schedule ────────────────────────────────────────────
+            ui.heading("Schedule (when to play)");
+            ui.checkbox(&mut prog.disabled, "Disabled (skip this program)");
+            ui.separator();
+            ui.label(RichText::new("Date Range").strong());
+            ui.horizontal(|ui| {
+                ui.label("From:");
+                ui.add(egui::TextEdit::singleline(&mut prog.date_start)
+                    .desired_width(90.0).hint_text("YYYY-MM-DD"));
+                ui.label("To:");
+                ui.add(egui::TextEdit::singleline(&mut prog.date_end)
+                    .desired_width(90.0).hint_text("YYYY-MM-DD"));
+            });
+            ui.label(RichText::new("Time Window").strong());
+            ui.horizontal(|ui| {
+                ui.label("From:");
+                ui.add(egui::TextEdit::singleline(&mut prog.time_start)
+                    .desired_width(60.0).hint_text("HH:MM"));
+                ui.label("To:");
+                ui.add(egui::TextEdit::singleline(&mut prog.time_end)
+                    .desired_width(60.0).hint_text("HH:MM"));
+            });
+            ui.label(RichText::new("Weekdays").strong());
+            let day_names = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+            ui.horizontal(|ui| {
+                for (i, &n) in day_names.iter().enumerate() {
+                    ui.checkbox(&mut prog.week_filter[i], n);
+                }
+            });
+            ui.label(RichText::new("(Leave date/time empty for no restriction)").italics().color(Color32::from_gray(140)));
             return;
         }
 
@@ -1654,6 +2284,11 @@ impl App {
             ContentItem::Calendar(c) => render_calendar_props(ui, c),
             ContentItem::Countdown(c) => render_countdown_props(ui, c),
             ContentItem::Table(t) => render_table_props(ui, t),
+            ContentItem::LiveStream(ls) => render_livestream_props(ui, ls),
+            ContentItem::Modbus(mb) => render_modbus_props(ui, mb),
+            ContentItem::Sensor(sn) => render_sensor_props(ui, sn),
+            ContentItem::Text3D(t3) => render_text3d_props(ui, t3),
+            ContentItem::Document(dc) => render_document_props(ui, dc),
         }
     }
 
@@ -1694,6 +2329,7 @@ impl App {
                 if ui.button("OFF").clicked() { self.send_req(Request::ScreenOff); }
                 if ui.button("Reboot").clicked() { self.send_req(Request::Reboot); }
                 if ui.button("Sync Time").clicked() { self.send_req(Request::SyncTime); }
+                ui.toggle_value(&mut self.show_schedule_window, "Schedules");
                 ui.separator();
                 if ui.button("Disconnect").clicked() { self.send_req(Request::Disconnect); }
             } else {
@@ -1937,14 +2573,19 @@ impl App {
                                 });
                             }
                         },
-                        ContentItem::Clock(c)     => render_clock_props(ui, c),
-                        ContentItem::Neon(n)      => render_neon_props(ui, n),
-                        ContentItem::QrCode(q)    => render_qr_props(ui, q),
-                        ContentItem::Image(im)    => render_image_props(ui, im),
-                        ContentItem::Video(v)     => render_video_props(ui, v),
-                        ContentItem::Calendar(c)  => render_calendar_props(ui, c),
-                        ContentItem::Countdown(c) => render_countdown_props(ui, c),
-                        ContentItem::Table(t)     => render_table_props(ui, t),
+                        ContentItem::Clock(c)       => render_clock_props(ui, c),
+                        ContentItem::Neon(n)        => render_neon_props(ui, n),
+                        ContentItem::QrCode(q)      => render_qr_props(ui, q),
+                        ContentItem::Image(im)      => render_image_props(ui, im),
+                        ContentItem::Video(v)       => render_video_props(ui, v),
+                        ContentItem::Calendar(c)    => render_calendar_props(ui, c),
+                        ContentItem::Countdown(c)   => render_countdown_props(ui, c),
+                        ContentItem::Table(t)       => render_table_props(ui, t),
+                        ContentItem::LiveStream(ls) => render_livestream_props(ui, ls),
+                        ContentItem::Modbus(mb)     => render_modbus_props(ui, mb),
+                        ContentItem::Sensor(sn)     => render_sensor_props(ui, sn),
+                        ContentItem::Text3D(t3)     => render_text3d_props(ui, t3),
+                        ContentItem::Document(dc)   => render_document_props(ui, dc),
                     }
                 });
             });
@@ -2049,6 +2690,11 @@ impl App {
                     ui.radio_value(&mut self.add_content_kind, AddContentKind::Calendar, "Calendar");
                     ui.radio_value(&mut self.add_content_kind, AddContentKind::Countdown, "Countdown");
                     ui.radio_value(&mut self.add_content_kind, AddContentKind::Table, "Table");
+                    ui.radio_value(&mut self.add_content_kind, AddContentKind::LiveStream, "Live Stream (RTSP/RTMP)");
+                    ui.radio_value(&mut self.add_content_kind, AddContentKind::Modbus, "Modbus Data");
+                    ui.radio_value(&mut self.add_content_kind, AddContentKind::Sensor, "Sensor (CPU temp / DS18B20 / DHT22)");
+                    ui.radio_value(&mut self.add_content_kind, AddContentKind::Text3D, "3D Text");
+                    ui.radio_value(&mut self.add_content_kind, AddContentKind::Document, "Document / Presentation");
                     ui.separator();
                     ui.horizontal(|ui| {
                         if ui.button("Add").clicked() {
@@ -2070,6 +2716,11 @@ impl App {
                                     AddContentKind::Calendar => ContentItem::new_calendar(guid),
                                     AddContentKind::Countdown => ContentItem::new_countdown(guid),
                                     AddContentKind::Table => ContentItem::new_table(guid),
+                                    AddContentKind::LiveStream => ContentItem::new_livestream(guid),
+                                    AddContentKind::Modbus     => ContentItem::new_modbus(guid),
+                                    AddContentKind::Sensor     => ContentItem::new_sensor(guid),
+                                    AddContentKind::Text3D     => ContentItem::new_text3d(guid),
+                                    AddContentKind::Document   => ContentItem::new_document(guid),
                                 };
                                 let ii = self.project.programs[pi].areas[ai].items.len();
                                 self.project.programs[pi].areas[ai].items.push(item);
@@ -2086,6 +2737,125 @@ impl App {
 
         // ── Item editor window (double-click to open, X to close) ──────────
         self.render_item_editor(ctx);
+
+        // ── Schedule Editor window ─────────────────────────────────────────────
+        if self.show_schedule_window && self.connected {
+            let mut open = true;
+            egui::Window::new("Device Schedules")
+                .id(egui::Id::new("schedule_window"))
+                .default_size([460.0, 520.0])
+                .resizable(true)
+                .collapsible(false)
+                .open(&mut open)
+                .show(ctx, |ui| {
+                    // ── Screen On/Off Schedule ───────────────────────────────
+                    ui.heading("Screen On/Off Schedule");
+                    ui.label("Each entry turns the screen on and off at set times on selected days.");
+                    ui.separator();
+
+                    let day_names = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+                    let sched = self.screen_sched.clone();
+                    let mut remove_idx: Option<usize> = None;
+                    for (i, (on, off, days)) in sched.iter().enumerate() {
+                        let days_str: String = days.iter().zip(day_names.iter())
+                            .filter(|(&d, _)| d)
+                            .map(|(_, n)| *n)
+                            .collect::<Vec<_>>().join(" ");
+                        ui.horizontal(|ui| {
+                            ui.label(format!("ON {on}  OFF {off}  — {days_str}"));
+                            if ui.small_button("✕").clicked() { remove_idx = Some(i); }
+                        });
+                    }
+                    if let Some(i) = remove_idx { self.screen_sched.remove(i); }
+
+                    ui.separator();
+                    ui.horizontal(|ui| {
+                        ui.label("ON:");
+                        ui.add(egui::TextEdit::singleline(&mut self.screen_sched_add_on)
+                            .desired_width(55.0).hint_text("08:00"));
+                        ui.label("OFF:");
+                        ui.add(egui::TextEdit::singleline(&mut self.screen_sched_add_off)
+                            .desired_width(55.0).hint_text("22:00"));
+                    });
+                    ui.horizontal(|ui| {
+                        for (i, &name) in day_names.iter().enumerate() {
+                            ui.checkbox(&mut self.screen_sched_add_days[i], name);
+                        }
+                    });
+                    if ui.button("+ Add Entry").clicked() {
+                        let bits: String = self.screen_sched_add_days.iter()
+                            .map(|&b| if b { '1' } else { '0' }).collect();
+                        self.screen_sched.push((
+                            self.screen_sched_add_on.clone(),
+                            self.screen_sched_add_off.clone(),
+                            self.screen_sched_add_days,
+                        ));
+                        let _ = bits;
+                    }
+                    ui.horizontal(|ui| {
+                        let apply_btn = egui::Button::new(RichText::new("Apply to Device").strong())
+                            .fill(Color32::from_rgb(40,120,200));
+                        if ui.add(apply_btn).clicked() {
+                            let entries: Vec<(String, String, String)> = self.screen_sched.iter()
+                                .map(|(on, off, days)| {
+                                    let bits: String = days.iter().map(|&b| if b {'1'} else {'0'}).collect();
+                                    (on.clone(), off.clone(), bits)
+                                }).collect();
+                            self.send_req(Request::SetScreenSchedule(entries));
+                        }
+                        if ui.button("Clear All").clicked() {
+                            self.screen_sched.clear();
+                            self.send_req(Request::SetScreenSchedule(Vec::new()));
+                        }
+                    });
+
+                    ui.add_space(12.0);
+                    ui.separator();
+
+                    // ── Brightness Schedule ──────────────────────────────────
+                    ui.heading("Brightness Schedule");
+                    ui.label("Set brightness level at specific times of day.");
+                    ui.separator();
+
+                    let bsched = self.brightness_sched.clone();
+                    let mut bremove: Option<usize> = None;
+                    for (i, &(h, m, lvl)) in bsched.iter().enumerate() {
+                        ui.horizontal(|ui| {
+                            ui.label(format!("{h:02}:{m:02} → {lvl}%"));
+                            if ui.small_button("✕").clicked() { bremove = Some(i); }
+                        });
+                    }
+                    if let Some(i) = bremove { self.brightness_sched.remove(i); }
+
+                    ui.separator();
+                    ui.horizontal(|ui| {
+                        ui.label("Time:");
+                        ui.add(egui::DragValue::new(&mut self.brightness_sched_add_h).range(0..=23).suffix("h"));
+                        ui.add(egui::DragValue::new(&mut self.brightness_sched_add_m).range(0..=59).suffix("m"));
+                        ui.label("Level:");
+                        ui.add(egui::Slider::new(&mut self.brightness_sched_add_lvl, 0u8..=100).suffix("%"));
+                        if ui.button("+ Add").clicked() {
+                            self.brightness_sched.push((
+                                self.brightness_sched_add_h,
+                                self.brightness_sched_add_m,
+                                self.brightness_sched_add_lvl,
+                            ));
+                        }
+                    });
+                    ui.horizontal(|ui| {
+                        let apply_btn = egui::Button::new(RichText::new("Apply to Device").strong())
+                            .fill(Color32::from_rgb(40,120,200));
+                        if ui.add(apply_btn).clicked() {
+                            self.send_req(Request::SetBrightnessSchedule(self.brightness_sched.clone()));
+                        }
+                        if ui.button("Clear All").clicked() {
+                            self.brightness_sched.clear();
+                            self.send_req(Request::SetBrightnessSchedule(Vec::new()));
+                        }
+                    });
+                });
+            if !open { self.show_schedule_window = false; }
+        }
 
         // Live Preview window
         if self.show_preview_window && self.connected {
@@ -2323,6 +3093,170 @@ fn render_table_props(ui: &mut egui::Ui, t: &mut TableItem) {
             });
         }
         if let Some(ri) = remove_idx { t.rows.remove(ri); }
+    });
+}
+
+fn render_livestream_props(ui: &mut egui::Ui, ls: &mut LiveStreamItem) {
+    egui::ScrollArea::vertical().show(ui, |ui| {
+        ui.label(RichText::new("Stream URL:").strong());
+        ui.add(egui::TextEdit::singleline(&mut ls.url)
+            .desired_width(f32::INFINITY)
+            .hint_text("rtsp://192.168.1.x/stream  or  rtmp://..."));
+        ui.label(RichText::new("Supported protocols: RTSP, RTMP, HLS (http://...m3u8)").italics().color(Color32::from_gray(140)));
+        ui.separator();
+        ui.checkbox(&mut ls.reconnect, "Auto-reconnect on stream loss");
+        ui.separator();
+        ui.label("Status/reconnect text font:");
+        ui.horizontal(|ui| {
+            ui.add(egui::DragValue::new(&mut ls.font_size).range(4..=200).prefix("Size: "));
+            color_edit(ui, "Color:", &mut ls.color);
+        });
+    });
+}
+
+fn render_modbus_props(ui: &mut egui::Ui, mb: &mut ModbusItem) {
+    egui::ScrollArea::vertical().show(ui, |ui| {
+        egui::Grid::new("modbus_grid").num_columns(2).spacing([8.0, 6.0]).show(ui, |ui| {
+            ui.label("PLC Host:");
+            ui.add(egui::TextEdit::singleline(&mut mb.host).desired_width(160.0).hint_text("192.168.1.10"));
+            ui.end_row();
+            ui.label("Port:");
+            ui.add(egui::DragValue::new(&mut mb.port).range(1..=65535));
+            ui.end_row();
+            ui.label("Slave ID:");
+            ui.add(egui::DragValue::new(&mut mb.slave).range(1..=247));
+            ui.end_row();
+            ui.label("Register:");
+            ui.add(egui::DragValue::new(&mut mb.register).range(0..=65535));
+            ui.end_row();
+            ui.label("Register type:");
+            egui::ComboBox::from_id_salt("mb_reg_type")
+                .selected_text(&mb.register_type)
+                .show_ui(ui, |ui| {
+                    ui.selectable_value(&mut mb.register_type, "holding".into(), "Holding (FC03)");
+                    ui.selectable_value(&mut mb.register_type, "input".into(), "Input (FC04)");
+                });
+            ui.end_row();
+            ui.label("Format string:");
+            ui.add(egui::TextEdit::singleline(&mut mb.format).desired_width(160.0).hint_text("{value}°C"));
+            ui.end_row();
+            ui.label("Scale (×value):");
+            ui.add(egui::TextEdit::singleline(&mut mb.scale_str).desired_width(80.0).hint_text("1.0"));
+            ui.end_row();
+            ui.label("Poll interval (s):");
+            ui.add(egui::DragValue::new(&mut mb.update_interval).range(1..=3600));
+            ui.end_row();
+            ui.label("Scroll speed (0=static):");
+            ui.add(egui::DragValue::new(&mut mb.scroll_speed).range(0..=500));
+            ui.end_row();
+            ui.label("Font size:");
+            ui.add(egui::DragValue::new(&mut mb.font_size).range(4..=200));
+            ui.end_row();
+        });
+        color_edit(ui, "Text color:", &mut mb.color);
+    });
+}
+
+fn render_sensor_props(ui: &mut egui::Ui, sn: &mut SensorItem) {
+    egui::ScrollArea::vertical().show(ui, |ui| {
+        egui::Grid::new("sensor_grid").num_columns(2).spacing([8.0, 6.0]).show(ui, |ui| {
+            ui.label("Sensor type:");
+            egui::ComboBox::from_id_salt("sensor_type")
+                .selected_text(&sn.sensor_type)
+                .show_ui(ui, |ui| {
+                    ui.selectable_value(&mut sn.sensor_type, "cpu_temp".into(), "CPU temperature (/sys)");
+                    ui.selectable_value(&mut sn.sensor_type, "ds18b20".into(), "DS18B20 1-Wire temp");
+                    ui.selectable_value(&mut sn.sensor_type, "dht22".into(), "DHT22 via Python");
+                    ui.selectable_value(&mut sn.sensor_type, "generic_file".into(), "Generic file (first line)");
+                });
+            ui.end_row();
+            ui.label("Device path:");
+            ui.add(egui::TextEdit::singleline(&mut sn.device)
+                .desired_width(200.0)
+                .hint_text("/sys/bus/w1/devices/28-xxxx"));
+            ui.end_row();
+            ui.label("Format string:");
+            ui.add(egui::TextEdit::singleline(&mut sn.format)
+                .desired_width(160.0).hint_text("{value}°C"));
+            ui.end_row();
+            ui.label("Poll interval (s):");
+            ui.add(egui::DragValue::new(&mut sn.update_interval).range(1..=3600));
+            ui.end_row();
+            ui.label("Scroll speed (0=static):");
+            ui.add(egui::DragValue::new(&mut sn.scroll_speed).range(0..=500));
+            ui.end_row();
+            ui.label("Font size:");
+            ui.add(egui::DragValue::new(&mut sn.font_size).range(4..=200));
+            ui.end_row();
+        });
+        color_edit(ui, "Text color:", &mut sn.color);
+        ui.separator();
+        ui.label(RichText::new("Device path is only needed for DS18B20 and generic_file.").italics().color(Color32::from_gray(140)));
+    });
+}
+
+fn render_text3d_props(ui: &mut egui::Ui, t3: &mut Text3DItem) {
+    egui::ScrollArea::vertical().show(ui, |ui| {
+        ui.label(RichText::new("Text:").strong());
+        ui.add(egui::TextEdit::singleline(&mut t3.text)
+            .desired_width(f32::INFINITY)
+            .font(egui::FontId::proportional(18.0)));
+        ui.separator();
+        egui::Grid::new("t3d_grid").num_columns(2).spacing([8.0, 6.0]).show(ui, |ui| {
+            ui.label("Font size (px):");
+            ui.add(egui::Slider::new(&mut t3.font_size, 4.0f32..=200.0).suffix("px"));
+            ui.end_row();
+            ui.label("Rotation speed:");
+            ui.add(egui::Slider::new(&mut t3.rotate_speed, 0.0f32..=5.0).suffix("×"));
+            ui.end_row();
+            ui.label("3D effect:");
+            egui::ComboBox::from_id_salt("t3d_effect")
+                .selected_text(&t3.effect_3d)
+                .show_ui(ui, |ui| {
+                    ui.selectable_value(&mut t3.effect_3d, "rotate_y".into(), "Rotate Y (spin)");
+                    ui.selectable_value(&mut t3.effect_3d, "rotate_x".into(), "Rotate X (flip)");
+                    ui.selectable_value(&mut t3.effect_3d, "pulse".into(), "Pulse (depth breathe)");
+                    ui.selectable_value(&mut t3.effect_3d, "wave".into(), "Wave");
+                });
+            ui.end_row();
+        });
+        ui.separator();
+        color_edit(ui, "Face color:", &mut t3.color);
+        color_edit(ui, "Depth/shadow color:", &mut t3.depth_color);
+    });
+}
+
+fn render_document_props(ui: &mut egui::Ui, dc: &mut DocumentItem) {
+    egui::ScrollArea::vertical().show(ui, |ui| {
+        let path_str = dc.path.as_ref().and_then(|p| p.to_str()).unwrap_or("(none)");
+        ui.label(format!("File: {}", path_str));
+        if ui.button("Browse…").clicked() {
+            if let Some(p) = rfd::FileDialog::new()
+                .add_filter("Documents", &["pdf","pptx","ppt","odp","docx","doc","odt","xlsx","ods","wps","dps","et"])
+                .pick_file()
+            {
+                dc.path = Some(p);
+            }
+        }
+        ui.label(RichText::new("Supported: PDF, PPTX/ODP/PPT, DOCX/ODT, XLSX/ODS, WPS/DPS\nRequires LibreOffice installed on the player device.").italics().color(Color32::from_gray(140)));
+        ui.separator();
+        egui::Grid::new("doc_grid").num_columns(2).spacing([8.0, 6.0]).show(ui, |ui| {
+            ui.label("Seconds per page:");
+            ui.add(egui::DragValue::new(&mut dc.page_duration).range(1..=300));
+            ui.end_row();
+            ui.label("Fit mode:");
+            egui::ComboBox::from_id_salt("doc_fit")
+                .selected_text(["Stretch","Fill","Center"][dc.fit as usize % 3])
+                .show_ui(ui, |ui| {
+                    ui.selectable_value(&mut dc.fit, 0, "Stretch");
+                    ui.selectable_value(&mut dc.fit, 1, "Fill (crop)");
+                    ui.selectable_value(&mut dc.fit, 2, "Center (letterbox)");
+                });
+            ui.end_row();
+            ui.label("Loop pages:");
+            ui.checkbox(&mut dc.loop_pages, "");
+            ui.end_row();
+        });
     });
 }
 

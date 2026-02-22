@@ -1,0 +1,17 @@
+[package]
+name = "huidu-protocol"
+version = "0.1.0"
+edition = "2021"
+description = "Shared Huidu LED display wire protocol implementation"
+
+[lib]
+name = "huidu_protocol"
+path = "src/lib.rs"
+
+[dependencies]
+byteorder = "1"
+uuid = { version = "1", features = ["v4"] }
+md5 = "0.7"
+tokio = { version = "1", features = ["net", "time", "io-util", "sync", "rt", "fs"] }
+thiserror = "1"
+tracing = "0.1"

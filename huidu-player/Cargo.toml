@@ -1,10 +1,13 @@
 [package]
-name = "huidu-player"
+name = "boxplayer"
 version = "0.1.0"
 edition = "2024"
-description = "Huidu LED sign player - Rust reproduction of BoxPlayer"
+description = "Rust reproduction of Huidu BoxPlayer — the LED display player running on device"
 
 [dependencies]
+# Shared Huidu protocol layer
+huidu-protocol = { path = "../huidu-protocol" }
+
 # Async runtime
 tokio = { version = "1", features = ["full"] }
 
@@ -86,8 +89,3 @@ nix = { version = "0.29", features = ["net", "fs"] }
 [dev-dependencies]
 tempfile = "3"
 
-[profile.release]
-opt-level = "z"
-lto = true
-strip = true
-panic = "abort"

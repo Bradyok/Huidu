@@ -7,12 +7,12 @@ use clap::{Parser, Subcommand};
 use std::time::Duration;
 use tracing_subscriber::EnvFilter;
 
-use hdplayer_client::{Client, Discovery};
-use hdplayer_client::transfer::FileTransfer;
+use hdplayer::{Client, Discovery};
+use hdplayer::transfer::FileTransfer;
 
 #[derive(Parser)]
 #[command(
-    name = "hdplayer-client",
+    name = "hdplayer",
     about = "Huidu BoxPlayer control client (HDPlayer.exe reproduction)",
     version
 )]
@@ -330,7 +330,7 @@ async fn main() -> anyhow::Result<()> {
 
     tracing_subscriber::fmt()
         .with_env_filter(EnvFilter::from_default_env()
-            .add_directive("hdplayer_client=info".parse()?))
+            .add_directive("hdplayer=info".parse()?))
         .init();
 
     // Handle discover command without a host
@@ -426,7 +426,7 @@ async fn main() -> anyhow::Result<()> {
                 let attrs = ["cpu", "os", "ram", "storage", "cpuUsage", "memUsage", "temperature"];
                 let labels = ["CPU arch", "OS", "RAM (MB)", "Storage (MB)", "CPU usage %", "Mem usage %", "Temperature °C"];
                 for (attr, label) in attrs.iter().zip(labels.iter()) {
-                    if let Some(val) = hdplayer_client::xml::get_attr(tag, attr) {
+                    if let Some(val) = hdplayer::xml::get_attr(tag, attr) {
                         println!("{:<16} {}", format!("{}:", label), val);
                     }
                 }
@@ -546,7 +546,7 @@ async fn main() -> anyhow::Result<()> {
             let elem_attr = |elem: &str, attr: &str| -> Option<String> {
                 let tag = format!("<{elem}");
                 xml.find(&tag)
-                    .and_then(|pos| hdplayer_client::xml::get_attr(&xml[pos..], attr))
+                    .and_then(|pos| hdplayer::xml::get_attr(&xml[pos..], attr))
                     .map(str::to_string)
             };
             let mut printed = false;
@@ -580,9 +580,9 @@ async fn main() -> anyhow::Result<()> {
             while let Some(start) = search.find("<item ") {
                 let end = search[start..].find("/>").map(|e| start + e + 2).unwrap_or(search.len());
                 let tag = &search[start..end];
-                let on   = hdplayer_client::xml::get_attr(tag, "onTime").unwrap_or("?");
-                let off  = hdplayer_client::xml::get_attr(tag, "offTime").unwrap_or("?");
-                let days = hdplayer_client::xml::get_attr(tag, "days").unwrap_or("?");
+                let on   = hdplayer::xml::get_attr(tag, "onTime").unwrap_or("?");
+                let off  = hdplayer::xml::get_attr(tag, "offTime").unwrap_or("?");
+                let days = hdplayer::xml::get_attr(tag, "days").unwrap_or("?");
                 println!("ON: {on}  OFF: {off}  Days: {days}");
                 found = true;
                 search = &search[end.min(search.len())..];
@@ -593,10 +593,11 @@ async fn main() -> anyhow::Result<()> {
         }
 
         Commands::SetSchedule { enable, on, off, days } => {
-            client.set_switch_time(*enable, on, off, days).await?;
             if *enable {
+                client.set_switch_time(&[(on.as_str(), off.as_str(), days.as_str())]).await?;
                 println!("Schedule set: on={on} off={off} days={days}");
             } else {
+                client.set_switch_time(&[]).await?;
                 println!("Schedule cleared.");
             }
         }
@@ -622,15 +623,15 @@ async fn main() -> anyhow::Result<()> {
                 while let Some(start) = search.find("<item ") {
                     let end = search[start..].find("/>").map(|e| start + e + 2).unwrap_or(search.len());
                     let tag = &search[start..end];
-                    let time  = hdplayer_client::xml::get_attr(tag, "time").unwrap_or("?");
-                    let level = hdplayer_client::xml::get_attr(tag, "level").unwrap_or("?");
+                    let time  = hdplayer::xml::get_attr(tag, "time").unwrap_or("?");
+                    let level = hdplayer::xml::get_attr(tag, "level").unwrap_or("?");
                     println!("  {time} → {level}%");
                     search = &search[end.min(search.len())..];
                     found = true;
                 }
                 if !found { println!("  (empty schedule)"); }
             } else {
-                let level = hdplayer_client::xml::get_attr(&xml, "value").unwrap_or("?");
+                let level = hdplayer::xml::get_attr(&xml, "value").unwrap_or("?");
                 println!("Brightness: {level}% (manual mode)");
             }
         }
@@ -659,9 +660,9 @@ async fn main() -> anyhow::Result<()> {
 
         Commands::GetTime => {
             let xml = client.get_time_info().await?;
-            let time = hdplayer_client::xml::get_attr(&xml, "value").unwrap_or("?");
-            let ntp  = hdplayer_client::xml::get_attr(&xml, "server").unwrap_or("");
-            let tz   = hdplayer_client::xml::get_attr(&xml, "timezone").unwrap_or("0");
+            let time = hdplayer::xml::get_attr(&xml, "value").unwrap_or("?");
+            let ntp  = hdplayer::xml::get_attr(&xml, "server").unwrap_or("");
+            let tz   = hdplayer::xml::get_attr(&xml, "timezone").unwrap_or("0");
             println!("Device time: {time}");
             println!("UTC offset:  UTC{:+}", tz.parse::<i8>().unwrap_or(0));
             if !ntp.is_empty() { println!("NTP server:  {ntp}"); }
@@ -763,7 +764,7 @@ async fn main() -> anyhow::Result<()> {
         Commands::GetNetworkInfo => {
             let xml = client.get_network_info().await?;
             // Response: <network eth0Connected="true" wifiConnected="false" internet="true" ip="..."/>
-            let get  = |a: &str| hdplayer_client::xml::get_attr(&xml, a).unwrap_or("?");
+            let get  = |a: &str| hdplayer::xml::get_attr(&xml, a).unwrap_or("?");
             let yesno = |v: &str| if v == "true" { "yes" } else { "no" };
             println!("Ethernet:  {}", yesno(get("eth0Connected")));
             println!("WiFi:      {}", yesno(get("wifiConnected")));
@@ -776,8 +777,8 @@ async fn main() -> anyhow::Result<()> {
 
         Commands::GetWifiInfo => {
             let xml = client.get_wifi_info().await?;
-            let ssid  = hdplayer_client::xml::get_attr(&xml, "ssid").unwrap_or("(none)");
-            let state = hdplayer_client::xml::get_attr(&xml, "state").unwrap_or("unknown");
+            let ssid  = hdplayer::xml::get_attr(&xml, "ssid").unwrap_or("(none)");
+            let state = hdplayer::xml::get_attr(&xml, "state").unwrap_or("unknown");
             println!("WiFi SSID:  {ssid}");
             println!("WiFi state: {state}");
         }
@@ -879,7 +880,7 @@ async fn main() -> anyhow::Result<()> {
                 eprintln!("Error: --ip is required for static configuration (or use --dhcp)");
                 std::process::exit(1);
             }
-            let cfg = hdplayer_client::EthConfig {
+            let cfg = hdplayer::EthConfig {
                 dhcp: *dhcp,
                 ip: ip.clone(),
                 mask: mask.clone(),
@@ -896,7 +897,7 @@ async fn main() -> anyhow::Result<()> {
 
         Commands::GetPppoe => {
             let xml = client.get_pppoe_info().await?;
-            let get = |a: &str| hdplayer_client::xml::get_attr(&xml, a).unwrap_or("?");
+            let get = |a: &str| hdplayer::xml::get_attr(&xml, a).unwrap_or("?");
             println!("PPPoE enabled: {}", get("enable"));
             println!("User:          {}", get("user"));
             println!("Status:        {}", get("status"));

@@ -1,0 +1,15 @@
+[workspace]
+members = [
+    "huidu-protocol",
+    "hdplayer-client",
+    "hdset-client",
+    "huidu-player",
+]
+resolver = "2"
+
+# Shared release profile for all workspace members
+[profile.release]
+opt-level = "z"
+lto = true
+strip = true
+panic = "abort"

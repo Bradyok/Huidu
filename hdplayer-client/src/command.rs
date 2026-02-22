@@ -107,25 +107,27 @@ pub fn get_switch_time() -> String {
 }
 
 /// Set screen on/off schedule.
-/// `on_time`: "HH:MM", `off_time`: "HH:MM"
-/// `days`: 7-character string of '0'/'1' for Mon–Sun (e.g. `"1111100"` = weekdays).
-///   Pass `"1111111"` to apply every day.
+///
+/// `entries` is a slice of `(on_time, off_time, days)` tuples where:
+/// - `on_time` / `off_time`: "HH:MM" strings
+/// - `days`: 7-char '0'/'1' string for Mon–Sun (e.g. `"1111100"` = weekdays)
+///
+/// Pass an empty slice to clear the schedule.
 /// Server (SetSwitchTime) parses `<item onTime="..." offTime="..." days="..."/>` elements.
-pub fn set_switch_time(enabled: bool, on_time: &str, off_time: &str, days: &str) -> String {
-    if !enabled {
-        return String::new(); // empty body = clear schedule
-    }
-    // Validate/sanitise: keep only '0'/'1', pad/truncate to 7 chars
-    let days_clean: String = days.chars()
-        .filter(|&c| c == '0' || c == '1')
-        .take(7)
-        .collect();
-    let days_str = if days_clean.len() == 7 {
-        days_clean
-    } else {
-        "1111111".to_string()
-    };
-    format!("<item onTime=\"{on_time}\" offTime=\"{off_time}\" days=\"{days_str}\"/>")
+pub fn set_switch_time(entries: &[(&str, &str, &str)]) -> String {
+    entries.iter().map(|(on_time, off_time, days)| {
+        // Validate/sanitise: keep only '0'/'1', pad/truncate to 7 chars
+        let days_clean: String = days.chars()
+            .filter(|&c| c == '0' || c == '1')
+            .take(7)
+            .collect();
+        let days_str = if days_clean.len() == 7 {
+            days_clean
+        } else {
+            "1111111".to_string()
+        };
+        format!("<item onTime=\"{on_time}\" offTime=\"{off_time}\" days=\"{days_str}\"/>")
+    }).collect()
 }
 
 // ── Network ──────────────────────────────────────────────────────────────────
@@ -505,8 +507,8 @@ mod tests {
     // ── set_switch_time ───────────────────────────────────────────────────────
 
     #[test]
-    fn test_set_switch_time_enabled() {
-        let xml = set_switch_time(true, "08:00", "22:00", "1111111");
+    fn test_set_switch_time_single_entry() {
+        let xml = set_switch_time(&[("08:00", "22:00", "1111111")]);
         assert!(xml.contains("onTime=\"08:00\""));
         assert!(xml.contains("offTime=\"22:00\""));
         assert!(xml.contains("days=\"1111111\""));
@@ -514,21 +516,33 @@ mod tests {
 
     #[test]
     fn test_set_switch_time_weekdays_only() {
-        let xml = set_switch_time(true, "08:00", "22:00", "1111100");
+        let xml = set_switch_time(&[("08:00", "22:00", "1111100")]);
         assert!(xml.contains("days=\"1111100\""));
     }
 
     #[test]
     fn test_set_switch_time_invalid_days_defaults_to_all() {
         // Too short — falls back to "1111111"
-        let xml = set_switch_time(true, "08:00", "22:00", "111");
+        let xml = set_switch_time(&[("08:00", "22:00", "111")]);
         assert!(xml.contains("days=\"1111111\""));
     }
 
     #[test]
-    fn test_set_switch_time_disabled() {
-        // Disabled → empty body (clear schedule)
-        assert_eq!(set_switch_time(false, "08:00", "22:00", "1111111"), "");
+    fn test_set_switch_time_empty_clears_schedule() {
+        // Empty slice → empty body (clear schedule)
+        assert_eq!(set_switch_time(&[]), "");
+    }
+
+    #[test]
+    fn test_set_switch_time_multiple_entries() {
+        let xml = set_switch_time(&[
+            ("07:00", "23:00", "1111100"),
+            ("09:00", "20:00", "0000011"),
+        ]);
+        assert!(xml.contains("onTime=\"07:00\""));
+        assert!(xml.contains("days=\"1111100\""));
+        assert!(xml.contains("onTime=\"09:00\""));
+        assert!(xml.contains("days=\"0000011\""));
     }
 
     // ── set_eth0_info ─────────────────────────────────────────────────────────

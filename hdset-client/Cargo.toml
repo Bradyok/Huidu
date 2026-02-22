@@ -1,16 +1,16 @@
 [package]
-name = "hdplayer"
+name = "hdset"
 version = "0.1.0"
 edition = "2021"
-description = "Rust reproduction of the Huidu HDPlayer LED content management tool"
+description = "Rust reproduction of the Huidu HDSet V4.0.16.0 LED hardware configuration tool"
 authors = ["Huidu Reverse Engineering Project"]
 
 [[bin]]
-name = "hdplayer"
+name = "hdset"
 path = "src/main.rs"
 
 [lib]
-name = "hdplayer"
+name = "hdset"
 path = "src/lib.rs"
 
 [features]
@@ -18,8 +18,8 @@ path = "src/lib.rs"
 gui = ["dep:eframe", "dep:egui", "dep:image", "dep:rfd"]
 
 [[bin]]
-name = "hdplayer-gui"
-path = "src/bin/hdplayer_gui.rs"
+name = "hdset-gui"
+path = "src/bin/hdset_gui.rs"
 required-features = ["gui"]
 
 [dependencies]
@@ -46,3 +46,8 @@ eframe  = { version = "0.31", optional = true, default-features = false, feature
 egui    = { version = "0.31", optional = true }
 image   = { version = "0.25", optional = true, default-features = false, features = ["png", "jpeg"] }
 rfd     = { version = "0.15", optional = true }
+
+# Serial port support for direct USB/serial connection to send cards
+# Only available on non-WASM targets
+[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+serialport = "4"

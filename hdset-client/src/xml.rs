@@ -1,8 +1,7 @@
 //! XML helpers — thin wrapper around `huidu_protocol::xml`.
 //!
-//! All shared helpers are re-exported directly.  Only `parse_result` is
-//! overridden here to map `huidu_protocol::Error` → `crate::error::Error`,
-//! so callers can use `?` without an explicit conversion.
+//! All shared helpers are re-exported directly.  `parse_result` is overridden
+//! to map `huidu_protocol::Error` → `crate::error::Error`.
 
 pub use huidu_protocol::xml::{
     new_guid, sdk_request, sdk_response, sdk_error_response,

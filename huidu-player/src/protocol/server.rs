@@ -1,4 +1,4 @@
-/// TCP protocol server — accepts connections from HDPlayer software.
+/// TCP protocol server — accepts connections from HDPlayer / HDSet software.
 use anyhow::Result;
 use byteorder::{LittleEndian, ReadBytesExt, WriteBytesExt};
 use std::io::Cursor;
@@ -8,25 +8,13 @@ use tokio::net::{TcpListener, TcpStream};
 use tokio::sync::{mpsc, RwLock};
 use tracing::{error, info, warn};
 
+use huidu_protocol::packet::{Command, Packet, SDK_TRANSPORT_VERSION};
+
 use crate::core::player::PlayerCommand;
 use crate::protocol::command;
 use crate::protocol::session::Session;
 use crate::services::manager::ServicesState;
 
-const CMD_TCP_HEARTBEAT_ASK: u16 = 0x005F;
-const CMD_TCP_HEARTBEAT_ANSWER: u16 = 0x0060;
-const CMD_SDK_SERVICE_ASK: u16 = 0x2001;
-const CMD_SDK_SERVICE_ANSWER: u16 = 0x2002;
-const CMD_SDK_CMD_ASK: u16 = 0x2003;
-const CMD_SDK_CMD_ANSWER: u16 = 0x2004;
-const CMD_FILE_START_ASK: u16 = 0x8001;
-const CMD_FILE_START_ANSWER: u16 = 0x8002;
-const CMD_FILE_CONTENT_ASK: u16 = 0x8003;
-const CMD_FILE_CONTENT_ANSWER: u16 = 0x8004;
-const CMD_FILE_END_ASK: u16 = 0x8005;
-const CMD_FILE_END_ANSWER: u16 = 0x8006;
-
-const TRANSPORT_VERSION: u32 = 0x0100_0005;
 const MAX_PACKET_SIZE: usize = 9 * 1024;
 
 pub async fn run(
@@ -84,7 +72,7 @@ async fn handle_connection(
         }
 
         let data_len = length - 2;
-        let cmd = stream.read_u16_le().await?;
+        let cmd_raw = stream.read_u16_le().await?;
 
         if data_len > 0 {
             if data_len > buf.len() {
@@ -93,17 +81,21 @@ async fn handle_connection(
             stream.read_exact(&mut buf[..data_len]).await?;
         }
 
-        let response = match cmd {
-            CMD_TCP_HEARTBEAT_ASK => Some(make_packet(CMD_TCP_HEARTBEAT_ANSWER, &[])),
-
-            CMD_SDK_SERVICE_ASK => {
-                let mut resp_data = Vec::new();
-                WriteBytesExt::write_u32::<LittleEndian>(&mut resp_data, TRANSPORT_VERSION)
-                    .unwrap();
-                Some(make_packet(CMD_SDK_SERVICE_ANSWER, &resp_data))
+        let cmd = Command::from_u16(cmd_raw);
+        let response: Option<Vec<u8>> = match cmd {
+            Command::TcpHeartbeatAsk => {
+                Some(Packet::new(Command::TcpHeartbeatAnswer, vec![]).to_bytes())
             }
 
-            CMD_SDK_CMD_ASK => {
+            Command::SdkServiceAsk => {
+                let mut resp_data = Vec::new();
+                WriteBytesExt::write_u32::<LittleEndian>(&mut resp_data, SDK_TRANSPORT_VERSION)
+                    .unwrap();
+                Some(Packet::new(Command::SdkServiceAnswer, resp_data).to_bytes())
+            }
+
+            Command::SdkCmdAsk => {
+                // Payload format: [u32 total_len][u32 chunk_index][xml_bytes...]
                 if data_len >= 8 {
                     let mut cursor = Cursor::new(&buf[..data_len]);
                     let total_len =
@@ -130,6 +122,7 @@ async fn handle_connection(
                         .await
                         {
                             Ok(response_xml) => {
+                                // Response payload: [u32 total_len][u32 index=0][xml_bytes]
                                 let xml_bytes = response_xml.as_bytes();
                                 let mut resp = Vec::new();
                                 WriteBytesExt::write_u32::<LittleEndian>(
@@ -139,7 +132,7 @@ async fn handle_connection(
                                 .unwrap();
                                 WriteBytesExt::write_u32::<LittleEndian>(&mut resp, 0).unwrap();
                                 resp.extend_from_slice(xml_bytes);
-                                Some(make_packet(CMD_SDK_CMD_ANSWER, &resp))
+                                Some(Packet::new(Command::SdkCmdAnswer, resp).to_bytes())
                             }
                             Err(e) => {
                                 warn!("SDK command error: {}", e);
@@ -154,8 +147,8 @@ async fn handle_connection(
                 }
             }
 
-            CMD_FILE_START_ASK => {
-                // Payload format: [32 bytes MD5 hex][u64 file_size][u16 file_type][filename\0]
+            Command::FileStartAsk => {
+                // Payload: [32 bytes MD5 hex][u64 file_size][u16 file_type][filename\0]
                 if data_len >= 42 {
                     let md5_str = String::from_utf8_lossy(&buf[..32]).to_string();
                     let mut cursor = Cursor::new(&buf[32..]);
@@ -172,31 +165,29 @@ async fn handle_connection(
                     let mut resp = Vec::new();
                     WriteBytesExt::write_u32::<LittleEndian>(&mut resp, 0).unwrap();
                     WriteBytesExt::write_u64::<LittleEndian>(&mut resp, 0).unwrap();
-                    Some(make_packet(CMD_FILE_START_ANSWER, &resp))
+                    Some(Packet::new(Command::FileStartAnswer, resp).to_bytes())
                 } else {
                     None
                 }
             }
 
-            CMD_FILE_CONTENT_ASK => {
-                // Payload format: [u64 offset][chunk data]
-                // Strip the 8-byte offset prefix before storing the chunk.
+            Command::FileContentAsk => {
+                // Payload: [u64 offset][chunk data]
                 const OFFSET_LEN: usize = 8;
                 if data_len > OFFSET_LEN {
                     session.append_file_data(&buf[OFFSET_LEN..data_len]);
                 } else if data_len > 0 {
-                    // Fallback: no offset prefix (older protocol variant)
+                    // Older protocol variant: no offset prefix
                     session.append_file_data(&buf[..data_len]);
                 }
-                // Send per-chunk ack: [u32 result=0]
+                // Per-chunk ack: [u32 result=0]
                 let mut resp = Vec::new();
                 WriteBytesExt::write_u32::<LittleEndian>(&mut resp, 0).unwrap();
-                Some(make_packet(CMD_FILE_CONTENT_ANSWER, &resp))
+                Some(Packet::new(Command::FileContentAnswer, resp).to_bytes())
             }
 
-            CMD_FILE_END_ASK => {
+            Command::FileEndAsk => {
                 let result: u32 = if let Some(transfer) = session.complete_file_transfer() {
-                    // Verify MD5 if the controller supplied one
                     let md5_ok = if !transfer.md5.is_empty() {
                         let computed = format!("{:x}", md5::compute(&transfer.data));
                         if computed != transfer.md5.to_lowercase() {
@@ -215,25 +206,21 @@ async fn handle_connection(
                     let dest = std::path::Path::new(&program_dir).join(&transfer.filename);
                     info!(
                         "File transfer complete: {} ({} bytes, md5_ok={})",
-                        transfer.filename,
-                        transfer.data.len(),
-                        md5_ok
+                        transfer.filename, transfer.data.len(), md5_ok
                     );
                     let _ = std::fs::create_dir_all(&program_dir);
                     let _ = std::fs::write(&dest, &transfer.data);
-                    // Return 0 (success) regardless of MD5 — file is saved, controller
-                    // can re-send if it detects the mismatch via GetFileChecklist.
                     0u32
                 } else {
                     0u32
                 };
                 let mut resp = Vec::new();
                 WriteBytesExt::write_u32::<LittleEndian>(&mut resp, result).unwrap();
-                Some(make_packet(CMD_FILE_END_ANSWER, &resp))
+                Some(Packet::new(Command::FileEndAnswer, resp).to_bytes())
             }
 
             _ => {
-                warn!("Unknown command: 0x{:04X}", cmd);
+                warn!("Unknown command: 0x{:04X}", cmd_raw);
                 None
             }
         };
@@ -244,13 +231,4 @@ async fn handle_connection(
     }
 
     Ok(())
-}
-
-fn make_packet(cmd: u16, data: &[u8]) -> Vec<u8> {
-    let length = (data.len() + 2) as u16;
-    let mut packet = Vec::with_capacity(4 + data.len());
-    WriteBytesExt::write_u16::<LittleEndian>(&mut packet, length).unwrap();
-    WriteBytesExt::write_u16::<LittleEndian>(&mut packet, cmd).unwrap();
-    packet.extend_from_slice(data);
-    packet
 }
