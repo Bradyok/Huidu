@@ -951,6 +951,10 @@ struct App {
     show_device_panel: bool,
     show_preview_window: bool,
 
+    // Inline item editor (double-click to open)
+    show_item_editor: bool,
+    item_editor_tab: u8,  // 0=Content 1=Font 2=Effects 3=Layout
+
     // Toast
     toast: Option<(String, Instant, bool)>,
 }
@@ -994,6 +998,8 @@ impl App {
             show_connect_dialog: false,
             show_device_panel: true,
             show_preview_window: false,
+            show_item_editor: false,
+            item_editor_tab: 0,
             toast: None,
         }
     }
@@ -1060,6 +1066,7 @@ impl App {
     // ── TOOLBAR ───────────────────────────────────────────────────────────────
 
     fn render_toolbar(&mut self, ui: &mut egui::Ui) {
+        // ── Row 1: File + Publish ──────────────────────────────────────────
         ui.horizontal(|ui| {
             if ui.button("New Program").clicked() {
                 self.new_prog_w_s = self.project.screen_w.to_string();
@@ -1103,13 +1110,26 @@ impl App {
                 }
             }
             ui.separator();
-            // Upload current program to device
-            if ui.add_enabled(self.connected, egui::Button::new("Send to Device")).clicked() {
+
+            // ── Publish button — always prominent ──────────────────────────
+            let publish_label = if self.connected {
+                RichText::new("  ▶  Publish to Screen  ").strong()
+                    .color(Color32::BLACK)
+            } else {
+                RichText::new("  ▶  Publish to Screen  ").strong()
+                    .color(Color32::from_gray(130))
+            };
+            let publish_btn = egui::Button::new(publish_label)
+                .fill(if self.connected { Color32::from_rgb(40, 160, 60) } else { Color32::from_gray(60) });
+            if ui.add_enabled(self.connected, publish_btn)
+                .on_disabled_hover_text("Connect to a device first (bottom bar)")
+                .clicked()
+            {
                 let xml = generate_boo(&self.project);
-                // strip <screen>...</screen> block for AddProgram
                 self.send_req(Request::UploadScreenXml(xml));
-                self.toast_ok("Uploading…");
+                self.toast_ok("Publishing to screen…");
             }
+
             ui.separator();
             ui.label("Zoom:");
             ui.add(egui::Slider::new(&mut self.canvas_zoom, 1.0..=12.0).step_by(0.5));
@@ -1119,6 +1139,84 @@ impl App {
                 ui.toggle_value(&mut self.show_preview_window, "Live Preview");
             }
         });
+
+        ui.separator();
+
+        // ── Row 2: Insert content ──────────────────────────────────────────
+        let can_insert = self.sel_prog.is_some();
+        ui.horizontal(|ui| {
+            ui.label(RichText::new("Insert:").strong());
+            ui.separator();
+
+            let btns: &[(&str, AddContentKind)] = &[
+                ("T  Text",       AddContentKind::TextSingle),
+                ("T¶ Multi-Text", AddContentKind::TextMulti),
+                ("🖼 Image",      AddContentKind::Image),
+                ("▶ Video",       AddContentKind::Video),
+                ("🕐 Clock",      AddContentKind::Clock),
+                ("🕐 Analog",     AddContentKind::AnalogClock),
+                ("✨ Neon",       AddContentKind::Neon),
+                ("▦ QR Code",     AddContentKind::QrCode),
+                ("📅 Calendar",   AddContentKind::Calendar),
+                ("⏳ Countdown",  AddContentKind::Countdown),
+                ("⊞ Table",       AddContentKind::Table),
+            ];
+
+            for (label, kind) in btns {
+                let btn = egui::Button::new(*label);
+                if ui.add_enabled(can_insert, btn)
+                    .on_disabled_hover_text("Create a program first")
+                    .clicked()
+                {
+                    self.insert_content(kind.clone());
+                }
+            }
+
+            if !can_insert {
+                ui.label(RichText::new("← Create a program first").color(Color32::from_gray(140)).italics());
+            } else if self.sel_area.is_none() {
+                ui.label(RichText::new("← Select or create an area to place content").color(Color32::from_gray(140)).italics());
+            }
+        });
+    }
+
+    /// Insert a content item into the selected area (auto-selects area 0 if none selected).
+    fn insert_content(&mut self, kind: AddContentKind) {
+        let pi = match self.sel_prog { Some(p) => p, None => return };
+
+        // Auto-select area 0 if no area is selected
+        if self.sel_area.is_none() {
+            if !self.project.programs[pi].areas.is_empty() {
+                self.sel_area = Some(0);
+            } else {
+                self.toast_err("No areas in this program — add an area first");
+                return;
+            }
+        }
+        let ai = self.sel_area.unwrap();
+
+        let guid = new_guid();
+        let item = match kind {
+            AddContentKind::TextSingle  => ContentItem::new_text(guid, true),
+            AddContentKind::TextMulti   => ContentItem::new_text(guid, false),
+            AddContentKind::Clock       => ContentItem::new_clock(guid),
+            AddContentKind::AnalogClock => {
+                let mut c = ContentItem::new_clock(guid);
+                if let ContentItem::Clock(ref mut cl) = c { cl.is_analog = true; }
+                c
+            }
+            AddContentKind::Neon        => ContentItem::new_neon(guid),
+            AddContentKind::QrCode      => ContentItem::new_qr(guid),
+            AddContentKind::Image       => ContentItem::new_image(guid),
+            AddContentKind::Video       => ContentItem::new_video(guid),
+            AddContentKind::Calendar    => ContentItem::new_calendar(guid),
+            AddContentKind::Countdown   => ContentItem::new_countdown(guid),
+            AddContentKind::Table       => ContentItem::new_table(guid),
+        };
+        let ii = self.project.programs[pi].areas[ai].items.len();
+        self.project.programs[pi].areas[ai].items.push(item);
+        self.sel_item = Some(ii);
+        self.project.modified = true;
     }
 
     // ── PROGRAM TREE (LEFT PANEL) ─────────────────────────────────────────────
@@ -1137,7 +1235,8 @@ impl App {
             let resp = ui.selectable_label(is_sel_prog, RichText::new(&label).strong());
             if resp.clicked() {
                 self.sel_prog = Some(pi);
-                self.sel_area = None;
+                // Auto-select first area so Insert buttons work immediately
+                self.sel_area = if self.project.programs[pi].areas.is_empty() { None } else { Some(0) };
                 self.sel_item = None;
             }
             resp.context_menu(|ui| {
@@ -1198,7 +1297,14 @@ impl App {
                                     self.project.programs[pi].areas[ai].items[ii].type_name());
                                 ui.indent(format!("item_{pi}_{ai}_{ii}"), |ui| {
                                     let resp = ui.selectable_label(is_sel_item, &iname);
-                                    if resp.clicked() { self.sel_item = Some(ii); }
+                                    if resp.clicked() {
+                                        self.sel_item = Some(ii);
+                                    }
+                                    if resp.double_clicked() {
+                                        self.sel_item = Some(ii);
+                                        self.show_item_editor = true;
+                                        self.item_editor_tab = 0;
+                                    }
                                     resp.context_menu(|ui| {
                                         if ui.button("Delete").clicked() {
                                             self.project.programs[pi].areas[ai].items.remove(ii);
@@ -1398,7 +1504,27 @@ impl App {
                 self.drag = None;
             }
 
-            // Click to select area
+            // Double-click → open item editor for first item in that area
+            if resp.double_clicked() {
+                if let Some(pi) = self.sel_prog {
+                    if let Some(prog) = self.project.programs.get(pi) {
+                        for (ai, area) in prog.areas.iter().enumerate().rev() {
+                            let ar = to_rect(area.x, area.y, area.w, area.h);
+                            if ar.contains(p) {
+                                self.sel_area = Some(ai);
+                                if !area.items.is_empty() {
+                                    self.sel_item = Some(0);
+                                    self.show_item_editor = true;
+                                    self.item_editor_tab = 0;
+                                }
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Single click to select area
             if resp.clicked() && self.drag.is_none() {
                 if let Some(pi) = self.sel_prog {
                     if let Some(prog) = self.project.programs.get(pi) {
@@ -1645,6 +1771,190 @@ impl App {
         }
     }
 
+    // ── ITEM EDITOR WINDOW ────────────────────────────────────────────────────
+
+    fn render_item_editor(&mut self, ctx: &egui::Context) {
+        if !self.show_item_editor { return; }
+        let (pi, ai, ii) = match (self.sel_prog, self.sel_area, self.sel_item) {
+            (Some(a), Some(b), Some(c)) => (a, b, c),
+            _ => { self.show_item_editor = false; return; }
+        };
+
+        // Extract what we need before the window (avoids borrow issues)
+        let type_name = self.project.programs.get(pi)
+            .and_then(|p| p.areas.get(ai))
+            .and_then(|a| a.items.get(ii))
+            .map(|i| i.type_name())
+            .unwrap_or("Item");
+        let title = format!("Edit — {}  (press X to close)", type_name);
+
+        // item_editor_tab lives in self — extract before window
+        let mut tab = self.item_editor_tab;
+
+        let result = egui::Window::new(&title)
+            .id(egui::Id::new("item_editor"))
+            .default_size([480.0, 520.0])
+            .resizable(true)
+            .collapsible(false)
+            .open(&mut self.show_item_editor)
+            .show(ctx, |ui| {
+                // Get item mutably inside the closure
+                let item = match self.project.programs.get_mut(pi)
+                    .and_then(|p| p.areas.get_mut(ai))
+                    .and_then(|a| a.items.get_mut(ii))
+                {
+                    Some(i) => i,
+                    None => return,
+                };
+
+                // Tab bar — only Text gets tabs; other types fill the whole window
+                if matches!(item, ContentItem::Text(_)) {
+                    ui.horizontal(|ui| {
+                        ui.selectable_value(&mut tab, 0, "✏  Content");
+                        ui.selectable_value(&mut tab, 1, "A  Font");
+                        ui.selectable_value(&mut tab, 2, "★  Effects");
+                        ui.selectable_value(&mut tab, 3, "⊞  Layout");
+                    });
+                    ui.separator();
+                }
+
+                egui::ScrollArea::vertical().show(ui, |ui| {
+                    match item {
+                        ContentItem::Text(t) => match tab {
+                            0 => {
+                                // ── Content ──────────────────────────────────
+                                ui.label(RichText::new("Text:").strong());
+                                if t.single_line {
+                                    ui.add(egui::TextEdit::singleline(&mut t.text)
+                                        .desired_width(f32::INFINITY)
+                                        .font(egui::FontId::proportional(16.0)));
+                                } else {
+                                    ui.add(egui::TextEdit::multiline(&mut t.text)
+                                        .desired_width(f32::INFINITY)
+                                        .desired_rows(8)
+                                        .font(egui::FontId::proportional(15.0)));
+                                }
+                                ui.add_space(4.0);
+                                ui.checkbox(&mut t.single_line, "Single line / ticker");
+                                ui.checkbox(&mut t.word_wrap, "Word wrap (multi-line only)");
+                            }
+                            1 => {
+                                // ── Font ─────────────────────────────────────
+                                egui::Grid::new("font_grid").num_columns(2).spacing([8.0, 6.0]).show(ui, |ui| {
+                                    ui.label("Family:");
+                                    ui.add(egui::TextEdit::singleline(&mut t.font_name)
+                                        .hint_text("(system default)").desired_width(180.0));
+                                    ui.end_row();
+                                    ui.label("Size:");
+                                    ui.add(egui::Slider::new(&mut t.font_size, 4u32..=200).suffix("pt"));
+                                    ui.end_row();
+                                    ui.label("Style:");
+                                    ui.horizontal(|ui| {
+                                        ui.checkbox(&mut t.bold, RichText::new("Bold").strong());
+                                        ui.checkbox(&mut t.italic, RichText::new("Italic").italics());
+                                        ui.checkbox(&mut t.underline, "Underline");
+                                    });
+                                    ui.end_row();
+                                    ui.label("Color:");
+                                    let mut c = to_c32(t.color);
+                                    egui::color_picker::color_edit_button_srgba(ui, &mut c, egui::color_picker::Alpha::Opaque);
+                                    t.color = from_c32(c);
+                                    ui.end_row();
+                                });
+                                ui.separator();
+                                let mut has_bg = t.background.is_some();
+                                if ui.checkbox(&mut has_bg, "Background fill").changed() {
+                                    t.background = if has_bg { Some([0,0,0]) } else { None };
+                                }
+                                if let Some(bg) = &mut t.background {
+                                    color_edit(ui, "Background:", bg);
+                                }
+                            }
+                            2 => {
+                                // ── Effects ──────────────────────────────────
+                                egui::Grid::new("fx_grid").num_columns(2).spacing([12.0, 8.0]).show(ui, |ui| {
+                                    ui.label(RichText::new("Enter effect:").strong());
+                                    let in_idx = (t.effect_in as usize).min(EFFECT_NAMES.len()-1);
+                                    egui::ComboBox::from_id_salt("eff_in")
+                                        .selected_text(EFFECT_NAMES[in_idx])
+                                        .show_ui(ui, |ui| {
+                                            for (i, &n) in EFFECT_NAMES.iter().enumerate() {
+                                                ui.selectable_value(&mut t.effect_in, i as u32, n);
+                                            }
+                                        });
+                                    ui.end_row();
+                                    ui.label("  Enter speed:");
+                                    ui.add(egui::Slider::new(&mut t.effect_in_speed, 1u32..=10).text(""));
+                                    ui.end_row();
+
+                                    ui.label(RichText::new("Exit effect:").strong());
+                                    let out_idx = (t.effect_out as usize).min(EFFECT_NAMES.len()-1);
+                                    egui::ComboBox::from_id_salt("eff_out")
+                                        .selected_text(EFFECT_NAMES[out_idx])
+                                        .show_ui(ui, |ui| {
+                                            for (i, &n) in EFFECT_NAMES.iter().enumerate() {
+                                                ui.selectable_value(&mut t.effect_out, i as u32, n);
+                                            }
+                                        });
+                                    ui.end_row();
+                                    ui.label("  Exit speed:");
+                                    ui.add(egui::Slider::new(&mut t.effect_out_speed, 1u32..=10).text(""));
+                                    ui.end_row();
+
+                                    ui.label("Hold time:");
+                                    ui.add(egui::DragValue::new(&mut t.duration_tenths)
+                                        .range(0..=9999).suffix(" ×0.1s"));
+                                    ui.end_row();
+                                });
+                                ui.separator();
+                                ui.label(RichText::new("Scroll direction:").strong());
+                                ui.horizontal(|ui| {
+                                    ui.selectable_value(&mut t.scroll_dir, 0, "None");
+                                    ui.selectable_value(&mut t.scroll_dir, 1, "← Left");
+                                    ui.selectable_value(&mut t.scroll_dir, 2, "→ Right");
+                                    ui.selectable_value(&mut t.scroll_dir, 3, "↑ Up");
+                                    ui.selectable_value(&mut t.scroll_dir, 4, "↓ Down");
+                                });
+                                if t.scroll_dir > 0 {
+                                    ui.add(egui::Slider::new(&mut t.scroll_speed, 1u32..=200)
+                                        .text("Speed (px/s)"));
+                                }
+                            }
+                            _ => {
+                                // ── Layout ───────────────────────────────────
+                                ui.label(RichText::new("Horizontal alignment:").strong());
+                                ui.horizontal(|ui| {
+                                    ui.selectable_value(&mut t.align, 0, "⬅ Left");
+                                    ui.selectable_value(&mut t.align, 1, "⬛ Center");
+                                    ui.selectable_value(&mut t.align, 2, "➡ Right");
+                                });
+                                ui.add_space(8.0);
+                                ui.label(RichText::new("Vertical alignment:").strong());
+                                ui.horizontal(|ui| {
+                                    ui.selectable_value(&mut t.valign, 0, "⬆ Top");
+                                    ui.selectable_value(&mut t.valign, 1, "⬛ Middle");
+                                    ui.selectable_value(&mut t.valign, 2, "⬇ Bottom");
+                                });
+                            }
+                        },
+                        ContentItem::Clock(c)     => render_clock_props(ui, c),
+                        ContentItem::Neon(n)      => render_neon_props(ui, n),
+                        ContentItem::QrCode(q)    => render_qr_props(ui, q),
+                        ContentItem::Image(im)    => render_image_props(ui, im),
+                        ContentItem::Video(v)     => render_video_props(ui, v),
+                        ContentItem::Calendar(c)  => render_calendar_props(ui, c),
+                        ContentItem::Countdown(c) => render_countdown_props(ui, c),
+                        ContentItem::Table(t)     => render_table_props(ui, t),
+                    }
+                });
+            });
+
+        // Persist the tab selection back (extracted before window to avoid borrow conflict)
+        self.item_editor_tab = tab;
+        // If window was closed via X button, result inner will be None
+        if result.is_none() { self.show_item_editor = false; }
+    }
+
     // ── DIALOGS ───────────────────────────────────────────────────────────────
 
     fn render_dialogs(&mut self, ctx: &egui::Context) {
@@ -1773,6 +2083,9 @@ impl App {
                 });
             if !open { self.show_add_content = false; }
         }
+
+        // ── Item editor window (double-click to open, X to close) ──────────
+        self.render_item_editor(ctx);
 
         // Live Preview window
         if self.show_preview_window && self.connected {
