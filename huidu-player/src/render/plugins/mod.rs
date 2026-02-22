@@ -2,6 +2,7 @@ pub mod analog_clock;
 pub mod clock;
 pub mod gif;
 pub mod image;
+pub mod neon;
 pub mod table;
 pub mod text;
 pub mod video;

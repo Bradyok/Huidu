@@ -188,4 +188,41 @@ DEMO</string>
     </area>
   </program>
 
+  <!-- ── Program 6: Neon shapes showcase ────────────────────────────────── -->
+  <program guid="demo-006" name="Neon Shapes" type="normal">
+    <playControl duration="00:00:15" count="0"/>
+
+    <border index="9" speed="8"/>
+
+    <!-- Heart (index 6) — rainbow animated, left half -->
+    <area guid="area-heart" name="Heart" alpha="255">
+      <rectangle x="0" y="0" width="64" height="64"/>
+      <resources>
+        <neon guid="neon-heart" index="6" color="rainbow" speed="5" singleColor="false">
+          <effect in="17" out="17" inSpeed="2" outSpeed="2" duration="0"/>
+        </neon>
+      </resources>
+    </area>
+
+    <!-- 5-point star (index 11) — pulsing gold, top right -->
+    <area guid="area-star" name="Star" alpha="255">
+      <rectangle x="64" y="0" width="64" height="32"/>
+      <resources>
+        <neon guid="neon-star" index="11" color="#ffcc00" speed="6" singleColor="true">
+          <effect in="17" out="17" inSpeed="2" outSpeed="2" duration="0"/>
+        </neon>
+      </resources>
+    </area>
+
+    <!-- Comet (index 35) — animated orbit, bottom right -->
+    <area guid="area-comet" name="Comet" alpha="255">
+      <rectangle x="64" y="32" width="64" height="32"/>
+      <resources>
+        <neon guid="neon-comet" index="35" color="#00ccff" speed="7" singleColor="false">
+          <effect in="17" out="17" inSpeed="2" outSpeed="2" duration="0"/>
+        </neon>
+      </resources>
+    </area>
+  </program>
+
 </screen>

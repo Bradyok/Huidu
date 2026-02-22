@@ -12,6 +12,7 @@ use crate::render::plugins::analog_clock::AnalogClockRenderer;
 use crate::render::plugins::clock::ClockRenderer;
 use crate::render::plugins::gif::GifRenderer;
 use crate::render::plugins::image::ImageRenderer;
+use crate::render::plugins::neon::NeonRenderer;
 use crate::render::plugins::table::TableRenderer;
 use crate::render::plugins::text::TextRenderer;
 use crate::render::plugins::video::VideoRenderer;
@@ -63,6 +64,7 @@ pub struct RenderEngine {
     table_renderer: TableRenderer,
     weather_renderer: WeatherRenderer,
     analog_clock_renderer: AnalogClockRenderer,
+    neon_renderer: NeonRenderer,
     // -- display state --
     frame: u64,
     ms_per_frame: u64,
@@ -89,6 +91,7 @@ impl RenderEngine {
             table_renderer: TableRenderer::new(),
             weather_renderer: WeatherRenderer::new(weather_url.clone()),
             analog_clock_renderer: AnalogClockRenderer::new(),
+            neon_renderer: NeonRenderer::new(),
             frame: 0,
             ms_per_frame: 1000 / fps.max(1) as u64,
             brightness: 100,
@@ -249,6 +252,7 @@ impl RenderEngine {
                 &mut self.table_renderer,
                 &mut self.weather_renderer,
                 &mut self.analog_clock_renderer,
+                &mut self.neon_renderer,
             );
 
             // Apply transition effect
@@ -370,6 +374,7 @@ fn dispatch_render(
     table: &mut TableRenderer,
     weather: &mut WeatherRenderer,
     analog_clock: &mut AnalogClockRenderer,
+    neon: &mut NeonRenderer,
 ) {
     match item {
         ContentItem::Image(_) => {
@@ -396,6 +401,9 @@ fn dispatch_render(
         ContentItem::AnalogClock(_) => {
             analog_clock.render(item, surface, 0, 0, w, h, elapsed_ms, program_dir);
         }
+        ContentItem::Neon(_) => {
+            neon.render(item, surface, 0, 0, w, h, elapsed_ms, program_dir);
+        }
     }
 }
 
@@ -412,6 +420,7 @@ fn get_effect_for_item(item: &ContentItem, start_ms: u64) -> EffectState {
         ContentItem::Table(t) => t.effect.as_ref(),
         ContentItem::Weather(w) => w.effect.as_ref(),
         ContentItem::AnalogClock(a) => a.effect.as_ref(),
+        ContentItem::Neon(n) => n.effect.as_ref(),
         _ => None,
     };
 

@@ -158,6 +158,8 @@ pub enum ContentItem {
     Weather(WeatherContent),
     #[serde(rename = "analogClock")]
     AnalogClock(AnalogClockContent),
+    #[serde(rename = "neon")]
+    Neon(NeonContent),
 }
 
 /// Transition/animation effect
@@ -460,6 +462,36 @@ pub struct AnalogClockContent {
     pub bg_image: String,
     pub effect: Option<Effect>,
 }
+
+// -- Neon decoration --
+
+/// Neon decoration content item (libneon_plugin.so equivalent).
+/// Renders one of 36 animated glowing shapes as an LED display decoration.
+/// Shape index reference: see `images/Border/*.png` in the HDPlayer installation.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct NeonContent {
+    #[serde(rename = "@guid")]
+    pub guid: String,
+    #[serde(rename = "@name", default)]
+    pub name: String,
+    /// Shape selector 0-35
+    #[serde(rename = "@index", default)]
+    pub index: u32,
+    /// Color: "#RRGGBB", "rainbow", or "gradient:#C1:#C2"
+    #[serde(rename = "@color", default = "default_neon_color")]
+    pub color: String,
+    /// Animation speed 1-10 (higher = faster pulse/rainbow)
+    #[serde(rename = "@speed", default = "default_neon_speed")]
+    pub speed: u32,
+    /// true = single color with breathing pulse; false = rainbow cycling
+    #[serde(rename = "@singleColor", default = "default_true")]
+    pub single_color: bool,
+    pub effect: Option<Effect>,
+}
+
+fn default_neon_color() -> String { "#ff0088".to_string() }
+fn default_neon_speed() -> u32 { 5 }
+fn default_true() -> bool { true }
 
 // -- Helpers --
 
