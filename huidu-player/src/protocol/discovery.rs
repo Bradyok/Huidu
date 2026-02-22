@@ -85,18 +85,23 @@ pub async fn run(device_info: DeviceInfo) -> Result<()> {
 }
 
 /// Build the DeviceInfo packet matching the BoxPlayer format.
-/// Format observed in Wireshark: [device_id bytes][binary header][BoxPlayer name][DeviceInfo XML]
+///
+/// Wire format (confirmed from Huidu protocol analysis):
+///   [15 bytes] device_id (null-padded ASCII)
+///   [ 4 bytes] IPv4 address (big-endian / network order)
+///   [ N bytes] player_name (null-terminated UTF-8)
+///   [ M bytes] DeviceInfo XML — attributes on the root element, NOT child elements
 fn build_device_info_packet(info: &DeviceInfo) -> Vec<u8> {
     let mut packet = Vec::new();
 
-    // Device ID (padded to 15 bytes with nulls, matching BoxPlayer)
+    // Device ID: exactly 15 bytes, null-padded
     let id_bytes = info.device_id.as_bytes();
     let mut id_buf = [0u8; 15];
     let copy_len = id_bytes.len().min(15);
     id_buf[..copy_len].copy_from_slice(&id_bytes[..copy_len]);
     packet.extend_from_slice(&id_buf);
 
-    // IP address as 4 bytes
+    // IPv4 address — 4 bytes, big-endian (network byte order)
     let ip_parts: Vec<u8> = info
         .ip_address
         .split('.')
@@ -108,19 +113,31 @@ fn build_device_info_packet(info: &DeviceInfo) -> Vec<u8> {
         packet.extend_from_slice(&[0, 0, 0, 0]);
     }
 
-    // Player name (null-terminated)
+    // Player name: null-terminated
     packet.extend_from_slice(info.player_name.as_bytes());
     packet.push(0);
 
-    // DeviceInfo XML
+    // DeviceInfo XML — HDPlayer expects INLINE ATTRIBUTES on <DeviceInfo/>.
+    // SoftwareVersion must be present or HDPlayer will silently discard the packet.
+    // DeviceType 52 == 0x34 == D15 (async architecture, common async player type).
+    // CPUType 6 == PX30 / modern async SoC.
     let xml = format!(
         "<?xml version=\"1.0\" encoding=\"utf-8\"?>\
-         <DeviceInfo>\
-         <CPUType Value=\"5\"/>\
-         <ScreenOnOff Value=\"1\"/>\
-         <ScreenR Value=\"0\"/>\
-         <HardwareVersion Value=\"1.0\"/>\
-         </DeviceInfo>"
+         <DeviceInfo \
+           SoftwareVersion=\"7.11.18.0\" \
+           DeviceType=\"52\" \
+           CPUType=\"6\" \
+           ScreenWidth=\"{w}\" \
+           ScreenHeight=\"{h}\" \
+           ScreenOnOff=\"1\" \
+           ScreenR=\"0\" \
+           HardwareVersion=\"1.0\" \
+           Volume=\"100\" \
+           Brightness=\"100\" \
+           Rotation=\"0\" \
+           AdminMode=\"0\"/>",
+        w = info.screen_width,
+        h = info.screen_height,
     );
     packet.extend_from_slice(xml.as_bytes());
 
@@ -128,28 +145,29 @@ fn build_device_info_packet(info: &DeviceInfo) -> Vec<u8> {
 }
 
 /// Build the ext1 status packet.
-/// Format: [device_id bytes][ext1 XML with play status]
+///
+/// Wire format: [15 bytes device_id][ext1 XML]
+/// (no IP address field — ext1 omits it)
 fn build_ext1_packet(info: &DeviceInfo) -> Vec<u8> {
     let mut packet = Vec::new();
 
-    // Device ID (padded to 15 bytes)
+    // Device ID: exactly 15 bytes, null-padded
     let id_bytes = info.device_id.as_bytes();
     let mut id_buf = [0u8; 15];
     let copy_len = id_bytes.len().min(15);
     id_buf[..copy_len].copy_from_slice(&id_bytes[..copy_len]);
     packet.extend_from_slice(&id_buf);
 
-    // ext1 XML with status info
-    let xml = format!(
-        "<?xml version=\"1.0\" encoding=\"utf-8\"?>\
-         <ext1>\
-         <PlayStatus value=\"1\"/>\
-         <ProgramIndex index=\"0\"/>\
-         <ProgramCount count=\"1\" normalCount=\"1\" intercutCount=\"0\"/>\
-         <DeviceLocker enable=\"0\"/>\
-         <WifiApPasswd simple=\"1\"/>\
-         </ext1>"
-    );
+    // ext1 XML — also uses inline attributes, not child elements
+    let xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\
+               <ext1 \
+                 PlayStatus=\"1\" \
+                 ProgramIndex=\"0\" \
+                 ProgramCount=\"1\" \
+                 NormalCount=\"1\" \
+                 IntercutCount=\"0\" \
+                 DeviceLocker=\"0\" \
+                 WifiApPasswd=\"1\"/>";
     packet.extend_from_slice(xml.as_bytes());
 
     packet

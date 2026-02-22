@@ -102,11 +102,13 @@ pub async fn handle_sdk_command(
 
         "GetAllProgram" | "getAllProgram" => {
             let state = services.read().await;
+            let current = state.current_program_guid.clone();
             let mut items = String::new();
             for p in &state.programs {
+                let is_current = if p.guid == current { "1" } else { "0" };
                 items.push_str(&format!(
-                    "<program guid=\"{}\" name=\"{}\"/>",
-                    p.guid, p.name
+                    "<program guid=\"{}\" name=\"{}\" type=\"{}\" current=\"{}\"/>",
+                    p.guid, p.name, p.program_type, is_current
                 ));
             }
             ok!(&items)
@@ -126,6 +128,20 @@ pub async fn handle_sdk_command(
                     .send(PlayerCommand::SwitchProgram(target_guid))
                     .await
                     .ok();
+            }
+            ok!("")
+        }
+
+        "SwitchProgramIndex" | "switchProgramIndex" => {
+            let idx = extract_attr(xml, "index", "value")
+                .or_else(|| extract_attr(xml, "program", "index"))
+                .and_then(|v| v.parse::<usize>().ok())
+                .unwrap_or(0);
+            let state = services.read().await;
+            if let Some(p) = state.programs.get(idx) {
+                let guid = p.guid.clone();
+                drop(state);
+                player_tx.send(PlayerCommand::SwitchProgram(guid)).await.ok();
             }
             ok!("")
         }
@@ -201,7 +217,7 @@ pub async fn handle_sdk_command(
             ok!("")
         }
 
-        "ScreenRotation" | "screenRotation" => {
+        "ScreenRotation" | "screenRotation" | "SetRotation" | "setRotation" => {
             // <rotate value="90"/> or <rotation value="90"/>
             let deg = extract_attr(xml, "rotate", "value")
                 .or_else(|| extract_attr(xml, "rotation", "value"))
@@ -234,6 +250,19 @@ pub async fn handle_sdk_command(
                         drop(state);
                         player_tx.send(PlayerCommand::SetBrightness(level)).await.ok();
                     }
+                }
+            }
+            ok!("")
+        }
+
+        // Simple single-value brightness setter (used by hdplayer-client SetBrightness)
+        "SetBrightness" | "setBrightness" => {
+            if let Some(val) = extract_attr(xml, "brightness", "value") {
+                if let Ok(level) = val.parse::<u8>() {
+                    let mut state = services.write().await;
+                    state.brightness.set_level(level);
+                    drop(state);
+                    player_tx.send(PlayerCommand::SetBrightness(level)).await.ok();
                 }
             }
             ok!("")
@@ -308,10 +337,22 @@ pub async fn handle_sdk_command(
             let state = services.read().await;
             let name = &state.device_name;
             let dev_id = if state.device_id.is_empty() { "RUST-001" } else { &state.device_id };
+            let brightness = state.brightness.get_level();
+            let vol = state.volume;
+            let rot = state.rotation;
+            let ip = crate::protocol::discovery::get_local_ip();
             ok!(&format!(
-                "<deviceInfo cpu=\"RustPlayer\" model=\"huidu-player\" \
-                 fpgaVersion=\"1.0.0\" screenWidth=\"{screen_width}\" \
-                 screenHeight=\"{screen_height}\" deviceID=\"{dev_id}\" name=\"{name}\"/>"
+                "<deviceInfo \
+                 deviceId=\"{dev_id}\" \
+                 deviceName=\"{name}\" \
+                 version=\"7.11.18.0\" \
+                 screenWidth=\"{screen_width}\" \
+                 screenHeight=\"{screen_height}\" \
+                 ip=\"{ip}\" \
+                 mac=\"00:00:00:00:00:00\" \
+                 brightness=\"{brightness}\" \
+                 volume=\"{vol}\" \
+                 rotation=\"{rot}\"/>"
             ))
         }
 
@@ -321,7 +362,7 @@ pub async fn handle_sdk_command(
             ok!(&format!("<name value=\"{name}\"/>"))
         }
 
-        "SetDeviceName" | "setDeviceName" => {
+        "SetDeviceName" | "setDeviceName" | "UpdateDevName" | "updateDevName" => {
             if let Some(name) = extract_attr(xml, "name", "value") {
                 let mut state = services.write().await;
                 state.device_name = name;
@@ -499,13 +540,13 @@ pub async fn handle_sdk_command(
         "UnlockAdminModePassword" | "unlockAdminModePassword" => ok!(""),
 
         // ── Volume ─────────────────────────────────────────────────────────────
-        "GetSystemVolume" | "getSystemVolume" => {
+        "GetSystemVolume" | "getSystemVolume" | "GetVolume" | "getVolume" => {
             let state = services.read().await;
             let vol = state.volume;
             ok!(&format!("<volume value=\"{vol}\"/>"))
         }
 
-        "SetSystemVolume" | "setSystemVolume" => {
+        "SetSystemVolume" | "setSystemVolume" | "SetVolume" | "setVolume" => {
             if let Some(v) = extract_attr(xml, "volume", "value") {
                 if let Ok(vol) = v.parse::<u8>() {
                     let mut state = services.write().await;
@@ -541,7 +582,7 @@ pub async fn handle_sdk_command(
         "SetSerialSDK" | "setSerialSDK" => ok!(""),
 
         // ── System Control ─────────────────────────────────────────────────────
-        "Reboot" | "reboot" => {
+        "Reboot" | "reboot" | "RebootDevice" | "rebootDevice" => {
             info!("Reboot requested — initiating system reboot");
             // On Linux, spawn `reboot` in the background
             #[cfg(unix)]

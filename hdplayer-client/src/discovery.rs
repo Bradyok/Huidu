@@ -78,13 +78,20 @@ impl DeviceInfo {
             String::new()
         };
 
-        // Parse optional fields from DeviceInfo XML
-        let device_type = xml::get_attr(&info_xml, "type").map(|s| s.to_string())
-            .or_else(|| xml::get_attr(&info_xml, "deviceType").map(|s| s.to_string()));
-        let firmware_version = xml::get_attr(&info_xml, "version").map(|s| s.to_string());
-        let screen_width = xml::get_attr(&info_xml, "width")
+        // Parse optional fields from DeviceInfo XML.
+        // huidu-player sends capitalized attribute names: SoftwareVersion, DeviceType, etc.
+        let device_type = xml::get_attr(&info_xml, "DeviceType").map(|s| s.to_string())
+            .or_else(|| xml::get_attr(&info_xml, "deviceType").map(|s| s.to_string()))
+            .or_else(|| xml::get_attr(&info_xml, "type").map(|s| s.to_string()));
+        let firmware_version = xml::get_attr(&info_xml, "SoftwareVersion").map(|s| s.to_string())
+            .or_else(|| xml::get_attr(&info_xml, "version").map(|s| s.to_string()));
+        let screen_width = xml::get_attr(&info_xml, "ScreenWidth")
+            .or_else(|| xml::get_attr(&info_xml, "screenWidth"))
+            .or_else(|| xml::get_attr(&info_xml, "width"))
             .and_then(|s| s.parse().ok());
-        let screen_height = xml::get_attr(&info_xml, "height")
+        let screen_height = xml::get_attr(&info_xml, "ScreenHeight")
+            .or_else(|| xml::get_attr(&info_xml, "screenHeight"))
+            .or_else(|| xml::get_attr(&info_xml, "height"))
             .and_then(|s| s.parse().ok());
         let current_program = xml::get_attr(&info_xml, "programGuid").map(|s| s.to_string());
 

@@ -16,6 +16,7 @@ use crate::services::usb_disk::UsbDiskService;
 pub struct ProgramInfo {
     pub guid: String,
     pub name: String,
+    pub program_type: String,
 }
 
 /// Shared services state — accessible from both the protocol server and the player.

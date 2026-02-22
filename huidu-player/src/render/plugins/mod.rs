@@ -1,8 +1,11 @@
 pub mod analog_clock;
+pub mod calendar;
 pub mod clock;
+pub mod countdown;
 pub mod gif;
 pub mod image;
 pub mod neon;
+pub mod qrcode;
 pub mod table;
 pub mod text;
 pub mod video;

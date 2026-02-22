@@ -55,6 +55,7 @@ byteorder = "1"
 
 # Base64 encoding (screenshot response)
 base64 = "0.22"
+qrcode = "0.14.1"
 
 [target.'cfg(unix)'.dependencies]
 # Serial port (FPGA comm) - only on Linux

@@ -157,4 +157,152 @@ mod tests {
         assert_eq!(screen.programs.len(), 1);
         assert_eq!(screen.programs[0].areas[0].resources.items.len(), 1);
     }
+
+    #[test]
+    fn test_parse_text_rich() {
+        let xml = r##"
+        <screen>
+          <program guid="p1" type="normal">
+            <area guid="a1">
+              <rectangle x="0" y="0" width="128" height="32"/>
+              <resources>
+                <text guid="t1" singleLine="false" background="#000000">
+                  <string>Hello\nWorld</string>
+                  <font size="14" color="rainbow" bold="true" italic="true" underline="false"/>
+                  <style align="center" valign="top"/>
+                </text>
+              </resources>
+            </area>
+          </program>
+        </screen>
+        "##;
+
+        let screen = parse_program_xml(xml).unwrap();
+        let area = &screen.programs[0].areas[0];
+        if let crate::program::model::ContentItem::Text(t) = &area.resources.items[0] {
+            let font = t.font.as_ref().unwrap();
+            assert!(font.bold);
+            assert!(font.italic);
+            assert_eq!(font.color, "rainbow");
+        } else {
+            panic!("Expected Text item");
+        }
+    }
+
+    #[test]
+    fn test_parse_table() {
+        let xml = r##"
+        <screen>
+          <program guid="p1" type="normal">
+            <area guid="a1">
+              <rectangle x="0" y="0" width="200" height="100"/>
+              <resources>
+                <table guid="tbl-1" rows="2" cols="3">
+                  <style fontColor="#ffffff" borderColor="#444444"
+                         fontSize="10" headerBg="#222266"/>
+                  <row>
+                    <cell>Score</cell><cell>Team A</cell><cell>Team B</cell>
+                  </row>
+                  <row>
+                    <cell>1</cell><cell>32</cell><cell>28</cell>
+                  </row>
+                </table>
+              </resources>
+            </area>
+          </program>
+        </screen>
+        "##;
+
+        let screen = parse_program_xml(xml).unwrap();
+        let area = &screen.programs[0].areas[0];
+        if let crate::program::model::ContentItem::Table(t) = &area.resources.items[0] {
+            assert_eq!(t.rows, 2);
+            assert_eq!(t.cols, 3);
+        } else {
+            panic!("Expected Table item");
+        }
+    }
+
+    #[test]
+    fn test_parse_countdown() {
+        let xml = r##"
+        <screen>
+          <program guid="p1" type="normal">
+            <area guid="a1">
+              <rectangle x="0" y="0" width="128" height="32"/>
+              <resources>
+                <countdownTimer guid="ct-1"
+                                target="2030-01-01 00:00:00"
+                                format="D:H:M:S"
+                                label="New Year in"
+                                color="#00ff88"
+                                urgentSecs="60"
+                                urgentColor="#ff2200"
+                                fontSize="14"/>
+              </resources>
+            </area>
+          </program>
+        </screen>
+        "##;
+
+        let screen = parse_program_xml(xml).unwrap();
+        let area = &screen.programs[0].areas[0];
+        if let crate::program::model::ContentItem::Countdown(c) = &area.resources.items[0] {
+            assert_eq!(c.format, "D:H:M:S");
+            assert_eq!(c.urgent_secs, 60);
+            assert_eq!(c.label, "New Year in");
+        } else {
+            panic!("Expected Countdown item");
+        }
+    }
+
+    #[test]
+    fn test_parse_weather() {
+        let xml = r##"
+        <screen>
+          <program guid="p1" type="normal">
+            <area guid="a1">
+              <rectangle x="0" y="0" width="128" height="64"/>
+              <resources>
+                <weather guid="w-1" city="London" updateInterval="2">
+                  <font size="10" color="#ffffff"/>
+                </weather>
+              </resources>
+            </area>
+          </program>
+        </screen>
+        "##;
+
+        let screen = parse_program_xml(xml).unwrap();
+        let area = &screen.programs[0].areas[0];
+        if let crate::program::model::ContentItem::Weather(w) = &area.resources.items[0] {
+            assert_eq!(w.city, "London");
+            assert_eq!(w.update_interval, 2);
+        } else {
+            panic!("Expected Weather item");
+        }
+    }
+
+    #[test]
+    fn test_parse_analog_clock() {
+        let xml = r##"
+        <screen>
+          <program guid="p1" type="normal">
+            <area guid="a1">
+              <rectangle x="0" y="0" width="64" height="64"/>
+              <resources>
+                <analogClock guid="ac-1" dialColor="#222222" handColor="#ffffff"/>
+              </resources>
+            </area>
+          </program>
+        </screen>
+        "##;
+
+        let screen = parse_program_xml(xml).unwrap();
+        let area = &screen.programs[0].areas[0];
+        assert!(matches!(
+            &area.resources.items[0],
+            crate::program::model::ContentItem::AnalogClock(_)
+        ));
+    }
 }

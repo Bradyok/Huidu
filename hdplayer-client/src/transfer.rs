@@ -33,13 +33,32 @@ pub fn md5_hex(data: &[u8]) -> String {
 }
 
 /// Build a kFileStartAsk packet.
+///
+/// Payload format (confirmed from huidu-player server.rs):
+///   [32 bytes] MD5 hex string (zero-padded to exactly 32 bytes)
+///   [ 8 bytes] file size (u64 little-endian)
+///   [ 2 bytes] file type (u16 little-endian; 0 = generic)
+///   [ N bytes] filename (null-terminated UTF-8)
 pub fn build_start_packet(filename: &str, total_size: u64, md5: &str) -> Packet {
     let mut payload = Vec::new();
+
+    // MD5 hex: exactly 32 bytes, zero-padded
+    let mut md5_buf = [0u8; 32];
+    let md5_bytes = md5.as_bytes();
+    let copy_len = md5_bytes.len().min(32);
+    md5_buf[..copy_len].copy_from_slice(&md5_bytes[..copy_len]);
+    payload.extend_from_slice(&md5_buf);
+
+    // File size: u64 LE
+    payload.extend_from_slice(&total_size.to_le_bytes());
+
+    // File type: u16 LE (0 = generic binary)
+    payload.extend_from_slice(&0u16.to_le_bytes());
+
+    // Filename: null-terminated
     payload.extend_from_slice(filename.as_bytes());
     payload.push(0);
-    payload.extend_from_slice(&total_size.to_le_bytes());
-    payload.extend_from_slice(md5.as_bytes());
-    payload.push(0);
+
     Packet::new(Command::FileStartAsk, payload)
 }
 

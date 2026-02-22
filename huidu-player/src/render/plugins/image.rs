@@ -84,6 +84,27 @@ impl ContentRenderer for ImageRenderer {
         let dst_w = width as f32;
         let dst_h = height as f32;
 
+        // Tile mode: repeat the image to fill the area
+        if fit_mode == "tile" {
+            let tw = src_pixmap.width();
+            let th = src_pixmap.height();
+            let cols = (width + tw - 1) / tw;
+            let rows = (height + th - 1) / th;
+            for row in 0..rows {
+                for col in 0..cols {
+                    target.draw_pixmap(
+                        x + (col * tw) as i32,
+                        y + (row * th) as i32,
+                        src_pixmap.as_ref(),
+                        &PixmapPaint::default(),
+                        Transform::identity(),
+                        None,
+                    );
+                }
+            }
+            return true;
+        }
+
         // Calculate transform based on fit mode
         let transform = match fit_mode.as_str() {
             "stretch" => {
@@ -113,7 +134,6 @@ impl ContentRenderer for ImageRenderer {
             }
         };
 
-        // Draw the image onto the target
         target.draw_pixmap(
             0,
             0,

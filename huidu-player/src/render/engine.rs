@@ -9,10 +9,13 @@ use crate::program::model::{ContentItem, Program};
 use crate::render::border;
 use crate::render::effects::{self, EffectPhase, EffectState};
 use crate::render::plugins::analog_clock::AnalogClockRenderer;
+use crate::render::plugins::calendar::CalendarRenderer;
 use crate::render::plugins::clock::ClockRenderer;
+use crate::render::plugins::countdown::CountdownRenderer;
 use crate::render::plugins::gif::GifRenderer;
 use crate::render::plugins::image::ImageRenderer;
 use crate::render::plugins::neon::NeonRenderer;
+use crate::render::plugins::qrcode::QrCodeRenderer;
 use crate::render::plugins::table::TableRenderer;
 use crate::render::plugins::text::TextRenderer;
 use crate::render::plugins::video::VideoRenderer;
@@ -50,10 +53,24 @@ struct AreaState {
     effect: EffectState,
 }
 
+/// Pre-compute a 256-entry brightness lookup table for a given level (0-100).
+/// Replaces per-pixel `value * factor` float math with a single array index.
+fn build_brightness_lut(brightness: u8) -> [u8; 256] {
+    let factor = brightness.min(100) as f32 / 100.0;
+    let mut lut = [0u8; 256];
+    for (i, slot) in lut.iter_mut().enumerate() {
+        *slot = (i as f32 * factor) as u8;
+    }
+    lut
+}
+
 pub struct RenderEngine {
     framebuffer: Pixmap,
     area_surfaces: Vec<Pixmap>,
     content_surfaces: Vec<Pixmap>,
+    /// Reusable surfaces for per-area borders — avoids a Pixmap allocation
+    /// every frame for each area that has a border defined.
+    border_surfaces: Vec<Pixmap>,
     area_states: Vec<AreaState>,
     // -- content renderers --
     image_renderer: ImageRenderer,
@@ -65,11 +82,17 @@ pub struct RenderEngine {
     weather_renderer: WeatherRenderer,
     analog_clock_renderer: AnalogClockRenderer,
     neon_renderer: NeonRenderer,
+    qrcode_renderer: QrCodeRenderer,
+    calendar_renderer: CalendarRenderer,
+    countdown_renderer: CountdownRenderer,
     // -- display state --
     frame: u64,
     ms_per_frame: u64,
     /// Software brightness level (0-100)
     brightness: u8,
+    /// Pre-computed lookup table for brightness scaling.
+    /// Avoids per-pixel f32 multiply; rebuilt only when brightness changes.
+    brightness_lut: [u8; 256],
     /// Screen rotation in degrees (0 / 90 / 180 / 270)
     rotation: u16,
     /// Weather API base URL (passed through to WeatherRenderer)
@@ -82,6 +105,7 @@ impl RenderEngine {
             framebuffer: Pixmap::new(width, height).expect("Failed to create framebuffer"),
             area_surfaces: Vec::new(),
             content_surfaces: Vec::new(),
+            border_surfaces: Vec::new(),
             area_states: Vec::new(),
             image_renderer: ImageRenderer::new(),
             text_renderer: TextRenderer::new(),
@@ -92,9 +116,13 @@ impl RenderEngine {
             weather_renderer: WeatherRenderer::new(weather_url.clone()),
             analog_clock_renderer: AnalogClockRenderer::new(),
             neon_renderer: NeonRenderer::new(),
+            qrcode_renderer: QrCodeRenderer::new(),
+            calendar_renderer: CalendarRenderer::new(),
+            countdown_renderer: CountdownRenderer::new(),
             frame: 0,
             ms_per_frame: 1000 / fps.max(1) as u64,
             brightness: 100,
+            brightness_lut: build_brightness_lut(100),
             rotation: 0,
             weather_url,
         }
@@ -102,6 +130,7 @@ impl RenderEngine {
 
     pub fn set_brightness(&mut self, level: u8) {
         self.brightness = level.min(100);
+        self.brightness_lut = build_brightness_lut(self.brightness);
     }
 
     pub fn set_rotation(&mut self, degrees: u16) {
@@ -155,6 +184,8 @@ impl RenderEngine {
     /// anchored to the present rather than to time zero.
     pub fn reset_for_program(&mut self, program: &Program, start_ms: u64) {
         self.area_states.clear();
+        // Clear pooled border surfaces so they're resized correctly for the new program.
+        self.border_surfaces.clear();
         for area in &program.areas {
             let items = &area.resources.items;
             let effect = if !items.is_empty() {
@@ -186,6 +217,9 @@ impl RenderEngine {
         }
         while self.content_surfaces.len() < program.areas.len() {
             self.content_surfaces.push(Pixmap::new(1, 1).unwrap());
+        }
+        while self.border_surfaces.len() < program.areas.len() {
+            self.border_surfaces.push(Pixmap::new(1, 1).unwrap());
         }
 
         for (i, area) in program.areas.iter().enumerate() {
@@ -253,6 +287,9 @@ impl RenderEngine {
                 &mut self.weather_renderer,
                 &mut self.analog_clock_renderer,
                 &mut self.neon_renderer,
+                &mut self.qrcode_renderer,
+                &mut self.calendar_renderer,
+                &mut self.countdown_renderer,
             );
 
             // Apply transition effect
@@ -287,18 +324,21 @@ impl RenderEngine {
                 None,
             );
 
-            // Per-area border (drawn directly on the framebuffer at area position)
+            // Per-area border (drawn directly on the framebuffer at area position).
+            // Reuses a pooled surface to avoid a Pixmap allocation every frame.
             if let Some(ref b) = area.border {
                 if b.index != 0 || !b.effect.is_empty() {
-                    // Build a temporary surface the size of the area, draw the
-                    // border into it, then composite onto the framebuffer.
-                    let mut bsurface =
-                        Pixmap::new(w, h).unwrap_or_else(|| Pixmap::new(1, 1).unwrap());
-                    border::draw_border(&mut bsurface, b, elapsed_ms);
+                    let bsurf = &mut self.border_surfaces[i];
+                    if bsurf.width() != w || bsurf.height() != h {
+                        *bsurf = Pixmap::new(w, h)
+                            .unwrap_or_else(|| Pixmap::new(1, 1).unwrap());
+                    }
+                    bsurf.fill(Color::TRANSPARENT);
+                    border::draw_border(bsurf, b, elapsed_ms);
                     self.framebuffer.draw_pixmap(
                         rect.x,
                         rect.y,
-                        bsurface.as_ref(),
+                        bsurf.as_ref(),
                         &PixmapPaint::default(),
                         Transform::identity(),
                         None,
@@ -314,14 +354,14 @@ impl RenderEngine {
             }
         }
 
-        // Apply software brightness
+        // Apply software brightness via pre-computed LUT (avoids per-pixel f32 math).
         if self.brightness < 100 {
-            let factor = self.brightness as f32 / 100.0;
+            let lut = self.brightness_lut;
             let data = self.framebuffer.data_mut();
             for chunk in data.chunks_exact_mut(4) {
-                chunk[0] = (chunk[0] as f32 * factor) as u8;
-                chunk[1] = (chunk[1] as f32 * factor) as u8;
-                chunk[2] = (chunk[2] as f32 * factor) as u8;
+                chunk[0] = lut[chunk[0] as usize];
+                chunk[1] = lut[chunk[1] as usize];
+                chunk[2] = lut[chunk[2] as usize];
             }
         }
 
@@ -375,6 +415,9 @@ fn dispatch_render(
     weather: &mut WeatherRenderer,
     analog_clock: &mut AnalogClockRenderer,
     neon: &mut NeonRenderer,
+    qrcode: &mut QrCodeRenderer,
+    calendar: &mut CalendarRenderer,
+    countdown: &mut CountdownRenderer,
 ) {
     match item {
         ContentItem::Image(_) => {
@@ -404,6 +447,15 @@ fn dispatch_render(
         ContentItem::Neon(_) => {
             neon.render(item, surface, 0, 0, w, h, elapsed_ms, program_dir);
         }
+        ContentItem::QrCode(_) => {
+            qrcode.render(item, surface, 0, 0, w, h, elapsed_ms, program_dir);
+        }
+        ContentItem::Calendar(_) => {
+            calendar.render(item, surface, 0, 0, w, h, elapsed_ms, program_dir);
+        }
+        ContentItem::Countdown(_) => {
+            countdown.render(item, surface, 0, 0, w, h, elapsed_ms, program_dir);
+        }
     }
 }
 
@@ -421,6 +473,9 @@ fn get_effect_for_item(item: &ContentItem, start_ms: u64) -> EffectState {
         ContentItem::Weather(w) => w.effect.as_ref(),
         ContentItem::AnalogClock(a) => a.effect.as_ref(),
         ContentItem::Neon(n) => n.effect.as_ref(),
+        ContentItem::QrCode(q) => q.effect.as_ref(),
+        ContentItem::Calendar(c) => c.effect.as_ref(),
+        ContentItem::Countdown(c) => c.effect.as_ref(),
         _ => None,
     };
 

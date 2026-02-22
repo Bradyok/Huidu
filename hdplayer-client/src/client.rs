@@ -10,6 +10,7 @@ use std::sync::Arc;
 use tracing::{debug, info, warn};
 use uuid::Uuid;
 
+
 use crate::command;
 use crate::error::{Error, Result};
 use crate::protocol::{Command, Packet};
@@ -153,9 +154,21 @@ impl Client {
     }
 
     /// Send an SDK XML command and receive the XML response.
+    ///
+    /// SDK CMD payload framing (confirmed from server.rs):
+    ///   Request:  [u32 total_xml_len][u32 chunk_index=0][xml_bytes...]
+    ///   Response: [u32 total_xml_len][u32 chunk_index=0][xml_bytes...]
     async fn sdk_cmd(&mut self, method: &str, body: &str) -> Result<String> {
-        let xml = xml::sdk_request(&self.client_guid, method, body);
-        let pkt = Packet::new(Command::SdkCmdAsk, xml.into_bytes());
+        let xml_str = xml::sdk_request(&self.client_guid, method, body);
+        let xml_bytes = xml_str.as_bytes();
+
+        // Build payload with [u32 total_len][u32 index=0] prefix
+        let mut payload = Vec::with_capacity(8 + xml_bytes.len());
+        payload.extend_from_slice(&(xml_bytes.len() as u32).to_le_bytes());
+        payload.extend_from_slice(&0u32.to_le_bytes()); // chunk index 0
+        payload.extend_from_slice(xml_bytes);
+
+        let pkt = Packet::new(Command::SdkCmdAsk, payload);
         self.send_packet(&pkt).await?;
 
         // Receive response — may need to skip heartbeat packets
@@ -163,7 +176,13 @@ impl Client {
             let resp = self.recv_with_timeout(CMD_TIMEOUT).await?;
             match resp.command {
                 Command::SdkCmdAnswer => {
-                    let response_xml = String::from_utf8_lossy(&resp.payload).into_owned();
+                    // Strip the [u32 total_len][u32 index] 8-byte prefix from response
+                    if resp.payload.len() < 8 {
+                        return Err(Error::Protocol(
+                            format!("SdkCmdAnswer too short: {} bytes", resp.payload.len())
+                        ));
+                    }
+                    let response_xml = String::from_utf8_lossy(&resp.payload[8..]).into_owned();
                     debug!("SDK response for {method}: {} bytes", response_xml.len());
                     xml::parse_result(&response_xml)?;
                     return Ok(response_xml);
@@ -193,16 +212,23 @@ impl Client {
         let xml = self.sdk_cmd("GetDeviceInfo", &command::get_device_info()).await?;
         let mut info = DeviceDetails::default();
         info.raw_xml = xml.clone();
-        // Parse key fields
-        if let Some(v) = xml::get_attr(&xml, "deviceId") { info.device_id = v.to_string(); }
-        if let Some(v) = xml::get_attr(&xml, "deviceName") { info.device_name = v.to_string(); }
-        if let Some(v) = xml::get_attr(&xml, "version") { info.firmware_version = v.to_string(); }
-        if let Some(v) = xml::get_attr(&xml, "width") { info.screen_width = v.parse().unwrap_or(0); }
-        if let Some(v) = xml::get_attr(&xml, "height") { info.screen_height = v.parse().unwrap_or(0); }
-        if let Some(v) = xml::get_attr(&xml, "ip") { info.ip_address = v.to_string(); }
-        if let Some(v) = xml::get_attr(&xml, "mac") { info.mac_address = v.to_string(); }
-        if let Some(v) = xml::get_attr(&xml, "brightness") { info.brightness = v.parse().unwrap_or(100); }
-        if let Some(v) = xml::get_attr(&xml, "volume") { info.volume = v.parse().unwrap_or(50); }
+        // Parse key fields — try multiple attribute name variants for compatibility
+        // with both huidu-player (our server) and real BoxPlayer firmware
+        let get = |a: &str| xml::get_attr(&xml, a).map(|s| s.to_string());
+        info.device_id    = get("deviceId").or_else(|| get("deviceID")).unwrap_or_default();
+        info.device_name  = get("deviceName").or_else(|| get("name")).unwrap_or_default();
+        info.firmware_version = get("version").or_else(|| get("SoftwareVersion"))
+                                    .or_else(|| get("softwareVersion")).unwrap_or_default();
+        info.screen_width  = get("screenWidth").or_else(|| get("ScreenWidth"))
+                                .or_else(|| get("width"))
+                                .and_then(|v| v.parse().ok()).unwrap_or(0);
+        info.screen_height = get("screenHeight").or_else(|| get("ScreenHeight"))
+                                .or_else(|| get("height"))
+                                .and_then(|v| v.parse().ok()).unwrap_or(0);
+        info.ip_address    = get("ip").unwrap_or_default();
+        info.mac_address   = get("mac").unwrap_or_default();
+        info.brightness    = get("brightness").and_then(|v| v.parse().ok()).unwrap_or(100);
+        info.volume        = get("volume").and_then(|v| v.parse().ok()).unwrap_or(50);
         Ok(info)
     }
 

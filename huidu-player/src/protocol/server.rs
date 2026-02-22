@@ -22,6 +22,7 @@ const CMD_SDK_CMD_ANSWER: u16 = 0x2004;
 const CMD_FILE_START_ASK: u16 = 0x8001;
 const CMD_FILE_START_ANSWER: u16 = 0x8002;
 const CMD_FILE_CONTENT_ASK: u16 = 0x8003;
+const CMD_FILE_CONTENT_ANSWER: u16 = 0x8004;
 const CMD_FILE_END_ASK: u16 = 0x8005;
 const CMD_FILE_END_ANSWER: u16 = 0x8006;
 
@@ -157,6 +158,7 @@ async fn handle_connection(
             }
 
             CMD_FILE_START_ASK => {
+                // Payload format: [32 bytes MD5 hex][u64 file_size][u16 file_type][filename\0]
                 if data_len >= 42 {
                     let md5_str = String::from_utf8_lossy(&buf[..32]).to_string();
                     let mut cursor = Cursor::new(&buf[32..]);
@@ -169,6 +171,7 @@ async fn handle_connection(
                     info!("File start: {} ({} bytes, type {})", filename, file_size, file_type);
                     session.start_file_transfer(filename, file_size, file_type, md5_str);
 
+                    // Response: [u32 result=0][u64 resume_offset=0]
                     let mut resp = Vec::new();
                     WriteBytesExt::write_u32::<LittleEndian>(&mut resp, 0).unwrap();
                     WriteBytesExt::write_u64::<LittleEndian>(&mut resp, 0).unwrap();
@@ -179,10 +182,19 @@ async fn handle_connection(
             }
 
             CMD_FILE_CONTENT_ASK => {
-                if data_len > 0 {
+                // Payload format: [u64 offset][chunk data]
+                // Strip the 8-byte offset prefix before storing the chunk.
+                const OFFSET_LEN: usize = 8;
+                if data_len > OFFSET_LEN {
+                    session.append_file_data(&buf[OFFSET_LEN..data_len]);
+                } else if data_len > 0 {
+                    // Fallback: no offset prefix (older protocol variant)
                     session.append_file_data(&buf[..data_len]);
                 }
-                None
+                // Send per-chunk ack: [u32 result=0]
+                let mut resp = Vec::new();
+                WriteBytesExt::write_u32::<LittleEndian>(&mut resp, 0).unwrap();
+                Some(make_packet(CMD_FILE_CONTENT_ANSWER, &resp))
             }
 
             CMD_FILE_END_ASK => {

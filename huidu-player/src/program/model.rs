@@ -160,6 +160,12 @@ pub enum ContentItem {
     AnalogClock(AnalogClockContent),
     #[serde(rename = "neon")]
     Neon(NeonContent),
+    #[serde(rename = "qrCode")]
+    QrCode(QrCodeContent),
+    #[serde(rename = "calendar")]
+    Calendar(CalendarContent),
+    #[serde(rename = "countdownTimer")]
+    Countdown(CountdownContent),
 }
 
 /// Transition/animation effect
@@ -492,6 +498,108 @@ pub struct NeonContent {
 fn default_neon_color() -> String { "#ff0088".to_string() }
 fn default_neon_speed() -> u32 { 5 }
 fn default_true() -> bool { true }
+
+// -- QR Code --
+
+/// QR code content item.
+/// Renders a live QR code from a text/URL string.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct QrCodeContent {
+    #[serde(rename = "@guid")]
+    pub guid: String,
+    #[serde(rename = "@name", default)]
+    pub name: String,
+    /// The text/URL to encode into the QR code.
+    #[serde(rename = "@data", default)]
+    pub data: String,
+    /// Foreground color (default black).
+    #[serde(rename = "@fgColor", default = "default_qr_fg")]
+    pub fg_color: String,
+    /// Background color (default white).
+    #[serde(rename = "@bgColor", default = "default_qr_bg")]
+    pub bg_color: String,
+    /// Border (quiet zone) in modules (default 1).
+    #[serde(rename = "@border", default = "default_qr_border")]
+    pub border: u32,
+    pub effect: Option<Effect>,
+}
+
+fn default_qr_fg() -> String { "#000000".to_string() }
+fn default_qr_bg() -> String { "#ffffff".to_string() }
+fn default_qr_border() -> u32 { 1 }
+
+// -- Calendar --
+
+/// Monthly calendar grid content item.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct CalendarContent {
+    #[serde(rename = "@guid")]
+    pub guid: String,
+    #[serde(rename = "@name", default)]
+    pub name: String,
+    /// Text color for regular days.
+    #[serde(rename = "@color", default = "default_color")]
+    pub color: String,
+    /// Highlight color for today's date.
+    #[serde(rename = "@todayColor", default = "default_today_color")]
+    pub today_color: String,
+    /// Header (month+year) color.
+    #[serde(rename = "@headerColor", default = "default_header_color")]
+    pub header_color: String,
+    /// Weekday name row color.
+    #[serde(rename = "@weekdayColor", default = "default_weekday_color")]
+    pub weekday_color: String,
+    /// Font size in pixels (default 8).
+    #[serde(rename = "@fontSize", default = "default_cal_font_size")]
+    pub font_size: f32,
+    pub effect: Option<Effect>,
+}
+
+fn default_today_color() -> String { "#ffff00".to_string() }
+fn default_header_color() -> String { "#00aaff".to_string() }
+fn default_weekday_color() -> String { "#aaaaaa".to_string() }
+fn default_cal_font_size() -> f32 { 8.0 }
+
+// -- Countdown timer --
+
+/// Countdown timer content item.
+/// Counts down to a fixed target datetime and displays the remaining time.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct CountdownContent {
+    #[serde(rename = "@guid")]
+    pub guid: String,
+    #[serde(rename = "@name", default)]
+    pub name: String,
+    /// Target datetime: "YYYY-MM-DD HH:MM:SS"
+    #[serde(rename = "@target", default)]
+    pub target: String,
+    /// Display format: "D:H:M:S" | "H:M:S" | "M:S" | "S"
+    #[serde(rename = "@format", default = "default_countdown_format")]
+    pub format: String,
+    /// Optional label shown above the timer (e.g. "Sale ends in")
+    #[serde(rename = "@label", default)]
+    pub label: String,
+    /// Timer digit colour
+    #[serde(rename = "@color", default = "default_color")]
+    pub color: String,
+    /// Label colour
+    #[serde(rename = "@labelColor", default = "default_color")]
+    pub label_color: String,
+    /// Font size for the timer digits
+    #[serde(rename = "@fontSize", default = "default_countdown_font_size")]
+    pub font_size: f32,
+    /// Colour to switch to when under this many seconds remain (0 = disabled)
+    #[serde(rename = "@urgentSecs", default)]
+    pub urgent_secs: u64,
+    /// Colour used when under urgent_secs
+    #[serde(rename = "@urgentColor", default = "default_urgent_color")]
+    pub urgent_color: String,
+    pub effect: Option<Effect>,
+}
+
+fn default_countdown_format() -> String { "H:M:S".to_string() }
+fn default_countdown_font_size() -> f32 { 16.0 }
+fn default_urgent_color() -> String { "#ff2200".to_string() }
 
 // -- Helpers --
 

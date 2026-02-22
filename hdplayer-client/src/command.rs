@@ -78,13 +78,12 @@ pub fn get_luminance_ploy() -> String {
 }
 
 /// Set a brightness schedule. `entries` is a list of (hour, minute, level 0-100).
+/// Server (SetLuminancePloy) and GetLuminancePloy both use `time="HH:MM"` format.
 pub fn set_luminance_ploy(entries: &[(u8, u8, u8)]) -> String {
-    let items: String = entries.iter().enumerate().map(|(i, (h, m, l))| {
-        format!(
-            "<item index=\"{i}\" hour=\"{h}\" minute=\"{m}\" level=\"{l}\"/>"
-        )
+    let items: String = entries.iter().map(|(h, m, l)| {
+        format!("<item time=\"{h:02}:{m:02}\" level=\"{l}\"/>")
     }).collect();
-    format!("<luminancePloy count=\"{}\">{items}</luminancePloy>", entries.len())
+    format!("<luminance mode=\"auto\">{items}</luminance>")
 }
 
 /// Set brightness level directly (0–100).
@@ -109,10 +108,13 @@ pub fn get_switch_time() -> String {
 
 /// Set screen on/off schedule.
 /// `on_time`: "HH:MM", `off_time`: "HH:MM"
+/// Server (SetSwitchTime) parses `<item onTime="..." offTime="..." days="..."/>` elements.
 pub fn set_switch_time(enabled: bool, on_time: &str, off_time: &str) -> String {
+    if !enabled {
+        return String::new(); // empty body = clear schedule
+    }
     format!(
-        "<switchTime enabled=\"{}\" on=\"{on_time}\" off=\"{off_time}\"/>",
-        if enabled { "true" } else { "false" }
+        "<item onTime=\"{on_time}\" offTime=\"{off_time}\" days=\"1111111\"/>"
     )
 }
 
@@ -249,15 +251,14 @@ pub fn get_upgrade_result() -> String {
 
 // ── Rotation ─────────────────────────────────────────────────────────────────
 
-/// Set screen rotation. `angle`: 0, 90, 180, or 270.
+/// Set screen rotation. `angle`: 0, 90, 180, or 270 (degrees).
 pub fn set_rotation(angle: u16) -> String {
-    let v = match angle {
-        90 => 1,
-        180 => 2,
-        270 => 3,
+    // Server (ScreenRotation / SetRotation) parses the actual degree value.
+    let degrees = match angle {
+        90 | 180 | 270 => angle,
         _ => 0,
     };
-    format!("<rotation value=\"{v}\"/>")
+    format!("<rotation value=\"{degrees}\"/>")
 }
 
 // ── Volume ───────────────────────────────────────────────────────────────────

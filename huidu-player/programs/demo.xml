@@ -188,6 +188,58 @@ DEMO</string>
     </area>
   </program>
 
+  <!-- ── Program 5a: Countdown timer ─────────────────────────────────────── -->
+  <program guid="demo-005a" name="Countdown" type="normal">
+    <playControl duration="00:00:12" count="0"/>
+
+    <border index="8" effect="rainbow" speed="4"/>
+
+    <!-- Full-screen countdown to next New Year -->
+    <area guid="area-cd" name="Countdown" alpha="255">
+      <rectangle x="0" y="0" width="128" height="64"/>
+      <resources>
+        <countdownTimer guid="cd-1"
+                        target="2026-01-01 00:00:00"
+                        format="D:H:M:S"
+                        label="New Year in"
+                        color="#00ff88"
+                        labelColor="#aaaaaa"
+                        fontSize="16"
+                        urgentSecs="3600"
+                        urgentColor="#ff2200">
+          <effect in="17" out="17" inSpeed="2" outSpeed="2" duration="0"/>
+        </countdownTimer>
+      </resources>
+    </area>
+  </program>
+
+  <!-- ── Program 5b: QR code + Calendar ──────────────────────────────────── -->
+  <program guid="demo-005b" name="QR + Calendar" type="normal">
+    <playControl duration="00:00:15" count="0"/>
+
+    <border index="10" effect="breathing" speed="3"/>
+
+    <!-- QR code (left half): link to project -->
+    <area guid="area-qr" name="QRCode" alpha="255">
+      <rectangle x="0" y="0" width="64" height="64"/>
+      <resources>
+        <qrCode guid="qr-1" data="https://github.com/Huidu" fgColor="#ffffff" bgColor="#000000" border="1">
+          <effect in="17" out="17" inSpeed="2" outSpeed="2" duration="0"/>
+        </qrCode>
+      </resources>
+    </area>
+
+    <!-- Monthly calendar (right half) -->
+    <area guid="area-cal" name="Calendar" alpha="255">
+      <rectangle x="64" y="0" width="64" height="64"/>
+      <resources>
+        <calendar guid="cal-1" color="#cccccc" todayColor="#ffff00" headerColor="#00aaff" weekdayColor="#888888" fontSize="7">
+          <effect in="17" out="17" inSpeed="2" outSpeed="2" duration="0"/>
+        </calendar>
+      </resources>
+    </area>
+  </program>
+
   <!-- ── Program 6: Extended colour effects showcase ─────────────────────── -->
   <program guid="demo-006b" name="Colour Effects" type="normal">
     <playControl duration="00:00:20" count="0"/>

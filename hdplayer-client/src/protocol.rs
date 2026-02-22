@@ -122,13 +122,26 @@ pub fn sdk_service_ask_payload(version: u32) -> Vec<u8> {
 }
 
 /// File transfer start payload (kFileStartAsk).
+///
+/// Wire format (confirmed from server.rs):
+///   [32 bytes] MD5 hex string (null-padded to exactly 32 bytes)
+///   [ 8 bytes] file size (u64 little-endian)
+///   [ 2 bytes] file type (u16 little-endian; 0 = generic)
+///   [ N bytes] filename (null-terminated UTF-8)
 pub fn file_start_payload(filename: &str, total_size: u64, md5: &str) -> Vec<u8> {
-    // Format: null-terminated filename + 8-byte size + 32-byte md5 hex string
     let mut v = Vec::new();
-    v.extend_from_slice(filename.as_bytes());
-    v.push(0); // null terminator
+    // MD5 hex: exactly 32 bytes, zero-padded
+    let mut md5_buf = [0u8; 32];
+    let md5_bytes = md5.as_bytes();
+    let copy_len = md5_bytes.len().min(32);
+    md5_buf[..copy_len].copy_from_slice(&md5_bytes[..copy_len]);
+    v.extend_from_slice(&md5_buf);
+    // File size (u64 LE)
     v.write_u64::<LittleEndian>(total_size).unwrap();
-    v.extend_from_slice(md5.as_bytes());
+    // File type (u16 LE; 0 = generic binary)
+    v.write_u16::<LittleEndian>(0).unwrap();
+    // Filename: null-terminated
+    v.extend_from_slice(filename.as_bytes());
     v.push(0);
     v
 }

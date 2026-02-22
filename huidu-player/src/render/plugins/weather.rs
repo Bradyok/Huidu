@@ -220,13 +220,20 @@ fn fetch_weather_sync(api_base: &str, city: &str, _city_code: &str) -> Option<We
     None
 }
 
-/// Parse wttr.in `?format=j1` JSON
+/// Parse wttr.in `?format=j1` JSON using serde_json.
+/// Format: `{"current_condition":[{"temp_C":"20","humidity":"60","weatherDesc":[{"value":"Sunny"}]}]}`
 fn parse_wttr_json(json: &str) -> Option<WeatherData> {
-    // wttr.in j1: {"current_condition":[{"temp_C":"20","humidity":"60","weatherDesc":[{"value":"Sunny"}]}],...}
-    let temp = extract_json_str(json, "temp_C")?.parse::<f32>().ok()?;
-    let humidity = extract_json_str(json, "humidity")?.parse::<u8>().ok()?;
-    let condition = extract_json_str_nested(json, "weatherDesc", "value")
-        .unwrap_or_else(|| "N/A".to_string());
+    let v: serde_json::Value = serde_json::from_str(json).ok()?;
+    let cc = v.get("current_condition")?.get(0)?;
+    let temp: f32 = cc.get("temp_C")?.as_str()?.parse().ok()?;
+    let humidity: u8 = cc.get("humidity")?.as_str()?.parse().ok()?;
+    let condition = cc
+        .get("weatherDesc")
+        .and_then(|a| a.get(0))
+        .and_then(|o| o.get("value"))
+        .and_then(|v| v.as_str())
+        .unwrap_or("N/A")
+        .to_string();
     Some(WeatherData {
         temp_c: temp,
         humidity,
@@ -236,13 +243,19 @@ fn parse_wttr_json(json: &str) -> Option<WeatherData> {
     })
 }
 
-/// Parse OpenWeatherMap JSON
+/// Parse OpenWeatherMap current weather JSON using serde_json.
+/// Format: `{"main":{"temp":293.15,"humidity":60},"weather":[{"description":"clear sky"}]}`
 fn parse_owm_json(json: &str) -> Option<WeatherData> {
-    // OWM: {"main":{"temp":293.15,"humidity":60},"weather":[{"description":"clear sky"}]}
-    let temp_k = extract_json_num(json, "temp")?;
-    let humidity = extract_json_num(json, "humidity")? as u8;
-    let condition = extract_json_str(json, "description")
-        .unwrap_or_else(|| "N/A".to_string());
+    let v: serde_json::Value = serde_json::from_str(json).ok()?;
+    let temp_k: f32 = v.get("main")?.get("temp")?.as_f64()? as f32;
+    let humidity: u8 = v.get("main")?.get("humidity")?.as_u64()? as u8;
+    let condition = v
+        .get("weather")
+        .and_then(|a| a.get(0))
+        .and_then(|o| o.get("description"))
+        .and_then(|s| s.as_str())
+        .unwrap_or("N/A")
+        .to_string();
     let temp_c = temp_k - 273.15;
     Some(WeatherData {
         temp_c,
@@ -254,31 +267,5 @@ fn parse_owm_json(json: &str) -> Option<WeatherData> {
 }
 
 fn weather_icon(temp_c: f32) -> String {
-    if temp_c > 30.0 { "☀" } else if temp_c > 15.0 { "⛅" } else { "❄" }.to_string()
-}
-
-/// Very simple JSON field extractor (avoids pulling in serde_json for this hot path)
-fn extract_json_str(json: &str, key: &str) -> Option<String> {
-    let search = format!("\"{}\":", key);
-    let pos = json.find(&search)?;
-    let rest = &json[pos + search.len()..].trim_start();
-    if rest.starts_with('"') {
-        let inner = &rest[1..];
-        let end = inner.find('"')?;
-        Some(inner[..end].to_string())
-    } else {
-        // Numeric value
-        let end = rest.find(|c: char| !c.is_ascii_digit() && c != '.' && c != '-')?;
-        Some(rest[..end].to_string())
-    }
-}
-
-fn extract_json_num(json: &str, key: &str) -> Option<f32> {
-    extract_json_str(json, key)?.parse().ok()
-}
-
-fn extract_json_str_nested(json: &str, array_key: &str, inner_key: &str) -> Option<String> {
-    let search = format!("\"{}\":", array_key);
-    let pos = json.find(&search)?;
-    extract_json_str(&json[pos..], inner_key)
+    if temp_c > 30.0 { "Hot" } else if temp_c > 20.0 { "Warm" } else if temp_c > 10.0 { "Cool" } else { "Cold" }.to_string()
 }

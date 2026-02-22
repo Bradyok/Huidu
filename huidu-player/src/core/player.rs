@@ -257,6 +257,7 @@ impl Player {
                 .map(|p| ProgramInfo {
                     guid: p.guid.clone(),
                     name: p.name.clone(),
+                    program_type: p.program_type.clone(),
                 })
                 .collect();
             state.current_program_guid = self
