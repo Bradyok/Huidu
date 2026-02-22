@@ -141,6 +141,7 @@ pub struct Resources {
 /// A content item — the actual thing displayed in an area
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
+#[allow(clippy::large_enum_variant)] // variants hold plain structs; boxing would add heap indirection
 pub enum ContentItem {
     #[serde(rename = "image")]
     Image(ImageContent),
@@ -268,6 +269,22 @@ pub struct TextContent {
     pub single_line: bool,
     #[serde(rename = "@background", default)]
     pub background: String,
+    /// Scroll speed in pixels per second (default 50).
+    #[serde(rename = "@scrollSpeed", default = "default_scroll_speed")]
+    pub scroll_speed: u32,
+    /// Scroll direction: "left" (default), "right", "up", "down".
+    #[serde(rename = "@scrollDir", default = "default_scroll_dir")]
+    pub scroll_dir: String,
+    /// Seamless (looping) ticker: second copy drawn to eliminate blank gap.
+    /// Only applies when single_line is true and text is wider than the area.
+    #[serde(rename = "@seamless", default)]
+    pub seamless: bool,
+    /// Gap in pixels between repeated seamless ticker copies (default 16).
+    #[serde(rename = "@tickerGap", default = "default_ticker_gap")]
+    pub ticker_gap: u32,
+    /// Word-wrap multi-line text at the area width boundary.
+    #[serde(rename = "@wordWrap", default)]
+    pub word_wrap: bool,
     pub effect: Option<Effect>,
     pub style: Option<TextStyle>,
     pub string: Option<String>,
@@ -305,7 +322,32 @@ pub struct FontSpec {
     pub italic: bool,
     #[serde(rename = "@underline", default)]
     pub underline: bool,
+    /// Drop shadow enabled.
+    #[serde(rename = "@shadow", default)]
+    pub shadow: bool,
+    /// Shadow colour (default black).
+    #[serde(rename = "@shadowColor", default = "default_shadow_color")]
+    pub shadow_color: String,
+    /// Shadow X offset in pixels (default 1).
+    #[serde(rename = "@shadowDx", default = "default_shadow_dx")]
+    pub shadow_dx: i32,
+    /// Shadow Y offset in pixels (default 1).
+    #[serde(rename = "@shadowDy", default = "default_shadow_dy")]
+    pub shadow_dy: i32,
+    /// Text outline enabled.
+    #[serde(rename = "@outline", default)]
+    pub outline: bool,
+    /// Outline colour (default black).
+    #[serde(rename = "@outlineColor", default = "default_color")]
+    pub outline_color: String,
 }
+
+fn default_scroll_speed() -> u32 { 50 }
+fn default_scroll_dir() -> String { "left".to_string() }
+fn default_ticker_gap() -> u32 { 16 }
+fn default_shadow_color() -> String { "#000000".to_string() }
+fn default_shadow_dx() -> i32 { 1 }
+fn default_shadow_dy() -> i32 { 1 }
 
 fn default_font_name() -> String {
     "Arial".to_string()
@@ -445,12 +487,16 @@ pub struct WeatherContent {
     /// Update interval in minutes
     #[serde(rename = "@updateInterval", default = "default_update_interval")]
     pub update_interval: u32,
+    /// Temperature unit: "C" (Celsius, default) or "F" (Fahrenheit).
+    #[serde(rename = "@tempUnit", default = "default_temp_unit")]
+    pub temp_unit: String,
     pub effect: Option<Effect>,
     pub font: Option<FontSpec>,
 }
 
 fn default_weather_lang() -> String { "en".to_string() }
 fn default_update_interval() -> u32 { 30 }
+fn default_temp_unit() -> String { "C".to_string() }
 
 // -- Analog clock --
 
@@ -463,11 +509,24 @@ pub struct AnalogClockContent {
     pub name: String,
     #[serde(rename = "@timezone", default)]
     pub timezone: String,
-    /// Background image filename
+    /// Background image filename (when set, fills the face instead of the software-rendered one)
     #[serde(rename = "@bgImage", default)]
     pub bg_image: String,
+    /// Clock face fill color — used when no bgImage (default dark navy).
+    #[serde(rename = "@dialColor", default = "default_dial_color")]
+    pub dial_color: String,
+    /// Hour and minute hand color; also used for tick marks and rim (default white).
+    #[serde(rename = "@handColor", default = "default_hand_color")]
+    pub hand_color: String,
+    /// Second hand color (default red).
+    #[serde(rename = "@secondColor", default = "default_second_color")]
+    pub second_color: String,
     pub effect: Option<Effect>,
 }
+
+fn default_dial_color()   -> String { "#0a0a1e".to_string() }
+fn default_hand_color()   -> String { "#ffffff".to_string() }
+fn default_second_color() -> String { "#ff3c3c".to_string() }
 
 // -- Neon decoration --
 

@@ -291,7 +291,7 @@ mod tests {
             <area guid="a1">
               <rectangle x="0" y="0" width="64" height="64"/>
               <resources>
-                <analogClock guid="ac-1" dialColor="#222222" handColor="#ffffff"/>
+                <analogClock guid="ac-1" dialColor="#222222" handColor="#ffffff" secondColor="#ff4400"/>
               </resources>
             </area>
           </program>
@@ -300,9 +300,212 @@ mod tests {
 
         let screen = parse_program_xml(xml).unwrap();
         let area = &screen.programs[0].areas[0];
-        assert!(matches!(
-            &area.resources.items[0],
-            crate::program::model::ContentItem::AnalogClock(_)
-        ));
+        if let crate::program::model::ContentItem::AnalogClock(c) = &area.resources.items[0] {
+            assert_eq!(c.guid, "ac-1");
+            assert_eq!(c.dial_color, "#222222");
+            assert_eq!(c.hand_color, "#ffffff");
+            assert_eq!(c.second_color, "#ff4400");
+        } else {
+            panic!("Expected AnalogClock item");
+        }
+        // Default colors when attributes are absent
+        let xml2 = r##"<screen><program guid="p2"><area guid="a2"><rectangle width="32" height="32"/><resources><analogClock guid="ac-2"/></resources></area></program></screen>"##;
+        let s2 = parse_program_xml(xml2).unwrap();
+        if let crate::program::model::ContentItem::AnalogClock(c) = &s2.programs[0].areas[0].resources.items[0] {
+            assert_eq!(c.dial_color, "#0a0a1e");
+            assert_eq!(c.hand_color, "#ffffff");
+            assert_eq!(c.second_color, "#ff3c3c");
+        }
+    }
+
+    /// Task #13: scrollDir, scrollSpeed, shadow/outline font attributes
+    #[test]
+    fn test_parse_text_scroll_and_shadow() {
+        let xml = r##"
+        <screen>
+          <program guid="p1" type="normal">
+            <area guid="a1">
+              <rectangle x="0" y="0" width="128" height="16"/>
+              <resources>
+                <text guid="t1" singleLine="true"
+                      scrollDir="up" scrollSpeed="75">
+                  <string>Scrolling</string>
+                  <font size="12" color="#ffffff"
+                        shadow="true" shadowColor="#000033" shadowDx="2" shadowDy="2"
+                        outline="true" outlineColor="#ff0000"/>
+                  <style align="left" valign="middle"/>
+                </text>
+              </resources>
+            </area>
+          </program>
+        </screen>
+        "##;
+
+        let screen = parse_program_xml(xml).unwrap();
+        let area = &screen.programs[0].areas[0];
+        if let crate::program::model::ContentItem::Text(t) = &area.resources.items[0] {
+            assert_eq!(t.scroll_dir, "up");
+            assert_eq!(t.scroll_speed, 75);
+            let font = t.font.as_ref().unwrap();
+            assert!(font.shadow);
+            assert_eq!(font.shadow_color, "#000033");
+            assert_eq!(font.shadow_dx, 2);
+            assert_eq!(font.shadow_dy, 2);
+            assert!(font.outline);
+            assert_eq!(font.outline_color, "#ff0000");
+        } else {
+            panic!("Expected Text item");
+        }
+    }
+
+    /// Task #14: seamless ticker, tickerGap, wordWrap attributes
+    #[test]
+    fn test_parse_text_seamless_and_wordwrap() {
+        let xml = r##"
+        <screen>
+          <program guid="p1" type="normal">
+            <area guid="a1">
+              <rectangle x="0" y="0" width="128" height="16"/>
+              <resources>
+                <text guid="t1" singleLine="true"
+                      seamless="true" tickerGap="24" wordWrap="false">
+                  <string>Seamless ticker demo</string>
+                  <font size="12" color="rainbow"/>
+                  <style align="left" valign="middle"/>
+                </text>
+              </resources>
+            </area>
+          </program>
+        </screen>
+        "##;
+
+        let screen = parse_program_xml(xml).unwrap();
+        let area = &screen.programs[0].areas[0];
+        if let crate::program::model::ContentItem::Text(t) = &area.resources.items[0] {
+            assert!(t.seamless);
+            assert_eq!(t.ticker_gap, 24);
+            assert!(!t.word_wrap);
+            assert!(t.single_line);
+        } else {
+            panic!("Expected Text item");
+        }
+    }
+
+    /// Task #14: wordWrap="true" on multi-line text
+    #[test]
+    fn test_parse_text_word_wrap() {
+        let xml = r##"
+        <screen>
+          <program guid="p1" type="normal">
+            <area guid="a1">
+              <rectangle x="0" y="0" width="128" height="64"/>
+              <resources>
+                <text guid="t1" singleLine="false" wordWrap="true">
+                  <string>This is a long text that should be word wrapped automatically</string>
+                  <font size="11" color="#ffffff"/>
+                  <style align="center" valign="middle"/>
+                </text>
+              </resources>
+            </area>
+          </program>
+        </screen>
+        "##;
+
+        let screen = parse_program_xml(xml).unwrap();
+        let area = &screen.programs[0].areas[0];
+        if let crate::program::model::ContentItem::Text(t) = &area.resources.items[0] {
+            assert!(t.word_wrap);
+            assert!(!t.single_line);
+        } else {
+            panic!("Expected Text item");
+        }
+    }
+
+    /// Task #14: weather tempUnit="F" for Fahrenheit display
+    #[test]
+    fn test_parse_weather_fahrenheit() {
+        let xml = r##"
+        <screen>
+          <program guid="p1" type="normal">
+            <area guid="a1">
+              <rectangle x="0" y="0" width="128" height="64"/>
+              <resources>
+                <weather guid="w-1" city="New York" tempUnit="F" updateInterval="15">
+                  <font size="12" color="#ffff00"/>
+                </weather>
+              </resources>
+            </area>
+          </program>
+        </screen>
+        "##;
+
+        let screen = parse_program_xml(xml).unwrap();
+        let area = &screen.programs[0].areas[0];
+        if let crate::program::model::ContentItem::Weather(w) = &area.resources.items[0] {
+            assert_eq!(w.city, "New York");
+            assert_eq!(w.temp_unit, "F");
+            assert_eq!(w.update_interval, 15);
+        } else {
+            panic!("Expected Weather item");
+        }
+    }
+
+    /// Default values: missing optional attributes should use their defaults.
+    #[test]
+    fn test_parse_text_defaults() {
+        let xml = r##"
+        <screen>
+          <program guid="p1" type="normal">
+            <area guid="a1">
+              <rectangle x="0" y="0" width="128" height="32"/>
+              <resources>
+                <text guid="t1">
+                  <string>Minimal text</string>
+                </text>
+              </resources>
+            </area>
+          </program>
+        </screen>
+        "##;
+
+        let screen = parse_program_xml(xml).unwrap();
+        let area = &screen.programs[0].areas[0];
+        if let crate::program::model::ContentItem::Text(t) = &area.resources.items[0] {
+            // Defaults from Task #13 + #14
+            assert_eq!(t.scroll_dir, "left");
+            assert_eq!(t.scroll_speed, 50);
+            assert!(!t.seamless);
+            assert_eq!(t.ticker_gap, 16);
+            assert!(!t.word_wrap);
+        } else {
+            panic!("Expected Text item");
+        }
+    }
+
+    /// Integration test: the full demo.xml must parse without errors and
+    /// contain all expected programs.
+    #[test]
+    fn test_parse_demo_xml() {
+        let xml = include_str!("../../programs/demo.xml");
+        let screen = parse_program_xml(xml).unwrap();
+
+        // Collect GUIDs for easy lookup
+        let guids: Vec<&str> = screen.programs.iter().map(|p| p.guid.as_str()).collect();
+
+        // Original demos
+        assert!(guids.contains(&"demo-001"), "demo-001 missing");
+        assert!(guids.contains(&"demo-002"), "demo-002 missing");
+        assert!(guids.contains(&"demo-007"), "demo-007 missing");
+
+        // New demos added in tasks 13–14
+        assert!(guids.contains(&"demo-007a"), "demo-007a (Text FX) missing");
+        assert!(guids.contains(&"demo-008a"), "demo-008a (Live Vars) missing");
+        assert!(guids.contains(&"demo-008b"), "demo-008b (Word Wrap) missing");
+        assert!(guids.contains(&"demo-009"), "demo-009 (Data Sources) missing");
+
+        // Every program must have at least one area
+        for p in &screen.programs {
+            assert!(!p.areas.is_empty(), "program {} has no areas", p.guid);
+        }
     }
 }

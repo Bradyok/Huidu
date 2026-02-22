@@ -85,7 +85,10 @@ impl CalendarRenderer {
 
         // -- Day grid --
         // Find the day-of-week for the 1st of this month (0=Sun, 6=Sat)
-        let first = NaiveDate::from_ymd_opt(year, month, 1).unwrap();
+        let first = match NaiveDate::from_ymd_opt(year, month, 1) {
+            Some(d) => d,
+            None => return, // shouldn't happen: year/month come from Local::now()
+        };
         // chrono: Mon=1 … Sun=7; we want Sun=0
         let start_col = (first.weekday().num_days_from_sunday()) as i32;
 
@@ -208,13 +211,17 @@ impl ContentRenderer for CalendarRenderer {
 fn days_in_month(year: i32, month: u32) -> u32 {
     let next_month = if month == 12 { 1 } else { month + 1 };
     let next_year = if month == 12 { year + 1 } else { year };
-    NaiveDate::from_ymd_opt(next_year, next_month, 1)
-        .unwrap()
-        .signed_duration_since(NaiveDate::from_ymd_opt(year, month, 1).unwrap())
-        .num_days() as u32
+    match (
+        NaiveDate::from_ymd_opt(next_year, next_month, 1),
+        NaiveDate::from_ymd_opt(year, month, 1),
+    ) {
+        (Some(next), Some(cur)) => next.signed_duration_since(cur).num_days() as u32,
+        _ => 30, // fallback; only reached if caller passes invalid year/month
+    }
 }
 
 /// Fill a rectangle with a semi-transparent colour (additive blend into target).
+#[allow(clippy::too_many_arguments)]
 fn fill_rect(target: &mut Pixmap, x: i32, y: i32, w: i32, h: i32, r: u8, g: u8, b: u8, a: u8) {
     let tw = target.width() as i32;
     let th = target.height() as i32;

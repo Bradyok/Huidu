@@ -85,6 +85,23 @@ pub fn xml_escape(s: &str) -> String {
      .replace('\'', "&apos;")
 }
 
+/// Unescape XML entities back to their character equivalents.
+///
+/// Handles the five predefined XML entities:
+/// `&amp;` → `&`, `&lt;` → `<`, `&gt;` → `>`, `&quot;` → `"`, `&apos;` → `'`
+///
+/// Returns the input unchanged (without allocation) if no `&` is present.
+pub fn xml_unescape(s: &str) -> String {
+    if !s.contains('&') {
+        return s.to_string();
+    }
+    s.replace("&amp;", "&")
+     .replace("&lt;", "<")
+     .replace("&gt;", ">")
+     .replace("&quot;", "\"")
+     .replace("&apos;", "'")
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -106,5 +123,48 @@ mod tests {
     fn test_parse_result_error() {
         let xml = "<sdk><out method=\"test\"><result value=\"18\"/></out></sdk>";
         assert!(parse_result(xml).is_err());
+    }
+
+    // ── xml_unescape ─────────────────────────────────────────────────────────
+
+    #[test]
+    fn test_xml_unescape_no_entities_passthrough() {
+        assert_eq!(xml_unescape("Hello World"), "Hello World");
+        assert_eq!(xml_unescape(""), "");
+        assert_eq!(xml_unescape("LED Sign v2"), "LED Sign v2");
+    }
+
+    #[test]
+    fn test_xml_unescape_amp() {
+        assert_eq!(xml_unescape("A &amp; B"), "A & B");
+    }
+
+    #[test]
+    fn test_xml_unescape_lt_gt() {
+        assert_eq!(xml_unescape("&lt;tag&gt;"), "<tag>");
+    }
+
+    #[test]
+    fn test_xml_unescape_quot() {
+        assert_eq!(xml_unescape("say &quot;hello&quot;"), "say \"hello\"");
+    }
+
+    #[test]
+    fn test_xml_unescape_apos() {
+        assert_eq!(xml_unescape("it&apos;s"), "it's");
+    }
+
+    #[test]
+    fn test_xml_unescape_multiple_entities() {
+        assert_eq!(
+            xml_unescape("&lt;name value=&quot;A &amp; B&quot;/&gt;"),
+            "<name value=\"A & B\"/>"
+        );
+    }
+
+    #[test]
+    fn test_xml_escape_unescape_roundtrip() {
+        let original = "LED & Sign <v2> \"test\" it's";
+        assert_eq!(xml_unescape(&xml_escape(original)), original);
     }
 }

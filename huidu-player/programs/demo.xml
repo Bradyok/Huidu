@@ -99,7 +99,7 @@ Compatible</string>
     <area guid="area-analog" name="AnalogClock" alpha="255">
       <rectangle x="0" y="0" width="60" height="64"/>
       <resources>
-        <analogClock guid="aclock-1">
+        <analogClock guid="aclock-1" dialColor="#0d1a0d" handColor="#00ff88" secondColor="#ff4400">
           <effect in="17" out="17" inSpeed="2" outSpeed="2" duration="0"/>
         </analogClock>
       </resources>
@@ -293,6 +293,50 @@ DEMO</string>
           <style align="center" valign="middle"/>
         </text>
 
+        <!-- Slide 6: breathe (all chars pulse together) in magenta -->
+        <text guid="txt-ce6" singleLine="false">
+          <string>BREATHE
+PULSE</string>
+          <effect in="17" out="17" inSpeed="3" outSpeed="3" duration="40"/>
+          <font size="18" color="breathe:#ff00cc"/>
+          <style align="center" valign="middle"/>
+        </text>
+
+      </resources>
+    </area>
+  </program>
+
+  <!-- ── Program 7a: Shadow + outline text / scroll directions ───────────── -->
+  <program guid="demo-007a" name="Text FX" type="normal">
+    <playControl duration="00:00:18" count="0"/>
+
+    <border index="8" effect="rainbow" speed="5"/>
+
+    <!-- Scroll upward with drop shadow -->
+    <area guid="area-scroll-up" name="ScrollUp" alpha="255">
+      <rectangle x="0" y="0" width="128" height="32"/>
+      <resources>
+        <text guid="txt-up" singleLine="false" scrollDir="up" scrollSpeed="40">
+          <string>SCROLL UP
+LINE TWO
+LINE THREE</string>
+          <effect in="17" out="17" inSpeed="2" outSpeed="2" duration="0"/>
+          <font size="12" color="#00ffff" shadow="true" shadowColor="#003333" shadowDx="1" shadowDy="1"/>
+          <style align="center" valign="middle"/>
+        </text>
+      </resources>
+    </area>
+
+    <!-- Outlined text scrolling right -->
+    <area guid="area-outline" name="Outline" alpha="255">
+      <rectangle x="0" y="32" width="128" height="32"/>
+      <resources>
+        <text guid="txt-outline" singleLine="true" scrollDir="right" scrollSpeed="60">
+          <string>★ OUTLINED ★ SCROLLING RIGHT ★ </string>
+          <effect in="21" out="0" inSpeed="3" outSpeed="0" duration="0"/>
+          <font size="13" color="#ffaa00" outline="true" outlineColor="#220000"/>
+          <style align="left" valign="middle"/>
+        </text>
       </resources>
     </area>
   </program>
@@ -333,5 +377,117 @@ DEMO</string>
       </resources>
     </area>
   </program>
+
+
+  <!-- ── Program 8a: Live text variables ──────────────────────────────────── -->
+  <program guid="demo-008a" name="Live Vars" type="normal">
+    <playControl duration="00:00:15" count="0"/>
+
+    <border index="8" effect="rainbow" speed="4"/>
+
+    <!-- Top: live clock variables — rebuilt every frame, never cached -->
+    <area guid="area-lv-clock" name="LiveClock" alpha="255">
+      <rectangle x="0" y="0" width="128" height="32"/>
+      <resources>
+        <text guid="txt-lv-time" singleLine="false">
+          <string>{DATE_S} {WEEK_S}
+{TIME}</string>
+          <effect in="17" out="17" inSpeed="2" outSpeed="2" duration="0"/>
+          <font size="13" color="#00ffcc"/>
+          <style align="center" valign="middle"/>
+        </text>
+      </resources>
+    </area>
+
+    <!-- Bottom: seamless ticker with live seconds counter -->
+    <area guid="area-lv-tick" name="LiveTicker" alpha="255">
+      <rectangle x="0" y="32" width="128" height="32"/>
+      <resources>
+        <text guid="txt-lv-tick" singleLine="true" seamless="true" tickerGap="20" scrollSpeed="55">
+          <string>Sec:{SEC} ★ {WEEK} ★ {MONTH_S} {DAY} ★ </string>
+          <effect in="21" out="0" inSpeed="3" outSpeed="0" duration="0"/>
+          <font size="12" color="rainbow"/>
+          <style align="left" valign="middle"/>
+        </text>
+      </resources>
+    </area>
+  </program>
+
+  <!-- ── Program 8b: Word-wrap demo ────────────────────────────────────────── -->
+  <program guid="demo-008b" name="Word Wrap" type="normal">
+    <playControl duration="00:00:12" count="0"/>
+
+    <border index="10" effect="breathing" speed="3"/>
+
+    <area guid="area-ww" name="WordWrap" alpha="255">
+      <rectangle x="0" y="0" width="128" height="64"/>
+      <resources>
+        <text guid="txt-ww" singleLine="false" wordWrap="true">
+          <string>Word wrap splits long lines at the area boundary automatically</string>
+          <effect in="17" out="17" inSpeed="2" outSpeed="2" duration="0"/>
+          <font size="11" color="#ffdd44"/>
+          <style align="center" valign="middle"/>
+        </text>
+      </resources>
+    </area>
+  </program>
+
+  <!-- ── Program 9: Data source variables ─────────────────────────────────── -->
+  <!-- Send SetDataSourceInfo with <dataSource name="score" value="3-1"/>     -->
+  <!-- (and "price", "status") to see live values here.                        -->
+  <program guid="demo-009" name="Data Sources" type="normal">
+    <playControl duration="00:00:15" count="0"/>
+
+    <border index="14" effect="rainbow" speed="5"/>
+
+    <!-- Top: live clock mixed with DS variable -->
+    <area guid="area-ds-top" name="DSTop" alpha="255">
+      <rectangle x="0" y="0" width="128" height="20"/>
+      <resources>
+        <text guid="txt-ds-clock" singleLine="true">
+          <string>{TIME_S} | Score: {DS:score}</string>
+          <effect in="17" out="17" inSpeed="2" outSpeed="2" duration="0"/>
+          <font size="11" color="#00ffcc"/>
+          <style align="center" valign="middle"/>
+        </text>
+      </resources>
+    </area>
+
+    <!-- Bottom: seamless data source ticker -->
+    <area guid="area-ds-ticker" name="DSTicker" alpha="255">
+      <rectangle x="0" y="20" width="128" height="44"/>
+      <resources>
+        <text guid="txt-ds-tick" singleLine="true" seamless="true" tickerGap="20">
+          <string>Price: {DS:price}  ★  Status: {DS:status}  ★  Score: {DS:score}  ★</string>
+          <effect in="21" out="0" inSpeed="3" outSpeed="0" duration="0"/>
+          <font size="14" color="gradient:#ff8800:#ffff00"/>
+          <style align="left" valign="middle"/>
+        </text>
+      </resources>
+    </area>
+  </program>
+
+  <!-- ── Program 8: Background music demo ─────────────────────────────────── -->
+  <!-- Uncomment and place an audio file in the programs/ directory to test.  -->
+  <!--
+  <program guid="demo-008" name="Music Demo" type="normal">
+    <playControl duration="00:00:30" count="0"/>
+    <backgroundMusic>
+      <file name="demo.mp3"/>
+    </backgroundMusic>
+    <area guid="area-music" name="Music" alpha="255">
+      <rectangle x="0" y="0" width="128" height="64"/>
+      <resources>
+        <text guid="txt-music" singleLine="false">
+          <string>NOW
+PLAYING</string>
+          <effect in="17" out="17" inSpeed="2" outSpeed="2" duration="0"/>
+          <font size="18" color="wave:#00ffff:#ff00ff"/>
+          <style align="center" valign="middle"/>
+        </text>
+      </resources>
+    </area>
+  </program>
+  -->
 
 </screen>

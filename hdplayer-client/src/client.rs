@@ -59,6 +59,14 @@ pub struct ProgramInfo {
     pub is_current: bool,
 }
 
+/// File entry returned by GetFileChecklist.
+#[derive(Debug, Clone)]
+pub struct FileEntry {
+    pub name: String,
+    pub md5: String,
+    pub size: u64,
+}
+
 /// Ethernet configuration.
 #[derive(Debug, Clone)]
 pub struct EthConfig {
@@ -210,11 +218,13 @@ impl Client {
     /// Get device information.
     pub async fn get_device_info(&mut self) -> Result<DeviceDetails> {
         let xml = self.sdk_cmd("GetDeviceInfo", &command::get_device_info()).await?;
-        let mut info = DeviceDetails::default();
-        info.raw_xml = xml.clone();
-        // Parse key fields — try multiple attribute name variants for compatibility
-        // with both huidu-player (our server) and real BoxPlayer firmware
-        let get = |a: &str| xml::get_attr(&xml, a).map(|s| s.to_string());
+        let mut info = DeviceDetails { raw_xml: xml.clone(), ..Default::default() };
+        // Narrow to the <deviceInfo ...> element so get_attr("version") doesn't
+        // hit <?xml version="1.0"?> in the envelope declaration.
+        let scope = xml.find("<deviceInfo")
+            .and_then(|s| xml[s..].find('>').map(|e| &xml[s..s + e + 1]))
+            .unwrap_or(xml.as_str());
+        let get = |a: &str| xml::get_attr(scope, a).map(xml::xml_unescape);
         info.device_id    = get("deviceId").or_else(|| get("deviceID")).unwrap_or_default();
         info.device_name  = get("deviceName").or_else(|| get("name")).unwrap_or_default();
         info.firmware_version = get("version").or_else(|| get("SoftwareVersion"))
@@ -225,10 +235,15 @@ impl Client {
         info.screen_height = get("screenHeight").or_else(|| get("ScreenHeight"))
                                 .or_else(|| get("height"))
                                 .and_then(|v| v.parse().ok()).unwrap_or(0);
+        info.device_type   = get("deviceType").or_else(|| get("DeviceType")).unwrap_or_default();
         info.ip_address    = get("ip").unwrap_or_default();
         info.mac_address   = get("mac").unwrap_or_default();
         info.brightness    = get("brightness").and_then(|v| v.parse().ok()).unwrap_or(100);
         info.volume        = get("volume").and_then(|v| v.parse().ok()).unwrap_or(50);
+        info.rotation      = get("rotation").and_then(|v| v.parse().ok()).unwrap_or(0);
+        info.admin_mode    = get("adminMode").map(|v| v == "true" || v == "1").unwrap_or(false);
+        info.storage_total = get("storageTotal").and_then(|v| v.parse().ok()).unwrap_or(0);
+        info.storage_free  = get("storageFree").and_then(|v| v.parse().ok()).unwrap_or(0);
         Ok(info)
     }
 
@@ -244,9 +259,9 @@ impl Client {
         Ok(v)
     }
 
-    /// Capture a screenshot. Returns JPEG bytes or base64-encoded PNG.
-    pub async fn screenshot(&mut self, width: u32, height: u32) -> Result<Vec<u8>> {
-        let xml = self.sdk_cmd("GetScreenshot2", &command::get_screenshot2(width, height)).await?;
+    /// Capture a screenshot. Returns PNG bytes.
+    pub async fn screenshot(&mut self) -> Result<Vec<u8>> {
+        let xml = self.sdk_cmd("GetScreenshot2", &command::get_screenshot2(0, 0)).await?;
         // Response contains base64-encoded image in <data> tag or attribute
         let data_b64 = xml::get_attr(&xml, "data")
             .or_else(|| xml::get_tag_text(&xml, "data"))
@@ -305,8 +320,9 @@ impl Client {
             let tag = &search[start..end];
             programs.push(ProgramInfo {
                 guid: xml::get_attr(tag, "guid").unwrap_or("").to_string(),
-                name: xml::get_attr(tag, "name").unwrap_or("").to_string(),
-                program_type: xml::get_attr(tag, "type").unwrap_or("normal").to_string(),
+                name: xml::get_attr(tag, "name").map(xml::xml_unescape).unwrap_or_default(),
+                program_type: xml::get_attr(tag, "type").map(xml::xml_unescape)
+                    .unwrap_or_else(|| "normal".to_string()),
                 is_current: xml::get_attr(tag, "current")
                     .map(|v| v == "true" || v == "1")
                     .unwrap_or(false),
@@ -353,15 +369,27 @@ impl Client {
     }
 
     /// Set screen on/off schedule.
-    pub async fn set_switch_time(&mut self, enabled: bool, on: &str, off: &str) -> Result<()> {
-        self.sdk_cmd("SetSwitchTime", &command::set_switch_time(enabled, on, off)).await?;
+    ///
+    /// `days`: 7-character string of '0'/'1' for Mon–Sun (e.g. `"1111100"` = weekdays only).
+    /// Pass `"1111111"` or any invalid string to apply every day.
+    pub async fn set_switch_time(&mut self, enabled: bool, on: &str, off: &str, days: &str) -> Result<()> {
+        self.sdk_cmd("SetSwitchTime", &command::set_switch_time(enabled, on, off, days)).await?;
         Ok(())
     }
 
     // ── Network ──────────────────────────────────────────────────────────
 
-    pub async fn get_eth0_info(&mut self) -> Result<String> {
-        self.sdk_cmd("GetEth0Info", &command::get_eth0_info()).await
+    pub async fn get_eth0_info(&mut self) -> Result<EthConfig> {
+        let xml = self.sdk_cmd("GetEth0Info", &command::get_eth0_info()).await?;
+        // Response: <eth0 dhcp="true" ip="..." mask="..." gateway="..." dns="..."/>
+        let get = |a: &str| crate::xml::get_attr(&xml, a).map(str::to_string);
+        Ok(EthConfig {
+            dhcp:    get("dhcp").map(|v| v == "true").unwrap_or(false),
+            ip:      get("ip").unwrap_or_default(),
+            mask:    get("mask").unwrap_or_default(),
+            gateway: get("gateway").unwrap_or_default(),
+            dns:     get("dns").unwrap_or_default(),
+        })
     }
 
     pub async fn set_eth0_info(&mut self, cfg: &EthConfig) -> Result<()> {
@@ -418,6 +446,186 @@ impl Client {
         Ok(())
     }
 
+    // ── Extra queries ─────────────────────────────────────────────────────
+
+    /// Get current brightness level (0–100).
+    pub async fn get_brightness(&mut self) -> Result<u8> {
+        let xml = self.sdk_cmd("GetLuminancePloy", &command::get_luminance_ploy()).await?;
+        let level = crate::xml::get_attr(&xml, "value")
+            .and_then(|v| v.parse().ok())
+            .unwrap_or(100);
+        Ok(level)
+    }
+
+    /// List all files stored on the device.
+    pub async fn list_files(&mut self) -> Result<Vec<String>> {
+        let xml = self.sdk_cmd("GetFiles", "").await?;
+        let mut files = Vec::new();
+        let mut search = xml.as_str();
+        while let Some(start) = search.find("<file ") {
+            let end = search[start..]
+                .find("/>")
+                .map(|e| start + e + 2)
+                .unwrap_or(search.len());
+            let tag = &search[start..end];
+            if let Some(name) = crate::xml::get_attr(tag, "name") {
+                files.push(crate::xml::xml_unescape(name));
+            }
+            search = &search[end.min(search.len())..];
+        }
+        Ok(files)
+    }
+
+    /// Get file list with MD5 hashes and sizes.
+    pub async fn get_file_checklist(&mut self) -> Result<Vec<FileEntry>> {
+        let xml = self.sdk_cmd("GetFileChecklist", &command::get_file_checklist()).await?;
+        let mut files = Vec::new();
+        let mut search = xml.as_str();
+        while let Some(start) = search.find("<file ") {
+            let end = search[start..]
+                .find("/>")
+                .map(|e| start + e + 2)
+                .unwrap_or(search.len());
+            let tag = &search[start..end];
+            files.push(FileEntry {
+                name: crate::xml::get_attr(tag, "name").map(crate::xml::xml_unescape).unwrap_or_default(),
+                md5:  crate::xml::get_attr(tag, "md5").unwrap_or("").to_string(),
+                size: crate::xml::get_attr(tag, "size")
+                    .and_then(|v| v.parse().ok())
+                    .unwrap_or(0),
+            });
+            search = &search[end.min(search.len())..];
+        }
+        Ok(files)
+    }
+
+    /// Set multiple data source key/value pairs in a single command.
+    pub async fn set_data_sources(&mut self, entries: &[(&str, &str)]) -> Result<()> {
+        self.sdk_cmd("SetDataSourceInfo", &command::set_data_source_info(entries)).await?;
+        Ok(())
+    }
+
+    /// Get the GUID of the currently playing program (empty string if none).
+    pub async fn get_current_program_guid(&mut self) -> Result<String> {
+        let xml = self
+            .sdk_cmd("GetCurrentPlayProgramGUID", "")
+            .await?;
+        Ok(crate::xml::get_attr(&xml, "guid").unwrap_or("").to_string())
+    }
+
+    /// Get current screen rotation in degrees (0, 90, 180, 270).
+    pub async fn get_rotation(&mut self) -> Result<u16> {
+        let xml = self.sdk_cmd("GetScreenRotation", &command::get_screen_rotation()).await?;
+        Ok(crate::xml::get_attr(&xml, "value")
+            .and_then(|v| v.parse().ok())
+            .unwrap_or(0))
+    }
+
+    /// Get the boot logo filename (empty = none set).
+    pub async fn get_boot_logo(&mut self) -> Result<String> {
+        let xml = self.sdk_cmd("GetBootLogo", &command::get_boot_logo()).await?;
+        Ok(crate::xml::get_attr(&xml, "name").map(crate::xml::xml_unescape).unwrap_or_default())
+    }
+
+    /// Set the boot logo by filename (must already be on the device).
+    pub async fn set_boot_logo(&mut self, filename: &str) -> Result<()> {
+        self.sdk_cmd("SetBootLogoName", &command::set_boot_logo_name(filename)).await?;
+        Ok(())
+    }
+
+    /// Clear the boot logo.
+    pub async fn clear_boot_logo(&mut self) -> Result<()> {
+        self.sdk_cmd("ClearBootLogo", &command::clear_boot_logo()).await?;
+        Ok(())
+    }
+
+    /// Delete named files from device storage.
+    pub async fn delete_files(&mut self, filenames: &[&str]) -> Result<()> {
+        self.sdk_cmd("DeleteFiles", &command::delete_files(filenames)).await?;
+        Ok(())
+    }
+
+    /// Get network connectivity status (eth0, wifi, internet).
+    pub async fn get_network_info(&mut self) -> Result<String> {
+        let xml = self.sdk_cmd("GetNetworkInfo", &command::get_network_info()).await?;
+        Ok(xml)
+    }
+
+    /// Get WiFi status (SSID and connection state).
+    pub async fn get_wifi_info(&mut self) -> Result<String> {
+        let xml = self.sdk_cmd("GetWifiInfo", &command::get_wifi_info()).await?;
+        Ok(xml)
+    }
+
+    /// Connect to a WiFi network.
+    pub async fn set_wifi(&mut self, ssid: &str, password: &str) -> Result<()> {
+        self.sdk_cmd("SetWifiInfo", &command::set_wifi(ssid, password, false)).await?;
+        Ok(())
+    }
+
+    /// Get the firmware upgrade result.
+    pub async fn get_upgrade_result(&mut self) -> Result<String> {
+        let xml = self.sdk_cmd("GetUpgradeResult", &command::get_upgrade_result()).await?;
+        Ok(crate::xml::get_attr(&xml, "message").map(crate::xml::xml_unescape).unwrap_or_default())
+    }
+
+    /// Trigger a firmware upgrade from a file already on the device.
+    pub async fn firmware_upgrade(&mut self, filename: &str) -> Result<()> {
+        self.sdk_cmd("FirmwareUpgrade", &command::firmware_upgrade(filename)).await?;
+        Ok(())
+    }
+
+    /// Get all data source key/value pairs from the device.
+    pub async fn get_data_sources(&mut self) -> Result<Vec<(String, String)>> {
+        let xml = self.sdk_cmd("GetDataSourceInfo", &command::get_data_source_info()).await?;
+        let mut entries = Vec::new();
+        let mut search = xml.as_str();
+        while let Some(start) = search.find("<dataSource ") {
+            let end = search[start..].find("/>").map(|e| start + e + 2).unwrap_or(search.len());
+            let tag = &search[start..end];
+            if let (Some(name), Some(value)) = (
+                crate::xml::get_attr(tag, "name"),
+                crate::xml::get_attr(tag, "value"),
+            ) {
+                entries.push((
+                    crate::xml::xml_unescape(name),
+                    crate::xml::xml_unescape(value),
+                ));
+            }
+            search = &search[end.min(search.len())..];
+        }
+        Ok(entries)
+    }
+
+    /// Set a single data source value.
+    pub async fn set_data_source(&mut self, name: &str, value: &str) -> Result<()> {
+        self.sdk_cmd("SetDataSourceInfo", &command::set_data_source_info(&[(name, value)])).await?;
+        Ok(())
+    }
+
+    /// Delete all orphaned program XML files from device storage.
+    /// Media files and configuration are preserved.
+    pub async fn cleanup(&mut self) -> Result<()> {
+        self.sdk_cmd("DeleteNotCiteFile", &command::delete_not_cite_file()).await?;
+        Ok(())
+    }
+
+    /// Get the device license string. Returns `(license, valid)`.
+    pub async fn get_license(&mut self) -> Result<(String, bool)> {
+        let xml = self.sdk_cmd("GetLicense", &command::get_license()).await?;
+        let value = crate::xml::get_attr(&xml, "value").unwrap_or("").to_string();
+        let valid = crate::xml::get_attr(&xml, "valid")
+            .map(|v| v == "true")
+            .unwrap_or(!value.is_empty());
+        Ok((value, valid))
+    }
+
+    /// Set the device license string.
+    pub async fn set_license(&mut self, value: &str) -> Result<()> {
+        self.sdk_cmd("SetLicense", &command::set_license(value)).await?;
+        Ok(())
+    }
+
     // ── File Transfer ─────────────────────────────────────────────────────
 
     /// Transfer a file to the device using the binary file transfer protocol.
@@ -467,11 +675,11 @@ impl Client {
     }
 
     fn check_file_answer(&self, pkt: &Packet) -> Result<()> {
-        if pkt.payload.is_empty() {
-            return Ok(());
+        if pkt.payload.len() < 4 {
+            return Ok(()); // Too short to contain a result code — treat as OK
         }
-        let code = pkt.payload[0] as i32;
-        if code == 0 || code == 1 {
+        let code = i32::from_le_bytes(pkt.payload[..4].try_into().unwrap_or([0; 4]));
+        if code == 0 {
             Ok(())
         } else {
             Err(Error::Device {

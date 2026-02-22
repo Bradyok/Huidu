@@ -137,6 +137,12 @@ impl RenderEngine {
         self.rotation = degrees % 360;
     }
 
+    /// Push a fresh snapshot of named data sources to all renderers that support variables.
+    pub fn set_data_sources(&mut self, sources: std::collections::HashMap<String, String>) {
+        self.qrcode_renderer.set_data_sources(sources.clone());
+        self.text_renderer.set_data_sources(sources);
+    }
+
     pub fn rotation(&self) -> u16 {
         self.rotation
     }
@@ -326,8 +332,8 @@ impl RenderEngine {
 
             // Per-area border (drawn directly on the framebuffer at area position).
             // Reuses a pooled surface to avoid a Pixmap allocation every frame.
-            if let Some(ref b) = area.border {
-                if b.index != 0 || !b.effect.is_empty() {
+            if let Some(ref b) = area.border
+                && (b.index != 0 || !b.effect.is_empty()) {
                     let bsurf = &mut self.border_surfaces[i];
                     if bsurf.width() != w || bsurf.height() != h {
                         *bsurf = Pixmap::new(w, h)
@@ -344,15 +350,13 @@ impl RenderEngine {
                         None,
                     );
                 }
-            }
         }
 
         // Full-screen program-level border (drawn last, on top of everything)
-        if let Some(ref b) = program.border {
-            if b.index != 0 || !b.effect.is_empty() {
+        if let Some(ref b) = program.border
+            && (b.index != 0 || !b.effect.is_empty()) {
                 border::draw_border(&mut self.framebuffer, b, elapsed_ms);
             }
-        }
 
         // Apply software brightness via pre-computed LUT (avoids per-pixel f32 math).
         if self.brightness < 100 {
@@ -391,6 +395,42 @@ impl RenderEngine {
 
     pub fn height(&self) -> u32 {
         self.framebuffer.height()
+    }
+
+    /// Render an idle frame when no programs are loaded.
+    ///
+    /// If `boot_logo` is `Some(path)` and the image loads successfully it is
+    /// scaled to fill the framebuffer. Otherwise the framebuffer is cleared to
+    /// black. Brightness is applied the same way as in `render_frame`.
+    pub fn render_idle(&mut self, boot_logo: Option<&Path>) {
+        self.framebuffer.fill(Color::BLACK);
+
+        if let Some(path) = boot_logo
+            && let Ok(img) = image::open(path) {
+                let w = self.framebuffer.width();
+                let h = self.framebuffer.height();
+                let img = img.resize_exact(w, h, image::imageops::FilterType::Lanczos3);
+                let rgba = img.to_rgba8();
+                let data = self.framebuffer.data_mut();
+                for (i, pixel) in rgba.pixels().enumerate() {
+                    let [r, g, b, a] = pixel.0;
+                    let af = a as f32 / 255.0;
+                    data[i * 4]     = (r as f32 * af) as u8;
+                    data[i * 4 + 1] = (g as f32 * af) as u8;
+                    data[i * 4 + 2] = (b as f32 * af) as u8;
+                    data[i * 4 + 3] = a;
+                }
+            }
+
+        if self.brightness < 100 {
+            let lut = self.brightness_lut;
+            let data = self.framebuffer.data_mut();
+            for chunk in data.chunks_exact_mut(4) {
+                chunk[0] = lut[chunk[0] as usize];
+                chunk[1] = lut[chunk[1] as usize];
+                chunk[2] = lut[chunk[2] as usize];
+            }
+        }
     }
 }
 

@@ -399,6 +399,7 @@ fn draw_full(content: &Pixmap, target: &mut Pixmap) {
 }
 
 /// Draw a rectangular region from content onto target
+#[allow(clippy::too_many_arguments)]
 fn draw_region(
     content: &Pixmap,
     target: &mut Pixmap,

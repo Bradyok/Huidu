@@ -192,7 +192,7 @@ fn compute_color(
 
         Style::Blink(r, g, b) => {
             let period_ms = 1000 / speed.clamp(1, 10);
-            if (elapsed_ms / period_ms) % 2 == 0 {
+            if (elapsed_ms / period_ms).is_multiple_of(2) {
                 (r, g, b)
             } else {
                 (0, 0, 0)
@@ -236,6 +236,7 @@ fn compute_color(
 // Pixel writer
 // ---------------------------------------------------------------------------
 
+#[allow(clippy::too_many_arguments)]
 #[inline]
 fn write_pixel(data: &mut [u8], px: i32, py: i32, w: i32, h: i32, r: u8, g: u8, b: u8) {
     if px < 0 || px >= w || py < 0 || py >= h {
@@ -293,5 +294,87 @@ pub fn draw_border(fb: &mut Pixmap, border: &Border, elapsed_ms: u64) {
             let (r, g, b) = compute_color(style, w - 1 - t, y, w, h, elapsed_ms, speed);
             write_pixel(data, w - 1 - t, y, w, h, r, g, b);
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    // ── hsv_to_rgb ────────────────────────────────────────────────────────────
+
+    #[test]
+    fn test_hsv_to_rgb_pure_red() {
+        let (r, g, b) = hsv_to_rgb(0.0, 1.0, 1.0);
+        assert_eq!(r, 255);
+        assert!(g < 5);
+        assert!(b < 5);
+    }
+
+    #[test]
+    fn test_hsv_to_rgb_pure_green() {
+        let (r, g, b) = hsv_to_rgb(120.0, 1.0, 1.0);
+        assert!(r < 5);
+        assert_eq!(g, 255);
+        assert!(b < 5);
+    }
+
+    #[test]
+    fn test_hsv_to_rgb_pure_blue() {
+        let (r, g, b) = hsv_to_rgb(240.0, 1.0, 1.0);
+        assert!(r < 5);
+        assert!(g < 5);
+        assert_eq!(b, 255);
+    }
+
+    #[test]
+    fn test_hsv_to_rgb_zero_saturation_is_gray() {
+        // S=0 → all channels equal (gray); at v=0.5 each channel ≈ 127
+        let (r, g, b) = hsv_to_rgb(0.0, 0.0, 0.5);
+        assert!((r as i32 - 127).abs() <= 1);
+        assert!((g as i32 - 127).abs() <= 1);
+        assert!((b as i32 - 127).abs() <= 1);
+    }
+
+    #[test]
+    fn test_hsv_to_rgb_h360_wraps_to_h0() {
+        let at_0   = hsv_to_rgb(0.0,   1.0, 1.0);
+        let at_360 = hsv_to_rgb(360.0, 1.0, 1.0);
+        assert_eq!(at_0, at_360);
+    }
+
+    // ── perimeter_pos ─────────────────────────────────────────────────────────
+
+    #[test]
+    fn test_perimeter_pos_top_left_is_zero() {
+        // Top-left corner is the origin of the clockwise walk
+        assert_eq!(perimeter_pos(0, 0, 10, 10), 0);
+    }
+
+    #[test]
+    fn test_perimeter_pos_advances_along_top() {
+        // Position increases left→right along the top edge
+        let p0 = perimeter_pos(0, 0, 10, 10);
+        let p5 = perimeter_pos(5, 0, 10, 10);
+        let p9 = perimeter_pos(9, 0, 10, 10);
+        assert!(p0 < p5 && p5 < p9);
+    }
+
+    #[test]
+    fn test_perimeter_pos_all_border_pixels_unique() {
+        // Every pixel on the outer border of an 8×6 rectangle should map to
+        // a distinct perimeter position.
+        let (w, h) = (8i32, 6i32);
+        let mut positions = std::collections::HashSet::new();
+        for x in 0..w {
+            positions.insert(perimeter_pos(x, 0,     w, h)); // top
+            positions.insert(perimeter_pos(x, h - 1, w, h)); // bottom
+        }
+        for y in 1..h - 1 {
+            positions.insert(perimeter_pos(0,     y, w, h)); // left
+            positions.insert(perimeter_pos(w - 1, y, w, h)); // right
+        }
+        let expected_perimeter = (2 * (w + h) - 4) as usize;
+        assert_eq!(positions.len(), expected_perimeter);
     }
 }

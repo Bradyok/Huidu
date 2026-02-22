@@ -66,12 +66,10 @@ impl CountdownRenderer {
         if self.cached_guid == cd.guid
             && self.cached_second == current_epoch
             && self.cached_size == (width, height)
-        {
-            if let Some(ref cached) = self.cached_pixmap {
+            && let Some(ref cached) = self.cached_pixmap {
                 target.data_mut().copy_from_slice(cached.data());
                 return;
             }
-        }
 
         // ── Compute remaining duration ────────────────────────────────────────
         let (remaining_secs, expired) = parse_target(&cd.target)

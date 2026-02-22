@@ -75,13 +75,10 @@ async fn handle_connection(
     let mut session = Session::new();
     let mut buf = vec![0u8; MAX_PACKET_SIZE];
 
-    loop {
-        let length = match stream.read_u16_le().await {
-            Ok(l) => l as usize,
-            Err(_) => break,
-        };
+    while let Ok(l) = stream.read_u16_le().await {
+        let length = l as usize;
 
-        if length < 2 || length > MAX_PACKET_SIZE {
+        if !(2..=MAX_PACKET_SIZE).contains(&length) {
             warn!("Invalid packet length: {}", length);
             break;
         }
@@ -198,14 +195,40 @@ async fn handle_connection(
             }
 
             CMD_FILE_END_ASK => {
-                if let Some(transfer) = session.complete_file_transfer() {
+                let result: u32 = if let Some(transfer) = session.complete_file_transfer() {
+                    // Verify MD5 if the controller supplied one
+                    let md5_ok = if !transfer.md5.is_empty() {
+                        let computed = format!("{:x}", md5::compute(&transfer.data));
+                        if computed != transfer.md5.to_lowercase() {
+                            warn!(
+                                "MD5 mismatch for {}: expected={} computed={}",
+                                transfer.filename, transfer.md5, computed
+                            );
+                            false
+                        } else {
+                            true
+                        }
+                    } else {
+                        true
+                    };
+
                     let dest = std::path::Path::new(&program_dir).join(&transfer.filename);
-                    info!("File saved: {} ({} bytes)", transfer.filename, transfer.data.len());
+                    info!(
+                        "File transfer complete: {} ({} bytes, md5_ok={})",
+                        transfer.filename,
+                        transfer.data.len(),
+                        md5_ok
+                    );
                     let _ = std::fs::create_dir_all(&program_dir);
                     let _ = std::fs::write(&dest, &transfer.data);
-                }
+                    // Return 0 (success) regardless of MD5 — file is saved, controller
+                    // can re-send if it detects the mismatch via GetFileChecklist.
+                    0u32
+                } else {
+                    0u32
+                };
                 let mut resp = Vec::new();
-                WriteBytesExt::write_u32::<LittleEndian>(&mut resp, 0).unwrap();
+                WriteBytesExt::write_u32::<LittleEndian>(&mut resp, result).unwrap();
                 Some(make_packet(CMD_FILE_END_ANSWER, &resp))
             }
 

@@ -1,25 +1,22 @@
-/// FPGA hardware parameters — reconstructed from libFPGADriver.so binary analysis
-/// and the BoxHwConfig XML format used by the Huidu SDK.
-///
-/// These structures mirror HFPGAParam, HSendCard, HRecvCard, etc. in the original.
+//! FPGA hardware parameters — reconstructed from libFPGADriver.so binary analysis
+//! and the BoxHwConfig XML format used by the Huidu SDK.
+//!
+//! These structures mirror HFPGAParam, HSendCard, HRecvCard, etc. in the original.
 
 /// LED module / receive-card scan type
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 #[repr(u8)]
+#[derive(Default)]
 pub enum ScanType {
     Static = 0,
     Half    = 1,  // 1/2 scan
     Quarter = 2,  // 1/4 scan
     Eighth  = 3,  // 1/8 scan
+    #[default]
     Sixteenth = 4, // 1/16 scan
     ThirtySecond = 5, // 1/32 scan
 }
 
-impl Default for ScanType {
-    fn default() -> Self {
-        ScanType::Sixteenth
-    }
-}
 
 /// Data polarity (OE / LAT active level)
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]

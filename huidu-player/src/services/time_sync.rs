@@ -1,33 +1,44 @@
 /// NTP time synchronization service.
 /// Periodically syncs system clock via NTP.
 use tokio::time::{self, Duration};
+use tokio_util::sync::CancellationToken;
 use tracing::{debug, info, warn};
 
 pub struct TimeSyncService;
 
 impl TimeSyncService {
-    /// Run NTP sync in background (every 6 hours)
-    pub async fn run() {
+    /// Run NTP sync in background (every 6 hours).
+    /// `ntp_server` is the configured NTP server (e.g. "pool.ntp.org").
+    /// Exits when `cancel` is triggered.
+    pub async fn run(ntp_server: String, cancel: CancellationToken) {
         // Initial sync after 10 seconds
-        time::sleep(Duration::from_secs(10)).await;
-        Self::sync_once().await;
+        tokio::select! {
+            biased;
+            _ = cancel.cancelled() => return,
+            _ = time::sleep(Duration::from_secs(10)) => {}
+        }
+        Self::sync_once(&ntp_server).await;
 
         // Then every 6 hours
         let mut interval = time::interval(Duration::from_secs(6 * 3600));
         loop {
-            interval.tick().await;
-            Self::sync_once().await;
+            tokio::select! {
+                biased;
+                _ = cancel.cancelled() => break,
+                _ = interval.tick() => {}
+            }
+            Self::sync_once(&ntp_server).await;
         }
     }
 
-    async fn sync_once() {
-        debug!("Attempting NTP time sync");
+    async fn sync_once(ntp_server: &str) {
+        debug!("Attempting NTP time sync via {}", ntp_server);
 
         // On Linux, try ntpdate or systemctl
         #[cfg(unix)]
         {
             let result = tokio::process::Command::new("ntpdate")
-                .args(["-u", "pool.ntp.org"])
+                .args(["-u", ntp_server])
                 .output()
                 .await;
 

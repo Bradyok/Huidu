@@ -1,56 +1,110 @@
 /// Analog clock renderer plugin (libclock_plugin.so, dial type).
 ///
 /// Draws a minimal analogue clock face using software rasterisation:
-///   - Dark circular bezel
-///   - 12 hour-tick marks
+///   - Optional background image (scaled to fill the area)
+///   - Dark circular bezel (when no bg image)
+///   - 12 hour-tick marks (when no bg image)
 ///   - Hour, minute, and second hands via Bresenham line drawing
 ///   - Centre pip
-///
-/// The `AnalogClockContent.bg_image` field is noted but image loading is
-/// deferred to when the file-system layout is known at runtime.
+use std::collections::{HashMap, VecDeque};
 use std::f32::consts::PI;
 use std::path::Path;
 
-use tiny_skia::Pixmap;
+use tiny_skia::{Pixmap, PixmapPaint, Transform};
 
-use crate::program::model::{AnalogClockContent, ContentItem};
+use crate::program::model::{parse_color, AnalogClockContent, ContentItem};
 use crate::render::plugins::ContentRenderer;
 
-pub struct AnalogClockRenderer;
+/// Maximum number of background images kept in memory at once.
+const MAX_CACHE: usize = 16;
+
+pub struct AnalogClockRenderer {
+    /// Cache: absolute image path → loaded+scaled Pixmap (None = load failed).
+    bg_cache: HashMap<String, Option<Pixmap>>,
+    /// Insertion-order queue for FIFO eviction.
+    bg_keys: VecDeque<String>,
+}
 
 impl AnalogClockRenderer {
     pub fn new() -> Self {
-        Self
+        Self {
+            bg_cache: HashMap::new(),
+            bg_keys: VecDeque::new(),
+        }
     }
 
-    fn render_clock(&self, clock: &AnalogClockContent, target: &mut Pixmap, width: u32, height: u32) {
+    fn render_clock(
+        &mut self,
+        clock: &AnalogClockContent,
+        target: &mut Pixmap,
+        width: u32,
+        height: u32,
+        program_dir: &Path,
+    ) {
         let w = width as i32;
         let h = height as i32;
         let cx = w / 2;
         let cy = h / 2;
         let radius = (w.min(h) / 2 - 1).max(4);
 
-        // Dark face
-        fill_circle(target.data_mut(), cx, cy, radius, w, h, 10, 10, 30, 255);
+        // ── Parse colors from model ──────────────────────────────────────────
+        let (dr, dg, db) = parse_color(&clock.dial_color);
+        let (hr, hg, hb) = parse_color(&clock.hand_color);
+        let (sr, sg, sb) = parse_color(&clock.second_color);
+        // Rim / ticks at ~65% of hand color
+        let dim = |c: u8| -> u8 { (c as u32 * 65 / 100) as u8 };
+        let (rr, rg, rb) = (dim(hr), dim(hg), dim(hb));
+        // Minute hand at ~80% of hand color
+        let mn = |c: u8| -> u8 { (c as u32 * 80 / 100) as u8 };
+        let (mr, mg, mb) = (mn(hr), mn(hg), mn(hb));
+        // Second tail at ~65% of second color
+        let (tr, tg, tb) = (dim(sr), dim(sg), dim(sb));
 
-        // Rim
-        draw_circle_outline(target.data_mut(), cx, cy, radius, w, h, 100, 100, 180);
-
-        // Hour tick marks
-        for i in 0..12 {
-            let angle = i as f32 * PI / 6.0 - PI / 2.0;
-            let inner = (radius as f32 * 0.82) as i32;
-            let outer = radius - 1;
-            let x0 = cx + (angle.cos() * inner as f32) as i32;
-            let y0 = cy + (angle.sin() * inner as f32) as i32;
-            let x1 = cx + (angle.cos() * outer as f32) as i32;
-            let y1 = cy + (angle.sin() * outer as f32) as i32;
-            draw_line(target.data_mut(), x0, y0, x1, y1, w, h, 180, 180, 220);
+        // ── Background image or software-rendered face ───────────────────────
+        let has_bg = !clock.bg_image.is_empty();
+        if has_bg {
+            let img_path = program_dir.join(&clock.bg_image);
+            let key = img_path.to_string_lossy().into_owned();
+            if !self.bg_cache.contains_key(&key) {
+                // Evict oldest entry if at capacity
+                if self.bg_cache.len() >= MAX_CACHE
+                    && let Some(oldest) = self.bg_keys.pop_front() {
+                        self.bg_cache.remove(&oldest);
+                    }
+                let pm = load_image_scaled(&img_path, width, height);
+                self.bg_cache.insert(key.clone(), pm);
+                self.bg_keys.push_back(key.clone());
+            }
+            if let Some(Some(bg)) = self.bg_cache.get(&key) {
+                target.draw_pixmap(
+                    0, 0,
+                    bg.as_ref(),
+                    &PixmapPaint::default(),
+                    Transform::identity(),
+                    None,
+                );
+            }
+        } else {
+            // Dial face
+            fill_circle(target.data_mut(), cx, cy, radius, w, h, dr, dg, db, 255);
+            // Rim
+            draw_circle_outline(target.data_mut(), cx, cy, radius, w, h, rr, rg, rb);
+            // Hour tick marks
+            for i in 0..12 {
+                let angle = i as f32 * PI / 6.0 - PI / 2.0;
+                let inner = (radius as f32 * 0.82) as i32;
+                let outer = radius - 1;
+                let x0 = cx + (angle.cos() * inner as f32) as i32;
+                let y0 = cy + (angle.sin() * inner as f32) as i32;
+                let x1 = cx + (angle.cos() * outer as f32) as i32;
+                let y1 = cy + (angle.sin() * outer as f32) as i32;
+                draw_line(target.data_mut(), x0, y0, x1, y1, w, h, rr, rg, rb);
+            }
         }
 
-        // Determine current local time (use timezone adjust if set)
+        // ── Current local time ───────────────────────────────────────────────
         let now = chrono::Local::now();
-        let hour = now.hour() % 12;
+        let hour   = now.hour() % 12;
         let minute = now.minute();
         let second = now.second();
 
@@ -72,11 +126,11 @@ impl AnalogClockRenderer {
                 cx + ox, cy + oy,
                 cx + (h_angle.cos() * h_len as f32) as i32 + ox,
                 cy + (h_angle.sin() * h_len as f32) as i32 + oy,
-                w, h, 255, 255, 255,
+                w, h, hr, hg, hb,
             );
         }
 
-        // Minute hand (medium, white)
+        // Minute hand (medium, slightly dimmer than hour)
         for off in 0..=1i32 {
             let ox = (-m_angle.sin() * off as f32) as i32;
             let oy = (m_angle.cos() * off as f32) as i32;
@@ -85,31 +139,29 @@ impl AnalogClockRenderer {
                 cx + ox, cy + oy,
                 cx + (m_angle.cos() * m_len as f32) as i32 + ox,
                 cy + (m_angle.sin() * m_len as f32) as i32 + oy,
-                w, h, 200, 200, 255,
+                w, h, mr, mg, mb,
             );
         }
 
-        // Second hand (thin, red)
+        // Second hand
         draw_line(
             target.data_mut(),
             cx, cy,
             cx + (s_angle.cos() * s_len as f32) as i32,
             cy + (s_angle.sin() * s_len as f32) as i32,
-            w, h, 255, 60, 60,
+            w, h, sr, sg, sb,
         );
-        // Counter-tail
+        // Counter-tail (dimmer)
         draw_line(
             target.data_mut(),
             cx, cy,
             cx - (s_angle.cos() * (s_len / 4) as f32) as i32,
             cy - (s_angle.sin() * (s_len / 4) as f32) as i32,
-            w, h, 180, 30, 30,
+            w, h, tr, tg, tb,
         );
 
-        // Centre pip
-        fill_circle(target.data_mut(), cx, cy, 2, w, h, 255, 255, 255, 255);
-
-        let _ = clock; // suppress unused warning for timezone field
+        // Centre pip (hand color)
+        fill_circle(target.data_mut(), cx, cy, 2, w, h, hr, hg, hb, 255);
     }
 }
 
@@ -123,21 +175,46 @@ impl ContentRenderer for AnalogClockRenderer {
         width: u32,
         height: u32,
         _elapsed_ms: u64,
-        _program_dir: &Path,
+        program_dir: &Path,
     ) -> bool {
         let clock = match item {
             ContentItem::AnalogClock(c) => c,
             _ => return false,
         };
-        self.render_clock(clock, target, width, height);
+        self.render_clock(clock, target, width, height, program_dir);
         true
     }
+}
+
+// ---------------------------------------------------------------------------
+// Image loader helper
+// ---------------------------------------------------------------------------
+
+/// Load an image from `path`, scale it to (`w` × `h`), and convert to a
+/// premultiplied-RGBA `Pixmap` ready for `draw_pixmap`. Returns `None` on any
+/// error so callers can fall back to the software-rendered face.
+fn load_image_scaled(path: &Path, w: u32, h: u32) -> Option<Pixmap> {
+    let img = image::open(path).ok()?;
+    let img = img.resize_exact(w, h, image::imageops::FilterType::Lanczos3);
+    let rgba = img.to_rgba8();
+    let mut pm = Pixmap::new(w, h)?;
+    let data = pm.data_mut();
+    for (i, pixel) in rgba.pixels().enumerate() {
+        let [r, g, b, a] = pixel.0;
+        let af = a as f32 / 255.0;
+        data[i * 4]     = (r as f32 * af) as u8;
+        data[i * 4 + 1] = (g as f32 * af) as u8;
+        data[i * 4 + 2] = (b as f32 * af) as u8;
+        data[i * 4 + 3] = a;
+    }
+    Some(pm)
 }
 
 // ---------------------------------------------------------------------------
 // Software rasterisation helpers
 // ---------------------------------------------------------------------------
 
+#[allow(clippy::too_many_arguments)]
 fn set_px(data: &mut [u8], x: i32, y: i32, w: i32, h: i32, r: u8, g: u8, b: u8, a: u8) {
     if x < 0 || x >= w || y < 0 || y >= h {
         return;
@@ -165,6 +242,7 @@ fn set_px(data: &mut [u8], x: i32, y: i32, w: i32, h: i32, r: u8, g: u8, b: u8, 
 }
 
 /// Filled circle using midpoint rasterisation.
+#[allow(clippy::too_many_arguments)]
 fn fill_circle(
     data: &mut [u8],
     cx: i32, cy: i32, r: i32,
@@ -180,6 +258,7 @@ fn fill_circle(
 }
 
 /// Single-pixel circle outline via midpoint algorithm.
+#[allow(clippy::too_many_arguments)]
 fn draw_circle_outline(
     data: &mut [u8],
     cx: i32, cy: i32, r: i32,
@@ -204,6 +283,7 @@ fn draw_circle_outline(
 }
 
 /// Bresenham line.
+#[allow(clippy::too_many_arguments)]
 fn draw_line(
     data: &mut [u8],
     mut x0: i32, mut y0: i32,

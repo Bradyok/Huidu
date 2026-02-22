@@ -108,14 +108,24 @@ pub fn get_switch_time() -> String {
 
 /// Set screen on/off schedule.
 /// `on_time`: "HH:MM", `off_time`: "HH:MM"
+/// `days`: 7-character string of '0'/'1' for Mon–Sun (e.g. `"1111100"` = weekdays).
+///   Pass `"1111111"` to apply every day.
 /// Server (SetSwitchTime) parses `<item onTime="..." offTime="..." days="..."/>` elements.
-pub fn set_switch_time(enabled: bool, on_time: &str, off_time: &str) -> String {
+pub fn set_switch_time(enabled: bool, on_time: &str, off_time: &str, days: &str) -> String {
     if !enabled {
         return String::new(); // empty body = clear schedule
     }
-    format!(
-        "<item onTime=\"{on_time}\" offTime=\"{off_time}\" days=\"1111111\"/>"
-    )
+    // Validate/sanitise: keep only '0'/'1', pad/truncate to 7 chars
+    let days_clean: String = days.chars()
+        .filter(|&c| c == '0' || c == '1')
+        .take(7)
+        .collect();
+    let days_str = if days_clean.len() == 7 {
+        days_clean
+    } else {
+        "1111111".to_string()
+    };
+    format!("<item onTime=\"{on_time}\" offTime=\"{off_time}\" days=\"{days_str}\"/>")
 }
 
 // ── Network ──────────────────────────────────────────────────────────────────
@@ -251,6 +261,10 @@ pub fn get_upgrade_result() -> String {
 
 // ── Rotation ─────────────────────────────────────────────────────────────────
 
+pub fn get_screen_rotation() -> String {
+    String::new()
+}
+
 /// Set screen rotation. `angle`: 0, 90, 180, or 270 (degrees).
 pub fn set_rotation(angle: u16) -> String {
     // Server (ScreenRotation / SetRotation) parses the actual degree value.
@@ -307,4 +321,276 @@ pub fn reload_all_fonts() -> String {
 
 pub fn get_gps_info() -> String {
     String::new()
+}
+
+// ── Storage Cleanup ───────────────────────────────────────────────────────────
+
+/// Delete all program files not referenced by any loaded program.
+/// Media files and device_state.json are preserved.
+pub fn delete_not_cite_file() -> String {
+    String::new()
+}
+
+// ── License ───────────────────────────────────────────────────────────────────
+
+pub fn get_license() -> String {
+    String::new()
+}
+
+pub fn set_license(value: &str) -> String {
+    format!("<license value=\"{}\"/>", xml::xml_escape(value))
+}
+
+pub fn clear_license() -> String {
+    String::new()
+}
+
+// ── Data Sources ──────────────────────────────────────────────────────────────
+
+pub fn get_data_source_info() -> String {
+    String::new()
+}
+
+/// Set one or more data source key/value pairs.
+/// `entries` is a slice of (name, value) tuples.
+pub fn set_data_source_info(entries: &[(&str, &str)]) -> String {
+    entries
+        .iter()
+        .map(|(name, value)| {
+            format!(
+                "<dataSource name=\"{}\" value=\"{}\"/>",
+                xml::xml_escape(name),
+                xml::xml_escape(value),
+            )
+        })
+        .collect()
+}
+
+pub fn reload_device_id() -> String {
+    String::new()
+}
+
+// ── Boot Logo ─────────────────────────────────────────────────────────────────
+
+pub fn get_boot_logo() -> String {
+    String::new()
+}
+
+pub fn set_boot_logo_name(filename: &str) -> String {
+    format!("<bootLogo name=\"{}\"/>", xml::xml_escape(filename))
+}
+
+pub fn clear_boot_logo() -> String {
+    String::new()
+}
+
+// ── File Management ───────────────────────────────────────────────────────────
+
+/// Get file list with MD5 hashes and sizes (for verifying transfer integrity).
+pub fn get_file_checklist() -> String {
+    String::new()
+}
+
+/// Delete named files from device storage.
+pub fn delete_files(filenames: &[&str]) -> String {
+    filenames
+        .iter()
+        .map(|f| format!("<file name=\"{}\"/>", xml::xml_escape(f)))
+        .collect()
+}
+
+// ── Network Status ────────────────────────────────────────────────────────────
+
+pub fn get_network_info() -> String {
+    String::new()
+}
+
+// (get_wifi_info, set_wifi, get_upgrade_result, firmware_upgrade already defined above)
+
+// ─────────────────────────────────────────────────────────────────────────────
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    // ── set_brightness ────────────────────────────────────────────────────────
+
+    #[test]
+    fn test_set_brightness_normal() {
+        assert_eq!(set_brightness(75), "<brightness value=\"75\"/>");
+    }
+
+    #[test]
+    fn test_set_brightness_clamp() {
+        // Values > 100 are clamped to 100
+        assert_eq!(set_brightness(200), "<brightness value=\"100\"/>");
+    }
+
+    #[test]
+    fn test_set_brightness_zero() {
+        assert_eq!(set_brightness(0), "<brightness value=\"0\"/>");
+    }
+
+    // ── set_rotation ──────────────────────────────────────────────────────────
+
+    #[test]
+    fn test_set_rotation_valid() {
+        assert_eq!(set_rotation(0),   "<rotation value=\"0\"/>");
+        assert_eq!(set_rotation(90),  "<rotation value=\"90\"/>");
+        assert_eq!(set_rotation(180), "<rotation value=\"180\"/>");
+        assert_eq!(set_rotation(270), "<rotation value=\"270\"/>");
+    }
+
+    #[test]
+    fn test_set_rotation_invalid_defaults_to_zero() {
+        assert_eq!(set_rotation(45),  "<rotation value=\"0\"/>");
+        assert_eq!(set_rotation(360), "<rotation value=\"0\"/>");
+    }
+
+    // ── set_luminance_ploy ────────────────────────────────────────────────────
+
+    #[test]
+    fn test_set_luminance_ploy_single_entry() {
+        let xml = set_luminance_ploy(&[(8, 0, 100)]);
+        assert_eq!(xml, "<luminance mode=\"auto\"><item time=\"08:00\" level=\"100\"/></luminance>");
+    }
+
+    #[test]
+    fn test_set_luminance_ploy_multiple() {
+        let xml = set_luminance_ploy(&[(8, 0, 100), (22, 30, 50)]);
+        assert!(xml.contains("<item time=\"08:00\" level=\"100\"/>"));
+        assert!(xml.contains("<item time=\"22:30\" level=\"50\"/>"));
+        assert!(xml.starts_with("<luminance mode=\"auto\">"));
+        assert!(xml.ends_with("</luminance>"));
+    }
+
+    #[test]
+    fn test_set_luminance_ploy_empty() {
+        let xml = set_luminance_ploy(&[]);
+        assert_eq!(xml, "<luminance mode=\"auto\"></luminance>");
+    }
+
+    // ── set_switch_time ───────────────────────────────────────────────────────
+
+    #[test]
+    fn test_set_switch_time_enabled() {
+        let xml = set_switch_time(true, "08:00", "22:00", "1111111");
+        assert!(xml.contains("onTime=\"08:00\""));
+        assert!(xml.contains("offTime=\"22:00\""));
+        assert!(xml.contains("days=\"1111111\""));
+    }
+
+    #[test]
+    fn test_set_switch_time_weekdays_only() {
+        let xml = set_switch_time(true, "08:00", "22:00", "1111100");
+        assert!(xml.contains("days=\"1111100\""));
+    }
+
+    #[test]
+    fn test_set_switch_time_invalid_days_defaults_to_all() {
+        // Too short — falls back to "1111111"
+        let xml = set_switch_time(true, "08:00", "22:00", "111");
+        assert!(xml.contains("days=\"1111111\""));
+    }
+
+    #[test]
+    fn test_set_switch_time_disabled() {
+        // Disabled → empty body (clear schedule)
+        assert_eq!(set_switch_time(false, "08:00", "22:00", "1111111"), "");
+    }
+
+    // ── set_eth0_info ─────────────────────────────────────────────────────────
+
+    #[test]
+    fn test_set_eth0_info_static() {
+        let xml = set_eth0_info(false, "192.168.1.10", "255.255.255.0", "192.168.1.1", "8.8.8.8");
+        assert!(xml.contains("dhcp=\"false\""));
+        assert!(xml.contains("ip=\"192.168.1.10\""));
+        assert!(xml.contains("mask=\"255.255.255.0\""));
+        assert!(xml.contains("gateway=\"192.168.1.1\""));
+        assert!(xml.contains("dns=\"8.8.8.8\""));
+    }
+
+    #[test]
+    fn test_set_eth0_info_dhcp() {
+        let xml = set_eth0_info(true, "", "", "", "");
+        assert!(xml.contains("dhcp=\"true\""));
+    }
+
+    // ── set_data_source_info ──────────────────────────────────────────────────
+
+    #[test]
+    fn test_set_data_source_info_single() {
+        let xml = set_data_source_info(&[("temperature", "23.5")]);
+        assert_eq!(xml, "<dataSource name=\"temperature\" value=\"23.5\"/>");
+    }
+
+    #[test]
+    fn test_set_data_source_info_multiple() {
+        let xml = set_data_source_info(&[("a", "1"), ("b", "2")]);
+        assert!(xml.contains("<dataSource name=\"a\" value=\"1\"/>"));
+        assert!(xml.contains("<dataSource name=\"b\" value=\"2\"/>"));
+    }
+
+    #[test]
+    fn test_set_data_source_info_xml_escape() {
+        let xml = set_data_source_info(&[("k", "<v&w>")]);
+        assert!(xml.contains("value=\"&lt;v&amp;w&gt;\""));
+    }
+
+    // ── delete_files ──────────────────────────────────────────────────────────
+
+    #[test]
+    fn test_delete_files_single() {
+        assert_eq!(delete_files(&["logo.png"]), "<file name=\"logo.png\"/>");
+    }
+
+    #[test]
+    fn test_delete_files_multiple() {
+        let xml = delete_files(&["a.mp4", "b.jpg"]);
+        assert!(xml.contains("<file name=\"a.mp4\"/>"));
+        assert!(xml.contains("<file name=\"b.jpg\"/>"));
+    }
+
+    #[test]
+    fn test_delete_files_empty() {
+        assert_eq!(delete_files(&[]), "");
+    }
+
+    // ── firmware_upgrade ──────────────────────────────────────────────────────
+
+    #[test]
+    fn test_firmware_upgrade() {
+        let xml = firmware_upgrade("v2.1.0.zbin");
+        assert_eq!(xml, "<upgrade file=\"v2.1.0.zbin\"/>");
+    }
+
+    #[test]
+    fn test_firmware_upgrade_xml_escape() {
+        let xml = firmware_upgrade("v2&1.zbin");
+        assert_eq!(xml, "<upgrade file=\"v2&amp;1.zbin\"/>");
+    }
+
+    // ── set_boot_logo_name ────────────────────────────────────────────────────
+
+    #[test]
+    fn test_set_boot_logo_name() {
+        assert_eq!(set_boot_logo_name("logo.png"), "<bootLogo name=\"logo.png\"/>");
+    }
+
+    // ── set_wifi ──────────────────────────────────────────────────────────────
+
+    #[test]
+    fn test_set_wifi() {
+        let xml = set_wifi("MyNet", "p@ss", true);
+        assert!(xml.contains("ssid=\"MyNet\""));
+        assert!(xml.contains("password=\"p@ss\""));
+        assert!(xml.contains("dhcp=\"true\""));
+    }
+
+    #[test]
+    fn test_set_wifi_xml_escape() {
+        let xml = set_wifi("Net<1>", "p&w", false);
+        assert!(xml.contains("ssid=\"Net&lt;1&gt;\""));
+        assert!(xml.contains("password=\"p&amp;w\""));
+    }
 }

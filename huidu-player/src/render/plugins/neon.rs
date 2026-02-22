@@ -104,6 +104,7 @@ impl ContentRenderer for NeonRenderer {
 
 // ── Shape dispatcher ─────────────────────────────────────────────────────────
 
+#[allow(clippy::too_many_arguments)]
 fn draw_shape(
     index: u32,
     target: &mut Pixmap,
@@ -166,6 +167,7 @@ fn draw_shape(
 
 // ── Low-level pixel / line primitives ────────────────────────────────────────
 
+#[allow(clippy::too_many_arguments)]
 #[inline]
 fn put(data: &mut [u8], x: i32, y: i32, tw: i32, th: i32, r: u8, g: u8, b: u8) {
     if x < 0 || x >= tw || y < 0 || y >= th {
@@ -179,6 +181,7 @@ fn put(data: &mut [u8], x: i32, y: i32, tw: i32, th: i32, r: u8, g: u8, b: u8) {
 }
 
 /// Bresenham line, 1 px.
+#[allow(clippy::too_many_arguments)]
 fn bline(data: &mut [u8], mut x0: i32, mut y0: i32, x1: i32, y1: i32,
          tw: i32, th: i32, r: u8, g: u8, b: u8) {
     let dx = (x1 - x0).abs();
@@ -196,6 +199,7 @@ fn bline(data: &mut [u8], mut x0: i32, mut y0: i32, x1: i32, y1: i32,
 }
 
 /// Thick line (draws 3 parallel 1-px lines — produces ~3px stroke).
+#[allow(clippy::too_many_arguments)]
 fn thick_line(target: &mut Pixmap, x0: i32, y0: i32, x1: i32, y1: i32, r: u8, g: u8, b: u8) {
     let tw = target.width() as i32;
     let th = target.height() as i32;
@@ -223,9 +227,10 @@ fn polyline(target: &mut Pixmap, pts: &[(i32, i32)], closed: bool, r: u8, g: u8,
 }
 
 /// Parametric ellipse outline via polyline.
+#[allow(clippy::too_many_arguments)]
 fn ellipse_outline(target: &mut Pixmap, cx: i32, cy: i32, rx: i32, ry: i32,
                    r: u8, g: u8, b: u8, _thickness: i32) {
-    let steps = (rx.max(ry) * 4).max(32).min(128);
+    let steps = (rx.max(ry) * 4).clamp(32, 128);
     let pts: Vec<(i32, i32)> = (0..=steps)
         .map(|i| {
             let a = i as f32 * PI * 2.0 / steps as f32;
@@ -236,6 +241,7 @@ fn ellipse_outline(target: &mut Pixmap, cx: i32, cy: i32, rx: i32, ry: i32,
 }
 
 /// Regular N-sided polygon outline.
+#[allow(clippy::too_many_arguments)]
 fn regular_polygon(target: &mut Pixmap, cx: i32, cy: i32, sides: u32, radius: i32,
                    start: f32, r: u8, g: u8, b: u8) {
     let pts: Vec<(i32, i32)> = (0..sides)
@@ -248,6 +254,7 @@ fn regular_polygon(target: &mut Pixmap, cx: i32, cy: i32, sides: u32, radius: i3
 }
 
 /// N-pointed star outline.
+#[allow(clippy::too_many_arguments)]
 fn star_outline(target: &mut Pixmap, cx: i32, cy: i32, points: u32,
                 outer_r: i32, inner_r: i32, r: u8, g: u8, b: u8) {
     let pts: Vec<(i32, i32)> = (0..points * 2)
@@ -263,6 +270,7 @@ fn star_outline(target: &mut Pixmap, cx: i32, cy: i32, points: u32,
 // ── Shape implementations ─────────────────────────────────────────────────────
 
 /// Heart (parametric: x=16·sin³t, y=13·cos·t − 5·cos·2t − 2·cos·3t − cos·4t).
+#[allow(clippy::too_many_arguments)]
 fn heart_outline(target: &mut Pixmap, cx: i32, cy: i32, w: i32, h: i32, r: u8, g: u8, b: u8) {
     let scale = (w as f32 / 34.0).min(h as f32 / 30.0) * 0.85;
     let steps = 64;
@@ -278,6 +286,7 @@ fn heart_outline(target: &mut Pixmap, cx: i32, cy: i32, w: i32, h: i32, r: u8, g
 }
 
 /// Simplified thumbs-up from line segments.
+#[allow(clippy::too_many_arguments)]
 fn thumbsup_outline(target: &mut Pixmap, cx: i32, cy: i32, w: i32, h: i32, r: u8, g: u8, b: u8) {
     let lx = cx - w / 4;
     let rx_  = cx + w / 4;
@@ -293,6 +302,7 @@ fn thumbsup_outline(target: &mut Pixmap, cx: i32, cy: i32, w: i32, h: i32, r: u8
 }
 
 /// Speech bubble (rounded-corner rect + tail at bottom-left).
+#[allow(clippy::too_many_arguments)]
 fn speech_bubble(target: &mut Pixmap, cx: i32, cy: i32, w: i32, h: i32, r: u8, g: u8, b: u8) {
     let m = 3;
     let bx = cx - w / 2 + m;
@@ -304,6 +314,7 @@ fn speech_bubble(target: &mut Pixmap, cx: i32, cy: i32, w: i32, h: i32, r: u8, g
 }
 
 /// Right-pointing arrow.
+#[allow(clippy::too_many_arguments)]
 fn arrow_right(target: &mut Pixmap, cx: i32, cy: i32, w: i32, h: i32, r: u8, g: u8, b: u8) {
     let lx = cx - w / 3;
     let rx_ = cx + w / 3;
@@ -375,6 +386,7 @@ fn midpoint_ticks(target: &mut Pixmap, size: i32, r: u8, g: u8, b: u8) {
 }
 
 /// Three horizontally linked circles.
+#[allow(clippy::too_many_arguments)]
 fn chain_circles(target: &mut Pixmap, cx: i32, cy: i32, w: i32, _h: i32, r: u8, g: u8, b: u8, n: i32) {
     let cr = w / (n * 3);
     let spacing = w / n;
@@ -386,6 +398,7 @@ fn chain_circles(target: &mut Pixmap, cx: i32, cy: i32, w: i32, _h: i32, r: u8, 
 }
 
 /// Row of horizontal ovals.
+#[allow(clippy::too_many_arguments)]
 fn oval_row(target: &mut Pixmap, cx: i32, cy: i32, w: i32, h: i32, r: u8, g: u8, b: u8, n: i32) {
     let ow = w / (n * 2);
     let oh = (h / 4).max(2);
@@ -398,6 +411,7 @@ fn oval_row(target: &mut Pixmap, cx: i32, cy: i32, w: i32, h: i32, r: u8, g: u8,
 }
 
 /// Four partially-overlapping rings arranged in a 2×2 grid.
+#[allow(clippy::too_many_arguments)]
 fn interlocked_rings(target: &mut Pixmap, cx: i32, cy: i32, w: i32, h: i32, r: u8, g: u8, b: u8) {
     let cr = (w.min(h) / 5).max(3);
     let off = cr * 3 / 4;
@@ -407,6 +421,7 @@ fn interlocked_rings(target: &mut Pixmap, cx: i32, cy: i32, w: i32, h: i32, r: u
 }
 
 /// Shield / badge (pentagon with a pointed bottom).
+#[allow(clippy::too_many_arguments)]
 fn shield(target: &mut Pixmap, cx: i32, cy: i32, w: i32, h: i32, r: u8, g: u8, b: u8) {
     let lx = cx - w / 3;
     let rx_ = cx + w / 3;
@@ -417,6 +432,7 @@ fn shield(target: &mut Pixmap, cx: i32, cy: i32, w: i32, h: i32, r: u8, g: u8, b
 }
 
 /// Teardrop (circle body + triangle tip at bottom).
+#[allow(clippy::too_many_arguments)]
 fn teardrop(target: &mut Pixmap, cx: i32, cy: i32, w: i32, h: i32, r: u8, g: u8, b: u8) {
     let cr = (w.min(h) / 3).max(4);
     let top_cy = cy - h / 6;
@@ -427,6 +443,7 @@ fn teardrop(target: &mut Pixmap, cx: i32, cy: i32, w: i32, h: i32, r: u8, g: u8,
 }
 
 /// Simplified apple (circle + small notch + stem).
+#[allow(clippy::too_many_arguments)]
 fn apple(target: &mut Pixmap, cx: i32, cy: i32, w: i32, h: i32, r: u8, g: u8, b: u8) {
     let cr = (w.min(h) / 3).max(4);
     ellipse_outline(target, cx, cy, cr, cr, r, g, b, 2);
@@ -437,6 +454,7 @@ fn apple(target: &mut Pixmap, cx: i32, cy: i32, w: i32, h: i32, r: u8, g: u8, b:
 }
 
 /// Trophy / cup (U-shape body + handles + base).
+#[allow(clippy::too_many_arguments)]
 fn trophy(target: &mut Pixmap, cx: i32, cy: i32, w: i32, h: i32, r: u8, g: u8, b: u8) {
     let hw = w / 4;
     let ty = cy - h / 3;
@@ -455,6 +473,7 @@ fn trophy(target: &mut Pixmap, cx: i32, cy: i32, w: i32, h: i32, r: u8, g: u8, b
 }
 
 /// Fish (lens body + triangular tail).
+#[allow(clippy::too_many_arguments)]
 fn fish(target: &mut Pixmap, cx: i32, cy: i32, w: i32, h: i32, r: u8, g: u8, b: u8) {
     let bw = w / 3;
     let bh = h / 3;
@@ -480,6 +499,7 @@ fn fish(target: &mut Pixmap, cx: i32, cy: i32, w: i32, h: i32, r: u8, g: u8, b: 
 }
 
 /// Waving flag on a pole.
+#[allow(clippy::too_many_arguments)]
 fn flag(target: &mut Pixmap, cx: i32, cy: i32, w: i32, h: i32, r: u8, g: u8, b: u8) {
     let pole_x = cx - w / 4;
     let ty = cy - h / 3;
@@ -498,6 +518,7 @@ fn flag(target: &mut Pixmap, cx: i32, cy: i32, w: i32, h: i32, r: u8, g: u8, b: 
 }
 
 /// Car silhouette (rectangle body + two wheel arches).
+#[allow(clippy::too_many_arguments)]
 fn car(target: &mut Pixmap, cx: i32, cy: i32, w: i32, h: i32, r: u8, g: u8, b: u8) {
     let bw = w * 2 / 5;
     let bh = h / 5;
@@ -522,6 +543,7 @@ fn car(target: &mut Pixmap, cx: i32, cy: i32, w: i32, h: i32, r: u8, g: u8, b: u
 }
 
 /// Four-leaf clover (four circles around center).
+#[allow(clippy::too_many_arguments)]
 fn clover(target: &mut Pixmap, cx: i32, cy: i32, w: i32, h: i32, r: u8, g: u8, b: u8) {
     let cr = (w.min(h) / 5).max(3);
     let off = cr + cr / 2;
@@ -533,6 +555,7 @@ fn clover(target: &mut Pixmap, cx: i32, cy: i32, w: i32, h: i32, r: u8, g: u8, b
 }
 
 /// Butterfly (two pairs of wing ellipses + body line).
+#[allow(clippy::too_many_arguments)]
 fn butterfly(target: &mut Pixmap, cx: i32, cy: i32, w: i32, h: i32, r: u8, g: u8, b: u8) {
     let ww = w / 3;
     let wh = h / 3;
@@ -550,6 +573,7 @@ fn butterfly(target: &mut Pixmap, cx: i32, cy: i32, w: i32, h: i32, r: u8, g: u8
 }
 
 /// Simplified maple leaf (star + stem).
+#[allow(clippy::too_many_arguments)]
 fn maple_leaf(target: &mut Pixmap, cx: i32, cy: i32, w: i32, h: i32, r: u8, g: u8, b: u8) {
     let radius = (w.min(h) / 2 - 2).max(4);
     // 11-point star (many points = leaf-like)
@@ -560,6 +584,7 @@ fn maple_leaf(target: &mut Pixmap, cx: i32, cy: i32, w: i32, h: i32, r: u8, g: u
 }
 
 /// Animated comet streak (circle + fading trail in opposite direction).
+#[allow(clippy::too_many_arguments)]
 fn comet(
     target: &mut Pixmap,
     cx: i32,

@@ -41,6 +41,12 @@ pub struct DeviceInfo {
     pub screen_height: Option<u32>,
     /// Currently playing program GUID
     pub current_program: Option<String>,
+    /// Current brightness (0–100)
+    pub brightness: Option<u8>,
+    /// Current rotation in degrees (0, 90, 180, 270)
+    pub rotation: Option<u16>,
+    /// Whether the screen is currently on
+    pub screen_on: Option<bool>,
 }
 
 impl DeviceInfo {
@@ -53,6 +59,12 @@ impl DeviceInfo {
             .unwrap_or("")
             .trim_end_matches('\0')
             .to_string();
+
+        // ext1 packets have XML directly at byte 15 (no IP address field).
+        // Detect by checking for '<' at that position.
+        if data[15] == b'<' {
+            return None; // ext1 status packet — skip, not a device entry
+        }
 
         // IP address: bytes 15–18 (network byte order = big endian)
         let ip = Ipv4Addr::new(data[15], data[16], data[17], data[18]);
@@ -94,6 +106,15 @@ impl DeviceInfo {
             .or_else(|| xml::get_attr(&info_xml, "height"))
             .and_then(|s| s.parse().ok());
         let current_program = xml::get_attr(&info_xml, "programGuid").map(|s| s.to_string());
+        let brightness = xml::get_attr(&info_xml, "Brightness")
+            .or_else(|| xml::get_attr(&info_xml, "brightness"))
+            .and_then(|s| s.parse().ok());
+        let rotation = xml::get_attr(&info_xml, "Rotation")
+            .or_else(|| xml::get_attr(&info_xml, "rotation"))
+            .or_else(|| xml::get_attr(&info_xml, "ScreenR"))
+            .and_then(|s| s.parse().ok());
+        let screen_on = xml::get_attr(&info_xml, "ScreenOnOff")
+            .map(|s| s != "0" && !s.eq_ignore_ascii_case("false"));
 
         Some(DeviceInfo {
             device_id,
@@ -105,6 +126,9 @@ impl DeviceInfo {
             screen_width,
             screen_height,
             current_program,
+            brightness,
+            rotation,
+            screen_on,
         })
     }
 }
@@ -144,9 +168,12 @@ impl Discovery {
                     debug!("Discovery response from {from}: {n} bytes");
                     if let Some(dev) = DeviceInfo::parse(&buf[..n]) {
                         debug!("Found device: {} @ {}", dev.name, dev.addr);
-                        devices.push(dev);
+                        // Deduplicate by device_id
+                        if !devices.iter().any(|d: &DeviceInfo| d.device_id == dev.device_id) {
+                            devices.push(dev);
+                        }
                     } else {
-                        warn!("Could not parse discovery response from {from}");
+                        debug!("Skipped non-DeviceInfo packet from {from}");
                     }
                 }
                 Ok(Err(e)) => {

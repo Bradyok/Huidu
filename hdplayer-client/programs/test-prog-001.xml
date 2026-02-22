@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?><sdk guid="D1B6376A-0917-4905-995F-BC1C2642BB9E"><in method="AddProgram"><screen timeStamps="12345">
+  <program guid="test-prog-001" name="TestProgram" type="normal">
+    <area guid="area-1" name="Main" alpha="255">
+      <rectangle x="0" y="0" width="128" height="64"/>
+      <resources>
+        <text guid="txt-1" singleLine="true">
+          <string>Hello Huidu!</string>
+          <effect in="17" out="17" inSpeed="3" outSpeed="3" duration="100"/>
+          <font size="14" color="#00ff00" bold="true"/>
+          <style align="center" valign="middle"/>
+        </text>
+      </resources>
+    </area>
+  </program>
+</screen></in></sdk>

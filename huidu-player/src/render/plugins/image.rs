@@ -1,6 +1,6 @@
 /// Image content renderer plugin.
 /// Loads PNG/JPG/BMP images and renders them to the area surface.
-use std::collections::HashMap;
+use std::collections::{HashMap, VecDeque};
 use std::path::Path;
 use tiny_skia::{Pixmap, PixmapPaint, Transform};
 use tracing::{debug, warn};
@@ -8,15 +8,21 @@ use tracing::{debug, warn};
 use crate::program::model::ContentItem;
 use crate::render::plugins::ContentRenderer;
 
+/// Maximum number of decoded images kept in memory at once.
+/// Older entries are evicted FIFO when the limit is reached.
+const MAX_CACHE: usize = 64;
+
 pub struct ImageRenderer {
-    /// Cache of loaded images by filename
     cache: HashMap<String, Pixmap>,
+    /// Insertion-order queue for FIFO eviction.
+    keys: VecDeque<String>,
 }
 
 impl ImageRenderer {
     pub fn new() -> Self {
         Self {
             cache: HashMap::new(),
+            keys: VecDeque::new(),
         }
     }
 
@@ -24,6 +30,12 @@ impl ImageRenderer {
         if self.cache.contains_key(filename) {
             return self.cache.get(filename);
         }
+
+        // Evict oldest entry if at capacity
+        if self.cache.len() >= MAX_CACHE
+            && let Some(oldest) = self.keys.pop_front() {
+                self.cache.remove(&oldest);
+            }
 
         let path = program_dir.join(filename);
         debug!("Loading image: {}", path.display());
@@ -43,6 +55,7 @@ impl ImageRenderer {
                         data[i * 4 + 3] = pixel[3];
                     }
                     self.cache.insert(filename.to_string(), pixmap);
+                    self.keys.push_back(filename.to_string());
                     return self.cache.get(filename);
                 }
             }
@@ -88,8 +101,8 @@ impl ContentRenderer for ImageRenderer {
         if fit_mode == "tile" {
             let tw = src_pixmap.width();
             let th = src_pixmap.height();
-            let cols = (width + tw - 1) / tw;
-            let rows = (height + th - 1) / th;
+            let cols = width.div_ceil(tw);
+            let rows = height.div_ceil(th);
             for row in 0..rows {
                 for col in 0..cols {
                     target.draw_pixmap(

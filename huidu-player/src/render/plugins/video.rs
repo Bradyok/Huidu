@@ -11,7 +11,7 @@
 ///   - Aspect-ratio mode (`aspectRatio="true"`) letterboxes/pillarboxes.
 ///
 /// If ffmpeg is not on PATH the renderer falls back to a static placeholder.
-use std::collections::HashMap;
+use std::collections::{HashMap, VecDeque};
 use std::io::Read;
 use std::path::Path;
 use std::process::{Command, Stdio};
@@ -27,6 +27,9 @@ const OUTPUT_FPS: u64 = 25;
 const FRAME_MS: u64 = 1000 / OUTPUT_FPS;
 /// Maximum frames decoded per video (~72 s at 25 fps).
 const MAX_FRAMES: usize = 1800;
+/// Maximum number of decoded videos kept in memory at once.
+/// At up to ~57 MB per video (1800 frames × 128×64×4 B), 4 videos ≈ 228 MB.
+const MAX_CACHE: usize = 4;
 
 // ── Decoded video cache ───────────────────────────────────────────────────────
 
@@ -58,12 +61,15 @@ struct VideoKey {
 
 pub struct VideoRenderer {
     cache: HashMap<VideoKey, Option<DecodedVideo>>,
+    /// Insertion-order queue for FIFO eviction.
+    keys: VecDeque<VideoKey>,
 }
 
 impl VideoRenderer {
     pub fn new() -> Self {
         Self {
             cache: HashMap::new(),
+            keys: VecDeque::new(),
         }
     }
 
@@ -85,8 +91,14 @@ impl VideoRenderer {
         };
 
         if !self.cache.contains_key(&key) {
+            // Evict oldest entry if at capacity
+            if self.cache.len() >= MAX_CACHE
+                && let Some(oldest) = self.keys.pop_front() {
+                    self.cache.remove(&oldest);
+                }
             let decoded = decode_video(&video_path, target_w, target_h, aspect_ratio);
             self.cache.insert(key.clone(), decoded);
+            self.keys.push_back(key.clone());
         }
 
         self.cache.get(&key).and_then(|v| v.as_ref())
@@ -123,9 +135,11 @@ impl ContentRenderer for VideoRenderer {
 
         // Build a Pixmap view over the selected frame and blit it.
         let frame_data = decoded.frame_at(elapsed_ms);
-        if let Some(frame_pixmap) =
-            Pixmap::from_vec(frame_data.to_vec(), tiny_skia::IntSize::from_wh(decoded.width, decoded.height).unwrap())
-        {
+        let frame_size = match tiny_skia::IntSize::from_wh(decoded.width, decoded.height) {
+            Some(s) => s,
+            None => return false, // zero-dimension decoded video; skip
+        };
+        if let Some(frame_pixmap) = Pixmap::from_vec(frame_data.to_vec(), frame_size) {
             target.draw_pixmap(
                 0, 0,
                 frame_pixmap.as_ref(),

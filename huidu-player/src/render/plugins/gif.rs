@@ -1,12 +1,16 @@
 /// GIF animation renderer plugin.
 /// Decodes GIF frames and cycles through them with proper timing.
-use std::collections::HashMap;
+use std::collections::{HashMap, VecDeque};
 use std::path::Path;
 use tiny_skia::{Pixmap, PixmapPaint, Transform};
 use tracing::{debug, warn};
 
 use crate::program::model::ContentItem;
 use crate::render::plugins::ContentRenderer;
+
+/// Maximum number of decoded GIFs kept in memory at once.
+/// Each GIF may hold dozens of frames; 16 is a generous but safe limit.
+const MAX_CACHE: usize = 16;
 
 struct GifData {
     frames: Vec<GifFrame>,
@@ -21,12 +25,15 @@ struct GifFrame {
 
 pub struct GifRenderer {
     cache: HashMap<String, GifData>,
+    /// Insertion-order queue for FIFO eviction.
+    keys: VecDeque<String>,
 }
 
 impl GifRenderer {
     pub fn new() -> Self {
         Self {
             cache: HashMap::new(),
+            keys: VecDeque::new(),
         }
     }
 
@@ -34,6 +41,12 @@ impl GifRenderer {
         if self.cache.contains_key(filename) {
             return self.cache.get(filename);
         }
+
+        // Evict oldest entry if at capacity
+        if self.cache.len() >= MAX_CACHE
+            && let Some(oldest) = self.keys.pop_front() {
+                self.cache.remove(&oldest);
+            }
 
         let path = program_dir.join(filename);
         debug!("Loading GIF: {}", path.display());
@@ -61,7 +74,13 @@ impl GifRenderer {
         let mut cumulative = 0u64;
 
         // Composite canvas for handling disposal methods
-        let mut canvas = Pixmap::new(width, height).unwrap();
+        let mut canvas = match Pixmap::new(width, height) {
+            Some(p) => p,
+            None => {
+                warn!("GIF {}: invalid dimensions {}x{}", path.display(), width, height);
+                return None;
+            }
+        };
         canvas.fill(tiny_skia::Color::TRANSPARENT);
 
         while let Ok(Some(frame)) = decoder.read_next_frame() {
@@ -123,6 +142,7 @@ impl GifRenderer {
             frames,
         };
         self.cache.insert(filename.to_string(), data);
+        self.keys.push_back(filename.to_string());
         self.cache.get(filename)
     }
 }

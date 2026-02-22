@@ -53,13 +53,11 @@ impl ClockRenderer {
         if self.cached_guid == clock.guid
             && self.cached_second == current_second
             && self.cached_size == (width, height)
-        {
-            if let Some(ref cached) = self.cached_pixmap {
+            && let Some(ref cached) = self.cached_pixmap {
                 // Fast memcpy — skips all font layout and rasterisation.
                 target.data_mut().copy_from_slice(cached.data());
                 return;
             }
-        }
 
         // ── Cache miss: render fresh into `target` ───────────────────────────
         render_clock_into(&self.font, clock, target, width, height, &now);
@@ -110,13 +108,12 @@ fn render_clock_into(
 ) {
     let mut lines: Vec<(String, (u8, u8, u8))> = Vec::new();
 
-    if let Some(ref f) = clock.title {
-        if f.display && !f.value.is_empty() {
+    if let Some(ref f) = clock.title
+        && f.display && !f.value.is_empty() {
             lines.push((f.value.clone(), parse_color(&f.color)));
         }
-    }
-    if let Some(ref f) = clock.date {
-        if f.display {
+    if let Some(ref f) = clock.date
+        && f.display {
             let s = match f.format.as_str() {
                 "2" => now.format("%m/%d/%Y").to_string(),
                 "3" => now.format("%d/%m/%Y").to_string(),
@@ -126,9 +123,8 @@ fn render_clock_into(
             };
             lines.push((s, parse_color(&f.color)));
         }
-    }
-    if let Some(ref f) = clock.week {
-        if f.display {
+    if let Some(ref f) = clock.week
+        && f.display {
             let s = match f.format.as_str() {
                 "2" => now.format("%A").to_string(),
                 "3" => now.format("%a").to_string(),
@@ -136,9 +132,8 @@ fn render_clock_into(
             };
             lines.push((s, parse_color(&f.color)));
         }
-    }
-    if let Some(ref f) = clock.time {
-        if f.display {
+    if let Some(ref f) = clock.time
+        && f.display {
             let s = match f.format.as_str() {
                 "2" => now.format("%H:%M").to_string(),
                 "3" => now.format("%I:%M:%S %p").to_string(),
@@ -147,12 +142,10 @@ fn render_clock_into(
             };
             lines.push((s, parse_color(&f.color)));
         }
-    }
-    if let Some(ref f) = clock.lunar_calendar {
-        if f.display {
+    if let Some(ref f) = clock.lunar_calendar
+        && f.display {
             lines.push((compute_lunar_date(now), parse_color(&f.color)));
         }
-    }
     if lines.is_empty() {
         lines.push((now.format("%H:%M:%S").to_string(), (255, 255, 255)));
     }
@@ -220,11 +213,13 @@ fn compute_lunar_date(now: &chrono::DateTime<Local>) -> String {
         (2044,1,30),(2045,2,17),
     ];
     let today = now.date_naive();
-    let mut cny = NaiveDate::from_ymd_opt(2020, 1, 25).unwrap();
+    // The seed date (2020-01-25) is a fixed valid date; the unwrap_or fallback
+    // is unreachable but avoids a panic if somehow compiled with odd chrono.
+    let mut cny = NaiveDate::from_ymd_opt(2020, 1, 25)
+        .unwrap_or(today);
     for &(y, m, d) in CNY {
-        if let Some(date) = NaiveDate::from_ymd_opt(y, m, d) {
-            if date <= today { cny = date; }
-        }
+        if let Some(date) = NaiveDate::from_ymd_opt(y, m, d)
+            && date <= today { cny = date; }
     }
     let days = (today - cny).num_days().max(0) as u32;
     format!("L:{}/{}", ((days / 30) + 1).min(13), (days % 30) + 1)

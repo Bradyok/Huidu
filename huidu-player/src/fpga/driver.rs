@@ -66,11 +66,10 @@ impl FpgaDriver {
 
     /// Set hardware brightness (0–100).
     pub fn set_brightness(&mut self, level: u8) {
-        if let Some(ref mut serial) = self.serial {
-            if let Err(e) = serial.set_brightness(level) {
+        if let Some(ref mut serial) = self.serial
+            && let Err(e) = serial.set_brightness(level) {
                 warn!("FPGA set_brightness error: {}", e);
             }
-        }
         self.config.send_card.brightness = level;
     }
 

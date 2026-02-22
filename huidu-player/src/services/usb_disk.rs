@@ -3,6 +3,7 @@
 use std::path::{Path, PathBuf};
 use tokio::sync::mpsc;
 use tokio::time::{self, Duration};
+use tokio_util::sync::CancellationToken;
 use tracing::{debug, info, warn};
 
 use crate::core::player::PlayerCommand;
@@ -11,13 +12,22 @@ use crate::program::parser;
 pub struct UsbDiskService;
 
 impl UsbDiskService {
-    /// Watch for USB drives with program files
-    pub async fn run(player_tx: mpsc::Sender<PlayerCommand>, program_dir: PathBuf) {
+    /// Watch for USB drives with program files.
+    /// Exits when `cancel` is triggered.
+    pub async fn run(
+        player_tx: mpsc::Sender<PlayerCommand>,
+        program_dir: PathBuf,
+        cancel: CancellationToken,
+    ) {
         let mut interval = time::interval(Duration::from_secs(5));
         let mut last_seen: Option<PathBuf> = None;
 
         loop {
-            interval.tick().await;
+            tokio::select! {
+                biased;
+                _ = cancel.cancelled() => break,
+                _ = interval.tick() => {}
+            }
 
             let usb_paths = Self::find_usb_program_paths();
             for usb_path in &usb_paths {
@@ -130,7 +140,10 @@ impl UsbDiskService {
             let entry = entry?;
             let src = entry.path();
             if src.is_file() {
-                let filename = src.file_name().unwrap();
+                let filename = match src.file_name() {
+                    Some(n) => n,
+                    None => continue, // path ends in ".." or is a root — skip
+                };
                 let dst = program_dir.join(filename);
                 info!("Copying {} -> {}", src.display(), dst.display());
                 std::fs::copy(&src, &dst)?;
@@ -139,7 +152,11 @@ impl UsbDiskService {
 
         // Parse and load the first XML program
         for xml_file in &xml_files {
-            let dst = program_dir.join(xml_file.file_name().unwrap());
+            let fname = match xml_file.file_name() {
+                Some(n) => n,
+                None => continue,
+            };
+            let dst = program_dir.join(fname);
             match parser::parse_program_file(&dst) {
                 Ok(screen) => {
                     info!("Loaded {} programs from USB", screen.programs.len());

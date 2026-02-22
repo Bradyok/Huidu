@@ -46,6 +46,6 @@ pub mod protocol;
 pub mod transfer;
 pub mod xml;
 
-pub use client::Client;
+pub use client::{Client, DeviceDetails, EthConfig, FileEntry, ProgramInfo};
 pub use discovery::{DeviceInfo, Discovery};
 pub use error::Error;

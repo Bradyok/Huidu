@@ -109,7 +109,7 @@ impl FileTransfer {
 
     /// Return the number of chunks this transfer will be split into.
     pub fn chunk_count(&self) -> usize {
-        (self.data.len() + CHUNK_SIZE - 1) / CHUNK_SIZE
+        self.data.len().div_ceil(CHUNK_SIZE)
     }
 
     /// Iterate over (offset, chunk) pairs.

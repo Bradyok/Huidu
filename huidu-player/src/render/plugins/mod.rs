@@ -17,6 +17,7 @@ use crate::program::model::ContentItem;
 
 /// Trait for content renderer plugins
 pub trait ContentRenderer {
+    #[allow(clippy::too_many_arguments)]
     fn render(
         &mut self,
         item: &ContentItem,

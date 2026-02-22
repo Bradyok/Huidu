@@ -44,23 +44,20 @@ impl StorageService {
     pub fn load_program_xml_by_guid(&self, guid: &str) -> Option<String> {
         // Direct GUID-based filename
         let direct = self.program_dir.join(guid_to_filename(guid));
-        if direct.exists() {
-            if let Ok(content) = std::fs::read_to_string(&direct) {
+        if direct.exists()
+            && let Ok(content) = std::fs::read_to_string(&direct) {
                 return Some(content);
             }
-        }
 
         // Legacy fallback: scan all XML files for one referencing this GUID
         if let Ok(entries) = std::fs::read_dir(&self.program_dir) {
             for entry in entries.flatten() {
                 let path = entry.path();
-                if path.extension().map_or(false, |e| e == "xml") {
-                    if let Ok(content) = std::fs::read_to_string(&path) {
-                        if content.contains(&format!("guid=\"{}\"", guid)) {
+                if path.extension().is_some_and(|e| e == "xml")
+                    && let Ok(content) = std::fs::read_to_string(&path)
+                        && content.contains(&format!("guid=\"{}\"", guid)) {
                             return Some(content);
                         }
-                    }
-                }
             }
         }
 
@@ -71,18 +68,17 @@ impl StorageService {
     pub fn load_current_program(&self) -> Option<Screen> {
         // Try legacy filename first for backward compatibility
         let legacy = self.program_dir.join("current_program.xml");
-        if legacy.exists() {
-            if let Ok(s) = crate::program::parser::parse_program_file(&legacy) {
+        if legacy.exists()
+            && let Ok(s) = crate::program::parser::parse_program_file(&legacy) {
                 info!("Restored program from {}", legacy.display());
                 return Some(s);
             }
-        }
 
         // Otherwise take the first XML we find
         if let Ok(entries) = std::fs::read_dir(&self.program_dir) {
             for entry in entries.flatten() {
                 let path = entry.path();
-                if path.extension().map_or(false, |e| e == "xml") {
+                if path.extension().is_some_and(|e| e == "xml") {
                     match crate::program::parser::parse_program_file(&path) {
                         Ok(screen) => {
                             info!("Restored program from {}", path.display());
@@ -103,11 +99,10 @@ impl StorageService {
         let mut files = Vec::new();
         if let Ok(entries) = std::fs::read_dir(&self.program_dir) {
             for entry in entries.flatten() {
-                if entry.path().is_file() {
-                    if let Some(name) = entry.file_name().to_str() {
+                if entry.path().is_file()
+                    && let Some(name) = entry.file_name().to_str() {
                         files.push(name.to_string());
                     }
-                }
             }
         }
         files

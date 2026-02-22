@@ -65,7 +65,7 @@ impl WeatherRenderer {
 
         // Check cache freshness
         {
-            let cache = self.cache.lock().unwrap();
+            let cache = self.cache.lock().unwrap_or_else(|e| e.into_inner());
             if let Some(data) = cache.get(key) {
                 let age = data.fetched_at.elapsed();
                 if age < Duration::from_secs(update_interval_mins as u64 * 60) {
@@ -83,13 +83,13 @@ impl WeatherRenderer {
 
         std::thread::spawn(move || {
             if let Some(data) = fetch_weather_sync(&api, &city_owned, &key_owned) {
-                let mut cache = cache_clone.lock().unwrap();
+                let mut cache = cache_clone.lock().unwrap_or_else(|e| e.into_inner());
                 cache.insert(key_owned, data);
             }
         });
 
         // Return current cached value (may be default/stale)
-        let cache = self.cache.lock().unwrap();
+        let cache = self.cache.lock().unwrap_or_else(|e| e.into_inner());
         cache.get(key).cloned().unwrap_or_default()
     }
 
@@ -104,9 +104,14 @@ impl WeatherRenderer {
 
         // Lines to render: city, temperature, condition
         let city_display = if weather.city.is_empty() { "Weather".to_string() } else { weather.city.clone() };
+        let temp_str = if weather.temp_unit.eq_ignore_ascii_case("F") {
+            format!("{:.0}°F  {}%", data.temp_c * 9.0 / 5.0 + 32.0, data.humidity)
+        } else {
+            format!("{:.0}°C  {}%", data.temp_c, data.humidity)
+        };
         let lines = [
             city_display,
-            format!("{:.0}°C  {}%", data.temp_c, data.humidity),
+            temp_str,
             data.condition.clone(),
         ];
 
@@ -268,4 +273,80 @@ fn parse_owm_json(json: &str) -> Option<WeatherData> {
 
 fn weather_icon(temp_c: f32) -> String {
     if temp_c > 30.0 { "Hot" } else if temp_c > 20.0 { "Warm" } else if temp_c > 10.0 { "Cool" } else { "Cold" }.to_string()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    // ── parse_wttr_json ───────────────────────────────────────────────────────
+
+    #[test]
+    fn test_parse_wttr_json_valid() {
+        let json = r#"{
+            "current_condition": [{
+                "temp_C": "22",
+                "humidity": "65",
+                "weatherDesc": [{"value": "Partly cloudy"}]
+            }]
+        }"#;
+        let data = parse_wttr_json(json).unwrap();
+        assert!((data.temp_c - 22.0).abs() < 0.01);
+        assert_eq!(data.humidity, 65);
+        assert_eq!(data.condition, "Partly cloudy");
+    }
+
+    #[test]
+    fn test_parse_wttr_json_invalid_returns_none() {
+        assert!(parse_wttr_json("not json").is_none());
+        assert!(parse_wttr_json("{}").is_none());
+    }
+
+    #[test]
+    fn test_parse_wttr_json_missing_desc_uses_na() {
+        let json = r#"{
+            "current_condition": [{
+                "temp_C": "10",
+                "humidity": "80"
+            }]
+        }"#;
+        // Should succeed despite missing weatherDesc, falling back to "N/A"
+        let data = parse_wttr_json(json).unwrap();
+        assert_eq!(data.condition, "N/A");
+    }
+
+    // ── parse_owm_json ────────────────────────────────────────────────────────
+
+    #[test]
+    fn test_parse_owm_json_valid() {
+        // 300.15 K − 273.15 = 27.0 °C
+        let json = r#"{
+            "main": {"temp": 300.15, "humidity": 70},
+            "weather": [{"description": "clear sky"}]
+        }"#;
+        let data = parse_owm_json(json).unwrap();
+        assert!((data.temp_c - 27.0).abs() < 0.1);
+        assert_eq!(data.humidity, 70);
+        assert_eq!(data.condition, "clear sky");
+    }
+
+    #[test]
+    fn test_parse_owm_json_invalid_returns_none() {
+        assert!(parse_owm_json("not json").is_none());
+        assert!(parse_owm_json("{}").is_none());
+    }
+
+    // ── weather_icon ──────────────────────────────────────────────────────────
+
+    #[test]
+    fn test_weather_icon_thresholds() {
+        assert_eq!(weather_icon(35.0), "Hot");   // > 30
+        assert_eq!(weather_icon(25.0), "Warm");  // 20 < t ≤ 30
+        assert_eq!(weather_icon(15.0), "Cool");  // 10 < t ≤ 20
+        assert_eq!(weather_icon(5.0),  "Cold");  // ≤ 10
+        // Boundary: 30.1 is still Hot; 20.0 is Cool not Warm (> required)
+        assert_eq!(weather_icon(30.1), "Hot");
+        assert_eq!(weather_icon(20.0), "Cool");
+        assert_eq!(weather_icon(10.0), "Cold");
+    }
 }

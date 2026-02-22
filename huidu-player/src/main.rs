@@ -2,8 +2,10 @@
 
 use anyhow::Result;
 use clap::Parser;
+use tokio_util::sync::CancellationToken;
 use tracing::{info, warn};
 
+mod audio;
 mod config;
 mod core;
 mod fpga;
@@ -100,12 +102,41 @@ async fn main() -> Result<()> {
 
     let mut player = Player::new(cfg);
 
-    // Propagate cloud + device info into the shared services state
-    {
+    // Propagate cloud + device info and restore persisted state
+    let (restored_brightness, restored_rotation, restored_volume) = {
         let svc = player.services();
         let mut state = svc.write().await;
         state.cloud_url = args.cloud_url.clone();
         state.device_id = args.device_id.clone();
+        state.load_persisted();
+
+        // Apply any pending firmware upgrade staged before the last restart.
+        // Must happen before the render loop so the new binary is in place.
+        let program_dir_path: std::path::PathBuf = args.program_dir.clone().into();
+        if let Some(upgrade_result) =
+            services::upgrade::apply_pending_upgrade(&program_dir_path)
+        {
+            info!("Startup upgrade result: {:?}", upgrade_result);
+            state.upgrade_status = upgrade_result;
+            state.save_persisted();
+        } else if matches!(state.upgrade_status, services::upgrade::UpgradeStatus::Idle) {
+            // Check for a persisted result from a previous boot (so GetUpgradeResult
+            // keeps reporting success/failure until the next upgrade is triggered).
+            if let Some(last) = services::upgrade::read_last_result(&program_dir_path) {
+                state.upgrade_status = last;
+            }
+        }
+
+        (state.brightness.get_level(), state.rotation, state.volume)
+    };
+
+    // Apply restored settings to the render engine and audio before the loop starts.
+    {
+        use crate::core::player::PlayerCommand;
+        let tx = player.program_sender();
+        let _ = tx.send(PlayerCommand::SetBrightness(restored_brightness)).await;
+        let _ = tx.send(PlayerCommand::SetRotation(restored_rotation)).await;
+        let _ = tx.send(PlayerCommand::SetVolume(restored_volume)).await;
     }
 
     // Load any existing programs from disk
@@ -114,6 +145,39 @@ async fn main() -> Result<()> {
     }
 
     let services = player.services();
+
+    // Shared cancellation token — cancelled on Ctrl-C, SIGTERM, or post-upgrade restart.
+    let cancel = CancellationToken::new();
+
+    // Make the token available to the FirmwareUpgrade command handler so it can
+    // trigger a graceful restart after staging an upgrade.
+    {
+        let mut state = services.write().await;
+        state.shutdown_token = Some(cancel.clone());
+    }
+
+    // Spawn signal handler: cancel all services on Ctrl-C / SIGTERM.
+    {
+        let tok = cancel.clone();
+        tokio::spawn(async move {
+            #[cfg(unix)]
+            {
+                use tokio::signal::unix::{signal, SignalKind};
+                let mut sigterm = signal(SignalKind::terminate())
+                    .expect("failed to register SIGTERM handler");
+                tokio::select! {
+                    _ = tokio::signal::ctrl_c() => {}
+                    _ = sigterm.recv() => {}
+                }
+            }
+            #[cfg(not(unix))]
+            {
+                let _ = tokio::signal::ctrl_c().await;
+            }
+            info!("Shutdown signal received — stopping services");
+            tok.cancel();
+        });
+    }
 
     // Start the TCP protocol server
     let protocol_handle = {
@@ -140,8 +204,9 @@ async fn main() -> Result<()> {
             screen_height: args.height as u16,
             player_name: "BoxPlayer".to_string(),
         };
+        let svc = services.clone();
         tokio::spawn(async move {
-            if let Err(e) = protocol::discovery::run(device_info).await {
+            if let Err(e) = protocol::discovery::run(device_info, svc).await {
                 tracing::error!("UDP discovery error: {}", e);
             }
         })
@@ -149,10 +214,10 @@ async fn main() -> Result<()> {
 
     // Start background services (scheduling, NTP, USB disk, cloud)
     let program_dir = args.program_dir.clone().into();
-    services::manager::start_services(services, player.program_sender(), program_dir).await;
+    services::manager::start_services(services, player.program_sender(), program_dir, cancel.clone()).await;
 
-    // Run the render loop (blocks)
-    player.run().await?;
+    // Run the render loop — exits when cancel fires (Ctrl-C / SIGTERM).
+    player.run(cancel).await?;
 
     protocol_handle.abort();
     discovery_handle.abort();

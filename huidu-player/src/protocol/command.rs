@@ -86,17 +86,16 @@ pub async fn handle_sdk_command(
         }
 
         "DeleteProgram" | "deleteProgram" => {
-            {
+            let guid = extract_attr(xml, "program", "guid").unwrap_or_default();
+            if !guid.is_empty() {
+                // Delete file from disk
                 let state = services.read().await;
-                let _ = state.storage.clear();
+                let filename = crate::services::storage::StorageService::filename_for_guid(&guid);
+                let _ = state.storage.delete_file(&filename);
+                drop(state);
+                // Remove from player's in-memory list
+                player_tx.send(PlayerCommand::DeleteProgram(guid)).await.ok();
             }
-            player_tx
-                .send(PlayerCommand::LoadScreen(crate::program::model::Screen {
-                    timestamps: String::new(),
-                    programs: Vec::new(),
-                }))
-                .await
-                .ok();
             ok!("")
         }
 
@@ -108,7 +107,7 @@ pub async fn handle_sdk_command(
                 let is_current = if p.guid == current { "1" } else { "0" };
                 items.push_str(&format!(
                     "<program guid=\"{}\" name=\"{}\" type=\"{}\" current=\"{}\"/>",
-                    p.guid, p.name, p.program_type, is_current
+                    xml_esc(&p.guid), xml_esc(&p.name), xml_esc(&p.program_type), is_current
                 ));
             }
             ok!(&items)
@@ -152,6 +151,19 @@ pub async fn handle_sdk_command(
             ok!(&format!("<program guid=\"{g}\"/>"))
         }
 
+        "GetProgramList" | "getProgramList" => {
+            let state = services.read().await;
+            let count = state.programs.len();
+            let mut items = String::new();
+            for p in &state.programs {
+                items.push_str(&format!(
+                    "<program guid=\"{}\" name=\"{}\" type=\"{}\"/>",
+                    xml_esc(&p.guid), xml_esc(&p.name), xml_esc(&p.program_type)
+                ));
+            }
+            ok!(&format!("<programs count=\"{}\">{}</programs>", count, items))
+        }
+
         "RealTimeUpdate" | "realTimeUpdate" => {
             // Treated the same as UpdateProgram for now
             match parser::parse_program_xml(xml) {
@@ -167,10 +179,12 @@ pub async fn handle_sdk_command(
         }
 
         "InsertPlayProgram" | "insertPlayProgram" => {
-            // Priority insert — treated as LoadScreen for now
             match parser::parse_program_xml(xml) {
                 Ok(screen) => {
-                    player_tx.send(PlayerCommand::LoadScreen(screen)).await.ok();
+                    player_tx
+                        .send(PlayerCommand::InsertProgram(screen.programs))
+                        .await
+                        .ok();
                     ok!("")
                 }
                 Err(_) => ok!(""),
@@ -189,9 +203,9 @@ pub async fn handle_sdk_command(
         }
 
         "DeleteNotCiteFile" | "deleteNotCiteFile" => {
-            // Delete files not referenced by the currently loaded programs.
+            // Delete XML program files not referenced by the currently loaded programs.
+            // Media files (images, videos, audio) and config files are preserved.
             let state = services.read().await;
-            // Build the set of XML filenames that correspond to active programs.
             let active: std::collections::HashSet<String> = state
                 .programs
                 .iter()
@@ -199,7 +213,8 @@ pub async fn handle_sdk_command(
                 .collect();
             let files = state.storage.list_files();
             for f in &files {
-                if !active.contains(f) && f != "screenshot.png" {
+                // Only remove XML program files; preserve device_state.json and media
+                if f.ends_with(".xml") && f != "device_state.json" && !active.contains(f) {
                     let _ = state.storage.delete_file(f);
                 }
             }
@@ -223,6 +238,11 @@ pub async fn handle_sdk_command(
                 .or_else(|| extract_attr(xml, "rotation", "value"))
                 .and_then(|v| v.parse::<u16>().ok())
                 .unwrap_or(0);
+            {
+                let mut state = services.write().await;
+                state.rotation = deg;
+                state.save_persisted();
+            }
             player_tx.send(PlayerCommand::SetRotation(deg)).await.ok();
             ok!("")
         }
@@ -237,34 +257,36 @@ pub async fn handle_sdk_command(
         "SetLuminancePloy" | "setLuminancePloy" => {
             let mode = extract_attr(xml, "luminance", "mode").unwrap_or_default();
             if mode == "auto" {
-                // Extract brightness schedule: <item time="HH:MM" level="N"/>
                 let entries = extract_brightness_schedule(xml);
                 let mut state = services.write().await;
                 state.brightness.set_schedule(entries);
+                state.save_persisted();
             } else {
                 // Manual mode: <luminance mode="manual" value="N"/>
-                if let Some(val) = extract_attr(xml, "luminance", "value") {
-                    if let Ok(level) = val.parse::<u8>() {
-                        let mut state = services.write().await;
-                        state.brightness.set_level(level);
-                        drop(state);
+                if let Some(val) = extract_attr(xml, "luminance", "value")
+                    && let Ok(level) = val.parse::<u8>() {
+                        {
+                            let mut state = services.write().await;
+                            state.brightness.set_level(level);
+                            state.save_persisted();
+                        }
                         player_tx.send(PlayerCommand::SetBrightness(level)).await.ok();
                     }
-                }
             }
             ok!("")
         }
 
         // Simple single-value brightness setter (used by hdplayer-client SetBrightness)
         "SetBrightness" | "setBrightness" => {
-            if let Some(val) = extract_attr(xml, "brightness", "value") {
-                if let Ok(level) = val.parse::<u8>() {
-                    let mut state = services.write().await;
-                    state.brightness.set_level(level);
-                    drop(state);
+            if let Some(val) = extract_attr(xml, "brightness", "value")
+                && let Ok(level) = val.parse::<u8>() {
+                    {
+                        let mut state = services.write().await;
+                        state.brightness.set_level(level);
+                        state.save_persisted();
+                    }
                     player_tx.send(PlayerCommand::SetBrightness(level)).await.ok();
                 }
-            }
             ok!("")
         }
 
@@ -303,10 +325,9 @@ pub async fn handle_sdk_command(
 
         "SetSwitchTime" | "setSwitchTime" => {
             let entries = extract_schedule_entries(xml);
-            {
-                let mut state = services.write().await;
-                state.screen_schedule.set_schedule(entries);
-            }
+            let mut state = services.write().await;
+            state.screen_schedule.set_schedule(entries);
+            state.save_persisted();
             ok!("")
         }
 
@@ -315,7 +336,7 @@ pub async fn handle_sdk_command(
             let now = chrono::Local::now();
             let dt = now.format("%Y-%m-%d %H:%M:%S").to_string();
             let state = services.read().await;
-            let ntp = &state.ntp_server;
+            let ntp = xml_esc(&state.ntp_server);
             ok!(&format!(
                 "<time value=\"{dt}\"/><ntp enable=\"true\" server=\"{ntp}\"/>"
             ))
@@ -328,37 +349,54 @@ pub async fn handle_sdk_command(
             if let Some(ntp_server) = extract_attr(xml, "ntp", "server") {
                 let mut state = services.write().await;
                 state.ntp_server = ntp_server;
+                state.save_persisted();
             }
             ok!("")
         }
 
         // ── Device Info ────────────────────────────────────────────────────────
         "GetDeviceInfo" | "getDeviceInfo" => {
-            let state = services.read().await;
-            let name = &state.device_name;
-            let dev_id = if state.device_id.is_empty() { "RUST-001" } else { &state.device_id };
-            let brightness = state.brightness.get_level();
-            let vol = state.volume;
-            let rot = state.rotation;
+            let (name, dev_id, brightness, vol, rot, admin, prog_dir) = {
+                let state = services.read().await;
+                let name = state.device_name.clone();
+                let dev_id = if state.device_id.is_empty() {
+                    "RUST-001".to_string()
+                } else {
+                    state.device_id.clone()
+                };
+                let brightness = state.brightness.get_level();
+                let vol = state.volume;
+                let rot = state.rotation;
+                let admin = state.admin_mode;
+                let prog_dir = state.storage.program_dir().clone();
+                (name, dev_id, brightness, vol, rot, admin, prog_dir)
+            };
             let ip = crate::protocol::discovery::get_local_ip();
+            let (storage_total, storage_free) = get_storage_bytes(&prog_dir);
+            let mac = get_mac_address();
+            let (dev_id, name) = (xml_esc(&dev_id), xml_esc(&name));
             ok!(&format!(
                 "<deviceInfo \
                  deviceId=\"{dev_id}\" \
                  deviceName=\"{name}\" \
+                 deviceType=\"52\" \
                  version=\"7.11.18.0\" \
                  screenWidth=\"{screen_width}\" \
                  screenHeight=\"{screen_height}\" \
                  ip=\"{ip}\" \
-                 mac=\"00:00:00:00:00:00\" \
+                 mac=\"{mac}\" \
                  brightness=\"{brightness}\" \
                  volume=\"{vol}\" \
-                 rotation=\"{rot}\"/>"
+                 rotation=\"{rot}\" \
+                 adminMode=\"{admin}\" \
+                 storageTotal=\"{storage_total}\" \
+                 storageFree=\"{storage_free}\"/>"
             ))
         }
 
         "GetDeviceName" | "getDeviceName" => {
             let state = services.read().await;
-            let name = &state.device_name;
+            let name = xml_esc(&state.device_name);
             ok!(&format!("<name value=\"{name}\"/>"))
         }
 
@@ -366,15 +404,28 @@ pub async fn handle_sdk_command(
             if let Some(name) = extract_attr(xml, "name", "value") {
                 let mut state = services.write().await;
                 state.device_name = name;
+                state.save_persisted();
             }
             ok!("")
         }
 
         "GetHardwareInfo" | "getHardwareInfo" => {
-            ok!(
-                "<hardware cpu=\"aarch64\" ram=\"512\" storage=\"8192\" \
-                 cpuUsage=\"5\" memUsage=\"15\" temperature=\"40\"/>"
-            )
+            let arch = std::env::consts::ARCH;
+            let os   = std::env::consts::OS;
+            let prog_dir = {
+                let state = services.read().await;
+                state.storage.program_dir().clone()
+            };
+            let (storage_total, _) = get_storage_bytes(&prog_dir);
+            let storage_mb = storage_total / 1024 / 1024;
+            // Read real hardware stats in a blocking thread (file I/O)
+            let (cpu_pct, mem_pct, temp_c, ram_mb) =
+                tokio::task::spawn_blocking(get_system_stats).await.unwrap_or((5, 15, 40, 512));
+            ok!(&format!(
+                "<hardware cpu=\"{arch}\" os=\"{os}\" \
+                 ram=\"{ram_mb}\" storage=\"{storage_mb}\" \
+                 cpuUsage=\"{cpu_pct}\" memUsage=\"{mem_pct}\" temperature=\"{temp_c}\"/>"
+            ))
         }
 
         // ── Screenshot ─────────────────────────────────────────────────────────
@@ -400,14 +451,23 @@ pub async fn handle_sdk_command(
         // ── Network Config ─────────────────────────────────────────────────────
         "GetEth0Info" | "getEth0Info" => {
             let ip = crate::protocol::discovery::get_local_ip();
+            let (mask, gateway, dns) = tokio::task::spawn_blocking(read_eth0_full_config)
+                .await
+                .unwrap_or_else(|_| ("255.255.255.0".to_string(), String::new(), "8.8.8.8".to_string()));
             ok!(&format!(
-                "<eth0 dhcp=\"true\" ip=\"{ip}\" mask=\"255.255.255.0\" \
-                 gateway=\"\" dns=\"8.8.8.8\"/>"
+                "<eth0 dhcp=\"true\" ip=\"{ip}\" mask=\"{mask}\" \
+                 gateway=\"{gateway}\" dns=\"{dns}\"/>"
             ))
         }
 
         "SetEth0Info" | "setEth0Info" => {
-            info!("SetEth0Info received (network config change, not applied)");
+            let dhcp    = extract_attr(xml, "eth0", "dhcp").map(|v| v == "true").unwrap_or(true);
+            let ip      = extract_attr(xml, "eth0", "ip").unwrap_or_default();
+            let mask    = extract_attr(xml, "eth0", "mask").unwrap_or_else(|| "255.255.255.0".to_string());
+            let gateway = extract_attr(xml, "eth0", "gateway").unwrap_or_default();
+            let dns     = extract_attr(xml, "eth0", "dns").unwrap_or_default();
+            info!("SetEth0Info: dhcp={dhcp} ip={ip} mask={mask} gw={gateway} dns={dns}");
+            tokio::task::spawn_blocking(move || apply_eth0_config(dhcp, &ip, &mask, &gateway, &dns)).await.ok();
             ok!("")
         }
 
@@ -416,19 +476,41 @@ pub async fn handle_sdk_command(
         }
 
         "GetWifiInfo" | "getWifiInfo" => {
-            ok!("<wifi enable=\"false\" ssid=\"\" password=\"\" status=\"disconnected\"/>")
+            let (ssid, status) = tokio::task::spawn_blocking(read_wifi_status)
+                .await
+                .unwrap_or_else(|_| (String::new(), "disconnected".to_string()));
+            let enable = !ssid.is_empty();
+            let ssid = xml_esc(&ssid);
+            ok!(&format!(
+                "<wifi enable=\"{enable}\" ssid=\"{ssid}\" password=\"\" status=\"{status}\"/>"
+            ))
         }
 
         "SetWifiInfo" | "setWifiInfo" => {
-            info!("SetWifiInfo received (not applied on this platform)");
-            ok!("")
+            let ssid     = extract_attr(xml, "wifi", "ssid").unwrap_or_default();
+            let password = extract_attr(xml, "wifi", "password").unwrap_or_default();
+            if ssid.is_empty() {
+                ok!("")
+            } else {
+                info!("SetWifiInfo: connecting to SSID '{ssid}'");
+                tokio::task::spawn_blocking(move || apply_wifi_config(&ssid, &password)).await.ok();
+                ok!("")
+            }
         }
 
         "GetNetworkInfo" | "getNetworkInfo" => {
             let ip = crate::protocol::discovery::get_local_ip();
+            let eth0 = ip != "0.0.0.0";
+            // Quick internet check — try TCP connect to 8.8.8.8:53 (500 ms timeout)
+            let internet = tokio::time::timeout(
+                std::time::Duration::from_millis(500),
+                tokio::net::TcpStream::connect("8.8.8.8:53"),
+            ).await.map(|r| r.is_ok()).unwrap_or(false);
             ok!(&format!(
-                "<network eth0Connected=\"true\" wifiConnected=\"false\" internet=\"false\" \
-                 ip=\"{ip}\"/>"
+                "<network eth0Connected=\"{eth0}\" wifiConnected=\"false\" \
+                 internet=\"{internet}\" ip=\"{ip}\"/>",
+                eth0 = if eth0 { "true" } else { "false" },
+                internet = if internet { "true" } else { "false" },
             ))
         }
 
@@ -438,9 +520,32 @@ pub async fn handle_sdk_command(
             let files = state.storage.list_files();
             let mut items = String::new();
             for f in &files {
-                items.push_str(&format!("<file name=\"{f}\"/>"));
+                items.push_str(&format!("<file name=\"{}\"/>", xml_esc(f)));
             }
             ok!(&items)
+        }
+
+        "GetFileChecklist" | "getFileChecklist" => {
+            // Returns each file in the program directory with its MD5 hash and size.
+            // The controller uses this to determine which files are already present
+            // and intact before starting a file transfer session.
+            let (files, program_dir) = {
+                let state = services.read().await;
+                (state.storage.list_files(), state.storage.program_dir().to_path_buf())
+            };
+            let count = files.len();
+            let mut items = String::new();
+            for f in &files {
+                let path = program_dir.join(f);
+                if let Ok(data) = std::fs::read(&path) {
+                    let md5_hash = format!("{:x}", md5::compute(&data));
+                    items.push_str(&format!(
+                        "<file name=\"{}\" md5=\"{}\" size=\"{}\"/>",
+                        xml_esc(f), md5_hash, data.len()
+                    ));
+                }
+            }
+            ok!(&format!("<files count=\"{}\">{}</files>", count, items))
         }
 
         "DeleteFiles" | "deleteFiles" => {
@@ -454,17 +559,56 @@ pub async fn handle_sdk_command(
 
         // ── Boot Logo ──────────────────────────────────────────────────────────
         "GetBootLogo" | "getBootLogo" => {
-            ok!("<bootLogo name=\"\"/>")
+            let state = services.read().await;
+            let name = xml_esc(state.boot_logo.as_deref().unwrap_or(""));
+            ok!(&format!("<bootLogo name=\"{name}\"/>"))
         }
 
-        "SetBootLogoName" | "setBootLogoName" | "ClearBootLogo" | "clearBootLogo" => ok!(""),
+        "SetBootLogoName" | "setBootLogoName" => {
+            if let Some(name) = extract_attr(xml, "bootLogo", "name") {
+                let mut state = services.write().await;
+                state.boot_logo = if name.is_empty() { None } else { Some(name) };
+                state.save_persisted();
+            }
+            ok!("")
+        }
+
+        "ClearBootLogo" | "clearBootLogo" => {
+            let mut state = services.write().await;
+            state.boot_logo = None;
+            state.save_persisted();
+            ok!("")
+        }
 
         // ── TCP Server Config ──────────────────────────────────────────────────
         "GetSDKTcpServer" | "getSDKTcpServer" => {
-            ok!("<server ip=\"\" port=\"10001\" enable=\"true\"/>")
+            let state = services.read().await;
+            let url = &state.cloud_url;
+            let (ip, port) = if url.is_empty() {
+                (String::new(), "10001".to_string())
+            } else {
+                let trimmed = url.trim_start_matches("http://").trim_start_matches("https://");
+                let mut parts = trimmed.splitn(2, ':');
+                let ip = parts.next().unwrap_or("").to_string();
+                let port = parts.next().unwrap_or("10001").trim_end_matches('/').to_string();
+                (ip, port)
+            };
+            let enable = !ip.is_empty();
+            ok!(&format!("<server ip=\"{ip}\" port=\"{port}\" enable=\"{enable}\"/>"))
         }
 
-        "SetSDKTcpServer" | "setSDKTcpServer" => ok!(""),
+        "SetSDKTcpServer" | "setSDKTcpServer" => {
+            // <server ip="192.168.1.100" port="10001" enable="true"/>
+            let ip   = extract_attr(xml, "server", "ip").unwrap_or_default();
+            let port = extract_attr(xml, "server", "port").unwrap_or_else(|| "10001".to_string());
+            if !ip.is_empty() {
+                let url = format!("http://{}:{}", ip, port);
+                info!("Cloud server URL updated to {}", url);
+                let mut state = services.write().await;
+                state.cloud_url = url;
+            }
+            ok!("")
+        }
 
         // ── FPGA Hardware Config ───────────────────────────────────────────────
         "GetBoxHwConfig" | "getBoxHwConfig" | "GetSDKFPGAConfig" | "getSDKFPGAConfig" => {
@@ -474,20 +618,20 @@ pub async fn handle_sdk_command(
         }
 
         "SetBoxHwConfig" | "setBoxHwConfig" | "SaveBoxHwConfig" | "saveBoxHwConfig"
-        | "ReplaceBoxHwConfig" | "replaceBoxHwConfig" => {
-            // Extract the BoxHwConfig element if present
-            if let Some(start) = xml.find("<BoxHwConfig") {
-                if let Some(end) = xml[start..].find("</BoxHwConfig>") {
-                    let config_xml = &xml[start..start + end + "</BoxHwConfig>".len()];
-                    let mut state = services.write().await;
-                    state.fpga_config = config_xml.to_string();
-                }
+        | "ReplaceBoxHwConfig" | "replaceBoxHwConfig"
+        | "SetSDKFPGAConfig" | "setSDKFPGAConfig" => {
+            // Extract the BoxHwConfig (or first XML element) and persist it.
+            let config_xml = if let Some(start) = xml.find("<BoxHwConfig") {
+                xml[start..].find("</BoxHwConfig>")
+                    .map(|end| xml[start..start + end + "</BoxHwConfig>".len()].to_string())
+            } else {
+                None
+            };
+            if let Some(cfg) = config_xml {
+                let mut state = services.write().await;
+                state.fpga_config = cfg;
+                info!("FPGA/BoxHwConfig updated");
             }
-            ok!("")
-        }
-
-        "SetSDKFPGAConfig" | "setSDKFPGAConfig" => {
-            info!("SetSDKFPGAConfig received (FPGA hardware driver not yet implemented)");
             ok!("")
         }
 
@@ -496,8 +640,8 @@ pub async fn handle_sdk_command(
         // ── License ────────────────────────────────────────────────────────────
         "GetLicense" | "getLicense" => {
             let state = services.read().await;
-            let lic = &state.license;
-            let valid = !lic.is_empty();
+            let valid = !state.license.is_empty();
+            let lic = xml_esc(&state.license);
             ok!(&format!(
                 "<license value=\"{lic}\" valid=\"{valid}\"/>"
             ))
@@ -533,6 +677,7 @@ pub async fn handle_sdk_command(
             if let Some(v) = extract_attr(xml, "adminMode", "enable") {
                 let mut state = services.write().await;
                 state.admin_mode = v == "true" || v == "1";
+                state.save_persisted();
             }
             ok!("")
         }
@@ -547,12 +692,16 @@ pub async fn handle_sdk_command(
         }
 
         "SetSystemVolume" | "setSystemVolume" | "SetVolume" | "setVolume" => {
-            if let Some(v) = extract_attr(xml, "volume", "value") {
-                if let Ok(vol) = v.parse::<u8>() {
-                    let mut state = services.write().await;
-                    state.volume = vol.min(100);
+            if let Some(v) = extract_attr(xml, "volume", "value")
+                && let Ok(vol) = v.parse::<u8>() {
+                    let clamped = vol.min(100);
+                    {
+                        let mut state = services.write().await;
+                        state.volume = clamped;
+                        state.save_persisted();
+                    }
+                    player_tx.send(PlayerCommand::SetVolume(clamped)).await.ok();
                 }
-            }
             ok!("")
         }
 
@@ -593,27 +742,155 @@ pub async fn handle_sdk_command(
         }
 
         "FirmwareUpgrade" | "firmwareUpgrade" => {
-            info!("FirmwareUpgrade requested (not implemented)");
-            ok!("<upgradeStatus value=\"unsupported\"/>")
+            let filename = extract_attr(xml, "upgrade", "file")
+                .unwrap_or_else(|| "upgrade.zbin".to_string());
+            let (upgrade_path, program_dir) = {
+                let state = services.read().await;
+                let dir = state.storage.program_dir().to_path_buf();
+                (dir.join(&filename), dir)
+            };
+            info!("FirmwareUpgrade requested: {}", upgrade_path.display());
+
+            if !upgrade_path.exists() {
+                warn!("Upgrade file not found: {}", upgrade_path.display());
+                ok!("<upgradeStatus value=\"error\" message=\"file not found\"/>")
+            } else {
+                // Stage the .zbin package (parse ZIP, extract files, write pending marker)
+                let stage_result = tokio::task::spawn_blocking({
+                    let p = upgrade_path.clone();
+                    move || crate::services::upgrade::stage_upgrade(&p)
+                })
+                .await
+                .unwrap_or_else(|e| Err(format!("spawn_blocking error: {e}")));
+
+                match stage_result {
+                    Ok(version) => {
+                        info!("Upgrade staged: {filename} v{version}");
+                        crate::services::upgrade::write_pending_marker(
+                            &program_dir,
+                            &filename,
+                            &version,
+                        );
+                        {
+                            let mut state = services.write().await;
+                            state.upgrade_status =
+                                crate::services::upgrade::UpgradeStatus::InProgress {
+                                    filename: filename.clone(),
+                                };
+                            state.save_persisted();
+                        }
+
+                        // Trigger a graceful restart after 3 s so the TCP response
+                        // is delivered before the connection drops.
+                        let svc = services.clone();
+                        tokio::spawn(async move {
+                            tokio::time::sleep(tokio::time::Duration::from_secs(3)).await;
+                            info!("Initiating graceful restart for firmware upgrade");
+                            if let Some(ref tok) = svc.read().await.shutdown_token {
+                                tok.cancel();
+                            }
+                        });
+
+                        ok!("<upgradeStatus value=\"upgrading\"/>")
+                    }
+                    Err(e) => {
+                        warn!("Upgrade staging failed: {e}");
+                        {
+                            let mut state = services.write().await;
+                            state.upgrade_status =
+                                crate::services::upgrade::UpgradeStatus::Failed {
+                                    reason: e.clone(),
+                                };
+                            state.save_persisted();
+                        }
+                        let msg = e.replace('"', "&quot;");
+                        ok!(&format!(
+                            "<upgradeStatus value=\"error\" message=\"{msg}\"/>"
+                        ))
+                    }
+                }
+            }
         }
 
         "ExcuteUpgradeShell" | "excuteUpgradeShell" => {
-            info!("ExcuteUpgradeShell requested (not implemented)");
-            ok!("")
+            // <cmd value="/path/to/script.sh [args]"/>
+            let cmd = extract_attr(xml, "cmd", "value")
+                .or_else(|| extract_attr(xml, "shell", "value"))
+                .unwrap_or_default();
+            if cmd.is_empty() {
+                ok!("")
+            } else {
+                // Only allow execution in admin mode as a basic safety check.
+                let admin = services.read().await.admin_mode;
+                if !admin {
+                    warn!("ExcuteUpgradeShell rejected — admin mode not enabled");
+                    ok!("<result value=\"error\" message=\"requires admin mode\"/>")
+                } else {
+                    info!("ExcuteUpgradeShell: {cmd}");
+                    #[cfg(unix)]
+                    {
+                        let cmd_owned = cmd.clone();
+                        tokio::task::spawn_blocking(move || {
+                            let _ = std::process::Command::new("sh")
+                                .args(["-c", &cmd_owned])
+                                .spawn();
+                        }).await.ok();
+                    }
+                    ok!("")
+                }
+            }
         }
 
         "GetUpgradeResult" | "getUpgradeResult" => {
-            ok!("<upgradeResult value=\"1\" message=\"no upgrade in progress\"/>")
+            let (value, message) = services.read().await.upgrade_status.sdk_response();
+            let msg = message.replace('"', "&quot;");
+            ok!(&format!("<upgradeResult value=\"{value}\" message=\"{msg}\"/>"))
         }
 
         // ── Data Sources ───────────────────────────────────────────────────────
         "GetDataSourceInfo" | "getDataSourceInfo" => {
-            ok!("<dataSources count=\"0\"/>")
+            let state = services.read().await;
+            let count = state.data_sources.len();
+            let mut body = format!("<dataSources count=\"{}\">", count);
+            for (name, value) in &state.data_sources {
+                body.push_str(&format!(
+                    "<dataSource name=\"{}\" value=\"{}\"/>",
+                    xml_esc(name), xml_esc(value)
+                ));
+            }
+            body.push_str("</dataSources>");
+            ok!(body)
         }
 
-        "SetDataSourceInfo" | "setDataSourceInfo" => ok!(""),
+        "SetDataSourceInfo" | "setDataSourceInfo" => {
+            let sources = extract_data_sources(xml);
+            let count = sources.len();
+            {
+                let mut state = services.write().await;
+                state.data_sources = sources;
+                state.save_persisted();
+            }
+            info!("Data sources updated: {} entries", count);
+            ok!("")
+        }
 
-        "ReloadDeviceID" | "reloadDeviceID" => ok!(""),
+        "ReloadDeviceID" | "reloadDeviceID" => {
+            // Reads device_id.txt from the program directory and updates the device ID.
+            let program_dir = {
+                let state = services.read().await;
+                state.storage.program_dir().to_path_buf()
+            };
+            let id_file = program_dir.join("device_id.txt");
+            if let Ok(contents) = std::fs::read_to_string(&id_file) {
+                let new_id = contents.trim().to_string();
+                if !new_id.is_empty() {
+                    info!("Device ID reloaded from file: {}", new_id);
+                    let mut state = services.write().await;
+                    state.device_id = new_id;
+                }
+            }
+            ok!("")
+        }
 
         // ── Catch-all ──────────────────────────────────────────────────────────
         _ => {
@@ -683,7 +960,364 @@ fn extract_brightness_schedule(
     entries
 }
 
-/// Extract file list from DeleteFiles XML
+/// Try to read the real MAC address of the first non-loopback network interface.
+/// Falls back to all-zeros if unavailable (e.g. on Windows or embedded boards
+/// where /sys/class/net is not present).
+fn get_mac_address() -> String {
+    #[cfg(unix)]
+    {
+        if let Ok(entries) = std::fs::read_dir("/sys/class/net") {
+            let mut names: Vec<String> = entries
+                .flatten()
+                .map(|e| e.file_name().to_string_lossy().into_owned())
+                .collect();
+            names.sort(); // deterministic order
+            for name in &names {
+                if name == "lo" {
+                    continue;
+                }
+                let mac_path =
+                    std::path::Path::new("/sys/class/net").join(name).join("address");
+                if let Ok(mac) = std::fs::read_to_string(&mac_path) {
+                    let mac = mac.trim().to_string();
+                    if !mac.is_empty() && mac != "00:00:00:00:00:00" {
+                        return mac;
+                    }
+                }
+            }
+        }
+    }
+    "00:00:00:00:00:00".to_string()
+}
+
+/// Read real hardware stats.
+/// Returns `(cpu_usage_pct, mem_usage_pct, temperature_celsius, ram_total_mb)`.
+/// On Linux these are read from /proc and /sys; on other platforms defaults are used.
+fn get_system_stats() -> (u8, u8, i32, u64) {
+    #[cfg(unix)]
+    {
+        let (mem_pct, ram_mb) = read_mem_info().unwrap_or((15, 512));
+        let temp = read_cpu_temp_c().unwrap_or(40);
+        let cpu = read_cpu_usage_pct().unwrap_or(5);
+        return (cpu, mem_pct, temp, ram_mb);
+    }
+    #[allow(unreachable_code)]
+    (5, 15, 40, 512)
+}
+
+/// Parse /proc/meminfo to get (used_percent, total_mb).
+#[cfg(unix)]
+fn read_mem_info() -> Option<(u8, u64)> {
+    let s = std::fs::read_to_string("/proc/meminfo").ok()?;
+    let mut total_kb = 0u64;
+    let mut avail_kb = 0u64;
+    for line in s.lines() {
+        if line.starts_with("MemTotal:") {
+            total_kb = line.split_whitespace().nth(1)?.parse().ok()?;
+        } else if line.starts_with("MemAvailable:") {
+            avail_kb = line.split_whitespace().nth(1)?.parse().ok()?;
+        }
+    }
+    if total_kb == 0 {
+        return None;
+    }
+    let used_kb = total_kb.saturating_sub(avail_kb);
+    let pct = ((used_kb * 100 / total_kb) as u8).min(100);
+    Some((pct, total_kb / 1024))
+}
+
+/// Read CPU temperature in degrees Celsius from a thermal zone sysfs node.
+#[cfg(unix)]
+fn read_cpu_temp_c() -> Option<i32> {
+    for zone in 0..4u8 {
+        let path = format!("/sys/class/thermal/thermal_zone{}/temp", zone);
+        if let Ok(s) = std::fs::read_to_string(&path) {
+            if let Ok(milli) = s.trim().parse::<i32>() {
+                return Some(milli / 1000);
+            }
+        }
+    }
+    None
+}
+
+/// Estimate CPU usage from a single snapshot of /proc/stat.
+/// Returns the percentage of time NOT spent idle since boot — a rough but
+/// zero-overhead approximation that avoids needing two timed samples.
+#[cfg(unix)]
+fn read_cpu_usage_pct() -> Option<u8> {
+    let s = std::fs::read_to_string("/proc/stat").ok()?;
+    let first = s.lines().next()?; // "cpu  user nice system idle iowait irq softirq ..."
+    let nums: Vec<u64> = first
+        .split_whitespace()
+        .skip(1) // skip "cpu" label
+        .filter_map(|v| v.parse().ok())
+        .collect();
+    if nums.len() < 4 {
+        return None;
+    }
+    let total: u64 = nums.iter().sum();
+    let idle = nums[3];
+    if total == 0 {
+        return None;
+    }
+    Some((((total - idle) * 100 / total) as u8).min(100))
+}
+
+/// Read current eth0 network configuration from the OS.
+/// Returns `(mask, gateway, dns)`.  Falls back to safe defaults if unavailable.
+fn read_eth0_full_config() -> (String, String, String) {
+    let mask    = read_eth0_mask().unwrap_or_else(|| "255.255.255.0".to_string());
+    let gateway = read_default_gateway().unwrap_or_default();
+    let dns     = read_first_dns().unwrap_or_else(|| "8.8.8.8".to_string());
+    (mask, gateway, dns)
+}
+
+/// Apply eth0 network config.  On Linux, uses `ip` commands.
+/// No-op on Windows (network managed externally).
+fn apply_eth0_config(dhcp: bool, ip: &str, mask: &str, gateway: &str, dns: &str) {
+    #[cfg(unix)]
+    {
+        if dhcp {
+            // Try udhcpc (BusyBox/embedded) then dhclient (Debian/Ubuntu)
+            let udhcpc = std::process::Command::new("udhcpc")
+                .args(["-i", "eth0", "-n", "-q"])
+                .status();
+            if udhcpc.is_err() || udhcpc.map(|s| !s.success()).unwrap_or(true) {
+                let _ = std::process::Command::new("dhclient")
+                    .args(["eth0"])
+                    .status();
+            }
+        } else if !ip.is_empty() {
+            let prefix = mask_to_prefix_len(mask);
+            let _ = std::process::Command::new("ip")
+                .args(["addr", "flush", "dev", "eth0"])
+                .status();
+            let _ = std::process::Command::new("ip")
+                .args(["addr", "add", &format!("{ip}/{prefix}"), "dev", "eth0"])
+                .status();
+            let _ = std::process::Command::new("ip")
+                .args(["link", "set", "eth0", "up"])
+                .status();
+            if !gateway.is_empty() {
+                // Delete existing default route first (ignore errors)
+                let _ = std::process::Command::new("ip")
+                    .args(["route", "del", "default"])
+                    .status();
+                let _ = std::process::Command::new("ip")
+                    .args(["route", "add", "default", "via", gateway, "dev", "eth0"])
+                    .status();
+            }
+            if !dns.is_empty() {
+                let _ = std::fs::write("/etc/resolv.conf", format!("nameserver {dns}\n"));
+            }
+        }
+    }
+    // Windows: network configuration is handled by the OS; log only.
+    #[cfg(not(unix))]
+    {
+        let _ = (dhcp, ip, mask, gateway, dns);
+    }
+}
+
+/// Convert a dotted-decimal subnet mask to a CIDR prefix length.
+/// e.g. "255.255.255.0" → 24
+fn mask_to_prefix_len(mask: &str) -> u32 {
+    let parts: Vec<u8> = mask.split('.').filter_map(|s| s.parse().ok()).collect();
+    if parts.len() != 4 {
+        return 24;
+    }
+    let n = u32::from_be_bytes([parts[0], parts[1], parts[2], parts[3]]);
+    n.count_ones() // works because valid masks are contiguous leading 1s
+}
+
+/// Read the current WiFi SSID and connection status.
+/// Returns `(ssid, status)` where status is "connected"/"disconnected".
+/// Uses nmcli if available; falls back to iw; returns empty on non-Linux or if unavailable.
+fn read_wifi_status() -> (String, String) {
+    #[cfg(unix)]
+    {
+        // Try nmcli first (NetworkManager)
+        if let Ok(out) = std::process::Command::new("nmcli")
+            .args(["-t", "-f", "DEVICE,TYPE,STATE,CONNECTION", "device"])
+            .output()
+        {
+            if let Ok(s) = std::str::from_utf8(&out.stdout) {
+                for line in s.lines() {
+                    let parts: Vec<&str> = line.split(':').collect();
+                    if parts.len() >= 4 && parts[1] == "wifi" {
+                        let status = if parts[2].contains("connected") { "connected" } else { "disconnected" };
+                        let ssid = parts[3].trim().to_string();
+                        if !ssid.is_empty() && ssid != "--" {
+                            return (ssid, status.to_string());
+                        }
+                        return (String::new(), status.to_string());
+                    }
+                }
+            }
+        }
+
+        // Fallback: iw dev
+        if let Ok(out) = std::process::Command::new("iw").args(["dev"]).output() {
+            if let Ok(s) = std::str::from_utf8(&out.stdout) {
+                for line in s.lines() {
+                    let line = line.trim();
+                    if let Some(rest) = line.strip_prefix("ssid ") {
+                        return (rest.trim().to_string(), "connected".to_string());
+                    }
+                }
+            }
+        }
+    }
+    (String::new(), "disconnected".to_string())
+}
+
+/// Apply WiFi configuration using nmcli.
+/// On non-Linux systems or when nmcli is absent, this is a no-op.
+fn apply_wifi_config(ssid: &str, password: &str) {
+    #[cfg(unix)]
+    {
+        let mut args = vec!["device", "wifi", "connect", ssid];
+        let pw_owned;
+        if !password.is_empty() {
+            pw_owned = password.to_string();
+            args.extend_from_slice(&["password", &pw_owned]);
+        }
+        let status = std::process::Command::new("nmcli").args(&args).status();
+        match status {
+            Ok(s) if s.success() => tracing::info!("WiFi connected to '{ssid}'"),
+            Ok(s) => tracing::warn!("nmcli wifi connect failed (exit {})", s),
+            Err(_) => tracing::warn!("nmcli not available — WiFi config not applied"),
+        }
+    }
+    #[cfg(not(unix))]
+    {
+        let _ = (ssid, password);
+    }
+}
+
+/// Read the subnet mask of the first non-loopback IPv4 interface from `ip addr`.
+/// Returns a dotted-decimal mask string, e.g. "255.255.255.0".
+#[cfg(unix)]
+fn read_eth0_mask() -> Option<String> {
+    let out = std::process::Command::new("ip")
+        .args(["-4", "addr", "show"])
+        .output()
+        .ok()?;
+    let s = std::str::from_utf8(&out.stdout).ok()?;
+    for line in s.lines() {
+        let line = line.trim();
+        if line.starts_with("inet ") {
+            // "inet 192.168.1.100/24 brd ..."
+            let cidr = line.split_whitespace().nth(1)?;
+            let prefix: u32 = cidr.split('/').nth(1)?.parse().ok()?;
+            let addr: u32 = cidr.split('/').next()?.parse::<std::net::Ipv4Addr>().ok().map(u32::from)?;
+            if addr == 0x7f000001 { continue; } // skip loopback
+            // prefix-length → dotted-decimal mask
+            let mask_bits = if prefix == 0 { 0u32 } else { u32::MAX << (32 - prefix) };
+            let b = mask_bits.to_be_bytes();
+            return Some(format!("{}.{}.{}.{}", b[0], b[1], b[2], b[3]));
+        }
+    }
+    None
+}
+
+#[cfg(not(unix))]
+fn read_eth0_mask() -> Option<String> { None }
+
+/// Parse /proc/net/route to find the default gateway.
+/// The default route has Destination == 00000000.
+/// The Gateway column is a little-endian 32-bit hex IPv4 address.
+#[cfg(unix)]
+fn read_default_gateway() -> Option<String> {
+    let s = std::fs::read_to_string("/proc/net/route").ok()?;
+    for line in s.lines().skip(1) {
+        let cols: Vec<&str> = line.split_whitespace().collect();
+        if cols.len() < 3 {
+            continue;
+        }
+        if cols[1] == "00000000" {
+            // cols[2] = gateway as little-endian hex
+            let hex = u32::from_str_radix(cols[2], 16).ok()?;
+            let bytes = hex.to_le_bytes(); // little-endian in /proc/net/route
+            return Some(format!("{}.{}.{}.{}", bytes[0], bytes[1], bytes[2], bytes[3]));
+        }
+    }
+    None
+}
+
+#[cfg(not(unix))]
+fn read_default_gateway() -> Option<String> {
+    None
+}
+
+/// Parse /etc/resolv.conf for the first `nameserver` entry.
+#[cfg(unix)]
+fn read_first_dns() -> Option<String> {
+    let s = std::fs::read_to_string("/etc/resolv.conf").ok()?;
+    for line in s.lines() {
+        let line = line.trim();
+        if let Some(rest) = line.strip_prefix("nameserver") {
+            let addr = rest.trim();
+            if !addr.is_empty() {
+                return Some(addr.to_string());
+            }
+        }
+    }
+    None
+}
+
+#[cfg(not(unix))]
+fn read_first_dns() -> Option<String> {
+    None
+}
+
+/// Return (total_bytes, free_bytes) for the filesystem containing `path`.
+/// Falls back to (0, 0) if the info is unavailable.
+fn get_storage_bytes(path: &std::path::Path) -> (u64, u64) {
+    // Use statvfs on Linux; approximate with dir walk on other platforms.
+    #[cfg(unix)]
+    {
+        use std::os::unix::ffi::OsStrExt;
+        let mut stat: libc::statvfs = unsafe { std::mem::zeroed() };
+        let c_path = std::ffi::CString::new(path.as_os_str().as_bytes()).unwrap_or_default();
+        if unsafe { libc::statvfs(c_path.as_ptr(), &mut stat) } == 0 {
+            let block = stat.f_frsize as u64;
+            let total = stat.f_blocks as u64 * block;
+            let free = stat.f_bavail as u64 * block;
+            return (total, free);
+        }
+    }
+    // Windows / fallback: scan directory size
+    let used: u64 = std::fs::read_dir(path)
+        .ok()
+        .into_iter()
+        .flatten()
+        .flatten()
+        .filter_map(|e| e.metadata().ok())
+        .map(|m| m.len())
+        .sum();
+    // Report 8 GB disk, used bytes consumed
+    let total = 8u64 * 1024 * 1024 * 1024;
+    let free = total.saturating_sub(used);
+    (total, free)
+}
+
+/// Extract all `<dataSource name="…" value="…"/>` elements from XML.
+fn extract_data_sources(xml: &str) -> std::collections::HashMap<String, String> {
+    let mut sources = std::collections::HashMap::new();
+    let mut from = 0;
+    while let Some(pos) = xml[from..].find("<dataSource ") {
+        let abs = from + pos;
+        let name = extract_attr(&xml[abs..], "dataSource", "name").unwrap_or_default();
+        let value = extract_attr(&xml[abs..], "dataSource", "value").unwrap_or_default();
+        if !name.is_empty() {
+            sources.insert(name, value);
+        }
+        from = abs + 12;
+    }
+    sources
+}
+
 fn extract_file_list(xml: &str) -> Vec<String> {
     let mut files = Vec::new();
     let mut search_from = 0;
@@ -695,6 +1329,22 @@ fn extract_file_list(xml: &str) -> Vec<String> {
         search_from = abs_pos + 5;
     }
     files
+}
+
+/// Escape the five predefined XML entities so that any string is safe to
+/// embed inside an XML attribute value (double-quoted).
+///
+/// No-op if the string contains none of the special characters.
+#[inline]
+fn xml_esc(s: &str) -> String {
+    if !s.contains(['&', '<', '>', '"', '\'']) {
+        return s.to_string();
+    }
+    s.replace('&', "&amp;")
+     .replace('<', "&lt;")
+     .replace('>', "&gt;")
+     .replace('"', "&quot;")
+     .replace('\'', "&apos;")
 }
 
 #[cfg(test)]
@@ -721,5 +1371,150 @@ mod tests {
         assert_eq!(entries.len(), 1);
         assert_eq!(entries[0].on_time, "08:00");
         assert_eq!(entries[0].off_time, "22:00");
+    }
+
+    #[test]
+    fn test_extract_data_sources_empty() {
+        let xml = r#"<sdk><in method="SetDataSourceInfo"></in></sdk>"#;
+        let sources = extract_data_sources(xml);
+        assert!(sources.is_empty());
+    }
+
+    #[test]
+    fn test_extract_data_sources_single() {
+        let xml = r#"<sdk><in method="SetDataSourceInfo"><dataSource name="ticker" value="AAPL 150.25"/></in></sdk>"#;
+        let sources = extract_data_sources(xml);
+        assert_eq!(sources.len(), 1);
+        assert_eq!(sources.get("ticker").map(|s| s.as_str()), Some("AAPL 150.25"));
+    }
+
+    #[test]
+    fn test_extract_data_sources_multiple() {
+        let xml = r#"<sdk><in method="SetDataSourceInfo">
+            <dataSource name="score" value="3-1"/>
+            <dataSource name="team" value="Home"/>
+        </in></sdk>"#;
+        let sources = extract_data_sources(xml);
+        assert_eq!(sources.len(), 2);
+        assert_eq!(sources.get("score").map(|s| s.as_str()), Some("3-1"));
+        assert_eq!(sources.get("team").map(|s| s.as_str()), Some("Home"));
+    }
+
+    // ── extract_brightness_schedule ──────────────────────────────────────────
+
+    #[test]
+    fn test_extract_brightness_schedule_single() {
+        let xml = r#"<luminance mode="auto"><item time="08:00" level="100"/></luminance>"#;
+        let entries = extract_brightness_schedule(xml);
+        assert_eq!(entries.len(), 1);
+        assert_eq!(entries[0].hour, 8);
+        assert_eq!(entries[0].minute, 0);
+        assert_eq!(entries[0].level, 100);
+    }
+
+    #[test]
+    fn test_extract_brightness_schedule_multiple() {
+        let xml = r#"<luminance mode="auto">
+            <item time="07:30" level="80"/>
+            <item time="22:00" level="30"/>
+        </luminance>"#;
+        let entries = extract_brightness_schedule(xml);
+        assert_eq!(entries.len(), 2);
+        assert_eq!((entries[0].hour, entries[0].minute, entries[0].level), (7, 30, 80));
+        assert_eq!((entries[1].hour, entries[1].minute, entries[1].level), (22, 0, 30));
+    }
+
+    #[test]
+    fn test_extract_brightness_schedule_empty() {
+        let xml = r#"<luminance mode="manual"><brightness value="75"/></luminance>"#;
+        let entries = extract_brightness_schedule(xml);
+        assert!(entries.is_empty());
+    }
+
+    // ── extract_file_list ─────────────────────────────────────────────────────
+
+    #[test]
+    fn test_extract_file_list_single() {
+        let xml = r#"<in method="DeleteFiles"><file name="logo.png"/></in>"#;
+        let files = extract_file_list(xml);
+        assert_eq!(files, vec!["logo.png"]);
+    }
+
+    #[test]
+    fn test_extract_file_list_multiple() {
+        let xml = r#"<in method="DeleteFiles"><file name="a.mp4"/><file name="b.jpg"/></in>"#;
+        let files = extract_file_list(xml);
+        assert_eq!(files, vec!["a.mp4", "b.jpg"]);
+    }
+
+    #[test]
+    fn test_extract_file_list_empty() {
+        let xml = r#"<in method="DeleteFiles"></in>"#;
+        let files = extract_file_list(xml);
+        assert!(files.is_empty());
+    }
+
+    // ── xml_esc ───────────────────────────────────────────────────────────────
+
+    #[test]
+    fn test_xml_esc_passthrough() {
+        assert_eq!(xml_esc("hello world"), "hello world");
+        assert_eq!(xml_esc(""), "");
+        assert_eq!(xml_esc("LED Sign v2"), "LED Sign v2");
+    }
+
+    #[test]
+    fn test_xml_esc_ampersand() {
+        assert_eq!(xml_esc("A & B"), "A &amp; B");
+    }
+
+    #[test]
+    fn test_xml_esc_lt_gt() {
+        assert_eq!(xml_esc("<tag>"), "&lt;tag&gt;");
+    }
+
+    #[test]
+    fn test_xml_esc_quote() {
+        assert_eq!(xml_esc("say \"hello\""), "say &quot;hello&quot;");
+    }
+
+    #[test]
+    fn test_xml_esc_all_entities() {
+        assert_eq!(
+            xml_esc("<\"it's\" & fine>"),
+            "&lt;&quot;it&apos;s&quot; &amp; fine&gt;"
+        );
+    }
+
+    // ── mask_to_prefix_len ────────────────────────────────────────────────────
+
+    #[test]
+    fn test_mask_to_prefix_len_class_c() {
+        assert_eq!(mask_to_prefix_len("255.255.255.0"), 24);
+    }
+
+    #[test]
+    fn test_mask_to_prefix_len_class_b() {
+        assert_eq!(mask_to_prefix_len("255.255.0.0"), 16);
+    }
+
+    #[test]
+    fn test_mask_to_prefix_len_class_a() {
+        assert_eq!(mask_to_prefix_len("255.0.0.0"), 8);
+    }
+
+    #[test]
+    fn test_mask_to_prefix_len_full() {
+        assert_eq!(mask_to_prefix_len("255.255.255.255"), 32);
+    }
+
+    #[test]
+    fn test_mask_to_prefix_len_slash28() {
+        assert_eq!(mask_to_prefix_len("255.255.255.240"), 28);
+    }
+
+    #[test]
+    fn test_mask_to_prefix_len_invalid_defaults_24() {
+        assert_eq!(mask_to_prefix_len("not.a.mask"), 24);
     }
 }
