@@ -21,8 +21,8 @@ struct Cli {
     #[arg(short = 'H', long)]
     host: Option<String>,
 
-    /// TCP port (default: 10001)
-    #[arg(short = 'p', long, default_value_t = 10001)]
+    /// TCP port (default: 9527 — BoxStream protocol used by HDPlayer.exe)
+    #[arg(short = 'p', long, default_value_t = 9527)]
     port: u16,
 
     #[command(subcommand)]

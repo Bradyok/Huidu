@@ -61,10 +61,34 @@ pub fn sdk_error_response(guid: &str, method: &str, code: i32) -> String {
 
 /// Parse a result code from an SDK XML response.
 ///
-/// Looks for `<result value="N"/>` and returns:
-/// - `Ok(())` if `N == 0` (or the tag is absent — some methods omit it)
-/// - `Err(Error::Device { code, message })` for any non-zero code
+/// Handles two response formats:
+///
+/// **BoxStream protocol (port 9527)** — `result` attribute on `<out>` tag:
+/// ```xml
+/// <out result="kSuccess" method="GetDeviceName">...</out>
+/// <out result="kUnsupportMethod" method="GetDeviceInfo"/>
+/// ```
+///
+/// **Legacy protocol (port 10001)** — `<result value="N"/>` child element:
+/// ```xml
+/// <out method="test"><result value="0"/></out>
+/// ```
+///
+/// Returns `Ok(())` on success, `Err(Error::Device)` on any failure result.
 pub fn parse_result(xml: &str) -> Result<()> {
+    // BoxStream protocol: result="kSuccess" or result="kXxx" attribute on <out> tag
+    if let Some(start) = xml.find("<out ") {
+        if let Some(result_val) = get_attr(&xml[start..], "result") {
+            return match result_val {
+                "kSuccess" => Ok(()),
+                other => Err(Error::Device {
+                    code: -1,
+                    message: other.to_string(),
+                }),
+            };
+        }
+    }
+    // Legacy protocol: <result value="N"/> child element
     if let Some(start) = xml.find("result value=\"") {
         let rest = &xml[start + 14..];
         if let Some(end) = rest.find('"') {
@@ -77,6 +101,26 @@ pub fn parse_result(xml: &str) -> Result<()> {
         }
     }
     Ok(())
+}
+
+/// Build a batch SDK request with the `##GUID` placeholder and multiple method calls.
+///
+/// Used with the BoxPlayer BoxStream protocol (port 9527). The real Huidu PC tools
+/// send multiple `<in method="..."/>` elements in a single `BoxStreamData` packet,
+/// as confirmed from Huidu.pcapng.
+pub fn sdk_batch_request(methods: &[(&str, &str)]) -> String {
+    let mut xml = String::from(
+        "<?xml version=\"1.0\" encoding=\"utf-8\"?><sdk guid=\"##GUID\">"
+    );
+    for (method, body) in methods {
+        xml.push_str("<in method=\"");
+        xml.push_str(method);
+        xml.push_str("\">");
+        xml.push_str(body);
+        xml.push_str("</in>");
+    }
+    xml.push_str("</sdk>");
+    xml
 }
 
 /// Extract the content of the `<out method="...">...</out>` block.
@@ -229,6 +273,27 @@ mod tests {
         let xml = "<GrayLevel value=\"256\"/>";
         assert_eq!(parse_value_attr(xml, "GrayLevel"), Some(256u32));
         assert_eq!(parse_value_attr(xml, "Missing"), None);
+    }
+
+    #[test]
+    fn test_parse_result_boxstream_success() {
+        let xml = "<sdk guid=\"##GUID\"><out result=\"kSuccess\" method=\"GetDeviceName\"><name value=\"BoxPlayer\"/></out></sdk>";
+        assert!(parse_result(xml).is_ok());
+    }
+
+    #[test]
+    fn test_parse_result_boxstream_unsupport() {
+        let xml = "<sdk guid=\"##GUID\"><out result=\"kUnsupportMethod\" method=\"GetDeviceInfo\"/></sdk>";
+        let err = parse_result(xml).unwrap_err();
+        assert!(matches!(err, Error::Device { code: -1, .. }));
+    }
+
+    #[test]
+    fn test_sdk_batch_request() {
+        let xml = sdk_batch_request(&[("GetDeviceName", ""), ("GetFirewareVersion", "")]);
+        assert!(xml.contains("guid=\"##GUID\""));
+        assert!(xml.contains("method=\"GetDeviceName\""));
+        assert!(xml.contains("method=\"GetFirewareVersion\""));
     }
 
     #[test]

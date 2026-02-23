@@ -8,7 +8,6 @@ use tokio::net::TcpStream;
 use tokio::sync::Mutex;
 use std::sync::Arc;
 use tracing::{debug, info, warn};
-use uuid::Uuid;
 
 
 use crate::command;
@@ -17,8 +16,9 @@ use crate::protocol::{Command, Packet};
 use crate::transfer::FileTransfer;
 use crate::xml;
 
-/// Default TCP port for Huidu BoxPlayer SDK protocol.
-pub const DEFAULT_PORT: u16 = huidu_protocol::packet::DEFAULT_PORT;
+/// Default TCP port for Huidu BoxPlayer — the BoxStream protocol on port 9527.
+/// Confirmed from Huidu.pcapng: HDPlayer.exe connects to port 9527, not 10001.
+pub const DEFAULT_PORT: u16 = huidu_protocol::packet::BOX_PLAYER_PORT;
 
 /// SDK protocol version sent in SdkServiceAsk (confirmed from HCatNet.dll analysis).
 pub const SDK_VERSION: u32 = huidu_protocol::packet::SDK_CLIENT_VERSION;
@@ -96,16 +96,76 @@ impl Client {
 
         let mut client = Self {
             stream: Arc::new(Mutex::new(stream)),
-            client_guid: Uuid::new_v4().to_string().to_uppercase(),
+            // BoxStream protocol uses the literal "##GUID" placeholder (not a real UUID).
+            // Confirmed from Huidu.pcapng: all SDK requests and responses use guid="##GUID".
+            client_guid: "##GUID".to_string(),
             read_buf: Vec::with_capacity(65536),
         };
 
-        // Negotiate SDK protocol version
-        client.send_sdk_service().await?;
+        // The device sends TcpHeartbeatAnswer (0x0060) as its FIRST packet on TCP connect.
+        // We must respond with TcpHeartbeatAsk (0x005F) before the device will accept
+        // BoxStreamInit commands.
+        //
+        // Observed timing: the device sends TcpHeartbeatAnswer ~5 seconds after TCP connect
+        // (both on fresh connections and after UDP discovery). We wait up to 12 seconds.
+        //
+        // After responding to the heartbeat we loop — the device may send additional
+        // TcpHeartbeatAnswer packets before it transitions to the BoxStream-ready state.
+        // We stop looping once we've responded to the first heartbeat and the 300 ms inter-
+        // packet gap fires, signaling the device is not sending more heartbeats immediately.
+        info!("Waiting for device TcpHeartbeatAnswer (up to 12s)...");
+        let mut got_heartbeat = false;
+        loop {
+            match client.recv_with_timeout(Duration::from_secs(12)).await {
+                Ok(pkt) if pkt.command == Command::TcpHeartbeatAnswer => {
+                    info!("Received TcpHeartbeatAnswer from device");
+                    client.send_packet(&Packet::new(Command::TcpHeartbeatAsk, vec![])).await?;
+                    info!("Responded with TcpHeartbeatAsk");
+                    got_heartbeat = true;
+                    // After responding, wait briefly (300 ms) to see if device sends another
+                    // heartbeat immediately. If not (timeout), break and proceed.
+                    match client.recv_with_timeout(Duration::from_millis(300)).await {
+                        Ok(next) if next.command == Command::TcpHeartbeatAnswer => {
+                            // Device sent another heartbeat right away — push back via temp store.
+                            // We can't push back onto TcpStream, so serialize the packet bytes
+                            // and prepend them to read_buf.
+                            let bytes = next.to_bytes();
+                            client.read_buf.splice(0..0, bytes);
+                            // Loop again to handle it.
+                        }
+                        Ok(other) => {
+                            // Something else arrived — prepend to read_buf and break.
+                            let bytes = other.to_bytes();
+                            client.read_buf.splice(0..0, bytes);
+                            break;
+                        }
+                        Err(Error::Timeout) => break, // quiet gap → device is done heartbeating
+                        Err(e) => return Err(e),
+                    }
+                }
+                Ok(pkt) => {
+                    warn!("Expected TcpHeartbeatAnswer, got {:?} — buffering for later", pkt.command);
+                    let bytes = pkt.to_bytes();
+                    client.read_buf.splice(0..0, bytes);
+                    break;
+                }
+                Err(Error::Timeout) => {
+                    if got_heartbeat {
+                        break; // already got at least one heartbeat, proceed
+                    }
+                    warn!("No TcpHeartbeatAnswer received within 12s — proceeding anyway");
+                    break;
+                }
+                Err(e) => return Err(e),
+            }
+        }
+
+        // Note: box_stream_init() is NOT called here.
+        // send_xml_request() sends BoxStreamInit at the start of every XML exchange.
         Ok(client)
     }
 
-    /// Connect using the default port (10001).
+    /// Connect using the default port (9527).
     pub async fn connect_default(host: &str) -> Result<Self> {
         Self::connect(host, DEFAULT_PORT).await
     }
@@ -150,84 +210,132 @@ impl Client {
             .map_err(|_| Error::Timeout)?
     }
 
-    /// Send SDK service negotiation packet.
-    async fn send_sdk_service(&mut self) -> Result<()> {
-        use crate::protocol::sdk_service_ask_payload;
-        let payload = sdk_service_ask_payload(SDK_VERSION);
-        let pkt = Packet::new(Command::SdkServiceAsk, payload);
+    /// Initiate a BoxStream session (port 9527 protocol).
+    ///
+    /// Sends `BoxStreamInit` with payload `[0,0,0,0]` and waits for `BoxStreamInitAck`.
+    /// Confirmed from Huidu.pcapng frames 8–10.
+    async fn box_stream_init(&mut self) -> Result<()> {
+        let pkt = Packet::new(Command::BoxStreamInit, vec![0x00, 0x00, 0x00, 0x00]);
         self.send_packet(&pkt).await?;
-        // Wait for SdkServiceAnswer
         let resp = self.recv_with_timeout(CMD_TIMEOUT).await?;
         match resp.command {
-            Command::SdkServiceAnswer => {}
-            Command::SdkErrorAnswer => {
-                let code = if resp.payload.len() >= 2 {
-                    u16::from_le_bytes(resp.payload[..2].try_into().unwrap_or([0; 2])) as i32
-                } else {
-                    -1
-                };
-                let de = crate::error::DeviceError::from_code(code);
-                return Err(Error::Device {
-                    code,
-                    message: format!("SDK version rejected: {}", de.message()),
-                });
+            Command::BoxStreamInitAck => {
+                info!("BoxStream session established");
+                Ok(())
             }
-            other => {
-                warn!("Expected SdkServiceAnswer, got {:?}", other);
-            }
+            other => Err(Error::Protocol(format!(
+                "Expected BoxStreamInitAck, got {other:?}"
+            ))),
         }
-        Ok(())
     }
 
-    /// Send an SDK XML command and receive the XML response.
-    ///
-    /// SDK CMD payload framing (confirmed from server.rs):
-    ///   Request:  [u32 total_xml_len][u32 chunk_index=0][xml_bytes...]
-    ///   Response: [u32 total_xml_len][u32 chunk_index=0][xml_bytes...]
-    async fn sdk_cmd(&mut self, method: &str, body: &str) -> Result<String> {
-        use crate::protocol::sdk_cmd_ask_payload;
-        let xml_str = xml::sdk_request(&self.client_guid, method, body);
-        let payload = sdk_cmd_ask_payload(&xml_str);
-        let pkt = Packet::new(Command::SdkCmdAsk, payload);
-        self.send_packet(&pkt).await?;
-
-        // Receive response — may need to skip heartbeat packets
+    /// Wait for a specific command, discarding heartbeat pings in between.
+    async fn expect_cmd(&mut self, expected: Command, timeout: Duration) -> Result<Packet> {
         loop {
-            let resp = self.recv_with_timeout(CMD_TIMEOUT).await?;
-            match resp.command {
-                Command::SdkCmdAnswer => {
-                    // Strip the [u32 total_len][u32 index] 8-byte prefix from response
-                    let xml_bytes = crate::protocol::parse_sdk_cmd_payload(&resp.payload)
-                        .ok_or_else(|| Error::Protocol(
-                            format!("SdkCmdAnswer too short: {} bytes", resp.payload.len())
-                        ))?;
-                    let response_xml = String::from_utf8_lossy(xml_bytes).into_owned();
-                    debug!("SDK response for {method}: {} bytes", response_xml.len());
-                    xml::parse_result(&response_xml)?;
-                    return Ok(response_xml);
-                }
-                Command::SdkErrorAnswer => {
-                    let code = if resp.payload.len() >= 2 {
-                        u16::from_le_bytes(resp.payload[..2].try_into().unwrap_or([0; 2])) as i32
-                    } else {
-                        -1
-                    };
-                    let de = crate::error::DeviceError::from_code(code);
-                    return Err(Error::Device {
-                        code,
-                        message: de.message().into(),
-                    });
-                }
+            let pkt = self.recv_with_timeout(timeout).await?;
+            if pkt.command == expected {
+                return Ok(pkt);
+            }
+            match pkt.command {
                 Command::TcpHeartbeatAsk => {
-                    // Auto-respond to heartbeat
-                    let pong = Packet::heartbeat();
-                    self.send_packet(&pong).await?;
+                    self.send_packet(&Packet::heartbeat()).await?;
                 }
                 other => {
-                    warn!("Unexpected packet {:?} while waiting for SdkCmdAnswer", other);
+                    warn!("Expected {:?}, got {:?} — ignoring", expected, other);
                 }
             }
         }
+    }
+
+    /// Send XML over BoxStream and receive the response XML.
+    ///
+    /// Full 10-step handshake confirmed from Huidu.pcapng:
+    ///
+    /// **Request delivery:**
+    /// 1. PC→Dev: BoxStreamData `[0x00,0x00] + xml`
+    /// 2. Dev→PC: BoxStreamRxAck `[0x00,0x00]`
+    /// 3. PC→Dev: BoxStreamTxAck `[0x00,0x00]`
+    /// 4. Dev→PC: BoxStreamFinalAck `[0x00,0x00]`
+    ///
+    /// **Response delivery:**
+    /// 5. Dev→PC: BoxStreamInit `[0x01,0x00,0x00,0x00]`  ← "response ready"
+    /// 6. PC→Dev: BoxStreamInitAck `[0x00,0x00]`
+    /// 7. Dev→PC: BoxStreamData `[0x01,0x00] + xml`      ← actual response
+    /// 8. PC→Dev: BoxStreamRxAck `[0x00,0x00]`
+    /// 9. Dev→PC: BoxStreamTxAck `[0x01,0x00]`
+    /// 10. PC→Dev: BoxStreamFinalAck `[0x00,0x00]`
+    async fn send_xml_request(&mut self, xml_str: &str) -> Result<String> {
+        use crate::protocol::{box_stream_data_request, parse_box_stream_data};
+
+        // Step 0 (pre-request): BoxStreamInit → BoxStreamInitAck handshake.
+        // Required before EVERY XML exchange (confirmed from More Huidu.pcapng:
+        // every subsequent call starts with BoxStreamInit [0,0,0,0] → BoxStreamInitAck).
+        self.box_stream_init().await?;
+
+        // Step 1: send BoxStreamData with [0x00,0x00] + xml
+        let payload = box_stream_data_request(xml_str);
+        self.send_packet(&Packet::new(Command::BoxStreamData, payload)).await?;
+
+        // Step 2: wait for BoxStreamRxAck
+        self.expect_cmd(Command::BoxStreamRxAck, CMD_TIMEOUT).await?;
+
+        // Step 3: send BoxStreamTxAck [0x00,0x00]
+        self.send_packet(&Packet::new(Command::BoxStreamTxAck, vec![0x00, 0x00])).await?;
+
+        // Step 4: wait for BoxStreamFinalAck
+        self.expect_cmd(Command::BoxStreamFinalAck, CMD_TIMEOUT).await?;
+
+        // Step 5: wait for BoxStreamInit with payload [0x01,0x00,0x00,0x00] ("response ready")
+        loop {
+            let pkt = self.recv_with_timeout(CMD_TIMEOUT).await?;
+            match pkt.command {
+                Command::BoxStreamInit => {
+                    // payload[0] == 0x01 means device has a response queued
+                    if pkt.payload.first() == Some(&0x01) {
+                        break;
+                    }
+                    warn!("BoxStreamInit with unexpected payload {:?}", pkt.payload);
+                }
+                Command::TcpHeartbeatAsk => {
+                    self.send_packet(&Packet::heartbeat()).await?;
+                }
+                other => {
+                    warn!("Unexpected {:?} while waiting for BoxStreamInit(ready)", other);
+                }
+            }
+        }
+
+        // Step 6: send BoxStreamInitAck [0x00,0x00]
+        self.send_packet(&Packet::new(Command::BoxStreamInitAck, vec![0x00, 0x00])).await?;
+
+        // Step 7: wait for BoxStreamData response
+        let resp = self.expect_cmd(Command::BoxStreamData, CMD_TIMEOUT).await?;
+        let xml_bytes = parse_box_stream_data(&resp.payload)
+            .ok_or_else(|| Error::Protocol(
+                format!("BoxStreamData response too short: {} bytes", resp.payload.len())
+            ))?;
+        let response_xml = String::from_utf8_lossy(xml_bytes).into_owned();
+        debug!("BoxStream response: {} bytes", response_xml.len());
+
+        // Step 8: send BoxStreamRxAck [0x00,0x00]
+        self.send_packet(&Packet::new(Command::BoxStreamRxAck, vec![0x00, 0x00])).await?;
+
+        // Step 9: wait for BoxStreamTxAck from device
+        self.expect_cmd(Command::BoxStreamTxAck, CMD_TIMEOUT).await?;
+
+        // Step 10: send BoxStreamFinalAck [0x00,0x00]
+        self.send_packet(&Packet::new(Command::BoxStreamFinalAck, vec![0x00, 0x00])).await?;
+
+        Ok(response_xml)
+    }
+
+    /// Send a single SDK XML method call and check the result.
+    async fn sdk_cmd(&mut self, method: &str, body: &str) -> Result<String> {
+        let xml_str = xml::sdk_request(&self.client_guid, method, body);
+        let response = self.send_xml_request(&xml_str).await?;
+        debug!("SDK response for {method}: {} bytes", response.len());
+        xml::parse_result(&response)?;
+        Ok(response)
     }
 
     /// Send a heartbeat packet.
@@ -238,35 +346,88 @@ impl Client {
 
     // ── Device Info ──────────────────────────────────────────────────────
 
-    /// Get device information.
+    /// Get device information via a batch request.
+    ///
+    /// The Huidu C15 BoxPlayer does not support `GetDeviceInfo` — instead we send a
+    /// batch of individual methods matching what HDPlayer.exe requests in practice
+    /// (confirmed from Huidu.pcapng).
     pub async fn get_device_info(&mut self) -> Result<DeviceDetails> {
-        let xml = self.sdk_cmd("GetDeviceInfo", &command::get_device_info()).await?;
-        let mut info = DeviceDetails { raw_xml: xml.clone(), ..Default::default() };
-        // Narrow to the <deviceInfo ...> element so get_attr("version") doesn't
-        // hit <?xml version="1.0"?> in the envelope declaration.
-        let scope = xml.find("<deviceInfo")
-            .and_then(|s| xml[s..].find('>').map(|e| &xml[s..s + e + 1]))
-            .unwrap_or(xml.as_str());
-        let get = |a: &str| xml::get_attr(scope, a).map(xml::xml_unescape);
-        info.device_id    = get("deviceId").or_else(|| get("deviceID")).unwrap_or_default();
-        info.device_name  = get("deviceName").or_else(|| get("name")).unwrap_or_default();
-        info.firmware_version = get("version").or_else(|| get("SoftwareVersion"))
-                                    .or_else(|| get("softwareVersion")).unwrap_or_default();
-        info.screen_width  = get("screenWidth").or_else(|| get("ScreenWidth"))
-                                .or_else(|| get("width"))
-                                .and_then(|v| v.parse().ok()).unwrap_or(0);
-        info.screen_height = get("screenHeight").or_else(|| get("ScreenHeight"))
-                                .or_else(|| get("height"))
-                                .and_then(|v| v.parse().ok()).unwrap_or(0);
-        info.device_type   = get("deviceType").or_else(|| get("DeviceType")).unwrap_or_default();
-        info.ip_address    = get("ip").unwrap_or_default();
-        info.mac_address   = get("mac").unwrap_or_default();
-        info.brightness    = get("brightness").and_then(|v| v.parse().ok()).unwrap_or(100);
-        info.volume        = get("volume").and_then(|v| v.parse().ok()).unwrap_or(50);
-        info.rotation      = get("rotation").and_then(|v| v.parse().ok()).unwrap_or(0);
-        info.admin_mode    = get("adminMode").map(|v| v == "true" || v == "1").unwrap_or(false);
-        info.storage_total = get("storageTotal").and_then(|v| v.parse().ok()).unwrap_or(0);
-        info.storage_free  = get("storageFree").and_then(|v| v.parse().ok()).unwrap_or(0);
+        use huidu_protocol::xml::sdk_batch_request;
+        let request_xml = sdk_batch_request(&[
+            ("GetDeviceName",         ""),
+            ("GetFirewareVersion",    ""),
+            ("GetScreenInfo",         ""),
+            ("GetEth0Info",           ""),
+            ("GetTimeInfo",           ""),
+            ("GetCurrentLuminance",   ""),
+        ]);
+        let response = self.send_xml_request(&request_xml).await?;
+        let mut info = DeviceDetails { raw_xml: response.clone(), ..Default::default() };
+        info.device_type = "BoxPlayer".to_string();
+
+        // GetDeviceName → <name value="BoxPlayer"/>
+        if let Some(body) = extract_out_body(&response, "GetDeviceName") {
+            info.device_name = xml::get_attr(&body, "value")
+                .map(xml::xml_unescape).unwrap_or_default();
+        }
+
+        // GetFirewareVersion → <app version="7.4.61.0"/><fpga version="6.3.70.0"/>
+        if let Some(body) = extract_out_body(&response, "GetFirewareVersion") {
+            if let Some(app_pos) = body.find("<app ") {
+                info.firmware_version = xml::get_attr(&body[app_pos..], "version")
+                    .map(xml::xml_unescape).unwrap_or_default();
+            }
+        }
+
+        // GetScreenInfo → <width value="128"/><height value="128"/>
+        //                  <space value="..."/><total value="..."/>
+        if let Some(body) = extract_out_body(&response, "GetScreenInfo") {
+            if let Some(p) = body.find("<width ") {
+                info.screen_width = xml::get_attr(&body[p..], "value")
+                    .and_then(|v| v.parse().ok()).unwrap_or(0);
+            }
+            if let Some(p) = body.find("<height ") {
+                info.screen_height = xml::get_attr(&body[p..], "value")
+                    .and_then(|v| v.parse().ok()).unwrap_or(0);
+            }
+            if let Some(p) = body.find("<space ") {
+                info.storage_free = xml::get_attr(&body[p..], "value")
+                    .and_then(|v| v.parse().ok()).unwrap_or(0);
+            }
+            if let Some(p) = body.find("<total ") {
+                info.storage_total = xml::get_attr(&body[p..], "value")
+                    .and_then(|v| v.parse().ok()).unwrap_or(0);
+            }
+            if let Some(p) = body.find("<rotation ") {
+                info.rotation = xml::get_attr(&body[p..], "value")
+                    .and_then(|v| v.parse().ok()).unwrap_or(0);
+            }
+        }
+
+        // GetEth0Info → <ip addr="..."/><netmask addr="..."/><mac addr="..."/>
+        if let Some(body) = extract_out_body(&response, "GetEth0Info") {
+            if let Some(p) = body.find("<ip ") {
+                info.ip_address = xml::get_attr(&body[p..], "addr")
+                    .map(xml::xml_unescape).unwrap_or_default();
+            }
+            if let Some(p) = body.find("<mac ") {
+                info.mac_address = xml::get_attr(&body[p..], "addr")
+                    .map(xml::xml_unescape).unwrap_or_default();
+            }
+            if let Some(p) = body.find("<dhcp ") {
+                let auto_val = xml::get_attr(&body[p..], "auto").unwrap_or("0");
+                info.device_id = format!("dhcp={auto_val}"); // placeholder until a real device_id method exists
+            }
+        }
+
+        // GetCurrentLuminance → <percent value="100"/>
+        if let Some(body) = extract_out_body(&response, "GetCurrentLuminance") {
+            if let Some(p) = body.find("<percent ") {
+                info.brightness = xml::get_attr(&body[p..], "value")
+                    .and_then(|v| v.parse().ok()).unwrap_or(100);
+            }
+        }
+
         Ok(info)
     }
 
@@ -404,14 +565,30 @@ impl Client {
 
     pub async fn get_eth0_info(&mut self) -> Result<EthConfig> {
         let xml = self.sdk_cmd("GetEth0Info", &command::get_eth0_info()).await?;
-        // Response: <eth0 dhcp="true" ip="..." mask="..." gateway="..." dns="..."/>
-        let get = |a: &str| crate::xml::get_attr(&xml, a).map(str::to_string);
+        // Real device response (confirmed from Huidu.pcapng):
+        //   <enable value="true"/>
+        //   <dhcp auto="1"/>
+        //   <ip addr="192.168.1.104"/>
+        //   <netmask addr="255.255.255.0"/>
+        //   <gateway addr="192.168.1.1"/>
+        //   <dns addr="192.168.1.1"/>
+        //   <mac addr="28:32:fd:be:36:40"/>
+        let addr_of = |tag: &str| -> String {
+            xml.find(&format!("<{tag} "))
+                .and_then(|p| crate::xml::get_attr(&xml[p..], "addr"))
+                .map(str::to_string)
+                .unwrap_or_default()
+        };
+        let dhcp = xml.find("<dhcp ")
+            .and_then(|p| crate::xml::get_attr(&xml[p..], "auto"))
+            .map(|v| v == "1" || v == "true")
+            .unwrap_or(false);
         Ok(EthConfig {
-            dhcp:    get("dhcp").map(|v| v == "true").unwrap_or(false),
-            ip:      get("ip").unwrap_or_default(),
-            mask:    get("mask").unwrap_or_default(),
-            gateway: get("gateway").unwrap_or_default(),
-            dns:     get("dns").unwrap_or_default(),
+            dhcp,
+            ip:      addr_of("ip"),
+            mask:    addr_of("netmask"),
+            gateway: addr_of("gateway"),
+            dns:     addr_of("dns"),
         })
     }
 
@@ -478,9 +655,14 @@ impl Client {
     // ── Extra queries ─────────────────────────────────────────────────────
 
     /// Get current brightness level (0–100).
+    ///
+    /// Uses `GetCurrentLuminance` which returns `<percent value="N"/>`.
+    /// Confirmed from More Huidu.pcapng: response is `<percent value="100"/>`.
     pub async fn get_brightness(&mut self) -> Result<u8> {
-        let xml = self.sdk_cmd("GetLuminancePloy", &command::get_luminance_ploy()).await?;
-        let level = crate::xml::get_attr(&xml, "value")
+        let xml = self.sdk_cmd("GetCurrentLuminance", "").await?;
+        // Response: <out result="kSuccess" method="GetCurrentLuminance"><percent value="100"/></out>
+        let level = xml.find("<percent ")
+            .and_then(|p| crate::xml::get_attr(&xml[p..], "value"))
             .and_then(|v| v.parse().ok())
             .unwrap_or(100);
         Ok(level)
@@ -754,4 +936,28 @@ impl Client {
             })
         }
     }
+}
+
+// ── Free helpers ──────────────────────────────────────────────────────────────
+
+/// Extract the inner body of `<out method="name">...</out>` from a batch response XML.
+///
+/// Returns `Some(body_xml)` — the content between the opening and closing `</out>` tags.
+/// Returns `Some("")` for self-closing tags (e.g. `<out result="kUnsupportMethod" .../>`).
+/// Returns `None` if the method's `<out>` block is not present in the XML.
+fn extract_out_body(xml: &str, method: &str) -> Option<String> {
+    let needle = format!("method=\"{method}\"");
+    let method_pos = xml.find(&needle)?;
+    // Walk back to the start of the enclosing <out element
+    let out_start = xml[..method_pos].rfind("<out")?;
+    let rest = &xml[out_start..];
+    // Find the end of the opening tag
+    let tag_end = rest.find('>')?;
+    // Self-closing? e.g. <out result="kUnsupportMethod" method="X"/>
+    if rest.as_bytes().get(tag_end.saturating_sub(1)) == Some(&b'/') {
+        return Some(String::new());
+    }
+    let body_start = tag_end + 1;
+    let close_off = rest[body_start..].find("</out>")?;
+    Some(rest[body_start..body_start + close_off].to_string())
 }

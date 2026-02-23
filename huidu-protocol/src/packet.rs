@@ -1,6 +1,6 @@
 //! TCP binary packet framing — shared across HDPlayer, HDSet, and BoxPlayer.
 //!
-//! ## Wire format
+//! ## Wire format (all ports)
 //! ```text
 //! [u16 LE length]   — total packet size (4 + payload_len), includes this field
 //! [u16 LE command]  — Command code
@@ -10,7 +10,28 @@
 //! Confirmed via live device captures: the real device sends and expects
 //! `length = total bytes` (header + payload), not `length = payload + 2`.
 //!
-//! ## SDK CMD chunking
+//! ## Port 9527 protocol (Huidu C-series BoxPlayer, confirmed from Huidu.pcapng)
+//!
+//! Each SDK command exchange follows this 14-step sequence:
+//! ```text
+//! 1. PC → Device: Sdk9527ServiceAsk (0x0200) payload=[u32 LE 0]
+//! 2. Device → PC: Sdk9527ServiceAnswer (0x0201) payload=[u16 LE 0]
+//! 3. PC → Device: Sdk9527Cmd (0x0202) payload=[u16 LE dir=0][XML bytes]
+//! 4. Device → PC: Sdk9527CmdAck1 (0x0203) payload=[u16 LE 0]
+//! 5. PC → Device: Sdk9527CmdAck2 (0x0204) payload=[u16 LE 0]
+//! 6. Device → PC: Sdk9527CmdAck3 (0x0205) payload=[u16 LE 0]
+//! 7. Device → PC: Sdk9527ServiceAsk (0x0200) payload=[u32 LE 1]  ("response ready")
+//! 8. PC → Device: Sdk9527ServiceAnswer (0x0201) payload=[u16 LE 0]
+//! 9. Device → PC: Sdk9527Cmd (0x0202) payload=[u16 LE dir=1][XML bytes]
+//! 10. PC → Device: Sdk9527CmdAck1 (0x0203) payload=[u16 LE 0]
+//! 11. Device → PC: Sdk9527CmdAck2 (0x0204) payload=[u16 LE 1]
+//! 12. PC → Device: Sdk9527CmdAck3 (0x0205) payload=[u16 LE 0]
+//! ```
+//!
+//! XML GUID is the literal string `##GUID` (not a real UUID).
+//! No GetIFVersion registration is needed.
+//!
+//! ## Port 10001 SDK CMD chunking (HDSet / legacy devices)
 //! `SdkCmdAsk` / `SdkCmdAnswer` payloads have an 8-byte framing header
 //! **before** the XML bytes (confirmed from BoxPlayer server.rs):
 //! ```text
@@ -25,8 +46,13 @@ use crate::error::{Error, Result};
 
 // ── Well-known port and timing constants ──────────────────────────────────────
 
-/// Default TCP port for the Huidu BoxPlayer SDK protocol.
+/// Legacy TCP port used by the old SdkService/SdkCmd protocol (port 10001).
+/// Real Huidu PC tools do NOT use this for BoxPlayer devices — they use port 9527.
 pub const DEFAULT_PORT: u16 = 10001;
+
+/// TCP port used by BoxPlayer devices for the BoxStream SDK protocol.
+/// Confirmed from Huidu.pcapng: HDPlayer.exe connects here, not port 10001.
+pub const BOX_PLAYER_PORT: u16 = 9527;
 
 /// Heartbeat interval — both HDPlayer and HDSet send a ping every 30 s.
 pub const HEARTBEAT_INTERVAL: std::time::Duration = std::time::Duration::from_secs(30);
@@ -76,6 +102,22 @@ pub enum Command {
     /// Device → client: XML SDK response (same framing as SdkCmdAsk).
     SdkCmdAnswer     = 0x2004,
 
+    // ── BoxPlayer BoxStream channel (port 9527) ───────────────────────────
+    /// PC → device: initiate a BoxStream session (payload = `[u32 LE 0x00000000]`).
+    /// Device signals response ready by sending BoxStreamInit with payload `[u32 LE 0x01000000]`.
+    BoxStreamInit     = 0x0200,
+    /// Device → PC or PC → device: session init acknowledge (payload = `[u16 LE 0x0000]`).
+    BoxStreamInitAck  = 0x0201,
+    /// Bidirectional: XML data (payload = `[u16 LE direction][xml_bytes]`).
+    /// direction: `0x0000` = PC→device (request), `0x0100` = device→PC (response).
+    BoxStreamData     = 0x0202,
+    /// Device → PC: confirms receipt of BoxStreamData (payload = `[u16 LE 0x0000]`).
+    BoxStreamRxAck    = 0x0203,
+    /// Bidirectional: sender acknowledges the RxAck (payload = `[u16 LE direction]`).
+    BoxStreamTxAck    = 0x0204,
+    /// Bidirectional: final handshake step (payload = `[u16 LE 0x0000]`).
+    BoxStreamFinalAck = 0x0205,
+
     // ── File transfer ─────────────────────────────────────────────────────
     /// Start transfer: [32 B MD5 hex][u64 size][u16 type][filename\0]
     FileStartAsk      = 0x8001,
@@ -122,6 +164,12 @@ impl Command {
             0x2002 => Self::SdkServiceAnswer,
             0x2003 => Self::SdkCmdAsk,
             0x2004 => Self::SdkCmdAnswer,
+            0x0200 => Self::BoxStreamInit,
+            0x0201 => Self::BoxStreamInitAck,
+            0x0202 => Self::BoxStreamData,
+            0x0203 => Self::BoxStreamRxAck,
+            0x0204 => Self::BoxStreamTxAck,
+            0x0205 => Self::BoxStreamFinalAck,
             0x8001 => Self::FileStartAsk,
             0x8002 => Self::FileStartAnswer,
             0x8003 => Self::FileContentAsk,
@@ -235,6 +283,32 @@ pub fn sdk_cmd_answer_payload(xml: &str) -> Vec<u8> {
     sdk_cmd_ask_payload(xml) // same framing
 }
 
+// ── BoxStream payload helpers ─────────────────────────────────────────────────
+
+/// Build a `BoxStreamData` request payload (PC → device direction).
+///
+/// Format: `[u16 LE 0x0000][xml_bytes]`
+/// The `0x0000` direction prefix marks this as a PC→device request.
+/// Confirmed from Huidu.pcapng frame 11 (PC→device XML batch request).
+pub fn box_stream_data_request(xml: &str) -> Vec<u8> {
+    let xml_bytes = xml.as_bytes();
+    let mut v = Vec::with_capacity(2 + xml_bytes.len());
+    v.push(0x00);
+    v.push(0x00);
+    v.extend_from_slice(xml_bytes);
+    v
+}
+
+/// Extract the XML bytes from a `BoxStreamData` payload (strips the 2-byte direction prefix).
+///
+/// Returns `None` if the payload is less than 2 bytes.
+pub fn parse_box_stream_data(payload: &[u8]) -> Option<&[u8]> {
+    if payload.len() < 2 {
+        return None;
+    }
+    Some(&payload[2..])
+}
+
 /// Extract the XML string from a `SdkCmdAsk` or `SdkCmdAnswer` payload.
 ///
 /// Strips the 8-byte `[u32 total][u32 index]` header.
@@ -259,6 +333,12 @@ impl std::fmt::Display for Command {
             Self::SdkServiceAnswer   => "SdkServiceAnswer",
             Self::SdkCmdAsk          => "SdkCmdAsk",
             Self::SdkCmdAnswer       => "SdkCmdAnswer",
+            Self::BoxStreamInit      => "BoxStreamInit",
+            Self::BoxStreamInitAck   => "BoxStreamInitAck",
+            Self::BoxStreamData      => "BoxStreamData",
+            Self::BoxStreamRxAck     => "BoxStreamRxAck",
+            Self::BoxStreamTxAck     => "BoxStreamTxAck",
+            Self::BoxStreamFinalAck  => "BoxStreamFinalAck",
             Self::FileStartAsk       => "FileStartAsk",
             Self::FileStartAnswer    => "FileStartAnswer",
             Self::FileContentAsk     => "FileContentAsk",
