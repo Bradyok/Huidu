@@ -27,3 +27,4 @@ pub mod xml;
 
 // Convenience re-exports at the crate root
 pub use error::{Error, Result, DeviceError};
+pub use discovery::udp_register;

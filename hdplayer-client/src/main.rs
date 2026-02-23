@@ -322,6 +322,36 @@ enum Commands {
         /// Path to program XML (.boo) file
         file: String,
     },
+
+    /// Get device play status (stopped / playing)
+    GetPlayStatus,
+
+    /// Get current audio volume
+    GetVolume,
+
+    /// Get ambient sensor info (temperature, humidity, GPS, etc.)
+    GetSensorInfo,
+
+    /// Get GPS coordinates
+    GetGpsInfo,
+
+    /// Get current temperature from sensor
+    GetTemperature,
+
+    /// Get current humidity from sensor
+    GetHumidity,
+
+    /// Get relay status list
+    GetRelay,
+
+    /// Get key definition value
+    GetKeyDefine,
+
+    /// Get sensor measurement range (kUnsupportMethod on most devices)
+    GetSensorRange,
+
+    /// Get device locker enable status
+    GetLockerEnable,
 }
 
 #[tokio::main]
@@ -401,12 +431,27 @@ async fn main() -> anyhow::Result<()> {
             println!("Name:         {}", info.device_name);
             println!("Type:         {}", info.device_type);
             println!("Firmware:     {}", info.firmware_version);
+            if !info.fpga_version.is_empty() {
+                println!("FPGA:         {}", info.fpga_version);
+            }
             println!("Screen:       {}x{}", info.screen_width, info.screen_height);
             println!("Rotation:     {}°", info.rotation);
             println!("IP:           {}", info.ip_address);
             println!("MAC:          {}", info.mac_address);
+            println!("DHCP:         {}", if info.dhcp { "enabled" } else { "disabled" });
             println!("Brightness:   {}%", info.brightness);
-            println!("Volume:       {}", info.volume);
+            println!("Volume:       {}%", info.volume);
+            println!("Play status:  {}", match info.play_status { 1 => "playing", _ => "stopped" });
+            if !info.device_time.is_empty() {
+                println!("Device time:  {}", info.device_time);
+            }
+            if !info.ntp_server.is_empty() {
+                println!("NTP server:   {}", info.ntp_server);
+            }
+            println!("Screen sched: {}", if info.switch_time_on { "on" } else { "off" });
+            if info.boot_logo_exists {
+                println!("Boot logo:    set");
+            }
             if info.storage_total > 0 {
                 let used = info.storage_total.saturating_sub(info.storage_free);
                 println!("Storage:      {:.1} GB used / {:.1} GB total",
@@ -954,6 +999,98 @@ async fn main() -> anyhow::Result<()> {
             };
             client.update_program(&screen_xml).await?;
             println!("Program updated successfully.");
+        }
+
+        Commands::GetPlayStatus => {
+            let status = client.get_play_status().await?;
+            println!("Play status: {}", match status { 1 => "playing", _ => "stopped" });
+        }
+
+        Commands::GetVolume => {
+            let vol = client.get_volume().await?;
+            println!("Volume: {vol}%");
+        }
+
+        Commands::GetSensorInfo => {
+            let xml = client.get_sensor_info().await?;
+            // Parse each sensor's connect enable status
+            for sensor in &["luminance", "temperature", "fpgaTemp", "humity", "gps",
+                             "windSpeed", "windDirection", "noise", "pressure"] {
+                if let Some(pos) = xml.find(&format!("<{sensor}")) {
+                    let slice = &xml[pos..];
+                    let connected = slice.find("<connect ")
+                        .and_then(|p| hdplayer::xml::get_attr(&slice[p..], "enable"))
+                        .map(|v| v == "1")
+                        .unwrap_or(false);
+                    println!("{:<16} {}", format!("{}:", sensor),
+                        if connected { "connected" } else { "not connected" });
+                }
+            }
+        }
+
+        Commands::GetGpsInfo => {
+            let xml = client.get_gps_info().await?;
+            let lat  = hdplayer::xml::get_attr(&xml, "value").unwrap_or("-1");
+            let lon  = hdplayer::xml::get_attr(&xml, "value").unwrap_or("-1");
+            let cnts = {
+                let p = xml.find("<counts ").unwrap_or(0);
+                hdplayer::xml::get_attr(&xml[p..], "value").unwrap_or("0")
+            };
+            if lat == "-1" && lon == "-1" {
+                println!("GPS: no fix (satellite count: {cnts})");
+            } else {
+                println!("Latitude:  {lat}");
+                println!("Longitude: {lon}");
+                println!("Satellites:{cnts}");
+            }
+        }
+
+        Commands::GetTemperature => {
+            let t = client.get_current_temperature().await?;
+            if t == -1 {
+                println!("Temperature: no sensor connected");
+            } else {
+                println!("Temperature: {t}°C");
+            }
+        }
+
+        Commands::GetHumidity => {
+            let h = client.get_current_humidity().await?;
+            if h == -1 {
+                println!("Humidity: no sensor connected");
+            } else {
+                println!("Humidity: {h}%");
+            }
+        }
+
+        Commands::GetRelay => {
+            let relays = client.get_relay().await?;
+            if relays.is_empty() {
+                println!("No relay items.");
+            } else {
+                println!("Relays ({}):", relays.len());
+                for (i, (use_sw, name, status)) in relays.iter().enumerate() {
+                    let name_str = if name.is_empty() { "(unnamed)" } else { name.as_str() };
+                    println!("  [{}] {} — enabled:{} status:{}", i, name_str, use_sw, status);
+                }
+            }
+        }
+
+        Commands::GetKeyDefine => {
+            let key = client.get_key_define().await?;
+            println!("Key define: {key}");
+        }
+
+        Commands::GetSensorRange => {
+            match client.get_sensor_range().await? {
+                Some(xml) => println!("{xml}"),
+                None => println!("GetSensorRange: not supported by this device."),
+            }
+        }
+
+        Commands::GetLockerEnable => {
+            let enabled = client.get_device_locker_enable().await?;
+            println!("Device locker: {}", if enabled { "enabled" } else { "disabled" });
         }
     }
 

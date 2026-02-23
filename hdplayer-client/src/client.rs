@@ -2,6 +2,8 @@
 //!
 //! Implements the full SDK XML command protocol plus file transfer.
 
+use std::net::Ipv4Addr;
+use std::str::FromStr;
 use std::time::Duration;
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 use tokio::net::TcpStream;
@@ -29,24 +31,38 @@ pub const HEARTBEAT_INTERVAL: Duration = huidu_protocol::packet::HEARTBEAT_INTER
 /// Response timeout for SDK commands.
 pub const CMD_TIMEOUT: Duration = Duration::from_secs(15);
 
-/// Information returned by GetDeviceInfo.
+/// Information returned by the full device status batch request.
 #[derive(Debug, Clone, Default)]
 pub struct DeviceDetails {
     pub device_id: String,
     pub device_name: String,
     pub device_type: String,
     pub firmware_version: String,
+    pub fpga_version: String,
     pub screen_width: u32,
     pub screen_height: u32,
     pub storage_total: u64,
     pub storage_free: u64,
     pub ip_address: String,
     pub mac_address: String,
+    pub dhcp: bool,
     pub volume: u8,
     pub brightness: u8,
     pub rotation: u32,
     pub admin_mode: bool,
     pub current_program_guid: Option<String>,
+    /// Play status: 0 = stopped, 1 = playing (from GetPlayStatus).
+    pub play_status: u8,
+    /// Device time string from GetTimeInfo (e.g. "2026-02-23 05:01:32").
+    pub device_time: String,
+    /// NTP server list from GetTimeInfo.
+    pub ntp_server: String,
+    /// Screen-on scheduling enabled (from GetSwitchTime).
+    pub switch_time_on: bool,
+    /// Device locker feature enabled (from GetDeviceLockerEnable).
+    pub locker_enabled: bool,
+    /// Boot logo present on device (from GetBootLogo).
+    pub boot_logo_exists: bool,
     pub raw_xml: String,
 }
 
@@ -87,6 +103,25 @@ pub struct Client {
 impl Client {
     /// Connect to a Huidu BoxPlayer at the given host and port.
     pub async fn connect(host: &str, port: u16) -> Result<Self> {
+        // UDP registration MUST happen before TCP BoxStream connection.
+        //
+        // Confirmed from hdplayer_real.pcapng: real HDPlayer performs a UDP handshake on
+        // port 9526 before connecting TCP.  Without this, the device accepts the TCP
+        // connection, sends TcpHeartbeatAnswer, but then closes the connection (FIN) after
+        // receiving BoxStreamInit — regardless of timing.
+        //
+        // The device sends unicast UDP from port 9527 TO port 9526 on the controller.
+        // We must respond with cmd=0x0003 (and optionally cmd=0x0006/0x0341) to be
+        // "registered" as an authorised controller.
+        if let Ok(ip) = Ipv4Addr::from_str(host) {
+            match huidu_protocol::udp_register(ip, Duration::from_secs(12)).await {
+                Ok(()) => info!("UDP registration complete"),
+                Err(e) => warn!("UDP registration failed ({e}) — attempting TCP anyway"),
+            }
+        } else {
+            warn!("Host '{host}' is not an IPv4 address — skipping UDP registration");
+        }
+
         let addr = format!("{host}:{port}");
         info!("Connecting to {addr}");
         let stream = TcpStream::connect(&addr).await
@@ -102,66 +137,49 @@ impl Client {
             read_buf: Vec::with_capacity(65536),
         };
 
-        // The device sends TcpHeartbeatAnswer (0x0060) as its FIRST packet on TCP connect.
-        // We must respond with TcpHeartbeatAsk (0x005F) before the device will accept
-        // BoxStreamInit commands.
+        // Handshake sequence confirmed from Huidu.pcapng (working capture):
         //
-        // Observed timing: the device sends TcpHeartbeatAnswer ~5 seconds after TCP connect
-        // (both on fresh connections and after UDP discovery). We wait up to 12 seconds.
+        //  1. TCP connect
+        //  2. Device → PC: TcpHeartbeatAnswer (0x0060)  ← device signals "ready"
+        //  3. PC → Device: TcpHeartbeatAsk   (0x005F)   ← PC acknowledges device greeting
+        //  4. ~107ms gap  (device processes TcpHeartbeatAsk before next packet)
+        //  5. PC → Device: BoxStreamInit      (0x0200)   ← done by send_xml_request()
         //
-        // After responding to the heartbeat we loop — the device may send additional
-        // TcpHeartbeatAnswer packets before it transitions to the BoxStream-ready state.
-        // We stop looping once we've responded to the first heartbeat and the 300 ms inter-
-        // packet gap fires, signaling the device is not sending more heartbeats immediately.
-        info!("Waiting for device TcpHeartbeatAnswer (up to 12s)...");
-        let mut got_heartbeat = false;
+        // From live testing failures (confirmed by packet captures):
+        //  - BoxStreamInit before TcpHeartbeatAnswer  → RST  (app not ready)
+        //  - BoxStreamInit immediately after TcpHeartbeatAnswer without TcpHeartbeatAsk → FIN
+        //  - TcpHeartbeatAsk + BoxStreamInit with 0ms gap → FIN
+        //  - TcpHeartbeatAsk + BoxStreamInit with 2s gap → FIN (too slow overall)
+        //
+        // The 150ms sleep after TcpHeartbeatAsk matches the observed ~107ms gap in the
+        // working capture and gives the device time to process TcpHeartbeatAsk before
+        // BoxStreamInit arrives.
+        info!("Waiting for TcpHeartbeatAnswer (device ready signal)...");
         loop {
-            match client.recv_with_timeout(Duration::from_secs(12)).await {
+            match client.recv_with_timeout(Duration::from_secs(15)).await {
                 Ok(pkt) if pkt.command == Command::TcpHeartbeatAnswer => {
-                    info!("Received TcpHeartbeatAnswer from device");
+                    info!("Received TcpHeartbeatAnswer — sending TcpHeartbeatAsk");
                     client.send_packet(&Packet::new(Command::TcpHeartbeatAsk, vec![])).await?;
-                    info!("Responded with TcpHeartbeatAsk");
-                    got_heartbeat = true;
-                    // After responding, wait briefly (300 ms) to see if device sends another
-                    // heartbeat immediately. If not (timeout), break and proceed.
-                    match client.recv_with_timeout(Duration::from_millis(300)).await {
-                        Ok(next) if next.command == Command::TcpHeartbeatAnswer => {
-                            // Device sent another heartbeat right away — push back via temp store.
-                            // We can't push back onto TcpStream, so serialize the packet bytes
-                            // and prepend them to read_buf.
-                            let bytes = next.to_bytes();
-                            client.read_buf.splice(0..0, bytes);
-                            // Loop again to handle it.
-                        }
-                        Ok(other) => {
-                            // Something else arrived — prepend to read_buf and break.
-                            let bytes = other.to_bytes();
-                            client.read_buf.splice(0..0, bytes);
-                            break;
-                        }
-                        Err(Error::Timeout) => break, // quiet gap → device is done heartbeating
-                        Err(e) => return Err(e),
-                    }
+                    // Allow device time to process TcpHeartbeatAsk before BoxStreamInit arrives.
+                    // Confirmed gap in working capture: ~107ms between TcpHeartbeatAsk and BoxStreamInit.
+                    tokio::time::sleep(Duration::from_millis(150)).await;
+                    info!("TcpHeartbeatAsk acknowledged — ready for BoxStreamInit");
+                    break;
                 }
                 Ok(pkt) => {
-                    warn!("Expected TcpHeartbeatAnswer, got {:?} — buffering for later", pkt.command);
+                    warn!("Expected TcpHeartbeatAnswer, got {:?} — buffering", pkt.command);
                     let bytes = pkt.to_bytes();
                     client.read_buf.splice(0..0, bytes);
                     break;
                 }
                 Err(Error::Timeout) => {
-                    if got_heartbeat {
-                        break; // already got at least one heartbeat, proceed
-                    }
-                    warn!("No TcpHeartbeatAnswer received within 12s — proceeding anyway");
+                    warn!("No TcpHeartbeatAnswer within 15s — proceeding anyway");
                     break;
                 }
                 Err(e) => return Err(e),
             }
         }
 
-        // Note: box_stream_init() is NOT called here.
-        // send_xml_request() sends BoxStreamInit at the start of every XML exchange.
         Ok(client)
     }
 
@@ -217,15 +235,26 @@ impl Client {
     async fn box_stream_init(&mut self) -> Result<()> {
         let pkt = Packet::new(Command::BoxStreamInit, vec![0x00, 0x00, 0x00, 0x00]);
         self.send_packet(&pkt).await?;
-        let resp = self.recv_with_timeout(CMD_TIMEOUT).await?;
-        match resp.command {
-            Command::BoxStreamInitAck => {
-                info!("BoxStream session established");
-                Ok(())
+        loop {
+            let resp = self.recv_with_timeout(CMD_TIMEOUT).await?;
+            match resp.command {
+                Command::BoxStreamInitAck => {
+                    info!("BoxStream session established");
+                    return Ok(());
+                }
+                // Device may send periodic keepalives while we wait.
+                Command::TcpHeartbeatAnswer => {
+                    debug!("Received TcpHeartbeatAnswer while waiting for BoxStreamInitAck — ignoring");
+                }
+                Command::TcpHeartbeatAsk => {
+                    self.send_packet(&Packet::heartbeat()).await?;
+                }
+                other => {
+                    return Err(Error::Protocol(format!(
+                        "Expected BoxStreamInitAck, got {other:?}"
+                    )));
+                }
             }
-            other => Err(Error::Protocol(format!(
-                "Expected BoxStreamInitAck, got {other:?}"
-            ))),
         }
     }
 
@@ -239,6 +268,10 @@ impl Client {
             match pkt.command {
                 Command::TcpHeartbeatAsk => {
                     self.send_packet(&Packet::heartbeat()).await?;
+                }
+                // Device sends TcpHeartbeatAnswer periodically; ignore mid-exchange.
+                Command::TcpHeartbeatAnswer => {
+                    debug!("Received TcpHeartbeatAnswer mid-exchange — ignoring");
                 }
                 other => {
                     warn!("Expected {:?}, got {:?} — ignoring", expected, other);
@@ -346,20 +379,46 @@ impl Client {
 
     // ── Device Info ──────────────────────────────────────────────────────
 
-    /// Get device information via a batch request.
+    /// Get full device status via a 23-method batch request.
     ///
-    /// The Huidu C15 BoxPlayer does not support `GetDeviceInfo` — instead we send a
-    /// batch of individual methods matching what HDPlayer.exe requests in practice
-    /// (confirmed from Huidu.pcapng).
+    /// Sends the same methods HDPlayer.exe requests on initial connection
+    /// (confirmed from Huidu.pcapng and More Huidu.pcapng):
+    /// GetDeviceName, GetFirewareVersion, GetKeyDefine, GetPlayStatus,
+    /// GetSystemVolume, GetBootLogo, GetSensorInfo, GetGPSInfo,
+    /// GetCurrentLuminance, GetCurrentTemperature, GetCurrentHumity,
+    /// GetSensorType, GetSwitchTime, GetTimeInfo, GetLuminancePloy,
+    /// GetScreenInfo, GetLicense, GetEth0Info, GetWifiInfo, GetPppoeInfo,
+    /// GetDeviceInfo, GetDataSourceInfo, GetRelay.
+    ///
+    /// Methods not supported by the device (e.g. GetSensorType, GetDeviceInfo,
+    /// GetDataSourceInfo) return kUnsupportMethod and are silently skipped.
     pub async fn get_device_info(&mut self) -> Result<DeviceDetails> {
         use huidu_protocol::xml::sdk_batch_request;
+        // Full 23-method batch — mirrors HDPlayer.exe initial sync exactly.
         let request_xml = sdk_batch_request(&[
-            ("GetDeviceName",         ""),
-            ("GetFirewareVersion",    ""),
-            ("GetScreenInfo",         ""),
-            ("GetEth0Info",           ""),
-            ("GetTimeInfo",           ""),
-            ("GetCurrentLuminance",   ""),
+            ("GetDeviceName",           ""),
+            ("GetFirewareVersion",      ""),
+            ("GetKeyDefine",            ""),
+            ("GetPlayStatus",           ""),
+            ("GetSystemVolume",         ""),
+            ("GetBootLogo",             ""),
+            ("GetSensorInfo",           ""),
+            ("GetGPSInfo",              ""),
+            ("GetCurrentLuminance",     ""),
+            ("GetCurrentTemperature",   ""),
+            ("GetCurrentHumity",        ""),  // note: protocol typo "Humity"
+            ("GetSensorType",           ""),
+            ("GetSwitchTime",           ""),
+            ("GetTimeInfo",             ""),
+            ("GetLuminancePloy",        ""),
+            ("GetScreenInfo",           ""),
+            ("GetLicense",              ""),
+            ("GetEth0Info",             ""),
+            ("GetWifiInfo",             ""),
+            ("GetPppoeInfo",            ""),
+            ("GetDeviceInfo",           ""),  // returns kUnsupportMethod on C-series
+            ("GetDataSourceInfo",       ""),  // returns kUnsupportMethod on C-series
+            ("GetRelay",                ""),
         ]);
         let response = self.send_xml_request(&request_xml).await?;
         let mut info = DeviceDetails { raw_xml: response.clone(), ..Default::default() };
@@ -375,6 +434,61 @@ impl Client {
         if let Some(body) = extract_out_body(&response, "GetFirewareVersion") {
             if let Some(app_pos) = body.find("<app ") {
                 info.firmware_version = xml::get_attr(&body[app_pos..], "version")
+                    .map(xml::xml_unescape).unwrap_or_default();
+            }
+            if let Some(fpga_pos) = body.find("<fpga ") {
+                info.fpga_version = xml::get_attr(&body[fpga_pos..], "version")
+                    .map(xml::xml_unescape).unwrap_or_default();
+            }
+        }
+
+        // GetPlayStatus → <status value="1"/> (1=playing, 0=stopped)
+        if let Some(body) = extract_out_body(&response, "GetPlayStatus") {
+            if let Some(p) = body.find("<status ") {
+                info.play_status = xml::get_attr(&body[p..], "value")
+                    .and_then(|v| v.parse().ok()).unwrap_or(0);
+            }
+        }
+
+        // GetSystemVolume → <volume precent="100"/> (note: protocol typo "precent")
+        if let Some(body) = extract_out_body(&response, "GetSystemVolume") {
+            if let Some(p) = body.find("<volume ") {
+                info.volume = xml::get_attr(&body[p..], "precent")
+                    .and_then(|v| v.parse().ok()).unwrap_or(100);
+            }
+        }
+
+        // GetBootLogo → <logo exist="false"/>
+        if let Some(body) = extract_out_body(&response, "GetBootLogo") {
+            info.boot_logo_exists = xml::get_attr(&body, "exist")
+                .map(|v| v == "true")
+                .unwrap_or(false);
+        }
+
+        // GetCurrentLuminance → <percent value="100"/>
+        if let Some(body) = extract_out_body(&response, "GetCurrentLuminance") {
+            if let Some(p) = body.find("<percent ") {
+                info.brightness = xml::get_attr(&body[p..], "value")
+                    .and_then(|v| v.parse().ok()).unwrap_or(100);
+            }
+        }
+
+        // GetSwitchTime → <open enable="true"/>
+        if let Some(body) = extract_out_body(&response, "GetSwitchTime") {
+            info.switch_time_on = body.find("<open ")
+                .and_then(|p| xml::get_attr(&body[p..], "enable"))
+                .map(|v| v == "true")
+                .unwrap_or(false);
+        }
+
+        // GetTimeInfo → <time value="..."/><server list="..."/>
+        if let Some(body) = extract_out_body(&response, "GetTimeInfo") {
+            if let Some(p) = body.find("<time ") {
+                info.device_time = xml::get_attr(&body[p..], "value")
+                    .map(xml::xml_unescape).unwrap_or_default();
+            }
+            if let Some(p) = body.find("<server ") {
+                info.ntp_server = xml::get_attr(&body[p..], "list")
                     .map(xml::xml_unescape).unwrap_or_default();
             }
         }
@@ -404,7 +518,10 @@ impl Client {
             }
         }
 
-        // GetEth0Info → <ip addr="..."/><netmask addr="..."/><mac addr="..."/>
+        // GetEth0Info → <enable value="true"/><dhcp auto="1"/>
+        //               <ip addr="..."/><netmask addr="..."/>
+        //               <gateway addr="..."/><dns addr="..."/>
+        //               <mac addr="28:32:fd:be:36:40"/>
         if let Some(body) = extract_out_body(&response, "GetEth0Info") {
             if let Some(p) = body.find("<ip ") {
                 info.ip_address = xml::get_attr(&body[p..], "addr")
@@ -416,15 +533,11 @@ impl Client {
             }
             if let Some(p) = body.find("<dhcp ") {
                 let auto_val = xml::get_attr(&body[p..], "auto").unwrap_or("0");
-                info.device_id = format!("dhcp={auto_val}"); // placeholder until a real device_id method exists
+                info.dhcp = auto_val == "1" || auto_val == "true";
             }
-        }
-
-        // GetCurrentLuminance → <percent value="100"/>
-        if let Some(body) = extract_out_body(&response, "GetCurrentLuminance") {
-            if let Some(p) = body.find("<percent ") {
-                info.brightness = xml::get_attr(&body[p..], "value")
-                    .and_then(|v| v.parse().ok()).unwrap_or(100);
+            // Use MAC as device_id — the most stable unique identifier.
+            if !info.mac_address.is_empty() {
+                info.device_id = info.mac_address.replace(':', "").to_uppercase();
             }
         }
 
@@ -666,6 +779,130 @@ impl Client {
             .and_then(|v| v.parse().ok())
             .unwrap_or(100);
         Ok(level)
+    }
+
+    // ── Sensor / Status queries ───────────────────────────────────────────
+
+    /// Get current play status (0 = stopped, 1 = playing).
+    ///
+    /// Confirmed from More Huidu.pcapng: response is `<status value="1"/>`.
+    pub async fn get_play_status(&mut self) -> Result<u8> {
+        let xml = self.sdk_cmd("GetPlayStatus", "").await?;
+        Ok(xml.find("<status ")
+            .and_then(|p| crate::xml::get_attr(&xml[p..], "value"))
+            .and_then(|v| v.parse().ok())
+            .unwrap_or(0))
+    }
+
+    /// Get current audio volume (0–100).
+    ///
+    /// Confirmed from More Huidu.pcapng: response is `<volume precent="100"/>`.
+    /// Note: "precent" is the protocol's typo for "percent".
+    pub async fn get_volume(&mut self) -> Result<u8> {
+        let xml = self.sdk_cmd("GetSystemVolume", "").await?;
+        Ok(xml.find("<volume ")
+            .and_then(|p| crate::xml::get_attr(&xml[p..], "precent"))
+            .and_then(|v| v.parse().ok())
+            .unwrap_or(100))
+    }
+
+    /// Get sensor connectivity info (luminance, temperature, GPS, humidity, etc.)
+    ///
+    /// Confirmed from More Huidu.pcapng: each sensor has a `<connect enable="0"/>` child.
+    pub async fn get_sensor_info(&mut self) -> Result<String> {
+        self.sdk_cmd("GetSensorInfo", "").await
+    }
+
+    /// Get GPS coordinates.
+    ///
+    /// Returns `<latitude value="-1"/><longitude value="-1"/>` when GPS is not connected.
+    pub async fn get_gps_info(&mut self) -> Result<String> {
+        self.sdk_cmd("GetGPSInfo", "").await
+    }
+
+    /// Get current ambient temperature from sensor (-1 = no sensor connected).
+    pub async fn get_current_temperature(&mut self) -> Result<i32> {
+        let xml = self.sdk_cmd("GetCurrentTemperature", "").await?;
+        Ok(xml.find("<temperature ")
+            .and_then(|p| crate::xml::get_attr(&xml[p..], "value"))
+            .and_then(|v| v.parse().ok())
+            .unwrap_or(-1))
+    }
+
+    /// Get current ambient humidity from sensor (-1 = no sensor connected).
+    ///
+    /// Note: the protocol spells this "Humity" (missing an 'i') — that is intentional
+    /// and matches the real device firmware.
+    pub async fn get_current_humidity(&mut self) -> Result<i32> {
+        let xml = self.sdk_cmd("GetCurrentHumity", "").await?;
+        Ok(xml.find("<humity ")
+            .and_then(|p| crate::xml::get_attr(&xml[p..], "value"))
+            .and_then(|v| v.parse().ok())
+            .unwrap_or(-1))
+    }
+
+    /// Get key definition (returned as `<key value="0"/>` on most devices).
+    pub async fn get_key_define(&mut self) -> Result<u32> {
+        let xml = self.sdk_cmd("GetKeyDefine", "").await?;
+        Ok(crate::xml::get_attr(&xml, "value")
+            .and_then(|v| v.parse().ok())
+            .unwrap_or(0))
+    }
+
+    /// Get relay status list.
+    ///
+    /// Returns a Vec of `(use_switch, name, relay_status)` tuples — one per relay.
+    /// Confirmed from More Huidu.pcapng: 6 relay items, all disabled.
+    pub async fn get_relay(&mut self) -> Result<Vec<(bool, String, u8)>> {
+        let xml = self.sdk_cmd("GetRelay", "").await?;
+        let mut relays = Vec::new();
+        let mut search = xml.as_str();
+        while let Some(start) = search.find("<item ") {
+            let end = search[start..].find("/>")
+                .map(|e| start + e + 2)
+                .unwrap_or(search.len());
+            let tag = &search[start..end];
+            let use_switch = crate::xml::get_attr(tag, "useSwitch")
+                .map(|v| v == "1")
+                .unwrap_or(false);
+            let name = crate::xml::get_attr(tag, "name")
+                .map(crate::xml::xml_unescape)
+                .unwrap_or_default();
+            let status = crate::xml::get_attr(tag, "relayStatus")
+                .and_then(|v| v.parse().ok())
+                .unwrap_or(0);
+            relays.push((use_switch, name, status));
+            search = &search[end.min(search.len())..];
+        }
+        Ok(relays)
+    }
+
+    /// Get sensor measurement range.
+    ///
+    /// Returns `Ok(Some(xml))` when supported, `Ok(None)` when the device responds
+    /// with kUnsupportMethod (confirmed: C-series BoxPlayer does not support this).
+    pub async fn get_sensor_range(&mut self) -> Result<Option<String>> {
+        let request_xml = xml::sdk_request(&self.client_guid, "GetSensorRange", "");
+        let response = self.send_xml_request(&request_xml).await?;
+        if response.contains("kUnsupportMethod") {
+            return Ok(None);
+        }
+        Ok(Some(response))
+    }
+
+    /// Get device locker enabled status.
+    ///
+    /// Confirmed from More Huidu.pcapng: response is `<enable value="false"/>`.
+    pub async fn get_device_locker_enable(&mut self) -> Result<bool> {
+        let request_xml = xml::sdk_request(&self.client_guid, "GetDeviceLockerEnable", "");
+        let response = self.send_xml_request(&request_xml).await?;
+        if response.contains("kUnsupportMethod") {
+            return Ok(false);
+        }
+        Ok(response.find("<enable ")
+            .and_then(|p| crate::xml::get_attr(&response[p..], "value"))
+            .map(|v| v == "true")
+            .unwrap_or(false))
     }
 
     /// List all files stored on the device.

@@ -77,8 +77,13 @@ use crate::xml;
 /// UDP port that **devices listen on** (PC sends search triggers here).
 pub const DISCOVERY_PORT: u16 = 9527;
 
-/// The PC also binds to this same port to receive device responses.
-/// (Both PC and device use port 9527 — confirmed by live capture.)
+/// UDP port that the **PC (controller) listens on** for device unicast broadcasts.
+///
+/// Confirmed from hdplayer_real.pcapng:
+///   - Device sends FROM port 9527 TO port 9526 (controller's listen port)
+///   - PC responds FROM port 9526 TO device port 9527
+/// The real HDPlayer binds to UDP port 9526 for receiving device announcements.
+pub const CONTROLLER_UDP_PORT: u16 = 9526;
 
 /// Fixed BoxPlayer firmware version string reported in discovery packets.
 ///
@@ -316,6 +321,184 @@ impl DeviceInfo {
             screen_width, screen_height, current_program, brightness, rotation, screen_on,
         })
     }
+}
+
+/// Perform the UDP controller-registration handshake required before TCP BoxStream.
+///
+/// ## Why this is needed
+///
+/// Confirmed from `hdplayer_real.pcapng`: the real HDPlayer performs a UDP handshake
+/// on port 9526 BEFORE establishing a TCP BoxStream connection.  Without this, the
+/// device accepts the TCP connection and sends TcpHeartbeatAnswer, but then responds to
+/// BoxStreamInit with a TCP FIN (graceful rejection).
+///
+/// ## Protocol (confirmed from real HDPlayer capture)
+///
+/// The device sends unicast UDP to the controller's port **9526**:
+///
+/// 1. **Device → PC cmd=0x0002** (21-byte announce; periodic, ~200 ms apart)
+///    `[00 00 00 01][02 00][device_id_15]`
+///
+/// 2. **PC → Device cmd=0x0003** (acknowledgment)
+///    `[03 00 00 01][03 00][device_id_15]`
+///
+/// 3. **Device → PC cmd=0x0004** (extended info, ~1 ms after cmd=0x0003)
+///
+/// ...then after ~2 seconds:
+///
+/// 4. **Device → PC cmd=0x0005** (token + full device info)
+///    `[03 00 00 01][05 00][token_4][device_id_15][...]`
+///
+/// 5. **Device → PC cmd=0x0340** (ext1 status XML)
+///    `[04 00 00 01][40 03][device_id_15][token_4][xml]`
+///
+/// 6. **PC → Device cmd=0x0006** (acknowledge with token)
+///    `[00 00 00 01][06 00][device_id_15][token_4]`
+///
+/// 7. **PC → Device cmd=0x0341** (extended acknowledgment)
+///    `[04 00 00 01][41 03][device_id_15][token_4]`
+///
+/// After step 7, the device accepts TCP BoxStream connections.
+///
+/// ## Usage
+///
+/// Call this before [`crate::packet::BOX_PLAYER_PORT`] TCP connection:
+/// ```rust,ignore
+/// udp_register(device_ip, Duration::from_secs(12)).await?;
+/// // now safe to TcpStream::connect(device_ip:9527)
+/// ```
+pub async fn udp_register(device_ip: Ipv4Addr, timeout: Duration) -> Result<()> {
+    use tracing::info;
+
+    // Bind to the controller's UDP port that the device sends unicast to.
+    let socket = UdpSocket::bind(format!("0.0.0.0:{CONTROLLER_UDP_PORT}")).await
+        .map_err(|e| Error::Connection(
+            format!("bind UDP controller port {CONTROLLER_UDP_PORT}: {e}")
+        ))?;
+
+    let device_addr = SocketAddr::new(IpAddr::V4(device_ip), DISCOVERY_PORT);
+    let mut buf = vec![0u8; 2048];
+    let deadline = tokio::time::Instant::now() + timeout;
+    let mut sent_cmd3 = false;
+    let mut pending_token: Option<[u8; 4]> = None;
+    let mut pending_device_id: Option<[u8; 15]> = None;
+    let mut got_cmd340 = false;
+
+    info!("UDP registration: waiting for device announce on port {CONTROLLER_UDP_PORT}...");
+
+    loop {
+        let remaining = deadline.saturating_duration_since(tokio::time::Instant::now());
+        if remaining.is_zero() {
+            if sent_cmd3 {
+                // Sent cmd=0x0003, treat as registered even if we didn't get cmd=0x0005/0x0340
+                info!("UDP registration: timeout waiting for extended handshake — proceeding");
+                return Ok(());
+            }
+            return Err(Error::Connection(
+                format!("UDP registration: no announce from {device_ip} within {timeout:?}")
+            ));
+        }
+
+        let Ok(Ok((n, from))) = tokio::time::timeout(remaining, socket.recv_from(&mut buf)).await
+        else {
+            if sent_cmd3 {
+                info!("UDP registration: socket timeout — proceeding with partial handshake");
+                return Ok(());
+            }
+            break;
+        };
+
+        // Only handle packets from our target device
+        if from.ip() != IpAddr::V4(device_ip) {
+            debug!("UDP registration: ignoring packet from {from}");
+            continue;
+        }
+
+        let data = &buf[..n];
+        if data.len() < 6 {
+            continue;
+        }
+
+        let cmd = u16::from_le_bytes([data[4], data[5]]);
+        debug!("UDP registration: received cmd=0x{cmd:04x} ({n} bytes) from {from}");
+
+        match cmd {
+            0x0002 if n == 21 => {
+                // Short announce — respond with cmd=0x0003.
+                // PC response format: [03 00 00 01][03 00][device_id_15]
+                let mut resp = [0u8; 21];
+                resp[0] = 0x03;
+                resp[1] = 0x00;
+                resp[2] = 0x00;
+                resp[3] = 0x01;
+                resp[4] = 0x03; // cmd=0x0003
+                resp[5] = 0x00;
+                resp[6..21].copy_from_slice(&data[6..21]); // device_id
+                socket.send_to(&resp, device_addr).await
+                    .map_err(|e| Error::Connection(format!("send cmd=0x0003: {e}")))?;
+                sent_cmd3 = true;
+                info!("UDP registration: sent cmd=0x0003 acknowledgment");
+            }
+            0x0004 => {
+                // Extended info response after cmd=0x0003 — acknowledged, keep waiting
+                debug!("UDP registration: received cmd=0x0004 (extended info)");
+            }
+            0x0005 if n >= 25 => {
+                // Token + device info.  Token is at bytes [6..10], device_id at [10..25].
+                let mut token = [0u8; 4];
+                token.copy_from_slice(&data[6..10]);
+                let mut device_id = [0u8; 15];
+                device_id.copy_from_slice(&data[10..25]);
+                debug!("UDP registration: received cmd=0x0005, token={token:?}");
+                pending_token = Some(token);
+                pending_device_id = Some(device_id);
+            }
+            0x0340 => {
+                // Ext1 status XML — sent together with cmd=0x0005.
+                // Extract device_id [6..21] and token [21..25] from this packet.
+                if n >= 25 && pending_token.is_none() {
+                    let mut device_id = [0u8; 15];
+                    device_id.copy_from_slice(&data[6..21]);
+                    let mut token = [0u8; 4];
+                    token.copy_from_slice(&data[21..25]);
+                    pending_device_id = Some(device_id);
+                    pending_token = Some(token);
+                }
+                got_cmd340 = true;
+            }
+            _ => {
+                debug!("UDP registration: ignoring cmd=0x{cmd:04x}");
+            }
+        }
+
+        // Once we have both cmd=0x0005 token AND cmd=0x0340, send the acks.
+        if let (Some(token), Some(device_id), true) = (pending_token, pending_device_id, got_cmd340) {
+            // cmd=0x0006: [00 00 00 01][06 00][device_id_15][token_4]
+            let mut pkt6 = [0u8; 25];
+            pkt6[0] = 0x00; pkt6[1] = 0x00; pkt6[2] = 0x00; pkt6[3] = 0x01;
+            pkt6[4] = 0x06; pkt6[5] = 0x00;
+            pkt6[6..21].copy_from_slice(&device_id);
+            pkt6[21..25].copy_from_slice(&token);
+            socket.send_to(&pkt6, device_addr).await
+                .map_err(|e| Error::Connection(format!("send cmd=0x0006: {e}")))?;
+
+            // cmd=0x0341: [04 00 00 01][41 03][device_id_15][token_4]
+            let mut pkt341 = [0u8; 25];
+            pkt341[0] = 0x04; pkt341[1] = 0x00; pkt341[2] = 0x00; pkt341[3] = 0x01;
+            pkt341[4] = 0x41; pkt341[5] = 0x03;
+            pkt341[6..21].copy_from_slice(&device_id);
+            pkt341[21..25].copy_from_slice(&token);
+            socket.send_to(&pkt341, device_addr).await
+                .map_err(|e| Error::Connection(format!("send cmd=0x0341: {e}")))?;
+
+            info!("UDP registration: sent cmd=0x0006 + cmd=0x0341 — registration complete");
+            return Ok(());
+        }
+    }
+
+    Err(Error::Connection(format!(
+        "UDP registration failed: device {device_ip} did not complete handshake"
+    )))
 }
 
 /// UDP discovery scanner (client-side).

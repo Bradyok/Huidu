@@ -60,13 +60,19 @@ pub const HEARTBEAT_INTERVAL: std::time::Duration = std::time::Duration::from_se
 // ── Protocol version constants ────────────────────────────────────────────────
 
 /// Version the PC tools (HDPlayer, HDSet) send in `SdkServiceAsk`.
-/// Confirmed from live device testing: sending 0x01000000 returns kVersionTooLow (error 3).
-/// 0x07000000 is the lowest tested value that receives a proper SdkServiceAnswer.
-pub const SDK_CLIENT_VERSION: u32 = 0x0700_0000;
+///
+/// Confirmed from wire capture (More Huidu.pcapng frame 187):
+/// PC → device port 10001: `08 00 01 20 07 00 00 01`
+/// Bytes `07 00 00 01` are the 4-byte payload, which as LE u32 = 0x0100_0007.
+/// Format is [major_byte][0][0][build_byte] i.e. version 7.0.0.1.
+pub const SDK_CLIENT_VERSION: u32 = 0x0100_0007;
 
 /// Version BoxPlayer responds with in `SdkServiceAnswer`.
-/// The lower byte (`0x05`) encodes a Huidu-internal firmware revision.
-pub const SDK_TRANSPORT_VERSION: u32 = 0x0100_0005;
+///
+/// Confirmed from wire capture (More Huidu.pcapng frame 189):
+/// device → PC port 10001: `08 00 02 20 06 00 00 01`
+/// Bytes `06 00 00 01` = LE u32 = 0x0100_0006 — version 6.0.0.1.
+pub const SDK_TRANSPORT_VERSION: u32 = 0x0100_0006;
 
 // ── Command codes ─────────────────────────────────────────────────────────────
 
