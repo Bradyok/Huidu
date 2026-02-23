@@ -2462,7 +2462,7 @@ impl App {
             .collapsible(false)
             .open(&mut open)
             .show(ctx, |ui| {
-                ui.label("Upload firmware archive (Box.tar.gz) via native port-9528 protocol.");
+                ui.label("Upload Huidu firmware (.zbin) via native port-9528 protocol.");
                 ui.separator();
 
                 // File picker row
@@ -2471,7 +2471,7 @@ impl App {
                     ui.add(
                         egui::TextEdit::singleline(&mut self.upgrade_file)
                             .desired_width(300.0)
-                            .hint_text("Path to Box.tar.gz…"),
+                            .hint_text("BoxPlayer_Vx.x.x_MagicPlayer_Vx.x.x.zbin…"),
                     );
                     if ui.button("Browse…").clicked() {
                         if let Some(p) = rfd::FileDialog::new()

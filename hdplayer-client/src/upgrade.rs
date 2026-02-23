@@ -75,6 +75,9 @@ const CONNECT_VERSION: u32 = 0x01000007;
 /// Data payload bytes per FileDataChunk packet (total packet = 4 header + 9212 = 9216).
 const CHUNK_SIZE: usize = 9212;
 /// Device target path for the uploaded firmware archive.
+/// The real HDPlayer client always uses this fixed path regardless of the local
+/// filename — confirmed in PCAP where the source was a `.zbin` file but the
+/// device received it as `/tmp/Box.tar.gz`.
 const DEVICE_FIRMWARE_PATH: &[u8] = b"/tmp/Box.tar.gz\0";
 /// Extract shell command sent as UpgradeControl mode=3 payload (after u16 mode prefix).
 /// The device fills in the two `%s` with the file path and install directory.
@@ -264,7 +267,8 @@ fn report_phase(opts: &UpgradeOptions, msg: &str) {
 /// Run the full port-9528 firmware upgrade.
 ///
 /// `addr` — device IP address (without port).
-/// `file_path` — local path to the firmware archive (typically `Box.tar.gz`).
+/// `file_path` — local path to the firmware archive (`.zbin` as released by Huidu,
+///               e.g. `BoxPlayer_V7.11.18.0_MagicPlayer_V2.12.8.0.zbin`).
 pub async fn run_upgrade(addr: &str, file_path: &Path, opts: UpgradeOptions) -> Result<()> {
     // Load firmware file
     let file_data = tokio::fs::read(file_path).await?;
