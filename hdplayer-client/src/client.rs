@@ -154,26 +154,28 @@ impl Client {
         // The 150ms sleep after TcpHeartbeatAsk matches the observed ~107ms gap in the
         // working capture and gives the device time to process TcpHeartbeatAsk before
         // BoxStreamInit arrives.
-        info!("Waiting for TcpHeartbeatAnswer (device ready signal)...");
+        // Wait for TWO TcpHeartbeatAnswer cycles (~12s) before attempting BoxStreamInit.
+        // Testing hypothesis: device only accepts BoxStreamInit after connection has been
+        // alive long enough to complete multiple heartbeat cycles.
+        info!("Waiting for TcpHeartbeatAnswer cycles...");
+        let mut heartbeat_count = 0u32;
         loop {
-            match client.recv_with_timeout(Duration::from_secs(15)).await {
+            match client.recv_with_timeout(Duration::from_secs(20)).await {
                 Ok(pkt) if pkt.command == Command::TcpHeartbeatAnswer => {
-                    info!("Received TcpHeartbeatAnswer — sending TcpHeartbeatAsk");
+                    heartbeat_count += 1;
+                    info!("Received TcpHeartbeatAnswer #{heartbeat_count} — sending TcpHeartbeatAsk");
                     client.send_packet(&Packet::new(Command::TcpHeartbeatAsk, vec![])).await?;
-                    // Allow device time to process TcpHeartbeatAsk before BoxStreamInit arrives.
-                    // Confirmed gap in working capture: ~107ms between TcpHeartbeatAsk and BoxStreamInit.
-                    tokio::time::sleep(Duration::from_millis(150)).await;
-                    info!("TcpHeartbeatAsk acknowledged — ready for BoxStreamInit");
-                    break;
+                    if heartbeat_count >= 2 {
+                        tokio::time::sleep(Duration::from_millis(150)).await;
+                        info!("Got {heartbeat_count} heartbeats — ready for BoxStreamInit");
+                        break;
+                    }
                 }
                 Ok(pkt) => {
-                    warn!("Expected TcpHeartbeatAnswer, got {:?} — buffering", pkt.command);
-                    let bytes = pkt.to_bytes();
-                    client.read_buf.splice(0..0, bytes);
-                    break;
+                    warn!("Expected TcpHeartbeatAnswer, got {:?} — ignoring", pkt.command);
                 }
                 Err(Error::Timeout) => {
-                    warn!("No TcpHeartbeatAnswer within 15s — proceeding anyway");
+                    warn!("No TcpHeartbeatAnswer within 20s — proceeding anyway");
                     break;
                 }
                 Err(e) => return Err(e),

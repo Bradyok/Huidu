@@ -3,11 +3,15 @@
 //! ## Protocol (confirmed by live packet capture — BoxPlayer 7.11.18.0)
 //!
 //! ### Ports
-//! - **9527**: Used by BOTH PC and device.  The PC binds to port 9527,
-//!   sends triggers to `broadcast:9527`, and all device responses also arrive
-//!   on port 9527.
+//! - **9527**: Device listen port.  PC sends triggers here.
+//! - **9527** (discovery): PC also binds to 9527 for broadcast discovery,
+//!   since device sends broadcast announces FROM port 9527 TO port 9527.
+//! - **9526** (registration): PC binds to 9526 for the controller-registration
+//!   handshake.  The device sends unicast packets to the SOURCE PORT of the
+//!   trigger that prompted it, so by sending from port 9526 the device
+//!   responds to port 9526.
 //!
-//! ### Discovery flow
+//! ### Discovery flow (broadcast, used by [`Discovery::scan`])
 //!
 //! 1. PC binds to `0.0.0.0:9527`.
 //! 2. PC sends a search trigger broadcast to `255.255.255.255:9527`.
@@ -384,7 +388,22 @@ pub async fn udp_register(device_ip: Ipv4Addr, timeout: Duration) -> Result<()> 
     let mut pending_device_id: Option<[u8; 15]> = None;
     let mut got_cmd340 = false;
 
-    info!("UDP registration: waiting for device announce on port {CONTROLLER_UDP_PORT}...");
+    // Send trigger to device so it responds to OUR port (9526).
+    // The device sends cmd=0x0002 to the source port of the trigger packet.
+    // Without this, the device sends to whatever port previously triggered it
+    // (e.g. an ephemeral port), never to our port 9526.
+    //
+    // Confirmed from broad capture: PowerShell triggered from port 61481,
+    // device responded to port 61481.  We must trigger from port 9526.
+    let trigger_old = [2u8, 0, 1, 0]; // [u16 LE length=2][u16 LE cmd=0x0001]
+    socket.send_to(&trigger_old, device_addr).await
+        .map_err(|e| Error::Connection(format!("send UDP trigger (old fmt): {e}")))?;
+
+    let trigger_new = [0u8, 0, 0, 1, 1, 0]; // [counter=0][0x00][0x00][0x01][cmd=0x01][0x00]
+    socket.send_to(&trigger_new, device_addr).await
+        .map_err(|e| Error::Connection(format!("send UDP trigger (new fmt): {e}")))?;
+
+    info!("UDP registration: sent triggers to {device_addr}, waiting for cmd=0x0002...");
 
     loop {
         let remaining = deadline.saturating_duration_since(tokio::time::Instant::now());
@@ -443,8 +462,11 @@ pub async fn udp_register(device_ip: Ipv4Addr, timeout: Duration) -> Result<()> 
                 // Extended info response after cmd=0x0003 — acknowledged, keep waiting
                 debug!("UDP registration: received cmd=0x0004 (extended info)");
             }
-            0x0005 if n >= 25 => {
+            0x0005 if n >= 25 && sent_cmd3 => {
                 // Token + device info.  Token is at bytes [6..10], device_id at [10..25].
+                // GUARD: only accept AFTER we've sent cmd=0x0003.  Stale cmd=0x0005 packets
+                // left in the OS buffer from a previous session would otherwise cause an
+                // instant false-positive Ok() before the real handshake completes.
                 let mut token = [0u8; 4];
                 token.copy_from_slice(&data[6..10]);
                 let mut device_id = [0u8; 15];
@@ -453,8 +475,9 @@ pub async fn udp_register(device_ip: Ipv4Addr, timeout: Duration) -> Result<()> 
                 pending_token = Some(token);
                 pending_device_id = Some(device_id);
             }
-            0x0340 => {
+            0x0340 if sent_cmd3 => {
                 // Ext1 status XML — sent together with cmd=0x0005.
+                // GUARD: same stale-packet protection as cmd=0x0005 above.
                 // Extract device_id [6..21] and token [21..25] from this packet.
                 if n >= 25 && pending_token.is_none() {
                     let mut device_id = [0u8; 15];
