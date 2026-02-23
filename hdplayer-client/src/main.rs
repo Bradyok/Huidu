@@ -1003,6 +1003,9 @@ async fn main() -> anyhow::Result<()> {
                     );
                     let _ = std::io::Write::flush(&mut std::io::stdout());
                 })),
+                phase: Some(Box::new(|msg: &str| {
+                    println!("\n  [{msg}]");
+                })),
             };
             // Box::pin to heap-allocate the large async state machine and avoid
             // stack overflow in the tokio block_on context.

@@ -235,6 +235,9 @@ pub struct UpgradeOptions {
     pub poll_timeout: Duration,
     /// Progress callback: receives (bytes_sent, total_bytes).
     pub progress: Option<Box<dyn Fn(u64, u64) + Send>>,
+    /// Phase callback: called with a short human-readable status string at each
+    /// major step (e.g. "Connecting", "Transferring", "Extracting", "Polling").
+    pub phase: Option<Box<dyn Fn(&str) + Send>>,
 }
 
 impl Default for UpgradeOptions {
@@ -243,8 +246,17 @@ impl Default for UpgradeOptions {
             poll_interval: Duration::from_secs(5),
             poll_timeout: Duration::from_secs(600),
             progress: None,
+            phase: None,
         }
     }
+}
+
+/// Helper: call the phase callback if set.
+fn report_phase(opts: &UpgradeOptions, msg: &str) {
+    if let Some(ref cb) = opts.phase {
+        cb(msg);
+    }
+    info!("{}", msg);
 }
 
 // ── Main upgrade entry point ──────────────────────────────────────────────────
@@ -265,12 +277,13 @@ pub async fn run_upgrade(addr: &str, file_path: &Path, opts: UpgradeOptions) -> 
     );
 
     // ── Phase 1: connect and handshake ────────────────────────────────────────
-    info!("Connecting to {}:9528 ...", addr);
+    report_phase(&opts, "Connecting…");
     let mut conn = Conn::connect(addr, 9528).await?;
+    report_phase(&opts, "Handshaking…");
     handshake(&mut conn).await?;
-    info!("Handshake complete");
 
     // ── Phase 2: enter upgrade mode ───────────────────────────────────────────
+    report_phase(&opts, "Entering upgrade mode…");
     conn.send(CMD_UPGRADE_CTRL, &1u16.to_le_bytes()).await?;
     let st = conn.expect(CMD_UPGRADE_STATUS).await?;
     let status_code = if st.len() >= 2 {
@@ -294,7 +307,7 @@ pub async fn run_upgrade(addr: &str, file_path: &Path, opts: UpgradeOptions) -> 
             bail!("FileTransferAck returned error code {}", code);
         }
     }
-    info!("File transfer accepted — streaming {} bytes ...", file_size);
+    report_phase(&opts, &format!("Transferring {:.1} MB…", file_size as f64 / 1_000_000.0));
 
     // ── Phase 4: stream file data chunks ─────────────────────────────────────
     let total_chunks = (file_data.len() + CHUNK_SIZE - 1) / CHUNK_SIZE;
@@ -314,9 +327,10 @@ pub async fn run_upgrade(addr: &str, file_path: &Path, opts: UpgradeOptions) -> 
             );
         }
     }
-    info!("All chunks sent — waiting for device file-complete signal ...");
+    report_phase(&opts, "Transfer complete — waiting for device…");
 
     // ── Phase 5: wait for file-complete notification (cmd 0x0060) ─────────────
+    report_phase(&opts, "Waiting for device to confirm receipt…");
     loop {
         let (cmd, _) = conn.recv().await?;
         match cmd {
@@ -334,6 +348,7 @@ pub async fn run_upgrade(addr: &str, file_path: &Path, opts: UpgradeOptions) -> 
     }
 
     // ── Phase 6: trigger extraction ───────────────────────────────────────────
+    report_phase(&opts, "Extracting firmware…");
     // Heartbeat exchange before extract command (matches real client behaviour)
     conn.send(CMD_HEARTBEAT, &[]).await?;
     conn.expect(CMD_HEARTBEAT_ACK).await?;
@@ -356,14 +371,13 @@ pub async fn run_upgrade(addr: &str, file_path: &Path, opts: UpgradeOptions) -> 
     info!("Upgrade script queued");
 
     // ── Phase 7: second connection → UpgradeExec ─────────────────────────────
+    report_phase(&opts, "Applying upgrade…");
     info!("Opening second connection for UpgradeExec ...");
     let mut conn2 = Conn::connect(addr, 9528).await?;
-    // Minimal handshake: ConnectReq → ConnectAck only (no ClientInfoReq needed)
-    conn2
-        .send(CMD_CONNECT_REQ, &CONNECT_VERSION.to_le_bytes())
-        .await?;
-    conn2.expect(CMD_CONNECT_ACK).await?;
-    debug!("Second ConnectAck ok");
+    // Full handshake on second connection (PCAP shows ClientInfoAck arrives after
+    // UpgradeExecAck, suggesting the device expects the full exchange).
+    handshake(&mut conn2).await?;
+    debug!("Second connection handshake ok");
 
     // UpgradeExec: payload = u64 LE 8 (confirmed from frame 103931)
     conn2
@@ -373,6 +387,7 @@ pub async fn run_upgrade(addr: &str, file_path: &Path, opts: UpgradeOptions) -> 
     info!("UpgradeExec acknowledged — device is applying firmware");
 
     // ── Phase 8: poll for completion on original connection ───────────────────
+    report_phase(&opts, "Polling for completion…");
     info!(
         "Polling for upgrade completion (interval={:?}, timeout={:?}) ...",
         opts.poll_interval, opts.poll_timeout,
@@ -389,7 +404,7 @@ pub async fn run_upgrade(addr: &str, file_path: &Path, opts: UpgradeOptions) -> 
 
         // Send status poll
         if conn.send(CMD_UPGRADE_CTRL, &0u16.to_le_bytes()).await.is_err() {
-            info!("Connection closed — device likely rebooted to apply upgrade");
+            report_phase(&opts, "Device rebooting — upgrade applied");
             return Ok(());
         }
         // Interleave heartbeat (matches real client)
@@ -411,9 +426,10 @@ pub async fn run_upgrade(addr: &str, file_path: &Path, opts: UpgradeOptions) -> 
                     };
                     info!("UpgradeStatus poll: {}", status);
                     if status == 0 {
-                        info!("Firmware upgrade completed successfully");
+                        report_phase(&opts, "Upgrade complete!");
                         return Ok(());
                     }
+                    report_phase(&opts, &format!("Applying… (status {})", status));
                     // Non-zero status → still in progress; break inner loop to re-poll
                     break;
                 }
@@ -426,7 +442,7 @@ pub async fn run_upgrade(addr: &str, file_path: &Path, opts: UpgradeOptions) -> 
                 }
                 Ok(Err(_)) => {
                     // Connection dropped — device rebooted
-                    info!("Connection closed — device likely rebooted to apply upgrade");
+                    report_phase(&opts, "Device rebooting — upgrade applied");
                     return Ok(());
                 }
                 Err(_) => {

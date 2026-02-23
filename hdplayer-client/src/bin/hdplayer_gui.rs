@@ -1200,6 +1200,8 @@ enum Request {
     SetScreenSchedule(Vec<(String, String, String)>),
     /// Apply brightness schedule to device. Each entry is (hour, min, level).
     SetBrightnessSchedule(Vec<(u8, u8, u8)>),
+    /// Run native port-9528 firmware upgrade.
+    UpgradeNative { file: PathBuf, host: String },
 }
 
 #[derive(Debug)]
@@ -1211,6 +1213,12 @@ enum Response {
     Ok(String),
     Error(String),
     Disconnected,
+    /// Firmware upgrade byte progress (bytes_sent, total_bytes).
+    UpgradeProgress { bytes: u64, total: u64 },
+    /// Human-readable upgrade phase string (e.g. "Transferring…", "Extracting…").
+    UpgradePhase(String),
+    /// Upgrade finished successfully.
+    UpgradeComplete,
 }
 
 async fn worker_loop(
@@ -1416,6 +1424,24 @@ async fn worker_loop(
                     let _ = resp_tx.send(Response::Error("Not connected".into()));
                 }
             }
+            Request::UpgradeNative { file, host } => {
+                let resp_prog = resp_tx.clone();
+                let resp_phase = resp_tx.clone();
+                let opts = hdplayer::upgrade::UpgradeOptions {
+                    poll_interval: Duration::from_secs(5),
+                    poll_timeout: Duration::from_secs(600),
+                    progress: Some(Box::new(move |bytes, total| {
+                        let _ = resp_prog.send(Response::UpgradeProgress { bytes, total });
+                    })),
+                    phase: Some(Box::new(move |msg: &str| {
+                        let _ = resp_phase.send(Response::UpgradePhase(msg.to_string()));
+                    })),
+                };
+                match hdplayer::upgrade::run_upgrade(&host, &file, opts).await {
+                    Ok(()) => { let _ = resp_tx.send(Response::UpgradeComplete); }
+                    Err(e) => { let _ = resp_tx.send(Response::Error(format!("Upgrade failed: {e}"))); }
+                }
+            }
         }
     }
 }
@@ -1518,6 +1544,13 @@ struct App {
 
     // Toast
     toast: Option<(String, Instant, bool)>,
+
+    // Firmware upgrade window
+    show_upgrade_window: bool,
+    upgrade_file: String,
+    upgrading: bool,
+    upgrade_progress: Option<(u64, u64)>, // (bytes_sent, total_bytes)
+    upgrade_phase: String,
 }
 
 impl App {
@@ -1570,6 +1603,11 @@ impl App {
             show_item_editor: false,
             item_editor_tab: 0,
             toast: None,
+            show_upgrade_window: false,
+            upgrade_file: String::new(),
+            upgrading: false,
+            upgrade_progress: None,
+            upgrade_phase: String::new(),
         }
     }
 
@@ -1619,6 +1657,9 @@ impl App {
                 Response::Ok(msg) => { self.toast_ok(msg); }
                 Response::Error(msg) => {
                     self.connecting = false;
+                    self.upgrading = false;
+                    self.upgrade_progress = None;
+                    self.upgrade_phase = String::new();
                     self.toast_err(msg);
                 }
                 Response::Disconnected => {
@@ -1627,6 +1668,24 @@ impl App {
                     self.dev_programs.clear();
                     self.preview_texture = None;
                     self.toast_ok("Disconnected");
+                }
+                Response::UpgradeProgress { bytes, total } => {
+                    self.upgrade_progress = Some((bytes, total));
+                    ctx.request_repaint();
+                }
+                Response::UpgradePhase(msg) => {
+                    self.upgrade_phase = msg;
+                    ctx.request_repaint();
+                }
+                Response::UpgradeComplete => {
+                    self.upgrading = false;
+                    self.upgrade_progress = Some((
+                        self.upgrade_progress.map(|(_, t)| t).unwrap_or(0),
+                        self.upgrade_progress.map(|(_, t)| t).unwrap_or(0),
+                    ));
+                    self.upgrade_phase = "Complete!".into();
+                    self.toast_ok("Firmware upgrade complete!");
+                    ctx.request_repaint();
                 }
             }
         }
@@ -2330,6 +2389,7 @@ impl App {
                 if ui.button("Reboot").clicked() { self.send_req(Request::Reboot); }
                 if ui.button("Sync Time").clicked() { self.send_req(Request::SyncTime); }
                 ui.toggle_value(&mut self.show_schedule_window, "Schedules");
+                ui.toggle_value(&mut self.show_upgrade_window, "Firmware");
                 ui.separator();
                 if ui.button("Disconnect").clicked() { self.send_req(Request::Disconnect); }
             } else {
@@ -2387,6 +2447,115 @@ impl App {
                 }
             });
         });
+    }
+
+    // ── FIRMWARE UPGRADE WINDOW ───────────────────────────────────────────────
+
+    fn render_upgrade_window(&mut self, ctx: &egui::Context) {
+        if !self.show_upgrade_window { return; }
+
+        let mut open = self.show_upgrade_window;
+        egui::Window::new("Firmware Upgrade")
+            .id(egui::Id::new("upgrade_window"))
+            .default_size([480.0, 220.0])
+            .resizable(false)
+            .collapsible(false)
+            .open(&mut open)
+            .show(ctx, |ui| {
+                ui.label("Upload firmware archive (Box.tar.gz) via native port-9528 protocol.");
+                ui.separator();
+
+                // File picker row
+                ui.horizontal(|ui| {
+                    ui.label("File:");
+                    ui.add(
+                        egui::TextEdit::singleline(&mut self.upgrade_file)
+                            .desired_width(300.0)
+                            .hint_text("Path to Box.tar.gz…"),
+                    );
+                    if ui.button("Browse…").clicked() {
+                        if let Some(p) = rfd::FileDialog::new()
+                            .add_filter("Firmware archive", &["gz", "tar", "bin", "zbin"])
+                            .pick_file()
+                        {
+                            self.upgrade_file = p.to_string_lossy().to_string();
+                        }
+                    }
+                });
+
+                ui.add_space(6.0);
+
+                // Progress bar — shown while upgrading or after completion
+                if let Some((bytes, total)) = self.upgrade_progress {
+                    let pct = if total > 0 { bytes as f32 / total as f32 } else { 0.0 };
+                    let label = if total > 0 {
+                        format!(
+                            "{:.1} MB / {:.1} MB  ({:.1}%)",
+                            bytes as f64 / 1_000_000.0,
+                            total as f64 / 1_000_000.0,
+                            pct * 100.0,
+                        )
+                    } else {
+                        String::new()
+                    };
+                    ui.add(egui::ProgressBar::new(pct).text(label).animate(self.upgrading));
+                    ui.add_space(4.0);
+                }
+
+                // Phase label
+                if !self.upgrade_phase.is_empty() {
+                    let col = if self.upgrade_phase == "Complete!" {
+                        Color32::from_rgb(100, 220, 100)
+                    } else if self.upgrading {
+                        Color32::from_rgb(180, 180, 255)
+                    } else {
+                        Color32::GRAY
+                    };
+                    ui.label(RichText::new(&self.upgrade_phase).color(col));
+                    ui.add_space(4.0);
+                }
+
+                ui.separator();
+
+                // Start / spinner row
+                ui.horizontal(|ui| {
+                    let can_start = !self.upgrading
+                        && !self.upgrade_file.is_empty()
+                        && self.connected;
+
+                    let btn = egui::Button::new(
+                        RichText::new("Start Upgrade").color(Color32::WHITE)
+                    )
+                    .fill(Color32::from_rgb(30, 120, 30));
+
+                    if ui.add_enabled(can_start, btn).clicked() {
+                        let host = self.device_info
+                            .as_ref()
+                            .map(|i| i.ip_address.clone())
+                            .unwrap_or_else(|| self.manual_host.clone());
+                        self.upgrading = true;
+                        self.upgrade_progress = Some((0, 0));
+                        self.upgrade_phase = "Starting…".into();
+                        self.send_req(Request::UpgradeNative {
+                            file: PathBuf::from(&self.upgrade_file),
+                            host,
+                        });
+                    }
+
+                    if self.upgrading {
+                        ui.spinner();
+                        ui.label("Upgrade in progress — do not disconnect");
+                    }
+
+                    if !self.upgrading && self.upgrade_phase == "Complete!" {
+                        if ui.button("Reset").clicked() {
+                            self.upgrade_progress = None;
+                            self.upgrade_phase = String::new();
+                        }
+                    }
+                });
+            });
+        self.show_upgrade_window = open;
     }
 
     // ── DEVICE PROGRAMS SIDE WINDOW ───────────────────────────────────────────
@@ -3277,7 +3446,13 @@ impl eframe::App for App {
             self.preview_last = Instant::now();
         }
 
-        ctx.request_repaint_after(Duration::from_millis(500));
+        // Repaint faster during active upgrade so the progress bar stays smooth
+        let repaint_delay = if self.upgrading {
+            Duration::from_millis(100)
+        } else {
+            Duration::from_millis(500)
+        };
+        ctx.request_repaint_after(repaint_delay);
 
         // Top toolbar
         egui::TopBottomPanel::top("toolbar").show(ctx, |ui| {
@@ -3334,6 +3509,7 @@ impl eframe::App for App {
 
         // Dialogs / windows
         self.render_dialogs(ctx);
+        self.render_upgrade_window(ctx);
     }
 }
 
