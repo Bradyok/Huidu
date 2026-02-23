@@ -47,7 +47,7 @@ use std::time::{Duration, Instant};
 use anyhow::{bail, Result};
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 use tokio::net::TcpStream;
-use tracing::{debug, info, warn};
+use tracing::{debug, info};
 
 // ── Command codes confirmed from Upgrade Huidu.pcapng ────────────────────────
 
@@ -254,12 +254,20 @@ impl Conn {
     }
 
     /// Receive next packet, skipping transparent periodic acks from device.
+    ///
+    /// Skips:
+    /// - `CMD_FILE_DATA_ACK` (0x001a): unsolicited periodic progress acks during transfer.
+    /// - `CMD_FILE_COMPLETE` (0x0060): the first copy is consumed in Phase 5; any extras
+    ///   that were pre-buffered by the Phase 4 `try_read` drain are discarded here.
+    ///
+    /// Does NOT skip `CMD_HEARTBEAT_ACK` (0x001c) so that
+    /// `conn.expect(CMD_HEARTBEAT_ACK)` in Phase 6 resolves correctly.
     async fn recv_skip_acks(&mut self) -> Result<(u16, Vec<u8>)> {
         loop {
             let (cmd, payload) = self.recv().await?;
             match cmd {
-                CMD_FILE_DATA_ACK | CMD_HEARTBEAT_ACK => {
-                    debug!("skip device ack cmd=0x{:04x}", cmd);
+                CMD_FILE_DATA_ACK | CMD_FILE_COMPLETE => {
+                    debug!("skip transparent cmd=0x{:04x}", cmd);
                 }
                 _ => return Ok((cmd, payload)),
             }
@@ -425,11 +433,31 @@ pub async fn run_upgrade(addr: &str, file_path: &Path, opts: UpgradeOptions) -> 
     report_phase(&opts, &format!("Transferring {:.1} MB…", file_size as f64 / 1_000_000.0));
 
     // ── Phase 4: stream file data chunks ─────────────────────────────────────
+    // IMPORTANT: after each chunk send, drain any incoming device acks with
+    // a non-blocking try_read.  The device sends periodic CMD_FILE_DATA_ACK
+    // (0x001a) packets during the transfer.  If we never read them, our TCP
+    // receive buffer fills up, we advertise window=0 to the device, and the
+    // device (single-threaded) blocks trying to send its next ack.  While
+    // blocked, it stops reading incoming data → its receive window drops to 0
+    // → our write_all blocks → classic TCP deadlock.  try_read never waits so
+    // it adds zero latency on the hot path but keeps the buffer drained.
     let total_chunks = (file_data.len() + CHUNK_SIZE - 1) / CHUNK_SIZE;
     let mut bytes_sent: u64 = 0;
+    let mut drain_buf = [0u8; 65536];
     for (i, chunk) in file_data.chunks(CHUNK_SIZE).enumerate() {
         conn.send(CMD_FILE_DATA_CHUNK, chunk).await?;
         bytes_sent += chunk.len() as u64;
+
+        // Drain the receive buffer (non-blocking) to prevent TCP deadlock.
+        loop {
+            match conn.stream.try_read(&mut drain_buf) {
+                Ok(0) => break,
+                Ok(n) => { conn.buf.extend_from_slice(&drain_buf[..n]); }
+                Err(ref e) if e.kind() == std::io::ErrorKind::WouldBlock => break,
+                Err(e) => return Err(e.into()),
+            }
+        }
+
         if let Some(ref cb) = opts.progress {
             cb(bytes_sent, file_size);
         }
@@ -442,68 +470,49 @@ pub async fn run_upgrade(addr: &str, file_path: &Path, opts: UpgradeOptions) -> 
             );
         }
     }
-    report_phase(&opts, "Transfer complete — waiting for device…");
-
-    // ── Phase 5: wait for file-complete notification (cmd 0x0060) ─────────────
-    report_phase(&opts, "Waiting for device to confirm receipt…");
-    loop {
-        let (cmd, _) = conn.recv().await?;
-        match cmd {
-            CMD_FILE_DATA_ACK | CMD_HEARTBEAT_ACK => {
-                // Periodic ack during/after transfer — keep waiting
-            }
-            CMD_FILE_COMPLETE => {
-                info!("Device confirmed file fully received (cmd 0x0060)");
-                break;
-            }
-            other => {
-                warn!("Unexpected cmd=0x{:04x} while waiting for FileComplete", other);
-            }
-        }
-    }
-
-    // ── Phase 6: trigger extraction ───────────────────────────────────────────
-    report_phase(&opts, "Extracting firmware…");
-    // Heartbeat exchange before extract command (matches real client behaviour)
-    conn.send(CMD_HEARTBEAT, &[]).await?;
-    conn.expect(CMD_HEARTBEAT_ACK).await?;
+    // ── Phase 6+7: second connection — UpgradeControl + UpgradeExec ──────────
+    // The device closes the first connection (TCP FIN) immediately after
+    // sending CMD_FILE_COMPLETE.  All post-transfer commands therefore run on
+    // a fresh second connection.
+    drop(conn);
+    report_phase(&opts, "Applying upgrade…");
+    info!("Opening second connection for UpgradeControl + UpgradeExec…");
+    let mut conn2 = Conn::connect(addr, 9528).await?;
+    handshake(&mut conn2).await?;
+    debug!("Second connection handshake ok");
 
     // UpgradeControl mode=3: [u16 LE 3][decompress_cmd\0]
     // The decompress_cmd comes from the BIN header's <Decompress> XML field.
     let mut ctrl3 = Vec::with_capacity(2 + fw.decompress_cmd.len());
     ctrl3.extend_from_slice(&3u16.to_le_bytes());
     ctrl3.extend_from_slice(&fw.decompress_cmd);
-    conn.send(CMD_UPGRADE_CTRL, &ctrl3).await?;
-    let st = conn.expect(CMD_UPGRADE_STATUS).await?;
+    conn2.send(CMD_UPGRADE_CTRL, &ctrl3).await?;
+    let st = conn2.expect(CMD_UPGRADE_STATUS).await?;
     let sc = if st.len() >= 2 { u16::from_le_bytes([st[0], st[1]]) } else { 0 };
     debug!("UpgradeStatus after extract cmd: {}", sc);
-    info!("Extract command accepted");
+    info!("Extract command accepted (status {})", sc);
 
     // UpgradeControl mode=2: [u16 LE 2][script_name\0]
     // The script_name comes from the BIN header's <Script> XML field.
     let mut ctrl2 = Vec::with_capacity(2 + fw.script_name.len());
     ctrl2.extend_from_slice(&2u16.to_le_bytes());
     ctrl2.extend_from_slice(&fw.script_name);
-    conn.send(CMD_UPGRADE_CTRL, &ctrl2).await?;
+    conn2.send(CMD_UPGRADE_CTRL, &ctrl2).await?;
     info!("Upgrade script queued");
 
-    // ── Phase 7: second connection → UpgradeExec ─────────────────────────────
-    report_phase(&opts, "Applying upgrade…");
-    info!("Opening second connection for UpgradeExec ...");
-    let mut conn2 = Conn::connect(addr, 9528).await?;
-    // Full handshake on second connection (PCAP shows ClientInfoAck arrives after
-    // UpgradeExecAck, suggesting the device expects the full exchange).
-    handshake(&mut conn2).await?;
-    debug!("Second connection handshake ok");
+    // UpgradeExec: payload = u64 LE 8 (confirmed from PCAP frame 103931)
+    conn2.send(CMD_UPGRADE_EXEC, &UPGRADE_EXEC_PARAM.to_le_bytes()).await?;
+    // Device may respond with UpgradeExecAck (0x0731, PCAP) or UpgradeStatus
+    // (0x0056, observed on our firmware version) — accept either.
+    let (exec_resp, _) = conn2.recv().await?;
+    match exec_resp {
+        CMD_UPGRADE_EXEC_ACK | CMD_UPGRADE_STATUS => {
+            info!("UpgradeExec acknowledged (cmd=0x{:04x}) — device is applying firmware", exec_resp);
+        }
+        other => bail!("unexpected response to UpgradeExec: cmd=0x{:04x}", other),
+    }
 
-    // UpgradeExec: payload = u64 LE 8 (confirmed from frame 103931)
-    conn2
-        .send(CMD_UPGRADE_EXEC, &UPGRADE_EXEC_PARAM.to_le_bytes())
-        .await?;
-    conn2.expect(CMD_UPGRADE_EXEC_ACK).await?;
-    info!("UpgradeExec acknowledged — device is applying firmware");
-
-    // ── Phase 8: poll for completion on original connection ───────────────────
+    // ── Phase 8: poll for completion on second connection ────────────────────
     report_phase(&opts, "Polling for completion…");
     info!(
         "Polling for upgrade completion (interval={:?}, timeout={:?}) ...",
@@ -520,12 +529,12 @@ pub async fn run_upgrade(addr: &str, file_path: &Path, opts: UpgradeOptions) -> 
         }
 
         // Send status poll
-        if conn.send(CMD_UPGRADE_CTRL, &0u16.to_le_bytes()).await.is_err() {
+        if conn2.send(CMD_UPGRADE_CTRL, &0u16.to_le_bytes()).await.is_err() {
             report_phase(&opts, "Device rebooting — upgrade applied");
             return Ok(());
         }
         // Interleave heartbeat (matches real client)
-        let _ = conn.send(CMD_HEARTBEAT, &[]).await;
+        let _ = conn2.send(CMD_HEARTBEAT, &[]).await;
 
         // Wait up to poll_interval for UpgradeStatus
         let wait_until = Instant::now() + opts.poll_interval;
@@ -534,7 +543,7 @@ pub async fn run_upgrade(addr: &str, file_path: &Path, opts: UpgradeOptions) -> 
             if remaining.is_zero() {
                 break;
             }
-            match tokio::time::timeout(remaining, conn.recv()).await {
+            match tokio::time::timeout(remaining, conn2.recv()).await {
                 Ok(Ok((CMD_UPGRADE_STATUS, payload))) => {
                     let status = if payload.len() >= 2 {
                         u16::from_le_bytes([payload[0], payload[1]])
