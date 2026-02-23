@@ -31,9 +31,14 @@ struct Args {
     #[arg(long, default_value_t = 64)]
     height: u32,
 
-    /// TCP listen port for HDPlayer connections
+    /// TCP listen port for legacy SDK connections (HDSet, old devices)
     #[arg(long, default_value_t = 10001)]
     port: u16,
+
+    /// TCP listen port for BoxStream connections (HDPlayer.exe — port 9527 protocol)
+    /// Set to 0 to disable.
+    #[arg(long, default_value_t = 9527)]
+    box_stream_port: u16,
 
     /// Target FPS
     #[arg(long, default_value_t = 30)]
@@ -200,7 +205,7 @@ async fn main() -> Result<()> {
         });
     }
 
-    // Start the TCP protocol server
+    // Start the legacy TCP protocol server (port 10001 — HDSet / old SDK)
     let protocol_handle = {
         let tx = player.program_sender();
         let port = args.port;
@@ -213,6 +218,23 @@ async fn main() -> Result<()> {
                 tracing::error!("Protocol server error: {}", e);
             }
         })
+    };
+
+    // Start the BoxStream server (port 9527 — HDPlayer.exe protocol)
+    let box_stream_handle = if args.box_stream_port > 0 {
+        let tx = player.program_sender();
+        let port = args.box_stream_port;
+        let dir = args.program_dir.clone();
+        let svc = services.clone();
+        let w = args.width;
+        let h = args.height;
+        Some(tokio::spawn(async move {
+            if let Err(e) = protocol::server::run_box_stream(port, tx, dir, svc, w, h).await {
+                tracing::error!("BoxStream server error: {}", e);
+            }
+        }))
+    } else {
+        None
     };
 
     // Start UDP discovery on port 9527 (Huidu discovery port)
@@ -262,6 +284,7 @@ async fn main() -> Result<()> {
     player.run(cancel).await?;
 
     protocol_handle.abort();
+    if let Some(h) = box_stream_handle { h.abort(); }
     discovery_handle.abort();
     info!("huidu-player shutdown");
     Ok(())

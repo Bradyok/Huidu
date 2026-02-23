@@ -14,7 +14,10 @@ use tracing::{debug, info, warn};
 
 use crate::command;
 use crate::error::{Error, Result};
-use crate::protocol::{Command, Packet};
+use crate::protocol::{
+    Command, Packet,
+    SDK_CLIENT_VERSION, sdk_service_ask_payload, sdk_cmd_ask_payload, parse_sdk_cmd_payload,
+};
 use crate::transfer::FileTransfer;
 use crate::xml;
 
@@ -98,6 +101,8 @@ pub struct Client {
     stream: Arc<Mutex<TcpStream>>,
     client_guid: String,
     read_buf: Vec<u8>,
+    /// True when using the legacy port-10001 SdkService/SdkCmd protocol instead of BoxStream.
+    use_legacy: bool,
 }
 
 impl Client {
@@ -135,6 +140,7 @@ impl Client {
             // Confirmed from Huidu.pcapng: all SDK requests and responses use guid="##GUID".
             client_guid: "##GUID".to_string(),
             read_buf: Vec::with_capacity(65536),
+            use_legacy: false,
         };
 
         // Handshake sequence confirmed from Huidu.pcapng (working capture):
@@ -154,10 +160,17 @@ impl Client {
         // The 150ms sleep after TcpHeartbeatAsk matches the observed ~107ms gap in the
         // working capture and gives the device time to process TcpHeartbeatAsk before
         // BoxStreamInit arrives.
-        // Wait for TWO TcpHeartbeatAnswer cycles (~12s) before attempting BoxStreamInit.
-        // Testing hypothesis: device only accepts BoxStreamInit after connection has been
-        // alive long enough to complete multiple heartbeat cycles.
-        info!("Waiting for TcpHeartbeatAnswer cycles...");
+        // Wait for ONE TcpHeartbeatAnswer before attempting BoxStreamInit.
+        //
+        // Confirmed from live_test8.pcapng:
+        //   1. Device → PC: TcpHeartbeatAnswer  (greeting, sent immediately on connect)
+        //   2. PC → Device: TcpHeartbeatAsk     (acknowledge)
+        //   3. ~150ms gap
+        //   4. PC → Device: BoxStreamInit
+        //
+        // Only 1 heartbeat is needed — the device sends it as a connection greeting.
+        // Waiting for 2 caused ~30s+ connection delays (one full 30s heartbeat interval).
+        info!("Waiting for TcpHeartbeatAnswer...");
         let mut heartbeat_count = 0u32;
         loop {
             match client.recv_with_timeout(Duration::from_secs(20)).await {
@@ -165,11 +178,10 @@ impl Client {
                     heartbeat_count += 1;
                     info!("Received TcpHeartbeatAnswer #{heartbeat_count} — sending TcpHeartbeatAsk");
                     client.send_packet(&Packet::new(Command::TcpHeartbeatAsk, vec![])).await?;
-                    if heartbeat_count >= 2 {
-                        tokio::time::sleep(Duration::from_millis(150)).await;
-                        info!("Got {heartbeat_count} heartbeats — ready for BoxStreamInit");
-                        break;
-                    }
+                    // One heartbeat is enough — device is ready for BoxStreamInit.
+                    tokio::time::sleep(Duration::from_millis(150)).await;
+                    info!("Heartbeat acknowledged — ready for BoxStreamInit");
+                    break;
                 }
                 Ok(pkt) => {
                     warn!("Expected TcpHeartbeatAnswer, got {:?} — ignoring", pkt.command);
@@ -188,6 +200,139 @@ impl Client {
     /// Connect using the default port (9527).
     pub async fn connect_default(host: &str) -> Result<Self> {
         Self::connect(host, DEFAULT_PORT).await
+    }
+
+    /// Connect using the legacy port-10001 SdkService/SdkCmd protocol.
+    ///
+    /// Older Huidu devices (and some C-series) use this protocol instead of BoxStream.
+    /// The handshake is client-initiated:
+    ///  1. Client → Device: SdkServiceAsk [u32 LE version]
+    ///  2. Device → Client: SdkServiceAnswer [u32 LE device_version]
+    ///
+    /// Some devices (e.g. C15 with SDK 6) reject SdkCmdAsk with kVersionNotSupport (22)
+    /// if the client claims a version higher than the device's own.  We handle this with
+    /// a two-pass strategy: probe with our full version, then reconnect with
+    /// min(SDK_CLIENT_VERSION, device_version) if needed.
+    ///
+    /// XML is then sent as SdkCmdAsk and received as SdkCmdAnswer, both with
+    /// an 8-byte `[u32 total][u32 chunk_index]` framing header before the XML bytes.
+    pub async fn connect_legacy(host: &str, port: u16) -> Result<Self> {
+        // Probe to discover the device's SDK version.
+        let device_version = Self::probe_legacy_version(host, port).await?;
+        let use_version = device_version.min(SDK_CLIENT_VERSION);
+
+        let addr = format!("{host}:{port}");
+        info!(
+            "Connecting (legacy SDK) to {addr} with version 0x{use_version:08X} \
+             (device=0x{device_version:08X})"
+        );
+        let stream = TcpStream::connect(&addr).await
+            .map_err(|e| Error::Connection(format!("TCP connect to {addr}: {e}")))?;
+        stream.set_nodelay(true)?;
+
+        let mut client = Self {
+            stream: Arc::new(Mutex::new(stream)),
+            // Legacy port-10001 protocol also uses "##GUID" as the literal GUID placeholder.
+            // Confirmed from More Huidu.pcapng frame 189: real HDPlayer uses ##GUID on port 10001.
+            client_guid: "##GUID".to_string(),
+            read_buf: Vec::with_capacity(65536),
+            use_legacy: true,
+        };
+
+        info!("Sending SdkServiceAsk (version 0x{use_version:08X})...");
+        let payload = sdk_service_ask_payload(use_version);
+        client.send_packet(&Packet::new(Command::SdkServiceAsk, payload)).await?;
+
+        // Wait for SdkServiceAnswer
+        loop {
+            match client.recv_with_timeout(Duration::from_secs(10)).await? {
+                pkt if pkt.command == Command::SdkServiceAnswer => {
+                    break;
+                }
+                pkt if pkt.command == Command::TcpHeartbeatAnswer => {
+                    debug!("TcpHeartbeatAnswer during legacy handshake — ignoring");
+                }
+                pkt if pkt.command == Command::SdkErrorAnswer => {
+                    let code = if pkt.payload.len() >= 2 {
+                        u16::from_le_bytes([pkt.payload[0], pkt.payload[1]])
+                    } else { 0 };
+                    return Err(Error::Protocol(format!(
+                        "Device rejected SDK version at handshake (SdkErrorAnswer code={code})"
+                    )));
+                }
+                pkt => {
+                    return Err(Error::Protocol(format!(
+                        "Expected SdkServiceAnswer, got {:?}", pkt.command
+                    )));
+                }
+            }
+        }
+
+        // GetIFVersion is a mandatory capability-negotiation step (confirmed from
+        // More Huidu.pcapng frame 189: always the first SdkCmdAsk after SdkServiceAnswer).
+        //
+        // The device's response contains the session GUID in <sdk guid="...">  which MUST
+        // be used for all subsequent SdkCmdAsk calls.  Using ##GUID or any other value
+        // returns kInvalidGUID (error 45).
+        info!("Sending GetIFVersion capability negotiation...");
+        let xml_str = xml::sdk_request(&client.client_guid, "GetIFVersion", &command::get_if_version());
+        let response = client.send_xml_request_legacy(&xml_str).await?;
+        // Extract session GUID assigned by the device.
+        if let Some(guid) = xml::extract_guid(&response) {
+            info!("Device assigned session GUID: {}", guid);
+            client.client_guid = guid.to_string();
+        }
+        let if_ver = response.find("<version ")
+            .and_then(|p| xml::get_attr(&response[p..], "value"))
+            .and_then(|s| s.parse::<u32>().ok())
+            .unwrap_or(0);
+        info!("Legacy SDK connected (interface version {})", if_ver);
+        Ok(client)
+    }
+
+    /// Open a short-lived connection to discover the device's SDK version, then close it.
+    async fn probe_legacy_version(host: &str, port: u16) -> Result<u32> {
+        let addr = format!("{host}:{port}");
+        let stream = TcpStream::connect(&addr).await
+            .map_err(|e| Error::Connection(format!("TCP connect to {addr}: {e}")))?;
+        stream.set_nodelay(true)?;
+
+        let mut probe = Self {
+            stream: Arc::new(Mutex::new(stream)),
+            client_guid: String::new(),
+            read_buf: Vec::with_capacity(256),
+            use_legacy: true,
+        };
+
+        let payload = sdk_service_ask_payload(SDK_CLIENT_VERSION);
+        probe.send_packet(&Packet::new(Command::SdkServiceAsk, payload)).await?;
+
+        let device_version = loop {
+            match probe.recv_with_timeout(Duration::from_secs(5)).await? {
+                pkt if pkt.command == Command::SdkServiceAnswer => {
+                    let ver = if pkt.payload.len() >= 4 {
+                        u32::from_le_bytes([
+                            pkt.payload[0], pkt.payload[1],
+                            pkt.payload[2], pkt.payload[3],
+                        ])
+                    } else { 0 };
+                    break ver;
+                }
+                pkt if pkt.command == Command::TcpHeartbeatAnswer => {
+                    debug!("TcpHeartbeatAnswer during probe — ignoring");
+                }
+                pkt if pkt.command == Command::SdkErrorAnswer => {
+                    // Device rejected version probe — default to SDK_CLIENT_VERSION
+                    break SDK_CLIENT_VERSION;
+                }
+                _ => {
+                    break SDK_CLIENT_VERSION;
+                }
+            }
+        };
+        // probe drops here, closing the TCP connection
+        info!("Version probe: device version = 0x{device_version:08X}");
+        Ok(device_version)
     }
 
     // ── Internal helpers ─────────────────────────────────────────────────
@@ -235,10 +380,13 @@ impl Client {
     /// Sends `BoxStreamInit` with payload `[0,0,0,0]` and waits for `BoxStreamInitAck`.
     /// Confirmed from Huidu.pcapng frames 8–10.
     async fn box_stream_init(&mut self) -> Result<()> {
+        info!("Sending BoxStreamInit [0,0,0,0]...");
         let pkt = Packet::new(Command::BoxStreamInit, vec![0x00, 0x00, 0x00, 0x00]);
         self.send_packet(&pkt).await?;
+        info!("BoxStreamInit sent — waiting for BoxStreamInitAck (0x0201)");
         loop {
             let resp = self.recv_with_timeout(CMD_TIMEOUT).await?;
+            info!("box_stream_init recv: {:?} payload_len={}", resp.command, resp.payload.len());
             match resp.command {
                 Command::BoxStreamInitAck => {
                     info!("BoxStream session established");
@@ -246,7 +394,8 @@ impl Client {
                 }
                 // Device may send periodic keepalives while we wait.
                 Command::TcpHeartbeatAnswer => {
-                    debug!("Received TcpHeartbeatAnswer while waiting for BoxStreamInitAck — ignoring");
+                    info!("TcpHeartbeatAnswer while waiting for BoxStreamInitAck — sending TcpHeartbeatAsk");
+                    self.send_packet(&Packet::heartbeat()).await?;
                 }
                 Command::TcpHeartbeatAsk => {
                     self.send_packet(&Packet::heartbeat()).await?;
@@ -282,6 +431,61 @@ impl Client {
         }
     }
 
+    /// Send XML using the legacy SdkCmdAsk/SdkCmdAnswer protocol (port 10001).
+    async fn send_xml_request_legacy(&mut self, xml_str: &str) -> Result<String> {
+        debug!("Legacy XML request: {}", xml_str);
+        // 8-byte framing header confirmed from More Huidu.pcapng frame 189:
+        //   u32[0] = total XML length, u32[1] = chunk index (0 for single-chunk)
+        let payload = sdk_cmd_ask_payload(xml_str);
+        self.send_packet(&Packet::new(Command::SdkCmdAsk, payload)).await?;
+
+        loop {
+            let resp = self.recv_with_timeout(CMD_TIMEOUT).await?;
+            match resp.command {
+                Command::SdkCmdAnswer => {
+                    let xml_bytes = parse_sdk_cmd_payload(&resp.payload)
+                        .ok_or_else(|| Error::Protocol(
+                            format!("SdkCmdAnswer payload too short ({} bytes)", resp.payload.len())
+                        ))?;
+                    return Ok(String::from_utf8_lossy(xml_bytes).into_owned());
+                }
+                Command::SdkErrorAnswer => {
+                    let code = if resp.payload.len() >= 2 {
+                        u16::from_le_bytes([resp.payload[0], resp.payload[1]])
+                    } else {
+                        0
+                    };
+                    let code_name = match code {
+                        3  => "kVersionTooLow",
+                        4  => "kDeviceOccupa",
+                        20 => "kXmlCmdTooLong",
+                        21 => "kInvalidXmlIndex",
+                        22 => "kParseXmlFailed",
+                        23 => "kInvalidMethod",
+                        44 => "kUnsupportMethod",
+                        45 => "kInvalidGUID",
+                        _  => "unknown",
+                    };
+                    warn!("SdkErrorAnswer code={} ({}) for XML: {}", code, code_name, xml_str);
+                    return Err(Error::Protocol(format!(
+                        "SdkErrorAnswer code={} ({})", code, code_name
+                    )));
+                }
+                Command::TcpHeartbeatAsk => {
+                    self.send_packet(&Packet::heartbeat()).await?;
+                }
+                Command::TcpHeartbeatAnswer => {
+                    debug!("TcpHeartbeatAnswer mid-legacy-exchange — ignoring");
+                }
+                other => {
+                    return Err(Error::Protocol(format!(
+                        "Expected SdkCmdAnswer, got {:?}", other
+                    )));
+                }
+            }
+        }
+    }
+
     /// Send XML over BoxStream and receive the response XML.
     ///
     /// Full 10-step handshake confirmed from Huidu.pcapng:
@@ -300,6 +504,9 @@ impl Client {
     /// 9. Dev→PC: BoxStreamTxAck `[0x01,0x00]`
     /// 10. PC→Dev: BoxStreamFinalAck `[0x00,0x00]`
     async fn send_xml_request(&mut self, xml_str: &str) -> Result<String> {
+        if self.use_legacy {
+            return self.send_xml_request_legacy(xml_str).await;
+        }
         use crate::protocol::{box_stream_data_request, parse_box_stream_data};
 
         // Step 0 (pre-request): BoxStreamInit → BoxStreamInitAck handshake.
@@ -394,35 +601,59 @@ impl Client {
     ///
     /// Methods not supported by the device (e.g. GetSensorType, GetDeviceInfo,
     /// GetDataSourceInfo) return kUnsupportMethod and are silently skipped.
+    const INFO_METHODS: &'static [(&'static str, &'static str)] = &[
+        ("GetDeviceName",           ""),
+        ("GetFirewareVersion",      ""),
+        ("GetKeyDefine",            ""),
+        ("GetPlayStatus",           ""),
+        ("GetSystemVolume",         ""),
+        ("GetBootLogo",             ""),
+        ("GetSensorInfo",           ""),
+        ("GetGPSInfo",              ""),
+        ("GetCurrentLuminance",     ""),
+        ("GetCurrentTemperature",   ""),
+        ("GetCurrentHumity",        ""),  // note: protocol typo "Humity"
+        ("GetSensorType",           ""),
+        ("GetSwitchTime",           ""),
+        ("GetTimeInfo",             ""),
+        ("GetLuminancePloy",        ""),
+        ("GetScreenInfo",           ""),
+        ("GetLicense",              ""),
+        ("GetEth0Info",             ""),
+        ("GetWifiInfo",             ""),
+        ("GetPppoeInfo",            ""),
+        ("GetDeviceInfo",           ""),  // returns kUnsupportMethod on C-series
+        ("GetDataSourceInfo",       ""),  // returns kUnsupportMethod on C-series
+        ("GetRelay",                ""),
+    ];
+
+    /// Send each of the INFO_METHODS individually (legacy port-10001 path) and
+    /// concatenate the successful responses.  Failed calls (kUnsupportMethod,
+    /// etc.) are silently skipped — the caller's `if let Some(body)` guards
+    /// handle missing methods gracefully.
+    async fn get_device_info_legacy(&mut self) -> Result<String> {
+        let mut combined = String::new();
+        for (method, body) in Self::INFO_METHODS {
+            match self.sdk_cmd(method, body).await {
+                Ok(xml) => combined.push_str(&xml),
+                Err(e) => {
+                    debug!("Legacy info: {} skipped ({})", method, e);
+                }
+            }
+        }
+        Ok(combined)
+    }
+
     pub async fn get_device_info(&mut self) -> Result<DeviceDetails> {
-        use huidu_protocol::xml::sdk_batch_request;
-        // Full 23-method batch — mirrors HDPlayer.exe initial sync exactly.
-        let request_xml = sdk_batch_request(&[
-            ("GetDeviceName",           ""),
-            ("GetFirewareVersion",      ""),
-            ("GetKeyDefine",            ""),
-            ("GetPlayStatus",           ""),
-            ("GetSystemVolume",         ""),
-            ("GetBootLogo",             ""),
-            ("GetSensorInfo",           ""),
-            ("GetGPSInfo",              ""),
-            ("GetCurrentLuminance",     ""),
-            ("GetCurrentTemperature",   ""),
-            ("GetCurrentHumity",        ""),  // note: protocol typo "Humity"
-            ("GetSensorType",           ""),
-            ("GetSwitchTime",           ""),
-            ("GetTimeInfo",             ""),
-            ("GetLuminancePloy",        ""),
-            ("GetScreenInfo",           ""),
-            ("GetLicense",              ""),
-            ("GetEth0Info",             ""),
-            ("GetWifiInfo",             ""),
-            ("GetPppoeInfo",            ""),
-            ("GetDeviceInfo",           ""),  // returns kUnsupportMethod on C-series
-            ("GetDataSourceInfo",       ""),  // returns kUnsupportMethod on C-series
-            ("GetRelay",                ""),
-        ]);
-        let response = self.send_xml_request(&request_xml).await?;
+        // Legacy protocol (port 10001) only accepts one <in> per SdkCmdAsk.
+        // BoxStream (port 9527) supports a multi-method batch in one request.
+        let response = if self.use_legacy {
+            self.get_device_info_legacy().await?
+        } else {
+            use huidu_protocol::xml::sdk_batch_request;
+            let request_xml = sdk_batch_request(Self::INFO_METHODS);
+            self.send_xml_request(&request_xml).await?
+        };
         let mut info = DeviceDetails { raw_xml: response.clone(), ..Default::default() };
         info.device_type = "BoxPlayer".to_string();
 
@@ -552,7 +783,10 @@ impl Client {
 
     pub async fn get_sdk_version(&mut self) -> Result<u32> {
         let xml = self.sdk_cmd("GetIFVersion", &command::get_if_version()).await?;
-        let v = xml::get_attr(&xml, "version")
+        // Response body is `<version value="1000000"/>` (confirmed from More Huidu.pcapng frame 190).
+        // Must find the <version> tag first, then read its `value` attribute.
+        let v = xml.find("<version ")
+            .and_then(|p| xml::get_attr(&xml[p..], "value"))
             .and_then(|s| s.parse().ok())
             .unwrap_or(0);
         Ok(v)
@@ -724,6 +958,12 @@ impl Client {
         Ok(())
     }
 
+    /// Set the NTP server used for automatic time synchronisation.
+    pub async fn set_ntp_server(&mut self, server: &str) -> Result<()> {
+        self.sdk_cmd("SetNtpServer", &command::set_ntp_server(server)).await?;
+        Ok(())
+    }
+
     /// Set device timezone (UTC offset in whole hours, e.g. 8 for UTC+8).
     pub async fn set_timezone(&mut self, offset: i8) -> Result<()> {
         self.sdk_cmd("SetTimeInfo", &command::set_time_zone(offset)).await?;
@@ -743,6 +983,18 @@ impl Client {
 
     pub async fn get_box_hw_config(&mut self) -> Result<String> {
         self.sdk_cmd("GetBoxHwConfig", &command::get_box_hw_config()).await
+    }
+
+    /// Persist the current BoxHwConfig to flash storage.
+    pub async fn save_box_hw_config(&mut self) -> Result<()> {
+        self.sdk_cmd("SaveBoxHwConfig", &command::save_box_hw_config()).await?;
+        Ok(())
+    }
+
+    /// Request automatic FPGA configuration for the attached LED module type.
+    pub async fn smart_setting(&mut self) -> Result<()> {
+        self.sdk_cmd("SmartSetting", &command::smart_setting()).await?;
+        Ok(())
     }
 
     // ── Device Control ────────────────────────────────────────────────────
@@ -1023,6 +1275,37 @@ impl Client {
     pub async fn set_pppoe_info(&mut self, enable: bool, user: &str, password: &str) -> Result<()> {
         self.sdk_cmd("SetPppoeInfo", &command::set_pppoe_info(enable, user, password)).await?;
         Ok(())
+    }
+
+    /// Get admin mode status: `(enabled, locker_on)`.
+    pub async fn get_admin_mode_info(&mut self) -> Result<(bool, bool)> {
+        let xml = self.sdk_cmd("GetAdminModeInfo", &command::get_admin_mode_info()).await?;
+        let enabled = crate::xml::get_attr(&xml, "enable")
+            .map(|v| v == "true" || v == "1")
+            .unwrap_or(false);
+        let locker = crate::xml::get_attr(&xml, "locker")
+            .map(|v| v == "true" || v == "1")
+            .unwrap_or(false);
+        Ok((enabled, locker))
+    }
+
+    /// Toggle a single relay output (SetRelayStatusInfo).
+    ///
+    /// `index`: 0-based relay number; `state`: true = on, false = off.
+    pub async fn set_relay_status(&mut self, index: u8, state: bool) -> Result<()> {
+        self.sdk_cmd("SetRelayStatusInfo", &command::set_relay_status(index, state)).await?;
+        Ok(())
+    }
+
+    /// Remove the device license key.
+    pub async fn clear_license(&mut self) -> Result<()> {
+        self.sdk_cmd("ClearLicense", &command::clear_license()).await?;
+        Ok(())
+    }
+
+    /// Get live sensor readings (temperature, humidity, luminance, etc.).
+    pub async fn get_current_sensor_value(&mut self) -> Result<String> {
+        self.sdk_cmd("GetCurrentSensorValue", &command::get_current_sensor_value()).await
     }
 
     /// Unlock admin mode using the device's configured password.

@@ -38,6 +38,7 @@ pub mod discovery;
 pub mod error;
 pub mod protocol;
 pub mod transfer;
+pub mod upgrade;
 pub mod xml;
 
 pub use client::{Client, DeviceDetails, EthConfig, FileEntry, ProgramInfo};

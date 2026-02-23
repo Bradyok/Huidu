@@ -21,7 +21,10 @@ pub fn get_sdk_tcp_server() -> String {
 }
 
 pub fn get_if_version() -> String {
-    String::new()
+    // Confirmed from More Huidu.pcapng frame 189: the request body must include
+    // <version value="1000000"/> to announce the client's interface version.
+    // Without this the device returns error 22 (kParseXmlFailed / kInvalidParam).
+    "<version value=\"1000000\"/>".to_string()
 }
 
 pub fn get_screenshot2(width: u32, height: u32) -> String {
@@ -213,6 +216,16 @@ pub fn reload_fpga_param() -> String {
     String::new()
 }
 
+/// Persist the current FPGA/BoxHwConfig to flash storage.
+pub fn save_box_hw_config() -> String {
+    String::new()
+}
+
+/// Request automatic configuration based on module type.
+pub fn smart_setting() -> String {
+    String::new()
+}
+
 // ── Device Identity ───────────────────────────────────────────────────────────
 
 pub fn set_device_name(name: &str) -> String {
@@ -238,12 +251,26 @@ pub fn get_relay_info() -> String {
     String::new()
 }
 
-/// Set relay state. `relay_index`: 0-based, `state`: true=on, false=off.
+/// Set relay state via SetRelayInfo. `relay_index`: 0-based, `state`: true=on, false=off.
 pub fn set_relay_info(relay_index: u8, state: bool) -> String {
     format!(
         "<relay index=\"{relay_index}\" state=\"{}\"/>",
         if state { "1" } else { "0" }
     )
+}
+
+/// Toggle a single relay output via SetRelayStatusInfo.
+/// `relay_index`: 0-based relay number; `state`: true=on, false=off.
+pub fn set_relay_status(relay_index: u8, state: bool) -> String {
+    format!(
+        "<relay index=\"{relay_index}\" relayStatus=\"{}\"/>",
+        if state { "1" } else { "0" }
+    )
+}
+
+/// Get live sensor readings (not just configuration).
+pub fn get_current_sensor_value() -> String {
+    String::new()
 }
 
 pub fn get_serial_sdk() -> String {

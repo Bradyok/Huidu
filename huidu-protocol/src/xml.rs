@@ -14,16 +14,17 @@ pub fn new_guid() -> String {
 
 /// Wrap an XML method call in the client-side SDK request envelope.
 ///
-/// Uses double-quoted attributes matching the format confirmed in NetIOServices.dll:
+/// Uses the format confirmed from More Huidu.pcapng frame 189 (real HDPlayer on port 10001):
 /// ```xml
-/// <?xml version="1.0" encoding="utf-8"?>
-/// <sdk guid="{guid}">
+/// <?xml version="1.0" encoding="UTF-8"?>
+/// <sdk guid="##GUID">
 ///   <in method="{method}">{body}</in>
 /// </sdk>
 /// ```
+/// Note: encoding is `UTF-8` (uppercase) as seen in the wire capture.
 pub fn sdk_request(guid: &str, method: &str, body: &str) -> String {
     format!(
-        "<?xml version=\"1.0\" encoding=\"utf-8\"?>\
+        "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\
 <sdk guid=\"{guid}\">\
 <in method=\"{method}\">{body}</in>\
 </sdk>"
@@ -110,7 +111,7 @@ pub fn parse_result(xml: &str) -> Result<()> {
 /// as confirmed from Huidu.pcapng.
 pub fn sdk_batch_request(methods: &[(&str, &str)]) -> String {
     let mut xml = String::from(
-        "<?xml version=\"1.0\" encoding=\"utf-8\"?><sdk guid=\"##GUID\">"
+        "<?xml version=\"1.0\" encoding=\"UTF-8\"?><sdk guid=\"##GUID\">"
     );
     for (method, body) in methods {
         xml.push_str("<in method=\"");

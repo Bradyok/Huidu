@@ -111,6 +111,12 @@ enum Commands {
     /// Sync device time to current local time
     SyncTime,
 
+    /// Set the NTP server used for automatic time synchronisation
+    SetNtpServer {
+        /// NTP server hostname or IP (e.g. pool.ntp.org, time.google.com)
+        server: String,
+    },
+
     /// Set device timezone (UTC offset in whole hours, e.g. 8 for UTC+8, -5 for UTC-5)
     SetTimezone {
         /// UTC offset hours (-12 to +14)
@@ -260,6 +266,25 @@ enum Commands {
         timeout: u64,
     },
 
+    /// Firmware upgrade using the native port-9528 binary protocol.
+    ///
+    /// Uploads the firmware archive to the device via the same protocol as
+    /// HDPlayer.exe: connect on port 9528, stream the file in 9212-byte chunks,
+    /// then trigger extraction and execution.  This is independent of the
+    /// SDK XML protocol used by `firmware-upgrade`.
+    ///
+    /// The firmware archive is typically named `Box.tar.gz`.
+    UpgradeNative {
+        /// Local path to the firmware archive (e.g. Box.tar.gz).
+        file: String,
+        /// Seconds between completion polls after the upgrade executes.
+        #[arg(long, default_value_t = 5)]
+        poll_interval: u64,
+        /// Maximum seconds to wait for the device to report completion.
+        #[arg(long, default_value_t = 600)]
+        timeout: u64,
+    },
+
     /// Get file list with MD5 hashes and sizes (for verifying transfer integrity)
     Checklist,
 
@@ -352,15 +377,52 @@ enum Commands {
 
     /// Get device locker enable status
     GetLockerEnable,
+
+    /// Get admin mode status (enabled / locker state)
+    GetAdminInfo,
+
+    /// Toggle a relay output on or off
+    SetRelay {
+        /// 0-based relay index
+        index: u8,
+        /// on or off
+        #[arg(value_parser = parse_relay_state)]
+        state: bool,
+    },
+
+    /// Remove the device license key
+    ClearLicense,
+
+    /// Request automatic FPGA/hardware configuration for the attached LED module
+    SmartSetting,
+
+    /// Persist the current FPGA/BoxHwConfig to flash storage
+    SaveHwConfig,
+
+    /// Get live sensor readings (temperature, humidity, luminance, etc.)
+    GetCurrentSensor,
+}
+
+fn parse_relay_state(s: &str) -> Result<bool, String> {
+    match s.to_ascii_lowercase().as_str() {
+        "on" | "1" | "true" => Ok(true),
+        "off" | "0" | "false" => Ok(false),
+        _ => Err(format!("expected 'on'/'off' or '1'/'0', got '{s}'")),
+    }
 }
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
     let cli = Cli::parse();
 
+    // When RUST_LOG is set, respect it fully. Otherwise default to INFO.
+    let filter = if std::env::var("RUST_LOG").is_ok() {
+        EnvFilter::from_default_env()
+    } else {
+        EnvFilter::new("hdplayer=info,huidu_protocol=info")
+    };
     tracing_subscriber::fmt()
-        .with_env_filter(EnvFilter::from_default_env()
-            .add_directive("hdplayer=info".parse()?))
+        .with_env_filter(filter)
         .init();
 
     // Handle discover command without a host
@@ -419,7 +481,12 @@ async fn main() -> anyhow::Result<()> {
         }
     };
 
-    let mut client = Client::connect(&host, cli.port).await?;
+    // Auto-select protocol: port 9527 → BoxStream; anything else → legacy SdkService (port 10001)
+    let mut client = if cli.port == 9527 {
+        Client::connect(&host, cli.port).await?
+    } else {
+        Client::connect_legacy(&host, cli.port).await?
+    };
     println!("Connected to {host}:{}", cli.port);
 
     match &cli.command {
@@ -568,6 +635,11 @@ async fn main() -> anyhow::Result<()> {
         Commands::SyncTime => {
             client.sync_time().await?;
             println!("Time synced.");
+        }
+
+        Commands::SetNtpServer { server } => {
+            client.set_ntp_server(server).await?;
+            println!("NTP server set to '{server}'.");
         }
 
         Commands::SetTimezone { offset } => {
@@ -897,13 +969,45 @@ async fn main() -> anyhow::Result<()> {
                             rebooted = true;
                         }
                         // Try to reconnect; if it fails we keep trying next iteration.
-                        if let Ok(new_client) = Client::connect(&host, cli.port).await {
+                        let reconnect = if cli.port == 9527 {
+                            Client::connect(&host, cli.port).await
+                        } else {
+                            Client::connect_legacy(&host, cli.port).await
+                        };
+                        if let Ok(new_client) = reconnect {
                             client = new_client;
                             println!("  [{elapsed}s] Reconnected to device.");
                         }
                     }
                 }
             }
+        }
+
+        Commands::UpgradeNative { file, poll_interval, timeout } => {
+            let path = std::path::Path::new(file.as_str());
+            if !path.exists() {
+                eprintln!("File not found: {file}");
+                std::process::exit(1);
+            }
+            // UpgradeNative connects directly to port 9528, independent of the SDK client.
+            // The `host` variable already holds the resolved device IP.
+            println!("Starting native firmware upgrade: {}", path.display());
+            println!("  Device: {host}:9528");
+            let opts = hdplayer::upgrade::UpgradeOptions {
+                poll_interval: Duration::from_secs(*poll_interval),
+                poll_timeout: Duration::from_secs(*timeout),
+                progress: Some(Box::new(|sent, total| {
+                    print!(
+                        "\r  {sent}/{total} bytes ({:.1}%)  ",
+                        sent as f64 / total as f64 * 100.0
+                    );
+                    let _ = std::io::Write::flush(&mut std::io::stdout());
+                })),
+            };
+            // Box::pin to heap-allocate the large async state machine and avoid
+            // stack overflow in the tokio block_on context.
+            Box::pin(hdplayer::upgrade::run_upgrade(&host, path, opts)).await?;
+            println!("\nFirmware upgrade complete.");
         }
 
         Commands::Checklist => {
@@ -1091,6 +1195,56 @@ async fn main() -> anyhow::Result<()> {
         Commands::GetLockerEnable => {
             let enabled = client.get_device_locker_enable().await?;
             println!("Device locker: {}", if enabled { "enabled" } else { "disabled" });
+        }
+
+        Commands::GetAdminInfo => {
+            let (enabled, locker) = client.get_admin_mode_info().await?;
+            println!("Admin mode: {}", if enabled { "enabled" } else { "disabled" });
+            println!("Locker:     {}", if locker { "on" } else { "off" });
+        }
+
+        Commands::SetRelay { index, state } => {
+            client.set_relay_status(*index, *state).await?;
+            println!("Relay {} set to {}.", index, if *state { "ON" } else { "OFF" });
+        }
+
+        Commands::ClearLicense => {
+            client.clear_license().await?;
+            println!("License cleared.");
+        }
+
+        Commands::SmartSetting => {
+            client.smart_setting().await?;
+            println!("Smart setting applied.");
+        }
+
+        Commands::SaveHwConfig => {
+            client.save_box_hw_config().await?;
+            println!("Hardware config saved to flash.");
+        }
+
+        Commands::GetCurrentSensor => {
+            let xml = client.get_current_sensor_value().await?;
+            if xml.is_empty() || xml.contains("kUnsupportMethod") {
+                println!("GetCurrentSensorValue: not supported by this device.");
+            } else {
+                // Try to print known sensor values
+                let get = |tag: &str, attr: &str| -> Option<String> {
+                    xml.find(&format!("<{tag}"))
+                        .and_then(|p| hdplayer::xml::get_attr(&xml[p..], attr))
+                        .map(str::to_string)
+                };
+                if let Some(v) = get("temperature", "value") { println!("Temperature: {v}°C"); }
+                if let Some(v) = get("humidity", "value")    { println!("Humidity:    {v}%"); }
+                if let Some(v) = get("luminance", "value")   { println!("Luminance:   {v}"); }
+                if let Some(v) = get("noise", "value")       { println!("Noise:       {v} dB"); }
+                if let Some(v) = get("pressure", "value")    { println!("Pressure:    {v} hPa"); }
+                if let Some(v) = get("windSpeed", "value")   { println!("Wind speed:  {v} m/s"); }
+                // Fallback: print raw XML if none of the above matched
+                if !xml.contains("value=") {
+                    println!("{xml}");
+                }
+            }
         }
     }
 

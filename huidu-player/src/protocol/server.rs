@@ -6,9 +6,9 @@ use std::sync::Arc;
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 use tokio::net::{TcpListener, TcpStream};
 use tokio::sync::{mpsc, RwLock};
-use tracing::{error, info, warn};
+use tracing::{debug, error, info, warn};
 
-use huidu_protocol::packet::{Command, Packet, SDK_TRANSPORT_VERSION};
+use huidu_protocol::packet::{Command, Packet, SDK_TRANSPORT_VERSION, parse_box_stream_data};
 
 use crate::core::player::PlayerCommand;
 use crate::protocol::command;
@@ -231,4 +231,366 @@ async fn handle_connection(
     }
 
     Ok(())
+}
+
+// ── BoxStream server (port 9527) ────────────────────────────────────────────
+//
+// HDPlayer.exe connects here using the 12-step BoxStream protocol documented
+// in huidu_protocol::packet.  File transfers share the same TCP connection
+// and use the same FileStart/Content/End packet framing as the legacy server.
+
+/// Start the BoxStream server on the given port (typically 9527).
+/// This is what real HDPlayer.exe connects to — it does NOT use port 10001.
+pub async fn run_box_stream(
+    port: u16,
+    player_tx: mpsc::Sender<PlayerCommand>,
+    program_dir: String,
+    services: Arc<RwLock<ServicesState>>,
+    screen_width: u32,
+    screen_height: u32,
+) -> Result<()> {
+    let addr = format!("0.0.0.0:{}", port);
+    let listener = TcpListener::bind(&addr).await?;
+    info!("BoxStream server listening on {} (HDPlayer.exe protocol)", addr);
+
+    loop {
+        match listener.accept().await {
+            Ok((stream, peer)) => {
+                info!("BoxStream connection from {}", peer);
+                let tx = player_tx.clone();
+                let dir = program_dir.clone();
+                let svc = services.clone();
+                tokio::spawn(async move {
+                    if let Err(e) =
+                        handle_box_stream(stream, tx, dir, svc, screen_width, screen_height).await
+                    {
+                        warn!("BoxStream connection error from {}: {}", peer, e);
+                    }
+                    info!("BoxStream connection closed: {}", peer);
+                });
+            }
+            Err(e) => {
+                error!("BoxStream accept error: {}", e);
+            }
+        }
+    }
+}
+
+/// Handle a single BoxStream connection (HDPlayer.exe → device).
+///
+/// Protocol flow per exchange (12 steps, confirmed from Huidu.pcapng):
+///  1  PC → Device: BoxStreamInit [0x00,0x00,0x00,0x00]  (request)
+///  2  Device → PC: BoxStreamInitAck [0x00,0x00]
+///  3  PC → Device: BoxStreamData [0x00,0x00]+xml
+///  4  Device → PC: BoxStreamRxAck [0x00,0x00]
+///  5  PC → Device: BoxStreamTxAck [0x00,0x00]
+///  6  Device → PC: BoxStreamFinalAck [0x00,0x00]
+///  7  Device → PC: BoxStreamInit [0x01,0x00,0x00,0x00]  ("response ready")
+///  8  PC → Device: BoxStreamInitAck [0x00,0x00]
+///  9  Device → PC: BoxStreamData [0x01,0x00]+xml
+/// 10  PC → Device: BoxStreamRxAck [0x00,0x00]
+/// 11  Device → PC: BoxStreamTxAck [0x01,0x00]
+/// 12  PC → Device: BoxStreamFinalAck [0x00,0x00]
+///
+/// File transfers (FileStartAsk/FileContentAsk/FileEndAsk) use the same TCP
+/// connection and the same packet framing; they arrive between exchanges.
+async fn handle_box_stream(
+    mut stream: TcpStream,
+    player_tx: mpsc::Sender<PlayerCommand>,
+    program_dir: String,
+    services: Arc<RwLock<ServicesState>>,
+    screen_width: u32,
+    screen_height: u32,
+) -> Result<()> {
+    let mut session = Session::new();
+    let mut buf: Vec<u8> = Vec::with_capacity(MAX_PACKET_SIZE * 4);
+
+    // Device sends TcpHeartbeatAnswer immediately — HDPlayer.exe waits for two
+    // heartbeat cycles before sending the first BoxStreamInit.
+    stream
+        .write_all(&Packet::new(Command::TcpHeartbeatAnswer, vec![]).to_bytes())
+        .await?;
+
+    let mut hb_tick =
+        tokio::time::interval(std::time::Duration::from_secs(5));
+    hb_tick.tick().await; // discard the immediate first tick
+
+    loop {
+        // Send a periodic heartbeat or read the next incoming packet.
+        let pkt = tokio::select! {
+            _ = hb_tick.tick() => {
+                stream
+                    .write_all(
+                        &Packet::new(Command::TcpHeartbeatAnswer, vec![]).to_bytes(),
+                    )
+                    .await?;
+                continue;
+            }
+            r = bs_recv(&mut stream, &mut buf) => r?,
+        };
+
+        match pkt.command {
+            // HDPlayer.exe sends TcpHeartbeatAsk to ack each of our heartbeats.
+            Command::TcpHeartbeatAsk | Command::TcpHeartbeatAnswer => {
+                debug!("BoxStream: heartbeat {:?}", pkt.command);
+            }
+
+            // ── XML command exchange ─────────────────────────────────────────
+            Command::BoxStreamInit if pkt.payload.first() == Some(&0x00) => {
+                // Step 2: ack the client's init
+                stream
+                    .write_all(
+                        &Packet::new(Command::BoxStreamInitAck, vec![0x00, 0x00]).to_bytes(),
+                    )
+                    .await?;
+
+                // Step 3: receive BoxStreamData carrying the request XML
+                let xml_str = loop {
+                    let p = bs_recv_skip_hb(&mut stream, &mut buf).await?;
+                    if p.command == Command::BoxStreamData {
+                        let xml_bytes = parse_box_stream_data(&p.payload)
+                            .ok_or_else(|| anyhow::anyhow!("BoxStreamData payload too short"))?;
+                        break String::from_utf8_lossy(xml_bytes).into_owned();
+                    }
+                    warn!(
+                        "BoxStream: expected BoxStreamData, got {:?} — ignoring",
+                        p.command
+                    );
+                };
+                info!("BoxStream XML command ({} bytes)", xml_str.len());
+
+                // Step 4: acknowledge receipt of the XML
+                stream
+                    .write_all(
+                        &Packet::new(Command::BoxStreamRxAck, vec![0x00, 0x00]).to_bytes(),
+                    )
+                    .await?;
+
+                // Step 5: wait for client BoxStreamTxAck
+                bs_skip_to(&mut stream, &mut buf, Command::BoxStreamTxAck).await?;
+
+                // Step 6: send BoxStreamFinalAck
+                stream
+                    .write_all(
+                        &Packet::new(Command::BoxStreamFinalAck, vec![0x00, 0x00]).to_bytes(),
+                    )
+                    .await?;
+
+                // Process the XML command
+                let resp_xml = match command::handle_sdk_command(
+                    &xml_str,
+                    &session,
+                    &player_tx,
+                    &program_dir,
+                    &services,
+                    screen_width,
+                    screen_height,
+                )
+                .await
+                {
+                    Ok(r) => r,
+                    Err(e) => {
+                        warn!("BoxStream command error: {}", e);
+                        format!(
+                            "<?xml version=\"1.0\" encoding=\"utf-8\"?>\
+                             <sdk guid=\"##GUID\"><out result=\"kError\"/></sdk>"
+                        )
+                    }
+                };
+
+                // Step 7: signal that the response is ready
+                stream
+                    .write_all(
+                        &Packet::new(
+                            Command::BoxStreamInit,
+                            vec![0x01, 0x00, 0x00, 0x00],
+                        )
+                        .to_bytes(),
+                    )
+                    .await?;
+
+                // Step 8: wait for client BoxStreamInitAck
+                bs_skip_to(&mut stream, &mut buf, Command::BoxStreamInitAck).await?;
+
+                // Step 9: send response XML in BoxStreamData [dir=1]
+                let mut resp_payload = vec![0x01u8, 0x00];
+                resp_payload.extend_from_slice(resp_xml.as_bytes());
+                stream
+                    .write_all(
+                        &Packet::new(Command::BoxStreamData, resp_payload).to_bytes(),
+                    )
+                    .await?;
+
+                // Step 10: wait for client BoxStreamRxAck
+                bs_skip_to(&mut stream, &mut buf, Command::BoxStreamRxAck).await?;
+
+                // Step 11: send BoxStreamTxAck [dir=1]
+                stream
+                    .write_all(
+                        &Packet::new(Command::BoxStreamTxAck, vec![0x01, 0x00]).to_bytes(),
+                    )
+                    .await?;
+
+                // Step 12: wait for client BoxStreamFinalAck
+                bs_skip_to(&mut stream, &mut buf, Command::BoxStreamFinalAck).await?;
+
+                // Exchange complete — loop for the next command.
+            }
+
+            // ── File transfer (same framing as legacy port 10001 server) ────
+            Command::FileStartAsk => {
+                if pkt.payload.len() >= 42 {
+                    let md5_str =
+                        String::from_utf8_lossy(&pkt.payload[..32]).to_string();
+                    let mut cursor = Cursor::new(&pkt.payload[32..]);
+                    let file_size =
+                        ReadBytesExt::read_u64::<LittleEndian>(&mut cursor)?;
+                    let file_type =
+                        ReadBytesExt::read_u16::<LittleEndian>(&mut cursor)?;
+                    let filename = String::from_utf8_lossy(&pkt.payload[42..])
+                        .trim_end_matches('\0')
+                        .to_string();
+                    info!(
+                        "BoxStream file start: {} ({} bytes, type {})",
+                        filename, file_size, file_type
+                    );
+                    session.start_file_transfer(filename, file_size, file_type, md5_str);
+                }
+                let mut resp = Vec::new();
+                WriteBytesExt::write_u32::<LittleEndian>(&mut resp, 0).unwrap();
+                WriteBytesExt::write_u64::<LittleEndian>(&mut resp, 0).unwrap();
+                stream
+                    .write_all(
+                        &Packet::new(Command::FileStartAnswer, resp).to_bytes(),
+                    )
+                    .await?;
+            }
+
+            Command::FileContentAsk => {
+                const OFFSET_LEN: usize = 8;
+                if pkt.payload.len() > OFFSET_LEN {
+                    session.append_file_data(&pkt.payload[OFFSET_LEN..]);
+                } else if !pkt.payload.is_empty() {
+                    session.append_file_data(&pkt.payload);
+                }
+                let mut resp = Vec::new();
+                WriteBytesExt::write_u32::<LittleEndian>(&mut resp, 0).unwrap();
+                stream
+                    .write_all(
+                        &Packet::new(Command::FileContentAnswer, resp).to_bytes(),
+                    )
+                    .await?;
+            }
+
+            Command::FileEndAsk => {
+                let result: u32 =
+                    if let Some(transfer) = session.complete_file_transfer() {
+                        let md5_ok = if !transfer.md5.is_empty() {
+                            let computed =
+                                format!("{:x}", md5::compute(&transfer.data));
+                            if computed != transfer.md5.to_lowercase() {
+                                warn!(
+                                    "BoxStream MD5 mismatch for {}: expected={} computed={}",
+                                    transfer.filename, transfer.md5, computed
+                                );
+                                false
+                            } else {
+                                true
+                            }
+                        } else {
+                            true
+                        };
+                        let dest =
+                            std::path::Path::new(&program_dir).join(&transfer.filename);
+                        info!(
+                            "BoxStream file complete: {} ({} bytes, md5_ok={})",
+                            transfer.filename,
+                            transfer.data.len(),
+                            md5_ok
+                        );
+                        let _ = std::fs::create_dir_all(&program_dir);
+                        let _ = std::fs::write(&dest, &transfer.data);
+                        0u32
+                    } else {
+                        0u32
+                    };
+                let mut resp = Vec::new();
+                WriteBytesExt::write_u32::<LittleEndian>(&mut resp, result).unwrap();
+                stream
+                    .write_all(
+                        &Packet::new(Command::FileEndAnswer, resp).to_bytes(),
+                    )
+                    .await?;
+            }
+
+            other => {
+                warn!(
+                    "BoxStream: unexpected command {:?} (0x{:04X})",
+                    other,
+                    other as u16
+                );
+            }
+        }
+    }
+}
+
+// ── BoxStream packet helpers ─────────────────────────────────────────────────
+
+/// Read the next complete packet from the TCP stream, accumulating data in `buf`.
+async fn bs_recv(stream: &mut TcpStream, buf: &mut Vec<u8>) -> Result<Packet> {
+    loop {
+        if buf.len() >= 4 {
+            match Packet::from_bytes(buf) {
+                Ok(Some((pkt, consumed))) => {
+                    buf.drain(..consumed);
+                    return Ok(pkt);
+                }
+                Ok(None) => {}
+                Err(e) => {
+                    return Err(anyhow::anyhow!("BoxStream packet framing error: {}", e))
+                }
+            }
+        }
+        let mut tmp = [0u8; 8192];
+        let n = stream.read(&mut tmp).await?;
+        if n == 0 {
+            return Err(anyhow::anyhow!("BoxStream connection closed by peer"));
+        }
+        buf.extend_from_slice(&tmp[..n]);
+    }
+}
+
+/// Like `bs_recv` but silently discards heartbeat packets.
+async fn bs_recv_skip_hb(stream: &mut TcpStream, buf: &mut Vec<u8>) -> Result<Packet> {
+    loop {
+        let pkt = bs_recv(stream, buf).await?;
+        if pkt.command != Command::TcpHeartbeatAsk
+            && pkt.command != Command::TcpHeartbeatAnswer
+        {
+            return Ok(pkt);
+        }
+        debug!("BoxStream: skipped {:?} mid-exchange", pkt.command);
+    }
+}
+
+/// Read packets until `expected` is received, skipping all heartbeats.
+async fn bs_skip_to(
+    stream: &mut TcpStream,
+    buf: &mut Vec<u8>,
+    expected: Command,
+) -> Result<Packet> {
+    loop {
+        let pkt = bs_recv(stream, buf).await?;
+        if pkt.command == expected {
+            return Ok(pkt);
+        }
+        if pkt.command != Command::TcpHeartbeatAsk
+            && pkt.command != Command::TcpHeartbeatAnswer
+        {
+            debug!(
+                "BoxStream: got {:?} while waiting for {:?}, skipping",
+                pkt.command, expected
+            );
+        }
+    }
 }
