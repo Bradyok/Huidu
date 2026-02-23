@@ -40,6 +40,7 @@
 //! 23. Heartbeat (0x005f): empty
 //! 24. UpgradeStatus (0x0056): repeat until status=0 (success)
 
+use std::io::Read as _;
 use std::path::Path;
 use std::time::{Duration, Instant};
 
@@ -79,11 +80,115 @@ const CHUNK_SIZE: usize = 9212;
 /// filename — confirmed in PCAP where the source was a `.zbin` file but the
 /// device received it as `/tmp/Box.tar.gz`.
 const DEVICE_FIRMWARE_PATH: &[u8] = b"/tmp/Box.tar.gz\0";
-/// Extract shell command sent as UpgradeControl mode=3 payload (after u16 mode prefix).
-/// The device fills in the two `%s` with the file path and install directory.
-const EXTRACT_CMD: &[u8] = b"killall -1 BoxDaemon; tar zxvf %s -C %s \0";
-/// Script name sent as UpgradeControl mode=2 payload (after u16 mode prefix).
-const UPGRADE_SCRIPT: &[u8] = b"upgrade.sh\0";
+
+// ── Firmware file parsing ─────────────────────────────────────────────────────
+
+/// The Huidu HDPLAYER .bin file has a 678-byte header before the tar.gz payload.
+/// Confirmed from ZBIN_Firmware_Analysis.md: payload starts at offset 0x2A6.
+const BIN_PAYLOAD_OFFSET: usize = 678;
+
+/// Parsed firmware ready for upload.
+struct FirmwareParsed {
+    /// The raw tar.gz bytes to stream to the device.
+    payload: Vec<u8>,
+    /// UpgradeControl mode=3 payload: `[u16 LE 3][decompress_cmd\0]`.
+    /// Read from the BIN XML header `<Decompress>` field.
+    decompress_cmd: Vec<u8>,
+    /// UpgradeControl mode=2 payload: `[u16 LE 2][script_name\0]`.
+    /// Read from the BIN XML header `<Script>` field.
+    script_name: Vec<u8>,
+}
+
+/// Parse a firmware file and extract the uploadable payload + device commands.
+///
+/// Handles three formats:
+/// - `.zbin` (ZIP bundle): unzips, finds `BoxPlayer*.bin`, then strips BIN header
+/// - `HDPLAYER` `.bin`: strips the 678-byte custom header, returns tar.gz payload
+/// - Anything else: treated as a raw tar.gz (passed through unchanged)
+fn parse_firmware_file(data: &[u8]) -> Result<FirmwareParsed> {
+    // ZIP magic → .zbin bundle
+    if data.starts_with(b"PK\x03\x04") {
+        return parse_zbin(data);
+    }
+    // HDPLAYER binary header
+    if data.starts_with(b"HDPLAYER") {
+        return parse_bin(data);
+    }
+    // Raw payload — use as-is with the defaults from the BIN XML
+    Ok(FirmwareParsed {
+        payload: data.to_vec(),
+        decompress_cmd: b"killall -1 BoxDaemon; tar zxvf %s -C %s \0".to_vec(),
+        script_name: b"upgrade.sh\0".to_vec(),
+    })
+}
+
+fn parse_zbin(data: &[u8]) -> Result<FirmwareParsed> {
+    let cursor = std::io::Cursor::new(data);
+    let mut archive = zip::ZipArchive::new(cursor)?;
+
+    // Find BoxPlayer*.bin (the Linux controller firmware)
+    let bin_name = (0..archive.len())
+        .find_map(|i| {
+            archive.by_index(i).ok().and_then(|f| {
+                let name = f.name().to_string();
+                if name.starts_with("BoxPlayer") && name.ends_with(".bin") {
+                    Some(name)
+                } else {
+                    None
+                }
+            })
+        })
+        .ok_or_else(|| anyhow::anyhow!("No BoxPlayer*.bin found inside .zbin"))?;
+
+    info!("Extracting {} from .zbin…", bin_name);
+    let mut entry = archive.by_name(&bin_name)?;
+    let mut bin_data = Vec::new();
+    entry.read_to_end(&mut bin_data)?;
+    parse_bin(&bin_data)
+}
+
+fn parse_bin(data: &[u8]) -> Result<FirmwareParsed> {
+    if !data.starts_with(b"HDPLAYER") {
+        bail!("Expected HDPLAYER magic in .bin file");
+    }
+    if data.len() <= BIN_PAYLOAD_OFFSET {
+        bail!(".bin too short ({} bytes)", data.len());
+    }
+
+    // XML metadata occupies bytes 18..678; search it for Decompress and Script tags.
+    let xml_end = BIN_PAYLOAD_OFFSET.min(data.len());
+    let xml_region = std::str::from_utf8(&data[18..xml_end]).unwrap_or("");
+    let decompress = xml_text(xml_region, "Decompress")
+        .unwrap_or("killall -1 BoxDaemon; tar zxvf %s -C %s");
+    let script = xml_text(xml_region, "Script").unwrap_or("upgrade.sh");
+    info!("BIN Decompress: {}", decompress);
+    info!("BIN Script: {}", script);
+
+    // Build null-terminated byte vectors (trailing space matches PCAP for Decompress)
+    let mut decompress_cmd = format!("{} ", decompress).into_bytes();
+    decompress_cmd.push(0);
+    let mut script_name = script.as_bytes().to_vec();
+    script_name.push(0);
+
+    // IMPORTANT: send the FULL .bin file including the 678-byte HDPLAYER header.
+    // The device's BoxUpgrade service understands the HDPLAYER binary format natively.
+    // Confirmed from PCAP: FileTransferReq size = 330,110,795 = full .bin size,
+    // NOT 330,110,117 (which would be the size with the header stripped).
+    Ok(FirmwareParsed {
+        payload: data.to_vec(),
+        decompress_cmd,
+        script_name,
+    })
+}
+
+/// Extract the text content of a simple XML tag (no attributes, no nesting).
+fn xml_text<'a>(xml: &'a str, tag: &str) -> Option<&'a str> {
+    let open = format!("<{}>", tag);
+    let close = format!("</{}>", tag);
+    let start = xml.find(&open)? + open.len();
+    let end = xml[start..].find(&close)?;
+    Some(xml[start..start + end].trim())
+}
 /// UpgradeExec parameter observed in capture (frame 103931: 08 00 00 00 00 00 00 00 → u64=8).
 const UPGRADE_EXEC_PARAM: u64 = 8;
 
@@ -220,8 +325,8 @@ async fn handshake(conn: &mut Conn) -> Result<()> {
     conn.expect(CMD_NULL_CAP_RESP).await?;
     debug!("NullCapResp ok");
 
-    // 2-byte capability query (payload unknown; observed length=2, value assumed 0)
-    conn.send(CMD_CAP_A, &[0u8, 0u8]).await?;
+    // CapQuery: empty payload (PCAP frame 1427: 04000a04 = length 4, cmd 0x040a, no payload)
+    conn.send(CMD_CAP_A, &[]).await?;
     conn.expect(CMD_CAP_B).await?;
     debug!("CapB ok");
 
@@ -270,14 +375,20 @@ fn report_phase(opts: &UpgradeOptions, msg: &str) {
 /// `file_path` — local path to the firmware archive (`.zbin` as released by Huidu,
 ///               e.g. `BoxPlayer_V7.11.18.0_MagicPlayer_V2.12.8.0.zbin`).
 pub async fn run_upgrade(addr: &str, file_path: &Path, opts: UpgradeOptions) -> Result<()> {
-    // Load firmware file
-    let file_data = tokio::fs::read(file_path).await?;
+    // ── Phase 0: parse firmware file ─────────────────────────────────────────
+    // .zbin is a ZIP bundle → extract BoxPlayer*.bin → strip 678-byte header
+    // → send only the inner tar.gz payload.  The real HDPlayer client does this
+    // extraction before opening the 9528 connection.
+    report_phase(&opts, "Parsing firmware archive…");
+    let raw = tokio::fs::read(file_path).await?;
+    let fw = tokio::task::spawn_blocking(move || parse_firmware_file(&raw)).await??;
+    let file_data = fw.payload;
     let file_size = file_data.len() as u64;
     info!(
-        "Firmware: {} ({} bytes, {} chunks)",
-        file_path.display(),
+        "Firmware payload: {} bytes ({} chunks) extracted from {}",
         file_size,
         (file_data.len() + CHUNK_SIZE - 1) / CHUNK_SIZE,
+        file_path.display(),
     );
 
     // ── Phase 1: connect and handshake ────────────────────────────────────────
@@ -357,20 +468,22 @@ pub async fn run_upgrade(addr: &str, file_path: &Path, opts: UpgradeOptions) -> 
     conn.send(CMD_HEARTBEAT, &[]).await?;
     conn.expect(CMD_HEARTBEAT_ACK).await?;
 
-    // UpgradeControl mode=3: [u16 LE 3][extract command\0]
-    let mut ctrl3 = Vec::with_capacity(2 + EXTRACT_CMD.len());
+    // UpgradeControl mode=3: [u16 LE 3][decompress_cmd\0]
+    // The decompress_cmd comes from the BIN header's <Decompress> XML field.
+    let mut ctrl3 = Vec::with_capacity(2 + fw.decompress_cmd.len());
     ctrl3.extend_from_slice(&3u16.to_le_bytes());
-    ctrl3.extend_from_slice(EXTRACT_CMD);
+    ctrl3.extend_from_slice(&fw.decompress_cmd);
     conn.send(CMD_UPGRADE_CTRL, &ctrl3).await?;
     let st = conn.expect(CMD_UPGRADE_STATUS).await?;
     let sc = if st.len() >= 2 { u16::from_le_bytes([st[0], st[1]]) } else { 0 };
     debug!("UpgradeStatus after extract cmd: {}", sc);
     info!("Extract command accepted");
 
-    // UpgradeControl mode=2: [u16 LE 2][script name\0]
-    let mut ctrl2 = Vec::with_capacity(2 + UPGRADE_SCRIPT.len());
+    // UpgradeControl mode=2: [u16 LE 2][script_name\0]
+    // The script_name comes from the BIN header's <Script> XML field.
+    let mut ctrl2 = Vec::with_capacity(2 + fw.script_name.len());
     ctrl2.extend_from_slice(&2u16.to_le_bytes());
-    ctrl2.extend_from_slice(UPGRADE_SCRIPT);
+    ctrl2.extend_from_slice(&fw.script_name);
     conn.send(CMD_UPGRADE_CTRL, &ctrl2).await?;
     info!("Upgrade script queued");
 
