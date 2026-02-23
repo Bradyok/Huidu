@@ -1,31 +1,71 @@
 //! UDP device discovery on port 9527.
 //!
-//! ## Protocol (both directions)
+//! ## Protocol (confirmed by live packet capture — BoxPlayer 7.11.18.0)
 //!
-//! ### PC → Device (search request)
-//! Any UDP packet sent to port 9527 triggers a response.  The conventional
-//! search trigger uses command `0x0001` (kSearchDeviceAsk):
+//! ### Ports
+//! - **9527**: Used by BOTH PC and device.  The PC binds to port 9527,
+//!   sends triggers to `broadcast:9527`, and all device responses also arrive
+//!   on port 9527.
+//!
+//! ### Discovery flow
+//!
+//! 1. PC binds to `0.0.0.0:9527`.
+//! 2. PC sends a search trigger broadcast to `255.255.255.255:9527`.
+//! 3. Device replies with a **21-byte announce** packet FROM device port 9527:
+//!    ```text
+//!    [4 bytes]  header    — [counter, 0x00, 0x00, 0x01]
+//!    [2 bytes]  cmd=0x02  — announce type (LE u16)
+//!    [15 bytes] device_id — null-padded ASCII
+//!    ```
+//! 4. PC **echoes** the 21-byte packet back to `device_ip:9527`.
+//! 5. Device sends a **full info** packet back to PC:9527.
+//!
+//! ### Full info packet layout (cmd=0x04, legacy)
+//!
 //! ```text
-//! [u16 LE length=2][u16 LE command=0x0001]
+//!  0- 5: header  [counter, 0x00, 0x00, 0x01, 0x04, 0x00]
+//!  6-20: device_id (15 bytes, null-padded ASCII)
+//!    21: flag  (0x20 = static IP)
+//! 22-25: IPv4 (big-endian)
+//! 26-31: 6 bytes unknown
+//! 32-35: subnet mask
+//! 36-39: gateway
+//! 40-43: DNS
+//! 44-47: zeros
+//!    48: cpu_type
+//!    49: hw_version
+//! 50-53: cap_flags (LE u32)
+//! 54-70: zeros
+//!    71: block_tag 0x07
+//!    72: block_sub 0x04
+//! 73-74: metric (LE u16)
+//! 75-76: screen_width (LE u16)
+//! 77-78: screen_height (LE u16)
+//!    79: zero
+//!    80: name_len (u8)
+//! 81..(81+name_len): player name (ASCII)
+//! (81+name_len): null
+//! (82+name_len): xml_len (u8)
+//! (83+name_len)..(83+name_len+xml_len): DeviceInfo XML
 //! ```
 //!
-//! ### Device → PC (two-packet response)
+//! ### Full info packet layout (cmd=0x05, current firmware)
 //!
-//! **Packet 1 — DeviceInfo** (client parses `DeviceInfo` from this):
+//! Same as cmd=0x04 but with **4 extra bytes** at offset 6-9 (`[0x21,0,0,0]`),
+//! which shifts device_id and everything after it by +4:
 //! ```text
-//! [15 bytes] device_id  — null-padded ASCII
-//! [ 4 bytes] IPv4 addr  — big-endian (network byte order)
-//! [ N bytes] player_name — null-terminated UTF-8
-//! [ M bytes] DeviceInfo XML — attribute-only root element
+//!  0- 5: header  [counter, 0x00, 0x00, 0x01, 0x05, 0x00]
+//!  6- 9: extra   [0x21, 0x00, 0x00, 0x00]
+//! 10-24: device_id (15 bytes)
+//!    25: flag
+//! 26-29: IPv4
+//!   …all other fields +4 vs cmd=0x04…
+//!    84: name_len
+//! 85..(85+name_len): player name
 //! ```
 //!
-//! **Packet 2 — ext1** (status overlay, no IP field):
-//! ```text
-//! [15 bytes] device_id  — null-padded ASCII (same as packet 1)
-//! [ M bytes] ext1 XML   — attribute-only root element
-//! ```
-//!
-//! The device also broadcasts both packets every ~3 seconds.
+//! Devices also broadcast the announce packet every ~3 seconds so passive
+//! listening also works without sending a search trigger.
 
 use std::net::{IpAddr, Ipv4Addr, SocketAddr};
 use std::time::Duration;
@@ -34,8 +74,11 @@ use tracing::{debug, warn};
 use crate::error::{Error, Result};
 use crate::xml;
 
-/// UDP port used by all Huidu device discovery traffic.
+/// UDP port that **devices listen on** (PC sends search triggers here).
 pub const DISCOVERY_PORT: u16 = 9527;
+
+/// The PC also binds to this same port to receive device responses.
+/// (Both PC and device use port 9527 — confirmed by live capture.)
 
 /// Fixed BoxPlayer firmware version string reported in discovery packets.
 ///
@@ -72,35 +115,170 @@ pub struct DeviceInfo {
 }
 
 impl DeviceInfo {
-    /// Try to parse a DeviceInfo packet received via UDP.
+    /// Try to parse a full DeviceInfo packet received via UDP on port 9527.
     ///
-    /// Returns `None` for ext1 status packets (which have XML directly at byte 15).
-    fn parse(data: &[u8]) -> Option<Self> {
+    /// Handles both:
+    /// - **New format** (≥85 bytes, 6-byte header, binary + XML):
+    ///   confirmed by live packet capture of BoxPlayer 7.11.18.0
+    /// - **Old format** (≥19 bytes, no header, starts with device_id):
+    ///   documented in HCatNet.dll / NetIOServices.dll
+    ///
+    /// Returns `None` for short announce packets (21-byte, cmd 0x02) or
+    /// unrecognised data.
+    pub fn parse(data: &[u8]) -> Option<Self> {
         if data.len() < 20 {
             return None;
         }
 
-        // Device ID: first 15 bytes, null-padded
+        // ── Detect new format ─────────────────────────────────────────────
+        // New format: bytes [0..5] = [counter, 0, 0, 0x01, cmd, 0x00]
+        // Full response has cmd = 0x04; announce has cmd = 0x02.
+        let is_new_format = data.len() >= 6
+            && data[1] == 0x00
+            && data[2] == 0x00
+            && data[3] == 0x01;
+
+        if is_new_format {
+            let cmd = u16::from_le_bytes([data[4], data[5]]);
+            match cmd {
+                0x04 | 0x05 => return Self::parse_new_format(data),
+                _ => return None, // Short announce (0x02), ext1 (0x0340), etc.
+            }
+        }
+
+        // ── Old format ────────────────────────────────────────────────────
+        Self::parse_old_format(data)
+    }
+
+    /// Parse the new binary+XML format introduced in BoxPlayer ≥7.11.x.
+    ///
+    /// cmd=0x04: device_id at offset 6.
+    /// cmd=0x05: 4 extra bytes at offset 6–9, device_id starts at offset 10.
+    ///
+    /// Confirmed offsets for cmd=0x05 (221-byte live capture):
+    /// - device_id: [10..25)
+    /// - flag:      [25]
+    /// - IPv4:      [26..30)
+    /// - MAC/unk6:  [30..36)
+    /// - subnet:    [36..40)
+    /// - gateway:   [40..44)
+    /// - dns:       [44..48)
+    /// - zeros4:    [48..52)
+    /// - cpu:       [52], hw: [53]
+    /// - cap_flags: [54..58)
+    /// - zeros14:   [58..72)
+    /// - block_tag: [72], block_sub: [73]
+    /// - metric:    [74..76)
+    /// - width:     [76..78), height: [78..80)
+    /// - zero:      [80], name_len: [81], name: [82..)
+    fn parse_new_format(data: &[u8]) -> Option<DeviceInfo> {
+        let cmd = u16::from_le_bytes([data[4], data[5]]);
+        // cmd=0x05 has 4 extra bytes before device_id; shift everything by 4.
+        let extra: usize = if cmd == 0x05 { 4 } else { 0 };
+
+        // Device ID: 15 bytes at 6+extra
+        let id_start = 6 + extra;
+        let id_end = id_start + 15;
+        let device_id = std::str::from_utf8(data.get(id_start..id_end)?)
+            .unwrap_or("")
+            .trim_end_matches('\0')
+            .to_string();
+
+        // IPv4: 4 bytes at 22+extra
+        let ip_start = 22 + extra;
+        let ip = data.get(ip_start..ip_start + 4)?;
+        let addr = IpAddr::V4(Ipv4Addr::new(ip[0], ip[1], ip[2], ip[3]));
+
+        // Screen dimensions: width at 76+extra (base 72 for cmd=0x04 + 4 extra for cmd=0x05).
+        // Confirmed offsets from 221-byte live capture: width=[76..78), height=[78..80).
+        let sw_start = 72 + extra; // = 76 for cmd=0x05, 72 for cmd=0x04
+        let screen_width = data.get(sw_start..sw_start + 2).map(|b| {
+            u16::from_le_bytes([b[0], b[1]]) as u32
+        });
+        let screen_height = data.get(sw_start + 2..sw_start + 4).map(|b| {
+            u16::from_le_bytes([b[0], b[1]]) as u32
+        });
+
+        // Player name: length-prefixed at 77+extra (= 81 for cmd=0x05)
+        let name_len_pos = 77 + extra;
+        let name_len = *data.get(name_len_pos)? as usize;
+        let name_start = name_len_pos + 1;
+        let name_end = name_start.checked_add(name_len)?;
+        let name = std::str::from_utf8(data.get(name_start..name_end)?)
+            .unwrap_or("")
+            .to_string();
+
+        // XML: length-prefixed after name + null terminator
+        let xml_len_pos = name_end + 1; // skip null terminator after name
+        let xml_len = *data.get(xml_len_pos)? as usize;
+        let xml_start = xml_len_pos + 1;
+        let xml_end = xml_start.checked_add(xml_len)?;
+        let info_xml = if xml_len > 0 {
+            std::str::from_utf8(data.get(xml_start..xml_end)?)
+                .unwrap_or("")
+                .to_string()
+        } else {
+            String::new()
+        };
+
+        // Parse optional fields from XML (may be limited in the compact XML)
+        let device_type = xml::get_attr(&info_xml, "DeviceType").map(|s| s.to_string())
+            .or_else(|| xml::get_attr(&info_xml, "deviceType").map(|s| s.to_string()));
+        let firmware_version = xml::get_attr(&info_xml, "SoftwareVersion").map(|s| s.to_string());
+
+        // Screen dimensions: prefer XML values (more authoritative), fall back to binary
+        let screen_width = xml::get_attr(&info_xml, "ScreenWidth")
+            .and_then(|s| s.parse().ok())
+            .or(screen_width);
+        let screen_height = xml::get_attr(&info_xml, "ScreenHeight")
+            .and_then(|s| s.parse().ok())
+            .or(screen_height);
+
+        let current_program = xml::get_attr(&info_xml, "programGuid").map(|s| s.to_string());
+        let brightness = xml::get_attr(&info_xml, "Brightness")
+            .or_else(|| xml::get_attr(&info_xml, "brightness"))
+            .and_then(|s| s.parse().ok());
+        let rotation = xml::get_attr(&info_xml, "ScreenR")
+            .or_else(|| xml::get_attr(&info_xml, "Rotation"))
+            .and_then(|s| s.parse().ok());
+        let screen_on = xml::get_attr(&info_xml, "ScreenOnOff")
+            .map(|s| s != "0" && !s.eq_ignore_ascii_case("false"));
+
+        Some(DeviceInfo {
+            device_id, addr, name, info_xml, device_type, firmware_version,
+            screen_width, screen_height, current_program, brightness, rotation, screen_on,
+        })
+    }
+
+    /// Parse the older format (no header, device_id starts at byte 0).
+    ///
+    /// ```text
+    ///  0-14: device_id (15 bytes, null-padded ASCII)
+    /// 15-18: IPv4 address (big-endian)
+    ///   19+: null-terminated player name
+    ///     +: DeviceInfo XML (ends before final '>')
+    /// ```
+    fn parse_old_format(data: &[u8]) -> Option<DeviceInfo> {
+        if data.len() < 20 {
+            return None;
+        }
+
         let device_id = std::str::from_utf8(&data[..15])
             .unwrap_or("")
             .trim_end_matches('\0')
             .to_string();
 
-        // ext1 packets have XML starting at byte 15 (no IP field).
-        // Detect by looking for '<' at that position.
+        // ext1 status packets start with XML at byte 15 — skip them.
         if data[15] == b'<' {
             return None;
         }
 
-        // IP: bytes 15–18 in big-endian (network byte order)
         let addr = IpAddr::V4(Ipv4Addr::new(data[15], data[16], data[17], data[18]));
 
-        // Player name: null-terminated string starting at byte 19
         let rest = &data[19..];
         let name_end = rest.iter().position(|&b| b == 0).unwrap_or(rest.len());
         let name = std::str::from_utf8(&rest[..name_end]).unwrap_or("").to_string();
 
-        // DeviceInfo XML: everything after the null terminator
         let xml_start = name_end + 1;
         let info_xml = if xml_start < rest.len() {
             let xml_bytes = &rest[xml_start..];
@@ -111,7 +289,6 @@ impl DeviceInfo {
             String::new()
         };
 
-        // Parse optional fields from DeviceInfo XML
         let device_type = xml::get_attr(&info_xml, "DeviceType").map(|s| s.to_string())
             .or_else(|| xml::get_attr(&info_xml, "deviceType").map(|s| s.to_string()))
             .or_else(|| xml::get_attr(&info_xml, "type").map(|s| s.to_string()));
@@ -119,11 +296,9 @@ impl DeviceInfo {
             .or_else(|| xml::get_attr(&info_xml, "version").map(|s| s.to_string()));
         let screen_width = xml::get_attr(&info_xml, "ScreenWidth")
             .or_else(|| xml::get_attr(&info_xml, "screenWidth"))
-            .or_else(|| xml::get_attr(&info_xml, "width"))
             .and_then(|s| s.parse().ok());
         let screen_height = xml::get_attr(&info_xml, "ScreenHeight")
             .or_else(|| xml::get_attr(&info_xml, "screenHeight"))
-            .or_else(|| xml::get_attr(&info_xml, "height"))
             .and_then(|s| s.parse().ok());
         let current_program = xml::get_attr(&info_xml, "programGuid").map(|s| s.to_string());
         let brightness = xml::get_attr(&info_xml, "Brightness")
@@ -147,42 +322,84 @@ impl DeviceInfo {
 pub struct Discovery;
 
 impl Discovery {
-    /// Broadcast a search packet and collect responses for `timeout`.
+    /// Broadcast a search packet and collect responding devices for `timeout`.
     ///
-    /// Deduplicates by `device_id`.  ext1 status packets are silently skipped.
+    /// ## Protocol
+    ///
+    /// 1. Binds to `0.0.0.0:9527` (same port used by both PC and device).
+    /// 2. Sends a search trigger broadcast to `255.255.255.255:9527`.
+    /// 3. When a 21-byte announce arrives, echoes it to `device_ip:9527`.
+    /// 4. Parses subsequent full-info packets into [`DeviceInfo`].
+    ///
+    /// Deduplicates by `device_id`.
     pub async fn scan(timeout: Duration) -> Result<Vec<DeviceInfo>> {
-        let socket = UdpSocket::bind("0.0.0.0:0").await
-            .map_err(|e| Error::Connection(format!("bind UDP: {e}")))?;
+        // Both PC and device use port 9527 — confirmed by live packet capture.
+        let socket = UdpSocket::bind(format!("0.0.0.0:{DISCOVERY_PORT}")).await
+            .map_err(|e| Error::Connection(
+                format!("bind UDP port {DISCOVERY_PORT}: {e}")
+            ))?;
         socket.set_broadcast(true)
             .map_err(|e| Error::Connection(format!("set broadcast: {e}")))?;
 
-        // kSearchDeviceAsk: [u16 length=2][u16 cmd=0x0001]
-        let search_pkt = [2u8, 0, 1, 0];
+        // Send search trigger to broadcast:9527.
+        // Use both old and new format to maximise compatibility.
         let broadcast = SocketAddr::new(IpAddr::V4(Ipv4Addr::BROADCAST), DISCOVERY_PORT);
-        socket.send_to(&search_pkt, broadcast).await
-            .map_err(|e| Error::Connection(format!("send broadcast: {e}")))?;
-        debug!("Discovery broadcast sent to 255.255.255.255:{DISCOVERY_PORT}");
 
-        let mut devices = Vec::new();
+        // Old format: [u16 LE length=2][u16 LE cmd=0x0001] — confirmed to trigger response.
+        let trigger_old = [2u8, 0, 1, 0];
+        socket.send_to(&trigger_old, broadcast).await
+            .map_err(|e| Error::Connection(format!("send broadcast (old): {e}")))?;
+
+        // New format: [counter=0][0x00][0x00][0x01][cmd=0x01][0x00]
+        let trigger_new = [0u8, 0, 0, 1, 1, 0];
+        socket.send_to(&trigger_new, broadcast).await
+            .map_err(|e| Error::Connection(format!("send broadcast (new): {e}")))?;
+
+        debug!("Discovery: sent search broadcasts to 255.255.255.255:{DISCOVERY_PORT}, \
+                listening on port {DISCOVERY_PORT}");
+
+        let mut devices: Vec<DeviceInfo> = Vec::new();
         let deadline = tokio::time::Instant::now() + timeout;
         let mut buf = vec![0u8; 2048];
 
         loop {
             let remaining = deadline.saturating_duration_since(tokio::time::Instant::now());
             if remaining.is_zero() { break; }
+
             match tokio::time::timeout(remaining, socket.recv_from(&mut buf)).await {
                 Ok(Ok((n, from))) => {
-                    debug!("Discovery response from {from}: {n} bytes");
-                    if let Some(dev) = DeviceInfo::parse(&buf[..n]) {
-                        debug!("Found: {} @ {}", dev.name, dev.addr);
-                        if !devices.iter().any(|d: &DeviceInfo| d.device_id == dev.device_id) {
-                            devices.push(dev);
+                    debug!("Discovery: received {n} bytes from {from}");
+                    let data = &buf[..n];
+
+                    // ── Detect and handle short announce (21-byte, cmd=0x02) ──────
+                    let is_new_announce = n == 21
+                        && data.get(3).copied() == Some(0x01)
+                        && data.get(4).copied() == Some(0x02)
+                        && data.get(5).copied() == Some(0x00);
+
+                    if is_new_announce {
+                        // Echo the announce back to device:9527 to trigger full response.
+                        let device_addr = SocketAddr::new(from.ip(), DISCOVERY_PORT);
+                        if let Err(e) = socket.send_to(data, device_addr).await {
+                            warn!("Discovery: echo to {device_addr} failed: {e}");
+                        } else {
+                            debug!("Discovery: echoed announce to {device_addr}");
                         }
-                    } else {
-                        debug!("Skipped non-DeviceInfo packet from {from}");
+                        continue; // wait for the full response
+                    }
+
+                    // ── Try to parse as full DeviceInfo ───────────────────────────
+                    match DeviceInfo::parse(data) {
+                        Some(dev) => {
+                            debug!("Discovery: found {} @ {}", dev.name, dev.addr);
+                            if !devices.iter().any(|d: &DeviceInfo| d.device_id == dev.device_id) {
+                                devices.push(dev);
+                            }
+                        }
+                        None => debug!("Discovery: skipped unrecognised packet from {from}"),
                     }
                 }
-                Ok(Err(e)) => warn!("UDP recv error: {e}"),
+                Ok(Err(e)) => warn!("Discovery: UDP recv error: {e}"),
                 Err(_) => break, // timeout
             }
         }

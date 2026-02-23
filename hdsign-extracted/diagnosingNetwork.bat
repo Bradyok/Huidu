@@ -1,0 +1,1 @@
+ToolsDiagnosisNetwork "1" "ip" "./log.acp"

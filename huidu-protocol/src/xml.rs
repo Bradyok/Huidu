@@ -14,15 +14,16 @@ pub fn new_guid() -> String {
 
 /// Wrap an XML method call in the client-side SDK request envelope.
 ///
+/// Uses double-quoted attributes matching the format confirmed in NetIOServices.dll:
 /// ```xml
-/// <?xml version='1.0' encoding='utf-8'?>
+/// <?xml version="1.0" encoding="utf-8"?>
 /// <sdk guid="{guid}">
 ///   <in method="{method}">{body}</in>
 /// </sdk>
 /// ```
 pub fn sdk_request(guid: &str, method: &str, body: &str) -> String {
     format!(
-        "<?xml version='1.0' encoding='utf-8'?>\
+        "<?xml version=\"1.0\" encoding=\"utf-8\"?>\
 <sdk guid=\"{guid}\">\
 <in method=\"{method}\">{body}</in>\
 </sdk>"
@@ -32,14 +33,14 @@ pub fn sdk_request(guid: &str, method: &str, body: &str) -> String {
 /// Build a device-side (server) SDK success response envelope.
 ///
 /// ```xml
-/// <?xml version='1.0' encoding='utf-8'?>
+/// <?xml version="1.0" encoding="utf-8"?>
 /// <sdk guid="{guid}">
 ///   <out method="{method}">{body}<result value="0"/></out>
 /// </sdk>
 /// ```
 pub fn sdk_response(guid: &str, method: &str, body: &str) -> String {
     format!(
-        "<?xml version='1.0' encoding='utf-8'?>\
+        "<?xml version=\"1.0\" encoding=\"utf-8\"?>\
 <sdk guid=\"{guid}\">\
 <out method=\"{method}\">{body}<result value=\"0\"/></out>\
 </sdk>"
@@ -49,7 +50,7 @@ pub fn sdk_response(guid: &str, method: &str, body: &str) -> String {
 /// Build a device-side SDK error response.
 pub fn sdk_error_response(guid: &str, method: &str, code: i32) -> String {
     format!(
-        "<?xml version='1.0' encoding='utf-8'?>\
+        "<?xml version=\"1.0\" encoding=\"utf-8\"?>\
 <sdk guid=\"{guid}\">\
 <out method=\"{method}\"><result value=\"{code}\"/></out>\
 </sdk>"

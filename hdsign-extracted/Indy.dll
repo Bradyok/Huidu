@@ -1,0 +1,1605 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<root>
+	<language name="हिन्दी">
+<Item name="ABrighterThanB">A है उज्जवल से B</Item>
+<Item name="About">बारे में</Item>
+<Item name="AbrightBoff">B काला है, जबकि A सफेद है</Item>
+<Item name="Add">जोड़ना</Item>
+<Item name="Add File">फ़ाइल जोड़ें</Item>
+<Item name="Add GIF">ग्राफ़िक जोड़ें</Item>
+<Item name="AddFailed">जोड़ने में विफल रहा है</Item>
+<Item name="AddFile">फ़ाइल जोड़ें</Item>
+<Item name="AddGroup">समूह जोड़ें</Item>
+<Item name="AddHypertext">हाइपरटेक्स्ट जोड़ें</Item>
+<Item name="AddPicture">चित्र जोड़ें</Item>
+<Item name="AddProgram">कार्यक्रम जोड़ें</Item>
+<Item name="AddRegion">क्षेत्र जोड़ें</Item>
+<Item name="AddSuccess">सफलतापूर्वक जोड़ें</Item>
+<Item name="AdjustTime">समय को समायोजित</Item>
+<Item name="AdvancedSetting">उन्नत सेटिंग</Item>
+<Item name="AdvancedSettings">उन्नत सेटिंग</Item>
+<Item name="AlignCenter">मध्य में संरेखित करें</Item>
+<Item name="AlignRight">दाईं ओर संरेखित</Item>
+<Item name="Alignment">संरेखण</Item>
+<Item name="All">सब</Item>
+<Item name="Allow">सक्षम करें</Item>
+<Item name="AllowPasswordAuthentication">पासवर्ड प्रमाणीकरण सक्षम करें लिए महत्वपूर्ण सेटिंग्स के लिए।</Item>
+<Item name="AlreadyOpened">इस स्क्रीन पहले से ही खोला जाता है।</Item>
+<Item name="AlterBaudrate">आयु बॉड दर</Item>
+<Item name="AntiClockwise rotation">घड़ी की विपरीत रोटेशन</Item>
+<Item name="AreaBackground">क्षेत्र पृष्ठभूमि</Item>
+<Item name="AreaDown">क्षेत्र नीचे</Item>
+<Item name="AreaLeft">क्षेत्र छोड़ दिया</Item>
+<Item name="AreaMaximize">क्षेत्र का विस्तार</Item>
+<Item name="AreaNoBorder">क्रॉस स्क्रीन वैश्विक कार्यक्रम के लिए सीमा का समर्थन नहीं करता</Item>
+<Item name="AreaRight">क्षेत्र दाईं ओर</Item>
+<Item name="AreaUp">क्षेत्र ऊपर की ओर</Item>
+<Item name="Associated">साथी</Item>
+<Item name="AutoAdjustTime">स्वचालित समय को समायोजित</Item>
+<Item name="AutoGetingIP">स्वचालित रूप से IP प्राप्त</Item>
+<Item name="AutoHide">स्वचालित छिपना</Item>
+<Item name="AutoReSend">स्वचालित पुनः भेजें</Item>
+<Item name="AutoSave">स्वचालित संग्रह</Item>
+<Item name="AutoScanInterval">स्वचालित स्कैन समय  </Item>
+<Item name="AutoScanMode">स्वचालित स्कैन मोड  </Item>
+<Item name="AutoSearchScans">स्वचालित रूप से स्कैन मोड खोज</Item>
+<Item name="AutoSwitching">स्वचालित स्विच</Item>
+<Item name="AutoUpdate">स्वचालित अद्यतन</Item>
+<Item name="Automatic">स्वचालित</Item>
+<Item name="AutomaticInfo">स्वत: समायोजन समारोह का उपयोग करते हैं, तो आप चमक सेंसर स्थापित किया है सुनिश्चित करें।</Item>
+<Item name="BBrighterThanA">B है उज्जवल से A</Item>
+<Item name="Background">पृष्ठभूमि</Item>
+<Item name="BackgroundColor">पृष्ठभूमि रंग  </Item>
+<Item name="BackgroundSetting">पृष्ठभूमि सेटिंग</Item>
+<List name="BackgroupEffects" id="0">यादृच्छिक  </List>
+<List name="BackgroupEffects" id="10"> बाहर ज़ूम करें</List>
+<List name="BackgroupEffects" id="11">साँस लेना</List>
+<List name="BackgroupEffects" id="12">विदेशी</List>
+<List name="BackgroupEffects" id="13">तुल्यकारक</List>
+<List name="BackgroupEffects" id="14">पलटा हुआ</List>
+<List name="BackgroupEffects" id="15">टिमटिमाहट</List>
+<List name="BackgroupEffects" id="16">गहरे रंग</List>
+<List name="BackgroupEffects" id="17">रिबन ओपनिंग समापन</List>
+<List name="BackgroupEffects" id="18">परिपत्र विस्तार</List>
+<List name="BackgroupEffects" id="19">डायमंड आकार का विस्तार</List>
+<List name="BackgroupEffects" id="1">स्थिर</List>
+<List name="BackgroupEffects" id="20">रैंडम क्रॉस लाइन</List>
+<List name="BackgroupEffects" id="21">वक्र रेखा</List>
+<List name="BackgroupEffects" id="2"> बाईं ओर ले जाएँ</List>
+<List name="BackgroupEffects" id="3"> दाईं ओर ले जाएँ</List>
+<List name="BackgroupEffects" id="4"> ऊपर ले जाएँ</List>
+<List name="BackgroupEffects" id="5"> नीचे ले जाएँ</List>
+<List name="BackgroupEffects" id="6">बाएं ले जाएं और दाईं तरफ जाएं </List>
+<List name="BackgroupEffects" id="7">क्षैतिज रूप से मध्य से खोले</List>
+<List name="BackgroupEffects" id="8">दोनों पक्षों से बंद करें</List>
+<List name="BackgroupEffects" id="9">ज़ूम इन</List>
+<Item name="BasicInfoSet">बेसिक सेटिंग</Item>
+<Item name="BasicPara">मूल पैरामीटर  </Item>
+<Item name="BasicSetting">मूल सेटिंग्स</Item>
+<Item name="Baudrate">बॉड दर</Item>
+<Item name="BbrightAoff">B सफेद है, जबकि A काला है</Item>
+<Item name="Begin">शुरू</Item>
+<Item name="Begin Play"> प्रारंभ करें</Item>
+<Item name="Black">काला</Item>
+<Item name="Blue">नीला</Item>
+<Item name="Boot">बूट स्थिति</Item>
+<Item name="BootStatus">नियंत्रण कार्ड बूट राज्य में वर्तमान में है फर्मवेयर अद्यतन किया जा करने के लिए इंतज़ार,पहले फर्मवेयर अपडेट कर लें!</Item>
+<Item name="Border">बॉर्डर</Item>
+<Item name="BorderColor">बॉर्डर का रंग</Item>
+<Item name="BorderSetting">सीमा निर्धारण</Item>
+<Item name="BorderWidth">बॉर्डर की चौड़ाई</Item>
+<Item name="BorderWidthExceeds">बॉर्डर चौड़ाई के से अधिक.</Item>
+<Item name="BorderWidthOutOfRange">बॉर्डर चौड़ाई के सीमा से बाहर है!</Item>
+<Item name="BoundDevice">बाउंड डिवाइस</Item>
+<Item name="Broadcast">प्रसारण</Item>
+<Item name="BuildArea">क्षेत्र का निर्माण</Item>
+<Item name="Built-inUnitBoard">में आम इकाई बोर्ड</Item>
+<Item name="BusEdit">संपादित</Item>
+<Item name="BusImage">यूनिट बोर्ड तस्वीरों</Item>
+<Item name="BusName">नाम</Item>
+<Item name="BusNew">नए</Item>
+<Item name="BusView">दृश्य</Item>
+<Item name="Busy">व्यस्त</Item>
+<Item name="Button">बटन</Item>
+<Item name="ButtonDownTiming">बटन उलटी गिनती</Item>
+<Item name="ButtonSettings">बटन 1</Item>
+<Item name="ButtonSettings2">बटन 2</Item>
+<Item name="ButtonSettings3">बटन  3</Item>
+<Item name="ButtonSettings4">बटन  4</Item>
+<Item name="ButtonSwitch">बटन स्विच करने</Item>
+<Item name="ButtonTiming">बटन समय</Item>
+<Item name="ButtonUpTiming">बटन गिनती</Item>
+<Item name="ButtonorPlaySet">बटन सेटिंग</Item>
+<Item name="CLKMirror">CLK polarity</Item>
+<Item name="CLKWidth">CLK चौड़ाई</Item>
+<Item name="COM">COM पोर्ट</Item>
+<Item name="COMERROR">कनेक्शन विफल रहता है,कोई कम धारावाहिक 2,3 पैर वहाँ जाँच?</Item>
+<Item name="COMINFO">संप्रेषण</Item>
+<Item name="COMURL">COM URL:http://huidu.wicp.net </Item>
+<Item name="CPUModelError">CPU मॉडल गलत है!</Item>
+<Item name="CanNotFindTheDefaultProfile">डिफ़ॉल्ट विन्यास फाइल नहीं मिल सकता है</Item>
+<Item name="Cancel">रद्द करें</Item>
+<Item name="CannotFindNetWordDrive">कोई नेटवर्क का डिवाइस पाया!</Item>
+<Item name="CannotOpenExcle">एक्सेल नहीं खोल सकता,यह किया गया है कि जाँच कृपया संस्थापित!</Item>
+<Item name="CardIpSeting">कार्ड IP सेटिंग</Item>
+<Item name="CardModel">कार्ड मॉडल</Item>
+<Item name="CardNumber">कार्ड प्रकार</Item>
+<Item name="CardOnlySupportFullColor">फर्मवेयर केवल सात रंग का समर्थन करता है।</Item>
+<Item name="CardOnlySupportTwoColor">फर्मवेयर केवल एकल रंग और दोहरी रंग का समर्थन करता है।</Item>
+<Item name="CardRestart">कार्ड पुनः आरंभ</Item>
+<Item name="CardVersion">कार्ड संस्करण</Item>
+<Item name="Center">केंद्र</Item>
+<Item name="CenterAlign">केंद्र संरेखित</Item>
+<Item name="CfwBackgroundEdit">एनीमेशन पृष्ठभूमि</Item>
+<Item name="Change">बदलें</Item>
+<Item name="Channel">चैनल</Item>
+<Item name="CharSpacing">चरित्र रिक्ति</Item>
+<Item name="CheckAll">सभी चुनें</Item>
+<Item name="CheckProgram">कार्यक्रम चुनें</Item>
+<Item name="ChecksumError">चेकसम गलत है!</Item>
+<Item name="ChooseDeive">डिवाइस का चयन करें</Item>
+<Item name="ClassicBackground">छवि पृष्ठभूमि</Item>
+<Item name="Clear">साफ़ स्क्रीन</Item>
+<List name="ClearEffects" id="0">साफ़ तुरंत</List>
+<List name="ClearEffects" id="10">ऊपर बंद करें और डाउन</List>
+<List name="ClearEffects" id="11">मध्य से क्षैतिज रूप खुला</List>
+<List name="ClearEffects" id="12">दोनों तरफ से बंद</List>
+<List name="ClearEffects" id="13">कार्यक्षेत्र शटर</List>
+<List name="ClearEffects" id="14">क्षैतिज शटर</List>
+<List name="ClearEffects" id="15">बाएँ पृष्ठ पर</List>
+<List name="ClearEffects" id="16">सही पृष्ठ पर</List>
+<List name="ClearEffects" id="17">फैन बाहर</List>
+<List name="ClearEffects" id="18">फैन करीब</List>
+<List name="ClearEffects" id="19">दक्षिणावर्त कवर</List>
+<List name="ClearEffects" id="1">वाम हटो</List>
+<List name="ClearEffects" id="200">रैंडम</List>
+<List name="ClearEffects" id="201">साफ़ न करें</List>
+<List name="ClearEffects" id="20">वामावर्त कवर</List>
+<List name="ClearEffects" id="21">क्षैतिज रूप बेतरतीब</List>
+<List name="ClearEffects" id="22">ऊपर रोल</List>
+<List name="ClearEffects" id="23">रोल नीचे</List>
+<List name="ClearEffects" id="24">रोल वाम</List>
+<List name="ClearEffects" id="25">रोल अधिकार</List>
+<List name="ClearEffects" id="26">क्षैतिज ग्रिड</List>
+<List name="ClearEffects" id="27">कार्यक्षेत्र ग्रिड</List>
+<List name="ClearEffects" id="2">दाएँजाएँ</List>
+<List name="ClearEffects" id="3">ऊपर ले जाएँ</List>
+<List name="ClearEffects" id="4">नीचे ले जाएँ</List>
+<List name="ClearEffects" id="5">कवर वाम</List>
+<List name="ClearEffects" id="6">कवर अधिकार</List>
+<List name="ClearEffects" id="7">कवर अप</List>
+<List name="ClearEffects" id="8">डाउन कवर</List>
+<List name="ClearEffects" id="9">मध्य से खड़ी खुला</List>
+<List name="platformList" id="hdplatform.huidu.cn">Release platform</List>
+<Item name="platform">platform</Item>
+<Item name="ClearScreeData">साफ़ विद्यमान प्रदर्शन?</Item>
+<Item name="Clock">डायल</Item>
+<Item name="ClockFrequency">घड़ी आवृत्ति</Item>
+<Item name="ClockParameters">ऐट्रिब्यूट डायल</Item>
+<Item name="Clockwise rotation">दक्षिणावर्त रोटेशन</Item>
+<Item name="Close">निकट</Item>
+<Item name="CloseScreen">बंद स्क्रीन</Item>
+<Item name="Color">रंग</Item>
+<Item name="ColorChannel">रंग चैनल</Item>
+<Item name="ColorChannelSet">रंग चैनल सेटिंग</Item>
+<Item name="ColorFilter">रंग फिल्टर</Item>
+<Item name="ColorInversion">रंग व्युत्क्रमण</Item>
+<Item name="ColorSingleSelect">रंग एकल चयन करें</Item>
+<Item name="ColorThreshold">रंग दहलीज</Item>
+<Item name="ColorfulText">एनिमेटेड किरदार</Item>
+<List name="ColorfulWordEffects" id="0">स्थिर प्रदर्शित</List>
+<List name="ColorfulWordEffects" id="10">ऊर्ध्वाधर पलटें</List>
+<List name="ColorfulWordEffects" id="11">क्षैतिज पलटें</List>
+<List name="ColorfulWordEffects" id="12">जूमिंग</List>
+<List name="ColorfulWordEffects" id="13">लगातार बाईं ओर ले जाने के लिए</List>
+<List name="ColorfulWordEffects" id="14">लगातार दाईं ओर ले जाने के लिए</List>
+<List name="ColorfulWordEffects" id="15">लगातार पक्ष ऊपर ले जाएँ</List>
+<List name="ColorfulWordEffects" id="16">लगातार नीचे की ओर ले जाते हैं</List>
+<List name="ColorfulWordEffects" id="17">2 डी ज़ूम इन</List>
+<List name="ColorfulWordEffects" id="18">2 डी ज़ूम आउट</List>
+<List name="ColorfulWordEffects" id="1">साइन तरंग</List>
+<List name="ColorfulWordEffects" id="2">शब्द के घूर्णन</List>
+<List name="ColorfulWordEffects" id="3">बाईं ओर में उड़ान भरने के लिए</List>
+<List name="ColorfulWordEffects" id="4">दाईं ओर में उड़ान भरने के लिए</List>
+<List name="ColorfulWordEffects" id="5">टिमटिमाहट</List>
+<List name="ColorfulWordEffects" id="6">शब्दशः उत्पादन</List>
+<List name="ColorfulWordEffects" id="7">आसपास डोलना</List>
+<List name="ColorfulWordEffects" id="8">लोच पाठ</List>
+<List name="ColorfulWordEffects" id="9">झूला</List>
+<Item name="Column">स्तंभ</Item>
+<Item name="CommStatus1">अच्छा संचार</Item>
+<Item name="CommStatus2">सामान्य संचार</Item>
+<Item name="CommStatus3">संचार गरीब है, लेकिन जुड़ा जा सकता है।</Item>
+<Item name="CommStatus4">संवाद नहीं कर सकता</Item>
+<Item name="CommTest">नेटवर्क का परीक्षण</Item>
+<Item name="Command">आदेश</Item>
+<Item name="CommandSmartSetting">सामान्यतः स्मार्ट सेटिंग</Item>
+<Item name="CommonSettings">आम सेटिंग</Item>
+<Item name="CommunicationMode">संचार मोड</Item>
+<Item name="CommunicationSetting">संचार सेटिंग्स</Item>
+<Item name="ConfirmRGBwidth">एक RGB डेटा द्वारा नियंत्रित लाइन्स</Item>
+<Item name="ConfirmScanMode">मोड स्कैन का निर्धारण करते हैं</Item>
+<Item name="Connected">जुड़े हुए</Item>
+<Item name="ConnectionSuccessful">सफलतापूर्वक कनेक्ट</Item>
+<Item name="ContainOverlappingRegions">अतिव्यापी क्षेत्रों को शामिल</Item>
+<Item name="ContentContainMultiLines">इस आशय की तालिका का समर्थन नहीं करता,आप इसे हटाना चाहते हैं?</Item>
+<Item name="ContinueMove">सतत कदम के</Item>
+<Item name="ContinueMoveUp">लगातार ऊपर ले जाएँ</Item>
+<Item name="Copy">प्रतिलिपि</Item>
+<Item name="Copyright">कॉपीराइट: शेन्ज़ेन Huidu प्रौद्योगिकी सह। लि</Item>
+<Item name="Count">गिनती</Item>
+<Item name="Count1">अंक</Item>
+<Item name="CountAdd">गिनती के साथ साथ</Item>
+<Item name="CountColor">मान रंग</Item>
+<Item name="CountDown">डाउन गिनती</Item>
+<Item name="CountReset">काउंटर रीसेट</Item>
+<Item name="CountSub">नीचे काउंटर</Item>
+<Item name="CountUp">गिनती</Item>
+<Item name="CradID">डिवाइस ID</Item>
+<Item name="CradName">डिवाइस का नाम</Item>
+<Item name="CrossBottom">नीचे</Item>
+<Item name="CrossCenter">केंद्र</Item>
+<Item name="CrossGlobalProgram">ग्लोबल प्रोग्राम</Item>
+<Item name="CrossNoSupport">ग्लोबल प्रोग्राम इस क्षेत्र में समर्थित नहीं है।</Item>
+<Item name="CrossScreen">क्रॉस स्क्रीन</Item>
+<Item name="CrossScreenParamsPageTip">क्रॉस स्क्रीन परम टिप</Item>
+<Item name="CrossScreenSetting">क्रॉस स्क्रीन सेटिंग</Item>
+<Item name="CrossSmartTip">सामान्य पाठ दिखाने वाला वर्तमान स्क्रीन, स्मार्ट सेट की कोई आवश्यकता नहीं है</Item>
+<Item name="CrossTop">टॉप</Item>
+<Item name="Custom">रिवाज</Item>
+<Item name="CustomIPTips">नियंत्रण कार्ड एक फ़ायरवॉल द्वारा अवरुद्ध है, स्वयं IP पते भरें।</Item>
+<Item name="CustomTime">समय अवधि के विनियमन द्वारा</Item>
+<Item name="CustomUnitBoard">कस्टम इकाई बोर्ड</Item>
+<Item name="CustomizeIP">अनुकूलित(TCP)</Item>
+<Item name="Cut">कट</Item>
+<Item name="Cyan">सियान</Item>
+<Item name="CycleTiming">चक्र समय</Item>
+<Item name="DHCPDNSAddr">DNS पता</Item>
+<Item name="DHCPGateway">डीएचसीपी डिफ़ॉल्ट गेटवे</Item>
+<Item name="DHCPLease">डीएचसीपी पट्टों</Item>
+<Item name="DHCPMask">डीएचसीपी सबनेट मास्क</Item>
+<Item name="DHCPServerAddr">DHCP सर्वर का पता</Item>
+<Item name="Data">डेटा</Item>
+<Item name="DataClearSuccess">डाटा सफलतापूर्वक को मंजूरी दे दी गई थी।</Item>
+<Item name="DataFill">"डेटा से अधिक है!"</Item>
+<Item name="DataLenght">Data length</Item>
+<Item name="DataLengthError">पैकेट लंबाई गलत है!</Item>
+<Item name="DataMirror">डाटा आईना</Item>
+<Item name="DataPolarity">डेटा ध्रुवता</Item>
+<Item name="DataPolaritySet">डाटा ध्रुवता सेटिंग</Item>
+<Item name="DataSource">डेटा स्रोत</Item>
+<Item name="DateAndWeekLocationReplaced">एक्सचेंज की तारीख और सप्ताह</Item>
+<Item name="Day">दिन</Item>
+<Item name="Default">डिफ़ॉल्ट</Item>
+<Item name="DefaultConnectDeviceType">डिफ़ॉल्ट कनेक्शन विधि</Item>
+<Item name="DelayedSignal">विलंबित सिग्नल</Item>
+<Item name="DeleteFailed">हटाने में विफल रहा</Item>
+<Item name="DeleteScreen">स्क्रीन हटाएँ</Item>
+<Item name="DeleteSuccess">हटाने में सफल</Item>
+<Item name="DeleteThisData">नियंत्रण कार्ड में सभी कार्यक्रमों हटाना चाहते हैं?</Item>
+<Item name="DeleteThisFile">इस फाइल को हटाना चाहते हैं?</Item>
+<Item name="DeleteThisProgram">इस कार्यक्रम हटाना चाहते हैं?</Item>
+<Item name="DeleteThisRegion">इस क्षेत्र हटाना चाहते हैं?</Item>
+<Item name="Deny">अक्षम करें</Item>
+<Item name="DestFile">लक्ष्य फ़ाइल</Item>
+<Item name="DestIP">डेस्ट IP </Item>
+<Item name="Detailed">विस्तृत ...</Item>
+<Item name="Detect">पता लगाने</Item>
+<Item name="DetectDevice">डिवाइस का पता लगाने</Item>
+<Item name="DetectFail">डिटेक्शन में विफल रहा है!</Item>
+<Item name="DetectSuccess">डिटेक्शन सफल होता है!</Item>
+<Item name="Detecting">पता लगा रहा ...</Item>
+<Item name="Deviation">आर्द्रता कैलिब्रेशन</Item>
+<Item name="Device">हटाने योग्य डिवाइस</Item>
+<Item name="DeviceChoosePageTip">1. U-डिस्क का उपयोग करें, कृपया का चयन करें नियंत्रक प्रकार; </Item>
+<Item name="DeviceID">डिवाइस ID</Item>
+<Item name="DeviceManage">डिवाइस प्रबंधित करें</Item>
+<Item name="DeviceName">डिवाइस का नाम</Item>
+<Item name="DialClock">डायल घड़ी</Item>
+<Item name="DialStyle">शैली डायल</Item>
+<Item name="DialWeek">सप्ताह</Item>
+<Item name="DialYear">दिनांक</Item>
+<Item name="DigitOnly">डिजिट केवल</Item>
+<Item name="Digital">डिजिट</Item>
+<Item name="Direction">दिशा</Item>
+<Item name="DisableBrightnessAdjustment">अक्षम चमक समायोजन</Item>
+<Item name="Disconnected">डिस्कनेक्ट किया गया</Item>
+<Item name="DiskSpace">डिस्क स्पेस:</Item>
+<Item name="Display">प्रदर्शन</Item>
+<List name="DisplayEffects" id="40">स्थिर प्रदर्शन कर</List>
+<List name="DisplayEffects" id="0">तुरंत दिखाएं</List>
+<List name="DisplayEffects" id="10">ऊपर और नीचे बंद</List>
+<List name="DisplayEffects" id="11">क्षैतिज रूप से बीच में से खोल</List>
+<List name="DisplayEffects" id="12">दोनों तरफ से बंद</List>
+<List name="DisplayEffects" id="14">कार्यक्षेत्र बंद</List>
+<List name="DisplayEffects" id="13">क्षैतिज शटर</List>
+<List name="DisplayEffects" id="15">बाएँ पृष्ठ पर</List>
+<List name="DisplayEffects" id="16">सही पृष्ठ पर</List>
+<List name="DisplayEffects" id="17">फैन बाहर</List>
+<List name="DisplayEffects" id="18">फैन करीब</List>
+<List name="DisplayEffects" id="19">दक्षिणावर्त कवर</List>
+<List name="DisplayEffects" id="1">वाम हटो</List>
+<List name="DisplayEffects" id="200">रैंडम</List>
+<List name="DisplayEffects" id="202">को लगातार वाम हटो</List>
+<List name="DisplayEffects" id="203">को लगातार दाएँजाएँ</List>
+<List name="DisplayEffects" id="204">को लगातार हटो ऊपर</List>
+<List name="DisplayEffects" id="20">वामावर्त कवर</List>
+<List name="DisplayEffects" id="21">लेवल बेतरतीब</List>
+<List name="DisplayEffects" id="23">ऊपर रोल</List>
+<List name="DisplayEffects" id="22">रोल नीचे</List>
+<List name="DisplayEffects" id="25">बाईं ओर रोल</List>
+<List name="DisplayEffects" id="24">दाईं ओर रोल</List>
+<List name="DisplayEffects" id="26">क्षैतिज ग्रिड</List>
+<List name="DisplayEffects" id="27">कार्यक्षेत्र ग्रिड</List>
+<List name="DisplayEffects" id="28">हिमपात</List>
+<List name="DisplayEffects" id="29">पड़ना</List>
+<List name="DisplayEffects" id="2">दाएँ स्थानांतरित</List>
+<List name="DisplayEffects" id="30">हिमपात (रिवर्स)</List>
+<List name="DisplayEffects" id="31">पतन (रिवर्स)</List>
+<List name="DisplayEffects" id="32">लेजर बाईं ओर</List>
+<List name="DisplayEffects" id="33">लेजर दाईं ओर</List>
+<List name="DisplayEffects" id="34">टिमटिमाहट</List>
+<List name="DisplayEffects" id="35">सफेद उलटा जगमगाहट</List>
+<List name="DisplayEffects" id="36">नीचे खींच</List>
+<List name="DisplayEffects" id="37">उर्ध्व खींचो</List>
+<List name="DisplayEffects" id="38">खड़ी खींचो</List>
+<List name="DisplayEffects" id="39">उथल-पुथल होना</List>
+<List name="DisplayEffects" id="3">ऊपर ले जाएँ</List>
+<List name="DisplayEffects" id="4">नीचे ले जाएँ</List>
+<List name="DisplayEffects" id="5">कवर वाम</List>
+<List name="DisplayEffects" id="6">कवर अधिकार</List>
+<List name="DisplayEffects" id="7">कवर अप</List>
+<List name="DisplayEffects" id="8">डाउन कवर</List>
+<List name="DisplayEffects" id="9">मध्य से खड़ी खुला</List>
+<Item name="DisplayState">प्रदर्शन का दर्जा</Item>
+<Item name="Dll_Add">संचित</Item>
+<Item name="Dll_Data">डाटा</Item>
+<Item name="Docking">डॉकिंग</Item>
+<Item name="DonotTips">प्रांप्ट नहीं</Item>
+<Item name="DontChange">मत बदलो</Item>
+<Item name="DownloadSpeed">डाउनलोड स्पीड</Item>
+<Item name="Dwell">रोक</Item>
+<Item name="Edit">संपादित करें</Item>
+<Item name="Editor">संपादित करें</Item>
+<Item name="Effect">प्रभाव</Item>
+<Item name="Effect Cover">आवरण</Item>
+<Item name="Effect Drift">बर्फ़</Item>
+<Item name="Effect FanShaped">शटर</Item>
+<Item name="Effect Flicker">ट्विंकल</Item>
+<Item name="Effect Laser">लेज़र</Item>
+<Item name="Effect Move">हटो</Item>
+<Item name="Effect OpenAndClose">ओपन-करीब</Item>
+<Item name="Effect PageTurning">पेज</Item>
+<Item name="Effect Pull">खींचें</Item>
+<Item name="Effect Roll">रोल</Item>
+<Item name="Effect WaterFall">पड़ना</Item>
+<Item name="EffectSetting">प्रभाव सेटिंग्स</Item>
+<Item name="EffectType">प्रभाव के प्रकार</Item>
+<Item name="EliminateGhosting">रेखा ब्लैंकिंग</Item>
+<Item name="Empty">खाली</Item>
+<Item name="EmptyScreen">प्रदर्शन को खाली करें</Item>
+<Item name="Enable">सक्षम करें</Item>
+<Item name="EnableDhcp">डीएचसीपी सक्षम करें</Item>
+<Item name="End Play">समाप्त</Item>
+<Item name="EndIpAddr">अंत आईपी</Item>
+<Item name="EndToEnd">अंत करने के लिए अंत</Item>
+<Item name="Equilibrium">इक्वलिब्रियम</Item>
+<Item name="Error">त्रुटि</Item>
+<Item name="EthSettingHelpA">सीधे सॉफ्टवेयर से संबंधित सेटिंग में बदलाव, युक्ति पता नहीं बदलते।</Item>
+<Item name="EthSettingHelpB">ध्यान दें:&#x000A;। सेटिंग्स सफल होने के बाद सॉफ्टवेयर और डिवाइस के पते एक साथ बदल जाएगा।&#x000A;2। कई उपकरणों के लिए एक साथ जुड़े हुए हैं, डिवाइस के मैक पते अद्वितीय है सुनिश्चित करें।</Item>
+<Item name="Ethernet">ईथरनेट</Item>
+<Item name="EthernetAddressSettingSuccess">ईथरनेट पता सफलतापूर्वक स्थापित किया गया था।</Item>
+<Item name="EthernetSettingInfo">नोट: इस समारोह का उपयोग करते हैं, तो कृपया सुनिश्चित करें कि लैन केवल एक ही नियंत्रण कार्ड से जोड़ता है।</Item>
+<Item name="Example">उदाहरण</Item>
+<Item name="ExitDownloading">अद्यतन फ़ाइल डाउनलोड कर रहा है, छोड़ने के लिए मजबूर करने के लिए कि क्या?</Item>
+<Item name="ExpiredVerification">समय सीमा समाप्त, passward की जरूरत</Item>
+<Item name="ExporBus">निर्यात इकाई बोर्ड मापदंडों</Item>
+<Item name="ExporBusIn">आयात इकाई बोर्ड मापदंडों</Item>
+<Item name="Export">यू डिस्क</Item>
+<Item name="ExportAdjustTimeFile">निर्यात समय-समायोजन फ़ाइल</Item>
+<Item name="ExportFile">निर्यात फ़ाइल</Item>
+<Item name="ExportFileFail">फ़ाइल निर्यात करने में विफल!</Item>
+<Item name="ExportImport">आयात और निर्यात</Item>
+<Item name="ExportParam">निर्यात</Item>
+<Item name="ExportScreenFile">निर्यात स्क्रीन फ़ाइल</Item>
+<Item name="ExportSetedParams">मापदंडों का निर्यात</Item>
+<Item name="ExportSuccess">यू डिस्क पॉप अप करने के लिए चाहे सफलतापूर्वक निर्यात?</Item>
+<Item name="ExportSuccess1">सफलतापूर्वक करने के लिए निर्यात</Item>
+<Item name="ExportSuccess2">!</Item>
+<Item name="ExportToUDisk">यू डिस्क में निर्यात करें</Item>
+<Item name="Fahrenheit">डिग्री F</Item>
+<Item name="Fast">तेजी से</Item>
+<Item name="Fastest">सबसे तेज</Item>
+<Item name="FeatureNavigator">कार्यात्मक नेविगेशन</Item>
+<Item name="File">फ़ाइल</Item>
+<Item name="FileConfigurationError">फ़ाइल कुविन्यस्त!</Item>
+<Item name="FileConfigurationPackageSentSuccessfully">फ़ाइल विन्यास पैकेज सफलतापूर्वक भेजा गया था।</Item>
+<Item name="FileDoesNotMatch">फ़ाइल से मेल नहीं खाती।</Item>
+<Item name="FileList">फ़ाइल सूची</Item>
+<Item name="FileMisidentified">फ़ाइल ग़लत पहचाना!</Item>
+<Item name="FileParametersError"> फ़ाइल पैरामीटर गलत है! (स्क्रीन चौड़ाई या ऊंचाई से अधिक है, या रंग गलत है।)</Item>
+<Item name="FileSendComplete">फ़ाइल सफलतापूर्वक भेजा गया था।</Item>
+<Item name="FileSize">फ़ाइल का आकार</Item>
+<Item name="FileSuccessfullyReceived">फ़ाइल सफलतापूर्वक प्राप्त हुआ था।</Item>
+<Item name="FilterColor">फ़िल्टर रंग</Item>
+<Item name="FindNewVersion">नए संस्करण की खोज,अद्यतन डाउनलोड करने के लिए है कि क्या?</Item>
+<Item name="FindScree">स्क्रीन लगाएं</Item>
+<Item name="FindSerial">नियंत्रण कार्ड के साथ जुड़े हुए सीरियल पोर्ट का पता लगाएं।</Item>
+<Item name="Finish">अंत</Item>
+<Item name="FinishTracingPoint">बिंदु ट्रेसिंग समाप्त हो गया है।</Item>
+<Item name="FirmwareMismatching">फर्मवेयर बेमेल के</Item>
+<Item name="FirmwareVersion">फर्मवेयर संस्करण</Item>
+<Item name="FirstPage">पहला पन्ना</Item>
+<Item name="FitMaxHint">क्षेत्र है अधिकतम</Item>
+<Item name="FixedCellsWidth">फिक्स्ड सेल चौड़ाई के</Item>
+<Item name="FixedPlay">फिक्स्ड प्रसारित कार्यक्रमों</Item>
+<Item name="FixedTime">निश्चित समय</Item>
+<Item name="Flash">SWF</Item>
+<Item name="Floating">चल</Item>
+<Item name="FlushLeft">फ्लश वाम</Item>
+<Item name="Font">फ़ॉन्ट</Item>
+<Item name="FontSize">फ़ॉन्ट का आकार</Item>
+<Item name="Foreground">अग्रभूमि</Item>
+<Item name="FoundDisk">हटाने योग्य डिवाइस पाया!</Item>
+<Item name="FramesTooMuch">फ्रेम्स जरूरत से ज्यादा रहे हैं, को कम करने के लिए कृपया!</Item>
+<Item name="FreeSpace">मुक्त स्थान</Item>
+<Item name="Frequency">स्कैन फ़्रिक्वेंसी</Item>
+<Item name="Friday">शुक्रवार</Item>
+<Item name="From">से</Item>
+<Item name="From Max To Min">कम से कम करने के लिए अधिक से अधिक से</Item>
+<Item name="From Min To Max">अधिकतम करने के लिए कम से कम से</Item>
+<Item name="GIF name">GIF पथ</Item>
+<Item name="GammaCorrection">गामा सुधार</Item>
+<Item name="GaryTip1">1 करने के लिए नियंत्रण अवधि घटाकर</Item>
+<Item name="General2">2 पीढ़ी</Item>
+<Item name="General4">4 पीढ़ी</Item>
+<Item name="General6">6 पीढ़ी</Item>
+<Item name="GeneratingData">जनरेट कर डेटा</Item>
+<Item name="GetFirmwareVersion">फर्मवेयर संस्करण प्राप्त करें</Item>
+<Item name="GetSystemTime">प्रणाली समय प्राप्त करें</Item>
+<Item name="Graph">ग्राफ़</Item>
+<Item name="GraphCount">मात्रा</Item>
+<Item name="GrayLevel">ग्रे स्तर</Item>
+<Item name="Green">हरा</Item>
+<Item name="HDScreenFile">एच.डी. स्क्रीन फ़ाइल</Item>
+<Item name="HZoom">स्तर खिंचाव</Item>
+<Item name="Height">ऊंचाई</Item>
+<Item name="HeightOfMoreTthan">"ऊँचाई अधिकतम से अधिक है!"</Item>
+<Item name="Hide">छिपाना</Item>
+<Item name="High">उच्च</Item>
+<Item name="Hollow">खोखला</Item>
+<Item name="Horizontal">क्षैतिज स्थिति</Item>
+<Item name="Hour">घंटा</Item>
+<Item name="HourHand">घड़ी की सूई</Item>
+<Item name="HourRadius">घंटो त्रिज्या</Item>
+<Item name="Humidity">आर्द्रता</Item>
+<Item name="IDAlreadyExists">आईडी किया गया है मौजूद है</Item>
+<Item name="IDInputError">आईडी त्रुटि है</Item>
+<Item name="IPAddress">आईपी पता</Item>
+<Item name="IPNotLegitimate">आईपी ​​वैध नहीं है</Item>
+<Item name="IPResetting">आईपी रीसेट</Item>
+<Item name="IPSetting">आईपी सेटिंग</Item>
+<Item name="Idle">बेकार</Item>
+<Item name="IllegalFile">अवैध फ़ाइल</Item>
+<Item name="Image">छवि</Item>
+<Item name="ImageAuto">चित्र शैली</Item>
+<Item name="Images">चित्र</Item>
+<Item name="ImportParam">आयात</Item>
+<Item name="ImportScreenFile">आयात स्क्रीन फ़ाइल</Item>
+<Item name="IncompleteDataWriting">अधूरा डेटा लेखन</Item>
+<Item name="Index">अनुक्रम संख्या</Item>
+<Item name="InfraredRay">इन्फ्रारेड रे</Item>
+<Item name="InitialState">प्रारंभिक अवस्था</Item>
+<Item name="InitializeSuccess">सफलतापूर्वक इनिशियलाइज़</Item>
+<Item name="InputSmartSettingName">स्मार्ट सेटिंग्स का नाम दर्ज करें</Item>
+<Item name="Insert">डालें</Item>
+<Item name="InsertColumn">डालें स्तंभ</Item>
+<Item name="InsertRow">डालें पंक्ति</Item>
+<Item name="Inverse">चयन उलटें</Item>
+<Item name="IsDeleteAllScreen">प्रदर्शन के सभी हटाना चाहते हैं?</Item>
+<Item name="IsExportVideo">चाहे निर्यात वीडियो?</Item>
+<Item name="IsSaveFile">आप फाइल को बचाने के लिए करना चाहते हैं?</Item>
+<Item name="IsSendToCard">आप इसे नियंत्रित करने के लिए कार्ड भेजने के लिए चाहते हैं?</Item>
+<Item name="IsTheLatestVersion">नवीनतम संस्करण पहले से ही है।</Item>
+<Item name="Large">बड़ा</Item>
+<Item name="LastPage">अंतिम पृष्ठ</Item>
+<Item name="LeftToRight">बाएँ-&gt;राइट</Item>
+<Item name="LevelScreenshot">क्षैतिज स्क्रीनशॉट</Item>
+<Item name="LightRows">लाइन्स एक मॉड्यूल में जलाया</Item>
+<Item name="LineSpacing">पंक्ति रिक्ति</Item>
+<Item name="Link">संपर्क</Item>
+<Item name="LinkState">संपर्क स्थिति</Item>
+<Item name="LiveTime">वर्तमान समय</Item>
+<Item name="LocalDisck">स्थानीय डिस्क</Item>
+<Item name="LocalIpSeting">स्थानीय IP सेटिंग</Item>
+<Item name="LockPara">लॉक मानकों</Item>
+<Item name="Low">कम</Item>
+<Item name="LuminancePrior">पहली चमकीलापन</Item>
+<Item name="LuminanceSetting">चमक सेटिंग्स</Item>
+<Item name="LuminanceSettingSuccess">चमक सफलतापूर्वक स्थापित किया गया था।</Item>
+<Item name="MACAddress">मैक पता</Item>
+<Item name="MFRDate">पूर्व कारखाने की तारीख</Item>
+<Item name="Max">मैक्स</Item>
+<Item name="MaxIPAddr">अधिकतम टी.पी. पता</Item>
+<Item name="MaxUseImage">मैक्स के लिए छवि</Item>
+<Item name="MaximumOfHeight">अधिकतम ऊंचाई</Item>
+<Item name="MaximumOfRange">अधिकतम रेंज</Item>
+<Item name="MaximumOfRegions">अधिकतम क्षेत्र</Item>
+<Item name="MaximumOfWidth">अधिकतम चौड़ाई के</Item>
+<Item name="Memory">स्मृति</Item>
+<Item name="Memory Size">फाइल का आकार</Item>
+<Item name="MergeCells">कोशिकाओं का विलय करो</Item>
+<Item name="Middle">मध्यम</Item>
+<Item name="Min">न्यूनतम</Item>
+<Item name="MinIPAddr">न्यूनतम आईपी पते</Item>
+<Item name="MinUseImage">न्यूनतम के लिए छवि</Item>
+<Item name="MinuteHand">मिनट की सूई</Item>
+<Item name="Model">Card</Item>
+<Item name="Modify">संशोधित करें</Item>
+<Item name="Module">मॉड्यूल</Item>
+<Item name="ModuleMismatching">नियंत्रण कार्ड के मॉडल से मेल नहीं खाती।</Item>
+<Item name="ModuleSelect">मॉड्यूल चयन</Item>
+<Item name="Monday">सोमवार</Item>
+<Item name="MoreSetting">अतिरिक्त सेटिंग्स</Item>
+<Item name="MoreSettings">अतिरिक्त सेटिंग्स-&gt;&gt;</Item>
+<Item name="MoveDown">नीचे ले जाएँ</Item>
+<Item name="MoveUp">ऊपर ले जाएँ</Item>
+<Item name="Multi">एकाधिक</Item>
+<Item name="MultiFrame">बहु फ्रेम छवि</Item>
+<Item name="MultiLine">मल्टी पंक्ति प्रदर्शन</Item>
+<Item name="MultiScreenDirectConnect">मल्टी स्क्रीन मोड</Item>
+<Item name="MultipeSend">भेजा जा रहा है एकाधिक</Item>
+<Item name="MultipeSendHint">एकाधिक भेजने केवल ईथरनेट पर लागू होता है (आईपी फिक्स्ड) मोड.</Item>
+<Item name="MultipleEffects">एकाधिक प्रभाव</Item>
+<Item name="MultipleLinesoftext">बहु पाठ</Item>
+<Item name="NICName">एनआईसी नाम</Item>
+<Item name="Name">नाम</Item>
+<Item name="NeedSensor">सेंसरों की आवश्यकता</Item>
+<Item name="NeedSpace">अंतरिक्ष की जरूरत</Item>
+<Item name="NetMark">सबनेट मास्क</Item>
+<Item name="NetWorkError">वर्तमान नियंत्रण कार्ड केवल, कॉम्पैक्ट मोड का उपयोग कर सकते हैं
+  नियंत्रण कार्ड कंप्यूटर के साथ एक ही नेटवर्क खंड पर है कि क्या जाँच कृपया!</Item>
+<Item name="NewCrossScreen">नई क्रॉस स्क्रीन(&amp;C)</Item>
+<Item name="NewCrossScreen_G">न्यू क्रॉस स्क्रीन</Item>
+<Item name="NewGuideScreen">गाइड द्वारा नए स्क्रीन</Item>
+<Item name="NewHypertext">नई हाइपरटेक्स्ट</Item>
+<Item name="NewNormalScreen_G">न्यू नोर्मल स्क्रीन</Item>
+<Item name="NewScreen">नए स्क्रीन</Item>
+<Item name="NewTable">नई तालिका</Item>
+<Item name="Next">अगला</Item>
+<Item name="NextPage">अगली</Item>
+<Item name="NextProgram">अगले कार्यक्रम में स्विच करें</Item>
+<Item name="NextScan">अगली</Item>
+<Item name="NoAssociation">कोई सहयोग</Item>
+<Item name="NoBorder">नहीं बॉर्डर</Item>
+<Item name="NoFile">फ़ाइल मौजूद नहीं है!</Item>
+<Item name="NoFindConfigFiles">स्क्रीन पैरामीटर फाइल नहीं मिल सकता है, जारी रखें?</Item>
+<Item name="NoFoundDisk">कोई हटाने योग्य डिवाइस नहीं मिला!</Item>
+<Item name="NoInstallFlash">कृपया जांचें एडोब फ्लैश प्लेयर स्थापित किया गया है कि क्या!</Item>
+<Item name="NoLimit">कोई सीमा नहीं</Item>
+<Item name="NoSerial">सीरियल के साथ जुड़ा नियंत्रण कार्ड नहीं मिल सका पोर्ट।</Item>
+<Item name="NoSerialConnection">जुड़ा नहीं सीरियल पोर्ट</Item>
+<Item name="Noarea">कार्यक्रम का अभाव, भेजने में विफल!</Item>
+<Item name="Noitemisselected">कुछ भी चयनित नहीं</Item>
+<Item name="NormalShow">खेलने के आदेश</Item>
+<Item name="NotSelected">अचयनित</Item>
+<Item name="NotSupportGlobalProgram">साधारण स्क्रीन वैश्विक कार्यक्रम का समर्थन नहीं करता</Item>
+<Item name="NotSupportLANUpgrade">इस मॉडल ईथरनेट का समर्थन नहीं करता, फर्मवेयर उपयोग सीरियल पोर्ट या यू डिस्क का उन्नयन कृपया!</Item>
+<Item name="NotSupportTips">सुझाव: समय का समर्थन नहीं करते, नई डायल, तापमान और आर्द्रता.</Item>
+<Item name="NumberOfProgramHasReachedItsMaximum">कार्यक्रम की संख्या तक पहुंच गया है अपने
+अधिकतम!</Item>
+<Item name="NumberOfRegionHasReachedItsMaximum">इस क्षेत्र की संख्या इसकी अधिकतम तक पहुँच गया है!</Item>
+<Item name="OEPolarity">ओई ध्रुव</Item>
+<Item name="OEPolaritySet">ओई  ध्रुवता सेटिंग</Item>
+<Item name="OK">ठीक</Item>
+<Item name="Offline">ऑफलाइन</Item>
+<Item name="OldVerCard">पीढ़ी 4 के लिए खोज</Item>
+<Item name="On-line">ऑन लाइन</Item>
+<Item name="OnBottom">से नीचे डालें</Item>
+<Item name="OnLeft">वाम पर</Item>
+<Item name="OnRight">राइट पर</Item>
+<Item name="OnTop"> डालें से ऊपर</Item>
+<Item name="OnlyAllowContainsAClockRegion">केवल एक डायल इस क्षेत्र!</Item>
+<Item name="OnlyAllowContainsATempRegion">केवल एक तापमान इस क्षेत्र को शामिल करने की अनुमति!</Item>
+<Item name="OnlyAllowContainsATimeRegion">केवल एक समय क्षेत्र शामिल कर सकते हैं</Item>
+<Item name="OnlyCard">बस कार्ड के लिए</Item>
+<Item name="Open">खुला</Item>
+<Item name="OpenAdv">ओपन विज्ञापन</Item>
+<Item name="OpenFileFail">फ़ाइल खोलने में असमर्थ है, यह कब्जा कर लिया है अगर जाँच कृपया!</Item>
+<Item name="OpenFolder">ओपन फ़ोल्डर</Item>
+<Item name="OpenScreen">ओपन स्क्रीन</Item>
+<Item name="OperationSuccess">सफलतापूर्वक संचालित</Item>
+<Item name="Orange">बैंगनी</Item>
+<Item name="OriginX">उत्पत्ति X</Item>
+<Item name="OriginY">उत्पत्ति Y</Item>
+<Item name="Original">मूल</Item>
+<Item name="OtherSeting">अन्य सेटिंग</Item>
+<Item name="Out">जानकारी</Item>
+<Item name="OutOfMemory">नियंत्रण कार्ड की स्मृति अपर्याप्त है, इस कार्यक्रम को कम करने के लिए कृपया!</Item>
+<Item name="OutOfShowMemory">स्मृति से बाहर, क्षेत्र को कम</Item>
+<List name="OutputWindowString" id="0">स्कैन किए गए उपकरण</List>
+<List name="OutputWindowString" id="10">नियंत्रण कार्ड नाम सफलतापूर्वक सेट</List>
+<List name="OutputWindowString" id="11">साफ स्क्रीन सफलतापूर्वक</List>
+<List name="OutputWindowString" id="12">स्क्रीन मापदंडों को सफलतापूर्वक स्थापित कर</List>
+<List name="OutputWindowString" id="13">नियंत्रण कार्ड समय सफलतापूर्वक स्थापित कर</List>
+<List name="OutputWindowString" id="14">चमक सफलतापूर्वक स्थापित कर</List>
+<List name="OutputWindowString" id="15">समय स्विच सफलतापूर्वक स्थापित कर</List>
+<List name="OutputWindowString" id="16">परीक्षा में प्रदर्शन। । ।</List>
+<List name="OutputWindowString" id="17">अज्ञात आदेश</List>
+<List name="OutputWindowString" id="18">कोई हार्डवेयर मापदंडों</List>
+<List name="OutputWindowString" id="19">अवैध आदेश</List>
+<List name="OutputWindowString" id="1">डिवाइस जानकारी प्राप्त करें।</List>
+<List name="OutputWindowString" id="20">सिस्टम व्यस्त है</List>
+<List name="OutputWindowString" id="21">सिर लंबाई त्रुटि</List>
+<List name="OutputWindowString" id="22">प्रतीक सही नहीं है</List>
+<List name="OutputWindowString" id="23">संख्या सही नहीं है</List>
+<List name="OutputWindowString" id="24">कोई स्क्रीन मापदंडों</List>
+<List name="OutputWindowString" id="25">पैकेट त्रुटि</List>
+<List name="OutputWindowString" id="26">अज्ञात त्रुटि</List>
+<List name="OutputWindowString" id="27">समय समाप्त भेजें</List>
+<List name="OutputWindowString" id="28">प्रतिक्रिया पैकेट पार्सिंग त्रुटि</List>
+<List name="OutputWindowString" id="29">आईपी ​​सफलतापूर्वक संशोधित</List>
+<List name="OutputWindowString" id="2">उपकरण ऑफ़लाइन</List>
+<List name="OutputWindowString" id="30">फर्मवेयर अद्यतन विफल रहा है, कृपया पुनः प्रयास करें</List>
+<List name="OutputWindowString" id="31">सेटिंग विफल रही</List>
+<List name="OutputWindowString" id="32">चेक त्रुटि</List>
+<List name="OutputWindowString" id="33">प्रोटोकॉल त्रुटि</List>
+<List name="OutputWindowString" id="34">निर्देश त्रुटि</List>
+<List name="OutputWindowString" id="35">फ़ाइल से मेल नहीं खाता</List>
+<List name="OutputWindowString" id="36">पैकेट नंबर त्रुटि</List>
+<List name="OutputWindowString" id="37">मॉड्यूल प्रकार मेल नहीं खाता</List>
+<List name="OutputWindowString" id="38">फ़ाइल कॉन्फ़िगरेशन त्रुटि</List>
+<List name="OutputWindowString" id="39">अवैध फ़ाइल</List>
+<List name="OutputWindowString" id="3">कृपया स्क्रीन का चयन आप भेजना चाहते हैं</List>
+<List name="OutputWindowString" id="40">सीपीयू प्रकार की त्रुटि</List>
+<List name="OutputWindowString" id="41">फर्मवेयर समर्थन तिरंगा ही, एकल और दोहरी रंग का समर्थन नहीं करते</List>
+<List name="OutputWindowString" id="42">फर्मवेयर समर्थन एकल दोहरी रंग केवल, तिरंगा का समर्थन नहीं करते</List>
+<List name="OutputWindowString" id="43">अद्यतन सफलतापूर्ण हो गया</List>
+<List name="OutputWindowString" id="44">रिसेप्शन में विफल रहा है</List>
+<List name="OutputWindowString" id="45">पैकेट लंबाई त्रुटि</List>
+<List name="OutputWindowString" id="46">फ़ाइल पहचान त्रुटि</List>
+<List name="OutputWindowString" id="47">उप-पैकेट क्रम संख्या त्रुटि</List>
+<List name="OutputWindowString" id="49">सफलतापूर्वक प्राप्त फ़ाइल</List>
+<List name="OutputWindowString" id="4">चयन स्क्रीन अनबाउंड उपकरण</List>
+<List name="OutputWindowString" id="50">विलंबित संकेत</List>
+<List name="OutputWindowString" id="51">सिस्टम व्यस्त है</List>
+<List name="OutputWindowString" id="52">डाटा अधूरे लिखा है</List>
+<List name="OutputWindowString" id="53">अद्यतन फर्मवेयर सफलतापूर्वक है!</List>
+<List name="OutputWindowString" id="54">हार्डवेयर मापदंडों सफलतापूर्वक सेट</List>
+<List name="OutputWindowString" id="55">बाध्य डिवाइस ऑफ़लाइन है</List>
+<List name="OutputWindowString" id="56">स्क्रीन आकार की स्थापना सही नहीं है।</List>
+<List name="OutputWindowString" id="57">भेजना प्रारंभ करें</List>
+<List name="OutputWindowString" id="58">सफलतापूर्वक स्थापना</List>
+<List name="OutputWindowString" id="59">सेवा समाप्ति</List>
+<List name="OutputWindowString" id="5">कार्यक्रम डेटा बहुत बड़ा है</List>
+<List name="OutputWindowString" id="60">फ़ॉन्ट सफलतापूर्वक बदल</List>
+<List name="OutputWindowString" id="61">सीधे सफलतापूर्वक जोड़ा सेट</List>
+<List name="OutputWindowString" id="62">रद्द सीधे सफलतापूर्वक जोड़ा</List>
+<List name="OutputWindowString" id="63">बूट स्थिति में उपकरण, फर्मवेयर अपडेट कर लें</List>
+<List name="OutputWindowString" id="64">सत्यापन में विफल रहता है</List>
+<List name="OutputWindowString" id="65">कुछ भी नहीं देता है</List>
+<List name="OutputWindowString" id="66">फ़ाइल बहुत बड़ी है</List>
+<List name="OutputWindowString" id="67">नियंत्रण कार्ड आईडी गलत है</List>
+<List name="OutputWindowString" id="68">अमान्य उपकरण आईडी</List>
+<List name="OutputWindowString" id="69">रीसेट उपकरण आईडी [% s]</List>
+<List name="OutputWindowString" id="6">आदेश को सफलतापूर्वक पूरा कर</List>
+<List name="OutputWindowString" id="7">प्रारंभ भेजें</List>
+<List name="OutputWindowString" id="8">भेजना। । ।</List>
+<List name="OutputWindowString" id="9">सफलतापूर्वक भेज दिया</List>
+<Item name="P10Colorful">M10 (रंगीन)</Item>
+<Item name="Pack">छवि पैकेज</Item>
+<Item name="PackageNumberError">पैकेट संख्या गलत है!</Item>
+<Item name="Packet">पैकेट के</Item>
+<Item name="PacketError">पैकेट गलत है!</Item>
+<Item name="PacketSize">पैकेट आकार</Item>
+<Item name="Page">पृष्ठ</Item>
+<Item name="Pages">पन्ने</Item>
+<Item name="PannelFill">"इस क्षेत्र में पहले से ही मौजूद है!"</Item>
+<Item name="ParallelSend">समानांतर भेजें</Item>
+<Item name="ParametersReadbackSuccess">सफलतापूर्वक मापदंडों वापस पढ़ें </Item>
+<Item name="ParametersSetting">पैरामीटर सेटिंग</Item>
+<Item name="Parti-color">गड्ड-रंग</Item>
+<Item name="Password">पासवर्ड</Item>
+<Item name="PasswordAuthentication">पासवर्ड प्रमाणीकरण</Item>
+<Item name="PasswordError">पासवर्ड गलत है!</Item>
+<Item name="PasswordSetting">पासवर्ड सेटिंग</Item>
+<Item name="Paste">पेस्ट</Item>
+<Item name="Path">पथ</Item>
+<Item name="Pause">ठहराव</Item>
+<Item name="PictrueProcessing">तस्वीर प्रसंस्करण से</Item>
+<Item name="PlaseSelectDevice">एक डिवाइस का चयन करें!</Item>
+<Item name="Play">प्ले</Item>
+<Item name="PlayBeforePowerProgram">मेमोरी अंतिम दिखाएँ</Item>
+<Item name="PlayMemory Size">प्ले फ़ाइल का आकार</Item>
+<Item name="PlayMode">खेलने के मोड</Item>
+<Item name="PlayQuality">प्रवाह</Item>
+<Item name="PlaySpeed">प्ले गति</Item>
+<Item name="PlayTime">खेल का समय</Item>
+<Item name="PlayTimes">टाइम्स खेलो</Item>
+<Item name="Playback Duration">प्लेबैक अवधि</Item>
+<Item name="Player">प्ले</Item>
+<Item name="Playing BeginFrames">प्रारंभ फ़्रेम खेलते हैं</Item>
+<Item name="Playing EndFrames">अंत फ्रेम खेलते हैं</Item>
+<Item name="Playing Frames">फ़्रेम खेलें</Item>
+<Item name="PleaseEnterTheBorderWidthOfTheTable">मेज की सीमा के चौड़ाई के दर्ज करें।</Item>
+<Item name="PleaseEnterTheNumberOfCloumns">स्तंभों की संख्या दर्ज करें।</Item>
+<Item name="PleaseEnterTheNumberOfRows">पंक्तियों की संख्या दर्ज करें।</Item>
+<Item name="PleaseSelect">कृपया चुनें</Item>
+<Item name="PleaseSelectAFile">एक फ़ाइल का चयन करें!</Item>
+<Item name="PleaseSelectAItem">एक आइटम का चयन करें,स्कैन परिणाम खाली है, तो लाइन की जाँच करें!</Item>
+<Item name="PleaseSelectAProgram">एक प्रोग्राम का चयन करें!</Item>
+<Item name="PleaseSelectScreen">स्क्रीन का चयन करें।</Item>
+<Item name="PleaseWait">कृपया प्रतीक्षा करें ...</Item>
+<Item name="PlotPointsImage">प्लॉट अंक छवि</Item>
+<Item name="PointCount">दशमलव अंक</Item>
+<Item name="Points">स्क्रीन अंक</Item>
+<Item name="PopUdiskfailure">यू डिस्क पॉप अप करने में विफल!</Item>
+<Item name="Port">बंदरगाह</Item>
+<Item name="PreProgram">पिछले कार्यक्रम में स्विच करें</Item>
+<Item name="PreProgramConctrl">कार्यक्रम नियंत्रण</Item>
+<Item name="Prev">को पिछले</Item>
+<Item name="PrevScan">प्रीवियस</Item>
+<Item name="Preview">पूर्वावलोकन</Item>
+<Item name="PreviewSetting">पूर्वावलोकन सेटिंग</Item>
+<Item name="PreviousPage">प्रीवियस</Item>
+<Item name="ProgramInformation">कार्यक्रम सूचना</Item>
+<Item name="ProgramSize">कार्यक्रम का आकार</Item>
+<Item name="ProgramSwitching">कार्यक्रम स्विचिंग</Item>
+<Item name="ProtocolError">प्रोटोकॉल गलत है!</Item>
+<Item name="ProtocolTypeError">प्रोटोकॉल प्रकार गलत है!</Item>
+<Item name="PullThreshold">पी लेना </Item>
+<Item name="QRCode">क्यूआर कोड</Item>
+<Item name="QuitTest">परीक्षण से बाहर निकलें</Item>
+<Item name="RFID">आरएफ आईडी</Item>
+<Item name="RFSetting">आरएफ सेटिंग</Item>
+<Item name="RS232">RS232</Item>
+<Item name="RadioEffect">एकल प्रभाव</Item>
+<Item name="RandomColor">यादृच्छिक रंग</Item>
+<Item name="ReadBack2">वापस पढ़ें</Item>
+<Item name="ReadScreenParamsFromUDisk">यू डिस्क से आयात स्क्रीन मापदंडों</Item>
+<Item name="Readback">वापस पढ़ें</Item>
+<Item name="RealTimeArea">वास्तविक समय क्षेत्र</Item>
+<Item name="RealTimeFindCard">वास्तविक समय खोज कार्ड</Item>
+<Item name="RebootScreen">रीबूट स्क्रीन</Item>
+<Item name="ReceiveFailure">प्राप्त करने में विफल!</Item>
+<Item name="Record">रिकॉर्ड</Item>
+<Item name="RecordTips">नोट: यदि आप सही छवि नहीं मिल सकता है,रिकॉर्डिंग विकल्प की जाँच करें।</Item>
+<Item name="RectangleScreen">आयत स्क्रीन</Item>
+<Item name="Red">लाल</Item>
+<Item name="Refresh">ताज़ा करना</Item>
+<Item name="RefreshFrequency">ताज़ा आवृत्ति</Item>
+<Item name="RefreshRate">ताज़ा दर</Item>
+<Item name="RegionHeight">ऊंचाई</Item>
+<Item name="RegionRect">क्षेत्र स्थिति के</Item>
+<Item name="RegionWidth">चौड़ाई के</Item>
+<Item name="Relevance">में मिलता है, कृपया:"मेनू -&gt; ऑपरेशन -&gt; संचार सेटिंग्स -&gt; TCP-&gt; एसोसिएट प्रदर्शन"!</Item>
+<Item name="RememberProgram">कार्यक्रम याद रखें</Item>
+<Item name="Remove">हटाना</Item>
+<Item name="RemoveDevice">डिवाइस निकालें</Item>
+<Item name="RemoveDeviceSuccess1">सफलतापूर्वक निकाला</Item>
+<Item name="RemoveDeviceSuccess2">!</Item>
+<Item name="Rename">का नाम बदलें</Item>
+<Item name="Repeat">दोहराना</Item>
+<Item name="Reset">रीसेट</Item>
+<Item name="ResetProgram">रीसेट कार्यक्रम</Item>
+<Item name="RestartFailed">पुनः प्रारंभ में विफल रहा है</Item>
+<Item name="RestartSuccess">नियंत्रण कार्ड सफलतापूर्वक पुनरारंभ करें</Item>
+<Item name="RevertToDefaultSettings">डिफ़ॉल्ट स्थिति के लिए ठीक हो, जारी रखें?</Item>
+<Item name="RightToLeft">दाएँ-&gt;वाम</Item>
+<Item name="Romaji">रोमन वर्णमाला</Item>
+<Item name="Round">दौर</Item>
+<Item name="RoundAndDigital">राउंड + डिजिट</Item>
+<Item name="RoundAndRomaji">राउंड + रोमन वर्णमाला</Item>
+<Item name="RouterAddress">डिफ़ॉल्ट गेटवे</Item>
+<Item name="Row">पंक्ति</Item>
+<Item name="SRCFile">स्रोत फ़ाइल</Item>
+<Item name="SWF name">SWF पथ</Item>
+<Item name="Saturday">शनिवार</Item>
+<Item name="Save">सहेजें</Item>
+<Item name="SaveToDefaultSetting">डिफ़ॉल्ट सेटिंग्स के रूप में सहेजें</Item>
+<Item name="ScaleAndDigital">स्केल + डिजिट</Item>
+<Item name="ScaleAndRomaji">स्केल + रोमन वर्णमाला</Item>
+<Item name="ScanMode">मोड स्कैन</Item>
+<Item name="ScanRange">स्कैन थ्रेसहोल्ड</Item>
+<Item name="ScanValueB">फ़िल्टर नीला</Item>
+<Item name="ScanValueG">फ़िल्टर हरे</Item>
+<Item name="ScanValueR">फ़िल्टर लाल</Item>
+<Item name="Scanning">स्कैन</Item>
+<Item name="ScanningComplete">स्कैन पूरा कर लिया।</Item>
+<Item name="Schedule">अनुसूची</Item>
+<Item name="ScreenCentered">स्क्रीन केंद्र</Item>
+<Item name="ScreenChoosePageTip">स्क्रीन प्रकार का चयन करें</Item>
+<Item name="ScreenColor">रंग</Item>
+<Item name="ScreenCount">स्क्रीन की मात्रा जुड़ा</Item>
+<Item name="ScreenHeight">ऊंचाई</Item>
+<Item name="ScreenInformation">स्क्रीन सूचना</Item>
+<Item name="ScreenParameters">स्क्रीन पैरामीटर्स</Item>
+<Item name="ScreenParametersSetting">स्क्रीन पैरामीटर सेटिंग</Item>
+<Item name="ScreenParamsPageTip">1. स्क्रीन चौड़ाई और ऊंचाई पिक्सेल का चयन करें (चौड़ाई और ऊंचाई अर्थ स्क्रीन कुल पिक्सेल)</Item>
+<Item name="ScreenSize">स्क्रीन आकार</Item>
+<Item name="ScreenSmartTip">वर्तमान स्क्रीन सामान्य पाठ दिखा रहा है, कोई जरूरत स्मार्ट सेट का चयन करें</Item>
+<Item name="ScreenTest">स्क्रीन टेस्ट</Item>
+<Item name="ScreenType">स्क्रीन प्रकार</Item>
+<Item name="ScreenWidth">चौड़ाई के</Item>
+<Item name="Search">सर्च</Item>
+<Item name="Searching">सर्च कर रहे हैं...</Item>
+<Item name="SearchingBegin">सर्च कर रहे हैं</Item>
+<Item name="SearchingEnd">खोज पूरी की।</Item>
+<Item name="Sec">सेक</Item>
+<Item name="SecondHand">सेकंड हैंड</Item>
+<Item name="SecondRadius">दूसरा त्रिज्या</Item>
+<Item name="SelectDataPolarity">डेटा ध्रुवता का चयन करें</Item>
+<Item name="SelectDefault">आप नियंत्रण कार्ड के प्रकार का पता नहीं है,डिफ़ॉल्ट विकल्प का चयन करें।</Item>
+<Item name="SelectMode">मोड चयन</Item>
+<Item name="SelectOEPolarity">OE ध्रुवता का चयन करें</Item>
+<Item name="SelectScan">"मोड स्कैन का चयन करें!"</Item>
+<Item name="SelectScree">तदनुरूपी स्क्रीन का चयन करें!</Item>
+<Item name="SendFile">फाइल भेजने</Item>
+<Item name="SendParamsWhenFinish">मापदंडों को संशोधित करने के बाद, "भेजें पैरामीटर" बटन पर क्लिक करें।</Item>
+<Item name="SendScreenParams">मापदंडों भेजने के</Item>
+<Item name="SendTimeOut">मध्यांतर भेजने के</Item>
+<Item name="SendingData">भेजा जा रहा है डेटा ...</Item>
+<Item name="SentSuccessfully">सफलतापूर्वक भेजा</Item>
+<Item name="SerialNumber">संख्या</Item>
+<Item name="SerialPort">सीरियल पोर्ट सेटिंग्स</Item>
+<Item name="SerialPortIsClosed">सीरियल पोर्ट से जुड़ा है, जो एलईडी नियंत्रण कार्ड नहीं मिला है।</Item>
+<Item name="SerialPortIsOccupied">सीरियल पोर्ट कब्जे वाले है!</Item>
+<Item name="SerialPortOpenError">सीरियल पोर्ट खोलने में विफल!</Item>
+<Item name="ServiceExpiration">सेवा समाप्ति</Item>
+<Item name="SetBrightnessFailed">चमक सेट करने में विफल!</Item>
+<Item name="SetBrightnessSuccess">सफलतापूर्वक चमक सेट</Item>
+<Item name="SetScreenParam">सफलतापूर्वक स्क्रीन मापदंडों सेट</Item>
+<Item name="SetTheBaudrateSuccessfully">जमी सफलतापूर्वक बॉड दर</Item>
+<Item name="Setting">सेटिंग्स</Item>
+<Item name="SetupFailed">सेटिंग्स में विफल रहा है!</Item>
+<Item name="ShowDate">शो की तिथि</Item>
+<Item name="ShowGroup">दिखाएँ समूह</Item>
+<Item name="ShowMode">प्रदर्शन मोड</Item>
+<Item name="ShowTime">शो टाइम</Item>
+<Item name="ShowWeek">दिखाएँ वीक</Item>
+<Item name="Showpage">दिखाएँ पेज</Item>
+<Item name="ShuttingDown">शट डाउन</Item>
+<Item name="SignalDelay">कुंडी ध्रुवता</Item>
+<Item name="SignalDelayHint">(जैसे कुछ पी 5) के रूप में स्क्रीन के कुछ एसटीआर कुंडी या बुलाया LAT संकेतों फ़्लैश बिंदु या रेखा है, तो आप इस विकल्प विरोधी चयन करने के लिए कोशिश कर सकते हैं, अन्य स्क्रीन के साथ उलट हैं।</Item>
+<Item name="SignalQuality">सिग्नल गुणवत्ता</Item>
+<Item name="Simplify">सरल मोड(UDP)</Item>
+<Item name="SimplifyInfo">सरल मोड केवल एकल प्रत्यक्ष कनेक्शन के लिए लागू होता है और लैन के लिए  एक नियंत्रण कार्ड,आईपी पते स्वचालित रूप से इन परिस्थितियों में मैच होगा।</Item>
+<Item name="Single">सिंगल</Item>
+<Item name="SingleDirectMode">डायरेक्ट कनेक्शन मोड</Item>
+<Item name="SingleLine">एकल लाइन प्रदर्शन</Item>
+<Item name="SingleLineoftext">एकल लाइन टेक्स्ट</Item>
+<Item name="SingleScreenBroadcasts">कॉपी मोड</Item>
+<Item name="Size">आकार</Item>
+<Item name="Slow">धीरे</Item>
+<Item name="Slowest">धीमी</Item>
+<Item name="Small">छोटा</Item>
+<Item name="SmartScanTips">स्क्रीन एक अंधेरे उज्ज्वल है, तो घड़ी आवृत्ति कम करें।</Item>
+<Item name="SmartSetting">स्मार्ट सेटिंग</Item>
+<Item name="SmartSettingName">स्मार्ट सेटिंग नाम</Item>
+<Item name="SmartTips">सुझाव: यूनिट के रूप में एक पिक्सेल</Item>
+<Item name="Snapshot">स्नैपशॉट</Item>
+<Item name="SnapshotTip">यदि कोई चमकदार धब्बे, खाली अंक डालने</Item>
+<Item name="Solid color">ठोस रंग</Item>
+<Item name="Space">अंतरालन</Item>
+<Item name="SpecifiedDate">निर्दिष्ट तिथि</Item>
+<Item name="SpecifiedTime">निर्दिष्ट समय</Item>
+<Item name="SpecifyValue">एक मूल्य निर्दिष्ट करें</Item>
+<Item name="Speed">गति</Item>
+<Item name="SpeedPrior">पहले स्पीड</Item>
+<Item name="SplitCell">स्प्लिट सेल</Item>
+<Item name="SplitHorizontal">स्प्लिट क्षैतिज</Item>
+<Item name="SplitVertical">स्प्लिट लंबवत</Item>
+<Item name="Standard">मानक</Item>
+<Item name="StartUpImage">बूट एनीमेशन</Item>
+<Item name="StartingUp">बूट अप</Item>
+<Item name="StateA">राज्य A</Item>
+<Item name="StateB">राज्य B</Item>
+<Item name="StateC">राज्य C</Item>
+<Item name="StateD">राज्य D</Item>
+<Item name="Static">स्टेटिक</Item>
+<Item name="Status">का स्थिति</Item>
+<Item name="StepBack">नष्ट कर देना</Item>
+<Item name="Stop">रुकें</Item>
+<Item name="Stroke">स्ट्रोक</Item>
+<Item name="StyleName">प्रभाव नाम</Item>
+<Item name="StyleText">टेक्स्ट</Item>
+<Item name="SubPacketSequenceNumberError">उप-पैकेट अनुक्रम संख्या गलत है!</Item>
+<Item name="SuccessfullyModified">"सफलतापूर्वक संशोधित"</Item>
+<Item name="Sunday">रविवार</Item>
+<Item name="SupportRegionsOverlap">समर्थन क्षेत्र ओवरलैप</Item>
+<Item name="SuspendPreview">पूर्वावलोकन रोकें</Item>
+<Item name="SwapBlueGreen">एक्सचेंज नीले और हरे रंग</Item>
+<List name="SystemBusName" id="0">[सी 1] φ4.75(φ3.75) 1R1G 1 / 16S HUB08 64X32 (इंडोर) [ए 1]</List>
+<List name="SystemBusName" id="10">[सी 11] P10 1R1G1B 1 / 8S HUB08 32X16 एचएलएल]</List>
+<List name="SystemBusName" id="11">[C12] P10 1R1G1B 1 / 4S HUB75 32x16 [ए 13]</List>
+<List name="SystemBusName" id="12">[C13] P8 1R1G1B 1/5 एस HUB75 40X20 JHG [A60]</List>
+<List name="SystemBusName" id="13">[सी 14] P8 1R1G1B 1 / 4s HUB08 32X16 [ए 8]</List>
+<List name="SystemBusName" id="14">[C15] P12 / P16 2R1G 1 / 4S HUB12 16x8 (P16) [ए 12]</List>
+<List name="SystemBusName" id="15">[C16] P13। 33 1R1G1B 1 / 3S HUB08 24X12 एचएलएल [A49]</List>
+<List name="SystemBusName" id="16">[C17] P13। 33 1R1G1B 1 / 3S HUB08 24X12 JHG [ए 57]</List>
+<List name="SystemBusName" id="17">[C18]P16       1R1G1B 1/5S  HUB08 20X10 HLL  [A52]</List>
+<List name="SystemBusName" id="18">[C19]P16       1R1G1B 1/1S  HUB40 16X8  [A29]</List>
+<List name="SystemBusName" id="19">[C20]P10       1R1G1B 1/4S  HUB75 32X16  [A11]</List>
+<List name="SystemBusName" id="1">[C2]φ3.75(φ5)1R     1/16S HUB08 64X32（Indoor）  [A1]</List>
+<List name="SystemBusName" id="20">[C21]P25       2R1G1B 1/1S  HUB40 16X8</List>
+<List name="SystemBusName" id="21">[C22]P10-P20   1G2R1B 1/4S  HUB12 16X8  [A61]</List>
+<List name="SystemBusName" id="22">[C23]P10-P20   2R1G1B 1/4S  HUB12 16X8  [A80]</List>
+<List name="SystemBusName" id="23">[C24]P13.33-P26.66  2R1G1B 1/4S  HUB12 12X6</List>
+<List name="SystemBusName" id="24">[C25]P20  1R1G 1/4S  HUB26 16*16（ZHGD） [A66]</List>
+<List name="SystemBusName" id="25">[C26]P13.33  1R1G1B 1/6S  HUB08 24*12（HLL） [A55]</List>
+<List name="SystemBusName" id="26">[C27]P10  1R 1/4S  HUB12 32*16（QL） [A19]</List>
+<List name="SystemBusName" id="27">[C28]P10  1R1G1B 1/2S  HUB75 16*16</List>
+<List name="SystemBusName" id="28">[C29]P6  1R1G1B 1/8S  HUB75 32*16</List>
+<List name="SystemBusName" id="29">[C30]P6  1R1G1B 1/8S  HUB75 32*32</List>
+<List name="SystemBusName" id="2">[C3]P5         1R1G1B 1/16S HUB08 32X32  [A3]</List>
+<List name="SystemBusName" id="30">[C31]P10  1R1G1B 1/4S  HUB75 16*16[A17]</List>
+<List name="SystemBusName" id="31">[C32]P20  1R1G1B 1/1S  HUB75 16*8</List>
+<List name="SystemBusName" id="32">[C33]P25  2R1G1B 1/1S  HUB75 8*8  [A30]</List>
+<List name="SystemBusName" id="33">[C34]P13.33  1R 1/4S  HUB12 24*12 [A71]</List>
+<List name="SystemBusName" id="34">[C35]P10  1R1G 1/4S  HUB12 32*16  [A7]</List>
+<List name="SystemBusName" id="3">[C4]P5         1R1G   1/8S  HUB08 32*16（Vehicle screen） [A4]</List>
+<List name="SystemBusName" id="4">[C5]P5/P4      1R1G1B 1/16S HUB75 32X32（Indoor） [A1]</List>
+<List name="SystemBusName" id="5">[C6]P10        1R/1R1G     1/4S  HUB12 32X16（P10） [A8]</List>
+<List name="SystemBusName" id="6">[C7]P10        1R     1/4S  HUB08  32X16</List>
+<List name="SystemBusName" id="7">[C8]P10        1R     1/1S  HUB08 32X16[A31]</List>
+<List name="SystemBusName" id="8">[C9]P10        1R1G   1/4S  HUB08  No 138 32X16  [A13]</List>
+<List name="SystemBusName" id="9">[C10]P10        1R1G   1/4S  HUB12 32X16 [A19]</List>
+<Item name="SystemBusy">सिस्टम व्यस्त है, बाद में पुन: प्रयास करें!</Item>
+<Item name="SystemOptimize">प्रणाली अनुकूलन</Item>
+<Item name="SystemTime">सिस्टम का समय</Item>
+<Item name="Table">तालिका</Item>
+<Item name="TargetTime">लक्ष्य समय</Item>
+<Item name="Temp">तापमान</Item>
+<Item name="TempAdjust">तापमान सुधार</Item>
+<Item name="TempHumidity">तापमान+आर्द्रता</Item>
+<Item name="TempOrRHExist">तापमान क्षेत्र और तापमान और आर्द्रता के क्षेत्र में एक साथ नहीं रह सकता।</Item>
+<Item name="TempUnit">तापमान इकाई</Item>
+<Item name="Temppoint1">सुनिश्चित करें कि आप उपयोग कर रहे संवेदक मॉडल है:DS18B20</Item>
+<Item name="Temppoint2">सुनिश्चित करें कि आप उपयोग कर रहे संवेदक मॉडल है:AM2301</Item>
+<Item name="Test">कसौटी</Item>
+<Item name="Text">टेक्स्ट</Item>
+<Item name="TextColor">टेक्स्ट का रंग</Item>
+<Item name="TextFile">.txt फ़ाइल</Item>
+<Item name="TextInfo">पाठ जानकारी</Item>
+<Item name="TextProcess">पाठ की दिशा</Item>
+<Item name="TextProcessing">पाठ प्रसंस्करण</Item>
+<Item name="TheDeviceHasBeenOffline">डिवाइस ऑफ़लाइन हो गया है</Item>
+<Item name="ThisModuleNotSupportUDisk">इस मॉडल यू डिस्क का समर्थन नहीं करता।</Item>
+<Item name="Thursday">बृहस्पतिवार</Item>
+<Item name="TimeClock">डिजिटल घड़ी</Item>
+<Item name="TimeDifference">टाइम लैग</Item>
+<Item name="TimeParameters">समय मापदंडों</Item>
+<Item name="TimeSettingSuccess">टाइम सफलतापूर्वक स्थापित किया गया था।</Item>
+<Item name="TimeSwitch">समय स्विच</Item>
+<Item name="TimeSwitchSettingSuccess">समय स्विच सफलतापूर्वक स्थापित किया गया था।</Item>
+<Item name="TimedRestart">समय समाप्त पुनः प्रारंभ</Item>
+<Item name="TimerColor">क्लॉक रंग</Item>
+<Item name="Timing Parameters">समय पैरामीटर</Item>
+<Item name="TimingControl">समय नियंत्रण</Item>
+<Item name="TimingMode">समय रखने मोड</Item>
+<Item name="TimingPause">समय रोकें</Item>
+<Item name="TimingReset">समय रीसेट</Item>
+<Item name="TimingSet">समय सेट</Item>
+<Item name="Tip_Type1">यूडीपी कनेक्ट करने के लिए वर्तमान संचार पते का उपयोग करें</Item>
+<Item name="Tip_Type2">यूडीपी कनेक्ट करने के लिए लौट आए डिवाइस से आईपी पते का उपयोग करें</Item>
+<Item name="Tip_Type3">टीसीपी कनेक्ट करने के लिए लौट आए डिवाइस से आईपी पते का उपयोग करें</Item>
+<Item name="Tip_Type4">के माध्यम से एजेंट का पता जुड़े उपकरण</Item>
+<Item name="To">को</Item>
+<Item name="To2">को</Item>
+<Item name="Toolbar_AddColorful_Bottom">रंगीन दिखा पाठ, उपयोगकर्ता एनिमेटेड पृष्ठभूमि जोड़ सकते हैं</Item>
+<Item name="Toolbar_AddColorful_Top">एनिमेटेड कैरेक्टर क्षेत्र जोड़ें</Item>
+<Item name="Toolbar_AddCount_Bottom">एक बटन या धारावाहिक से डेटा प्रदर्शन, नेटवर्क केबल का अधिग्रहण</Item>
+<Item name="Toolbar_AddCount_Top">बटन गिनती या बाहरी डेटा</Item>
+<Item name="Toolbar_AddExcel_Bottom">एक्सेल फ़ाइलों का चयन करें, विशेष प्रभाव और पृष्ठभूमि</Item>
+<Item name="Toolbar_AddExcel_Top">एक्सेल क्षेत्र जोड़ें</Item>
+<Item name="Toolbar_AddGlobalProgram_Bottom">हाइपरटेक्स्ट, पाठ, समय, आदि का केवल एक ही क्षेत्र सेट करें, कार्यक्रम समय से खेल सकते हैं</Item>
+<Item name="Toolbar_AddGlobalProgram_Top">ग्लोबल प्रोग्राम जोड़ें</Item>
+<Item name="Toolbar_AddHypertext_Bottom">चित्र, वीडियो, swf, आदि</Item>
+<Item name="Toolbar_AddHypertext_Top">हाइपरटेक्स्ट जोड़े</Item>
+<Item name="Toolbar_AddProgram_Bottom">सेट अप 20 क्षेत्रों हाइपरटेक्स्ट, पाठ, समय, आदि, कार्यक्रमों समय तक खेल सकते हैं</Item>
+<Item name="Toolbar_AddProgram_Top">प्रोग्राम जोड़ें</Item>
+<Item name="Toolbar_AddTempRH_Bottom">दिखा रहा है तापमान, आर्द्रता (सेंसर की आवश्यकता है)</Item>
+<Item name="Toolbar_AddTempRH_Top">तापमान और आर्द्रता क्षेत्र जोड़ें</Item>
+<Item name="Toolbar_AddText_Bottom">लेख संपादित करें का चयन करें प्रभाव और पृष्ठभूमि</Item>
+<Item name="Toolbar_AddText_Top">शब्द जोड़ें</Item>
+<Item name="Toolbar_AddTime_Bottom">डिजिटल घड़ी या घड़ी डायल</Item>
+<Item name="Toolbar_AddTime_Top">समय क्षेत्र जोड़ें</Item>
+<Item name="Toolbar_AddTiming_Bottom">समय उलटी गिनती लक्षित करते हैं, ऊपर गिनती, बटन द्वारा गिनती</Item>
+<Item name="Toolbar_AddTiming_Top">समय क्षेत्र जोड़ें</Item>
+<Item name="Toolbar_Adjusttime_Bottom">कंप्यूटर के साथ सुधार नियंत्रण कार्ड समय सिंक्रनाइज़</Item>
+<Item name="Toolbar_Adjusttime_Top">समय समायोजित करें</Item>
+<Item name="Toolbar_Check">चेक</Item>
+<Item name="Toolbar_Copy">प्रतिलिपि</Item>
+<Item name="Toolbar_Delete">हटाना</Item>
+<Item name="Toolbar_Down">नीचे</Item>
+<Item name="Toolbar_ExportToUdisk_Bottom">स्क्रीन यू डिस्क को निर्यात किया जाता</Item>
+<Item name="Toolbar_ExportToUdisk_Top">यू डिस्क में निर्यात</Item>
+<Item name="Toolbar_Paste">चिपकाएं</Item>
+<Item name="Toolbar_Preview1_Bottom">वर्तमान स्क्रीन का पूर्वावलोकन करें</Item>
+<Item name="Toolbar_Preview1_Top">स्क्रीन पूर्वावलोकन</Item>
+<Item name="Toolbar_Preview2_Bottom">निर्मित सभी स्क्रीन दिखा रहा है, नामित स्क्रीन में प्रवेश करने के लिए डबल क्लिक करें।</Item>
+<Item name="Toolbar_Preview2_Top">समूह पूर्वावलोकन नहीं कर सकते</Item>
+<Item name="Toolbar_Preview_Bottom">वर्तमान कार्यक्रम का पूर्वावलोकन करें</Item>
+<Item name="Toolbar_Preview_Top">पूर्वावलोकन कार्यक्रम</Item>
+<Item name="Toolbar_Save">बचाना</Item>
+<Item name="Toolbar_Search">खोज</Item>
+<Item name="Toolbar_Send_Bottom">कार्ड को नियंत्रित करने के लिए स्क्रीन कार्यक्रमों भेजा जा रहा है</Item>
+<Item name="Toolbar_Send_Top">भेजना</Item>
+<Item name="Toolbar_Uncheck">सही का निशान हटाएँ</Item>
+<Item name="Toolbar_Up">ऊपर</Item>
+<Item name="TotalECard">की कुल संख्या नेटवर्क इंटरफेस कार्ड :</Item>
+<Item name="TotalFrames">कुल तख्ते</Item>
+<Item name="TotalSpace">कुल अंतरिक्ष</Item>
+<Item name="TracingPoint">संरेखण विवरण</Item>
+<Item name="TracingPointArrowKeys">बाएँ क्लिक बिंदु अनुरेखण, आप की ओर बिंदु नियंत्रित करने के लिए तीर कुंजी का उपयोग कर सकते हैं।</Item>
+<Item name="TracingPointError">बिंदु ट्रेसिंग त्रुटि है।</Item>
+<Item name="TracingPointFail">बिंदु में विफल रहा है ट्रेसिंग, फिर से बिंदु ट्रेसिंग करें।</Item>
+<Item name="TransitionThreshold">संक्रमण दहलीज</Item>
+<Item name="Transparent">पारदर्शक</Item>
+<Item name="Tricolor">तिरंगा</Item>
+<Item name="Tuesday">मंगलवार</Item>
+<Item name="Twinkle">ट्विंकल</Item>
+<Item name="TwoLinedisplay">दो लाइन प्रदर्शन</Item>
+<Item name="Type">प्रकार</Item>
+<Item name="Type1">एक प्रकार</Item>
+<Item name="Type2">प्रकार दो</Item>
+<Item name="Type3">प्रकार तीन</Item>
+<Item name="Type4">प्रकार चार</Item>
+<Item name="TypeName">टाइप नाम</Item>
+<Item name="U-DiskSucess">यू डिस्क सफल होता है!</Item>
+<Item name="UDisk">यू डिस्क</Item>
+<Item name="USE_HD2010">नियंत्रण कार्ड का पता चला था, लेकिन यह मौजूदा सॉफ्टवेयर के साथ मेल नहीं खाता, एच.डी. 2010 उपयोग करें.</Item>
+<Item name="UnableToOpenFile">फ़ाइल को खोल नहीं!</Item>
+<Item name="Unchanged">अपरिवर्तित</Item>
+<Item name="Undo">पूर्ववत</Item>
+<Item name="UnexpectedError">संचार मध्यांतर</Item>
+<Item name="Unit">इकाई</Item>
+<Item name="UnitBoard">यूनिट बोर्ड</Item>
+<Item name="UnitBoardInfo">मॉड्यूल जानकारी</Item>
+<Item name="UnitBoardTips">एक मॉड्यूल चौड़ाई 64 से अधिक है, तो 64 का चयन करें</Item>
+<Item name="UnitBoardWidth">मॉड्यूल चौड़ाई के </Item>
+<Item name="UnitBoards">इकाई बोर्ड की संख्या</Item>
+<Item name="UnitColor">यूनिट रंग</Item>
+<Item name="UnitSize">मॉड्यूल अंक</Item>
+<Item name="Unmerge">अनमर्ज</Item>
+<Item name="Unselected">अचयनित</Item>
+<Item name="Unspecified">अनिर्दिष्ट</Item>
+<Item name="UnsupportedInstructions">असमर्थित निर्देश</Item>
+<Item name="Untitled">शीर्षकहीन</Item>
+<Item name="Update">अपडेट</Item>
+<Item name="UpdateFailed">अद्यतन विफल रहा है।</Item>
+<Item name="UpdateFirmwareFinished">फर्मवेयर अद्यतन पूरा किया।</Item>
+<Item name="UpdatedSuccessfully">अद्यतन, सफल होता है अद्यतन खोलने के लिए कि क्या फ़ाइलें?</Item>
+<Item name="UpdatingFirmware">फर्मवेयर अद्यतन.</Item>
+<Item name="Use">उपयोग</Item>
+<Item name="Use138Decoder">138 डिकोडर का प्रयोग करें</Item>
+<List name="Use138" id="0">138 का प्रयोग करें</List>
+<List name="Use138" id="1">संख्या 138</List>
+<Item name="UseDefaultSetting">हार्डवेयर सेटिंग्स का उपयोग करें</Item>
+<Item name="UseParams">मापदंडों का उपयोग</Item>
+<Item name="UsedMemory">खेतों में प्रयुक्त मेमोरी</Item>
+<Item name="UsingHardwareSetup">उपयोग हार्डवेयर सेटिंग्स (पैरामीटर वापस पढ़ें)</Item>
+<Item name="VZoom">कार्यक्षेत्र खिंचाव</Item>
+<Item name="Valign">लंबवत संरेखित</Item>
+<Item name="ValignBottom">नीचे संरेखित</Item>
+<Item name="ValignMiddle">कार्यक्षेत्र केन्द्रित</Item>
+<Item name="ValignTop">शीर्ष संरेखित</Item>
+<Item name="Veritical">कार्यक्षेत्र स्थिति के</Item>
+<Item name="VerticalPosition">कार्यक्षेत्र स्थिति के</Item>
+<Item name="VerticalScreenshot">कार्यक्षेत्र स्क्रीनशॉट</Item>
+<Item name="VerticalStretch">लंबवत स्ट्रेच</Item>
+<Item name="Video">वीडियो</Item>
+<Item name="Video FramesCount">कुल फ्रेम</Item>
+<Item name="Video name">वीडियो पथ</Item>
+<Item name="ViewHelp">देखने में मदद</Item>
+<Item name="WaitingForInitialization">प्रारंभ करने के लिए प्रतीक्षा कर रहा है</Item>
+<Item name="WaitingToBeSent">भेजे जाने की प्रतीक्षा कर रहा है</Item>
+<Item name="Wednesday">बुधवार</Item>
+<Item name="White">सफेद</Item>
+<Item name="Width">चौड़ाई के</Item>
+<Item name="WidthOfMoreTthan">"चौड़ाई के अधिकतम से अधिक है!"</Item>
+<Item name="WindowPosition">विंडो स्थिति</Item>
+<Item name="WrongParameter">गलत मापदंडों</Item>
+<Item name="Yellow">पीला</Item>
+<List name="color" id="0">एकल रंग</List>
+<List name="color" id="1">दोहरी रंग</List>
+<List name="color" id="2">पूर्ण रंग</List>
+<Item name="delete">हटाना</Item>
+<Item name="flashTips">नोट: लिपियों युक्त SWF अभी तक समर्थित नहीं है,ताकि आप अपनी सही छवि नहीं मिल सकता।</Item>
+<List name="frequency" id="0">ऑटो</List>
+<List name="frequency" id="160">100Hz</List>
+<List name="frequency" id="140">120Hz</List>
+<List name="frequency" id="120">140Hz</List>
+<List name="frequency" id="100">160Hz</List>
+<List name="frequency" id="80">180Hz</List>
+<List name="frequency" id="60">200Hz</List>
+<List name="frequency" id="200">60Hz</List>
+<List name="frequency" id="180">80Hz</List>
+<List name="graylevel" id="1">कोई ग्रेलेवल नहीं</List>
+<List name="graylevel" id="2">4 ग्रे स्तर</List>
+<List name="graylevel" id="3">8 ग्रे स्तर</List>
+<List name="graylevel" id="4">16 ग्रे स्तर</List>
+<List name="graylevel" id="5">32 ग्रे स्तर</List>
+<Item name="group">समूह</Item>
+<Item name="hypertext">हाइपरटेक्स्ट</Item>
+<List name="listCtlDelay" id="0">सक्षम करें उच्च</List>
+<List name="listCtlDelay" id="1">सक्षम करें कम</List>
+<List name="listStrDelay" id="0">0</List>
+<List name="listStrDelay" id="1">1</List>
+<Item name="mAPPFace">प्रोग्राम प्रकटन(&amp;A)</Item>
+<Item name="mAbout">बारे में(&amp;A)</Item>
+<Item name="mBlackStyle">काले शैली(L)</Item>
+<Item name="mBludStyle">ब्लू शैली(B)</Item>
+<Item name="mCalculator">कैलक्यूलेटर</Item>
+<Item name="mClearDisplayData">साफ़ डेटा प्रदर्शित</Item>
+<Item name="mCommSetting">संचार सेटिंग्स</Item>
+<Item name="mExit">निकास(&amp;E)</Item>
+<Item name="mFile">फ़ाइल(&amp;F)</Item>
+<Item name="mHardwareSetting">हार्डवेयर सेटिंग</Item>
+<Item name="mHelp">मदद(&amp;H)</Item>
+<Item name="mIPManagmentTools">IP प्रबंधन उपकरण</Item>
+<Item name="mLanguage">भाषा(&amp;L)</Item>
+<Item name="mLuminanceSetting">चमक सेटिंग्स</Item>
+<Item name="mNarrow">ज़ूम आउट करें</Item>
+<Item name="mNew">नए स्क्रीन(&amp;N)</Item>
+<Item name="mNotepad">नोटपैड</Item>
+<Item name="mOpen">खुला(&amp;O)</Item>
+<Item name="mOperate">आपरेशन(&amp;O)</Item>
+<Item name="mOutWindow">Info Window</Item>
+<Item name="mPaint">खींचना</Item>
+<Item name="mSave">सहेजें(&amp;S)</Item>
+<Item name="mSaveAs">रूप में सहेजें...</Item>
+<Item name="mScreenSetting">स्क्रीन पैरामीटर सेटिंग</Item>
+<Item name="mSendProject">आइटम भेजने के</Item>
+<Item name="mSetting">सेटिंग्स(&amp;S)</Item>
+<Item name="mSilverStyle">रजत शैली(S)</Item>
+<Item name="mSystemSetting">सिस्टम सेटिंग्स</Item>
+<Item name="mTimeSetting">समय सेटिंग</Item>
+<Item name="mTool">उपकरण(&amp;T)</Item>
+<Item name="mUpdateFirmware">अद्यतन फर्मवेयर</Item>
+<Item name="mView">दृश्य(&amp;V)</Item>
+<Item name="mWatergreenStyle">हल्के हरे रंग की शैली(A)</Item>
+<Item name="mZoom">ज़ूम इन</Item>
+<Item name="minimum">न्यूनतम</Item>
+<Item name="ms">मिलीसेकंड</Item>
+<List name="polarity" id="0">सक्षम करें कम</List>
+<List name="polarity" id="1">सक्षम करें उच्च</List>
+<Item name="program">कार्यक्रम</Item>
+<Item name="screen">स्क्रीन</Item>
+<Item name="sec">सेक</Item>
+<Item name="send">भेजने के</Item>
+<Item name="static">स्टेटिक</Item>
+<Item name="time">समय</Item>
+<Item name="whirl180">उलट</Item>
+<Item name="whirl270">बायां ओर रोटेशन</Item>
+<Item name="whirl90">सही ओर रोटेशन</Item>
+<Item name="whirlt">रोटेशन</Item>
+<Item name="AddItemID">आईडी जोड़ें</Item>
+<Item name="BeginIpAddr">IP  शुरू</Item>
+<Item name="CurrentSel">वर्तमान में चुनी गई भाषा</Item>
+<Item name="DetectsThisFileWasNotSaved">वर्तमान में चयनित द्वारा पता लगाया फ़ाइल सहेजी नहीं है तो कवरेज</Item>
+<Item name="English">अंग्रेज़ी</Item>
+<Item name="IDAndContentCanNotBeEmpty">आईडी और सामग्री खाली नहीं हो सकता</Item>
+<Item name="ModificationFails">Modification fails</Item>
+<Item name="ModifyItemID">आईडी को संशोधित</Item>
+<Item name="ModifyOnlyOneItem">केवल एक ही आईडी संशोधित</Item>
+<Item name="RemoveItemID">आईडी निकालें</Item>
+<Item name="ShowOnlyControlCardWifi">केवल नियंत्रण कार्ड वाईफ़ाई प्रदर्शन</Item>
+<Item name="ShowType">प्रदर्शन विधि</Item>
+<Item name="ThisIDAlreadyExists">ID पहले से मौजूद</Item>
+<Item name="FillingTheCurrentLanguage">वर्तमान भाषा को भरने के लिए</Item>
+<Item name="WhetherToSaveTheCurrentModifiedFile">परिवर्तन सहेजने के लिए जा रहा है?</Item>
+<Item name="RemoveDuplicate">डुप्लिकेट निकालें</Item>
+<Item name="Apply">लागू करें</Item>
+<Item name="Remark">टिप्पणी</Item>
+<Item name="FirstMode">प्राथमिकता मोड</Item>
+<Item name="FirstMode_Normal">संतुलित</Item>
+<Item name="FirstMode_Speed">गति प्राथमिकता</Item>
+<Item name="FirstMode_Text">चमक प्राथमिकता</Item>
+<Item name="Random">बिना सोचे समझे</Item>
+<Item name="WhetherToReplace">बदलने के लिए है?</Item>
+<Item name="ImportFailed">आयात अयशस्वी</Item>
+<Item name="ExportFailed">निर्यात विफल</Item>
+<Item name="ExportLanguage">निर्यात भाषा</Item>
+<Item name="ImportLanguage">भाषा आयात करें</Item>
+<List name="SystemBusName" id="35">[C36]P10  1R1G1B 1/4S  HUB75 16*16</List>
+<Item name="ClickHereToUpdate">अपडेट करने के लिए यहां क्लिक करें</Item>
+<Item name="ImportFile">फ़ाइल आयात करें</Item>
+<List name="SystemBusName" id="36">[C37]P10  1R 1/4S  HUB12 32*16[A25]</List>
+<Item name="EditingLanguage">भाषा संपादक</Item>
+<List name="SystemBusName" id="37">[C38]P7.62  1R1G1B 1/8S  HUB08 32*16</List>
+<List name="SystemBusName" id="38">[C39]P5   1R1G1B   1/8S  HUB75 32*16 [A4]</List>
+<Item name="Imsak">रोज़ा</Item>
+<Item name="Fajr">फज्र</Item>
+<Item name="Dhuhr">Zhuhur</Item>
+<Item name="Asr">अशार</Item>
+<Item name="Maghrib">सूर्यास्त</Item>
+<Item name="Isha">ईशा</Item>
+<Item name="MidNight">आधी रात</Item>
+<Item name="Country">देश</Item>
+<Item name="City">शहर</Item>
+<Item name="NumColor">संख्या रंग</Item>
+<Item name="ExprotConfigFile">निर्यात प्रोफाइल</Item>
+<Item name="SoundModule">ध्वनि मॉड्यूल</Item>
+<Item name="Year">साल</Item>
+<Item name="ImportTable">आयात टेबल</Item>
+<Item name="ExportBable">टेबल निर्यात करें</Item>
+<Item name="ClearAll">स्पष्ट</Item>
+<Item name="cfWords">रंगीन शब्द</Item>
+<Item name="OnlyOnePrayForScreen">केवल एक प्रार्थना क्षेत्र का समर्थन किया</Item>
+<Item name="BKSpeed">पृष्ठभूमि गति</Item>
+<Item name="EffectCycle">प्रभाव चक्र</Item>
+<Item name="ExportConfigFile">निर्यात प्रोफाइल</Item>
+<Item name="SoundSetting">ध्वनि सेटिंग</Item>
+<List name="graylevel" id="6">64 ग्रे स्तर</List>
+<List name="graylevel" id="7">128 ग्रे स्तर</List>
+<List name="graylevel" id="8">256 ग्रे स्तर</List>
+<List name="SystemBusName" id="39">[C40]P10  1R1G1B   1/4S  HUB75  32X16[A12]</List>
+<Item name="SelectFirmwareVersion">फ़र्मवेयर संस्करण का चयन करें</Item>
+<Item name="NoSelectVersion">कोई भी चयनित संस्करण</Item>
+<Item name="Ordinal">संख्या</Item>
+<Item name="VersionNum">संस्करण</Item>
+<Item name="ConfirmSelect">की पुष्टि करें</Item>
+<List name="SystemBusName" id="40">[C41]P10  1R1G1B  1/4S  HUB75 32*16</List>
+<Item name="FileNameAlreadyExistIsCover">फ़ाइल नाम पहले से ही मौजूद हैं, कवर है?</Item>
+<Item name="VersionAlreadyExist">संस्करण पहले से मौजूद है</Item>
+<Item name="DeleteThisGroup">इस समूह को हटाएं</Item>
+<Item name="FindNewVersionIsUpdate">नए संस्करण का पता लगाएं, फर्मवेयर अद्यतन करने के लिए है कि क्या?</Item>
+<Item name="UpdateFile">अद्यतन फ़ाइल</Item>
+<List name="SystemBusName" id="41">[C42]P10  1R1G1B  1/2S  HUB75 32*16</List>
+<List name="SystemBusName" id="42">[C43]P3  1R1G1B  1/16S  HUB75 64*64</List>
+<Item name="UdiskUpgrade">यू-डिस्क द्वारा अद्यतन</Item>
+<Item name="TimingPlay">समय प्रारंभ</Item>
+<Item name="SelectVersionOnTheRight">कृपया सही पर फर्मवेयर का चयन करें!</Item>
+<List name="SystemBusName" id="43">[C44]P8  1R1G  1/8S  HUB08 32*32 (WQS)</List>
+<List name="SystemBusName" id="44">[C45]P5  1R1G1B  1/8S  HUB75 32*32 (CXH)</List>
+<Item name="TheSameSegment">सुनिश्चित करें कि नियंत्रण कार्ड और कंप्यूटर का आईपी एक ही नेटवर्क सेगमेंट में है।</Item>
+<Item name="Step">चरण</Item>
+<Item name="ShadowMode">परछाई मोड</Item>
+<Item name="3DDeep">3D दीप</Item>
+<Item name="Gradient">ढाल</Item>
+<Item name="Alpha">पारदर्शिता</Item>
+<Item name="BorderStyle">झालर की शैली</Item>
+<Item name="RoundRect">गोलाकार आयत</Item>
+<Item name="Octagon">अष्टकोना</Item>
+<Item name="CustomStyle">कस्टम शैली</Item>
+<List name="SystemBusName" id="45">[C46]P10  1R  1/4S  HUB12 32*16</List>
+<Item name="3DText">3 डी पाठ</Item>
+<Item name="Whether_to_cancel_the_current_task">मिशन रद्द या नहीं?</Item>
+<List name="SystemBusName" id="46">[C47]P10-P20   1G2R1B 1/4S  HUB12 32X16  Virtual pixel</List>
+<List name="SystemBusName" id="47">[C48]P10-P20   2R1G1B 1/4S  HUB12 32X16  Virtual pixel</List>
+<List name="SystemBusName" id="48">[C49]P13.33-P26.66  2R1G1B 1/4S  HUB12 24X12 Virtual pixel</List>
+<Item name="SinglePage">एक पृष्ठ</Item>
+<Item name="TwinkleStyle">ट्विंकल शैली</Item>
+<Item name="TwinkleSpeed">ट्विंकल स्पीड</Item>
+<Item name="NoTwinkle">कोई ट्विंकल</Item>
+<Item name="3Dtwinkle">3 डी ट्विंकल</Item>
+<Item name="SaveCountValue">पिछली बार याद रखें</Item>
+<Item name="SpecialBorder">विशेष सीमा</Item>
+<Item name="BootingDelayWasComingOn">पावर पर, धीरे-धीरे चमक</Item>
+<Item name="RememberToThoose">वर्तमान चयन याद रखें</Item>
+<Item name="EndPageToEndPage">अंत पृष्ठ पर अंत पेज</Item>
+<List name="SystemBusName" id="49">[C50]P10  1R 1/1S  HUB08 RXP</List>
+<List name="OutputWindowString" id="70">कार्यक्रमों को हटाने के लिए बटन पर क्लिक करें [पर]</List>
+<List name="OutputWindowString" id="71">कार्यक्रमों को हटाने के लिए बटन [बंद] क्लिक करें</List>
+<List name="OutputWindowString" id="72">पैरामीटर सेटिंग [सक्षम]</List>
+<List name="OutputWindowString" id="73">पैरामीटर सेटिंग [विकलांग]</List>
+<Item name="Btn1ClearProgram">निषिद्ध हटाने कार्यक्रम</Item>
+<Item name="DoubleSidedScreen">दो तरफा स्क्रीन</Item>
+<Item name="networkMonitoring">निगरानी</Item>
+<Item name="Toolbar_Add3D_Bottom">समर्थन पृष्ठभूमि, अग्रभूमि, रंगीन शब्द, 3 डी प्रभाव</Item>
+<Item name="Toolbar_Add3D_Top">3 डी पाठ जोड़ें</Item>
+<List name="SystemBusName" id="50">[C51]P6  1R1G1B 1/5S  HUB75 32X20</List>
+<Item name="WifiSpeedMode1">उच्च गति मोड</Item>
+<Item name="WifiSpeedMode2">कम गति मोड</Item>
+<Item name="All the devices automatically obtain IP">सभी उपकरणों 'आईपी स्वचालित रूप से प्राप्त करें' की तैयारी में हैं</Item>
+<Item name="The firmware information">फर्मवेयर जानकारी</Item>
+<Item name="The device information">डिवाइस जानकारी</Item>
+<List name="SystemBusName" id="51">[C52]  1R1G  1/8  KR</List>
+<List name="SystemBusName" id="52">[C53]  1R1G1B  1/4S ICN2038S</List>
+<List name="SystemBusName" id="53">[C54]  P10  1R1G  1/4S HUB12 32x16 (YLR)</List>
+<List name="SystemBusName" id="54">[C55]  P8 1R1G1B 1/5S  HUB75 40X20</List>
+<List name="SystemBusName" id="55">[C56]  P10 1/4S No 138 MCGD</List>
+<List name="SystemBusName" id="56">[C57]  P8 1R1G1B 1/4S HUB75 (JJY)</List>
+<List name="SystemBusName" id="57">[C58]  P13.33 1R1G1B 1/3S HUB75 (LLR)</List>
+<List name="SystemBusName" id="58">[C59]  P3 1R1G1B 1/32S HUB75E (RBG) ICN2038S</List>
+<List name="SystemBusName" id="59">[C60]  P3 1R1G1B 1/32S HUB75E (RGB) ICN2038S</List>
+<List name="SystemBusName" id="60">[C61]  P6 1/8S HUB75 (BGR)</List>
+<List name="SystemBusName" id="61">[C62]  P6 1/8S HUB75 GK</List>
+<List name="SystemBusName" id="62">[C63]  P6 1/8S HUB75(HJ)</List>
+<List name="SystemBusName" id="63">[C64]  P6 1R1G1B 1/8S HUB75</List>
+<List name="SystemBusName" id="64">[C65]  P10 1R 1/4s(YLR)</List>
+<List name="SystemBusName" id="65">[C66]  P10 1R 1/4S HUB12</List>
+<List name="SystemBusName" id="66">[C67]  P10 1R1G1B 1/2S HUB75 (HJ)</List>
+<List name="SystemBusName" id="67">[C68]  P10 1R1G1B 1/2S HUB75 </List>
+<List name="SystemBusName" id="68">[C69]  P10 1R1G1B 1/3S HUB73A 24X24 (KSZ)</List>
+<List name="SystemBusName" id="69">[C70]  P10 1R1G1B 1/4S No 138 HUB75</List>
+<List name="SystemBusName" id="70">[C71]  P13.33 1R1G1B 1/3S 24x12</List>
+<List name="SystemBusName" id="71">[C72]  P16 1R1G 1/4S HUB08</List>
+<List name="SystemBusName" id="72">[C73]  P20 1R1G1B 1S</List>
+<List name="SystemBusName" id="73">[C74]  P10 1R1G1B 1/4S HUB75（KT）</List>
+<List name="SystemBusName" id="74">[C75]  P8  1R1G1B 1/4S HUB75 32x16 No138</List>
+<List name="SystemBusName" id="75">[C76]  P8  1R1G1B 1/4S HUB75 32x16 (HJ)</List>
+<List name="SystemBusName" id="76">[C77]  P10 1R1G1B 1/4S HUB75 32x16 No138</List>
+<List name="SystemBusName" id="77">[C78]  P10 1R1G1B 1/2S HUB75 32x16</List>
+<List name="SystemBusName" id="78">[C79]  P10 1R 1/4S HUB08 32x16</List>
+<List name="SystemBusName" id="79">[C80]  P10 1R1G1B 1/2S HUB75 32x16 (GK)</List>
+<List name="SystemBusName" id="80">[C81]  P10 1R1G1B 1/2S HUB75 32x16 (QL)</List>
+<List name="SystemBusName" id="81">[C82]  P16 1R1G 1/1S HUB12 16x8</List>
+<List name="SystemBusName" id="82">[C83]  P10 1R 1/4S HUB12 32x16 (KT)</List>
+<List name="SystemBusName" id="83">[C84]  P10 1R 1/4S HUB12 32x16 (GK)</List>
+<List name="SystemBusName" id="84">[C85]  P5  1R1G1B 1/8S HUB75 64x32</List>
+<List name="SystemBusName" id="85">[C86]  P10 1R1G1B 1/4S HUB75 32x16 No138 (HJCL)</List>
+<List name="SystemBusName" id="86">[C87]  P10 1R1G1B 1/2S HUB75E 32x16 No138 (HLL)</List>
+<List name="SystemBusName" id="87">[C88]  P10 1R1G1B 1/2S HUB75 32x16 No138</List>
+<List name="SystemBusName" id="88">[C89]  P6.66 1R1G1B 1/6S HUB75 48x24</List>
+<List name="SystemBusName" id="89">[C90]  P8  1R1G1B 1/5S HUB75 40x20</List>
+<List name="SystemBusName" id="90">[C91]  P4 1R1G1B 1/10S HUB75 80x40 ICN2038S</List>
+<List name="SystemBusName" id="91">[C92]  P4  1R1G1B 1/20S HUB75 80x40 ICN2038S</List>
+<List name="SystemBusName" id="92">[C93]  P10 1R1G1B 1/4S HUB75 32x16 No138 ICN2038S</List>
+<List name="SystemBusName" id="93">[C94]  P10 1R1G1B 1/2S  32x16 No138 ICN2038S</List>
+<List name="SystemBusName" id="94">[C95]  P10 1R1G1B 1/5S HUB75 40x20 ICN2038S</List>
+<List name="SystemBusName" id="95">[C96]  P10 1R1G1B 1/5S HUB75 40x20 SM16207S</List>
+<List name="SystemBusName" id="96">[C97]  H10 1R1G1B 1/2S HUB75 32x16</List>
+<List name="SystemBusName" id="97">[C98]  P8  1R1G1B 1/5S HUB75 40x20 ICN20378BP</List>
+<List name="SystemBusName" id="98">[C99]  dz0228 1R1G1B 1/1S HUB75 16x16</List>
+<Item name="Server address">सर्वर का पता</Item>
+<Item name="User name">उपयोगकर्ता नाम</Item>
+<Item name="Fill the same">एक ही भरें</Item>
+<Item name="Cloud server Settings">बादल सर्वर सेटिंग</Item>
+<Item name="Cloud server">बादल सर्वर</Item>
+<Item name="ButtonCtrl">बटन पर नियंत्रण</Item>
+<Item name="NoUse">बटन नियंत्रण बंद</Item>
+<Item name="Button1">बटन 1</Item>
+<Item name="Button2">बटन 2</Item>
+<Item name="Button3">बटन 3</Item>
+<Item name="Button4">बटन 4</Item>
+<Item name="DefaultBackground">डिफ़ॉल्ट पृष्ठभूमि</Item>
+<Item name="ImageBackground">छवि पृष्ठभूमि</Item>
+<Item name="SingleProgramSend">एकल कार्यक्रम संदेश</Item>
+<Item name="latest">नवीनतम</Item>
+<Item name="newdata">नए आंकड़े</Item>
+<Item name="Imsak">सत्तारूढ़</Item>
+<Item name="Music">संगीत</Item>
+<Item name="Pray">Pray</Item>
+<Item name="Aglinment">संरेखण</Item>
+<Item name="LeftAglinment">बाईं ओर संरेखण</Item>
+<Item name="CenterAglinment">केंद्र संरेखण</Item>
+<Item name="RightAglinment">दाहिनी ओर संरेखण</Item>
+<Item name="SplitType">SplitType</Item>
+<Item name="SingleChar">SingleChar</Item>
+<Item name="Word">Word</Item>
+<Item name="WifiSetting">Wi-Fi Setting</Item>
+<Item name="SettingSuccessfully">SettingSuccessfully</Item>
+<Item name="SettingFailed">SettingFailed</Item>
+<Item name="Connectting">Connectting</Item>
+<Item name="NoFoundAp">NoFoundAp</Item>
+<Item name="ConnectFailed">ConnectFailed</Item>
+<Item name="ConnectOK">ConnectOK</Item>
+<Item name="ApMode">ApMode</Item>
+<Item name="StationMode">StationMode</Item>
+<Item name="WifiPasswordLenghLess">Wi-Fi password is too short</Item>
+<Item name="WifiSSIDIsNULL">Wi-Fi name is empty</Item>
+<Item name="MaskError">MaskError</Item>
+<Item name="IPError">IPError</Item>
+<Item name="WifiSSIDTooLong">Wi-Fi name is too long.</Item>
+<Item name="WifiPasswordTooLong">Wi-Fi password is too long.</Item>
+<Item name="SSIDPasswordInputTips">Only allow input 0~9 a~z A~Z _</Item>
+ 
+    <Item name="Date">Date</Item>
+    <Item name="temp">temp</Item>
+    <Item name="Weather">Weather</Item>
+    <Item name="Wind Direction">Wind Direction</Item>
+    <Item name="Wind speed">Wind speed</Item>
+    <Item name="Temp Unit">Temp Unit</Item>
+    <Item name="America">America</Item>
+    <Item name="Australia">Australia</Item>
+    <Item name="Canada">Canada</Item>
+    <Item name="China">China</Item>
+    <Item name="India">India</Item>
+    <Item name="Indonesia">Indonesia</Item>
+    <Item name="Iran">Iran</Item>
+    <Item name="Japan">Japan</Item>
+    <Item name="Korea">Korea</Item>
+    <Item name="Malaysia">Malaysia</Item>
+    <Item name="Pakistan">Pakistan</Item>
+    <Item name="Peru">Peru</Item>
+    <Item name="Poland">Poland</Item>
+    <Item name="Russia">Russia</Item>
+    <Item name="Spain">Spain</Item>
+    <Item name="Thailand">Thailand</Item>
+    <Item name="Turkey">Turkey</Item>
+    <Item name="United Arab Emirates">United Arab Emirates</Item>
+    <Item name="Vietnam">Vietnam</Item>
+    <Item name="Sunny">Sunny</Item>
+    <Item name="Cloudy">Cloudy</Item>
+    <Item name="Few clouds">Few clouds</Item>
+    <Item name="Partly cloudy">Partly cloudy</Item>
+    <Item name="Overcast">Overcast</Item>
+    <Item name="Windy">Windy</Item>
+    <Item name="Calm">No wind</Item>
+    <Item name="Light breeze">Light breeze</Item>
+    <Item name="Moderate">Moderate</Item>
+    <Item name="Fresh breeze">Fresh breeze</Item>
+    <Item name="Strong breeze">Strong breeze</Item>
+    <Item name="High wind">High wind</Item>
+    <Item name="Gale">Gale</Item>
+    <Item name="Strong gale">Strong gale</Item>
+    <Item name="Storm">storm</Item>
+    <Item name="Violent storm">Violent storm</Item>
+    <Item name="Hurricane">Hurricane</Item>
+    <Item name="Tornado">Tornado</Item>
+    <Item name="Tropical storm">Tropical storm</Item>
+    <Item name="Shower rain">Shower rain</Item>
+    <Item name="Heavy shower rain">Heavy shower rain</Item>
+    <Item name="Thundershower">Thunderstorms</Item>
+    <Item name="Heavy thunderstorm">Heavy thunderstorm</Item>
+    <Item name="Hail">Hail</Item>
+    <Item name="Light rain">Light rain</Item>
+    <Item name="Moderate rain">Moderate rain</Item>
+    <Item name="Heavy rain">Heavy rain</Item>
+    <Item name="Extreme rain">Extreme rain</Item>
+    <Item name="Drizzle rain">Drizzle rain</Item>
+    <Item name="Storm">storm</Item>
+    <Item name="Heavy storm">Heavy storm</Item>
+    <Item name="Severe storm">Severe storm</Item>
+    <Item name="Freezing rain">Freezing rain</Item>
+    <Item name="Light snow">Light snow</Item>
+    <Item name="Moderate snow">Moderate snow</Item>
+    <Item name="Heavy snow">Heavy snow</Item>
+    <Item name="Snowstorm">Snowstorm</Item>
+    <Item name="Sleet">Sleet</Item>
+    <Item name="Rain and snow">Rain and snow</Item>
+    <Item name="Shower snow">Shower snow</Item>
+    <Item name="Snow flurry">Snow flurry</Item>
+    <Item name="Mist">mist</Item>
+    <Item name="Foggy">Foggy</Item>
+    <Item name="Haze">Haze</Item>
+    <Item name="Sand">sand</Item>
+    <Item name="Dust">Dust</Item>
+    <Item name="Duststorm">dust storm</Item>
+    <Item name="Sandstorm">sandstorm</Item>
+    <Item name="Hot">Hot</Item>
+    <Item name="Cold">Cold</Item>
+    <Item name="Unknown">Unknown</Item>
+    <Item name="Clear">Clear</Item>
+    <Item name="No Sustained Wind">No Sustained Wind</Item>
+    <Item name="Northeast Wind">Northeast Wind</Item>
+    <Item name="East Wind">East Wind</Item>
+    <Item name="Southeaster Wind">Southeaster Wind</Item>
+    <Item name="South Wind">South Wind</Item>
+    <Item name="Southwest Wind">Southwest Wind</Item>
+    <Item name="Strong wind">Strong wind</Item>
+    <Item name="West Wind">West Wind</Item>
+    <Item name="Northwest Wind">Northwest Wind</Item>
+    <Item name="North Wind">North Wind</Item>
+    <Item name="Vortex Wind">Vortex Wind</Item>
+    <Item name="The Breeze Wind">The Breeze Wind</Item>
+    <Item name="No wind">No wind</Item>
+    <Item name="Light air">Light air</Item>
+    <Item name="Breeze">Breeze</Item>
+    <Item name="Gentle breeze">Gentle breeze</Item>
+    <Item name="Strong wind">Strong wind</Item>
+    <Item name="Blast">Blast</Item>
+    <Item name="Gale">Gale</Item>
+    <Item name="Strong gale">Strong gale</Item>
+    <Item name="Whole gale">Whole gale</Item>
+    <Item name="Storm wind">Storm wind</Item>
+    <Item name="Hurricane">Hurricane</Item>
+	<Item name="OfflineMode">Offline Mode</Item>
+	<Item name="PleaseSelectDevice">Please select device</Item>
+	<Item name="SeeMoreParameters">See more parameters</Item>
+	<Item name="ExportProgram">Export program</Item>
+	<List name="ErrorTips" id="00">Common problem hints</List>
+	<List name="ErrorTips" id="01">Error / The width and height set in the screen setting exceeds the control range of the controller</List>
+	<List name="ErrorTips" id="02">Error1 / U disk file format error</List>
+	<List name="ErrorTips" id="03">Error2 / Excessive  program content</List>
+	<List name="ErrorTips" id="04">NoFile / No program file in the U disk</List>
+	<List name="ErrorTips" id="05">End / Setting expired</List>
+	<Item name="ColorfulBorder">Colorful border</Item>
+	<Item name="FixedText">Fixed text</Item>
+	<List name="PM25String" id="00">No data</List>
+	<List name="PM25String" id="01">Good</List>
+	<List name="PM25String" id="02">Moderate</List>
+	<List name="PM25String" id="03">Lightly Polluted</List>
+	<List name="PM25String" id="04">Moderately Polluted</List>
+	<List name="PM25String" id="05">Heavily Polluted</List>
+	<List name="PM25String" id="06">Severely Polluted</List>
+	<Item name="BootTips">Boot tips</Item>
+	<Item name="ShowAll">Show all</Item>
+	<Item name="NoShow">No show</Item>
+	<Item name="PM25Adjust">Adjust PM2.5</Item>
+	<Item name="PM10Adjust">Adjust PM10</Item>
+	<Item name="QuickConfig">Quick config</Item>
+	<Item name="Subtitles">Subtitles</Item>
+	<Item name="Toolbar_AddSubtitles_Top">Add Subtitles</Item>
+	<Item name="ICSetting">IC setting</Item>
+	<Item name="NormalIC">Normal IC</Item>
+	<Item name="RegisterGroup">Register group</Item>
+	<Item name="RedRegister">Red register</Item>
+	<Item name="GreenRegister">Green register</Item>
+	<Item name="BlueRegister">Blue register</Item>
+	<Item name="HighByte">High byte</Item>
+	<Item name="LowByte">Low byte</Item>
+	<Item name="HelpDoc">Help Doc</Item>
+	<Item name="PrayAutioTip">जब आपको ऑडियो मॉड्यूल का उपयोग करने की आवश्यकता होती है, तो कृपया प्रार्थना नामों के अनुरूप कई एमपी 3 फाइलें प्रदान करें। Imsak->1.mp3 Fajr->2.mp3 Dhuhr->3.mp3 Asr->4.mp3 Maghrib->5.mp3 Isha->6.mp3 MidNight->7.mp3 .</Item>
+<Item name="Confirm Password">Confirm Password</Item>
+<Item name="PasswordInvalidTip">The password must be a number + letter combination with a length of 8~16.</Item>
+<Item name="PasswordUnEqual">The password entered twice is different.</Item>
+<Item name="PasswordTooSimple">The system has detected that the device's Wi-Fi password is too simple. Please reset it.</Item>
+<List name="OutputWindowString" id="75">The system has detected that the device's Wi-Fi password is too simple. Please reset it.</List>
+<Item name="Logout">Logout</Item>
+<Item name="LogoutYesOrNo">Is the user logged out?</Item>
+<Item name="Login">login</Item>
+<Item name="WifiSettingOK">The setting is successful, please reconnect to Wi-Fi.</Item>
+<Item name="UserName">User name</Item>
+<Item name="InputPassword">Input password</Item>
+<Item name="Register">Register</Item>
+<Item name="GetCheckCode">GetCheckCode</Item>
+<Item name="InputCheckCode">Input the check code</Item>
+<Item name="RegisterError">Registration error</Item>
+<Item name="PhoneNum">Cellphone number</Item>
+<Item name="CheckCode">Check code</Item>
+<Item name="ConnectNetwordToUse">Please use the software after connecting to the Internet</Item>
+<Item name="AuthorizedSuccess">Authorized success</Item>
+<Item name="UnsupportedLoginType">Unsupported login type</Item>
+<Item name="CheckCodeNotMatch">Check code does not match</Item>
+<Item name="InputRightPhone">Please enter the correct phone number</Item>
+<Item name="ResetPassword">Reset Password</Item>
+<Item name="PhoneNumError">Wrong format of phone number.</Item>
+<Item name="CheckCodeTimeoutInOneMinute">Verification code cannot be sent repeatedly within one minute</Item>
+<Item name="CheckCodeTimeout">Verification code transmission frequency is exceeded</Item>
+<Item name="CheckCodeSendError">The verification code failed to be sent.</Item>
+<Item name="InvalidToken">Invalid token</Item>
+<Item name="MissingRegInfo">Missing registration information</Item>
+<Item name="AgreeAndAccept">Agreen</Item>
+<Item name="TermsOfService">Services Agreement</Item>
+<Item name="Reacquire">Reacquire</Item>
+<Item name="SettingLoginPassword">Setting login password</Item>
+<Item name="Skip">Skip</Item>
+<Item name="NetworkErrorTip">Network error</Item>
+<Item name="Retry">Retry</Item>
+<Item name="PleaseGetCheckCode">Please get the check code.</Item>
+<Item name="KeepLogin">Keep login</Item>
+<Item name="IsLogoutUser">Logout the current user?</Item>
+<Item name="NotTipsAgin">Do not tips again</Item>
+<Item name="OpenDeviceLock">Enable device lock</Item>
+<Item name="ModifyDeviceLock">Modify device lock</Item>
+<Item name="CloseDeviceLock">Close device lock</Item>
+<Item name="DeviceHasLockedInfo">The device has been locked. Please enter your password.</Item>
+<Item name="DeviceLockPassword">Device lock password</Item>
+<Item name="NoInputNoDeviceLockTip">No password is required when device lock is not enabled.</Item>
+<Item name="UseOldPassword">Use current password</Item>
+<Item name="DeviceLockSetting">Device lock settings</Item>
+<Item name="DeviceLock">Device lock</Item>
+<Item name="KeepPassword">Keep password</Item>
+<Item name="AutoLogin">Auto login</Item>
+<Item name="PleaseInputOldPassword">Please enter the old password</Item>
+<Item name="OldPasswordError">Old password error</Item>
+<Item name="Old Password">Old password</Item>
+<Item name="New Password">New password</Item>
+<Item name="Action">Action</Item>
+
+<List name="OutputWindowString" id="76">The device lock password is incorrect.</List>
+<List name="OutputWindowString" id="77">Missing log content.</List>
+<List name="OutputWindowString" id="78">The machine code is wrong.</List>
+<List name="OutputWindowString" id="79">The length of the machine code is incorrect.</List>
+<List name="OutputWindowString" id="80">The length of the device lock password is incorrect.</List>
+<List name="OutputWindowString" id="81">XR809 is updating</List>
+<List name="OutputWindowString" id="82">XR809 idnvalid address</List>
+<List name="OutputWindowString" id="83">XR809 error</List>
+<List name="OutputWindowString" id="84">Start reading parameters</List>
+<List name="OutputWindowString" id="85">Finish reading parameters</List>
+<List name="OutputWindowString" id="86">Start to restore parameters</List>
+<List name="OutputWindowString" id="87">The parameters have been restored</List>
+<List name="OutputWindowString" id="88">The download is complete and is waiting to recover data.</List>
+<Item name="UseWechatQRCode">Use WeChat to scan the QR code</Item>
+<Item name="Activate">Activate</Item>
+<Item name="ActivateOffline">Activate offline</Item>
+<Item name="PleaseInputActiveCode">Please enter the activation code</Item>
+<Item name="ErrorActivateCode">Wrong activation code</Item>
+<Item name="NTPSetting">नेटवर्क समय सेटिंग</Item>
+<Item name="NetworkSame">Make sure that the device IP and router IP are on the same network segment.</Item>
+<List name="SystemBusName" id="99">[C100]  P10 28x16 8 स्वीप 8 ड्रॉ पॉइंट</List>
+	</language>
+</root>                                                                                                                                                                                                                                                                                          

@@ -2,10 +2,13 @@
 //!
 //! ## Wire format
 //! ```text
-//! [u16 LE length]   — payload_len + 2  (includes the command word itself)
+//! [u16 LE length]   — total packet size (4 + payload_len), includes this field
 //! [u16 LE command]  — Command code
-//! [N bytes payload] — command-specific data (N = length - 2)
+//! [N bytes payload] — command-specific data (N = length - 4)
 //! ```
+//!
+//! Confirmed via live device captures: the real device sends and expects
+//! `length = total bytes` (header + payload), not `length = payload + 2`.
 //!
 //! ## SDK CMD chunking
 //! `SdkCmdAsk` / `SdkCmdAnswer` payloads have an 8-byte framing header
@@ -20,11 +23,20 @@ use byteorder::{LittleEndian, ReadBytesExt, WriteBytesExt};
 use std::io::Cursor;
 use crate::error::{Error, Result};
 
+// ── Well-known port and timing constants ──────────────────────────────────────
+
+/// Default TCP port for the Huidu BoxPlayer SDK protocol.
+pub const DEFAULT_PORT: u16 = 10001;
+
+/// Heartbeat interval — both HDPlayer and HDSet send a ping every 30 s.
+pub const HEARTBEAT_INTERVAL: std::time::Duration = std::time::Duration::from_secs(30);
+
 // ── Protocol version constants ────────────────────────────────────────────────
 
 /// Version the PC tools (HDPlayer, HDSet) send in `SdkServiceAsk`.
-/// Value `0x01000000` from binary analysis of HCatNet.dll.
-pub const SDK_CLIENT_VERSION: u32 = 0x0100_0000;
+/// Confirmed from live device testing: sending 0x01000000 returns kVersionTooLow (error 3).
+/// 0x07000000 is the lowest tested value that receives a proper SdkServiceAnswer.
+pub const SDK_CLIENT_VERSION: u32 = 0x0700_0000;
 
 /// Version BoxPlayer responds with in `SdkServiceAnswer`.
 /// The lower byte (`0x05`) encodes a Huidu-internal firmware revision.
@@ -50,6 +62,11 @@ pub enum Command {
     TcpHeartbeatAnswer = 0x0060,
 
     // ── SDK XML channel ───────────────────────────────────────────────────
+    /// Device → client: generic error response (payload = u16 LE error_code).
+    /// Sent when a command fails at the protocol layer (version mismatch, invalid
+    /// method, XML parse failure, etc.).  Error codes: 3=kVersionTooLow, 22=kVersionNotSupport,
+    /// 23=kInvalidMethod.
+    SdkErrorAnswer   = 0x2000,
     /// Client → device: negotiate protocol version (payload = u32 LE version).
     SdkServiceAsk    = 0x2001,
     /// Device → client: acknowledge version (payload = u32 LE device version).
@@ -100,6 +117,7 @@ impl Command {
             0x0001 => Self::SearchDeviceAsk,
             0x005F => Self::TcpHeartbeatAsk,
             0x0060 => Self::TcpHeartbeatAnswer,
+            0x2000 => Self::SdkErrorAnswer,
             0x2001 => Self::SdkServiceAsk,
             0x2002 => Self::SdkServiceAnswer,
             0x2003 => Self::SdkCmdAsk,
@@ -151,9 +169,11 @@ impl Packet {
     }
 
     /// Serialize to wire bytes: `[u16 LE length][u16 LE command][payload]`
+    ///
+    /// `length` = total packet size (4 + payload.len()), confirmed by live device testing.
     pub fn to_bytes(&self) -> Vec<u8> {
         let mut buf = Vec::with_capacity(4 + self.payload.len());
-        let length = (self.payload.len() + 2) as u16;
+        let length = (self.payload.len() + 4) as u16;
         buf.write_u16::<LittleEndian>(length).unwrap();
         buf.write_u16::<LittleEndian>(self.command.as_u16()).unwrap();
         buf.extend_from_slice(&self.payload);
@@ -171,18 +191,18 @@ impl Packet {
         let mut cur = Cursor::new(data);
         let length = cur.read_u16::<LittleEndian>()
             .map_err(|e| Error::Protocol(e.to_string()))? as usize;
-        if length < 2 {
-            return Err(Error::Protocol("packet length field < 2".into()));
+        if length < 4 {
+            return Err(Error::Protocol("packet length field < 4".into()));
         }
-        let payload_len = length - 2;
-        if data.len() < 4 + payload_len {
+        let payload_len = length - 4;
+        if data.len() < length {
             return Ok(None);
         }
         let command_raw = cur.read_u16::<LittleEndian>()
             .map_err(|e| Error::Protocol(e.to_string()))?;
         let command = Command::from_u16(command_raw);
         let payload = data[4..4 + payload_len].to_vec();
-        Ok(Some((Packet { command, payload }, 4 + payload_len)))
+        Ok(Some((Packet { command, payload }, length)))
     }
 }
 
@@ -224,4 +244,153 @@ pub fn parse_sdk_cmd_payload(payload: &[u8]) -> Option<&[u8]> {
         return None;
     }
     Some(&payload[8..])
+}
+
+// ── Display impl for logging ──────────────────────────────────────────────────
+
+impl std::fmt::Display for Command {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let name = match self {
+            Self::SearchDeviceAsk    => "SearchDeviceAsk",
+            Self::TcpHeartbeatAsk    => "TcpHeartbeatAsk",
+            Self::TcpHeartbeatAnswer => "TcpHeartbeatAnswer",
+            Self::SdkErrorAnswer     => "SdkErrorAnswer",
+            Self::SdkServiceAsk      => "SdkServiceAsk",
+            Self::SdkServiceAnswer   => "SdkServiceAnswer",
+            Self::SdkCmdAsk          => "SdkCmdAsk",
+            Self::SdkCmdAnswer       => "SdkCmdAnswer",
+            Self::FileStartAsk       => "FileStartAsk",
+            Self::FileStartAnswer    => "FileStartAnswer",
+            Self::FileContentAsk     => "FileContentAsk",
+            Self::FileContentAnswer  => "FileContentAnswer",
+            Self::FileEndAsk         => "FileEndAsk",
+            Self::FileEndAnswer      => "FileEndAnswer",
+            Self::FpgaSettingInAsk   => "FpgaSettingInAsk",
+            Self::FpgaSettingInAnswer=> "FpgaSettingInAnswer",
+            Self::FpgaSettingOutAsk  => "FpgaSettingOutAsk",
+            Self::FpgaSettingOutAnswer=>"FpgaSettingOutAnswer",
+            Self::FpgaParamSetAsk    => "FpgaParamSetAsk",
+            Self::FpgaParamSetAnswer => "FpgaParamSetAnswer",
+            Self::FpgaSetCmdAsk      => "FpgaSetCmdAsk",
+            Self::FpgaSetCmdAnswer   => "FpgaSetCmdAnswer",
+            Self::ScreenTestInAsk    => "ScreenTestInAsk",
+            Self::ScreenTestCmdAsk   => "ScreenTestCmdAsk",
+            Self::BootScreenInAsk    => "BootScreenInAsk",
+            Self::BootScreenOutAsk   => "BootScreenOutAsk",
+            Self::RemoveBootScreenAsk=> "RemoveBootScreenAsk",
+            Self::Unknown            => "Unknown",
+        };
+        write!(f, "{name}(0x{:04X})", self.as_u16())
+    }
+}
+
+// ── Tests ─────────────────────────────────────────────────────────────────────
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn packet_to_bytes_format() {
+        let pkt = Packet::new(Command::TcpHeartbeatAsk, vec![]);
+        let bytes = pkt.to_bytes();
+        // [u16 LE length=4 (total)][u16 LE command=0x005F]
+        assert_eq!(bytes, [0x04, 0x00, 0x5F, 0x00]);
+    }
+
+    #[test]
+    fn packet_with_payload_roundtrip() {
+        let payload = b"hello".to_vec();
+        let pkt = Packet::new(Command::SdkCmdAsk, payload.clone());
+        let bytes = pkt.to_bytes();
+        // Length field = payload.len() + 4 = 9 (total size)
+        assert_eq!(bytes[0], 9);
+        assert_eq!(bytes[1], 0);
+        let (parsed, consumed) = Packet::from_bytes(&bytes).unwrap().unwrap();
+        assert_eq!(consumed, bytes.len());
+        assert_eq!(parsed.command, Command::SdkCmdAsk);
+        assert_eq!(parsed.payload, payload);
+    }
+
+    #[test]
+    fn packet_from_bytes_needs_more_data() {
+        // Only 3 bytes — not enough for the 4-byte header
+        assert!(Packet::from_bytes(&[0x04, 0x00, 0x5F]).unwrap().is_none());
+    }
+
+    #[test]
+    fn packet_from_bytes_partial_payload() {
+        // total=12 means 8 bytes payload, but only 6 bytes available
+        let bytes = [0x0C, 0x00, 0x5F, 0x00, 0x01, 0x02];
+        assert!(Packet::from_bytes(&bytes).unwrap().is_none());
+    }
+
+    #[test]
+    fn packet_from_bytes_invalid_length() {
+        // Length field = 1 (< 4 = minimum valid total)
+        let bytes = [0x01, 0x00, 0x5F, 0x00];
+        assert!(Packet::from_bytes(&bytes).is_err());
+    }
+
+    #[test]
+    fn command_from_u16_known_values() {
+        assert_eq!(Command::from_u16(0x005F), Command::TcpHeartbeatAsk);
+        assert_eq!(Command::from_u16(0x0060), Command::TcpHeartbeatAnswer);
+        assert_eq!(Command::from_u16(0x2001), Command::SdkServiceAsk);
+        assert_eq!(Command::from_u16(0x8001), Command::FileStartAsk);
+        assert_eq!(Command::from_u16(0x8006), Command::FileEndAnswer);
+    }
+
+    #[test]
+    fn command_from_u16_unknown() {
+        assert_eq!(Command::from_u16(0xDEAD), Command::Unknown);
+    }
+
+    #[test]
+    fn command_as_u16_roundtrip() {
+        for &cmd in &[
+            Command::TcpHeartbeatAsk, Command::SdkServiceAsk,
+            Command::SdkCmdAsk, Command::FileStartAsk, Command::FileEndAnswer,
+        ] {
+            assert_eq!(Command::from_u16(cmd.as_u16()), cmd);
+        }
+    }
+
+    #[test]
+    fn command_display_includes_hex() {
+        let s = Command::TcpHeartbeatAsk.to_string();
+        assert!(s.contains("TcpHeartbeatAsk"));
+        assert!(s.contains("005F"));
+    }
+
+    #[test]
+    fn sdk_cmd_payload_roundtrip() {
+        let xml = "<foo/>";
+        let payload = sdk_cmd_ask_payload(xml);
+        // 8-byte header + xml bytes
+        assert_eq!(payload.len(), 8 + xml.len());
+        // First 4 bytes = xml length as u32 LE
+        let len = u32::from_le_bytes(payload[..4].try_into().unwrap()) as usize;
+        assert_eq!(len, xml.len());
+        // Chunk index = 0
+        let idx = u32::from_le_bytes(payload[4..8].try_into().unwrap());
+        assert_eq!(idx, 0);
+        // XML content
+        assert_eq!(&payload[8..], xml.as_bytes());
+        // parse_sdk_cmd_payload extracts xml correctly
+        assert_eq!(parse_sdk_cmd_payload(&payload), Some(xml.as_bytes()));
+    }
+
+    #[test]
+    fn parse_sdk_cmd_payload_too_short() {
+        assert_eq!(parse_sdk_cmd_payload(&[1, 2, 3, 4, 5, 6, 7]), None);
+        assert_eq!(parse_sdk_cmd_payload(&[]), None);
+    }
+
+    #[test]
+    fn heartbeat_packet_command() {
+        let pkt = Packet::heartbeat();
+        assert_eq!(pkt.command, Command::TcpHeartbeatAsk);
+        assert!(pkt.payload.is_empty());
+    }
 }

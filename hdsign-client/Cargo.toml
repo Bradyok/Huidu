@@ -1,0 +1,45 @@
+[package]
+name = "hdsign"
+version = "0.1.0"
+edition = "2021"
+description = "Rust reproduction of Huidu HDSign V2.0.2 LED sign control tool"
+
+[[bin]]
+name = "hdsign"
+path = "src/main.rs"
+
+[lib]
+name = "hdsign"
+path = "src/lib.rs"
+
+[features]
+gui = ["dep:eframe", "dep:egui", "dep:image", "dep:rfd"]
+
+[[bin]]
+name = "hdsign-gui"
+path = "src/bin/hdsign_gui.rs"
+required-features = ["gui"]
+
+[dependencies]
+huidu-protocol = { path = "../huidu-protocol" }
+tokio          = { version = "1", features = ["full"] }
+serde          = { version = "1", features = ["derive"] }
+serde_json     = "1"
+quick-xml      = { version = "0.37", features = ["serialize"] }
+uuid           = { version = "1", features = ["v4"] }
+md5            = "0.7"
+chrono         = "0.4"
+tracing        = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+clap           = { version = "4", features = ["derive"] }
+thiserror      = "1"
+anyhow         = "1"
+byteorder      = "1"
+base64         = "0.22"
+reqwest        = { version = "0.12", features = ["json"] }
+
+# GUI (optional)
+eframe = { version = "0.31", optional = true, default-features = false, features = ["default_fonts", "glow"] }
+egui   = { version = "0.31", optional = true }
+image  = { version = "0.25", optional = true, default-features = false, features = ["png", "jpeg"] }
+rfd    = { version = "0.15", optional = true }

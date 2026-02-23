@@ -66,12 +66,12 @@ async fn handle_connection(
     while let Ok(l) = stream.read_u16_le().await {
         let length = l as usize;
 
-        if !(2..=MAX_PACKET_SIZE).contains(&length) {
+        if !(4..=MAX_PACKET_SIZE).contains(&length) {
             warn!("Invalid packet length: {}", length);
             break;
         }
 
-        let data_len = length - 2;
+        let data_len = length - 4;
         let cmd_raw = stream.read_u16_le().await?;
 
         if data_len > 0 {

@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<BackgroundType>
+<Type1 Def="Def" Counts="1" TypeName="Style1" FileType="MultiFrame" Speed="100" Select="0">.\images\Foreground\01.gif</Type1>
+<Type2 Def="Def" Counts="1" TypeName="Style2" FileType="MultiFrame" Speed="100" Select="0">.\images\Foreground\02.gif</Type2>
+<Type3 Def="Def" Counts="1" TypeName="Style3" FileType="MultiFrame" Speed="100" Select="0">.\images\Foreground\03.gif</Type3>
+<Type4 Def="Def" Counts="1" TypeName="Style4" FileType="MultiFrame" Speed="100" Select="0">.\images\Foreground\04.gif</Type4>
+<Type5 Def="Def" Counts="1" TypeName="Style5" FileType="MultiFrame" Speed="100" Select="0">.\images\Foreground\05.gif</Type5>
+<Type6 Def="Def" Counts="1" TypeName="Style6" FileType="MultiFrame" Speed="100" Select="0">.\images\Foreground\06.gif</Type6>
+<Type7 Def="Def" Counts="1" TypeName="Style7" FileType="MultiFrame" Speed="100" Select="0">.\images\Foreground\07.gif</Type7>
+<Type8 Def="Def" Counts="1" TypeName="Style8" FileType="MultiFrame" Speed="100" Select="0">.\images\Foreground\08.gif</Type8>
+<Type9 Def="Def" Counts="1" TypeName="Style9" FileType="MultiFrame" Speed="100" Select="0">.\images\Foreground\09.gif</Type9>
+<Type10 Def="Def" Counts="1" TypeName="Style10" FileType="MultiFrame" Speed="100" Select="0">.\images\Foreground\10.gif</Type10>
+<Type11 Def="Def" Counts="1" TypeName="Style11" FileType="MultiFrame" Speed="100" Select="0">.\images\Foreground\11.gif</Type11>
+<Type12 Def="Def" Counts="1" TypeName="Style12" FileType="MultiFrame" Speed="100" Select="0">.\images\Foreground\12.gif</Type12>
+<Type13 Def="Def" Counts="1" TypeName="Style13" FileType="MultiFrame" Speed="100" Select="0">.\images\Foreground\13.gif</Type13>
+<Type14 Def="Def" Counts="1" TypeName="Style14" FileType="MultiFrame" Speed="100" Select="0">.\images\Foreground\14.gif</Type14>
+<Type15 Def="Def" Counts="1" TypeName="Style15" FileType="MultiFrame" Speed="100" Select="0">.\images\Foreground\15.gif</Type15>
+<Type16 Def="Def" Counts="1" TypeName="Style16" FileType="MultiFrame" Speed="100" Select="0">.\images\Foreground\16.gif</Type16>
+<Type17 Def="Def" Counts="1" TypeName="Style17" FileType="MultiFrame" Speed="100" Select="0">.\images\Foreground\17.gif</Type17>
+<Type18 Def="Def" Counts="1" TypeName="Style18" FileType="MultiFrame" Speed="100" Select="0">.\images\Foreground\18.gif</Type18>
+<Type19 Def="Def" Counts="1" TypeName="Style19" FileType="MultiFrame" Speed="100" Select="0">.\images\Foreground\19.gif</Type19>
+<Type20 Def="Def" Counts="1" TypeName="Style20" FileType="MultiFrame" Speed="100" Select="0">.\images\Foreground\20.gif</Type20>
+<Type21 Def="Def" Counts="1" TypeName="Style21" FileType="MultiFrame" Speed="100" Select="0">.\images\Foreground\21.gif</Type21>
+<Type22 Def="Def" Counts="1" TypeName="Style22" FileType="MultiFrame" Speed="100" Select="0">.\images\Foreground\22.gif</Type22>
+<Type23 Def="Def" Counts="1" TypeName="Style23" FileType="MultiFrame" Speed="100" Select="0">.\images\Foreground\23.gif</Type23>
+<Type24 Def="Def" Counts="1" TypeName="Style24" FileType="MultiFrame" Speed="100" Select="0">.\images\Foreground\24.gif</Type24>
+<Type25 Def="Def" Counts="1" TypeName="Style25" FileType="MultiFrame" Speed="100" Select="0">.\images\Foreground\25.gif</Type25>
+<Type26 Def="Def" Counts="1" TypeName="Style26" FileType="MultiFrame" Speed="100" Select="0">.\images\Foreground\26.gif</Type26>
+<Type27 Def="Def" Counts="1" TypeName="Style27" FileType="MultiFrame" Speed="100" Select="0">.\images\Foreground\27.gif</Type27>
+<Type28 Def="Def" Counts="1" TypeName="Style28" FileType="MultiFrame" Speed="100" Select="0">.\images\Foreground\28.gif</Type28>
+<Type29 Def="Def" Counts="1" TypeName="Style29" FileType="MultiFrame" Speed="100" Select="0">.\images\Foreground\29.gif</Type29>
+</BackgroundType>

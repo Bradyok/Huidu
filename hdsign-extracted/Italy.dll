@@ -1,0 +1,1598 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <language name="Italia">
+        <Item name="ABrighterThanB">A è più luminoso di B</Item>
+        <Item name="About">Supporto</Item>
+        <Item name="AbrightBoff">A è bianco mentre B è nero</Item>
+        <Item name="Add">Inserisci</Item>
+        <Item name="Add File">Aggiungi file</Item>
+        <Item name="Add GIF">Aggiungi GIF</Item>
+        <Item name="AddFailed">Aggiungi non riuscito</Item>
+        <Item name="AddFile">Aggiungi file</Item>
+        <Item name="AddGroup">Aggiungere gruppo</Item>
+        <Item name="AddHypertext">Aggiungi ipertesto</Item>
+        <Item name="AddItemID">Aggiungi ID</Item>
+        <Item name="AddPicture">Aggiungi immagine</Item>
+        <Item name="AddProgram">Aggiungi programma</Item>
+        <Item name="AddRegion">Aggiungi regione</Item>
+        <Item name="AddSuccess">Aggiungi con successo</Item>
+        <Item name="AdjustTime">Regola il tempo</Item>
+        <Item name="AdvancedSetting">Impostazioni avanzate</Item>
+        <Item name="AdvancedSettings">Impostazioni avanzate</Item>
+        <Item name="AlignCenter">Screen Centered</Item>
+        <Item name="AlignRight">Lavare a destra</Item>
+        <Item name="Alignment">Tipo di allineamento</Item>
+        <Item name="All">Tutti</Item>
+		<Item name="168">1966</Item>
+        <Item name="Allow">Abilitare</Item>
+        <Item name="AllowPasswordAuthentication">Abilita l'autenticazione della password per le impostazioni importanti.</Item>
+        <Item name="AlreadyOpened">Questo schermo è già aperto.</Item>
+        <Item name="AlterBaudrate">Alter Baudrate</Item>
+        <Item name="AntiClockwise rotation">In senso antiorario</Item>
+        <Item name="AreaBackground">Area di sfondo</Item>
+        <Item name="AreaDown">Area in basso</Item>
+        <Item name="AreaLeft">Area sinistra</Item>
+        <Item name="AreaMaximize">Regione massimizzata</Item>
+        <Item name="AreaNoBorder">Lo schermo incrociato non supporta il bordo per il programma globale</Item>
+        <Item name="AreaRight">Area destra</Item>
+        <Item name="AreaUp">Area Up</Item>
+        <Item name="Associated">Socio</Item>
+        <Item name="AutoAdjustTime">Tempo di regolazione automatica</Item>
+        <Item name="AutoGetingIP">Ottieni automaticamente l'IP</Item>
+        <Item name="AutoHide">Nascondi automaticamente</Item>
+        <Item name="AutoReSend">Reinviare automaticamente</Item>
+        <Item name="AutoSave">Salvataggio automatico</Item>
+        <Item name="AutoScanInterval">Tempo di scansione automatica</Item>
+        <Item name="AutoScanMode">Modalità di scansione automatica</Item>
+        <Item name="AutoSearchScans">Cerca automaticamente la modalità di scansione</Item>
+        <Item name="AutoSwitching">Cambio automatico</Item>
+        <Item name="AutoUpdate">Aggiornamenti automatici</Item>
+        <Item name="Automatic">Automatico</Item>
+        <Item name="AutomaticInfo">Quando si utilizza la funzione di regolazione automatica, si prega di assicurarsi di che hai installato il sensore di luminosità.</Item>
+        <Item name="BBrighterThanA">B è più luminoso di A</Item>
+        <Item name="Background">sfondo</Item>
+        <Item name="BackgroundColor">Colore di sfondo</Item>
+        <Item name="BackgroundSetting">Impostazioni di sfondo</Item>
+        <Item name="platform">piattaforma</Item>
+        <List name="BackgroupEffects" id="0">Casuale</List>
+        <List name="BackgroupEffects" id="10">Zoom indietro</List>
+        <List name="BackgroupEffects" id="11">Respirare</List>
+        <List name="BackgroupEffects" id="12">Crossover</List>
+        <List name="BackgroupEffects" id="13">Equalizzatore</List>
+        <List name="BackgroupEffects" id="14">Riflesso</List>
+        <List name="BackgroupEffects" id="15">Scintillio</List>
+        <List name="BackgroupEffects" id="16">Tinta unita</List>
+        <List name="BackgroupEffects" id="17">Chiusura dell'apertura del nastro</List>
+        <List name="BackgroupEffects" id="18">Espansione circolare</List>
+        <List name="BackgroupEffects" id="19">Espansione a forma di diamante</List>
+        <List name="BackgroupEffects" id="1">Statico</List>
+        <List name="BackgroupEffects" id="20">Random Cross Line</List>
+        <List name="BackgroupEffects" id="21">Linea curva</List>
+        <List name="BackgroupEffects" id="2">Muovere a sinistra</List>
+        <List name="BackgroupEffects" id="3">Vai a destra</List>
+        <List name="BackgroupEffects" id="4">Andare avanti</List>
+        <List name="BackgroupEffects" id="5">Abbassati</List>
+        <List name="BackgroupEffects" id="6">Sposta a sinistra, quindi sposta a destra</List>
+        <List name="BackgroupEffects" id="7">Orizzontalmente aperto dal centro</List>
+        <List name="BackgroupEffects" id="8">Chiudere da entrambi i lati</List>
+        <List name="BackgroupEffects" id="9">Ingrandire</List>
+        <List name="platformList" id="hdplatform.huidu.cn">Piattaforma di rilascio</List>
+        <Item name="BasicInfoSet">Impostazioni di base</Item>
+        <Item name="BasicPara">Parametri di base</Item>
+        <Item name="BasicSetting">Impostazioni di base</Item>
+        <Item name="Baudrate">Velocità di trasmissione</Item>
+        <Item name="BbrightAoff">A è nero mentre B è bianco</Item>
+        <Item name="Begin">Inizio</Item>
+        <Item name="Begin Play">Inizio</Item>
+        <Item name="BeginIpAddr">Inizia IP</Item>
+        <Item name="Black">Nero</Item>
+        <Item name="Blue">Blu</Item>
+        <Item name="Boot">Stato di avvio</Item>
+        <Item name="BootStatus">La scheda di controllo è attualmente in stato di avvio in attesa del firmware essere aggiornato, si prega di aggiornare il firmware prima!</Item>
+        <Item name="Border">Bordo</Item>
+        <Item name="BorderColor">Colore del bordo</Item>
+        <Item name="BorderSetting">Impostazione del confine</Item>
+        <Item name="BorderWidth">Larghezza del bordo</Item>
+        <Item name="BorderWidthExceeds">La larghezza del bordo supera.</Item>
+        <Item name="BorderWidthOutOfRange">La larghezza del bordo è fuori portata!</Item>
+        <Item name="BoundDevice">Dispositivo associato</Item>
+        <Item name="Broadcast">Trasmissione</Item>
+        <Item name="BuildArea">Area di costruzione</Item>
+        <Item name="Built-inUnitBoard">Scheda unità comune</Item>
+        <Item name="BusEdit">modificare</Item>
+        <Item name="BusImage">Immagini della scheda dell'unità</Item>
+        <Item name="BusName">Nome</Item>
+        <Item name="BusNew">Nuovo</Item>
+        <Item name="BusView">vista</Item>
+        <Item name="Busy">Occupato</Item>
+        <Item name="Button">Pulsante</Item>
+        <Item name="ButtonDownTiming">Abbassare il tasto</Item>
+        <Item name="ButtonSettings">Pulsante 1</Item>
+        <Item name="ButtonSettings2">Pulsante 2</Item>
+        <Item name="ButtonSettings3">Pulsante 3</Item>
+        <Item name="ButtonSettings4">Pulsante 4</Item>
+        <Item name="ButtonSwitch">Pulsante per passare</Item>
+        <Item name="ButtonTiming">Tempi dei pulsanti</Item>
+        <Item name="ButtonUpTiming">Pulsante di conteggio</Item>
+        <Item name="ButtonorPlaySet">Impostazioni del pulsante</Item>
+        <Item name="CLKMirror">Polarità CLK</Item>
+        <Item name="CLKWidth">Larghezza CLK</Item>
+        <Item name="COM">Porta COM</Item>
+        <Item name="COMERROR">La connessione fallisce, controllare che non ci siano brevi 2 piedi seriali?</Item>
+        <Item name="COMINFO">Comunicazione</Item>
+        <Item name="COMURL">URL COM: http: //huidu.wicp.net</Item>
+        <Item name="CPUModelError">Il modello di CPU è sbagliato!</Item>
+        <Item name="CanNotFindTheDefaultProfile">Impossibile trovare il file di configurazione predefinito.</Item>
+        <Item name="Cancel">Annulla</Item>
+        <Item name="CannotFindNetWordDrive">Trovato nessun dispositivo di rete!</Item>
+        <Item name="CannotOpenExcle">Impossibile aprire Excel, verificare se è stato installato</Item>
+        <Item name="CardIpSeting">Impostazione IP della scheda</Item>
+        <Item name="CardModel">Modello di carta</Item>
+        <Item name="CardNumber">Tipo di carta</Item>
+        <Item name="CardOnlySupportFullColor">Il firmware supporta solo sette colori.</Item>
+        <Item name="CardOnlySupportTwoColor">Il firmware supporta solo colori singoli e doppi colore.</Item>
+        <Item name="CardRestart">ripresa</Item>
+        <Item name="CardVersion">Versione della carta</Item>
+        <Item name="Center">Centro</Item>
+        <Item name="CenterAlign">Centro</Item>
+        <Item name="CfwBackgroundEdit">Sfondo di animazione</Item>
+        <Item name="Change">Modificare</Item>
+        <Item name="Channel">Canale</Item>
+        <Item name="CharSpacing">Spaziatura caratteri</Item>
+        <Item name="CheckAll">Seleziona tutto</Item>
+        <Item name="CheckProgram">Choose program</Item>
+        <Item name="ChecksumError">Il checksum è sbagliato!</Item>
+        <Item name="ChooseDeive">Seleziona dispositivo</Item>
+        <Item name="ClassicBackground">Immagine di sfondo</Item>
+        <Item name="Clear">Schermo pulito</Item>
+        <List name="ClearEffects" id="0">Cancella immediatamente</List>
+        <List name="ClearEffects" id="10">Chiudi su e giù</List>
+        <List name="ClearEffects" id="11">Orizzontalmente aperto dal centro</List>
+        <List name="ClearEffects" id="12">Chiudere da entrambi i lati</List>
+        <List name="ClearEffects" id="13">Persiane verticali</List>
+        <List name="ClearEffects" id="14">Persiane orizzontali</List>
+        <List name="ClearEffects" id="15">Alla pagina sinistra</List>
+        <List name="ClearEffects" id="16">Alla pagina giusta</List>
+        <List name="ClearEffects" id="17">Fan fuori</List>
+        <List name="ClearEffects" id="18">Fan vicino</List>
+        <List name="ClearEffects" id="19">Coperchio in senso orario</List>
+        <List name="ClearEffects" id="1">Muovere a sinistra</List>
+        <List name="ClearEffects" id="200">Casuale</List>
+        <List name="ClearEffects" id="201">Non chiaro</List>
+        <List name="ClearEffects" id="20">Coperchio antiorario</List>
+        <List name="ClearEffects" id="21">Orizzontalmente intervallati</List>
+        <List name="ClearEffects" id="22">Roll Up</List>
+        <List name="ClearEffects" id="23">Rotolare giù</List>
+        <List name="ClearEffects" id="24">Rotolare a sinistra</List>
+        <List name="ClearEffects" id="25">Rotolo a destra</List>
+        <List name="ClearEffects" id="26">Griglie orizzontali</List>
+        <List name="ClearEffects" id="27">Griglie verticali</List>
+        <List name="ClearEffects" id="2">Vai a destra</List>
+        <List name="ClearEffects" id="3">Andare avanti</List>
+        <List name="ClearEffects" id="4">Abbassati</List>
+        <List name="ClearEffects" id="5">Coprire a sinistra</List>
+        <List name="ClearEffects" id="6">Coprire a destra</List>
+        <List name="ClearEffects" id="7">Coprire</List>
+        <List name="ClearEffects" id="8">Coprire</List>
+        <List name="ClearEffects" id="9">Verticalmente aperto da metà</List>
+        <Item name="ClearScreeData">Cancella il display esistente?</Item>
+        <Item name="Clock">Comporre</Item>
+        <Item name="ClockFrequency">Frequenza di clock</Item>
+        <Item name="ClockParameters">Componi l'attributo</Item>
+        <Item name="Clockwise rotation">Senso orario</Item>
+        <Item name="Close">Vicino</Item>
+        <Item name="CloseScreen">Chiudi schermata</Item>
+        <Item name="Color">Colore</Item>
+        <Item name="ColorChannel">Canale di colore</Item>
+        <Item name="ColorChannelSet">Impostazione del canale del colore</Item>
+        <Item name="ColorFilter">Regolazione del colore</Item>
+        <Item name="ColorInversion">Inversione di colore</Item>
+        <Item name="ColorSingleSelect">Colore Seleziona singola</Item>
+        <Item name="ColorThreshold">Soglia di colore</Item>
+        <Item name="ColorfulText">Animazione</Item>
+        <List name="ColorfulWordEffects" id="0">Visualizza statico</List>
+        <List name="ColorfulWordEffects" id="10">Capovolgi verticale</List>
+        <List name="ColorfulWordEffects" id="11">Capovolgi orizzontalmente</List>
+        <List name="ColorfulWordEffects" id="12">Zoom</List>
+        <List name="ColorfulWordEffects" id="13">Continua a sinistra</List>
+        <List name="ColorfulWordEffects" id="14">Continua a destra</List>
+        <List name="ColorfulWordEffects" id="15">Sposta continuamente verso l'alto</List>
+        <List name="ColorfulWordEffects" id="16">Continuamente verso il basso</List>
+        <List name="ColorfulWordEffects" id="17">Zoom 2D in</List>
+        <List name="ColorfulWordEffects" id="18">Zoom 2D fuori</List>
+        <List name="ColorfulWordEffects" id="1">Onda sinusoidale</List>
+        <List name="ColorfulWordEffects" id="2">Parola rotante</List>
+        <List name="ColorfulWordEffects" id="3">Lasciato a volare in</List>
+        <List name="ColorfulWordEffects" id="4">Il diritto di volare dentro</List>
+        <List name="ColorfulWordEffects" id="5">Scintillio</List>
+        <List name="ColorfulWordEffects" id="6">Uscita verbale</List>
+        <List name="ColorfulWordEffects" id="7">Swing around</List>
+        <List name="ColorfulWordEffects" id="8">Testo elasticità</List>
+        <List name="ColorfulWordEffects" id="9">Swing</List>
+        <Item name="Column">colonna</Item>
+        <Item name="CommStatus1">Buona comunicazione</Item>
+        <Item name="CommStatus2">Comunicazione normale</Item>
+        <Item name="CommStatus3">La comunicazione è scarsa ma può essere connessa..</Item>
+        <Item name="CommStatus4">Non può comunicare</Item>
+        <Item name="CommTest">Test di rete</Item>
+        <Item name="Command">Comando</Item>
+        <Item name="CommandSmartSetting">scansione del pannello</Item>
+        <Item name="CommonSettings">Impostazioni comuni</Item>
+        <Item name="CommunicationMode">Comunicazione</Item>
+        <Item name="CommunicationSetting">Impostazioni di comunicazione</Item>
+        <Item name="ConfirmRGBwidth">Linee controllate da un dato RGB</Item>
+        <Item name="ConfirmScanMode">Determina la modalità di scansione</Item>
+        <Item name="Connected">Collegato</Item>
+        <Item name="ConnectionSuccessful">Connetti con successo</Item>
+        <Item name="ContainOverlappingRegions">Contenere regioni sovrapposte</Item>
+        <Item name="ContentContainMultiLines">Questo effetto non supporta la tabella, vuoi Cancellalo?</Item>
+        <Item name="ContinueMove">Spostamento continuo</Item>
+        <Item name="ContinueMoveUp">Continua a salire</Item>
+        <Item name="Copy">copia</Item>
+        <Item name="Copyright">Copyright: Shenzhen Huidu Technology Co., Ltd.</Item>
+        <Item name="Count">Contare...</Item>
+        <Item name="Count1">cifra</Item>
+        <Item name="CountAdd">cifra più</Item>
+        <Item name="CountColor">Valore del colore</Item>
+        <Item name="CountDown">digita giù</Item>
+        <Item name="CountReset">Reset contatore</Item>
+        <Item name="CountSub">digita giù</Item>
+        <Item name="CountUp">digita</Item>
+        <Item name="CradID">ID del dispositivo</Item>
+        <Item name="CradName">Nome del dispositivo</Item>
+        <Item name="CrossBottom">Parte inferiore</Item>
+        <Item name="CrossCenter">Centro</Item>
+        <Item name="CrossGlobalProgram">Programma globale</Item>
+        <Item name="CrossNoSupport">Il programma globale non è supportato in quest'area</Item>
+        <Item name="CrossScreenParamsPageTip">1.La larghezza e l'altezza dello schermo è di 3 livelli;&#x000A;2.Select the color of screen ;</Item>
+        <Item name="CrossScreenSetting">Impostazioni Cross Screen</Item>
+        <Item name="CrossSmartTip">La schermata corrente che mostra il testo normale, non è necessario selezionare intelligente impostato</Item>
+        <Item name="CrossTop">Superiore</Item>
+        <Item name="CurrentSel">Lingua attualmente selezionata</Item>
+        <Item name="Custom">costume</Item>
+        <Item name="CustomIPTips">Se la scheda di controllo è bloccata da un firewall, si prega di compilare l'IP indirizzo manualmente.</Item>
+        <Item name="CustomTime">Per regolamento del periodo di tempo</Item>
+        <Item name="CustomUnitBoard">Scheda unità personalizzata</Item>
+        <Item name="CustomizeIP">Personalizza (TCP)</Item>
+        <Item name="Cut">Tagliare</Item>
+        <Item name="Cyan">Ciano</Item>
+        <Item name="CycleTiming">Durata del ciclo</Item>
+        <Item name="DHCPDNSAddr">Indirizzo DNS</Item>
+        <Item name="DHCPGateway">Gateway predefinito DHCP</Item>
+        <Item name="DHCPLease">Lease DHCP</Item>
+        <Item name="DHCPMask">Subnet Mask DHCP</Item>
+        <Item name="DHCPServerAddr">Indirizzo del server DHCP</Item>
+        <Item name="Data">Dati</Item>
+        <Item name="DataClearSuccess">I dati sono stati cancellati con successo</Item>
+        <Item name="DataFill">"I dati superano!"</Item>
+        <Item name="DataLenght">Lunghezza dei dati</Item>
+        <Item name="DataLengthError">La lunghezza del pacchetto è sbagliata!</Item>
+        <Item name="DataMirror">Data Mirror</Item>
+        <Item name="DataPolarity">Data Polarity</Item> 
+        <Item name="DataPolaritySet">Impostazione della polarità dei dati</Item>
+        <Item name="DataSource">Fonte di dati</Item>
+        <Item name="DateAndWeekLocationReplaced">Scambia data e settimana</Item>
+        <Item name="Day">Giorno</Item>
+        <Item name="Default">Predefinito</Item>
+        <Item name="DefaultConnectDeviceType">Il metodo di connessione predefinito</Item>
+        <Item name="DelayedSignal">Segnale ritardato</Item>
+        <Item name="DeleteFailed">Elimina non riuscito</Item>
+        <Item name="DeleteScreen">Elimina schermo</Item>
+        <Item name="DeleteSuccess">Elimina con successo</Item>
+        <Item name="DeleteThisData">Cancellare tutti i programmi nella scheda di controllo?</Item>
+        <Item name="DeleteThisFile">Elimina questo file?</Item>
+        <Item name="DeleteThisProgram">Elimina questo programma?</Item>
+        <Item name="DeleteThisRegion">Elimina questa regione?</Item>
+        <Item name="Deny">disattivare</Item>
+        <Item name="DestFile">File di destinazione</Item>
+        <Item name="DestIP">Dest IP</Item>
+        <Item name="Detailed">Dettagliata ...</Item>
+        <Item name="Detect">individuare</Item>
+        <Item name="DetectDevice">Rileva dispositivo</Item>
+        <Item name="DetectFail">Detection failed!</Item> 
+        <Item name="DetectSuccess">Il rilevamento ha successo!</Item>
+        <Item name="Detecting">Rilevamento ...</Item>
+        <Item name="DetectsThisFileWasNotSaved">Rilevato dal file attualmente selezionato non salvato se la copertura</Item>
+        <Item name="Deviation">Calibrazione dell'umidità</Item>
+        <Item name="Device">Dispositivo rimovibile</Item>
+        <Item name="DeviceChoosePageTip">1. Utilizzare U-disk, selezionare il tipo di controller; &#x000A; 2.Appare il nome del dispositivo e l'ID del controller corrispondente; &#x000A;3. Solo un dispositivo e stato trovato, quindi fare clic su Avanti </Item>
+        <Item name="DeviceID">ID del dispositivo</Item>
+        <Item name="DeviceManage">Gestore dispositivi</Item>
+        <Item name="DeviceName">Nome del dispositivo</Item>
+        <Item name="DialClock">Orologio quadrante</Item>
+        <Item name="DialStyle">Stile quadrante</Item>
+        <Item name="DialWeek">Settimana</Item>
+        <Item name="DialYear">Data</Item>
+        <Item name="DigitOnly">Solo cifre</Item>
+        <Item name="Digital">cifra</Item> 
+        <Item name="Direction">Direzione</Item>
+        <Item name="DisableBrightnessAdjustment">Disabilita la regolazione della luminosità</Item>
+        <Item name="Disconnected">scollegato</Item>
+        <Item name="DiskSpace">Spazio sul disco:</Item>
+        <Item name="Display">Display</Item>
+		<List name="DisplayEffects" id="40">Effetto 1</List>
+        <List name="DisplayEffects" id="0">Effetto 2</List>
+        <List name="DisplayEffects" id="10">Effetto 12</List>
+        <List name="DisplayEffects" id="11">Effetto 13</List>
+        <List name="DisplayEffects" id="12">Effetto 14</List>
+        <List name="DisplayEffects" id="14">Effetto 16</List>
+        <List name="DisplayEffects" id="13">Effetto 15</List>
+        <List name="DisplayEffects" id="15">Effetto 17</List>
+        <List name="DisplayEffects" id="16">Effetto 18</List>
+        <List name="DisplayEffects" id="17">Effetto 19</List>
+        <List name="DisplayEffects" id="18">Effetto 20</List>
+        <List name="DisplayEffects" id="19">Effetto 21</List> 
+        <List name="DisplayEffects" id="1">Effetto 3</List>
+        <List name="DisplayEffects" id="200">Casuale</List>
+        <List name="DisplayEffects" id="202">Continua a sinistra</List>
+        <List name="DisplayEffects" id="203">Continua a destra</List>
+        <List name="DisplayEffects" id="204">Sposta continuamente verso l'alto</List>
+        <List name="DisplayEffects" id="20">Effetto 22</List>
+        <List name="DisplayEffects" id="21">Effetto 23</List>
+        <List name="DisplayEffects" id="23">Effetto 25</List>
+        <List name="DisplayEffects" id="22">Effetto 24</List>
+        <List name="DisplayEffects" id="25">Effetto 27</List>
+        <List name="DisplayEffects" id="24">Effetto 26</List>
+        <List name="DisplayEffects" id="26">Effetto 28</List>
+        <List name="DisplayEffects" id="27">Effetto 29</List>
+        <List name="DisplayEffects" id="28">Effetto 30</List>
+        <List name="DisplayEffects" id="29">Effetto 31</List>
+        <List name="DisplayEffects" id="2">Effetto 4</List>
+        <List name="DisplayEffects" id="30">Effetto 32</List>
+        <List name="DisplayEffects" id="31">Effetto 33</List>
+        <List name="DisplayEffects" id="32">Effetto 34</List>
+        <List name="DisplayEffects" id="33">Effetto 35</List>
+        <List name="DisplayEffects" id="34">Effetto 36</List>
+        <List name="DisplayEffects" id="35">Effetto 37</List>
+        <List name="DisplayEffects" id="36">Effetto 38</List>
+        <List name="DisplayEffects" id="37">Effetto 39</List>
+        <List name="DisplayEffects" id="38">Effetto 40</List>
+        <List name="DisplayEffects" id="39">Effetto 41</List>
+        <List name="DisplayEffects" id="3">Effetto 5</List>
+        <List name="DisplayEffects" id="4">Effetto 6</List>
+        <List name="DisplayEffects" id="5">Effetto 7</List>
+        <List name="DisplayEffects" id="6">Effetto 8</List>
+        <List name="DisplayEffects" id="7">Effetto 9</List>
+        <List name="DisplayEffects" id="8">Effetto 10</List>
+        <List name="DisplayEffects" id="9">Effetto 11</List>
+        <Item name="DisplayState">Visualizza stato</Item>
+        <Item name="Dll_Add">Accumulare</Item>
+        <Item name="Dll_Data">Dati</Item>
+        <Item name="Docking">attracco</Item>
+        <Item name="DonotTips">Non chiedere</Item>
+        <Item name="DontChange">Non cambiare</Item>
+        <Item name="DownloadSpeed">Velocità di download</Item>
+        <Item name="Dwell">Fermati</Item>
+        <Item name="Edit">modificare</Item>
+        <Item name="EditingLanguage">Editor di lingue</Item>
+        <Item name="Editor">modificare</Item>
+        <Item name="Effect">Effetto</Item>
+        <Item name="Effect Cover">Copertina</Item>
+        <Item name="Effect Drift">La neve</Item>
+        <Item name="Effect FanShaped">persiane</Item>
+        <Item name="Effect Flicker">Scintillio</Item>
+        <Item name="Effect Laser">Laser</Item>
+        <Item name="Effect Move">Mossa</Item>
+        <Item name="Effect OpenAndClose">Aperto chiuso</Item>
+        <Item name="Effect PageTurning">Pagina</Item>
+        <Item name="Effect Pull">Tirare</Item>
+        <Item name="Effect Roll">rotolo</Item>
+        <Item name="Effect WaterFall">Autunno</Item>
+        <Item name="EffectSetting">Impostazioni degli effetti</Item>
+        <Item name="EffectType">Tipi di effetti</Item>
+        <Item name="EliminateGhosting">Blanking della linea</Item>
+        <Item name="Empty">Vuoto</Item>
+        <Item name="EmptyScreen">Svuotare il display</Item>
+        <Item name="Enable">Abilita</Item>
+        <Item name="EnableDhcp">Abilita DHCP</Item>
+        <Item name="End Play">fine</Item>
+        <Item name="EndIpAddr">Fine IP</Item>
+        <Item name="EndToEnd">End to end</Item>
+        <Item name="English">inglese</Item>
+        <Item name="Equilibrium">Equilibrium</Item>
+        <Item name="Error">errore</Item>
+        <Item name="EthSettingHelpA">Modificare direttamente le impostazioni relative del software, non cambiare L'indirizzo del dispositivo.</Item>
+        <Item name="EthSettingHelpB">Nota: &#x000A; 1. Verranno indicati gli indirizzi del software e del dispositivo Modificato dopo aver impostato correttamente. &#x000A; 2. Quando sono collegati più dispositivi Contemporaneamente, si prega di rendere l'indirizzo MAC del dispositivo unico.</Item>
+        <Item name="Ethernet">Ethernet</Item>
+        <Item name="EthernetAddressSettingSuccess">L'indirizzo Ethernet è stato impostato correttamente.</Item>
+        <Item name="EthernetSettingInfo">Nota: quando si utilizza questa funzione, assicurarsi che la LAN sia attiva Collega solo una scheda di controllo.</Item>
+        <Item name="Example">esempio</Item>
+        <Item name="ExitDownloading">Download del file di aggiornamento, se forzare la chiusura?</Item>
+        <Item name="ExpiredVerification">Scaduto, è necessaria la password</Item>
+        <Item name="ExporBus">Esporta i parametri della scheda dell'unità</Item>
+        <Item name="ExporBusIn">Importa i parametri della scheda dell'unità</Item>
+        <Item name="Export">U disco</Item>
+        <Item name="ExportAdjustTimeFile">Esporta file di regolazione del tempo</Item>
+        <Item name="ExportFile">Esporta file</Item>
+        <Item name="ExportFileFail">Impossibile esportare il file!</Item>
+        <Item name="ExportImport">Importa ed esporta</Item>
+        <Item name="ExportParam">esportazione</Item>
+        <Item name="ExportScreenFile">Esporta file di schermo</Item>
+        <Item name="ExportSetedParams">Esporta i parametri</Item>
+        <Item name="ExportSuccess">Esportare con successo, se si desidera visualizzare il disco U?</Item>
+        <Item name="ExportSuccess1">Esportare con successo in</Item>
+        <Item name="ExportSuccess2">!</Item>
+        <Item name="ExportToUDisk">Esporta su disco U.</Item>
+        <Item name="Fahrenheit">Gradi F</Item>
+        <Item name="Fast">veloce</Item>
+        <Item name="Fastest">Fastest</Item>
+        <Item name="FeatureNavigator">Navigazione funzionale</Item>
+        <Item name="File">File</Item>
+        <Item name="FileConfigurationError">Il file configurato male!</Item>
+        <Item name="FileConfigurationPackageSentSuccessfully">Il pacchetto di configurazione del file era Inviato con successo.</Item>
+        <Item name="FileDoesNotMatch">Il file non corrisponde.</Item>
+        <Item name="FileList">Elenco dei file</Item>
+        <Item name="FileMisidentified">Il file erroneamente identificato!</Item>
+        <Item name="FileParametersError">Il parametro file è errato! (La larghezza o l'altezza dello schermo è superiore o Il colore è sbagliato.) </Item> 
+        <Item name="FileSendComplete">Il file è stato inviato con successo.</Item>
+        <Item name="FileSize">Dimensione file</Item>
+        <Item name="FileSuccessfullyReceived">Il file è stato ricevuto con successo.</Item>
+        <Item name="FillingTheCurrentLanguage">Per riempire la lingua corrente</Item>
+        <Item name="FilterColor">Colore filtro</Item>
+        <Item name="FindNewVersion">Scopri la nuova versione, se scaricare l'aggiornamento?</Item>
+        <Item name="FindScree">Trova lo schermo</Item>
+        <Item name="FindSerial">Trova la porta seriale connessa con la scheda di controllo. </Item> 
+        <Item name="FinishTracingPoint">Il punto di tracciamento è finito.</Item>
+        <Item name="FirmwareMismatching">Mancata corrispondenza del firmware</Item>
+        <Item name="FirmwareVersion">Versione del firmware</Item>
+        <Item name="FirstPage">Prima pagina</Item>
+        <Item name="FitMaxHint">Regione ingrandita</Item>
+        <Item name="FixedCellsWidth">Fissa la larghezza della cella</Item>
+        <Item name="FixedPlay">Risolti i programmi di trasmissione</Item>
+        <Item name="FixedTime">Tempo fisso</Item>
+        <Item name="Flash">SWF</Item>
+        <Item name="Floating">Floating</Item>
+        <Item name="FlushLeft">Flush Left</Item>
+        <Item name="Font">Font</Item>
+        <Item name="FontSize">Dimensione del carattere</Item>
+        <Item name="Foreground">Primo piano</Item>
+        <Item name="FoundDisk">Trovato il dispositivo rimovibile!</Item>
+        <Item name="FramesTooMuch">I fotogrammi sono eccessivi, si prega di ridurre!</Item>
+        <Item name="FreeSpace">Spazio libero</Item>
+        <Item name="Frequency">Frequenza di scansione</Item>
+        <Item name="Friday">venerdì</Item>
+        <Item name="From">da</Item>
+        <Item name="From Max To Min">Da massimo a min</Item>
+        <Item name="From Min To Max">Da Min a Max</Item>
+        <Item name="GIF name">Percorso GIF</Item>
+        <Item name="GammaCorrection">Correzione gamma</Item>
+        <Item name="GaryTip1">Ridurre il range di controllo a 1/</Item>
+        <Item name="General2">Gen2</Item>
+        <Item name="General4">Gen4</Item>
+        <Item name="General6">Gen6</Item>
+        <Item name="GeneratingData">Generazione di dati</Item>
+        <Item name="GetFirmwareVersion">Ottieni la versione del firmware</Item>
+        <Item name="GetSystemTime">Ottieni tempo di sistema</Item>
+        <Item name="Graph">grafico</Item>
+        <Item name="GraphCount">Quantità</Item>
+        <Item name="GrayLevel">Gray Level</Item>
+        <Item name="Green">verde</Item>
+        <Item name="HDScreenFile">File di schermo HD</Item>
+        <Item name="HZoom">Allungamento del livello</Item>
+        <Item name="Height">altezza</Item>
+        <Item name="HeightOfMoreTthan">"Altezza supera il massimo!"</Item>
+        <Item name="Hide">nascondere</Item>
+        <Item name="High">alto</Item>
+        <Item name="Hollow">cavo</Item>
+        <Item name="Horizontal">Posizione orizzontale</Item>
+        <Item name="Hour">ora</Item>
+        <Item name="HourHand">Lancetta delle ore</Item>
+        <Item name="HourRadius">Raggio orario</Item>
+        <Item name="Humidity">umidità</Item>
+        <Item name="IDAlreadyExists">L'ID è stato esistente</Item>
+        <Item name="IDAndContentCanNotBeEmpty">ID e contenuto non possono essere vuoti</Item>
+        <Item name="IDInputError">ID è errore</Item>
+        <Item name="IPAddress">Indirizzo IP</Item>
+        <Item name="IPNotLegitimate">IP non è legittimo</Item>
+        <Item name="IPResetting">Ripristino IP</Item>
+        <Item name="IPSetting">Impostazione IP</Item>
+        <Item name="Idle">inattivo</Item>
+        <Item name="IllegalFile">File non valido</Item>
+        <Item name="Image">Immagine</Item>
+        <Item name="ImageAuto">Stile foto</Item>
+        <Item name="Images">immagine</Item>
+        <Item name="ImportParam">importazione</Item>
+        <Item name="ImportScreenFile">Importa file di schermo</Item>
+        <Item name="IncompleteDataWriting">Scrittura incompleta dei dati</Item>
+        <Item name="Index">Numero di sequenza</Item>
+        <Item name="InfraredRay">Raggio infrarosso</Item>
+        <Item name="InitialState">Lo stato iniziale</Item>
+        <Item name="InitializeSuccess">Inizializza correttamente</Item>
+        <Item name="InputSmartSettingName">Inserisci il nome di Smart settings</Item>
+        <Item name="Insert">Inserire</Item>
+        <Item name="InsertColumn">Inserisci colonna</Item>
+        <Item name="InsertRow">Inserisci riga</Item>
+        <Item name="Inverse">Seleziona Inverti</Item>
+        <Item name="IsDeleteAllScreen">Cancella tutto il display?</Item>
+        <Item name="IsExportVideo">Se esportare video?</Item>
+        <Item name="IsSaveFile">Vuoi salvare il file?</Item>
+        <Item name="IsSendToCard">Vuoi inviarlo alla scheda di controllo?...</Item>
+        <Item name="IsTheLatestVersion">L'ultima versione è già.</Item>
+        <Item name="Large">grande</Item>
+        <Item name="LastPage">Ultima pagina</Item>
+        <Item name="LeftToRight">Left-&gt;Right</Item>
+        <Item name="LevelScreenshot">Screenshot orizzontale</Item>
+        <Item name="LightRows">Le linee si trovano in un modulo</Item>
+        <Item name="LineSpacing">Interlinea</Item>
+        <Item name="Link">collegamento</Item>
+        <Item name="LinkState">Stato della connessione</Item>
+        <Item name="LiveTime">Live Time</Item>
+        <Item name="LocalDisck">Disco locale</Item>
+        <Item name="LocalIpSeting">Impostazione IP locale</Item>
+        <Item name="LockPara">Bloccare i parametri</Item>
+        <Item name="Low">basso</Item>
+        <Item name="LuminancePrior">Prima la luminosità</Item>
+        <Item name="LuminanceSetting">Impostazioni di luminosità</Item>
+        <Item name="LuminanceSettingSuccess">La luminosità è stata impostata correttamente.</Item>
+        <Item name="MACAddress">Indirizzo MAC</Item>
+        <Item name="MFRDate">Data di fabbrica</Item>
+        <Item name="Max">Max</Item>
+        <Item name="MaxIPAddr">Indirizzo TP massimo</Item>
+        <Item name="MaxUseImage">Immagine per Max</Item>
+        <Item name="MaximumOfHeight">Altezza massima</Item>
+        <Item name="MaximumOfRange">Portata massima</Item>
+        <Item name="MaximumOfRegions">Regione massima</Item>
+        <Item name="MaximumOfWidth">Larghezza massima</Item>
+        <Item name="Memory">memoria</Item>
+        <Item name="Memory Size">Dimensione del file</Item>
+        <Item name="MergeCells">Unisci celle</Item>
+        <Item name="Middle">medio</Item>
+        <Item name="Min">Min</Item>
+        <Item name="MinIPAddr">Indirizzo IP minimo</Item>
+        <Item name="MinUseImage">Immagine per Min</Item>
+        <Item name="MinuteHand">Mano Minuta</Item>
+        <Item name="Model">carta</Item>
+        <Item name="ModificationFails">La modifica non riesce</Item>
+        <Item name="Modify">modificare</Item>
+        <Item name="ModifyItemID">Modifica ID</Item>
+        <Item name="ModifyOnlyOneItem">Modifica solo un ID</Item>
+        <Item name="Module">modulo</Item>
+        <Item name="ModuleMismatching">Il modello della carta di controllo non corrisponde.</Item>
+        <Item name="ModuleSelect">Selezione del modulo</Item>
+        <Item name="Monday">lunedi</Item>
+        <Item name="MoreSetting">Impostazioni aggiuntive</Item>
+        <Item name="MoreSettings">Impostazioni aggiuntive</Item>
+        <Item name="MoveDown">Sposta giù</Item>
+        <Item name="MoveUp">Sposta in alto</Item>
+        <Item name="Multi">multiplo</Item>
+        <Item name="MultiFrame">Immagine multi-frame</Item>
+        <Item name="MultiLine">Display multilinea</Item>
+        <Item name="MultiScreenDirectConnect">Modalità multischermo</Item>
+        <Item name="MultipeSend">Invio multiplo</Item>
+        <Item name="MultipeSendHint">Invio multiplo si applica solo a Ethernet (IP fisso) modalità.</Item> 
+        <Item name="MultipleEffects">Effetti multipli</Item>
+        <Item name="MultipleLinesoftext">Testo multilinea</Item>
+        <Item name="NICName">Nome NIC</Item>
+        <Item name="Name">nome</Item>
+        <Item name="NeedSensor">Hai bisogno di sensori</Item>
+        <Item name="NeedSpace">Spazio necessario</Item>
+        <Item name="NetMark">Subnet Mask</Item>
+        <Item name="NetWorkError">La scheda di controllo corrente può utilizzare solo la modalità compatta, si prega di controllare Se la scheda di controllo si trova sullo stesso segmento di rete con il computer!</Item>
+        <Item name="NewCrossScreen">Nuovo schermo incrociato (&amp;C)</Item>
+        <Item name="NewCrossScreen_G">Nuovo schermo incrociato</Item>
+        <Item name="NewGuideScreen">Nuovo schermo per guida</Item>
+        <Item name="NewHypertext">Nuovo ipertesto</Item>
+        <Item name="NewNormalScreen_G">Nuova schermata normale</Item>
+        <Item name="NewScreen">Nuovo schermo</Item>
+        <Item name="NewTable">Nuova tabella</Item>
+        <Item name="Next">prossimo</Item>
+        <Item name="NextPage">prossimo</Item>
+        <Item name="NextProgram">Passa al programma successivo</Item>
+        <Item name="NextScan">prossimo</Item>
+        <Item name="NoAssociation">Nessuna associazione</Item>
+        <Item name="NoBorder">Nessun confine</Item>
+        <Item name="NoFile">Il file non esiste!</Item>
+		 <Item name="NoFind">Non trovato</Item>
+        <Item name="NoFindConfigFiles">Non riesci a trovare il file param dello schermo, continua?</Item>
+        <Item name="NoFoundDisk">Nessun dispositivo rimovibile è stato trovato!</Item>
+        <Item name="NoInstallFlash">Si prega di verificare se Adobe Flash Player è stato installato!</Item> 
+        <Item name="NoLimit">Nessun limite</Item>
+        <Item name="NoSerial">Impossibile trovare la scheda di controllo collegata alla porta seriale.</Item>
+        <Item name="NoSerialConnection">Nessuna porta seriale collegata</Item>
+        <Item name="Noarea">Mancanza di programma, non è riuscito a inviare!</Item>
+        <Item name="Noitemisselected">Niente selezionato</Item>
+        <Item name="NormalShow">Ordine di gioco</Item>
+        <Item name="NotSelected">Non selezionato</Item>
+        <Item name="NotSupportGlobalProgram">La schermata ordinaria non supporta il programma globale</Item>
+        <Item name="NotSupportLANUpgrade">Questo modello non supporta Ethernet, si prega di utilizzare seriale Porta o disco U per aggiornare il firmware!</Item>
+        <Item name="NotSupportTips">Suggerimenti: non supportare l'ora, il nuovo quadrante, la temperatura e Umidità, il Lunare</Item> 
+        <Item name="NumberOfProgramHasReachedItsMaximum">Il numero di programmi ha raggiunto il massimo!</Item>
+        <Item name="NumberOfRegionHasReachedItsMaximum">Il numero di regioni ha raggiunto il suo massimo!</Item>
+        <Item name="OEPolarity">Polarità OE</Item>
+        <Item name="OEPolaritySet">Impostazione della polarità OE</Item>
+        <Item name="OK">OK</Item>
+        <Item name="Offline">Offline</Item>
+        <Item name="OldVerCard">Cerca Gen4</Item>
+        <Item name="On-line">On-line</Item>
+        <Item name="OnBottom">Inserisci sotto</Item>
+        <Item name="OnLeft">A sinistra</Item>
+        <Item name="OnRight">A destra</Item>
+        <Item name="OnTop">Inserisci sopra</Item>
+        <Item name="OnlyAllowContainsAClockRegion">Consenti solo di contenere una regione di composizione!</Item>
+        <Item name="OnlyAllowContainsATempRegion">Consenti solo di contenere una regione di temperatura!</Item>
+        <Item name="OnlyAllowContainsATimeRegion">Consenti solo di contenere una regione temporale!</Item>
+        <Item name="OnlyCard">Solo per carta</Item>
+        <Item name="Open">aperto</Item>
+        <Item name="OpenAdv">Apri l'annuncio</Item>
+        <Item name="OpenFileFail">Impossibile aprire il file, controlla se è occupato!</Item>
+        <Item name="OpenFolder">Apri cartella</Item>
+        <Item name="OpenScreen">Schermo aperto</Item>
+        <Item name="OperationSuccess">Operare con successo</Item>
+        <Item name="Orange">porpora</Item>
+        <Item name="OriginX">Origine X</Item>
+        <Item name="OriginY">Origine Y</Item>
+        <Item name="Original">Original</Item>
+        <Item name="OtherSeting">Altre impostazioni</Item>
+        <Item name="Out">Info</Item>
+        <Item name="OutOfMemory">La memoria della scheda di controllo è insufficiente, si prega di ridurre il programma!</Item> 
+        <Item name="OutOfShowMemory">Memoria insufficiente, ridurre l'area.</Item>
+        <List name="OutputWindowString" id="0">Attrezzatura scannerizzata</List>
+        <List name="OutputWindowString" id="10">Il nome della scheda di controllo è stato impostato correttamente</List>
+        <List name="OutputWindowString" id="11">Cancella schermo correttamente</List>
+        <List name="OutputWindowString" id="12">Impostazione dei parametri dello schermo con successo</List>
+        <List name="OutputWindowString" id="13">Impostazione dell'ora della scheda di controllo</List>
+        <List name="OutputWindowString" id="14">Impostazione della luminosità con successo</List>
+        <List name="OutputWindowString" id="15">Impostazione dell'interruttore orario con successo</List>
+        <List name="OutputWindowString" id="16">Mostra nel test ...</List>
+        <List name="OutputWindowString" id="17">Comando sconosciuto</List>
+        <List name="OutputWindowString" id="18">Nessun parametro hardware</List>
+        <List name="OutputWindowString" id="19">Comando non valido</List>
+        <List name="OutputWindowString" id="1">Ottieni le informazioni sul dispositivo.</List>
+        <List name="OutputWindowString" id="20">Il sistema è impegnativo</List>
+        <List name="OutputWindowString" id="21">Errore di lunghezza della testa</List>
+        <List name="OutputWindowString" id="22">Il simbolo non è corretto</List>
+        <List name="OutputWindowString" id="23">No. non è corretto</List>
+        <List name="OutputWindowString" id="24">Nessun parametro sullo schermo</List>
+        <List name="OutputWindowString" id="25">Errore nel pacchetto</List>
+        <List name="OutputWindowString" id="26">Errore sconosciuto</List>
+        <List name="OutputWindowString" id="27">Invia Timeout</List>
+        <List name="OutputWindowString" id="28">Errore di analisi del pacchetto di feedback</List>
+        <List name="OutputWindowString" id="29">IP modificato con successo</List>
+        <List name="OutputWindowString" id="2">Attrezzatura offline</List>
+        <List name="OutputWindowString" id="30">Aggiornamento firmware fallito, si prega di riprovare</List>
+        <List name="OutputWindowString" id="31">Impostazione fallita</List>
+        <List name="OutputWindowString" id="32">Controlla l'errore</List>
+        <List name="OutputWindowString" id="33">Errore di protocollo</List>
+        <List name="OutputWindowString" id="34">Errore di istruzioni</List>
+        <List name="OutputWindowString" id="35">Il file non corrisponde</List>
+        <List name="OutputWindowString" id="36">Errore del numero di pacchetto</List>
+        <List name="OutputWindowString" id="37">Tipo di modulo non corrispondente</List>
+        <List name="OutputWindowString" id="38">Errore di configurazione del file</List>
+        <List name="OutputWindowString" id="39">File non valido</List>
+        <List name="OutputWindowString" id="3">Si prega di selezionare lo schermo che si desidera inviare</List>
+        <List name="OutputWindowString" id="40">Errore di tipo CPU</List>
+        <List name="OutputWindowString" id="41">Supporto firmware singolo solo doppio colore, no Supporto tricolore </List>
+        <List name="OutputWindowString" id="42">Supporto firmware singolo solo doppio colore, no Supporto tricolore </List>
+        <List name="OutputWindowString" id="43">Aggiornato con successo</List>
+        <List name="OutputWindowString" id="44">Ricezione fallita</List>
+        <List name="OutputWindowString" id="45">Errore di lunghezza del pacchetto</List>
+        <List name="OutputWindowString" id="46">Errore di identificazione del file</List>
+        <List name="OutputWindowString" id="47">Errore del numero di sequenza del sotto pacchetto</List>
+        <List name="OutputWindowString" id="49">File ricevuto con successo</List>
+        <List name="OutputWindowString" id="4">Seleziona schermo non legato</List>
+        <List name="OutputWindowString" id="50">Segnale ritardato</List>
+        <List name="OutputWindowString" id="51">Sistema occupato</List>
+        <List name="OutputWindowString" id="52">I dati sono scritti in modo incompleto</List>
+        <List name="OutputWindowString" id="53">Il firmware aggiornato è successo!</List>
+        <List name="OutputWindowString" id="54">Parametri hardware impostati con successo</List>
+        <List name="OutputWindowString" id="55">Il dispositivo associato non è in linea</List>
+        <List name="OutputWindowString" id="56">L'impostazione delle dimensioni dello schermo non è corretta.</List>
+        <List name="OutputWindowString" id="57">Inizia l'invio</List>
+        <List name="OutputWindowString" id="58">Impostazione corretta</List>
+        <List name="OutputWindowString" id="59">Scadenza del servizio</List>
+        <List name="OutputWindowString" id="5">I dati del programma sono troppo grandi</List>
+        <List name="OutputWindowString" id="60">Carattere cambiato con successo</List>
+        <List name="OutputWindowString" id="61">Imposta collegato direttamente con successo</List>
+        <List name="OutputWindowString" id="62">Annulla direttamente connesso correttamente</List>
+        <List name="OutputWindowString" id="63">Apparecchiatura nello stato di avvio, si prega di aggiornare il firmware</List>
+        <List name="OutputWindowString" id="64">La verifica non riesce</List>
+        <List name="OutputWindowString" id="65">Non restituisce nulla</List>
+        <List name="OutputWindowString" id="66">Il file è troppo grande</List>
+        <List name="OutputWindowString" id="67">L'ID della carta di controllo è sbagliato</List>
+        <List name="OutputWindowString" id="68">ID dispositivo non valido [% s]</List>
+        <List name="OutputWindowString" id="69">Ripristina ID dispositivo [% s]</List>
+        <List name="OutputWindowString" id="70">Fare clic sul pulsante per eliminare i programmi [ON]</List>
+        <List name="OutputWindowString" id="71">Fai clic sul pulsante per eliminare i programmi [OFF]</List>
+        <List name="OutputWindowString" id="72">Impostazione parametri [Abilitato]</List>
+        <List name="OutputWindowString" id="73">Impostazione parametri [Disabilitato]</List>
+        <List name="OutputWindowString" id="6">Il comando è stato completato con successo</List>
+        <List name="OutputWindowString" id="7">Invia l'inizializzazione</List>
+        <List name="OutputWindowString" id="8">Invio ...</List>
+        <List name="OutputWindowString" id="9">Inviato con successo</List>
+        <Item name="Btn1ClearProgram">Proibito programma di cancellazione</Item>
+        <Item name="DoubleSidedScreen">Schermo a doppia faccia</Item>
+        <Item name="networkMonitoring">Monitoraggio</Item>
+        <Item name="P10Colorful">M10 (colorato)</Item>
+        <Item name="Pack">Pacchetto di immagini</Item>
+        <Item name="PackageNumberError">Il numero del pacchetto è sbagliato!</Item>
+        <Item name="Packet">pacchetto</Item>
+        <Item name="PacketError">Il pacchetto è sbagliato!</Item>
+        <Item name="PacketSize">Dimensione del pacchetto</Item>
+        <Item name="Page">pagina</Item>
+        <Item name="Pages">pagine</Item>
+        <Item name="PannelFill">"La regione esiste già!"</Item>
+        <Item name="ParallelSend">Invio parallelo</Item>
+        <Item name="ParametersReadbackSuccess">Leggere con successo i parametri</Item>
+        <Item name="ParametersSetting">Impostazioni dei parametri</Item>
+        <Item name="Parti-color">Parti-colore</Item>
+        <Item name="Password">password</Item>
+        <Item name="PasswordAuthentication">Autenticazione password</Item>
+        <Item name="PasswordError">La password è sbagliata!</Item>
+        <Item name="PasswordSetting">Impostazioni della password</Item>
+        <Item name="Paste">incollare</Item>
+        <Item name="Path">sentiero</Item>
+        <Item name="Pause">pausa</Item>
+        <Item name="PictrueProcessing">Elaborazione di immagini</Item>
+        <Item name="PlaseSelectDevice">Si prega di selezionare un dispositivo!</Item>
+        <Item name="Play">Riproduci</Item>
+        <Item name="PlayBeforePowerProgram">Memoria ultimo spettacolo</Item>
+        <Item name="PlayMemory Size">Riproduci dimensione file</Item>
+        <Item name="PlayMode">Modalità di gioco</Item>
+        <Item name="PlayQuality">La scioltezza</Item>
+        <Item name="PlaySpeed">Gioca la velocità</Item>
+        <Item name="PlayTime">Tempo di gioco</Item>
+        <Item name="PlayTimes">Gioca a volte</Item>
+        <Item name="Playback Duration">Durata della riproduzione</Item>
+        <Item name="Player">giocare</Item>
+        <Item name="Playing BeginFrames">Scegliere il fotogramma finale</Item>
+        <Item name="Playing EndFrames">Riproduci il fotogramma finale</Item>
+        <Item name="Playing Frames">Gioca a frame</Item>
+        <Item name="PleaseEnterTheBorderWidthOfTheTable">Si prega di inserire la larghezza del bordo del tavolo.</Item> 
+        <Item name="PleaseEnterTheNumberOfCloumns">Inserisci il numero di colonne.</Item>
+        <Item name="PleaseEnterTheNumberOfRows">Si prega di inserire il numero di righe.</Item>
+        <Item name="PleaseSelect">Per favore seleziona</Item>
+        <Item name="PleaseSelectAFile">Si prega di selezionare un file!</Item>
+        <Item name="PleaseSelectAItem">Si prega di selezionare un elemento, se il risultato della scansione è vuoto, per favore controlla la linea!</Item>
+        <Item name="PleaseSelectAProgram">Si prega di selezionare un programma!</Item>
+        <Item name="PleaseSelectScreen">Si prega di selezionare schermo.</Item>
+        <Item name="PleaseWait">Attendere prego...</Item>
+        <Item name="PlotPointsImage">Immagine dei punti di trama</Item>
+        <Item name="PointCount">Cifre decimali</Item>
+        <Item name="Points">Punti dello schermo</Item>
+        <Item name="PopUdiskfailure">Impossibile far apparire il disco U!</Item>
+        <Item name="Port">Port</Item>
+        <Item name="PreProgram">Passa al programma precedente</Item>
+        <Item name="PreProgramConctrl">Controllo del programma</Item>
+        <Item name="Prev">Precedente</Item>
+        <Item name="PrevScan">Precedente</Item>
+        <Item name="Preview">Anteprima</Item>
+        <Item name="PreviewSetting">Impostazioni di anteprima</Item>
+        <Item name="PreviousPage">precedente</Item>
+        <Item name="ProgramInformation">Informazioni sul programma</Item>
+        <Item name="ProgramSize">Dimensione del programma</Item>
+        <Item name="ProgramSwitching">Cambio di programma</Item>
+        <Item name="ProtocolError">Il protocollo è sbagliato!</Item>
+        <Item name="ProtocolTypeError">Il tipo di protocollo è sbagliato!</Item>
+        <Item name="PullThreshold">assorbire</Item>
+        <Item name="QRCode">QR Code</Item>
+        <Item name="QuitTest">Esci dal test</Item>
+        <Item name="RFID">ID RF</Item>
+        <Item name="RFSetting">Impostazione RF</Item>
+        <Item name="RS232">RS232</Item>
+        <Item name="RadioEffect">Effetti singoli</Item>
+        <Item name="RandomColor">Colore casuale</Item>
+        <Item name="ReadBack2">Rileggi</Item>
+        <Item name="ReadScreenParamsFromUDisk">Importa i parametri dello schermo dal disco U.</Item>
+        <Item name="Readback">Rileggi</Item>
+        <Item name="RealTimeArea">Area in tempo reale</Item>
+        <Item name="RealTimeFindCard">Ricerca in tempo reale</Item>
+        <Item name="RebootScreen">Riavvia lo schermo</Item>
+        <Item name="ReceiveFailure">Non è stato possibile ricevere!</Item>
+        <Item name="Record">Disco</Item>
+        <Item name="RecordTips">Nota: se non è possibile ottenere l'immagine corretta, controllare la registrazione opzioni.</Item> 
+        <Item name="RectangleScreen">Schermo rettangolare</Item>
+        <Item name="Red">Rosso</Item>
+        <Item name="Refresh">ricaricare</Item>
+        <Item name="RefreshFrequency">Frequenza di aggiornamento</Item>
+        <Item name="RefreshRate">Frequenza di aggiornamento</Item>
+        <Item name="RegionHeight">Altezza</Item>
+        <Item name="RegionRect">Posizione della regione</Item>
+        <Item name="RegionWidth">Larghezza</Item>
+        <Item name="Relevance">Entra in "Menu-&gt; Operazione-&gt;Impostazioni di comunicazione-&gt; TCP-&gt; Display associato "!</Item>
+        <Item name="RememberProgram">Ricorda il programma</Item>
+        <Item name="Remove">Elimina</Item>
+        <Item name="RemoveDevice">Rimuovi dispositivo</Item>
+        <Item name="RemoveDeviceSuccess1">Rimosso con successo</Item>
+        <Item name="RemoveDeviceSuccess2">!</Item>
+        <Item name="RemoveItemID">Rimuovi ID</Item>
+        <Item name="Rename">Rinominare</Item>
+        <Item name="Repeat">Ripetere</Item>
+        <Item name="Reset">Ripristina</Item>
+        <Item name="ResetProgram">Ripristina il programma</Item>
+        <Item name="RestartFailed">Il riavvio fallito</Item>
+        <Item name="RestartSuccess">La scheda di controllo si riavvia correttamente</Item>
+        <Item name="RevertToDefaultSettings">Ripristina lo stato predefinito, continua?</Item>
+        <Item name="RightToLeft">A destra&gt;Sinistra</Item>
+        <Item name="Romaji">Alfabeti romani</Item>
+        <Item name="Round">rotondo</Item>
+        <Item name="RoundAndDigital">Round + Digit</Item>
+        <Item name="RoundAndRomaji">Alfabeti rotondi + romani</Item>
+        <Item name="RouterAddress">Gateway predefinito</Item>
+        <Item name="Row">Riga</Item>
+        <Item name="SRCFile">File sorgente</Item>
+        <Item name="SWF name">Percorso SWF</Item>
+        <Item name="Saturday">Sabato</Item>
+        <Item name="Save">Salvare</Item>
+        <Item name="SaveToDefaultSetting">Salva come impostazioni predefinite</Item>
+        <Item name="ScaleAndDigital">Scala + cifra</Item>
+        <Item name="ScaleAndRomaji">Scala + alfabeti romani</Item>
+        <Item name="ScanMode">Modalità di scansione</Item>
+        <Item name="ScanRange">Soglia scansione</Item>
+        <Item name="ScanValueB">Filtro blu</Item>
+        <Item name="ScanValueG">Filtro verde</Item>
+        <Item name="ScanValueR">Filtro rosso</Item>
+        <Item name="Scanning">Scansione</Item>
+        <Item name="ScanningComplete">Scansione completata</Item>
+        <Item name="Schedule">Programma</Item>
+        <Item name="ScreenCentered">Centro dello schermo</Item>
+        <Item name="ScreenChoosePageTip">Seleziona il tipo di schermo</Item>
+        <Item name="ScreenColor">Colore</Item>
+        <Item name="ScreenCount">Quantità di schermi collegati</Item>
+        <Item name="ScreenHeight">Altezza</Item>
+        <Item name="ScreenInformation">Informazioni sullo schermo</Item>
+        <Item name="ScreenParameters">Parametri dello schermo</Item>
+        <Item name="ScreenParametersSetting">Impostazione parametri schermo</Item>
+        <Item name="ScreenParamsPageTip">1.Seleziona la larghezza e l'altezza dello schermo Pixel (Larghezza e Altezza significato schermo Pixel totale)&#x000A;2.Seleziona il colore dello schermo;&#x000A;3. Il singolo scrren di pixel totale è la quantità di luci a led.</Item>
+        <Item name="ScreenSize">Dimensione dello schermo</Item>
+        <Item name="ScreenSmartTip">La schermata corrente che mostra il testo normale, non è necessario selezionare intelligente set </Item> 
+        <Item name="ScreenTest">Provino</Item>
+        <Item name="ScreenType">Il tipo di schermo</Item>
+        <Item name="ScreenWidth">Larghezza</Item>
+        <Item name="Search">Ricerca</Item>
+        <Item name="Searching">Ricerca in corso ...</Item>
+        <Item name="SearchingBegin">Ricerca</Item>
+        <Item name="SearchingEnd">Ricerca completata</Item>
+        <Item name="Sec">secondo</Item>
+        <Item name="SecondHand">Seconda mano</Item>
+        <Item name="SecondRadius">Secondo raggio</Item>
+        <Item name="SelectDataPolarity">Si prega di selezionare la polarità dei dati</Item>
+        <Item name="SelectDefault">Se non si conosce il tipo di scheda di controllo, selezionare opzione predefinita.</Item> 
+        <Item name="SelectMode">Selezione della modalità</Item>
+        <Item name="SelectOEPolarity">Si prega di selezionare la polarità OE</Item>
+        <Item name="SelectScan">"Si prega di selezionare la modalità di scansione!"</Item>
+        <Item name="SelectScree">Si prega di selezionare la schermata corrispondente!</Item>
+        <Item name="SendFile">Inviare file</Item>
+        <Item name="SendParamsWhenFinish">Dopo aver modificato i parametri, fare clic su "Invia" Parametri ".</Item>
+        <Item name="SendScreenParams">Invia parametri</Item>
+        <Item name="SendTimeOut">Invia il timeout</Item>
+        <Item name="SendingData">Invio di dati ...</Item>
+        <Item name="SentSuccessfully">Inviato con successo</Item>
+        <Item name="SerialNumber">No.</Item>
+        <Item name="SerialPort">Impostazioni della porta seriale</Item> 
+        <Item name="SerialPortIsClosed">La scheda di controllo a LED che è collegata alla porta seriale non lo è trovato.</Item>
+        <Item name="SerialPortIsOccupied">La porta seriale è occupata!</Item>
+        <Item name="SerialPortOpenError">Impossibile aprire la porta seriale!</Item>
+        <Item name="ServiceExpiration">Scadenza del servizio</Item>
+        <Item name="SetBrightnessFailed">Impossibile impostare la luminosità!</Item>
+        <Item name="SetBrightnessSuccess">Imposta la luminosità con successo</Item>
+        <Item name="SetScreenParam">Impostare correttamente i parametri dello schermo</Item>
+        <Item name="SetTheBaudrateSuccessfully">Imposta il baudrate con successo</Item>
+        <Item name="Setting">impostazioni</Item>
+        <Item name="SetupFailed">Impostazioni fallite!</Item>
+        <Item name="ShowDate">Mostra data</Item>
+        <Item name="ShowGroup">Mostra gruppo</Item>
+        <Item name="ShowMode">Modalità display</Item>
+        <Item name="ShowOnlyControlCardWifi">Visualizza solo la scheda di controllo Wi-Fi</Item>
+        <Item name="ShowTime">Orario dello spettacolo</Item>
+        <Item name="ShowType">Metodo di visualizzazione</Item>
+        <Item name="ShowWeek">Mostra settimana</Item>
+        <Item name="Showpage">Mostra pagina</Item>
+        <Item name="ShuttingDown">Spegnimento</Item>
+        <Item name="SignalDelay">Latch Polarity</Item>
+        <Item name="SignalDelayHint">Alcuni di schermo (come alcuni P5) Latch STR o chiamati segnali LAT sono invertiti con altri schermi, se c'è il punto o la linea del flash, puoi provare a selezionare la selezione questa opzione.</Item>
+        <Item name="SignalQuality">Qualità del segnale</Item>
+        <Item name="Simplify">Modalità semplice (UDP)</Item>
+        <Item name="SimplifyInfo">La modalità semplice si applica solo alla singola connessione diretta e alla LAN con una scheda di controllo, l'indirizzo IP corrisponderà automaticamente in queste circostanze.</Item>
+        <Item name="Single">singolo</Item>
+        <Item name="SingleDirectMode">Modalità di connessione diretta</Item>
+        <Item name="SingleLine">Display a linea singola</Item>
+        <Item name="SingleLineoftext">Testo a riga singola</Item>
+        <Item name="SingleScreenBroadcasts">Modalità di copia</Item>
+        <Item name="Size">Dimensione</Item>
+        <Item name="Slow">Lento</Item>
+        <Item name="Slowest">più lento</Item>
+        <Item name="Small">Piccolo</Item>
+        <Item name="SmartScanTips">Se lo schermo è scuro, si prega di ridurre l'orologio frequenza.</Item>
+        <Item name="SmartSetting">Impostazione intelligente</Item>
+        <Item name="SmartSettingName">Nome impostazione intelligente</Item>
+        <Item name="SmartTips">Suggerimenti: un pixel come unità</Item>
+        <Item name="Snapshot">Istantanea</Item>
+        <Item name="SnapshotTip">Se non ci sono punti luminosi, inserire punti vuoti</Item>
+        <Item name="Solid color">Tinta unita</Item>
+        <Item name="Space">Spaziatura</Item>
+        <Item name="SpecifiedDate">Data specificata</Item>
+        <Item name="SpecifiedTime">Tempo specificato</Item>
+        <Item name="SpecifyValue">Specificare un valore</Item>
+        <Item name="Speed">Velocità</Item>
+        <Item name="SpeedPrior">La velocità prima</Item>
+        <Item name="SplitCell">Cella divisa</Item>
+        <Item name="SplitHorizontal">Diviso orizzontalmente</Item>
+        <Item name="SplitVertical">Dividi verticalmente</Item>
+        <Item name="Standard">Standard</Item>
+        <Item name="StartUpImage">Animazione di avvio</Item>
+        <Item name="StartingUp">Avviare</Item>
+        <Item name="StateA">Stato A</Item>
+        <Item name="StateB">Stato B</Item>
+        <Item name="StateC">Stato C</Item>
+        <Item name="StateD">Dichiarato</Item>
+        <Item name="Static">Statico</Item>
+        <Item name="Status">Stato</Item>
+        <Item name="StepBack">Disfare</Item>
+        <Item name="Stop">Stop</Item>
+        <Item name="Stroke">ictus</Item>
+        <Item name="StyleName">Nome dell'effetto</Item>
+        <Item name="StyleText">Testo</Item>
+        <Item name="SubPacketSequenceNumberError">Il numero di sequenza del sotto pacchetto è errato!</Item>
+        <Item name="SuccessfullyModified">"Modificato con successo"</Item>
+        <Item name="Sunday">Domenica</Item>
+        <Item name="SupportRegionsOverlap">Sovrapposizione delle aree di supporto</Item>
+        <Item name="SuspendPreview">Metti in pausa l'anteprima</Item>
+        <Item name="SwapBlueGreen">Scambio blu e verde</Item>
+        <List name="SystemBusName" id="0">[C1]φ4.75(φ3.75)1R1G 1/16S HUB08 64X32（Indoor） [A1]</List>
+        <List name="SystemBusName" id="10">[C11]P10 1R1G1B 1/8S HUB08 32X16 HLL</List>
+        <List name="SystemBusName" id="11">[C12]P10 1R1G1B 1/4S HUB75 32X16 [A13]</List>
+        <List name="SystemBusName" id="12">[C13]P8 1R1G1B 1/5S HUB75 40X20 JHG [A60]</List>
+        <List name="SystemBusName" id="13">[C14]P8 1R1G1B 1/4S HUB08 32X16 [A8]</List>
+        <List name="SystemBusName" id="14">[C15]P12/P16 2R1G 1/4S HUB12 16X8（P16） [A12]</List>
+        <List name="SystemBusName" id="15">[C16]P13.33 1R1G1B 1/3S HUB08 24X12 HLL [A49]</List>
+        <List name="SystemBusName" id="16">[C17]P13.33 1R1G1B 1/3S HUB08 24X12 JHG [A57]</List>
+        <List name="SystemBusName" id="17">[C18]P16 1R1G1B 1/5S HUB08 20X10 HLL [A52]</List>
+        <List name="SystemBusName" id="18">[C19]P16 1R1G1B 1/1S HUB40 16X8 [A29]</List>
+        <List name="SystemBusName" id="19">[C20]P10 1R1G1B 1/4S  HUB75 32X16  [A11]</List>
+        <List name="SystemBusName" id="1">[C2]φ3.75(φ5)1R 1/16S HUB08 64X32（Indoor） [A1]</List>
+        <List name="SystemBusName" id="20">[C21]P25 2R1G1B 1/1S HUB40 16X8</List>
+        <List name="SystemBusName" id="21">[C22]P10-P20 1G2R1B 1/4S HUB12 16X8 [A61]</List>
+        <List name="SystemBusName" id="22">[C23]P10-P20 2R1G1B 1/4S HUB12 16X8 [A80]</List>
+        <List name="SystemBusName" id="23">[C24]P13.33-P26.66 2R1G1B 1/4S HUB12 12X6</List>
+        <List name="SystemBusName" id="24">[C25]P20 1R1G 1/4S HUB26 16*16（ZHGD） [A66]</List>
+        <List name="SystemBusName" id="25">[C26]P13.33 1R1G1B 1/6S HUB08 24*12（HLL） [A55]</List>
+        <List name="SystemBusName" id="26">[C27]P10 1R 1/4S HUB12 32*16（QL） [A19]</List>
+        <List name="SystemBusName" id="27">[C28]P10 1R1G1B 1/2S HUB75 16*16</List>
+        <List name="SystemBusName" id="28">[C29]P6 1R1G1B 1/8S HUB75 32*16</List>
+        <List name="SystemBusName" id="29">[C30]P6 1R1G1B 1/8S HUB75 32*32</List>
+        <List name="SystemBusName" id="2">[C3]P5 1R1G1B 1/16S HUB08 32X32 [A3]</List>
+        <List name="SystemBusName" id="35">[C36]P10 1R1G1B 1/4S HUB75 16*16</List>
+        <List name="SystemBusName" id="31">[C32]P20 1R1G1B 1/1S HUB75 16*8</List>
+        <List name="SystemBusName" id="32">[C33]P25 2R1G1B 1/1S HUB75 8*8 [A30]</List>
+        <List name="SystemBusName" id="33">[C34]P13.33 1R 1/4S HUB12 24*12 [A71]</List>
+        <List name="SystemBusName" id="34">[C35]P10 1R1G 1/4S HUB12 32*16 [A7]</List>
+        <List name="SystemBusName" id="37">[C38]P7.62 1R1G1B 1/8S HUB08 32*16</List>
+        <List name="SystemBusName" id="38">[C39]P5 1R1G1B 1/8S HUB75 32*16 [A4]</List>
+        <List name="SystemBusName" id="3">[C4]P5 1R1G 1/8S HUB08 32*16（Vehicle screen） [A4]</List>
+        <List name="SystemBusName" id="4">[C5]P5/P4 1R1G1B 1/16S HUB75 32X32（Indoor） [A1]</List>
+        <List name="SystemBusName" id="5">[C6]P10 1R/1R1G 1/4S HUB12 32X16（P10） [A8]</List>
+        <List name="SystemBusName" id="6">[C7]P10 1R 1/4S HUB08 32X16</List>
+        <List name="SystemBusName" id="7">[C8]P10 1R 1/4S HUB08 32X16 [A31]</List>
+        <List name="SystemBusName" id="36">[C37]P10 1R 1/4S HUB12 32*16[A25]</List>
+        <List name="SystemBusName" id="8">[C9]P10 1R1G 1/4S HUB08 No 138 32X16 [A13]</List>
+        <List name="SystemBusName" id="9">[C10]P10 1R1G 1/4S HUB12 32X16 [A19]</List>
+        <List name="SystemBusName" id="46">[C47]P10-P20 1G2R1B 1/4S HUB12 32X16 Virtual pixel</List>
+        <List name="SystemBusName" id="47">[C48]P10-P20 2R1G1B 1/4S HUB12 32X16 Virtual pixel</List>
+        <List name="SystemBusName" id="48">[C49]P13.33-P26.66 2R1G1B 1/4S HUB12 24X12 Virtual pixel</List>
+        <List name="SystemBusName" id="49">[C50]P10 1R 1/1S HUB08 RXP</List>
+        <List name="SystemBusName" id="50">[C51]P6 1R1G1B 1/5S HUB75 32X20</List>
+        <Item name="SystemBusy">Il sistema è occupato, riprova più tardi!</Item>
+        <Item name="SystemOptimize">Ottimizzazione del sistema</Item>
+        <Item name="SystemTime">Tempo di sistema</Item>
+        <Item name="Table">tavolo</Item>
+        <Item name="TargetTime">Target Time</Item>
+        <Item name="Temp">Temperatura</Item>
+        <Item name="TempAdjust">Temperatura Correction</Item>
+        <Item name="TempHumidity">Temp + Umid</Item>
+        <Item name="TempOrRHExist">La regione di temperatura e l'area di temperatura e umidità non possono esistono contemporaneamente.</Item>
+        <Item name="TempUnit">Unità di temperatura</Item>
+        <Item name="Temppoint1">Assicurarsi che il modello di sensore che si sta utilizzando sia: DS18B20</Item>
+        <Item name="Temppoint2">Assicurarsi che il modello di sensore che si sta utilizzando sia: AM2301</Item>
+        <Item name="Test">Testo</Item>
+        <Item name="Text">Testo</Item>
+        <Item name="TextColor">Colore del testo</Item>
+        <Item name="TextFile">.txt File</Item>
+        <Item name="TextInfo">Informazioni di testo</Item>
+        <Item name="TextProcess">Direzione del testo</Item>
+        <Item name="TextProcessing">Elaborazione del testo</Item>
+        <Item name="TheDeviceHasBeenOffline">Il dispositivo è offline</Item>
+        <Item name="ThisIDAlreadyExists">L'ID esiste già</Item>
+        <Item name="ThisModuleNotSupportUDisk">Questo modello non supporta il disco U.</Item>
+        <Item name="Thursday">giovedi</Item>
+        <Item name="TimeClock">Orologio digitale</Item>
+        <Item name="TimeDifference">Strato temporale</Item>
+        <Item name="TimeParameters">Parametri temporali</Item>
+        <Item name="TimeSettingSuccess">Il tempo è stato impostato con successo.</Item>
+        <Item name="TimeSwitch">Interruttore orario</Item>
+        <Item name="TimeSwitchSettingSuccess">L'interruttore del tempo è stato impostato correttamente.</Item>
+        <Item name="TimedRestart">Riavvio a tempo</Item>
+        <Item name="TimerColor">Colore dell'orologio</Item>
+        <Item name="Timing Parameters">Parametri di temporizzazione</Item>
+        <Item name="TimingControl">Controllo del tempo</Item>
+        <Item name="TimingMode">Modalità di indicazione dell'ora</Item>
+        <Item name="TimingPause">Tempo di pausa</Item>
+        <Item name="TimingPlay">inizio del conteggio</Item>
+        <Item name="TimingReset">conteggio ripristinato</Item>
+        <Item name="TimingSet">Set di cronometraggio</Item>
+        <Item name="Tip_Type1">Utilizzare l'indirizzo di comunicazione corrente per connettere UDP</Item>
+        <Item name="Tip_Type2">Utilizzare l'indirizzo IP dal dispositivo restituito per connettere UDP</Item>
+        <Item name="Tip_Type3">Utilizzare l'indirizzo IP dal dispositivo restituito per connettere TCP</Item>
+        <Item name="Tip_Type4">Attraverso il dispositivo collegato all'agente agente</Item>
+        <Item name="To">A</Item>
+        <Item name="To2">A</Item>
+        <Item name="Toolbar_AddColorful_Bottom">Testo che mostra in modo colorato, l'utente può aggiungere animato sfondo</Item>
+        <Item name="Toolbar_AddColorful_Top">Aggiungi l'area di animazione</Item>
+        <Item name="Toolbar_AddCount_Bottom">Visualizza i dati da un pulsante o da un cavo seriale di rete acquisita</Item>
+        <Item name="Toolbar_AddCount_Top">Conteggio pulsanti o dati esterni</Item>
+        <Item name="Toolbar_AddExcel_Bottom">File Excel, selezionare effetti speciali e sfondo</Item>
+        <Item name="Toolbar_AddExcel_Top">Aggiungi area Excel</Item>
+        <Item name="Toolbar_AddGlobalProgram_Bottom">Imposta solo un'area di ipertesto, testo, tempo, ecc., il programma può suonare in base al tempo</Item>
+        <Item name="Toolbar_AddGlobalProgram_Top">Aggiungi programma globale</Item>
+        <Item name="Toolbar_AddHypertext_Bottom">Immagini, video, SWF, ecc.</Item>
+        <Item name="Toolbar_AddHypertext_Top">Aggiungi ipertesto</Item>
+        <Item name="Toolbar_AddProgram_Bottom">Imposta 20 regioni ipertesto, testo, orario, ecc., i programmi possono giocare per tempo</Item>
+        <Item name="Toolbar_AddProgram_Top">Aggiungi programma</Item>
+        <Item name="Toolbar_AddTempRH_Bottom">Visualizzazione della temperatura, umidità (richiede sensore)</Item>
+        <Item name="Toolbar_AddTempRH_Top">Aggiungi l'area di temperatura e umidità</Item>
+        <Item name="Toolbar_AddText_Bottom">Modifica testo, seleziona effetti e sfondo</Item>
+        <Item name="Toolbar_AddText_Top">Aggiungi testo</Item>
+        <Item name="Toolbar_AddTime_Bottom">Orologio digitale o quadrante di orologio</Item>
+        <Item name="Toolbar_AddTime_Top">Aggiungi l'area del tempo</Item>
+        <Item name="Toolbar_AddTiming_Bottom">Tempo di conto alla rovescia, conteggio indietro, conteggio per tasto</Item>
+        <Item name="Toolbar_AddTiming_Top">Aggiungi l'area del tempo</Item>
+        <Item name="Toolbar_Adjusttime_Bottom">Tempo di controllo della scheda di correzione con il computer sincronizzato</Item>
+        <Item name="Toolbar_Adjusttime_Top">Aggiungi tempo di regolazione</Item>
+        <Item name="Toolbar_Add3D_Bottom">Supporta sfondo, primo piano, parole colorate, 3D effetti</Item>
+        <Item name="Toolbar_Add3D_Top">Aggiungi testo 3D</Item>
+        <Item name="Toolbar_Check">Dai un'occhiata</Item>
+        <Item name="Toolbar_Copy">copia</Item>
+        <Item name="Toolbar_Delete">Elimina</Item>
+        <Item name="Toolbar_Down">Giù</Item>
+        <Item name="Toolbar_ExportToUdisk_Bottom">Lo schermo viene esportato sul disco U.</Item>
+        <Item name="Toolbar_ExportToUdisk_Top">Esporta su disco U.</Item>
+        <Item name="Toolbar_Paste">Incolla</Item>
+        <Item name="Toolbar_Preview1_Bottom">Visualizza l'anteprima della schermata corrente</Item>
+        <Item name="Toolbar_Preview1_Top">Anteprima dello schermo</Item>
+        <Item name="Toolbar_Preview2_Bottom">Mostrare tutti gli schermi creati, fare doppio clic per accedere al schermo designato.</Item>
+        <Item name="Toolbar_Preview2_Top">Il gruppo non può visualizzare l'anteprima</Item>
+        <Item name="Toolbar_Preview_Bottom">Visualizza l'anteprima del programma corrente</Item>
+        <Item name="Toolbar_Preview_Top">cProgramma di anteprima</Item>
+        <Item name="Toolbar_Save">Salvare</Item>
+        <Item name="Toolbar_Search">Ricerca</Item>
+        <Item name="Toolbar_Send_Bottom">Invio dei programmi sullo schermo alla scheda di controllo</Item>
+        <Item name="Toolbar_Send_Top">Inviare</Item>
+        <Item name="Toolbar_Uncheck">Deseleziona</Item>
+        <Item name="Toolbar_Up">Su</Item>
+        <Item name="TotalECard">Il numero totale di schede di interfaccia di rete:</Item>
+        <Item name="TotalFrames">Cornici totali</Item>
+        <Item name="TotalSpace">Spazio totale</Item>
+        <Item name="TracingPoint">Descrizione dell'allineamento</Item>
+        <Item name="TracingPointArrowKeys">Punto di tracciamento del clic con il tasto sinistro del mouse, è possibile utilizzare i tasti freccia per punto di controllo verso.</Item>
+        <Item name="TracingPointError">Il punto di tracciamento è errore.</Item>
+        <Item name="TracingPointFail">Il punto di tracciamento non è riuscito, si prega di tracciare nuovamente il punto.</Item>
+        <Item name="TransitionThreshold">Soglia di transizione</Item>
+        <Item name="Transparent">Trasparente</Item>
+        <Item name="Tricolor">Tricolore</Item>
+        <Item name="Tuesday">martedì</Item>
+        <Item name="Twinkle">Scintillio</Item>
+        <Item name="TwoLinedisplay">Display a due righe</Item>
+        <Item name="Type">genere</Item>
+        <Item name="Type1">Scrivi uno</Item>
+        <Item name="Type2">Digita due</Item>
+        <Item name="Type3">Digitare tre</Item>
+        <Item name="Type4">Digitare quattro</Item>
+        <Item name="TypeName">Digita il nome</Item>
+        <Item name="U-DiskSucess">Il disco U ha successo!</Item>
+        <Item name="UDisk">U disco</Item>
+        <Item name="USE_HD2010">La scheda di controllo è stata rilevata, ma non corrisponde alla corrente software, si prega di utilizzare l'HD 2010.</Item>
+        <Item name="UnableToOpenFile">Impossibile aprire il file!</Item>
+        <Item name="Unchanged">immutato</Item>
+        <Item name="Undo">Disfare</Item>
+        <Item name="UnexpectedError">Timeout di comunicazione</Item>
+        <Item name="Unit">Unità</Item>
+        <Item name="UnitBoard">Scheda dell'unità</Item>
+        <Item name="UnitBoardInfo">Informazioni sul modulo</Item>
+        <Item name="UnitBoardTips">Se la larghezza di un singolo Moudle è superiore a 64, selezionare 64</Item>
+        <Item name="UnitBoardWidth">Larghezza del modulo</Item>
+        <Item name="UnitBoards">Numero di pannelli dell'unità</Item>
+        <Item name="UnitColor">Colore unitario</Item>
+        <Item name="UnitSize">Punti del modulo</Item>
+        <Item name="Unmerge">unmerge</Item>
+        <Item name="Unselected">Non selezionato</Item>
+        <Item name="Unspecified">imprecisato</Item>
+        <Item name="UnsupportedInstructions">Istruzioni non supportate</Item>
+        <Item name="Untitled">Senza titolo</Item>
+        <Item name="Update">aggiornamenti</Item>
+        <Item name="UpdateFailed">Aggiornamento non riuscito.</Item>
+        <Item name="UpdateFirmwareFinished">Aggiornamento del firmware completato.</Item>
+        <Item name="UpdatedSuccessfully">The update is successful, whether to open the update files?</Item>
+        <Item name="UpdatingFirmware">Aggiornamento del firmware.</Item>
+        <Item name="Use">Uso</Item>
+        <Item name="Use138Decoder">Utilizzare il decodificatore 138</Item>
+        <List name="Use138" id="0">Usa 138</List>
+        <List name="Use138" id="1">No 138</List>
+        <Item name="UseDefaultSetting">Impostazioni predefinite</Item>
+        <Item name="UseParams">Memoria usata</Item>
+        <Item name="UsedMemory">Memoria usata</Item>
+        <Item name="UsingHardwareSetup">Usa le impostazioni hardware (lettura dei parametri)</Item>
+        <Item name="VZoom">Tratto verticale</Item>
+        <Item name="Valign">Allineare verticalmente</Item>
+        <Item name="ValignBottom">Allinea il fondo</Item>
+        <Item name="ValignMiddle">Verticale centrato</Item>
+        <Item name="ValignTop">Allinea in alto</Item>
+        <Item name="Veritical">Posizione verticale</Item>
+        <Item name="VerticalPosition">Posizione verticale</Item>
+        <Item name="VerticalScreenshot">Screenshot verticale</Item>
+        <Item name="VerticalStretch">Stretching verticale</Item>
+        <Item name="Video">Video</Item>
+        <Item name="Video FramesCount">Cornici totali</Item>
+        <Item name="Video name">Percorso video</Item>
+        <Item name="ViewHelp">Visualizza la guida</Item>
+        <Item name="WaitingForInitialization">In attesa di inizializzazione</Item>
+        <Item name="WaitingToBeSent">In attesa di essere inviato</Item>
+        <Item name="Wednesday">mercoledì</Item>
+        <Item name="WhetherToSaveTheCurrentModifiedFile">Se salvare le modifiche?</Item>
+        <Item name="White">bianca</Item>
+        <Item name="Width">Larghezza</Item>
+        <Item name="WidthOfMoreTthan">"La larghezza supera il massimo!"</Item>
+        <Item name="WindowPosition">Posizione della finestra</Item>
+        <Item name="WrongParameter">Parametri sbagliati</Item>
+        <Item name="Yellow">Giallo</Item>
+        <List name="color" id="0">Singolo colore</List>
+        <List name="color" id="1">Doppio colore</List>
+        <List name="color" id="2">Pieno di colori</List>
+        <Item name="delete">Elimina</Item>
+        <Item name="flashTips">Nota: gli script contenenti SWF non sono ancora supportati, quindi non è possibile ottieni la sua immagine corretta.</Item>
+        <List name="frequency" id="0">Auto</List>
+        <List name="frequency" id="160">100Hz</List>
+        <List name="frequency" id="140">120Hz</List>
+        <List name="frequency" id="120">140Hz</List>
+        <List name="frequency" id="100">160Hz</List>
+        <List name="frequency" id="80">180Hz</List>
+        <List name="frequency" id="60">200Hz</List>
+        <List name="frequency" id="200">60Hz</List>
+        <List name="frequency" id="180">80Hz</List>
+        <List name="graylevel" id="1">Nessun valore</List>
+        <List name="graylevel" id="2">4 livelli</List>
+        <List name="graylevel" id="3">8 livelli</List>
+        <List name="graylevel" id="4">16 livelli</List>
+        <List name="graylevel" id="5">32 livelli</List>
+        <Item name="group">Gruppo</Item>
+        <Item name="hypertext">Ipertesto</Item>
+        <List name="listCtlDelay" id="0">Abilita alta</List>
+        <List name="listCtlDelay" id="1">Abilita bassa</List>
+        <List name="listStrDelay" id="0">0</List>
+        <List name="listStrDelay" id="1">1</List>
+        <Item name="mAPPFace">AppFace (&amp;A)</Item>
+        <Item name="mAbout">A proposito di (&amp;A)</Item>
+        <Item name="mBlackStyle">Stile nero (L)</Item>
+        <Item name="mBludStyle">Stile blu (B)</Item>
+        <Item name="mCalculator">Calcolatrice</Item>
+        <Item name="mClearDisplayData">Cancella dati visualizzati</Item>
+        <Item name="mCommSetting">Impostazioni di comunicazione</Item>
+        <Item name="mExit">Uscita(&amp;U)</Item>
+        <Item name="mFile">File(&amp;F)</Item>
+        <Item name="mHardwareSetting">Impostazioni hardware</Item>
+        <Item name="mHelp">Aiuto (&amp;H)</Item>
+        <Item name="mIPManagmentTools">Strumenti di gestione IP</Item>
+        <Item name="mLanguage">Lingua (&amp;L)</Item>
+        <Item name="mLuminanceSetting">Impostazioni di luminosità</Item>
+        <Item name="mNarrow">Zoom indietro</Item>
+        <Item name="mNew">Nuova schermata (&amp;N)</Item>
+        <Item name="mNotepad">Bloc notes</Item>
+        <Item name="mOpen">Open(&amp;O)</Item>
+        <Item name="mOperate">Operation(&amp;O)</Item>
+        <Item name="mOutWindow">Finestra informativa</Item>
+        <Item name="mPaint">Disegnare</Item>
+        <Item name="mSave">Salva (&amp;S)</Item>
+        <Item name="mSaveAs">Salva come...</Item>
+        <Item name="mScreenSetting">Impostazioni dello schermo</Item>
+        <Item name="mSendProject">Invia elemento</Item>
+        <Item name="mSetting">Impostazioni (&amp;S)</Item>
+        <Item name="mSilverStyle">Stile argento (S)</Item>
+        <Item name="mSystemSetting">Impostazioni Sistema</Item>
+        <Item name="mTimeSetting">Strumenti (&amp;T)</Item>
+        <Item name="mTool">Strumenti (&amp;T)</Item>
+        <Item name="mUpdateFirmware">Aggiorna firmware</Item>
+        <Item name="mView">Vista (&amp;V)</Item>
+        <Item name="mWatergreenStyle">Stile verde chiaro (A)</Item>
+        <Item name="mZoom">Ingrandire</Item>
+        <Item name="minimum">Min</Item>
+        <Item name="ms">ms</Item>
+        <List name="polarity" id="0">Abilita bassa</List>
+        <List name="polarity" id="1">Abilita alta</List>
+        <Item name="program">Programma</Item>
+        <Item name="screen">Schermo</Item>
+        <Item name="sec">secondo</Item>
+        <Item name="send">Inviare</Item>
+        <Item name="static">Statico</Item>
+        <Item name="time">Tempo</Item>
+        <Item name="whirl180">Inversione</Item>
+        <Item name="whirl270">Rotazione sinistra</Item>
+        <Item name="whirl90">Rotazione a destra</Item>
+        <Item name="whirlt">Rotazione</Item>
+        <Item name="RemoveDuplicate">Rimuovi duplicato</Item>
+        <Item name="Apply">Applicare</Item>
+        <Item name="Remark">osservazione</Item>
+        <Item name="FirstMode">Modalità prioritaria</Item>
+        <Item name="FirstMode_Normal">Equilibrato</Item>
+        <Item name="FirstMode_Speed">Priorità di velocità</Item>
+        <Item name="FirstMode_Text">Priorità di luminosità</Item>
+        <Item name="Random">Casuale</Item>
+        <Item name="WhetherToReplace">Se sostituire?</Item>
+        <Item name="ImportFailed">Importazione non riuscita</Item>
+        <Item name="ExportFailed">Esportazione fallita</Item>
+        <Item name="ExportLanguage">Esportare la lingua</Item>
+        <Item name="ImportLanguage">Importa lingua</Item>
+        <List name="SystemBusName" id="30">[C31]P10 1R1G1B 1/4S HUB75 16*16[A17]</List>
+        <Item name="ClickHereToUpdate">Clicca qui per aggiornare</Item>
+        <Item name="ImportFile">Importare file</Item>
+		<Item  name="Imsak">Quaresima</Item>
+		<Item  name="Fajr">Cerimonia  del  mattino</Item>
+		<Item  name="Dhuhr">Zuhr</Item>
+		<Item  name="Asr">Asr</Item>
+		<Item  name="Maghrib">Maghrib</Item>
+		<Item  name="Isha">Isha</Item>
+		<Item  name="MidNight">mezzanotte</Item>
+        <Item name="City">Città</Item>
+        <Item name="NumColor">Colore dei numeri</Item>
+        <Item name="ExportConfigFile">Profili di esportazione</Item>
+        <Item name="SoundModule">Modulo sonoro</Item>
+        <Item name="SoundSetting">Impostazione del suono</Item>
+        <Item name="Year">Anno</Item>
+        <Item name="ImportTable">Tabella di importazione</Item>
+        <Item name="ExportBable">Esporta tabella</Item>
+        <Item name="ClearAll">Chiaro</Item>
+        <Item name="cfWords">Testo colorato</Item>
+        <Item name="OnlyOnePrayForScreen">Supportato solo un'area di preghiera</Item>
+        <Item name="BKSpeed">Velocità di sfondo</Item>
+        <Item name="EffectCycle">Ciclo degli effetti</Item>
+        <List name="graylevel" id="6">64 graylevel</List>
+        <List name="graylevel" id="7">128 graylevel</List>
+        <List name="graylevel" id="8">256 livelli</List>
+        <List name="SystemBusName" id="39">[C40]P10 1R1G1B 1/4S HUB75 32X16[A12]</List>
+        <List name="SystemBusName" id="40">[C41]P10 1R1G1B 1/4S HUB75 32*16</List>
+        <List name="SystemBusName" id="41">[C42]P10 1R1G1B 1/2S HUB75 32*16</List>
+        <List name="SystemBusName" id="42">[C43]P3 1R1G1B 1/16S HUB75 64*64</List>
+        <List name="SystemBusName" id="43">[C44]P8 1R1G 1/8S HUB08 32*32 (WQS)</List>
+        <List name="SystemBusName" id="44">[C45]P5 1R1G1B 1/8S HUB75 32*32 (CXH)</List>
+        <List name="SystemBusName" id="45">[C46]P10 1R 1/4S HUB12 32*16</List>
+        <Item name="SelectFirmwareVersion">Seleziona la versione del firmware</Item>
+        <Item name="NoSelectVersion">Nessuna versione selezionata</Item>
+        <Item name="Ordinal">No.</Item>
+        <Item name="VersionNum">Versione</Item>
+        <Item name="ConfirmSelect">Confermare</Item>
+        <Item name="FileNameAlreadyExistIsCover">FileName esiste già, è la copertura?</Item>
+        <Item name="VersionAlreadyExist">La versione esiste già</Item>
+        <Item name="FindNewVersionIsUpdate">Trova una nuova versione, se aggiornare il firmware?</Item>
+        <Item name="DeleteThisGroup">Elimina questo gruppo</Item>
+        <Item name="UpdateFile">Aggiorna il file</Item>
+        <Item name="UdiskUpgrade">Aggiornamento da U-disk</Item>
+        <Item name="SelectVersionOnTheRight">Si prega di selezionare il firmware sulla destra!</Item>
+        <Item name="TheSameSeAssicurarsi che l'IP della scheda di controllo e il computer sia nel stesso segmento di rete&lt;/Item&gt; &lt;Item name=">Passo</Item>
+        <Item name="ShadowMode">Ciao</Item>
+        <Item name="3DDeep">3D profondo</Item>
+        <Item name="Gradient">Pendenza</Item>
+        <Item name="Alpha">Trasparenza</Item>
+        <Item name="BorderStyle">Stile del bordo</Item>
+        <Item name="RoundRect">Rettangolo arrotondato</Item>
+        <Item name="Octagon">Ottagono</Item>
+        <Item name="CustomStyle">Stile personalizzato</Item>
+        <Item name="3DText">Testo 3D</Item>
+        <Item name="Whether_to_cancel_the_current_task">Annulla missione o no?</Item>
+        <Item name="SinglePage">Pagina singolatyle</Item>
+        <Item name="TwinkleSpeed">Twinkle Speed</Item>
+        <Item name="NoTwinkle">No Twinkle</Item>
+        <Item name="3Dtwinkle">3D Twinkle</Item>
+        <Item name="SaveCountValue">Ricorda l'ultimo conteggio</Item>
+        <Item name="SpecialBorder">Bordo speciale</Item>
+        <Item name="BootingDelayWasComingOn">Accensione, schiarire gradualmente</Item>
+        <Item name="RememberToThoose">Ricorda la selezione corrente</Item>
+        <Item name="EndPageToEndPage">Fine alla fine della pagina</Item>
+        <Item name="WifiSpeedMode1">Modalità ad alta velocità</Item>
+        <Item name="WifiSpeedMode2">Modalità a bassa velocità</Item>
+        <Item name="All the devices automatically obtain IP">Tutti i dispositivi sono impostati su "Ottieni IP automaticamente"</Item>
+        <Item name="The firmware information">Le informazioni sul firmware</Item>
+        <Item name="The device information">Le informazioni sul dispositivo</Item>
+        <List name="SystemBusName" id="51">[C52] 1R1G 1/8 KR</List>
+        <List name="SystemBusName" id="52">[C53] 1R1G1B 1/4S ICN2038S</List>
+        <List name="SystemBusName" id="53">[C54] P10 1R1G 1/4S HUB12 32x16 (YLR)</List>
+        <List name="SystemBusName" id="54">[C55] P8 1R1G1B 1/5S HUB75 40X20</List>
+        <List name="SystemBusName" id="55">[C56] P10 1/4S No 138 MCGD</List>
+        <List name="SystemBusName" id="56">[C57] P8 1R1G1B 1/4S HUB75 (JJY)</List>
+        <List name="SystemBusName" id="57">[C58] P13.33 1R1G1B 1/3S HUB75 (LLR)</List>
+        <List name="SystemBusName" id="58">[C59] P3 1R1G1B 1/32S HUB75E (RBG) ICN2038S</List>
+        <List name="SystemBusName" id="59">[C60] P3 1R1G1B 1/32S HUB75E (RGB) ICN2038S</List>
+        <List name="SystemBusName" id="60">[C61] P6 1/8S HUB75 (BGR)</List>
+        <List name="SystemBusName" id="61">[C62] P6 1/8S HUB75 GK</List>
+        <List name="SystemBusName" id="62">[C63] P6 1/8S HUB75(HJ)</List>
+        <List name="SystemBusName" id="63">[C64] P6 1R1G1B 1/8S HUB75</List>
+        <List name="SystemBusName" id="64">[C65] P10 1R 1/4s(YLR)</List>
+        <List name="SystemBusName" id="65">[C66] P10 1R 1/4S HUB12</List>
+        <List name="SystemBusName" id="66">[C67] P10 1R1G1B 1/2S HUB75 (HJ)</List>
+        <List name="SystemBusName" id="67">[C68] P10 1R1G1B 1/2S HUB75</List>
+        <List name="SystemBusName" id="68">[C69] P10 1R1G1B 1/3S HUB73A 24X24 (KSZ)</List>
+        <List name="SystemBusName" id="69">[C70] P10 1R1G1B 1/4S No 138 HUB75</List>
+        <List name="SystemBusName" id="70">[C71] P13.33 1R1G1B 1/3S 24x12</List>
+        <List name="SystemBusName" id="71">[C72] P16 1R1G 1/4S HUB08</List>
+        <List name="SystemBusName" id="72">[C73] P20 1R1G1B 1S</List>
+        <List name="SystemBusName" id="73">[C74] P10 1R1G1B 1/4S HUB75（KT）</List>
+        <List name="SystemBusName" id="74">[C75] P8 1R1G1B 1/4S HUB75 32x16 No138</List>
+        <List name="SystemBusName" id="75">[C76] P8 1R1G1B 1/4S HUB75 32x16 (HJ)</List>
+        <List name="SystemBusName" id="76">[C77] P10 1R1G1B 1/4S HUB75 32x16 No138</List>
+        <List name="SystemBusName" id="77">[C78] P10 1R1G1B 1/2S HUB75 32x16</List>
+        <List name="SystemBusName" id="78">[C79] P10 1R 1/4S HUB08 32x16</List>
+        <List name="SystemBusName" id="79">[C80] P10 1R1G1B 1/2S HUB75 32x16 (GK)</List>
+        <List name="SystemBusName" id="80">[C81] P10 1R1G1B 1/2S HUB75 32x16 (QL)</List>
+        <List name="SystemBusName" id="81">[C82] P16 1R1G 1/1S HUB12 16x8</List>
+        <List name="SystemBusName" id="82">[C83] P10 1R 1 / 4S HUB12 32x16 (KT)</List>
+        <List name="SystemBusName" id="83">[C84] P10 1R 1 / 4S HUB12 32x16 (GK)</List>
+        <List name="SystemBusName" id="84">[C85] P5 1R1G1B 1 / 8S HUB75 64x32</List>
+        <List name="SystemBusName" id="85">[C86] P10 1R1G1B 1 / 4S HUB75 32x16 No138 (HJCL)</List>
+        <List name="SystemBusName" id="86">[C87] P10 1R1G1B 1 / 2S HUB75E 32x16 No138 (HLL)</List>
+        <List name="SystemBusName" id="87">[C88] P10 1R1G1B 1 / 2S HUB75 32x16 No138</List>
+        <List name="SystemBusName" id="88">[C89] P6.66 1R1G1B 1 / 6S HUB75 48x24</List>
+        <List name="SystemBusName" id="89">[C90] P8 1R1G1B 1 / 5S HUB75 40x20</List>
+        <List name="SystemBusName" id="90">[C91] P4 1R1G1B 1 / 10S HUB75 80x40 ICN2038S</List>
+        <List name="SystemBusName" id="91">[C92] P4 1R1G1B 1 / 20S HUB75 80x40 ICN2038S</List>
+        <List name="SystemBusName" id="92">[C93] P10 1R1G1B 1 / 4S HUB75 32x16 No138 ICN2038S</List>
+        <List name="SystemBusName" id="93">[C94] P10 1R1G1B 1 / 2S 32x16 No138 ICN2038S</List>
+		<List name="SystemBusName" id="94">[C95]  P10 1R1G1B 1/5S HUB75 40x20 No138 ICN2038S</List>
+		<List name="SystemBusName" id="95">[C96]  P10 1R1G1B 1/5S HUB75 40x20 SM16207S</List>
+		<List name="SystemBusName" id="96">[C97]  H10 1R1G1B 1/2S HUB75 32x16</List>
+		<List name="SystemBusName" id="97">[C98]  P8  1R1G1B 1/5S HUB75 40x20 ICN20378BP</List>
+		<List name="SystemBusName" id="98">[C99]  dz0228 1R1G1B 1/1S HUB75 16x16</List>
+        <Item name="Server address">Indirizzo del server</Item>
+        <Item name="User name">Nome utente</Item>
+        <Item name="Fill the same">Riempi lo stesso</Item>
+        <Item name="Cloud server Settings">Impostazioni del server cloud</Item>
+        <Item name="Cloud server">Server cloud</Item>
+        <Item name="ButtonCtrl">Pulsante di controllo attivo</Item>
+        <Item name="NoUse">Pulsante di controllo disattivato</Item>
+        <Item name="Button1">Button1</Item>
+        <Item name="Button2">Button2</Item>
+        <Item name="Button3">Button3</Item>
+        <Item name="Button4">Button4</Item>
+        <Item name="DefaultBackground">Sfondo predefinito</Item>
+        <Item name="ImageBackground">Immagine di sfondo</Item>
+        <Item name="SingleProgramSend">SingleProgramSend</Item>
+        <Item name="latest">più recente</Item>
+        <Item name="newdata">newdata</Item>
+        <Item name="pray">Pregare</Item>
+        <Item name="Music">Musica</Item>
+        <Item name="Aglinment">Allineamento</Item>
+        <Item name="LeftAglinment">Allinea a sinistra</Item>
+        <Item name="CenterAglinment">Allineamento centrato</Item>
+        <Item name="RightAglinment">Allinea a destra</Item>
+        <Item name="SplitType">SplitType</Item>
+        <Item name="SingleChar">SingleChar</Item>
+        <Item name="Word">parola</Item>
+        <Item name="WifiSetting">Impostazione Wi-Fi</Item>
+        <Item name="SettingSuccessfully">SettingSuccessfully</Item>
+        <Item name="SettingFailed">SettingFailed</Item>
+        <Item name="Connectting">Collegamento</Item>
+        <Item name="NoFoundAp">NoFoundAp</Item>
+        <Item name="ConnectFailed">Connessione fallita</Item>
+        <Item name="ConnectOK">ConnectOK</Item>
+        <Item name="ApMode">APMODE</Item>
+        <Item name="StationMode">StationMode</Item>
+        <Item name="WifiPasswordLenghLess">La password del Wi-Fi è troppo corta</Item>
+        <Item name="WifiSSIDIsNULL">Il nome Wi-Fi è vuoto</Item>
+        <Item name="MaskError">MaskError</Item>
+        <Item name="IPError">IPError</Item>
+        <Item name="WifiSSIDTooLong">Il nome Wi-Fi è troppo lungo.</Item>
+        <Item name="WifiPasswordTooLong">La password del Wi-Fi è troppo lunga.</Item>
+        <Item name="SSIDPasswordInputTips">Consenti solo l'ingresso 0 ~ 9 a ~ z A ~ Z _</Item>
+        <Item name="City">Città</Item>
+        <Item name="Date">Data</Item>
+        <Item name="temp">temp</Item>
+        <Item name="Weather">Tempo metereologico</Item>
+        <Item name="Wind Direction">La direzione del vento</Item>
+        <Item name="Wind speed">Velocità del vento</Item>
+        <Item name="Temp Unit">Unità Temp</Item>
+        <Item name="America">America</Item>
+        <Item name="Australia">Australia</Item>
+        <Item name="Canada">Canada</Item>
+        <Item name="China">Cina</Item>
+        <Item name="India">India</Item>
+        <Item name="Indonesia">Indonesia</Item>
+        <Item name="Iran">Ho corso</Item>
+        <Item name="Japan">Giappone</Item>
+        <Item name="Korea">Corea</Item>
+        <Item name="Malaysia">Malaysia</Item>
+        <Item name="Pakistan">Pakistan</Item>
+        <Item name="Peru">Perù</Item>
+        <Item name="Poland">Polonia</Item>
+        <Item name="Russia">Russia</Item>
+        <Item name="Spain">Spagna</Item>
+        <Item name="Thailand">Tailandia</Item>
+        <Item name="Turkey">tacchino</Item>
+        <Item name="United Arab Emirates">Emirati Arabi Uniti</Item>
+        <Item name="Vietnam">Vietnam</Item>
+        <Item name="Sunny">soleggiato</Item>
+        <Item name="Cloudy">Nuvoloso</Item>
+        <Item name="Few clouds">Poche nuvole</Item>
+        <Item name="Partly cloudy">Parzialmente nuvoloso</Item>
+        <Item name="Overcast">nuvoloso</Item>
+        <Item name="Windy">Ventoso</Item>
+        <Item name="Calm">Senza vento</Item>
+        <Item name="Light breeze">Brezza leggera</Item>
+        <Item name="Moderate">Moderare</Item>
+        <Item name="Fresh breeze">Brezza fresca</Item>
+        <Item name="Strong breeze">Forte brezza</Item>
+        <Item name="High wind">Vento forte</Item>
+        <Item name="Gale">Burrasca</Item>
+        <Item name="Strong gale">Forte tempesta</Item>
+        <Item name="Storm">tempesta</Item>
+        <Item name="Violent storm">Tempesta violenta</Item>
+        <Item name="Hurricane">uragano</Item>
+        <Item name="Tornado">Tornado</Item>
+        <Item name="Tropical storm">Tempesta tropicale</Item>
+        <Item name="Shower rain">Pioggia doccia</Item>
+        <Item name="Heavy shower rain">Pioggia pesante sotto la pioggia</Item>
+        <Item name="Thundershower">temporali</Item>
+        <Item name="Heavy thunderstorm">Forte temporale</Item>
+        <Item name="Hail">grandinare</Item>
+        <Item name="Light rain">Pioggia leggera</Item>
+        <Item name="Moderate rain">Pioggia moderata</Item>
+        <Item name="Heavy rain">Forte pioggia</Item>
+        <Item name="Extreme rain">Pioggia estrema</Item>
+        <Item name="Drizzle rain">Pioggia leggera</Item>
+        <Item name="Storm">tempesta</Item>
+        <Item name="Heavy storm">Forte tempesta</Item>
+        <Item name="Severe storm">Forte tempesta</Item>
+        <Item name="Freezing rain">Grandine</Item>
+        <Item name="Light snow">Neve leggera</Item>
+        <Item name="Moderate snow">Neve moderata</Item>
+        <Item name="Heavy snow">Forte nevicata</Item>
+        <Item name="Snowstorm">tempesta di neve</Item>
+        <Item name="Sleet">Nevischio</Item>
+        <Item name="Rain and snow">Pioggia e neve</Item>
+        <Item name="Shower snow">Doccia neve</Item>
+        <Item name="Snow flurry">Tempesta di neve</Item>
+        <Item name="Mist">nebbia</Item>
+        <Item name="Foggy">Nebbioso</Item>
+        <Item name="Haze">Foschia</Item>
+        <Item name="Sand">sabbia</Item>
+        <Item name="Dust">Polvere</Item>
+        <Item name="Duststorm">tempesta di sabbia</Item>
+        <Item name="Sandstorm">tempesta di sabbia</Item>
+        <Item name="Hot">Caldo</Item>
+        <Item name="Cold">Freddo</Item>
+        <Item name="Unknown">Sconosciuto</Item>
+        <Item name="Clear">Chiaro</Item>
+        <Item name="No Sustained Wind">Nessun vento sostenuto</Item>
+        <Item name="Northeast Wind">Vento Nord-Est</Item>
+        <Item name="East Wind">Vento dell'est</Item>
+        <Item name="Southeaster Wind">Vento del sud-est</Item>
+        <Item name="South Wind">Vento del Sud</Item>
+        <Item name="Southwest Wind">Vento del sud-ovest</Item>
+        <Item name="Strong wind">Vento forte</Item>
+        <Item name="West Wind">Vento dell'Ovest</Item>
+        <Item name="Northwest Wind">Vento da nord-ovest</Item>
+        <Item name="North Wind">Vento del nord</Item>
+        <Item name="Vortex Wind">Vortex Wind</Item>
+        <Item name="The Breeze Wind">The Breeze Wind</Item>
+        <Item name="No wind">Senza vento</Item>
+        <Item name="Light air">Aria leggera</Item>
+        <Item name="Breeze">Brezza</Item>
+        <Item name="Gentle breeze">Brezza leggera</Item>
+        <Item name="Strong wind">Vento forte</Item>
+        <Item name="Blast">esplosione</Item>
+        <Item name="Gale">Burrasca</Item>
+        <Item name="Strong gale">Forte tempesta</Item>
+        <Item name="Whole gale">Burrasca intera</Item>
+        <Item name="Storm wind">Vento di tempesta</Item>
+        <Item name="Hurricane">uragano</Item>
+        <Item name="OfflineMode">Moda offline</Item>
+        <Item name="PleaseSelectDevice">Si prega di selezionare il dispositivo</Item>
+        <Item name="SeeMoreParameters">Vedi più parametri</Item>
+        <Item name="ExportProgram">Programma di esportazione</Item>
+        <List name="ErrorTips" id="00">Suggerimenti di problemi comuni</List>
+        <List name="ErrorTips" id="01">Errore / La larghezza e l'altezza impostate nelle impostazioni dello schermo supera il range di controllo del controller</List>
+        <List name="ErrorTips" id="02">Errore formato file errore 1 / U</List>
+        <List name="ErrorTips" id="03">Errore2 / Contenuto del programma eccessivo</List>
+        <List name="ErrorTips" id="04">NoFile / Nessun file di programma nel disco U.</List>
+        <List name="ErrorTips" id="05">Fine / Impostazione scaduta</List>
+        <Item name="ColorfulBorder">Bordo colorato</Item>
+        <Item name="FixedText">Risolto il problema</Item>
+        <List name="PM25String" id="00">Nessun dato</List>
+        <List name="PM25String" id="01">Buona</List>
+        <List name="PM25String" id="02">Moderare</List>
+        <List name="PM25String" id="03">Leggermente inquinato</List>
+        <List name="PM25String" id="04">Moderatamente inquinato</List>
+        <List name="PM25String" id="05">Pesantemente inquinato</List>
+        <List name="PM25String" id="06">Gravemente inquinato</List>
+        <Item name="BootTips">Suggerimenti per l'avvio</Item>
+        <Item name="ShowAll">Mostra tutto</Item>
+        <Item name="NoShow">Nessuno spettacolo</Item>
+        <Item name="PM25Adjust">Regola PM2.5</Item>
+        <Item name="PM10Adjust">Regola PM10</Item>
+        <Item name="QuickConfig">Configurazione rapida</Item>
+        <Item name="Subtitles">Sottotitoli</Item>
+        <Item name="Toolbar_AddSubtitles_Top">Aggiungi sottotitoli</Item>
+		<Item name="ICSetting">IC setting</Item>
+		<Item name="NormalIC">Normal IC</Item>
+		<Item name="RegisterGroup">Register group</Item>
+		<Item name="RedRegister">Red register</Item>
+		<Item name="GreenRegister">Green register</Item>
+		<Item name="BlueRegister">Blue register</Item>
+		<Item name="HighByte">High byte</Item>
+		<Item name="LowByte">Low byte</Item>
+		<Item name="HelpDoc">Help Doc</Item>
+		<Item name="PrayAutioTip">Quando è necessario utilizzare il modulo audio, fornire più file mp3 corrispondenti ai nomi delle preghiere. Imsak->1.mp3 Fajr->2.mp3 Dhuhr->3.mp3 Asr->4.mp3 Maghrib->5.mp3 Isha->6.mp3 MidNight->7.mp3 .</Item>
+    <Item name="Confirm Password">Confirm Password</Item>
+<Item name="PasswordInvalidTip">The password must be a number + letter combination with a length of 8~16.</Item>
+<Item name="PasswordUnEqual">The password entered twice is different.</Item>
+<Item name="PasswordTooSimple">The system has detected that the device's Wi-Fi password is too simple. Please reset it.</Item>
+<List name="OutputWindowString" id="75">The system has detected that the device's Wi-Fi password is too simple. Please reset it.</List>
+<Item name="Logout">Logout</Item>
+<Item name="LogoutYesOrNo">Is the user logged out?</Item>
+<Item name="Login">login</Item>
+<Item name="WifiSettingOK">The setting is successful, please reconnect to Wi-Fi.</Item>
+<Item name="UserName">User name</Item>
+<Item name="InputPassword">Input password</Item>
+<Item name="Register">Register</Item>
+<Item name="GetCheckCode">GetCheckCode</Item>
+<Item name="InputCheckCode">Input the check code</Item>
+<Item name="RegisterError">Registration error</Item>
+<Item name="PhoneNum">Cellphone number</Item>
+<Item name="CheckCode">Check code</Item>
+<Item name="ConnectNetwordToUse">Please use the software after connecting to the Internet</Item>
+<Item name="AuthorizedSuccess">Authorized success</Item>
+<Item name="UnsupportedLoginType">Unsupported login type</Item>
+<Item name="CheckCodeNotMatch">Check code does not match</Item>
+<Item name="InputRightPhone">Please enter the correct phone number</Item>
+<Item name="ResetPassword">Reset Password</Item>
+<Item name="PhoneNumError">Wrong format of phone number.</Item>
+<Item name="CheckCodeTimeoutInOneMinute">Verification code cannot be sent repeatedly within one minute</Item>
+<Item name="CheckCodeTimeout">Verification code transmission frequency is exceeded</Item>
+<Item name="CheckCodeSendError">The verification code failed to be sent.</Item>
+<Item name="InvalidToken">Invalid token</Item>
+<Item name="MissingRegInfo">Missing registration information</Item>
+<Item name="AgreeAndAccept">Agreen</Item>
+<Item name="TermsOfService">Services Agreement</Item>
+<Item name="Reacquire">Reacquire</Item>
+<Item name="SettingLoginPassword">Setting login password</Item>
+<Item name="Skip">Skip</Item>
+<Item name="NetworkErrorTip">Network error</Item>
+<Item name="Retry">Retry</Item>
+<Item name="PleaseGetCheckCode">Please get the check code.</Item>
+<Item name="KeepLogin">Keep login</Item>
+<Item name="IsLogoutUser">Logout the current user?</Item>
+<Item name="NotTipsAgin">Do not tips again</Item>
+<Item name="OpenDeviceLock">Enable device lock</Item>
+<Item name="ModifyDeviceLock">Modify device lock</Item>
+<Item name="CloseDeviceLock">Close device lock</Item>
+<Item name="DeviceHasLockedInfo">The device has been locked. Please enter your password.</Item>
+<Item name="DeviceLockPassword">Device lock password</Item>
+<Item name="NoInputNoDeviceLockTip">No password is required when device lock is not enabled.</Item>
+<Item name="UseOldPassword">Use current password</Item>
+<Item name="DeviceLockSetting">Device lock settings</Item>
+<Item name="DeviceLock">Device lock</Item>
+<Item name="KeepPassword">Keep password</Item>
+<Item name="AutoLogin">Auto login</Item>
+<Item name="PleaseInputOldPassword">Please enter the old password</Item>
+<Item name="OldPasswordError">Old password error</Item>
+<Item name="Old Password">Old password</Item>
+<Item name="New Password">New password</Item>
+<Item name="Action">Action</Item>
+
+<List name="OutputWindowString" id="76">The device lock password is incorrect.</List>
+<List name="OutputWindowString" id="77">Missing log content.</List>
+<List name="OutputWindowString" id="78">The machine code is wrong.</List>
+<List name="OutputWindowString" id="79">The length of the machine code is incorrect.</List>
+<List name="OutputWindowString" id="80">The length of the device lock password is incorrect.</List>
+<List name="OutputWindowString" id="81">XR809 is updating</List>
+<List name="OutputWindowString" id="82">XR809 idnvalid address</List>
+<List name="OutputWindowString" id="83">XR809 error</List>
+<List name="OutputWindowString" id="84">Start reading parameters</List>
+<List name="OutputWindowString" id="85">Finish reading parameters</List>
+<List name="OutputWindowString" id="86">Start to restore parameters</List>
+<List name="OutputWindowString" id="87">The parameters have been restored</List>
+<List name="OutputWindowString" id="88">The download is complete and is waiting to recover data.</List>
+<Item name="UseWechatQRCode">Use WeChat to scan the QR code</Item>
+<Item name="Activate">Activate</Item>
+<Item name="ActivateOffline">Activate offline</Item>
+<Item name="PleaseInputActiveCode">Please enter the activation code</Item>
+<Item name="ErrorActivateCode">Wrong activation code</Item>
+<Item name="NTPSetting">Impostazione dell'ora di rete</Item>
+<Item name="NetworkSame">Make sure that the device IP and router IP are on the same network segment.</Item>
+<List name="SystemBusName" id="99">[C100]  P10 28x16 8 spazzare 8 punti</List>
+	</language>
+</root>

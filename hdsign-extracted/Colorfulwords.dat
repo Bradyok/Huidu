@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<BackgroundType>
+<Type1 Def="Def" Counts="1" TypeName="Style1" FileType="MultiFrame" Speed="50" Select="0">.\images\Colorfulwords\01.gif</Type1>
+<Type2 Def="Def" Counts="1" TypeName="Style2" FileType="MultiFrame" Speed="50" Select="0">.\images\Colorfulwords\02.gif</Type2>
+<Type3 Def="Def" Counts="1" TypeName="Style3" FileType="MultiFrame" Speed="50" Select="0">.\images\Colorfulwords\03.gif</Type3>
+<Type4 Def="Def" Counts="1" TypeName="Style4" FileType="MultiFrame" Speed="50" Select="0">.\images\Colorfulwords\04.gif</Type4>
+<Type5 Def="Def" Counts="1" TypeName="Style5" FileType="MultiFrame" Speed="50" Select="0">.\images\Colorfulwords\05.gif</Type5>
+<Type6 Def="Def" Counts="1" TypeName="Style6" FileType="MultiFrame" Speed="50" Select="0">.\images\Colorfulwords\06.gif</Type6>
+<Type7 Def="Def" Counts="1" TypeName="Style7" FileType="MultiFrame" Speed="50" Select="0">.\images\Colorfulwords\07.gif</Type7>
+<Type8 Def="Def" Counts="1" TypeName="Style8" FileType="MultiFrame" Speed="50" Select="0">.\images\Colorfulwords\08.gif</Type8>
+<Type9 Def="Def" Counts="1" TypeName="Style9" FileType="MultiFrame" Speed="50" Select="0">.\images\Colorfulwords\09.gif</Type9>
+<Type10 Def="Def" Counts="1" TypeName="Style10" FileType="MultiFrame" Speed="50" Select="0">.\images\Colorfulwords\10.gif</Type10>
+<Type11 Def="Def" Counts="1" TypeName="Style11" FileType="MultiFrame" Speed="50" Select="0">.\images\Colorfulwords\11.gif</Type11>
+<Type12 Def="Def" Counts="1" TypeName="Style12" FileType="MultiFrame" Speed="50" Select="0">.\images\Colorfulwords\12.gif</Type12>
+<Type13 Def="Def" Counts="1" TypeName="Style13" FileType="MultiFrame" Speed="50" Select="0">.\images\Colorfulwords\13.gif</Type13>
+<Type14 Def="Def" Counts="1" TypeName="Style14" FileType="MultiFrame" Speed="50" Select="0">.\images\Colorfulwords\14.gif</Type14>
+<Type15 Def="Def" Counts="1" TypeName="Style15" FileType="MultiFrame" Speed="50" Select="0">.\images\Colorfulwords\15.gif</Type15>
+<Type16 Def="Def" Counts="1" TypeName="Style16" FileType="MultiFrame" Speed="50" Select="0">.\images\Colorfulwords\16.gif</Type16>
+<Type17 Def="Def" Counts="1" TypeName="Style17" FileType="MultiFrame" Speed="50" Select="0">.\images\Colorfulwords\17.gif</Type17>
+<Type18 Def="Def" Counts="1" TypeName="Style18" FileType="MultiFrame" Speed="50" Select="0">.\images\Colorfulwords\18.gif</Type18>
+<Type19 Def="Def" Counts="1" TypeName="Style19" FileType="MultiFrame" Speed="50" Select="0">.\images\Colorfulwords\19.gif</Type19>
+</BackgroundType>

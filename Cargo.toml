@@ -4,6 +4,7 @@ members = [
     "hdplayer-client",
     "hdset-client",
     "huidu-player",
+    "hdsign-client",
 ]
 resolver = "2"
 

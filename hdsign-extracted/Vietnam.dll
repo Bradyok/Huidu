@@ -1,0 +1,1606 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<root>
+	<language name="Tiếng Việt">
+<Item name="ABrighterThanB">A là sáng hơn B</Item>
+<Item name="About">Về</Item>
+<Item name="AbrightBoff">A là màu trắng trong khi B là màu đen</Item>
+<Item name="Add">Thêm</Item>
+<Item name="Add File">Add File</Item>
+<Item name="Add GIF">Add GIF</Item>
+<Item name="AddFailed">Add Failed</Item>
+<Item name="AddFile">Thêm tập</Item>
+<Item name="AddGroup">Add Group</Item>
+<Item name="AddHypertext">Thêm siêu văn bản</Item>
+<Item name="AddPicture">Thêm một hình ảnh</Item>
+<Item name="AddProgram">Thêm Chương trình</Item>
+<Item name="AddRegion">Thêm khu vực</Item>
+<Item name="AddSuccess">Add Successfully</Item>
+<Item name="AdjustTime">Thời gian Điều chỉnh độ</Item>
+<Item name="AdvancedSetting">Thiết lập nâng cao</Item>
+<Item name="AdvancedSettings">Thiết lập nâng cao</Item>
+<Item name="AlignCenter">Màn hình làm trung tâm</Item>
+<Item name="AlignRight">Flush right</Item>
+<Item name="Alignment">Aligning type</Item>
+<Item name="All">Tất cả</Item>
+<Item name="Allow">Kích hoạt tính năng</Item>
+<Item name="AllowPasswordAuthentication">Cho phép xác minh mật khẩu cho các thiết lập quan trọng.</Item>
+<Item name="AlreadyOpened">Màn hình này đã được mở.</Item>
+<Item name="AlterBaudrate">Thay đổi baud tỷ lệ</Item>
+<Item name="AntiClockwise rotation">Xoay ngược kim đồng hồ</Item>
+<Item name="AreaBackground">AreaBackground</Item>
+<Item name="AreaDown">Khu vực hướng giảm</Item>
+<Item name="AreaLeft">Khu vực bên trái</Item>
+<Item name="AreaMaximize">Tối đa hóa khu vực</Item>
+<Item name="AreaNoBorder">Cross screen don't support border for global program</Item>
+<Item name="AreaRight">Khu vực bên phải</Item>
+<Item name="AreaUp">Khu vực lên</Item>
+<Item name="Associated">liên kết</Item>
+<Item name="AutoAdjustTime">Auto adjust time</Item>
+<Item name="AutoGetingIP">Tự động nhận IP</Item>
+<Item name="AutoHide">Auto hide</Item>
+<Item name="AutoReSend">Auto reSend</Item>
+<Item name="AutoSave">Auto Save</Item>
+<Item name="AutoScanInterval">Auto Scan Time</Item>
+<Item name="AutoScanMode">Auto Scan Mode</Item>
+<Item name="AutoSearchScans">Tự động tìm kiếm các chế độ quét</Item>
+<Item name="AutoSwitching">Tự động chuyển đổi</Item>
+<Item name="AutoUpdate">Cập nhật tự động</Item>
+<Item name="Automatic">Tự động điều chỉnh</Item>
+<Item name="AutomaticInfo">Hãy chắc chắn rằng các bộ cảm biến độ sáng được cài đặt.</Item>
+<Item name="BBrighterThanA">B là sáng hơn A</Item>
+<Item name="Background">Nền</Item>
+<Item name="BackgroundColor">Background Color</Item>
+<Item name="BackgroundSetting">Thiết lập nền</Item>
+<List name="BackgroupEffects" id="0">Random</List>
+<List name="BackgroupEffects" id="10">Zoom out</List>
+<List name="BackgroupEffects" id="11">Breathe</List>
+<List name="BackgroupEffects" id="12">Crossover</List>
+<List name="BackgroupEffects" id="13">Equalizer</List>
+<List name="BackgroupEffects" id="14">Reflex</List>
+<List name="BackgroupEffects" id="15">Twinkle</List>
+<List name="BackgroupEffects" id="16">Solid color</List>
+<List name="BackgroupEffects" id="17">Ribbon Opening Closing</List>
+<List name="BackgroupEffects" id="18">Circular Expansion</List>
+<List name="BackgroupEffects" id="19">DiamondShaped Expansion</List>
+<List name="BackgroupEffects" id="1">Static</List>
+<List name="BackgroupEffects" id="20">Ranbom Cross Line</List>
+<List name="BackgroupEffects" id="21">Curve Line</List>
+<List name="BackgroupEffects" id="2">Move Left</List>
+<List name="BackgroupEffects" id="3">Move Right</List>
+<List name="BackgroupEffects" id="4">Move Up</List>
+<List name="BackgroupEffects" id="5">Move Down</List>
+<List name="BackgroupEffects" id="6">Move Left，then Move Right</List>
+<List name="BackgroupEffects" id="7">Horizontally open from middle</List>
+<List name="BackgroupEffects" id="8">Close from both sides</List>
+<List name="BackgroupEffects" id="9">Zoom in</List>
+<List name="platformList" id="hdplatform.huidu.cn">Release platform</List>
+<Item name="platform">platform</Item>
+<Item name="BasicInfoSet">Thiết lập cơ bản</Item>
+<Item name="BasicPara">Basic parameters</Item>
+<Item name="BasicSetting">Cài đặt cơ bản</Item>
+<Item name="Baudrate">Baud tỷ lệ</Item>
+<Item name="BbrightAoff">A là màu đen trong khi B là màu trắng</Item>
+<Item name="Begin">Bắt đầu</Item>
+<Item name="Begin Play">Start</Item>
+<Item name="Black">đen</Item>
+<Item name="Blue">màu xanh</Item>
+<Item name="Boot">Boot status</Item>
+<Item name="BootStatus">Thẻ kiểm soát hiện đang trong trạng thái khởi động chờ đợi cho các phần mềm được cập nhật, xin vui lòng cập nhật firmware đầu tiên!</Item>
+<Item name="Border">Biên giới</Item>
+<Item name="BorderColor">Màu viền</Item>
+<Item name="BorderSetting">Thiết lập biên giới</Item>
+<Item name="BorderWidth">Chiều rộng Biên giới</Item>
+<Item name="BorderWidthExceeds">Chiều rộng biên giới Vượt quá!</Item>
+<Item name="BorderWidthOutOfRange">Chiều rộng biên giới là ra khỏi phạm vi!</Item>
+<Item name="BoundDevice">Bound device</Item>
+<Item name="Broadcast">Broadcast</Item>
+<Item name="BuildArea">Build Area</Item>
+<Item name="Built-inUnitBoard">Hội đồng quản trị đơn vị phổ biến</Item>
+<Item name="BusEdit">Sửa</Item>
+<Item name="BusImage">hình ảnh Mô-đun</Item>
+<Item name="BusName">Tên</Item>
+<Item name="BusNew">Tân</Item>
+<Item name="BusView">Xem</Item>
+<Item name="Busy">Busy</Item>
+<Item name="Button">Button</Item>
+<Item name="ButtonDownTiming">Button count down</Item>
+<Item name="ButtonSettings">Nút 1</Item>
+<Item name="ButtonSettings2">Nút 2</Item>
+<Item name="ButtonSettings3">Button 3</Item>
+<Item name="ButtonSettings4">Button 4</Item>
+<Item name="ButtonSwitch">nút để chuyển đổi</Item>
+<Item name="ButtonTiming">Button Timing</Item>
+<Item name="ButtonUpTiming">Button count up</Item>
+<Item name="ButtonorPlaySet">Button settings</Item>
+<Item name="CLKMirror">CLK polarity</Item>
+<Item name="CLKWidth">CLK Width</Item>
+<Item name="COM">COM cổng</Item>
+<Item name="COMERROR">Kết nối không thành công, kiểm tra nối tiếp 2,3 chân ngắn?</Item>
+<Item name="COMINFO">thông tin</Item>
+<Item name="COMURL">Dịch vụ Website: http://www.huidu.cn</Item>
+<Item name="CPUModelError">Mô hình CPU là sai!</Item>
+<Item name="CanNotFindTheDefaultProfile">Can not find the default configuration file.</Item>
+<Item name="Cancel">Hủy bỏ</Item>
+<Item name="CannotFindNetWordDrive">Không tìm thấy thiết bị mạng!</Item>
+<Item name="CannotOpenExcle">Không thể bắt đầu Excle, xin vui lòng kiểm tra xem Excel đã được cài đặt!</Item>
+<Item name="CardIpSeting">Thiết lập các thẻ kiểm soát IP</Item>
+<Item name="CardModel">Card Model</Item>
+<Item name="CardNumber">Loại Thẻ</Item>
+<Item name="CardOnlySupportFullColor">Phần vững chỉ hỗ trợ đầy đủ màu sắc.</Item>
+<Item name="CardOnlySupportTwoColor">Phần vững chỉ hỗ trợ màu duy nhất và màu sắc kép.</Item>
+<Item name="CardRestart">Restarting</Item>
+<Item name="CardVersion">Card Version</Item>
+<Item name="Center">Trung tâm</Item>
+<Item name="CenterAlign">Center</Item>
+<Item name="CfwBackgroundEdit">Animated Characters background</Item>
+<Item name="Change">Thay đổi</Item>
+<Item name="Channel">Channel</Item>
+<Item name="CharSpacing">ký tự khoảng cách</Item>
+<Item name="CheckAll">Chọn tất cả</Item>
+<Item name="CheckProgram">chọn chương trình</Item>
+<Item name="ChecksumError">Kiểm tra tổng là sai.</Item>
+<Item name="ChooseDeive">Select device</Item>
+<Item name="ClassicBackground">Image Background</Item>
+<Item name="Clear">xóa màn hình</Item>
+<List name="ClearEffects" id="0">Ngay lập tức xóa</List>
+<List name="ClearEffects" id="10">Đóng theo chiều ngang từ trung lộ</List>
+<List name="ClearEffects" id="11">Mở theo chiều ngang từ trung lộ</List>
+<List name="ClearEffects" id="12">Đóng theo chiều dọc từ trung lộ</List>
+<List name="ClearEffects" id="13">Mành nhựa dọc</List>
+<List name="ClearEffects" id="14">Mành nằm ngang</List>
+<List name="ClearEffects" id="15">Chuyển sang trang bên trái</List>
+<List name="ClearEffects" id="16">Chuyển sang trang bên phải</List>
+<List name="ClearEffects" id="17">Quạt ra</List>
+<List name="ClearEffects" id="18">Quạt tắt</List>
+<List name="ClearEffects" id="19">Che hướng kim đồng hồ</List>
+<List name="ClearEffects" id="1">Di chuyển trái</List>
+<List name="ClearEffects" id="200">Ngâu nhiên</List>
+<List name="ClearEffects" id="201">None</List>
+<List name="ClearEffects" id="20">Che ngược kim đồng hồ</List>
+<List name="ClearEffects" id="21">Theo chiều ngang xen kẽ</List>
+<List name="ClearEffects" id="22">Lăn lên</List>
+<List name="ClearEffects" id="23">Lăn xuống</List>
+<List name="ClearEffects" id="24">Lăn sang trái</List>
+<List name="ClearEffects" id="25">Lăn sang phải</List>
+<List name="ClearEffects" id="26">Lưới nằm ngang</List>
+<List name="ClearEffects" id="27">Lưới thẳng đứng</List>
+<List name="ClearEffects" id="2">Di chuyển phải</List>
+<List name="ClearEffects" id="3">Di chuyển lên</List>
+<List name="ClearEffects" id="4">Di chuyển xuống</List>
+<List name="ClearEffects" id="5">Bao gồm bên trái</List>
+<List name="ClearEffects" id="6">Bao gồm bên phải</List>
+<List name="ClearEffects" id="7">Bao gồm bên lên</List>
+<List name="ClearEffects" id="8">Bao gồm bên xuống</List>
+<List name="ClearEffects" id="9">Mở theo chiều ngang từ trung lộ</List>
+<Item name="ClearScreeData">Hiển thị rõ ràng hiện tại?</Item>
+<Item name="Clock">La bàn</Item>
+<Item name="ClockFrequency">Tần số đồng hồ</Item>
+<Item name="ClockParameters">Quay số Thuộc tính</Item>
+<Item name="Clockwise rotation">Xoay chiều kim đồng hồ</Item>
+<Item name="Close">Đóng</Item>
+<Item name="CloseScreen">Đóng màn hình</Item>
+<Item name="Color">Màu</Item>
+<Item name="ColorChannel">Kênh màu</Item>
+<Item name="ColorChannelSet">Thiết lập kênh màu</Item>
+<Item name="ColorFilter">bộ lọc màu</Item>
+<Item name="ColorInversion">đảo ngược Màu</Item>
+<Item name="ColorSingleSelect">Color Single Select</Item>
+<Item name="ColorThreshold">Màu Ngưỡng</Item>
+<Item name="ColorfulText">Nhân vật hoạt hình</Item>
+<List name="ColorfulWordEffects" id="0">Display Static</List>
+<List name="ColorfulWordEffects" id="10">Flip Vertical</List>
+<List name="ColorfulWordEffects" id="11">Flip Horizontal</List>
+<List name="ColorfulWordEffects" id="12">Zooming</List>
+<List name="ColorfulWordEffects" id="13">Continuously Move Left</List>
+<List name="ColorfulWordEffects" id="14">Continuously Move Right</List>
+<List name="ColorfulWordEffects" id="15">Continuously Move Up</List>
+<List name="ColorfulWordEffects" id="16">Continuously Move Down</List>
+<List name="ColorfulWordEffects" id="17">2D zoom in</List>
+<List name="ColorfulWordEffects" id="18">2D zoom out</List>
+<List name="ColorfulWordEffects" id="1">Sine wave</List>
+<List name="ColorfulWordEffects" id="2">Word rotating</List>
+<List name="ColorfulWordEffects" id="3">Left to fly into</List>
+<List name="ColorfulWordEffects" id="4">The right to fly into</List>
+<List name="ColorfulWordEffects" id="5">Twinkle</List>
+<List name="ColorfulWordEffects" id="6">Verbatim output</List>
+<List name="ColorfulWordEffects" id="7">Swing around</List>
+<List name="ColorfulWordEffects" id="8">Elasticity text</List>
+<List name="ColorfulWordEffects" id="9">Swing</List>
+<Item name="Column">Cột</Item>
+<Item name="CommStatus1">Giao tiếp tốt</Item>
+<Item name="CommStatus2">Giao tiếp bình thường</Item>
+<Item name="CommStatus3">Giao tiếp là người nghèo, nhưng có thể được kết nối.</Item>
+<Item name="CommStatus4">Không thể giao tiếp</Item>
+<Item name="CommTest">Kiểm tra mạng</Item>
+<Item name="Command">Command</Item>
+<Item name="CommandSmartSetting">Thiết lập thường thông minh</Item>
+<Item name="CommonSettings">các thiết lập chung</Item>
+<Item name="CommunicationMode">Chế độ Thông tin liên lạc</Item>
+<Item name="CommunicationSetting">Các thiết lập giao tiếp</Item>
+<Item name="ConfirmRGBwidth">Đường dây kiểm soát bởi một dữ liệu RGB</Item>
+<Item name="ConfirmScanMode">Xác định các chế độ quét</Item>
+<Item name="Connected">Connected</Item>
+<Item name="ConnectionSuccessful">Kết nối thành công</Item>
+<Item name="ContainOverlappingRegions">Có vùng chồng chéo</Item>
+<Item name="ContentContainMultiLines">Hiệu ứng này không hỗ trợ bàn, bạn có muốn xóa nó?</Item>
+<Item name="ContinueMove">động tác liên tục</Item>
+<Item name="ContinueMoveUp">Liên tục di chuyển lên</Item>
+<Item name="Copy">Cọp dê</Item>
+<Item name="Copyright">Bản quyền: Thâm Quyến Huidu nghệ Công ty TNHH</Item>
+<Item name="Count">Thời gian</Item>
+<Item name="Count1">Digit</Item>
+<Item name="CountAdd">Count plus</Item>
+<Item name="CountColor">Màu của giá trị</Item>
+<Item name="CountDown">Đếm ngược</Item>
+<Item name="CountReset">Counter Reset</Item>
+<Item name="CountSub">Count down</Item>
+<Item name="CountUp">Đếm lên</Item>
+<Item name="CradID">ID thiết bị</Item>
+<Item name="CradName">Tên thiết bị</Item>
+<Item name="CrossBottom">Phía dưới</Item>
+<Item name="CrossCenter">Trung tâm</Item>
+<Item name="CrossGlobalProgram">Chương trình toàn cầu</Item>
+<Item name="CrossNoSupport">Chương trình toàn cầu không được hỗ trợ trong lĩnh vực này.</Item>
+<Item name="CrossScreen">chéo màn hình</Item>
+<Item name="CrossScreenParamsPageTip">1.Setting screen width and height is 3 steps；&#x000A;2.Select the color of screen ；</Item>
+<Item name="CrossScreenSetting">Cài đặt màn hình chéo</Item>
+<Item name="CrossSmartTip">The current screen showing normal text ,no need select smart set</Item>
+<Item name="CrossTop">đầu</Item>
+<Item name="Custom">tùy chỉnh</Item>
+<Item name="CustomIPTips">Nếu thẻ kiểm soát chặn bởi tường lửa, vui lòng điền vào địa chỉ IP bằng 
+tay.</Item>
+<Item name="CustomTime">Do thời gian quy định</Item>
+<Item name="CustomUnitBoard">Đơn vị bảng tùy chỉnh</Item>
+<Item name="CustomizeIP">Tùy chỉnh IP</Item>
+<Item name="Cut">Cắt</Item>
+<Item name="Cyan">lục lam</Item>
+<Item name="CycleTiming">Cycle Timing</Item>
+<Item name="DHCPDNSAddr">DNS address</Item>
+<Item name="DHCPGateway">DHCP Default Gateway</Item>
+<Item name="DHCPLease">DHCP leases</Item>
+<Item name="DHCPMask">DHCP Subnet Mask</Item>
+<Item name="DHCPServerAddr">DHCP server address</Item>
+<Item name="Data">Data</Item>
+<Item name="DataClearSuccess">Dữ liệu được xóa thành công.</Item>
+<Item name="DataFill">"Dữ liệu là ra khỏi phạm vi!"</Item>
+<Item name="DataLenght">Data length</Item>
+<Item name="DataLengthError">Chiều dài gói là sai.</Item>
+<Item name="DataMirror">Gương Dữ liệu</Item>
+<Item name="DataPolarity">Cực tính Dữ liệu</Item>
+<Item name="DataPolaritySet">Thiết lập dữ liệu phân cực</Item>
+<Item name="DataSource">Data Source</Item>
+<Item name="DateAndWeekLocationReplaced">Ngày trao đổi và tuần</Item>
+<Item name="Day">Ngày</Item>
+<Item name="Default">Mặc định</Item>
+<Item name="DefaultConnectDeviceType">The default connection method</Item>
+<Item name="DelayedSignal">Tín hiệu bị chậm</Item>
+<Item name="DeleteFailed">Delete failed</Item>
+<Item name="DeleteScreen">Delete Screen</Item>
+<Item name="DeleteSuccess">Delete successful</Item>
+<Item name="DeleteThisData">Xóa tất cả các các chương trình trong thẻ kiểm soát?</Item>
+<Item name="DeleteThisFile">Xóa các tập tin được lựa chọn?</Item>
+<Item name="DeleteThisProgram">Xóa các chương trình lựa chọn?</Item>
+<Item name="DeleteThisRegion">Xóa các khu vực được lựa chọn?</Item>
+<Item name="Deny">Vô hiệu hoá</Item>
+<Item name="DestFile">tập tin mục tiêu</Item>
+<Item name="DestIP">mục tiêu IP</Item>
+<Item name="Detailed">Chi tiết...</Item>
+<Item name="Detect">Dò ra</Item>
+<Item name="DetectDevice">Phát hiện thiết bị</Item>
+<Item name="DetectFail">Phát hiện không thành công.</Item>
+<Item name="DetectSuccess">Phát hiện thành công.</Item>
+<Item name="Detecting">Phát hiện...</Item>
+<Item name="Deviation">độ ẩm hiệu chuẩn</Item>
+<Item name="Device">những ổ đĩa di</Item>
+<Item name="DeviceChoosePageTip">1.Use U-disk， please select controller type; &#x000A;2.Appear the device name and match controller ID; &#x000A;3.Only one device and been found,then click next.</Item>
+<Item name="DeviceID">ID thiết bị</Item>
+<Item name="DeviceManage">Device Manage</Item>
+<Item name="DeviceName">Tên thiết bị</Item>
+<Item name="DialClock">Dial Clock</Item>
+<Item name="DialStyle">Kiểu Quay số</Item>
+<Item name="DialWeek">Tuần</Item>
+<Item name="DialYear">ngày</Item>
+<Item name="DigitOnly">Chữ số chỉ</Item>
+<Item name="Digital">Kỹ thuật số</Item>
+<Item name="Direction">hướng</Item>
+<Item name="DisableBrightnessAdjustment">Điều chỉnh độ sáng vô hiệu hóa</Item>
+<Item name="Disconnected">Disconnected</Item>
+<Item name="DiskSpace">không gian đĩa:</Item>
+<Item name="Display">Chưng ra</Item>
+<List name="DisplayEffects" id="0">Hiển thị ngay lập tức</List>
+<List name="DisplayEffects" id="40">Màn hình hiển thị tĩnh</List>
+<List name="DisplayEffects" id="10">Đóng theo chiều ngang từ trung lộ</List>
+<List name="DisplayEffects" id="11">Mở theo chiều ngang từ trung lộ</List>
+<List name="DisplayEffects" id="12">Đóng theo chiều dọc từ trung lộ</List>
+<List name="DisplayEffects" id="14">Mành nhựa dọc</List>
+<List name="DisplayEffects" id="13">Mành nằm ngang</List>
+<List name="DisplayEffects" id="15">Chuyển sang trang bên trái</List>
+<List name="DisplayEffects" id="16">Chuyển sang trang bên phải</List>
+<List name="DisplayEffects" id="17">Quạt ra</List>
+<List name="DisplayEffects" id="18">Quạt tắt</List>
+<List name="DisplayEffects" id="19">Che hướng kim đồng hồ</List>
+<List name="DisplayEffects" id="1">Di chuyển trái</List>
+<List name="DisplayEffects" id="200">Ngâu nhiên</List>
+<List name="DisplayEffects" id="202">Liên tục di chuyển trái</List>
+<List name="DisplayEffects" id="203">Liên tục di chuyển pngay</List>
+<List name="DisplayEffects" id="204">Liên tục di chuyển lên</List>
+<List name="DisplayEffects" id="20">Che ngược kim đồng hồ</List>
+<List name="DisplayEffects" id="21">Theo chiều ngang xen kẽ</List>
+<List name="DisplayEffects" id="23">Lăn lên</List>
+<List name="DisplayEffects" id="22">Lăn xuống</List>
+<List name="DisplayEffects" id="25">Lăn sang trái</List>
+<List name="DisplayEffects" id="24">Lăn sang phải</List>
+<List name="DisplayEffects" id="26">Lưới nằm ngang</List>
+<List name="DisplayEffects" id="27">Lưới thẳng đứng</List>
+<List name="DisplayEffects" id="28">Tuyết Rơi</List>
+<List name="DisplayEffects" id="29">Rơi</List>
+<List name="DisplayEffects" id="2">Di chuyển phải</List>
+<List name="DisplayEffects" id="30">Tuyết Rơi(đảo ngược)</List>
+<List name="DisplayEffects" id="31">Rơi(đảo ngược)</List>
+<List name="DisplayEffects" id="32">Laser trái</List>
+<List name="DisplayEffects" id="33">Laser phải</List>
+<List name="DisplayEffects" id="34">Bị nhấp nháy</List>
+<List name="DisplayEffects" id="35">Điểm nổi bật nhấp nháy</List>
+<List name="DisplayEffects" id="36">Keùo xuống</List>
+<List name="DisplayEffects" id="37">Keùo lên</List>
+<List name="DisplayEffects" id="38">Căng ra theo chiều dọc</List>
+<List name="DisplayEffects" id="39">Lật ngửa</List>
+<List name="DisplayEffects" id="3">Di chuyển lên</List>
+<List name="DisplayEffects" id="4">Di chuyển xuống</List>
+<List name="DisplayEffects" id="5">Bao gồm bên trái</List>
+<List name="DisplayEffects" id="6">Bao gồm bên phải</List>
+<List name="DisplayEffects" id="7">Bao gồm bên lên</List>
+<List name="DisplayEffects" id="8">Bao gồm bên xuống</List>
+<List name="DisplayEffects" id="9">Mở theo chiều ngang từ trung lộ</List>
+<Item name="DisplayState">Hiển thị trạng thái</Item>
+<Item name="Dll_Add">Chứa chất</Item>
+<Item name="Dll_Data">Giá trị</Item>
+<Item name="Docking">Docking</Item>
+<Item name="DonotTips">No tips</Item>
+<Item name="DontChange">Không thay đổi</Item>
+<Item name="DownloadSpeed">tốc độ tải</Item>
+<Item name="Dwell">ngừng hẳn</Item>
+<Item name="Edit">Sửa</Item>
+<Item name="Editor">Sửa</Item>
+<Item name="Effect Cover">che</Item>
+<Item name="Effect Drift">tuyết</Item>
+<Item name="Effect FanShaped">màn trập</Item>
+<Item name="Effect Flicker">nhấp nháy</Item>
+<Item name="Effect Laser">tia laser</Item>
+<Item name="Effect Move">chuyển động</Item>
+<Item name="Effect OpenAndClose">mở và gần</Item>
+<Item name="Effect PageTurning">trang</Item>
+<Item name="Effect Pull">níu</Item>
+<Item name="Effect Roll">lăn</Item>
+<Item name="Effect WaterFall">ngã</Item>
+<Item name="EffectSetting">Các thiết lập Hiệu lực </Item>
+<Item name="EffectType">Loại hiệu ứng</Item>
+<Item name="Effects">Hiệu lực</Item>
+<Item name="EliminateGhosting">dòng ẩn</Item>
+<Item name="Empty">Vét sạch</Item>
+<Item name="EmptyScreen">Đổ hết màn hình</Item>
+<Item name="Enable">Enable</Item>
+<Item name="EnableDhcp">Enable DHCP</Item>
+<Item name="End Play">End</Item>
+<Item name="EndIpAddr">End IP</Item>
+<Item name="EndToEnd">Kết thúc để kết thúc</Item>
+<Item name="Equilibrium">Cân bằng</Item>
+<Item name="Error">Lôi</Item>
+<Item name="EthSettingHelpA">Chỉ thay đổi địa chỉ IP của phần mềm.</Item>
+<Item name="EthSettingHelpB">Lưu ý:&#x000A;1. Địa chỉ của phần mềm và thiết bị sẽ được thay đổi sau khi các thiết lập thành công.&#x000A;2. Khi nhiều thiết bị được kết nối cùng một lúc, hãy chắc chắn rằng địa chỉ MAC là duy nhất.</Item>
+<Item name="Ethernet">Ethernet</Item>
+<Item name="EthernetAddressSettingSuccess">Địa chỉ ethernet thành công thiết</Item>
+<Item name="EthernetSettingInfo">Lưu ý: Khi sử dụng chức năng này, hãy chắc chắn rằng chỉ có một thẻ kiểm soát được kết nối vào mạng LAN.</Item>
+<Item name="Example">Ví dụ</Item>
+<Item name="ExitDownloading">Tải về các tập tin cập nhật, cho dù để buộc bỏ？</Item>
+<Item name="ExpiredVerification">Expired,need passward</Item>
+<Item name="ExporBus">Xuất khẩu các thông số mô-đun</Item>
+<Item name="ExporBusIn">Nhập khẩu các thông số mô-đun</Item>
+<Item name="Export">U đĩa</Item>
+<Item name="ExportAdjustTimeFile">Xuất tập tin điều chỉnh thời gian</Item>
+<Item name="ExportFile">Tập tin xuất khẩu</Item>
+<Item name="ExportFileFail">Không thể xuất các tập tin!</Item>
+<Item name="ExportImport">Xuất nhập khẩu</Item>
+<Item name="ExportParam">Xuất cảng</Item>
+<Item name="ExportScreenFile">Export Screen File</Item>
+<Item name="ExportSetedParams">Xuất khẩu các thông số</Item>
+<Item name="ExportSuccess">Xuất khẩu thành công, bạn có muốn để kéo ra U đĩa?</Item>
+<Item name="ExportSuccess1">Xuất khẩu thành công tới</Item>
+<Item name="ExportSuccess2">!</Item>
+<Item name="ExportToUDisk">Xuất khẩu sang U đĩa</Item>
+<Item name="Fahrenheit">Phi Luân Hải</Item>
+<Item name="Fast">Fast</Item>
+<Item name="Fastest">Nhanh nhất</Item>
+<Item name="FeatureNavigator">Chức năng danh mục chính</Item>
+<Item name="File">Tệp</Item>
+<Item name="FileConfigurationError">Tập tin định cấu hình sai.</Item>
+<Item name="FileConfigurationPackageSentSuccessfully">Gói cấu hình của tập tin đã được gửi thành công!</Item>
+<Item name="FileDoesNotMatch">Tệp bất xứng hợp.</Item>
+<Item name="FileList">Danh sách tệp</Item>
+<Item name="FileMisidentified">Tập tin xác định nhầm.</Item>
+<Item name="FileParametersError">Các thông số của tập tin là sai. (Chiều rộng màn hình hoặc chiều cao vượt quá, hoặc màu sắc là sai.)</Item>
+<Item name="FileSendComplete">Các tập tin được gửi thành công.</Item>
+<Item name="FileSize">Kích thước Tập tin</Item>
+<Item name="FileSuccessfullyReceived">Tập tin thành công nhận được</Item>
+<Item name="FilterColor">Lọc các màu</Item>
+<Item name="FindNewVersion">Khám phá phiên bản mới, cho dù để tải về các bản cập nhật?</Item>
+<Item name="FindScree">Kiểm tra màn hình</Item>
+<Item name="FindSerial">Tìm các cổng nối tiếp kết nối với thẻ kiểm soát.</Item>
+<Item name="Finish">Hoàn thành</Item>
+<Item name="FinishTracingPoint">Truy tìm điểm kết thúc.</Item>
+<Item name="FirmwareMismatching">Firmware không khớp</Item>
+<Item name="FirmwareVersion">Phiên bản firmware</Item>
+<Item name="FirstPage">Trang đầu tiên</Item>
+<Item name="FitMaxHint">Tối đa hóa khu vực</Item>
+<Item name="FixedCellsWidth">Tế bào chiều rộng cố định</Item>
+<Item name="FixedPlay">Cố định phát lại.</Item>
+<Item name="FixedTime">Thời gian cố định</Item>
+<Item name="Flash">SWF</Item>
+<Item name="Floating">Floating</Item>
+<Item name="FlushLeft">Tuôn ra trái</Item>
+<Item name="Font">Phông chữ</Item>
+<Item name="FontSize">Cỡ chữ</Item>
+<Item name="Foreground">Tiền cảnh</Item>
+<Item name="FoundDisk">Tìm thấy các thiết bị rời!</Item>
+<Item name="FramesTooMuch">Khung hình là quá nhiều, xin vui lòng giảm.</Item>
+<Item name="FreeSpace">miễn phí không gian</Item>
+<Item name="Frequency">Tần số quét</Item>
+<Item name="Friday">Thứ sáu</Item>
+<Item name="From">Từ</Item>
+<Item name="From Max To Min">From Max To Min</Item>
+<Item name="From Min To Max">From Min To Max</Item>
+<Item name="GIF name">GIF Path</Item>
+<Item name="GammaCorrection">Gamma Correction</Item>
+<Item name="GaryTip1">Reduce the control range to 1/</Item>
+<Item name="General2">Gen2</Item>
+<Item name="General4">Gen4</Item>
+<Item name="General6">Gen6</Item>
+<Item name="GeneratingData">Tạo ra dữ liệu</Item>
+<Item name="GetFirmwareVersion">Nhận được phiên bản firmware</Item>
+<Item name="GetSystemTime">Nhận hệ thống Thời gian</Item>
+<Item name="Graph">Graph</Item>
+<Item name="GraphCount">Quantity</Item>
+<Item name="GrayLevel">Gray Level</Item>
+<Item name="Green">xanh</Item>
+<Item name="HDScreenFile">HD Tập tin màn hình</Item>
+<Item name="HZoom">Level stretch</Item>
+<Item name="Height">Chiều cao</Item>
+<Item name="HeightOfMoreTthan">"Chiều cao là ra khỏi phạm vi!"</Item>
+<Item name="Hide">Hide</Item>
+<Item name="High">High</Item>
+<Item name="Hollow">rông</Item>
+<Item name="Horizontal">Vị trí nằm ngang</Item>
+<Item name="Hour">Giờ</Item>
+<Item name="HourHand">Giờ chiều rộng tay</Item>
+<Item name="HourRadius">bán kính giờ</Item>
+<Item name="Humidity">Độ ẩm</Item>
+<Item name="IDAlreadyExists">ID has been exists</Item>
+<Item name="IDInputError">ID is Error</Item>
+<Item name="IPAddress">địa chỉ IP</Item>
+<Item name="IPNotLegitimate">IP is not legitimate</Item>
+<Item name="IPResetting">Thiết lập lại IP</Item>
+<Item name="IPSetting">IP các cài đặt</Item>
+<Item name="Idle">Idle</Item>
+<Item name="IllegalFile">Tập tin bất hợp pháp</Item>
+<Item name="Image">Hình ảnh</Item>
+<Item name="ImageAuto">Picture Style</Item>
+<Item name="Images">Hình ảnh</Item>
+<Item name="ImportParam">Nhập cảng</Item>
+<Item name="ImportScreenFile">Import Screen File</Item>
+<Item name="IncompleteDataWriting">Dữ liệu viết không đầy đủ</Item>
+<Item name="Index">Không.</Item>
+<Item name="InfraredRay">tia hồng ngoại</Item>
+<Item name="InitialState">The initial state</Item>
+<Item name="InitializeSuccess">khởi tạo thành công</Item>
+<Item name="InputSmartSettingName">Xin vui lòng nhập vào tên của thiết lập thông minh</Item>
+<Item name="Insert">Chèn</Item>
+<Item name="InsertColumn">Chèn Cột</Item>
+<Item name="InsertRow">Chèn Hàng</Item>
+<Item name="Inverse">Chống chọn</Item>
+<Item name="IsDeleteAllScreen">Xóa tất cả các màn hình?</Item>
+<Item name="IsExportVideo">Whether  export video?</Item>
+<Item name="IsSaveFile">Bạn có muốn lưu các tập tin?</Item>
+<Item name="IsSendToCard">Bạn có muốn gửi nó vào thẻ ?</Item>
+<Item name="IsTheLatestVersion">Phiên bản mới nhất đã được.</Item>
+<Item name="Large">Lớn</Item>
+<Item name="LastPage">Trang cuối cùng</Item>
+<Item name="LeftToRight">Trái-&gt;Phải</Item>
+<Item name="LevelScreenshot">Horizontal Screenshot</Item>
+<Item name="LightRows">Đường dây chiếu soi thắp sáng trong một Moudle</Item>
+<Item name="LineSpacing">khoảng cách dòng</Item>
+<Item name="Link">Link</Item>
+<Item name="LinkState">Connection Status</Item>
+<Item name="LiveTime">Live Time</Item>
+<Item name="LocalDisck">Đĩa địa phương</Item>
+<Item name="LocalIpSeting">Thiết lập IP địa phương</Item>
+<Item name="LockPara">Lock parameters</Item>
+<Item name="Low">Low</Item>
+<Item name="LuminancePrior">độ sáng đầu tiên</Item>
+<Item name="LuminanceSetting">thiết lập độ sáng</Item>
+<Item name="LuminanceSettingSuccess">Thành công thiết độ sáng</Item>
+<Item name="MACAddress">địa chỉ MAC</Item>
+<Item name="MFRDate">Ngaøy saûn xuaát</Item>
+<Item name="Max">Max</Item>
+<Item name="MaxIPAddr">Maximum TP address</Item>
+<Item name="MaxUseImage">Image for Max</Item>
+<Item name="MaximumOfHeight">chiều cao tối đa</Item>
+<Item name="MaximumOfRange">Phạm vi kiểm soát tối đa</Item>
+<Item name="MaximumOfRegions">diện tích tối đa</Item>
+<Item name="MaximumOfWidth">chiều rộng tối đa</Item>
+<Item name="Memory">Bộ nhớ</Item>
+<Item name="Memory Size">File size</Item>
+<Item name="MergeCells">Hợp nhất các tế bào</Item>
+<Item name="Middle">Vừa</Item>
+<Item name="Min">Phut</Item>
+<Item name="MinIPAddr">Minimum IP address</Item>
+<Item name="MinUseImage">Image for Min</Item>
+<Item name="MinuteHand">Chiều rộng tay phút</Item>
+<Item name="Model">Card</Item>
+<Item name="Modify">Sửa đổi</Item>
+<Item name="Module">Mô-đun</Item>
+<Item name="ModuleMismatching">Mô hình thẻ kiểm soát sự không phù hợp.</Item>
+<Item name="ModuleSelect">Lựa chọn mô-đun</Item>
+<Item name="Monday">Thứ Hai</Item>
+<Item name="MoreSetting">Cài đặt khác</Item>
+<Item name="MoreSettings">Cài đặt khác-&gt;&gt;</Item>
+<Item name="MoveDown">Di chuyển xuống</Item>
+<Item name="MoveUp">Di chuyển lên</Item>
+<Item name="Multi">Nhieu</Item>
+<Item name="MultiFrame">Hình ảnh đa khung</Item>
+<Item name="MultiLine">Nhiêu đương dây</Item>
+<Item name="MultiScreenDirectConnect">Chế độ đa màn hình</Item>
+<Item name="MultipeSend">Nhieu cách gửi</Item>
+<Item name="MultipeSendHint">Nhieu cách gửi chỉ áp dụng cho Ethernet (IP cố định) chế độ.</Item>
+<Item name="MultipleEffects">Multiple effects</Item>
+<Item name="MultipleLinesoftext">Văn bản nhiều dòng</Item>
+<Item name="NICName">Tên NIC</Item>
+<Item name="Name">Name</Item>
+<Item name="NeedSensor">Yêu cầu các bộ cảm biến</Item>
+<Item name="NeedSpace">Dung lượng cần</Item>
+<Item name="NetMark">Mặt nạ mạng con</Item>
+<Item name="NetWorkError">Thẻ kiểm soát hiện tại chỉ có thể sử dụng chế độ nhỏ gọn, hãy kiểm tra xem thẻ kiểm soát là trên cùng một đoạn mạng với máy tính!</Item>
+<Item name="NewCrossScreen">Mới qua màn(&amp;C)</Item>
+<Item name="NewCrossScreen_G">New Cross Screen</Item>
+<Item name="NewGuideScreen">New screen by guide</Item>
+<Item name="NewHypertext">Siêu văn bản Mới</Item>
+<Item name="NewNormalScreen_G">New Normal Screen</Item>
+<Item name="NewScreen">Tân</Item>
+<Item name="NewTable">Tân</Item>
+<Item name="Next">Tiếp</Item>
+<Item name="NextPage">Tiếp</Item>
+<Item name="NextProgram">Switch to next program</Item>
+<Item name="NextScan">Tiếp</Item>
+<Item name="NoAssociation">Không có sự liên</Item>
+<Item name="NoBorder">Không có biên giới</Item>
+<Item name="NoFile">Tập tin không tồn tại!</Item>
+<Item name="NoFindConfigFiles">Không thể tìm thấy tập tin param màn hình, tiếp tục không?</Item>
+<Item name="NoFoundDisk">Không có thiết bị di động đã được tìm thấy!</Item>
+<Item name="NoInstallFlash">Hãy kiểm tra xem Adobe Flash Player đã được cài đặt!</Item>
+<Item name="NoLimit">No Limit</Item>
+<Item name="NoSerial">Không thể tìm thấy thẻ kiểm soát kết nối với cổng nối tiếp.</Item>
+<Item name="NoSerialConnection">Không có cổng nối tiếp kết nối</Item>
+<Item name="Noarea">Thiếu sự của khu vực, thất bại trong việc gửi!</Item>
+<Item name="Noitemisselected">Nothing selected</Item>
+<Item name="NormalShow">Tiếp theo là chơi</Item>
+<Item name="NotSelected">Không được chọn</Item>
+<Item name="NotSupportGlobalProgram">Ordinary screen does not support global program</Item>
+<Item name="NotSupportLANUpgrade">Ethernet không phải là được hỗ trợ bởi mô hình này, xin hãy sử dụng cổng nối tiếp hoặc U đĩa để nâng cấp phần vững.</Item>
+<Item name="NotSupportTips">Lời khuyên: Không hỗ trợ thời gian, quay số mới, nhiệt độ và độ ẩm, âm lịch</Item>
+<Item name="NumberOfProgramHasReachedItsMaximum">Số lượng chương trình có đạt đến tối đa!</Item>
+<Item name="NumberOfRegionHasReachedItsMaximum">Số lượng khu vực có đạt đến tối đa!</Item>
+<Item name="OEPolarity">Cực tính OE</Item>
+<Item name="OEPolaritySet">Thiết lập phân cực OE</Item>
+<Item name="OK">OK</Item>
+<Item name="Offline">Offline</Item>
+<Item name="OldVerCard">Search for Gen4</Item>
+<Item name="On-line">On-line</Item>
+<Item name="OnBottom">Chèn vào bên dưới</Item>
+<Item name="OnLeft">Ở bên trái</Item>
+<Item name="OnRight">Ở bên phải</Item>
+<Item name="OnTop">Chèn ở trên</Item>
+<Item name="OnlyAllowContainsAClockRegion">Chỉ cho phép chứa một khu vực quay số!</Item>
+<Item name="OnlyAllowContainsATempRegion">Chỉ cho phép chứa một khu vực nhiệt độ!</Item>
+<Item name="OnlyAllowContainsATimeRegion">Chỉ cho phép chứa một khu vực thời gian!</Item>
+<Item name="OnlyCard">Just for card</Item>
+<Item name="Open">Mở cửa</Item>
+<Item name="OpenAdv">Mở rao vặt</Item>
+<Item name="OpenFileFail">Không thể mở tập tin, xin vui lòng kiểm tra xem nó là chiếm đóng!</Item>
+<Item name="OpenFolder">Mở cửa thư mục</Item>
+<Item name="OpenScreen">Mở màn hình </Item>
+<Item name="OperationSuccess">Hoạt động thành công</Item>
+<Item name="Orange">màu tím</Item>
+<Item name="OriginX">Nguồn gốc X</Item>
+<Item name="OriginY">Nguồn gốc Y</Item>
+<Item name="Original">Original</Item>
+<Item name="OtherSeting">thiết lập khác</Item>
+<Item name="Out">Info</Item>
+<Item name="OutOfMemory">Thẻ kiểm soát là ra khỏi bộ nhớ, xin vui lòng làm giảm các chương trình.</Item>
+<Item name="OutOfShowMemory">Out of memory,reduce area.</Item>
+<List name="OutputWindowString" id="0">Scanned equipment</List>
+<List name="OutputWindowString" id="10">Control card name set successfully</List>
+<List name="OutputWindowString" id="11">Clear screen successfully</List>
+<List name="OutputWindowString" id="12">Screen parameters setting successfully</List>
+<List name="OutputWindowString" id="13">Control card time setting successfully</List>
+<List name="OutputWindowString" id="14">Brightness setting successfully</List>
+<List name="OutputWindowString" id="15">Time switch setting successfully</List>
+<List name="OutputWindowString" id="16">Display in test...</List>
+<List name="OutputWindowString" id="17">Unknown command</List>
+<List name="OutputWindowString" id="18">No hardware parameters</List>
+<List name="OutputWindowString" id="19">Invalid Command</List>
+<List name="OutputWindowString" id="1">Get the device information.</List>
+<List name="OutputWindowString" id="20">System is busying</List>
+<List name="OutputWindowString" id="21">Head length error</List>
+<List name="OutputWindowString" id="22">Symbol is incorrect</List>
+<List name="OutputWindowString" id="23">No. is incorrect </List>
+<List name="OutputWindowString" id="24">No screen parameters</List>
+<List name="OutputWindowString" id="25">Packet error</List>
+<List name="OutputWindowString" id="26">Unknown error</List>
+<List name="OutputWindowString" id="27">Send Timeout</List>
+<List name="OutputWindowString" id="28">Feedback packet parsing error</List>
+<List name="OutputWindowString" id="29">IP modified successfully </List>
+<List name="OutputWindowString" id="2">Equipment offline</List>
+<List name="OutputWindowString" id="30">Firmware updated failed, please try again</List>
+<List name="OutputWindowString" id="31">Setting failed</List>
+<List name="OutputWindowString" id="32">Check error</List>
+<List name="OutputWindowString" id="33">Protocol error</List>
+<List name="OutputWindowString" id="34">Instruction error</List>
+<List name="OutputWindowString" id="35">File does not match</List>
+<List name="OutputWindowString" id="36">Packet number error</List>
+<List name="OutputWindowString" id="37">Module type mismatch</List>
+<List name="OutputWindowString" id="38">File configuration error</List>
+<List name="OutputWindowString" id="39">Illegal file</List>
+<List name="OutputWindowString" id="3">Please select the screen you want to send</List>
+<List name="OutputWindowString" id="40">CPU type error</List>
+<List name="OutputWindowString" id="41">Firmware support tricolor only, do not support single and dual color</List>
+<List name="OutputWindowString" id="42">Firmware support single dual color only, do not support tricolor</List>
+<List name="OutputWindowString" id="43">Updated  successfully</List>
+<List name="OutputWindowString" id="44">Reception failed</List>
+<List name="OutputWindowString" id="45">Packet length error</List>
+<List name="OutputWindowString" id="46">File identification error</List>
+<List name="OutputWindowString" id="47">Sub-packet sequence number error</List>
+<List name="OutputWindowString" id="49">File successfully received</List>
+<List name="OutputWindowString" id="4">Select screen unbound equipment</List>
+<List name="OutputWindowString" id="50">Delayed signal</List>
+<List name="OutputWindowString" id="51">System Busy</List>
+<List name="OutputWindowString" id="52">Data is written incompletely</List>
+<List name="OutputWindowString" id="53">Firmware updated is successfully！</List>
+<List name="OutputWindowString" id="54">Hardware parameters set successfully</List>
+<List name="OutputWindowString" id="55">Device bound is offline</List>
+<List name="OutputWindowString" id="56">The setting of th escreen size is not right.</List>
+<List name="OutputWindowString" id="57">Start sending</List>
+<List name="OutputWindowString" id="58">Setting successfully</List>
+<List name="OutputWindowString" id="59">Service expiration</List>
+<List name="OutputWindowString" id="5">Program data is too large</List>
+<List name="OutputWindowString" id="60">Font changed successfully</List>
+<List name="OutputWindowString" id="61">Set directly connected successfully</List>
+<List name="OutputWindowString" id="62">Cancel directly connected successfully</List>
+<List name="OutputWindowString" id="63">Equipment in the Boot status,please update the firmware</List>
+<List name="OutputWindowString" id="64">Verification fails</List>
+<List name="OutputWindowString" id="65">Returns nothing</List>
+<List name="OutputWindowString" id="66">File is too large</List>
+<List name="OutputWindowString" id="67">Control card ID is wrong</List>
+<List name="OutputWindowString" id="68">Invalid device ID[%s]</List>
+<List name="OutputWindowString" id="69">Reset Device ID[%s]</List>
+<List name="OutputWindowString" id="6">The command completed successfully</List>
+<List name="OutputWindowString" id="7">Send initialization</List>
+<List name="OutputWindowString" id="8">Sending...</List>
+<List name="OutputWindowString" id="9">Sent successfully</List>
+<Item name="P10Colorful">M10（Colorful）</Item>
+<Item name="Pack">Gói Hình ảnh</Item>
+<Item name="PackageNumberError">Số gói là sai!</Item>
+<Item name="Packet">Gói tin</Item>
+<Item name="PacketError">Gói là sai.</Item>
+<Item name="PacketSize">Gói kích thước</Item>
+<Item name="Page">Trang</Item>
+<Item name="Pages">Các trang</Item>
+<Item name="PannelFill">"Khu vực đã tồn tại!"</Item>
+<Item name="ParallelSend">Parallel send</Item>
+<Item name="ParametersReadbackSuccess">Thành công đọc trở lại các thông số</Item>
+<Item name="ParametersSetting">thiết lập tham số</Item>
+<Item name="Parti-color">Sặc sở</Item>
+<Item name="Password">Mật khẩu</Item>
+<Item name="PasswordAuthentication">Mật khẩu Xác thực</Item>
+<Item name="PasswordError">Mật khẩu không đúng!</Item>
+<Item name="PasswordSetting">thiết lập mật khẩu</Item>
+<Item name="Paste">Dán</Item>
+<Item name="Path">đường dẫn</Item>
+<Item name="Pause">Tạm dừng</Item>
+<Item name="PictrueProcessing">Xử lý Hình ảnh</Item>
+<Item name="PlaseSelectDevice">Vui lòng chọn một thiết bị!</Item>
+<Item name="Play">Lượt chơi</Item>
+<Item name="PlayBeforePowerProgram">Memory Last Show</Item>
+<Item name="PlayMemory Size">Play File Size</Item>
+<Item name="PlayMode">Chế độ Chơi</Item>
+<Item name="PlayQuality">The fluency</Item>
+<Item name="PlaySpeed">Play speed</Item>
+<Item name="PlayTime">Thời gian Chơi</Item>
+<Item name="PlayTimes">Chơi Tần số</Item>
+<Item name="Playback Duration">Playback duration</Item>
+<Item name="Player">Play</Item>
+<Item name="Playing BeginFrames">Play start frame</Item>
+<Item name="Playing EndFrames">Play end frame</Item>
+<Item name="Playing Frames">Play frames</Item>
+<Item name="PleaseEnterTheBorderWidthOfTheTable">Vui lòng nhập chiều rộng biên giới của bảng.</Item>
+<Item name="PleaseEnterTheNumberOfCloumns">Vui lòng nhập số cột.</Item>
+<Item name="PleaseEnterTheNumberOfRows">Vui lòng nhập số lượng hàng.</Item>
+<Item name="PleaseSelect">Vui lòng chọn</Item>
+<Item name="PleaseSelectAFile">Vui lòng chọn một tập tin!</Item>
+<Item name="PleaseSelectAItem">Hãy chọn một mục, nếu kết quả quét có sản phẩm nào, hãy kiểm tra các dòng.</Item>
+<Item name="PleaseSelectAProgram">Hãy chọn một chương trình!</Item>
+<Item name="PleaseSelectScreen">Vui lòng chọn màn hình.</Item>
+<Item name="PleaseWait">Xin vui lòng chờ đợi...</Item>
+<Item name="PlotPointsImage">Plot Points Image</Item>
+<Item name="PointCount">Decimal digits</Item>
+<Item name="Points">màn hình điểm</Item>
+<Item name="PopUdiskfailure">Không thể cửa sổ pop U-đĩa.</Item>
+<Item name="Port">Port</Item>
+<Item name="PreProgram">Chuyển sang các chương trình trước</Item>
+<Item name="PreProgramConctrl">điều khiển chương trình</Item>
+<Item name="Prev">Lùi</Item>
+<Item name="PrevScan">Lùi</Item>
+<Item name="Preview">Xem trước</Item>
+<Item name="PreviewSetting">Thiết lập xem trước</Item>
+<Item name="PreviousPage">Lùi</Item>
+<Item name="ProgramInformation">Program Information</Item>
+<Item name="ProgramSize">Program Size</Item>
+<Item name="ProgramSwitching">chuyển đổi các chương trình</Item>
+<Item name="ProtocolError">Nghị định thư là sai!</Item>
+<Item name="ProtocolTypeError">Loại giao thức là sai.</Item>
+<Item name="PullThreshold">Thấm vào</Item>
+<Item name="QRCode">QR code</Item>
+<Item name="QuitTest">thử lối ra</Item>
+<Item name="RFID"> RF  ID</Item>
+<Item name="RFSetting">RF Setting</Item>
+<Item name="RS232">RS232</Item>
+<Item name="RadioEffect">Single effects</Item>
+<Item name="RandomColor">Random color</Item>
+<Item name="ReadBack2">Readback</Item>
+<Item name="ReadScreenParamsFromUDisk">Các thông số màn hình nhập khẩu từ đĩa U</Item>
+<Item name="Readback">Thông số readback</Item>
+<Item name="RealTimeArea">Real-time area</Item>
+<Item name="RealTimeFindCard">Real-time search card</Item>
+<Item name="RebootScreen">Reboot Screen</Item>
+<Item name="ReceiveFailure">Không thể nhận được!</Item>
+<Item name="Record">Kỷ lục</Item>
+<Item name="RecordTips">Lưu ý: Nếu bạn không thể nhận được hình ảnh chính xác, kiểm tra các tùy chọn ghi âm.</Item>
+<Item name="RectangleScreen">Rectangle screen</Item>
+<Item name="Red">dỏ</Item>
+<Item name="Refresh">Refresh</Item>
+<Item name="RefreshFrequency">Refresh frequency</Item>
+<Item name="RefreshRate">Tỷ lệ làm mới</Item>
+<Item name="RegionHeight">Chiều Cao</Item>
+<Item name="RegionRect">vị trí khu vực</Item>
+<Item name="RegionWidth">Chiều Rộng</Item>
+<Item name="Relevance">Xin vui lòng vào "Trình đơn-&gt;Vận hành-&gt;các thiết lập giao tiếp-&gt;TCP-&gt;Kết nối màn hình hiển thị"!</Item>
+<Item name="RememberProgram">Remember Program</Item>
+<Item name="Remove">Xóa</Item>
+<Item name="RemoveDevice">Loại bỏ thiết bị</Item>
+<Item name="RemoveDeviceSuccess1">Gỡ bỏ thành công</Item>
+<Item name="RemoveDeviceSuccess2">!</Item>
+<Item name="Rename">đổi tên</Item>
+<Item name="Repeat">Repeat</Item>
+<Item name="Reset">đặt lại</Item>
+<Item name="ResetProgram">chương trình thiết lập lại</Item>
+<Item name="RestartFailed">Restart failed</Item>
+<Item name="RestartSuccess">Control card restart successfully</Item>
+<Item name="RevertToDefaultSettings">Recover to the default status, continue?</Item>
+<Item name="RightToLeft">Phải-&gt;Trái</Item>
+<Item name="Romaji">Romaji</Item>
+<Item name="Round">Tròn</Item>
+<Item name="RoundAndDigital">Vòng + kỹ thuật số</Item>
+<Item name="RoundAndRomaji">Vòng + Romaji</Item>
+<Item name="RouterAddress">Cửa ngõ mặc định</Item>
+<Item name="Row">Hàng</Item>
+<Item name="SRCFile">source File</Item>
+<Item name="SWF name">SWF Path</Item>
+<Item name="Saturday">Thứ bảy</Item>
+<Item name="Save">Lưu</Item>
+<Item name="SaveToDefaultSetting">Tiết kiệm như thiết lập mặc định</Item>
+<Item name="ScaleAndDigital">Tốt nghiệp + kỹ thuật số</Item>
+<Item name="ScaleAndRomaji">Tốt nghiệp + Romaji</Item>
+<Item name="ScanMode">Chế độ quét</Item>
+<Item name="ScanRange">Quét ngưỡng</Item>
+<Item name="ScanValueB">Bộ lọc màu xanh</Item>
+<Item name="ScanValueG">Bộ lọc xanh</Item>
+<Item name="ScanValueR">Bộ lọc màu đỏ</Item>
+<Item name="Scanning">Quét</Item>
+<Item name="ScanningComplete">Quét xong.</Item>
+<Item name="Schedule">tiến</Item>
+<Item name="ScreenCentered">Màn hình hiển thị trong trung tâm</Item>
+<Item name="ScreenChoosePageTip">Select the screen type </Item>
+<Item name="ScreenColor">Màu</Item>
+<Item name="ScreenCount">Số lượng màn hình</Item>
+<Item name="ScreenHeight">Chiều cao</Item>
+<Item name="ScreenInformation">Screen Information</Item>
+<Item name="ScreenParameters">thông số màn hình</Item>
+<Item name="ScreenParametersSetting">Thiết lập thông số màn hình</Item>
+<Item name="ScreenParamsPageTip">1.Select the screen width and height Pixel(Width and Height meaning screen total Pixel) &#x000A;2.Select the color of screen ；                           3.The single scrren of total pixle is the amount of led lights.</Item>
+<Item name="ScreenSize">Kích thước màn hình</Item>
+<Item name="ScreenSmartTip">The current screen showing normal text ,no need select smart set</Item>
+<Item name="ScreenTest">thử màn hình</Item>
+<Item name="ScreenType">The screen type</Item>
+<Item name="ScreenWidth">Chiều rộng</Item>
+<Item name="Search">Tìm kiếm</Item>
+<Item name="Searching">Tìm kiếm...</Item>
+<Item name="SearchingBegin">Tìm kiếm</Item>
+<Item name="SearchingEnd">Tìm kiếm hoàn thành</Item>
+<Item name="Sec">Giây</Item>
+<Item name="SecondHand">Chiều rộng tay thứ hai</Item>
+<Item name="SecondRadius">bán kính giây</Item>
+<Item name="SelectDataPolarity">Vui lòng chọn cực dữ liệu</Item>
+<Item name="SelectDefault">Nếu bạn không biết các loại thẻ điều khiển,chọn các tùy chọn mặc định.</Item>
+<Item name="SelectMode">lựa chọn chế độ</Item>
+<Item name="SelectOEPolarity">Vui lòng chọn OE phân cực</Item>
+<Item name="SelectScan">"Hãy chọn chế độ quét!"</Item>
+<Item name="SelectScree">Vui lòng chọn màn hình tương ứng!</Item>
+<Item name="SendFile">Gửi tập tin</Item>
+<Item name="SendParamsWhenFinish">Sau khi sửa đổi các thông số, xin vui lòng bấm vào "Gửi tham số" nút.</Item>
+<Item name="SendScreenParams">Gửi thông số</Item>
+<Item name="SendTimeOut">gửi thời gian chờ</Item>
+<Item name="SendingData">Gửi dữ liệu...</Item>
+<Item name="SentSuccessfully">Gửi thành công</Item>
+<Item name="SerialNumber">No.</Item>
+<Item name="SerialPort">cổng nối tiếp</Item>
+<Item name="SerialPortIsClosed">Không tìm thấy thẻ khiển LED và kết nối nối tiếp.</Item>
+<Item name="SerialPortIsOccupied">Cổng nối tiếp là chiếm đóng!</Item>
+<Item name="SerialPortOpenError">Không mở cổng nối tiếp.</Item>
+<Item name="ServiceExpiration">Service expiration</Item>
+<Item name="SetBrightnessFailed">Cài đặt độ sáng không thành.</Item>
+<Item name="SetBrightnessSuccess">Thành công thiết độ sáng</Item>
+<Item name="SetScreenParam">Thành công thiết các thông số màn hình</Item>
+<Item name="SetTheBaudrateSuccessfully">Thiết lập tốc độ baud thành công</Item>
+<Item name="Setting">các cài đặt</Item>
+<Item name="SetupFailed">Thiết lập không thành</Item>
+<Item name="ShowDate">màn hình hiển thị ngày</Item>
+<Item name="ShowGroup">Show Group</Item>
+<Item name="ShowMode">Chế độ màn hình</Item>
+<Item name="ShowTime">màn hình hiển thị thời gian</Item>
+<Item name="ShowWeek">màn hình hiển thị tuần</Item>
+<Item name="Showpage">Hiện trang</Item>
+<Item name="ShuttingDown">Tắt Nguồn</Item>
+<Item name="SignalDelay">Cực tính chốt</Item>
+<Item name="SignalDelayHint">Một số màn hình hiển thị (ví dụ, một số P5) chốt STR (LAT tín hiệu) là đối diện với màn hình khác,
+                nếu có nhấp nháy điểm hoặc đường, bạn có thể chọn tùy chọn ngược lại.</Item>
+<Item name="SignalQuality">Signal Quality</Item>
+<Item name="Simplify">Chế độ nhỏ gọn</Item>
+<Item name="SimplifyInfo">Chế độ nhỏ gọn chỉ thích hợp cho kết nối trực tiếp duy nhất và mạng LAN với chỉ một thẻ điều khiển duy nhất, địa chỉ IP sẽ tự động trận đấu.</Item>
+<Item name="Single">đơn</Item>
+<Item name="SingleDirectMode">Direct connection mode</Item>
+<Item name="SingleLine">Một dòng</Item>
+<Item name="SingleLineoftext">Văn bản dòng đơn</Item>
+<Item name="SingleScreenBroadcasts">chế độ sao chép</Item>
+<Item name="Size">Size</Item>
+<Item name="Slow">Slow</Item>
+<Item name="Slowest">Chạy chậm nhất</Item>
+<Item name="Small">Nhỏ</Item>
+<Item name="SmartScanTips">Nếu màn hình có tươi sáng tối, xin giảm tần số đồng hồ.</Item>
+<Item name="SmartSetting">Thiết lập thông minh</Item>
+<Item name="SmartSettingName">Thiết lập thông minh Tên</Item>
+<Item name="SmartTips">Lời khuyên: một điểm ảnh là đơn vị</Item>
+<Item name="Snapshot">Snapshot</Item>
+<Item name="SnapshotTip">If no bright spots, insert empty points</Item>
+<Item name="Solid color">Tinh khiết</Item>
+<Item name="Space">Khoảng cách</Item>
+<Item name="SpecifiedDate">Ngày quy định</Item>
+<Item name="SpecifiedTime">Thời gian quy định</Item>
+<Item name="SpecifyValue">Specify a value</Item>
+<Item name="Speed">Tốc độ</Item>
+<Item name="SpeedPrior">Tốc độ đầu tiên</Item>
+<Item name="SplitCell">Bửa củi tế bào</Item>
+<Item name="SplitHorizontal">Bửa củi theo chiều ngang</Item>
+<Item name="SplitVertical">Bửa củi theo chiều dọc</Item>
+<Item name="Standard">Standard</Item>
+<Item name="StartUpImage">Boot animation</Item>
+<Item name="StartingUp">Điện Trên</Item>
+<Item name="StateA">Nhà nước A</Item>
+<Item name="StateB">Nhà nước B</Item>
+<Item name="StateC">Nhà nước C</Item>
+<Item name="StateD">Nhà nước D</Item>
+<Item name="Static">Tĩnh</Item>
+<Item name="Status">tình trạng</Item>
+<Item name="StepBack">Hoàn tác</Item>
+<Item name="Stop">Thôi</Item>
+<Item name="Stroke">đột quỵ</Item>
+<Item name="StyleName">Tên Hiệu ứng</Item>
+<Item name="StyleText">Văn bản</Item>
+<Item name="SubPacketSequenceNumberError">Số thứ tự của các tiểu gói là sai!</Item>
+<Item name="SuccessfullyModified">"Sửa đổi thành công!"</Item>
+<Item name="Sunday">Chủ Nhật</Item>
+<Item name="SupportRegionsOverlap">Support Regions Overlap</Item>
+<Item name="SuspendPreview">Pause preview</Item>
+<Item name="SwapBlueGreen">Trao đổi màu xanh/xanh</Item>
+<List name="SystemBusName" id="0">[C1]φ4.75(φ3.75)  1R1G   1/16S HUB08 64X32（Indoor）  [A1]</List>
+<List name="SystemBusName" id="10">[C11]P10       1R1G1B 1/8S  HUB08 32X16 HLL</List>
+<List name="SystemBusName" id="11">[C12]P10       1R1G1B 1/4S  HUB75 32X16  [A13]</List>
+<List name="SystemBusName" id="12">[C13]P8        1R1G1B 1/5S   HUB75 40X20 JHG  [A60]</List>
+<List name="SystemBusName" id="13">[C14]P8        1R1G1B 1/4S  HUB08 32X16  [A8]</List>
+<List name="SystemBusName" id="14">[C15]P12/P16   2R1G   1/4S  HUB12 16X8（P16） [A12]</List>
+<List name="SystemBusName" id="15">[C16]P13.33    1R1G1B 1/3S  HUB08 24X12 HLL  [A49]</List>
+<List name="SystemBusName" id="16">[C17]P13.33    1R1G1B 1/3S  HUB08 24X12 JHG  [A57]</List>
+<List name="SystemBusName" id="17">[C18]P16       1R1G1B 1/5S  HUB08 20X10 HLL  [A52]</List>
+<List name="SystemBusName" id="18">[C19]P16       1R1G1B 1/1S  HUB40 16X8  [A29]</List>
+<List name="SystemBusName" id="19">[C20]P10       1R1G1B 1/4S  HUB75 32X16  [A11]</List>
+<List name="SystemBusName" id="1">[C2]φ3.75(φ5)1R     1/16S HUB08 64X32（Indoor）  [A1]</List>
+<List name="SystemBusName" id="20">[C21]P25       2R1G1B 1/1S  HUB40 16X8</List>
+<List name="SystemBusName" id="21">[C22]P10-P20   1G2R1B 1/4S  HUB12 16X8  [A61]</List>
+<List name="SystemBusName" id="22">[C23]P10-P20   2R1G1B 1/4S  HUB12 16X8  [A80]</List>
+<List name="SystemBusName" id="23">[C24]P13.33-P26.66  2R1G1B 1/4S  HUB12 12X6</List>
+<List name="SystemBusName" id="24">[C25]P20  1R1G 1/4S  HUB26 16*16（ZHGD） [A66]</List>
+<List name="SystemBusName" id="25">[C26]P13.33  1R1G1B 1/6S  HUB08 24*12（HLL） [A55]</List>
+<List name="SystemBusName" id="26">[C27]P10  1R 1/4S  HUB12 32*16（QL） [A19]</List>
+<List name="SystemBusName" id="27">[C28]P10  1R1G1B 1/2S  HUB75 16*16</List>
+<List name="SystemBusName" id="28">[C29]P6  1R1G1B 1/8S  HUB75 32*16</List>
+<List name="SystemBusName" id="29">[C30]P6  1R1G1B 1/8S  HUB75 32*32</List>
+<List name="SystemBusName" id="2">[C3]P5         1R1G1B 1/16S HUB08 32X32  [A3]</List>
+<List name="SystemBusName" id="30">[C31]P10  1R1G1B 1/4S  HUB75 16*16[A17]</List>
+<List name="SystemBusName" id="31">[C32]P20  1R1G1B 1/1S  HUB75 16*8</List>
+<List name="SystemBusName" id="32">[C33]P25  2R1G1B 1/1S  HUB75 8*8  [A30]</List>
+<List name="SystemBusName" id="33">[C34]P13.33  1R 1/4S  HUB12 24*12 [A71]</List>
+<List name="SystemBusName" id="34">[C35]P10  1R1G 1/4S  HUB12 32*16  [A7]</List>
+<List name="SystemBusName" id="3">[C4]P5         1R1G   1/8S  HUB08 32*16（Vehicle screen） [A4]</List>
+<List name="SystemBusName" id="4">[C5]P5/P4      1R1G1B 1/16S HUB75 32X32（Indoor） [A1]</List>
+<List name="SystemBusName" id="5">[C6]P10        1R/1R1G     1/4S  HUB12 32X16（P10） [A8]</List>
+<List name="SystemBusName" id="6">[C7]P10        1R     1/4S  HUB08  32X16</List>
+<List name="SystemBusName" id="7">[C8]P10        1R     1/1S  HUB08 32X16[A31]</List>
+<List name="SystemBusName" id="8">[C9]P10        1R1G   1/4S  HUB08  No 138 32X16  [A13]</List>
+<List name="SystemBusName" id="9">[C10]P10        1R1G   1/4S  HUB12 32X16 [A19]</List>
+<Item name="SystemBusy">Hệ thống đang bận, vui lòng thử lại sau!</Item>
+<Item name="SystemOptimize">Tối ưu hóa hệ thống</Item>
+<Item name="SystemTime">thời gian hệ thống</Item>
+<Item name="Table">Bảng</Item>
+<Item name="TargetTime">Mục tiêu thời gian</Item>
+<Item name="Temp">Nhiệt độ</Item>
+<Item name="TempAdjust">điều chỉnh nhiệt độ</Item>
+<Item name="TempHumidity">Nhiệt độ và độ ẩm</Item>
+<Item name="TempOrRHExist">Khu vực nhiệt độ và các khu vực nhiệt độ và độ ẩm không thể tồn tại cùng một lúc.</Item>
+<Item name="TempUnit">Nhiệt độ đơn vị</Item>
+<Item name="Temppoint1">Hãy chắc chắn rằng mô hình cảm biến bạn đang sử dụng là:DS18B20</Item>
+<Item name="Temppoint2">Hãy chắc chắn rằng mô hình cảm biến bạn đang sử dụng là:AM2301</Item>
+<Item name="Test">Thử</Item>
+<Item name="Text">Phụ đề</Item>
+<Item name="TextColor">Màu Văn bản</Item>
+<Item name="TextFile">.txt Tệp</Item>
+<Item name="TextInfo">Text information</Item>
+<Item name="TextProcess">Văn bản chỉ đạo</Item>
+<Item name="TextProcessing">Chế biến Phụ đề</Item>
+<Item name="TheDeviceHasBeenOffline">The device has been offline</Item>
+<Item name="ThisModuleNotSupportUDisk">Mô-đun này không hỗ trợ U đĩa.</Item>
+<Item name="Thursday">Thứ năm</Item>
+<Item name="TimeClock">Digital Clock</Item>
+<Item name="TimeDifference">chênh giờ</Item>
+<Item name="TimeParameters">Thông số Thời gian</Item>
+<Item name="TimeSettingSuccess">Thiết lập thời gian thành công</Item>
+<Item name="TimeSwitch">Thời gian Chuyển sang</Item>
+<Item name="TimeSwitchSettingSuccess">Thành công thiết chuyển đổi thời gian</Item>
+<Item name="TimedRestart">khởi động lại đúng lúc</Item>
+<Item name="TimerColor">đồng hồ màu</Item>
+<Item name="Timing Parameters">Timing Parameters</Item>
+<Item name="TimingControl">Timing Control</Item>
+<Item name="TimingMode">Chế độ chấm công</Item>
+<Item name="TimingPause">Timing Pause</Item>
+<Item name="TimingReset">Timing Reset</Item>
+<Item name="TimingSet">Thời gian Set</Item>
+<Item name="Tip_Type1">Use  current communication address to connect UDP</Item>
+<Item name="Tip_Type2">Use IP address from returned device to connect UDP</Item>
+<Item name="Tip_Type3">Use IP address from returned device to connect TCP</Item>
+<Item name="Tip_Type4">Through agent address connected device</Item>
+<Item name="To">để</Item>
+<Item name="To2">để</Item>
+<Item name="Toolbar_AddColorful_Bottom">Text showing colorfully, user can add  animated background</Item>
+<Item name="Toolbar_AddColorful_Top">Add animated Character  area</Item>
+<Item name="Toolbar_AddCount_Bottom">Display data from a button or serial, network cables acquired</Item>
+<Item name="Toolbar_AddCount_Top">Button count or external data</Item>
+<Item name="Toolbar_AddExcel_Bottom">Excel files, select special effects and background</Item>
+<Item name="Toolbar_AddExcel_Top">Add Excel area</Item>
+<Item name="Toolbar_AddGlobalProgram_Bottom">Set up only one area of hypertext, text, time, etc.,  program can play by time</Item>
+<Item name="Toolbar_AddGlobalProgram_Top">Add Global Program</Item>
+<Item name="Toolbar_AddHypertext_Bottom">Pictures, video, SWF, etc.</Item>
+<Item name="Toolbar_AddHypertext_Top">Add Hypertext</Item>
+<Item name="Toolbar_AddProgram_Bottom">Set up 20 regions hypertext, text, time, etc.,  programs can play by time</Item>
+<Item name="Toolbar_AddProgram_Top">Add Program</Item>
+<Item name="Toolbar_AddTempRH_Bottom">Showing temperature, humidity (requires sensor)</Item>
+<Item name="Toolbar_AddTempRH_Top">Add Temperature and humidity area</Item>
+<Item name="Toolbar_AddText_Bottom">Edit text, select effects and background</Item>
+<Item name="Toolbar_AddText_Top">Add Text</Item>
+<Item name="Toolbar_AddTime_Bottom">Digital clock or clock dial</Item>
+<Item name="Toolbar_AddTime_Top">Add Time area</Item>
+<Item name="Toolbar_AddTiming_Bottom">Target time countdown, count up, count by button</Item>
+<Item name="Toolbar_AddTiming_Top">Add Timing area</Item>
+<Item name="Toolbar_Adjusttime_Bottom">Correction control card time  with the computer synchronized</Item>
+<Item name="Toolbar_Adjusttime_Top">Add Adjust time</Item>
+<Item name="Toolbar_Check">Check</Item>
+<Item name="Toolbar_Copy">Copy</Item>
+<Item name="Toolbar_Delete">Delete</Item>
+<Item name="Toolbar_Down">Down</Item>
+<Item name="Toolbar_ExportToUdisk_Bottom">The screen  is exported to the U disk</Item>
+<Item name="Toolbar_ExportToUdisk_Top">Export To U disk</Item>
+<Item name="Toolbar_Paste">Paste</Item>
+<Item name="Toolbar_Preview1_Bottom">Preview the current screen </Item>
+<Item name="Toolbar_Preview1_Top">Screen  Preview</Item>
+<Item name="Toolbar_Preview2_Bottom">Showing all screens built, double-click to enter the designated screen.</Item>
+<Item name="Toolbar_Preview2_Top">Group can not preview</Item>
+<Item name="Toolbar_Preview_Bottom">Preview the current program</Item>
+<Item name="Toolbar_Preview_Top">Preview program</Item>
+<Item name="Toolbar_Save">Save</Item>
+<Item name="Toolbar_Search">Search</Item>
+<Item name="Toolbar_Send_Bottom">Sending  the screen programs to control card</Item>
+<Item name="Toolbar_Send_Top">Send</Item>
+<Item name="Toolbar_Uncheck">Uncheck</Item>
+<Item name="Toolbar_Up">Up</Item>
+<Item name="TotalECard">Tổng số card mạng :</Item>
+<Item name="TotalFrames">Tổng số khung</Item>
+<Item name="TotalSpace">tổng số không gian</Item>
+<Item name="TracingPoint">Mô tả sự liên kết</Item>
+<Item name="TracingPointArrowKeys">Nhấp chuột trái vào điểm truy tìm, bạn có thể sử dụng các phím mũi tên để kiểm soát điểm hướng tới.</Item>
+<Item name="TracingPointError">Điểm truy tìm là lỗi.</Item>
+<Item name="TracingPointFail">Truy tìm điểm là thất bại, xin vui lòng Truy tìm điểm một lần nữa.</Item>
+<Item name="TransitionThreshold">Transition Threshold</Item>
+<Item name="Transparent">Transparent</Item>
+<Item name="Tricolor">Ba màu</Item>
+<Item name="Tuesday">Thứ ba</Item>
+<Item name="Twinkle">Nhấp nháy</Item>
+<Item name="TwoLinedisplay">Hiển thị hai dòng</Item>
+<Item name="Type">Type</Item>
+<Item name="Type1">Type one</Item>
+<Item name="Type2">Type two</Item>
+<Item name="Type3">Type three</Item>
+<Item name="Type4">Type four</Item>
+<Item name="TypeName">Gõ Tên</Item>
+<Item name="U-DiskSucess">U đĩa thành công.</Item>
+<Item name="UDisk">U đĩa</Item>
+<Item name="USE_HD2010">Một thẻ kiểm soát được phát hiện, nhưng nó không phù hợp với phần mềm hiện tại, hãy sử dụng HD2012.</Item>
+<Item name="UnableToOpenFile">Không thể mở tập tin!</Item>
+<Item name="Unchanged">Không thay đổi</Item>
+<Item name="Undo">Hủy bỏ</Item>
+<Item name="UnexpectedError">Giao tiếp Thời gian hết giờ</Item>
+<Item name="Unit">đơn vị</Item>
+<Item name="UnitBoard">đơn vị hội đồng quản trị</Item>
+<Item name="UnitBoardInfo">Thông tin mô-đun</Item>
+<Item name="UnitBoardTips">Chiều rộng nếu một đơn Moudle là hơn 64, hãy chọn 64</Item>
+<Item name="UnitBoardWidth">Chiều rộng mô-đun</Item>
+<Item name="UnitBoards">Số đơn vị Board</Item>
+<Item name="UnitColor">Đơn vị màu</Item>
+<Item name="UnitSize">mô-đun điểm</Item>
+<Item name="Unmerge">hủy hợp nhất</Item>
+<Item name="Unselected">Không được chọn</Item>
+<Item name="Unspecified">Không quy định</Item>
+<Item name="UnsupportedInstructions">Chỉ dẫn Không được hỗ trợ</Item>
+<Item name="Untitled">Chưa đặt tên</Item>
+<Item name="Update">Cập nhật</Item>
+<Item name="UpdateFailed">Cập nhật Lỗi.</Item>
+<Item name="UpdateFirmwareFinished">Cập nhật firmware hoàn tất</Item>
+<Item name="UpdatedSuccessfully">Bản cập nhật thành công, cho dù để mở tập tin cập nhật？</Item>
+<Item name="UpdatingFirmware">Cập nhật phần vững.</Item>
+<Item name="Use">Sử dụng</Item>
+<Item name="Use138Decoder">Sử dụng 138 bộ giải mã</Item>
+<List name="Use138" id="0">Use 138</List>
+<List name="Use138" id="1">No 138</List>
+<Item name="UseDefaultSetting">Sử dụng các thiết lập phần cứng</Item>
+<Item name="UseParams">sử dụng thông số</Item>
+<Item name="UsedMemory">Used Memory</Item>
+<Item name="UsingHardwareSetup">Use hardware settings(Parameter readback)</Item>
+<Item name="VZoom">Vertical stretch</Item>
+<Item name="Valign">Sắp hàng theo chiều dọc</Item>
+<Item name="ValignBottom">Sắp hàng dưới cùng</Item>
+<Item name="ValignMiddle">Sắp hàng trung tâm</Item>
+<Item name="ValignTop">Sắp hàng đầu trang</Item>
+<Item name="Veritical">Chức vụ dọc</Item>
+<Item name="VerticalPosition">Chức vụ dọc</Item>
+<Item name="VerticalScreenshot">Thẳng đứng chụp màn hình</Item>
+<Item name="VerticalStretch">Căng ra theo chiều dọc</Item>
+<Item name="Video">Video</Item>
+<Item name="Video FramesCount">Total frames</Item>
+<Item name="Video name">Video Path</Item>
+<Item name="ViewHelp">Xem giúp đỡ</Item>
+<Item name="WaitingForInitialization">Chờ đợi để khởi tạo</Item>
+<Item name="WaitingToBeSent">Đang chờ để gửi</Item>
+<Item name="Wednesday">Thứ tư</Item>
+<Item name="White">trắng</Item>
+<Item name="Width">Chiều rộng</Item>
+<Item name="WidthOfMoreTthan">"Chiều rộng là ra khỏi phạm vi!"</Item>
+<Item name="WindowPosition">Window position</Item>
+<Item name="WrongParameter">Thông số sai</Item>
+<Item name="Yellow">vàng</Item>
+<List name="color" id="0">đơn màu</List>
+<List name="color" id="1">màu kép</List>
+<List name="color" id="2">đầy màu</List>
+<Item name="delete">Xóa</Item>
+<Item name="flashTips">Lưu ý: SWF có chứa các kịch bản không được hỗ trợ nào, vì vậy bạn không thể có được hình ảnh chính xác của nó.</Item>
+<List name="frequency" id="0">tự động</List>
+<List name="frequency" id="160">100Hz</List>
+<List name="frequency" id="140">120Hz</List>
+<List name="frequency" id="120">140Hz</List>
+<List name="frequency" id="100">160Hz</List>
+<List name="frequency" id="80">180Hz</List>
+<List name="frequency" id="60">200Hz</List>
+<List name="frequency" id="200">60Hz</List>
+<List name="frequency" id="180">80Hz</List>
+<List name="graylevel" id="1">No graylevel</List>
+<List name="graylevel" id="2">4 graylevel</List>
+<List name="graylevel" id="3">8 graylevel</List>
+<List name="graylevel" id="4">16 graylevel</List>
+<List name="graylevel" id="5">32 graylevel</List>
+<Item name="group">Group</Item>
+<Item name="hypertext">Teletext</Item>
+<List name="listCtlDelay" id="0">cao hiệu quả</List>
+<List name="listCtlDelay" id="1">thấp hiệu quả</List>
+<List name="listStrDelay" id="0">0</List>
+<List name="listStrDelay" id="1">1</List>
+<Item name="mAPPFace">APPface(&amp;A)</Item>
+<Item name="mAbout">Giới(&amp;A)</Item>
+<Item name="mBlackStyle">phong cách màu đen</Item>
+<Item name="mBludStyle">màu xanh phong cách</Item>
+<Item name="mCalculator">tệ Tính toán</Item>
+<Item name="mClearDisplayData">Tháo dữ liệu hiển thị</Item>
+<Item name="mCommSetting">Thiết đặt giao tiếp</Item>
+<Item name="mExit">Lối ra(&amp;E)</Item>
+<Item name="mFile">Tệp(&amp;F)</Item>
+<Item name="mHardwareSetting">Hardware Settings</Item>
+<Item name="mHelp">Giúp(&amp;H)</Item>
+<Item name="mIPManagmentTools">Công cụ quản lý IP</Item>
+<Item name="mLanguage">Ngôn ngư(&amp;L)</Item>
+<Item name="mLuminanceSetting">thiết lập độ sáng</Item>
+<Item name="mNarrow">phóng to</Item>
+<Item name="mNew">Tân(&amp;N)</Item>
+<Item name="mNotepad">Notepad</Item>
+<Item name="mOpen">Mở cửa(&amp;O)</Item>
+<Item name="mOperate">Vận hành(&amp;O)</Item>
+<Item name="mOutWindow">Info Window</Item>
+<Item name="mPaint">Sơn</Item>
+<Item name="mSave">Lưu(&amp;S)</Item>
+<Item name="mSaveAs">Lưu như...</Item>
+<Item name="mScreenSetting">Cài đặt màn hình</Item>
+<Item name="mSendProject">Gửi dự án</Item>
+<Item name="mSetting">Các thiết lập(&amp;S)</Item>
+<Item name="mSilverStyle">bạc phong cách</Item>
+<Item name="mSystemSetting">thiết lập hệ thống</Item>
+<Item name="mTimeSetting">thiết lập thời gian</Item>
+<Item name="mTool">Công cụ(&amp;T)</Item>
+<Item name="mUpdateFirmware">Cập nhật phần vững</Item>
+<Item name="mView">Xem(&amp;V)</Item>
+<Item name="mWatergreenStyle">phong cách màu xanh nhạt</Item>
+<Item name="mZoom">phóng to ra</Item>
+<Item name="minimum">Min</Item>
+<Item name="ms">mili giây</Item>
+<List name="polarity" id="0">thấp hiệu quả</List>
+<List name="polarity" id="1">cao hiệu quả</List>
+<Item name="program">Chương</Item>
+<Item name="screen">Màn hình</Item>
+<Item name="sec">giây</Item>
+<Item name="send">Gởi</Item>
+<Item name="static">Tĩnh</Item>
+<Item name="time">Thời gian</Item>
+<Item name="whirl180">Reversal</Item>
+<Item name="whirl270">Left rotation</Item>
+<Item name="whirl90">Right rotation</Item>
+<Item name="whirlt">Rotation</Item>
+<Item name="AddItemID">Add ID</Item>
+<Item name="BeginIpAddr">Begin IP</Item>
+<Item name="CurrentSel">Currently selected language</Item>
+<Item name="DetectsThisFileWasNotSaved">Detected by the currently selected file is not saved if coverage</Item>
+<Item name="Effect">Effect</Item>
+<Item name="English">English</Item>
+<Item name="IDAndContentCanNotBeEmpty">ID and content can not be empty</Item>
+<Item name="ModificationFails">Modification fails</Item>
+<Item name="ModifyItemID">Modify ID</Item>
+<Item name="ModifyOnlyOneItem">Only modify one ID</Item>
+<Item name="RemoveItemID">Remove ID</Item>
+<Item name="ShowOnlyControlCardWifi">Display only control card Wi-Fi</Item>
+<Item name="ShowType">Display method</Item>
+<Item name="ThisIDAlreadyExists">ID exists already</Item>
+<Item name="FillingTheCurrentLanguage">To fill the current language</Item>
+<Item name="WhetherToSaveTheCurrentModifiedFile">Whether to save the changes？</Item>
+<Item name="RemoveDuplicate">Remove duplicate</Item>
+<Item name="Apply">Apply</Item>
+<Item name="Remark">Remark</Item>
+<Item name="FirstMode">Priority mode</Item>
+<Item name="FirstMode_Normal">Balanced</Item>
+<Item name="FirstMode_Speed">Speed Priority</Item>
+<Item name="FirstMode_Text">Brightness Priority</Item>
+<Item name="Random">Random</Item>
+<Item name="WhetherToReplace">Whether to replace?</Item>
+<Item name="ImportFailed">Import Failed</Item>
+<Item name="ExportFailed">Export Failed</Item>
+<Item name="ExportLanguage">Export Language</Item>
+<Item name="ImportLanguage">Import Language</Item>
+<List name="SystemBusName" id="35">[C36]P10  1R1G1B 1/4S  HUB75 16*16</List>
+<Item name="ClickHereToUpdate">Click here to update</Item>
+<Item name="ImportFile">Import File</Item>
+<List name="SystemBusName" id="36">[C37]P10  1R 1/4S  HUB12 32*16[A25]</List>
+<Item name="EditingLanguage">Language Editor</Item>
+<List name="SystemBusName" id="37">[C38]P7.62  1R1G1B 1/8S  HUB08 32*16</List>
+<List name="SystemBusName" id="38">[C39]P5   1R1G1B   1/8S  HUB75 32*16 [A4]</List>
+<Item name="Imsak">Nhanh</Item>
+<Item name="Fajr">Buổi sáng</Item>
+<Item name="Dhuhr">Chào</Item>
+<Item name="Asr">Asr</Item>
+<Item name="Maghrib">Hôn mê</Item>
+<Item name="Isha">Bữa ăn tối</Item>
+<Item name="MidNight">Nửa đêm</Item>
+<Item name="Country">Quốc gia</Item>
+<Item name="City">Thành phố</Item>
+<Item name="NumColor">Numbers Color</Item>
+<Item name="ExprotConfigFile">Export Profiles</Item>
+<Item name="SoundModule">Sound Module</Item>
+<Item name="Year">Year</Item>
+<Item name="ImportTable">Import Table</Item>
+<Item name="ExportBable">Export Table</Item>
+<Item name="ClearAll">Clear</Item>
+<Item name="cfWords">Colorful word</Item>
+<Item name="OnlyOnePrayForScreen">Only supported a prayer area</Item>
+<Item name="BKSpeed">Background speed</Item>
+<Item name="EffectCycle">Effects cycle</Item>
+<Item name="ExportConfigFile">Export Profiles</Item>
+<Item name="SoundSetting">Sound Setting</Item>
+<List name="graylevel" id="6">64 graylevel</List>
+<List name="graylevel" id="7">128 graylevel</List>
+<List name="graylevel" id="8">256 graylevel</List>
+<List name="SystemBusName" id="39">[C40]P10  1R1G1B   1/4S  HUB75  32X16[A12]</List>
+<Item name="SelectFirmwareVersion">Select Firmware Version </Item>
+<Item name="NoSelectVersion">None selected version</Item>
+<Item name="Ordinal">No.</Item>
+<Item name="VersionNum">Version</Item>
+<Item name="ConfirmSelect">Confirm</Item>
+<List name="SystemBusName" id="40">[C41]P10  1R1G1B  1/4S  HUB75 32*16</List>
+<Item name="FileNameAlreadyExistIsCover">FileName already exist,is cover?</Item>
+<Item name="VersionAlreadyExist">Version already exist</Item>
+<Item name="DeleteThisGroup">Delete this group</Item>
+<Item name="FindNewVersionIsUpdate">Find new version，whether to update the firmware?</Item>
+<Item name="UpdateFile">Update file</Item>
+<List name="SystemBusName" id="41">[C42]P10  1R1G1B  1/2S  HUB75 32*16</List>
+<List name="SystemBusName" id="42">[C43]P3  1R1G1B  1/16S  HUB75 64*64</List>
+<Item name="UdiskUpgrade">Update by U-disk</Item>
+<Item name="TimingPlay">Timing Start</Item>
+<Item name="SelectVersionOnTheRight">Please select the firmware on the right!</Item>
+<List name="SystemBusName" id="43">[C44]P8  1R1G  1/8S  HUB08 32*32 (WQS)</List>
+<List name="SystemBusName" id="44">[C45]P5  1R1G1B  1/8S  HUB75 32*32 (CXH)</List>
+<Item name="TheSameSegment">Make sure the IP of the control card and the computer is in the same network segment.</Item>
+<Item name="Step">Step</Item>
+<Item name="ShadowMode">Shadow Mode</Item>
+<Item name="3DDeep">3D Deep</Item>
+<Item name="Gradient">Gradient</Item>
+<Item name="Alpha">Transparency</Item>
+<Item name="BorderStyle">Border Style</Item>
+<Item name="RoundRect">Rounded Rectangle</Item>
+<Item name="Octagon">Octagon</Item>
+<Item name="CustomStyle">Custom Style</Item>
+<List name="SystemBusName" id="45">[C46]P10  1R  1/4S  HUB12 32*16</List>
+<Item name="3DText">3D Text</Item>
+<Item name="Whether_to_cancel_the_current_task">Cancel mission or not?</Item>
+<List name="SystemBusName" id="46">[C47]P10-P20   1G2R1B 1/4S  HUB12 32X16  Virtual pixel</List>
+<List name="SystemBusName" id="47">[C48]P10-P20   2R1G1B 1/4S  HUB12 32X16  Virtual pixel</List>
+<List name="SystemBusName" id="48">[C49]P13.33-P26.66  2R1G1B 1/4S  HUB12 24X12 Virtual pixel</List>
+<Item name="SinglePage">Single Page</Item>
+<Item name="TwinkleStyle">Twinkle Style</Item>
+<Item name="TwinkleSpeed">Twinkle Speed</Item>
+<Item name="NoTwinkle">No Twinkle</Item>
+<Item name="3Dtwinkle">3D Twinkle</Item>
+<Item name="SaveCountValue">Remember the last count</Item>
+<Item name="SpecialBorder">Special Border</Item>
+<Item name="BootingDelayWasComingOn">Power on,brighten gradually</Item>
+<Item name="RememberToThoose">Remember the current selection</Item>
+<Item name="EndPageToEndPage">End page to end page</Item>
+<List name="SystemBusName" id="49">[C50]P10  1R 1/1S  HUB08 RXP</List>
+<List name="OutputWindowString" id="70">Click the button to delete programs [ON]</List>
+<List name="OutputWindowString" id="71">Click the button to delete programs [OFF]</List>
+<List name="OutputWindowString" id="72">Parameter Setting  [Enabled]</List>
+<List name="OutputWindowString" id="73">Parameter Setting  [Disabled]</List>
+<Item name="Btn1ClearProgram">Prohibited delete program</Item>
+<Item name="DoubleSidedScreen">Double-sided screen</Item>
+<Item name="networkMonitoring">Monitoring</Item>
+<Item name="Toolbar_Add3D_Bottom">Support background, foreground, colorful words, 3D effects</Item>
+<Item name="Toolbar_Add3D_Top">Add 3D text</Item>
+<List name="SystemBusName" id="50">[C51]P6  1R1G1B 1/5S  HUB75 32X20</List>
+<Item name="WifiSpeedMode1">High-speed mode</Item>
+<Item name="WifiSpeedMode2">Low speed mode</Item>
+<Item name="All the devices automatically obtain IP">All devices are set to "Get IP automatically"</Item>
+<Item name="The firmware information">The firmware information</Item>
+<Item name="The device information">The device information</Item>
+<List name="SystemBusName" id="51">[C52]  1R1G  1/8  KR</List>
+<Item name="Server address">Server address</Item>
+<Item name="User name">User name</Item>
+<Item name="Fill the same">Fill the same</Item>
+<Item name="Cloud server Settings">Cloud server Settings</Item>
+<Item name="Cloud server">Cloud server</Item>
+<Item name="Imsak">Imsak</Item>
+<List name="SystemBusName" id="52">[C53]  1R1G1B  1/4S ICN2038s</List>
+<List name="SystemBusName" id="53">[C54]  P10  1R1G  1/4S HUB12 32x16 (YLR)</List>
+<List name="SystemBusName" id="54">[C55]  P8 1R1G1B 1/5S  HUB75 40X20</List>
+<List name="SystemBusName" id="55">[C56]  P10 1/4S No 138 MCGD</List>
+<List name="SystemBusName" id="56">[C57]  P8 1R1G1B 1/4S HUB75 (JJY)</List>
+<List name="SystemBusName" id="57">[C58]  P13.33 1R1G1B 1/3S HUB75 (LLR)</List>
+<List name="SystemBusName" id="58">[C59]  P3 1R1G1B 1/32S HUB75E (RBG) ICN2038s</List>
+<List name="SystemBusName" id="59">[C60]  P3 1R1G1B 1/32S HUB75E (RGB) ICN2038s</List>
+<List name="SystemBusName" id="60">[C61]  P6 1/8S HUB75 (BGR)</List>
+<List name="SystemBusName" id="61">[C62]  P6 1/8S HUB75 GK</List>
+<List name="SystemBusName" id="62">[C63]  P6 1/8S HUB75(HJ)</List>
+<List name="SystemBusName" id="63">[C64]  P6 1R1G1B 1/8S HUB75</List>
+<List name="SystemBusName" id="64">[C65]  P10 1R 1/4s(YLR)</List>
+<List name="SystemBusName" id="65">[C66]  P10 1R 1/4S HUB12</List>
+<List name="SystemBusName" id="66">[C67]  P10 1R1G1B 1/2S HUB75 (HJ)</List>
+<List name="SystemBusName" id="67">[C68]  P10 1R1G1B 1/2S HUB75 </List>
+<List name="SystemBusName" id="68">[C69]  P10 1R1G1B 1/3S HUB73A 24X24 (KSZ)</List>
+<List name="SystemBusName" id="69">[C70]  P10 1R1G1B 1/4S No 138 HUB75</List>
+<List name="SystemBusName" id="70">[C71]  P13.33 1R1G1B 1/3S 24x12</List>
+<List name="SystemBusName" id="71">[C72]  P16 1R1G 1/4S HUB08</List>
+<List name="SystemBusName" id="72">[C73]  P20 1R1G1B 1S</List>
+<List name="SystemBusName" id="73">[C74]  P10 1R1G1B 1/4S HUB75（KT）</List>
+<List name="SystemBusName" id="74">[C75]  P8  1R1G1B 1/4S HUB75 32x16 No138</List>
+<List name="SystemBusName" id="75">[C76]  P8  1R1G1B 1/4S HUB75 32x16 (HJ)</List>
+<List name="SystemBusName" id="76">[C77]  P10 1R1G1B 1/4S HUB75 32x16 No138</List>
+<List name="SystemBusName" id="77">[C78]  P10 1R1G1B 1/2S HUB75 32x16</List>
+<List name="SystemBusName" id="78">[C79]  P10 1R 1/4S HUB08 32x16</List>
+<List name="SystemBusName" id="79">[C80]  P10 1R1G1B 1/2S HUB75 32x16 (GK)</List>
+<List name="SystemBusName" id="80">[C81]  P10 1R1G1B 1/2S HUB75 32x16 (QL)</List>
+<List name="SystemBusName" id="81">[C82]  P16 1R1G 1/1S HUB12 16x8</List>
+<List name="SystemBusName" id="82">[C83]  P10 1R 1/4S HUB12 32x16 (KT)</List>
+<List name="SystemBusName" id="83">[C84]  P10 1R 1/4S HUB12 32x16 (GK)</List>
+<List name="SystemBusName" id="84">[C85]  P5  1R1G1B 1/8S HUB75 64x32</List>
+<List name="SystemBusName" id="85">[C86]  P10 1R1G1B 1/4S HUB75 32x16 No138 (HJCL)</List>
+<List name="SystemBusName" id="86">[C87]  P10 1R1G1B 1/2S HUB75E 32x16 No138 (HLL)</List>
+<List name="SystemBusName" id="87">[C88]  P10 1R1G1B 1/2S HUB75 32x16 No138</List>
+<List name="SystemBusName" id="88">[C89]  P6.66 1R1G1B 1/6S HUB75 48x24</List>
+<List name="SystemBusName" id="89">[C90]  P8  1R1G1B 1/5S HUB75 40x20</List>
+<List name="SystemBusName" id="90">[C91]  P4 1R1G1B 1/10S HUB75 80x40 ICN2038S</List>
+<List name="SystemBusName" id="91">[C92]  P4  1R1G1B 1/20S HUB75 80x40 ICN2038S</List>
+<List name="SystemBusName" id="92">[C93]  P10 1R1G1B 1/4S HUB75 32x16 No138 ICN2038S</List>
+<List name="SystemBusName" id="93">[C94]  P10 1R1G1B 1/2S  32x16 No138 ICN2038S</List>
+<List name="SystemBusName" id="94">[C95]  P10 1R1G1B 1/5S HUB75 40x20 ICN2038S</List>
+<List name="SystemBusName" id="95">[C96]  P10 1R1G1B 1/5S HUB75 40x20 SM16207S</List>
+<List name="SystemBusName" id="96">[C97]  H10 1R1G1B 1/2S HUB75 32x16</List>
+<List name="SystemBusName" id="97">[C98]  P8  1R1G1B 1/5S HUB75 40x20 ICN20378BP</List>
+<List name="SystemBusName" id="98">[C99]  dz0228 1R1G1B 1/1S HUB75 16x16</List>
+<Item name="ButtonCtrl">Button Control on</Item>
+<Item name="NoUse">Button Control off</Item>
+<Item name="Button1">Button1</Item>
+<Item name="Button2">Button2</Item>
+<Item name="Button3">Button3</Item>
+<Item name="Button4">Button4</Item>
+<Item name="DefaultBackground">DefaultBackground</Item>
+<Item name="ImageBackground">ImageBackground</Item>
+<Item name="SingleProgramSend">SingleProgramSend</Item>
+<Item name="latest">latest</Item>
+<Item name="newdata">newdata</Item>
+<Item name="pray">Pray</Item>
+<Item name="Music">Music</Item>
+<Item name="Aglinment">Căn chỉnh</Item>
+<Item name="LeftAglinment">Căn trái</Item>
+<Item name="CenterAglinment">Căn chỉnh trung tâm</Item>
+<Item name="RightAglinment">Sắp xếp đúng</Item>
+<Item name="SplitType">SplitType</Item>
+<Item name="SingleChar">SingleChar</Item>
+<Item name="Word">Word</Item>
+<Item name="WifiSetting">Wi-Fi Setting</Item>
+<Item name="SettingSuccessfully">SettingSuccessfully</Item>
+<Item name="SettingFailed">SettingFailed</Item>
+<Item name="Connectting">Connectting</Item>
+<Item name="NoFoundAp">NoFoundAp</Item>
+<Item name="ConnectFailed">ConnectFailed</Item>
+<Item name="ConnectOK">ConnectOK</Item>
+<Item name="ApMode">ApMode</Item>
+<Item name="StationMode">StationMode</Item>
+<Item name="WifiPasswordLenghLess">Wi-Fi password is too short</Item>
+<Item name="WifiSSIDIsNULL">Wi-Fi name is empty</Item>
+<Item name="MaskError">MaskError</Item>
+<Item name="IPError">IPError</Item>
+<Item name="WifiSSIDTooLong">Wi-Fi name is too long.</Item>
+<Item name="WifiPasswordTooLong">Wi-Fi password is too long.</Item>
+<Item name="SSIDPasswordInputTips">Only allow input 0~9 a~z A~Z _</Item>
+    <Item name="City">thành phố</Item>
+    <Item name="Date">ngày</Item>
+    <Item name="temp">nhiệt độ</Item>
+    <Item name="Weather">thời tiết</Item>
+    <Item name="Wind Direction">hướng gió</Item>
+    <Item name="Wind speed">vận tốc gió</Item>
+    <Item name="Temp Unit">Đơn vị nhiệt độ</Item>
+    <Item name="America">Hoa Kỳ</Item>
+    <Item name="Australia">Úc</Item>
+    <Item name="Canada">Canada</Item>
+    <Item name="China">đồ sứ</Item>
+    <Item name="India">Ấn Độ</Item>
+    <Item name="Indonesia">Indonesia</Item>
+    <Item name="Iran">Iran</Item>
+    <Item name="Japan">sơn mài Nhật</Item>
+    <Item name="Korea">Hàn Quốc</Item>
+    <Item name="Malaysia">Malaysia</Item>
+    <Item name="Pakistan">Pakistan</Item>
+    <Item name="Peru">Peru</Item>
+    <Item name="Poland">Ba Lan</Item>
+    <Item name="Russia">Nga</Item>
+    <Item name="Spain">Tây Ban Nha</Item>
+    <Item name="Thailand">Thái Lan</Item>
+    <Item name="Turkey">gà tây</Item>
+    <Item name="United Arab Emirates">Ả Rập Saudi</Item>
+    <Item name="Vietnam">Việt Nam</Item>
+    <Item name="Sunny">trong sáng</Item>
+    <Item name="Cloudy">nhiều mây</Item>
+    <Item name="Few clouds">nhiều mây</Item>
+    <Item name="Partly cloudy">Một phần mây</Item>
+    <Item name="Overcast">Yin</Item>
+    <Item name="Windy">nhiều gió</Item>
+    <Item name="Calm">không có gió</Item>
+    <Item name="Light breeze">Gió nhẹ</Item>
+    <Item name="Moderate">Breeze</Item>
+    <Item name="Fresh breeze">Breeze</Item>
+    <Item name="Strong breeze">cây sim</Item>
+    <Item name="High wind">cây sim</Item>
+    <Item name="Gale">cây sim</Item>
+    <Item name="Strong gale">Blast</Item>
+    <Item name="Storm">bão</Item>
+    <Item name="Violent storm">Mad luồng gió</Item>
+    <Item name="Hurricane">bão</Item>
+    <Item name="Tornado">vòi rồng</Item>
+    <Item name="Tropical storm">bão nhiệt đới</Item>
+    <Item name="Shower rain">vòi hoa sen</Item>
+    <Item name="Heavy shower rain">Light Rain Shower</Item>
+    <Item name="Thundershower">giông bão</Item>
+    <Item name="Heavy thunderstorm">dông mạnh</Item>
+    <Item name="Hail">Mưa đá</Item>
+    <Item name="Light rain">mưa rơi nhẹ hột</Item>
+    <Item name="Moderate rain">mưa vừa</Item>
+    <Item name="Heavy rain">mưa lớn</Item>
+    <Item name="Extreme rain">lượng mưa cực đoan</Item>
+    <Item name="Drizzle rain">mưa phùn</Item>
+    <Item name="Storm">bão</Item>
+    <Item name="Heavy storm">mưa lớn</Item>
+    <Item name="Severe storm">mưa lớn</Item>
+    <Item name="Freezing rain">mưa tuyết</Item>
+    <Item name="Light snow">tuyết</Item>
+    <Item name="Moderate snow">tuyết</Item>
+    <Item name="Heavy snow">tuyết</Item>
+    <Item name="Snowstorm">bão tuyết</Item>
+    <Item name="Sleet">mưa tuyết</Item>
+    <Item name="Rain and snow">mưa tuyết</Item>
+    <Item name="Shower snow">mảng mưa đá</Item>
+    <Item name="Snow flurry">tuyết tắm</Item>
+    <Item name="Mist">sương mù</Item>
+    <Item name="Foggy">sương mù</Item>
+    <Item name="Haze">sương mù</Item>
+    <Item name="Sand">cát</Item>
+    <Item name="Dust">bảo cát</Item>
+    <Item name="Duststorm">làm bụi cuốn</Item>
+    <Item name="Sandstorm">bảo cát</Item>
+    <Item name="Hot">nhiệt</Item>
+    <Item name="Cold">lạnh</Item>
+    <Item name="Unknown">không biết</Item>
+    <Item name="Clear">Clear</Item>
+    <Item name="No Sustained Wind">Không có gió bền vững</Item>
+    <Item name="Northeast Wind">vùng ở đông bắc</Item>
+    <Item name="East Wind">East Wind</Item>
+    <Item name="Southeaster Wind">Đông Nam gió</Item>
+    <Item name="South Wind">gió Nam</Item>
+    <Item name="Southwest Wind">Southwest gió</Item>
+    <Item name="Strong wind">cây sim</Item>
+    <Item name="West Wind">về hướng tây</Item>
+    <Item name="Northwest Wind">Tây Bắc gió</Item>
+    <Item name="North Wind">bắc</Item>
+    <Item name="Vortex Wind">xoay gió</Item>
+    <Item name="The Breeze Wind">Breeze</Item>
+    <Item name="No wind">không có gió</Item>
+    <Item name="Light air">không khí ánh sáng</Item>
+    <Item name="Breeze">Breeze</Item>
+    <Item name="Gentle breeze">Breeze</Item>
+    <Item name="Strong wind">cây sim</Item>
+    <Item name="Blast">Blast</Item>
+    <Item name="Gale">cây sim</Item>
+    <Item name="Strong gale">Blast</Item>
+    <Item name="Whole gale">gió khốc liệt</Item>
+    <Item name="Storm wind">bão</Item>
+    <Item name="Hurricane">bão</Item>
+	<Item name="OfflineMode">Offline Mode</Item>
+	<Item name="PleaseSelectDevice">Please select device</Item>
+	<Item name="SeeMoreParameters">See more parameters</Item>
+	<Item name="ExportProgram">Export program</Item>
+	<List name="ErrorTips" id="00">Common problem hints</List>
+	<List name="ErrorTips" id="01">Error / The width and height set in the screen setting exceeds the control range of the controller</List>
+	<List name="ErrorTips" id="02">Error1 / U disk file format error</List>
+	<List name="ErrorTips" id="03">Error2 / Excessive  program content</List>
+	<List name="ErrorTips" id="04">NoFile / No program file in the U disk</List>
+	<List name="ErrorTips" id="05">End / Setting expired</List>
+	<Item name="ColorfulBorder">Colorful border</Item>
+	<Item name="FixedText">Fixed text</Item>
+	<List name="PM25String" id="00">No data</List>
+	<List name="PM25String" id="01">Good</List>
+	<List name="PM25String" id="02">Moderate</List>
+	<List name="PM25String" id="03">Lightly Polluted</List>
+	<List name="PM25String" id="04">Moderately Polluted</List>
+	<List name="PM25String" id="05">Heavily Polluted</List>
+	<List name="PM25String" id="06">Severely Polluted</List>
+	<Item name="BootTips">Boot tips</Item>
+	<Item name="ShowAll">Show all</Item>
+	<Item name="NoShow">No show</Item>
+	<Item name="PM25Adjust">Adjust PM2.5</Item>
+	<Item name="PM10Adjust">Adjust PM10</Item>
+	<Item name="QuickConfig">Quick config</Item>
+	<Item name="Subtitles">Subtitles</Item>
+	<Item name="Toolbar_AddSubtitles_Top">Add Subtitles</Item>
+	<Item name="HelpDoc">Help Doc</Item>
+	<Item name="PrayAutioTip">Khi bạn cần sử dụng mô-đun âm thanh, vui lòng cung cấp nhiều tệp mp3 tương ứng với tên cầu nguyện. Imsak->1.mp3 Fajr->2.mp3 Dhuhr->3.mp3 Asr->4.mp3 Maghrib->5.mp3 Isha->6.mp3 MidNight->7.mp3 .</Item>
+	<Item name="ICSetting">IC setting</Item>
+	<Item name="NormalIC">Normal IC</Item>
+	<Item name="RegisterGroup">Register group</Item>
+	<Item name="RedRegister">Red register</Item>
+	<Item name="GreenRegister">Green register</Item>
+	<Item name="BlueRegister">Blue register</Item>
+	<Item name="HighByte">High byte</Item>
+	<Item name="LowByte">Low byte</Item>
+	<Item name="Confirm Password">Confirm Password</Item>
+<Item name="PasswordInvalidTip">The password must be a number + letter combination with a length of 8~16.</Item>
+<Item name="PasswordUnEqual">The password entered twice is different.</Item>
+<Item name="PasswordTooSimple">The system has detected that the device's Wi-Fi password is too simple. Please reset it.</Item>
+<List name="OutputWindowString" id="75">The system has detected that the device's Wi-Fi password is too simple. Please reset it.</List>
+<Item name="Logout">Logout</Item>
+<Item name="LogoutYesOrNo">Is the user logged out?</Item>
+<Item name="Login">login</Item>
+<Item name="WifiSettingOK">The setting is successful, please reconnect to Wi-Fi.</Item>
+<Item name="UserName">User name</Item>
+<Item name="InputPassword">Input password</Item>
+<Item name="Register">Register</Item>
+<Item name="GetCheckCode">GetCheckCode</Item>
+<Item name="InputCheckCode">Input the check code</Item>
+<Item name="RegisterError">Registration error</Item>
+<Item name="PhoneNum">Cellphone number</Item>
+<Item name="CheckCode">Check code</Item>
+<Item name="ConnectNetwordToUse">Please use the software after connecting to the Internet</Item>
+<Item name="AuthorizedSuccess">Authorized success</Item>
+<Item name="UnsupportedLoginType">Unsupported login type</Item>
+<Item name="CheckCodeNotMatch">Check code does not match</Item>
+<Item name="InputRightPhone">Please enter the correct phone number</Item>
+<Item name="ResetPassword">Reset Password</Item>
+<Item name="PhoneNumError">Wrong format of phone number.</Item>
+<Item name="CheckCodeTimeoutInOneMinute">Verification code cannot be sent repeatedly within one minute</Item>
+<Item name="CheckCodeTimeout">Verification code transmission frequency is exceeded</Item>
+<Item name="CheckCodeSendError">The verification code failed to be sent.</Item>
+<Item name="InvalidToken">Invalid token</Item>
+<Item name="MissingRegInfo">Missing registration information</Item>
+<Item name="AgreeAndAccept">Agreen</Item>
+<Item name="TermsOfService">Services Agreement</Item>
+<Item name="Reacquire">Reacquire</Item>
+<Item name="SettingLoginPassword">Setting login password</Item>
+<Item name="Skip">Skip</Item>
+<Item name="NetworkErrorTip">Network error</Item>
+<Item name="Retry">Retry</Item>
+<Item name="PleaseGetCheckCode">Please get the check code.</Item>
+<Item name="KeepLogin">Keep login</Item>
+<Item name="IsLogoutUser">Logout the current user?</Item>
+<Item name="NotTipsAgin">Do not tips again</Item>
+<Item name="OpenDeviceLock">Enable device lock</Item>
+<Item name="ModifyDeviceLock">Modify device lock</Item>
+<Item name="CloseDeviceLock">Close device lock</Item>
+<Item name="DeviceHasLockedInfo">The device has been locked. Please enter your password.</Item>
+<Item name="DeviceLockPassword">Device lock password</Item>
+<Item name="NoInputNoDeviceLockTip">No password is required when device lock is not enabled.</Item>
+<Item name="UseOldPassword">Use current password</Item>
+<Item name="DeviceLockSetting">Device lock settings</Item>
+<Item name="DeviceLock">Device lock</Item>
+<Item name="KeepPassword">Keep password</Item>
+<Item name="AutoLogin">Auto login</Item>
+<Item name="PleaseInputOldPassword">Please enter the old password</Item>
+<Item name="OldPasswordError">Old password error</Item>
+<Item name="Old Password">Old password</Item>
+<Item name="New Password">New password</Item>
+<Item name="Action">Action</Item>
+
+<List name="OutputWindowString" id="76">The device lock password is incorrect.</List>
+<List name="OutputWindowString" id="77">Missing log content.</List>
+<List name="OutputWindowString" id="78">The machine code is wrong.</List>
+<List name="OutputWindowString" id="79">The length of the machine code is incorrect.</List>
+<List name="OutputWindowString" id="80">The length of the device lock password is incorrect.</List>
+<List name="OutputWindowString" id="81">XR809 is updating</List>
+<List name="OutputWindowString" id="82">XR809 idnvalid address</List>
+<List name="OutputWindowString" id="83">XR809 error</List>
+<List name="OutputWindowString" id="84">Start reading parameters</List>
+<List name="OutputWindowString" id="85">Finish reading parameters</List>
+<List name="OutputWindowString" id="86">Start to restore parameters</List>
+<List name="OutputWindowString" id="87">The parameters have been restored</List>
+<List name="OutputWindowString" id="88">The download is complete and is waiting to recover data.</List>
+<Item name="UseWechatQRCode">Use WeChat to scan the QR code</Item>
+<Item name="Activate">Activate</Item>
+<Item name="ActivateOffline">Activate offline</Item>
+<Item name="PleaseInputActiveCode">Please enter the activation code</Item>
+<Item name="ErrorActivateCode">Wrong activation code</Item>
+<Item name="NTPSetting">cài đặt thời gian mạng</Item>
+<Item name="NetworkSame">Make sure that the device IP and router IP are on the same network segment.</Item>
+<List name="SystemBusName" id="99">[C100]  P10 28x16 8 quét 8 điểm rút thăm</List>
+	</language>
+</root>                                                                                                                                                                                                                                                                                          

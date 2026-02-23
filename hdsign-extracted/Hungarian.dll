@@ -1,0 +1,1609 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<root>
+<language name="Hungarian">
+<Item name="ABrighterThanB">A fényesebb, mint B</Item>
+<Item name="About">Rólunk</Item>
+<Item name="AbrightBoff">A fehér A, míg B fekete</Item>
+<Item name="Add">Hozzáadás</Item>
+<Item name="Add File">Fájl hozzáadása</Item>
+<Item name="Add GIF">GIF hozzáadása</Item>
+<Item name="AddFailed">Hozzáadás sikertelen</Item>
+<Item name="AddFile">Fájl hozzáadása</Item>
+<Item name="AddGroup">Csoport hozzáadása</Item>
+<Item name="AddHypertext">Hiperszöveg hozzáadása</Item>
+<Item name="AddItemID">ID hozzáadása</Item>
+<Item name="AddPicture">Kép hozzáadása</Item>
+<Item name="AddProgram">Program hozzáadása</Item>
+<Item name="AddRegion">Terület hozzáadása</Item>
+<Item name="AddSuccess">Sikeresen hozzáadva</Item>
+<Item name="AdjustTime">Idő beállítása</Item>
+<Item name="AdvancedSetting">Haladó beállítások</Item>
+<Item name="AdvancedSettings">Haladó beállítások</Item>
+<Item name="AlignCenter">Középre igazítás</Item>
+<Item name="AlignRight">Jobbra igazítás</Item>
+<Item name="Alignment">Igazítás típusa</Item>
+<Item name="All">Összes</Item>
+<Item name="Allow">Engedélyez</Item>
+<Item name="AllowPasswordAuthentication">Engedélyezze a jelszóval történő hitelesítést fontos beállításokhoz.</Item>
+<Item name="AlreadyOpened">Ez a képernyő már meg van nyitva.</Item>
+<Item name="AlterBaudrate">Baudráta módosítása</Item>
+<Item name="AntiClockwise rotation">Óramutató járásával ellentétes</Item>
+<Item name="AreaBackground">Terület háttér</Item>
+<Item name="AreaDown">Terület lefelé</Item>
+<Item name="AreaLeft">Terület balra</Item>
+<Item name="AreaMaximize">Terület maximalizálva</Item>
+<Item name="AreaNoBorder">Kereszt képernyő nem támogatja a keretet globális programhoz</Item>
+<Item name="AreaRight">Terület jobbra</Item>
+<Item name="AreaUp">Terület felfelé</Item>
+<Item name="Associated">Társítva</Item>
+<Item name="AutoAdjustTime">Idő automatikus beállítása</Item>
+<Item name="AutoGetingIP">IP automatikus beszerzése</Item>
+<Item name="AutoHide">Automatikus elrejtés</Item>
+<Item name="AutoReSend">Automatikus újraküldés</Item>
+<Item name="AutoSave">Automatikus mentés</Item>
+<Item name="AutoScanInterval">Automatikus keresési idő</Item>
+<Item name="AutoScanMode">Automatikus keresési mód</Item>
+<Item name="AutoSearchScans">Automatikus keresés a keresési módban</Item>
+<Item name="AutoSwitching">Automatikus váltás</Item>
+<Item name="AutoUpdate">Automatikus frissítések</Item>
+<Item name="Automatic">Automatikus</Item>
+<Item name="AutomaticInfo">Az automatikus beállítási funkció használatakor győződjön meg róla, hogy telepítve van a fényérzékelő.</Item>
+<Item name="BBrighterThanA">B fényesebb, mint A</Item>
+<Item name="Background">Háttér</Item>
+<Item name="BackgroundColor">Háttérszín</Item>
+<Item name="BackgroundSetting">Háttér beállítások</Item>
+<Item name="platform">platform</Item>
+<List name="BackgroupEffects" id="0">Véletlenszerű</List>
+<List name="BackgroupEffects" id="10">Kicsi zoom</List>
+<List name="BackgroupEffects" id="11">Légies</List>
+<List name="BackgroupEffects" id="12">Keresztbe</List>
+<List name="BackgroupEffects" id="13">Egyenlő</List>
+<List name="BackgroupEffects" id="14">Reflex</List>
+<List name="BackgroupEffects" id="15">Pislákolás</List>
+<List name="BackgroupEffects" id="16">Egyszínű</List>
+<List name="BackgroupEffects" id="17">Szalag nyitás/zárás</List>
+<List name="BackgroupEffects" id="18">Körkörös terjedés</List>
+<List name="BackgroupEffects" id="19">Gyémánt alakú terjedés</List>
+<List name="BackgroupEffects" id="1">Statikus</List>
+<List name="BackgroupEffects" id="20">Véletlen keresztvonal</List>
+<List name="BackgroupEffects" id="21">Görbe vonal</List>
+<List name="BackgroupEffects" id="2">Balra mozog</List>
+<List name="BackgroupEffects" id="3">Jobbra mozog</List>
+<List name="BackgroupEffects" id="4">Felfelé mozog</List>
+<List name="BackgroupEffects" id="5">Lefelé mozog</List>
+<List name="BackgroupEffects" id="6">Balra mozog, majd jobbra</List>
+<List name="BackgroupEffects" id="7">Középről nyitva vízszintesen</List>
+<List name="BackgroupEffects" id="8">Zárás mindkét oldalról</List>
+<List name="BackgroupEffects" id="9">Nagyítás</List>
+<List name="platformList" id="hdplatform.huidu.cn">Kiadási platform</List>
+<Item name="BasicInfoSet">Alapbeállítás</Item>
+<Item name="BasicPara">Alap paraméterek</Item>
+<Item name="BasicSetting">Alapbeállítások</Item>
+<Item name="Baudrate">Baudráta</Item>
+<Item name="BbrightAoff">A fekete, míg B fehér</Item>
+<Item name="Begin">Kezdés</Item>
+<Item name="Begin Play">Indítás</Item>
+<Item name="BeginIpAddr">Kezdő IP</Item>
+<Item name="Black">Fekete</Item>
+<Item name="Blue">Kék</Item>
+<Item name="Boot">Indítási állapot</Item>
+<Item name="BootStatus">A vezérlő kártya jelenleg indítási állapotban van, várja a firmware frissítését, kérjük, frissítse a firmware-t először!</Item>
+<Item name="Border">Határ</Item>
+<Item name="BorderColor">Határ színe</Item>
+<Item name="BorderSetting">Határ beállítása</Item>
+<Item name="BorderWidth">Határ szélessége</Item>
+<Item name="BorderWidthExceeds">A határ szélessége meghaladja.</Item>
+<Item name="BorderWidthOutOfRange">A határ szélessége kívül esik a tartományon!</Item>
+<Item name="BoundDevice">Kötött eszköz</Item>
+<Item name="Broadcast">Közvetítés</Item>
+<Item name="BuildArea">Építési terület</Item>
+<Item name="Built-inUnitBoard">Általános egységpanel</Item>
+<Item name="BusEdit">Szerkesztés</Item>
+<Item name="BusImage">Egységpanel képek</Item>
+<Item name="BusName">Név</Item>
+<Item name="BusNew">Új</Item>
+<Item name="BusView">Nézet</Item>
+<Item name="Busy">Foglalt</Item>
+<Item name="Button">Gomb</Item>
+<Item name="ButtonDownTiming">Gomb lenyomás</Item>
+<Item name="ButtonSettings">Gomb 1</Item>
+<Item name="ButtonSettings2">Gomb 2</Item>
+<Item name="ButtonSettings3">Gomb 3</Item>
+<Item name="ButtonSettings4">Gomb 4</Item>
+<Item name="ButtonSwitch">Gomb a váltáshoz</Item>
+<Item name="ButtonTiming">Gomb időzítés</Item>
+<Item name="ButtonUpTiming">Gomb számolás felfelé</Item>
+<Item name="ButtonorPlaySet">Gomb beállítások</Item>
+<Item name="CLKMirror">CLK polaritás</Item>
+<Item name="CLKWidth">CLK szélesség</Item>
+<Item name="COM">COM Port</Item>
+<Item name="COMERROR">Kapcsolat sikertelen, ellenőrizze, hogy nincsenek-e rövidzárlatok a 2,3 lábak között?</Item>
+<Item name="COMINFO">Kommunikáció</Item>
+<Item name="COMURL">COM URL:http://huidu.wicp.net </Item>
+<Item name="CPUModelError">CPU modell hibás!</Item>
+<Item name="CanNotFindTheDefaultProfile">Nem található az alapértelmezett konfigurációs fájl.</Item>
+<Item name="Cancel">Mégse</Item>
+<Item name="CannotFindNetWordDrive">Nincs található hálózati eszköz!</Item>
+<Item name="CannotOpenExcle">Nem lehet megnyitni az Excelt, kérjük, ellenőrizze, hogy telepítve van-e!</Item>
+<Item name="CardIpSeting">Kártya IP beállítása</Item>
+<Item name="CardModel">Kártya modell</Item>
+<Item name="CardNumber">Kártya típusa</Item>
+<Item name="CardOnlySupportFullColor">A firmware csak hét színt támogat.</Item>
+<Item name="CardOnlySupportTwoColor">A firmware csak egy és két színt támogat.</Item>
+<Item name="CardRestart">Újraindítás</Item>
+<Item name="CardVersion">Kártya verzió</Item>
+<Item name="Center">Középre</Item>
+<Item name="CenterAlign">Középre</Item>
+<Item name="CfwBackgroundEdit">Animációs háttér</Item>
+<Item name="Change">Változtatás</Item>
+<Item name="Channel">Csatorna</Item>
+<Item name="CharSpacing">Karakter távolság</Item>
+<Item name="CheckAll">Összes kiválasztása</Item>
+<Item name="CheckProgram">Program kiválasztása</Item>
+<Item name="ChecksumError">Ellenőrző összeg hibás!</Item>
+<Item name="ChooseDeive">Eszköz kiválasztása</Item>
+<Item name="ClassicBackground">Kép háttér</Item>
+<Item name="Clear">Képernyő törlése</Item>
+<List name="ClearEffects" id="0">Törlés azonnal</List>
+<List name="ClearEffects" id="10">Felfelé és lefelé bezárva</List>
+<List name="ClearEffects" id="11">Horizontálisan középről nyitva</List>
+<List name="ClearEffects" id="12">Két oldalról zárva</List>
+<List name="ClearEffects" id="13">Függőleges redőnyök</List>
+<List name="ClearEffects" id="14">Vízszintes redőnyök</List>
+<List name="ClearEffects" id="15">Bal oldalra</List>
+<List name="ClearEffects" id="16">Jobb oldalra</List>
+<List name="ClearEffects" id="17">Ventilátor ki</List>
+<List name="ClearEffects" id="18">Ventilátor zárva</List>
+<List name="ClearEffects" id="19">Óramutató járásával megegyezően lefedve</List>
+<List name="ClearEffects" id="1">Balra mozgás</List>
+<List name="ClearEffects" id="200">Véletlenszerű</List>
+<List name="ClearEffects" id="201">Ne törölje</List>
+<List name="ClearEffects" id="20">Órajárással ellentétes fedés</List>
+<List name="ClearEffects" id="21">Vízszintesen keverve</List>
+<List name="ClearEffects" id="22">Feljebb gördül</List>
+<List name="ClearEffects" id="23">Lefelé gördül</List>
+<List name="ClearEffects" id="24">Balra gördül</List>
+<List name="ClearEffects" id="25">Jobbra gördül</List>
+<List name="ClearEffects" id="26">Vízszintes rácsok</List>
+<List name="ClearEffects" id="27">Függőleges rácsok</List>
+<List name="ClearEffects" id="2">Jobbra mozog</List>
+<List name="ClearEffects" id="3">Felfelé mozog</List>
+<List name="ClearEffects" id="4">Lefelé mozog</List>
+<List name="ClearEffects" id="5">Befedés balról</List>
+<List name="ClearEffects" id="6">Befedés jobbról</List>
+<List name="ClearEffects" id="7">Befedés fentről</List>
+<List name="ClearEffects" id="8">Befedés lentről</List>
+<List name="ClearEffects" id="9">Középről függőlegesen nyitva</List>
+<Item name="ClearScreeData">K meglévő megjelenítést törölni?</Item>
+<Item name="Clock">Óra</Item>
+<Item name="ClockFrequency">Óra frekvencia</Item>
+<Item name="ClockParameters">Óra jellemzők</Item>
+<Item name="Clockwise rotation">Órajárás szerinti</Item>
+<Item name="Close">Bezárás</Item>
+<Item name="CloseScreen">Képernyő bezárása</Item>
+<Item name="Color">Szín</Item>
+<Item name="ColorChannel">Színcsatorna</Item>
+<Item name="ColorChannelSet">Színcsatorna beállítás</Item>
+<Item name="ColorFilter">Színkorrekció</Item>
+<Item name="ColorInversion">Színfordítás</Item>
+<Item name="ColorSingleSelect">Szín egyedi kiválasztás</Item>
+<Item name="ColorThreshold">Színküszöb</Item>
+<Item name="ColorfulText">Animáció</Item>
+<List name="ColorfulWordEffects" id="0">Statikus megjelenítés</List>
+<List name="ColorfulWordEffects" id="10">Függőleges fordítás</List>
+<List name="ColorfulWordEffects" id="11">Vízszintes fordítás</List>
+<List name="ColorfulWordEffects" id="12">Zommolás</List>
+<List name="ColorfulWordEffects" id="13">Folyamatos mozgás balra</List>
+<List name="ColorfulWordEffects" id="14">Folyamatos mozgás jobbra</List>
+<List name="ColorfulWordEffects" id="15">Folyamatos mozgás felfelé</List>
+<List name="ColorfulWordEffects" id="16">Folyamatos mozgás lefelé</List>
+<List name="ColorfulWordEffects" id="17">2D zoom be</List>
+<List name="ColorfulWordEffects" id="18">2D zoom ki</List>
+<List name="ColorfulWordEffects" id="1">Szinuszhullám</List>
+<List name="ColorfulWordEffects" id="2">Szó forgatása</List>
+<List name="ColorfulWordEffects" id="3">Balról belevág</List>
+<List name="ColorfulWordEffects" id="4">Jobbról belevág</List>
+<List name="ColorfulWordEffects" id="5">Pislákolás</List>
+<List name="ColorfulWordEffects" id="6">Szó szerinti kimenet</List>
+<List name="ColorfulWordEffects" id="7">Körbeforgás</List>
+<List name="ColorfulWordEffects" id="8">Rugalmasság szöveg</List>
+<List name="ColorfulWordEffects" id="9">Hintázás</List>
+<Item name="Column">Oszlop</Item>
+<Item name="CommStatus1">Jó kapcsolat</Item>
+<Item name="CommStatus2">Normális kapcsolat</Item>
+<Item name="CommStatus3">Kapcsolat gyenge, de csatlakoztatható.</Item>
+<Item name="CommStatus4">Nem tud kapcsolódni</Item>
+<Item name="CommTest">Hálózati teszt</Item>
+<Item name="Command">Parancs</Item>
+<Item name="CommandSmartSetting">Panel vizsgálat</Item>
+<Item name="CommonSettings">Általános beállítások</Item>
+<Item name="CommunicationMode">Kommunikáció</Item>
+<Item name="CommunicationSetting">Kommunikációs beállítások</Item>
+<Item name="ConfirmRGBwidth">Egy RGB adat által vezérelt vonalak</Item>
+<Item name="ConfirmScanMode">A beolvasási mód meghatározása</Item>
+<Item name="Connected">Kapcsolódva</Item>
+<Item name="ConnectionSuccessful">Kapcsolódás sikeres</Item>
+<Item name="ContainOverlappingRegions">Tartalmaz átfedő területeket</Item>
+<Item name="ContentContainMultiLines">Ez a hatás nem támogatja a táblázatot, törölni szeretné?</Item>
+<Item name="ContinueMove">Folyamatos mozgás</Item>
+<Item name="ContinueMoveUp">Folyamatos mozgás felfelé</Item>
+<Item name="Copy">Másolás</Item>
+<Item name="Copyright">Szerzői jog: Shenzhen Huidu Technology Co., Ltd.</Item>
+<Item name="Count">Számláló</Item>
+<Item name="Count1">Digit</Item>
+<Item name="CountAdd">digit plusz</Item>
+<Item name="CountColor">Érték szín</Item>
+<Item name="CountDown">digit csökkent</Item>
+<Item name="CountReset">Számláló visszaállítása</Item>
+<Item name="CountSub">digit csökkent</Item>
+<Item name="CountUp">digit növel</Item>
+<Item name="CradID">Eszköz azonosító</Item>
+<Item name="CradName">Eszköz név</Item>
+<Item name="CrossBottom">Alja</Item>
+<Item name="CrossCenter">Középen</Item>
+<Item name="CrossGlobalProgram">Globális program</Item>
+<Item name="CrossNoSupport">A globális program nem támogatott ezen a területen.</Item>
+<Item name="CrossScreen">Átlépés képernyőre</Item>
+<Item name="CrossScreenParamsPageTip">1. A képernyő szélességének és magasságának beállítása 3 lépés; &#x000A;2. Válassza ki a képernyő színét;</Item>
+<Item name="CrossScreenSetting">Átlépés képernyő beállításai</Item>
+<Item name="CrossSmartTip">A jelenlegi képernyő normál szöveget mutat, nincs szükség intelligens beállításra</Item>
+<Item name="CrossTop">Fent</Item>
+<Item name="CurrentSel">Jelenleg kiválasztott nyelv</Item>
+<Item name="Custom">Egyedi</Item>
+<Item name="CustomIPTips">Ha a vezérlőkártya tűzfal által blokkolva van, kérjük, töltse ki az IP címet manuálisan.</Item>
+<Item name="CustomTime">Időszakos szabályozás</Item>
+<Item name="CustomUnitBoard">Egyedi egységpanel</Item>
+<Item name="CustomizeIP">Egyedi (TCP)</Item>
+<Item name="Cut">Vág</Item>
+<Item name="Cyan">Ciklámen</Item>
+<Item name="CycleTiming">Ciklus időzítés</Item>
+<Item name="DHCPDNSAddr">DNS cím</Item>
+<Item name="DHCPGateway">DHCP alapértelmezett átjáró</Item>
+<Item name="DHCPLease">DHCP bérleti idő</Item>
+<Item name="DHCPMask">DHCP alhálózati maszk</Item>
+<Item name="DHCPServerAddr">DHCP szerver címe</Item>
+<Item name="Data">Adatok</Item>
+<Item name="DataClearSuccess">Az adatok sikeresen törölve.</Item>
+<Item name="DataFill">"Az adat meghaladja!"</Item>
+<Item name="DataLenght">Adathossz</Item>
+<Item name="DataLengthError">A csomag hossza hibás!</Item>
+<Item name="DataMirror">Adat tükör</Item>
+<Item name="DataPolarity">Adat polaritás</Item>
+<Item name="DataPolaritySet">Adat polaritás beállítása</Item>
+<Item name="DataSource">Adatforrás</Item>
+<Item name="DateAndWeekLocationReplaced">Dátum és hét helyének felcserélése</Item>
+<Item name="Day">Nap</Item>
+<Item name="Default">Alapértelmezett</Item>
+<Item name="DefaultConnectDeviceType">Az alapértelmezett kapcsolódási mód</Item>
+<Item name="DelayedSignal">Késleltetett jel</Item>
+<Item name="DeleteFailed">Törlés sikertelen</Item>
+<Item name="DeleteScreen">Képernyő törlése</Item>
+<Item name="DeleteSuccess">Törlés sikeres</Item>
+<Item name="DeleteThisData">Törölni az összes programot a vezérlőkártyáról?</Item>
+<Item name="DeleteThisFile">Törölni ezt a fájlt?</Item>
+<Item name="DeleteThisProgram">Törölni ezt a programot?</Item>
+<Item name="DeleteThisRegion">Törölni ezt a területet?</Item>
+<Item name="Deny">Letiltás</Item>
+<Item name="DestFile">Cél fájl</Item>
+<Item name="DestIP">Cél IP </Item>
+<Item name="Detailed">Részletes...</Item>
+<Item name="Detect">Észlelés</Item>
+<Item name="DetectDevice">Eszköz észlelése</Item>
+<Item name="DetectFail">Az észlelés sikertelen!</Item>
+<Item name="DetectSuccess">Az észlelés sikeres!</Item>
+<Item name="Detecting">Észlelés...</Item>
+<Item name="DetectsThisFileWasNotSaved">A jelenleg kiválasztott fájl észlelve, de nincs elmentve, ha felülírja</Item>
+<Item name="Deviation">Páratartalom kalibrálás</Item>
+<Item name="Device">Kivehető eszköz</Item>
+<Item name="DeviceChoosePageTip">1. Használjon U-lemezt, kérjük, válassza ki a vezérlőtípust; &#x000A;2. Megjelenik az eszköz neve és a vezérlő azonosítója; &#x000A;3. Ha csak egy eszköz található, kattintson a következőre.</Item>
+<Item name="DeviceID">Eszköz azonosító</Item>
+<Item name="DeviceManage">Eszköz kezelés</Item>
+<Item name="DeviceName">Eszköz neve</Item>
+<Item name="DialClock">Óra</Item>
+<Item name="DialStyle">Óra stílus</Item>
+<Item name="DialWeek">Hét</Item>
+<Item name="DialYear">Dátum</Item>
+<Item name="DigitOnly">Csak szám</Item>
+<Item name="Digital">Digitális</Item>
+<Item name="Direction">Irány</Item>
+<Item name="DisableBrightnessAdjustment">Fényerő-szabályozás letiltása</Item>
+<Item name="Disconnected">Kapcsolat megszakítva</Item>
+<Item name="DiskSpace">Lemezterület:</Item>
+<Item name="Display">Kijelző</Item>
+<List name="DisplayEffects" id="40">Statikus megjelenítés</List>
+<List name="DisplayEffects" id="0">Azonnali megjelenítés</List>
+<List name="DisplayEffects" id="10">Felfelé és lefelé zárás</List>
+<List name="DisplayEffects" id="11">Középről vízszintesen nyitva</List>
+<List name="DisplayEffects" id="12">Mindkét oldalról zárás</List>
+<List name="DisplayEffects" id="14">Függőleges redők</List>
+<List name="DisplayEffects" id="13">Vízszintes redők</List>
+<List name="DisplayEffects" id="15">Balra lapozás</List>
+<List name="DisplayEffects" id="16">Jobbra lapozás</List>
+<List name="DisplayEffects" id="17">Szétfújás</List>
+<List name="DisplayEffects" id="18">Összefújás</List>
+<List name="DisplayEffects" id="19">Óramutató járásával megegyező zárás</List>
+<List name="DisplayEffects" id="1">Balra mozgatás</List>
+<List name="DisplayEffects" id="200">Véletlenszerű</List>
+<List name="DisplayEffects" id="202">Folyamatos balra mozgatás</List>
+<List name="DisplayEffects" id="203">Folyamatos jobbra mozgatás</List>
+<List name="DisplayEffects" id="204">Folyamatos felfelé mozgatás</List>
+<List name="DisplayEffects" id="20">Óramutató járásával ellentétes zárás</List>
+<List name="DisplayEffects" id="21">Vízszintes szórás</List>
+<List name="DisplayEffects" id="23">Felfelé görgetés</List>
+<List name="DisplayEffects" id="22">Lefelé görgetés</List>
+<List name="DisplayEffects" id="25">Balra görgetés</List>
+<List name="DisplayEffects" id="24">Jobbra görgetés</List>
+<List name="DisplayEffects" id="26">Vízszintes rácsok</List>
+<List name="DisplayEffects" id="27">Függőleges rácsok</List>
+<List name="DisplayEffects" id="28">Hó</List>
+<List name="DisplayEffects" id="29">Hullás</List>
+<List name="DisplayEffects" id="2">Jobbra mozgatás</List>
+<List name="DisplayEffects" id="30">Hó (visszafelé)</List>
+<List name="DisplayEffects" id="31">Hullás (visszafelé)</List>
+<List name="DisplayEffects" id="32">Lézer balra</List>
+<List name="DisplayEffects" id="33">Lézer jobbra</List>
+<List name="DisplayEffects" id="34">Pislákolás</List>
+<List name="DisplayEffects" id="35">Fehér-inverz pislákolás</List>
+<List name="DisplayEffects" id="36">Lehúzás</List>
+<List name="DisplayEffects" id="37">Felhúzás</List>
+<List name="DisplayEffects" id="38">Függőleges lehúzás</List>
+<List name="DisplayEffects" id="39">Felfordítás</List>
+<List name="DisplayEffects" id="3">Felfelé mozgatás</List>
+<List name="DisplayEffects" id="4">Lefelé mozgatás</List>
+<List name="DisplayEffects" id="5">Balra takarás</List>
+<List name="DisplayEffects" id="6">Jobbra takarás</List>
+<List name="DisplayEffects" id="7">Felfelé takarás</List>
+<List name="DisplayEffects" id="8">Lefelé takarás</List>
+<List name="DisplayEffects" id="9">Középről függőlegesen nyitva</List>
+<Item name="DisplayState">Kijelző állapot</Item>
+<Item name="Dll_Add">Összegzés</Item>
+<Item name="Dll_Data">Adat</Item>
+<Item name="Docking">Dokkolás</Item>
+<Item name="DonotTips">Ne figyelmeztessen</Item>
+<Item name="DontChange">Ne változtass</Item>
+<Item name="DownloadSpeed">Letöltési sebesség</Item>
+<Item name="Dwell">Megállás</Item>
+<Item name="Edit">Szerkesztés</Item>
+<Item name="EditingLanguage">Nyelvszerkesztő</Item>
+<Item name="Editor">Szerkesztő</Item>
+<Item name="Effect">Hatás</Item>
+<Item name="Effect Cover">Takarás</Item>
+<Item name="Effect Drift">Hó</Item>
+<Item name="Effect FanShaped">Redőny</Item>
+<Item name="Effect Flicker">Pislákolás</Item>
+<Item name="Effect Laser">Lézer</Item>
+<Item name="Effect Move">Mozgás</Item>
+<Item name="Effect OpenAndClose">Nyit-zár</Item>
+<Item name="Effect PageTurning">Oldal</Item>
+<Item name="Effect Pull">Húzás</Item>
+<Item name="Effect Roll">Gurulás</Item>
+<Item name="Effect WaterFall">Vízfolyás</Item>
+<Item name="EffectSetting">Effektus beállítások</Item>
+<Item name="EffectType">Effektusok típusai</Item>
+<Item name="EliminateGhosting">Vonal eltüntetése</Item>
+<Item name="Empty">Üres</Item>
+<Item name="EmptyScreen">Képernyő ürítése</Item>
+<Item name="Enable">Engedélyezés</Item>
+<Item name="EnableDhcp">DHCP engedélyezése</Item>
+<Item name="End Play">Vége</Item>
+<Item name="EndIpAddr">Vég IP</Item>
+<Item name="EndToEnd">Végponttól végpontig</Item>
+<Item name="English">Angol</Item>
+<Item name="Equilibrium">Egyensúly</Item>
+<Item name="Error">Hiba</Item>
+<Item name="EthSettingHelpA">Közvetlenül módosítsa a szoftver kapcsolódó beállításait, ne módosítsa az eszköz címét.</Item>
+<Item name="EthSettingHelpB">Megjegyzés:&#x000A;1. A szoftver és az eszköz címei együtt fognak változni a beállítások sikeres végrehajtása után.&#x000A;2. Amikor több eszköz csatlakozik egyszerre, kérjük, győződjön meg róla, hogy az eszköz MAC címe egyedi.</Item>
+<Item name="Ethernet">Ethernet</Item>
+<Item name="EthernetAddressSettingSuccess">Ethernet cím sikeresen beállítva.</Item>
+<Item name="EthernetSettingInfo">Megjegyzés: E funkció használata során kérjük, győződjön meg róla, hogy a LAN csak egy vezérlő kártyához csatlakozik.</Item>
+<Item name="Example">Példa</Item>
+<Item name="ExitDownloading">Frissítési fájl letöltése alatt áll, szeretnék kilépni?</Item>
+<Item name="ExpiredVerification">Lejárt, szükséges a jelszó</Item>
+<Item name="ExporBus">Egység panel paramétereinek exportálása</Item>
+<Item name="ExporBusIn">Egység panel paramétereinek importálása</Item>
+<Item name="Export">U lemez</Item>
+<Item name="ExportAdjustTimeFile">Időbeállító fájl exportálása</Item>
+<Item name="ExportFile">Fájl exportálása</Item>
+<Item name="ExportFileFail">A fájl exportálása sikertelen!</Item>
+<Item name="ExportImport">Importálás és exportálás</Item>
+<Item name="ExportParam">Exportálás</Item>
+<Item name="ExportScreenFile">Képernyőfájl exportálása</Item>
+<Item name="ExportSetedParams">A paraméterek exportálása</Item>
+<Item name="ExportSuccess">Sikeres exportálás, szeretnék felugró üzenetet az U lemezhez?</Item>
+<Item name="ExportSuccess1">Sikeres exportálás ide:</Item>
+<Item name="ExportSuccess2">!</Item>
+<Item name="ExportToUDisk">Exportálás U lemezre</Item>
+<Item name="Fahrenheit">Fok F</Item>
+<Item name="Fast">Gyors</Item>
+<Item name="Fastest">Leggyorsabb</Item>
+<Item name="FeatureNavigator">Funkcionális navigáció</Item>
+<Item name="File">Fájl</Item>
+<Item name="FileConfigurationError">A fájl hibásan van konfigurálva!</Item>
+<Item name="FileConfigurationPackageSentSuccessfully">A fájl konfigurációs csomag sikeresen elküldve.</Item>
+<Item name="FileDoesNotMatch">A fájl nem megfelelő.</Item>
+<Item name="FileList">Fájl lista</Item>
+<Item name="FileMisidentified">A fájl helytelenül azonosítva!</Item>
+<Item name="FileParametersError">A fájl paraméter hibás!(A képernyő szélessége vagy magassága meghaladja, vagy a szín hibás.)</Item>
+<Item name="FileSendComplete">A fájl sikeresen elküldve.</Item>
+<Item name="FileSize">Fájl méret</Item>
+<Item name="FileSuccessfullyReceived">A fájl sikeresen fogadva.</Item>
+<Item name="FillingTheCurrentLanguage">A jelenlegi nyelv kitöltése</Item>
+<Item name="FilterColor">Szűrő szín</Item>
+<Item name="FindNewVersion">Új verzió felfedezve, szeretné letölteni a frissítést?</Item>
+<Item name="FindScree">Képernyő keresése</Item>
+<Item name="FindSerial">A soros port keresése, amely csatlakozik a vezérlő kártyához.</Item>
+<Item name="Finish">Befejezés</Item>
+<Item name="FinishTracingPoint">A nyomkövetési pont befejeződött.</Item>
+<Item name="FirmwareMismatching">Firmware eltérés</Item>
+<Item name="FirmwareVersion">Firmware verzió</Item>
+<Item name="FirstPage">Első oldal</Item>
+<Item name="FitMaxHint">Régió maximalizálva</Item>
+<Item name="FixedCellsWidth">Rögzített cella szélesség</Item>
+<Item name="FixedPlay">Rögzített műsorok</Item>
+<Item name="FixedTime">Rögzített idő</Item>
+<Item name="Flash">SWF</Item>
+<Item name="Floating">Lebegő</Item>
+<Item name="FlushLeft">Balra igazítás</Item>
+<Item name="Font">Betűtípus</Item>
+<Item name="FontSize">Betűméret</Item>
+<Item name="Foreground">Előtér</Item>
+<Item name="FoundDisk">Felfedezett a külső eszköz!</Item>
+<Item name="FramesTooMuch">Túl sok keret, kérjük csökkentse!</Item>
+<Item name="FreeSpace">Szabad hely</Item>
+<Item name="Frequency">Frekvencia beállítás</Item>
+<Item name="Friday">Péntek</Item>
+<Item name="From">Tól</Item>
+<Item name="From Max To Min">Max-tól Min-ig</Item>
+<Item name="From Min To Max">Min-től Max-ig</Item>
+<Item name="GIF name">GIF elérési út</Item>
+<Item name="GammaCorrection">Gamma korrekció</Item>
+<Item name="GaryTip1">Csökkentse a vezérlési tartományt 1/</Item>
+<Item name="General2">Általános2</Item>
+<Item name="General4">Általános4</Item>
+<Item name="General6">Általános6</Item>
+<Item name="GeneratingData">Adatok generálása</Item>
+<Item name="GetFirmwareVersion">Firmware verzió lekérése</Item>
+<Item name="GetSystemTime">Rendszeridő lekérése</Item>
+<Item name="Graph">Grafikon</Item>
+<Item name="GraphCount">Mennyiség</Item>
+<Item name="GrayLevel">Szürke szint</Item>
+<Item name="Green">Zöld</Item>
+<Item name="HDScreenFile">HD Képernyőfájl</Item>
+<Item name="HZoom">Szint nyújtás</Item>
+<Item name="Height">Magasság</Item>
+<Item name="HeightOfMoreTthan">„A magasság meghaladja a maximális értéket!”</Item>
+<Item name="Hide">Rejtés</Item>
+<Item name="High">Magas</Item>
+<Item name="Hollow">Üreges</Item>
+<Item name="Horizontal">Vízszintes pozíció</Item>
+<Item name="Hour">Óra</Item>
+<Item name="HourHand">Óra mutató</Item>
+<Item name="HourRadius">Óra sugár</Item>
+<Item name="Humidity">Páratartalom</Item>
+<Item name="IDAlreadyExists">ID már létezik</Item>
+<Item name="IDAndContentCanNotBeEmpty">Az ID és a tartalom nem lehet üres</Item>
+<Item name="IDInputError">Az ID hibás</Item>
+<Item name="IPAddress">IP cím</Item>
+<Item name="IPNotLegitimate">Az IP nem érvényes</Item>
+<Item name="IPResetting">IP alaphelyzetbe állítása</Item>
+<Item name="IPSetting">IP beállítás</Item>
+<Item name="Idle">Tétlen</Item>
+<Item name="IllegalFile">Jogosulatlan fájl</Item>
+<Item name="Image">Kép</Item>
+<Item name="ImageAuto">Képstílus</Item>
+<Item name="Images">Képek</Item>
+<Item name="ImportParam">Importálás</Item>
+<Item name="ImportScreenFile">Képernyőfájl importálása</Item>
+<Item name="IncompleteDataWriting">Hiányos adatírás</Item>
+<Item name="Index">Sorszám</Item>
+<Item name="InfraredRay">Infravörös sugár</Item>
+<Item name="InitialState">Kezdeti állapot</Item>
+<Item name="InitializeSuccess">Sikeres inicializálás</Item>
+<Item name="InputSmartSettingName">Kérjük, adja meg a Smart beállítás nevét</Item>
+<Item name="Insert">Beszúrás</Item>
+<Item name="InsertColumn">Oszlop beszúrása</Item>
+<Item name="InsertRow">Sor beszúrása</Item>
+<Item name="Inverse">Válassza az inverz lehetőséget</Item>
+<Item name="IsDeleteAllScreen">Törölni kívánja az összes megjelenítést?</Item>
+<Item name="IsExportVideo">Kívánja exportálni a videót?</Item>
+<Item name="IsSaveFile">Menteni szeretné a fájlt?</Item>
+<Item name="IsSendToCard">El kívánja küldeni a vezérlőkártyára?</Item>
+<Item name="IsTheLatestVersion">A legfrissebb verzió már telepítve van.</Item>
+<Item name="Large">Nagy</Item>
+<Item name="LastPage">Utolsó oldal</Item>
+<Item name="LeftToRight">Balra-&gt;Jobbra</Item>
+<Item name="LevelScreenshot">Horizontális képernyőkép</Item>
+<Item name="LightRows">Megvilágított sorok egy modulban</Item>
+<Item name="LineSpacing">Sorköz</Item>
+<Item name="Link">Hivatkozás</Item>
+<Item name="LinkState">Kapcsolati állapot</Item>
+<Item name="LiveTime">Élő idő</Item>
+<Item name="LocalDisck">Helyi lemez</Item>
+<Item name="LocalIpSeting">Helyi IP beállítás</Item>
+<Item name="LockPara">Paraméterek lezárása</Item>
+<Item name="Low">Alacsony</Item>
+<Item name="LuminancePrior">Fényerő első</Item>
+<Item name="LuminanceSetting">Fényerő beállítások</Item>
+<Item name="LuminanceSettingSuccess">A fényerő sikeresen beállítva.</Item>
+<Item name="MACAddress">MAC cím</Item>
+<Item name="MFRDate">Gyártási dátum</Item>
+<Item name="Max">Max</Item>
+<Item name="MaxIPAddr">Maximális TP cím</Item>
+<Item name="MaxUseImage">Kép a maximumhoz</Item>
+<Item name="MaximumOfHeight">Maximális magasság</Item>
+<Item name="MaximumOfRange">Maximális tartomány</Item>
+<Item name="MaximumOfRegions">Maximális régiók</Item>
+<Item name="MaximumOfWidth">Maximális szélesség</Item>
+<Item name="Memory">Memória</Item>
+<Item name="Memory Size">Fájlméret</Item>
+<Item name="MergeCells">Cellák egyesítése</Item>
+<Item name="Middle">Közepes</Item>
+<Item name="Min">Min</Item>
+<Item name="MinIPAddr">Minimális IP cím</Item>
+<Item name="MinUseImage">Kép a minimumhoz</Item>
+<Item name="MinuteHand">Perc mutató</Item>
+<Item name="Model">Kártya</Item>
+<Item name="ModificationFails">Módosítás nem sikerült</Item>
+<Item name="Modify">Módosít</Item>
+<Item name="ModifyItemID">Módosítási azonosító</Item>
+<Item name="ModifyOnlyOneItem">Csak egy azonosító módosítása</Item>
+<Item name="Module">Modul</Item>
+<Item name="ModuleMismatching">A vezérlőkártya típusa nem megfelelő.</Item>
+<Item name="ModuleSelect">Modul kiválasztása</Item>
+<Item name="Monday">Hétfő</Item>
+<Item name="MoreSetting">További beállítások</Item>
+<Item name="MoreSettings">További beállítások-&gt;&gt;</Item>
+<Item name="MoveDown">Lefelé mozgatás</Item>
+<Item name="MoveUp">Felfelé mozgatás</Item>
+<Item name="Multi">Több</Item>
+<Item name="MultiFrame">Többkeretes kép</Item>
+<Item name="MultiLine">Többsoros megjelenítés</Item>
+<Item name="MultiScreenDirectConnect">Több képernyős mód</Item>
+<Item name="MultipeSend">Többszörös küldés</Item>
+<Item name="MultipeSendHint">A többszörös küldés csak Ethernet (fix IP) módban érvényes.</Item>
+<Item name="MultipleEffects">Több effektus</Item>
+<Item name="MultipleLinesoftext">Többsoros szöveg</Item>
+<Item name="NICName">NIC név</Item>
+<Item name="Name">Név</Item>
+<Item name="NeedSensor">Szenzorok szükségesek</Item>
+<Item name="NeedSpace">Szükséges hely</Item>
+<Item name="NetMark">Alhálózati maszk</Item>
+<Item name="NetWorkError">A jelenlegi vezérlőkártya csak kompakt módban használható, kérjük, ellenőrizze, hogy a vezérlőkártya ugyanabban a hálózati szegmensben van-e, mint a számítógép!</Item>
+<Item name="NewCrossScreen">Új keresztképernyő(&amp;C)</Item>
+<Item name="NewCrossScreen_G">Új keresztképernyő</Item>
+<Item name="NewGuideScreen">Új képernyő útmutató alapján</Item>
+<Item name="NewHypertext">Új hiperhivatkozás</Item>
+<Item name="NewNormalScreen_G">Új normál képernyő</Item>
+<Item name="NewScreen">Új képernyő</Item>
+<Item name="NewTable">Új táblázat</Item>
+<Item name="Next">Következő</Item>
+<Item name="NextPage">Következő oldal</Item>
+<Item name="NextProgram">Következő programra váltás</Item>
+<Item name="NextScan">Következő</Item>
+<Item name="NoAssociation">Nincs társítás</Item>
+<Item name="NoBorder">Nincs határ</Item>
+<Item name="NoFind">Nem található</Item>
+<Item name="NoFile">A fájl nem létezik!</Item>
+<Item name="NoFindConfigFiles">Nem található a képernyő paraméter fájl, folytatni?</Item>
+<Item name="NoFoundDisk">Nincs eltávolítható eszköz találva!</Item>
+<Item name="NoInstallFlash">Kérjük, ellenőrizze, hogy telepítve van-e az Adobe Flash Player!</Item>
+<Item name="NoLimit">Nincs korlátozás</Item>
+<Item name="NoSerial">Nem található a vezérlőkártya a soros porthoz csatlakoztatva.</Item>
+<Item name="NoSerialConnection">Nincs soros port csatlakoztatva</Item>
+<Item name="Noarea">Program hiánya, a küldés meghiúsult!</Item>
+<Item name="Noitemisselected">Nincs kiválasztva semmi</Item>
+<Item name="NormalShow">Lejátszás rendje</Item>
+<Item name="NotSelected">Nincs kiválasztva</Item>
+<Item name="NotSupportGlobalProgram">A szokásos képernyő nem támogatja a globális programot</Item>
+<Item name="NotSupportLANUpgrade">Ez a modell nem támogatja az Ethernetet, kérjük, használja a soros portot vagy USB meghajtót a firmware frissítéséhez!</Item>
+<Item name="NotSupportTips">Tipp: Nem támogatja az időt, az új tárcsát, a hőmérsékletet és páratartalmat, a holdnaptárt</Item>
+<Item name="NumberOfProgramHasReachedItsMaximum">A programok száma elérte a maximális értéket!</Item>
+<Item name="NumberOfRegionHasReachedItsMaximum">A régiók száma elérte a maximális értéket!</Item>
+<Item name="OEPolarity">OE polaritás</Item>
+<Item name="OEPolaritySet">OE polaritás beállítása</Item>
+<Item name="OK">OK</Item>
+<Item name="Offline">Offline</Item>
+<Item name="OldVerCard">Keresés Gen4</Item>
+<Item name="On-line">Online</Item>
+<Item name="OnBottom">Beszúrás alá</Item>
+<Item name="OnLeft">Balra</Item>
+<Item name="OnRight">Jobbra</Item>
+<Item name="OnTop">Beszúrás felül</Item>
+<Item name="OnlyAllowContainsAClockRegion">Csak óra régiót tartalmazhat!</Item>
+<Item name="OnlyAllowContainsATempRegion">Csak hőmérséklet régiót tartalmazhat!</Item>
+<Item name="OnlyAllowContainsATimeRegion">Csak idő régiót tartalmazhat!</Item>
+<Item name="OnlyCard">Csak kártyához</Item>
+<Item name="Open">Megnyitás</Item>
+<Item name="OpenAdv">Hirdetés megnyitása</Item>
+<Item name="OpenFileFail">Nem lehet megnyitni a fájlt, kérjük, ellenőrizze, hogy foglalt-e!</Item>
+<Item name="OpenFolder">Mappa megnyitása</Item>
+<Item name="OpenScreen">Képernyő megnyitása</Item>
+<Item name="OperationSuccess">Sikeres művelet</Item>
+<Item name="Orange">Narancs</Item>
+<Item name="OriginX">Eredeti X</Item>
+<Item name="OriginY">Eredeti Y</Item>
+<Item name="Original">Eredeti</Item>
+<Item name="OtherSeting">Egyéb beállítások</Item>
+<Item name="Out">Info</Item>
+<Item name="OutOfMemory">A vezérlőkártya memóriája nem elegendő, kérjük, csökkentse a programot!</Item>
+<Item name="OutOfShowMemory">Nincs memória, csökkentse a területet.</Item>
+<List name="OutputWindowString" id="0">Beolvasott berendezések</List>
+<List name="OutputWindowString" id="10">A vezérlőkártya neve sikeresen beállítva</List>
+<List name="OutputWindowString" id="11">Képernyő sikeresen törölve</List>
+<List name="OutputWindowString" id="12">Képernyő paraméterek sikeresen beállítva</List>
+<List name="OutputWindowString" id="13">A vezérlőkártya időbeállítása sikeresen megtörtént</List>
+<List name="OutputWindowString" id="14">Fényerő beállítása sikeresen megtörtént</List>
+<List name="OutputWindowString" id="15">Időkapcsoló beállítása sikeresen megtörtént</List>
+<List name="OutputWindowString" id="16">Tesztelés alatt...</List>
+<List name="OutputWindowString" id="17">Ismeretlen parancs</List>
+<List name="OutputWindowString" id="18">Nincs hardverparaméter</List>
+<List name="OutputWindowString" id="19">Érvénytelen parancs</List>
+<List name="OutputWindowString" id="1">Eszköz információk lekérése.</List>
+<List name="OutputWindowString" id="20">Rendszer elfoglalt</List>
+<List name="OutputWindowString" id="21">Fej hossza hiba</List>
+<List name="OutputWindowString" id="22">Jelkép helytelen</List>
+<List name="OutputWindowString" id="23">Szám helytelen</List>
+<List name="OutputWindowString" id="24">Nincsenek képernyőparaméterek</List>
+<List name="OutputWindowString" id="25">Csomag hiba</List>
+<List name="OutputWindowString" id="26">Ismeretlen hiba</List>
+<List name="OutputWindowString" id="27">Küldési időtúllépés</List>
+<List name="OutputWindowString" id="28">Visszajelző csomag elemzési hiba</List>
+<List name="OutputWindowString" id="29">IP sikeresen módosítva</List>
+<List name="OutputWindowString" id="2">Eszköz offline</List>
+<List name="OutputWindowString" id="30">Firmware frissítése sikertelen, kérlek próbáld újra</List>
+<List name="OutputWindowString" id="31">Beállítás sikertelen</List>
+<List name="OutputWindowString" id="32">Ellenőrzési hiba</List>
+<List name="OutputWindowString" id="33">Protokoll hiba</List>
+<List name="OutputWindowString" id="34">Utasítás hiba</List>
+<List name="OutputWindowString" id="35">Fájl nem egyezik</List>
+<List name="OutputWindowString" id="36">Csomagszám hiba</List>
+<List name="OutputWindowString" id="37">Modul típus eltérés</List>
+<List name="OutputWindowString" id="38">Fájl konfigurációs hiba</List>
+<List name="OutputWindowString" id="39">Jogosulatlan fájl</List>
+<List name="OutputWindowString" id="3">Kérlek válaszd ki a küldeni kívánt képernyőt</List>
+<List name="OutputWindowString" id="40">CPU típus hiba</List>
+<List name="OutputWindowString" id="41">A firmware csak trikolorot támogat, nem támogatja az egy- és kétszínűt</List>
+<List name="OutputWindowString" id="42">A firmware csak egy- és kétszínűt támogat, nem támogatja a trikolort</List>
+<List name="OutputWindowString" id="43">Sikeresen frissítve</List>
+<List name="OutputWindowString" id="44">Fogadás sikertelen</List>
+<List name="OutputWindowString" id="45">Csomag hosszúsági hiba</List>
+<List name="OutputWindowString" id="46">Fájl azonosítási hiba</List>
+<List name="OutputWindowString" id="47">Al-csomag sorrend hiba</List>
+<List name="OutputWindowString" id="49">Fájl sikeresen megkapva</List>
+<List name="OutputWindowString" id="4">Válaszd a képernyőt, amelyhez az eszközt kötni szeretnéd</List>
+<List name="OutputWindowString" id="50">Késleltetett jel</List>
+<List name="OutputWindowString" id="51">Rendszer foglalt</List>
+<List name="OutputWindowString" id="52">Adatok hiányosan íródnak</List>
+<List name="OutputWindowString" id="53">Firmware frissítése sikeres!</List>
+<List name="OutputWindowString" id="54">Hardver paraméterek sikeresen beállítva</List>
+<List name="OutputWindowString" id="55">Az eszköz, amelyhez a kötelék offline</List>
+<List name="OutputWindowString" id="56">A képernyőméret beállítása helytelen.</List>
+<List name="OutputWindowString" id="57">Küldés megkezdése</List>
+<List name="OutputWindowString" id="58">Beállítás sikeres</List>
+<List name="OutputWindowString" id="59">Szolgáltatás lejárt</List>
+<List name="OutputWindowString" id="5">A program adatai túl nagyok</List>
+<List name="OutputWindowString" id="60">Betűtípus sikeresen megváltoztatva</List>
+<List name="OutputWindowString" id="61">Közvetlen kapcsolat sikeresen beállítva</List>
+<List name="OutputWindowString" id="62">Közvetlen kapcsolat sikeresen megszüntetve</List>
+<List name="OutputWindowString" id="63">Az eszköz boot állapotban van, kérlek frissítsd a firmware-t</List>
+<List name="OutputWindowString" id="64">Az ellenőrzés nem sikerült</List>
+<List name="OutputWindowString" id="65">Nincs visszatérés</List>
+<List name="OutputWindowString" id="66">A fájl túl nagy</List>
+<List name="OutputWindowString" id="67">A vezérlő kártya azonosítója hibás</List>
+<List name="OutputWindowString" id="68">Érvénytelen eszközazonosító [%s]</List>
+<List name="OutputWindowString" id="69">Reset eszközazonosító [%s]</List>
+<List name="OutputWindowString" id="70">Kattintson a gombra a programok törléséhez [BE]</List>
+<List name="OutputWindowString" id="71">Kattintson a gombra a programok törléséhez [KI]</List>
+<List name="OutputWindowString" id="72">Paraméter beállítás [Engedélyezve]</List>
+<List name="OutputWindowString" id="73">Paraméter beállítás [Letiltva]</List>
+<List name="OutputWindowString" id="6">A parancs sikeresen végrehajtva</List>
+<List name="OutputWindowString" id="7">Küldés inicializálás</List>
+<List name="OutputWindowString" id="8">Küldés...</List>
+<List name="OutputWindowString" id="9">Sikeresen elküldve</List>
+<Item name="Btn1ClearProgram">Program törlése tilos</Item>
+<Item name="DoubleSidedScreen">Kétoldalas kijelző</Item>
+<Item name="networkMonitoring">Monitoring</Item>
+<Item name="P10Colorful">M10 (Színes)</Item>
+<Item name="Pack">Kép csomag</Item>
+<Item name="PackageNumberError">A csomagszám hibás!</Item>
+<Item name="Packet">Csomag</Item>
+<Item name="PacketError">A csomag hibás!</Item>
+<Item name="PacketSize">Csomag mérete</Item>
+<Item name="Page">Oldal</Item>
+<Item name="Pages">Oldalak</Item>
+<Item name="PannelFill">"A terület már létezik!"</Item>
+<Item name="ParallelSend">Párhuzamos küldés</Item>
+<Item name="ParametersReadbackSuccess">Sikeresen visszaolvastuk a paramétereket</Item>
+<Item name="ParametersSetting">Paraméter beállítások</Item>
+<Item name="Parti-color">Többszínű</Item>
+<Item name="Password">Jelszó</Item>
+<Item name="PasswordAuthentication">Jelszó hitelesítés</Item>
+<Item name="PasswordError">A jelszó hibás!</Item>
+<Item name="PasswordSetting">Jelszó beállítások</Item>
+<Item name="Paste">Beillesztés</Item>
+<Item name="Path">Útvonal</Item>
+<Item name="Pause">Szünet</Item>
+<Item name="PictrueProcessing">Kép feldolgozás</Item>
+<Item name="PlaseSelectDevice">Kérjük, válasszon eszközt!</Item>
+<Item name="Play">Lejátszás</Item>
+<Item name="PlayBeforePowerProgram">Memória utolsó megjelenítés</Item>
+<Item name="PlayMemory Size">Lejátszási fájl mérete</Item>
+<Item name="PlayMode">Lejátszási mód</Item>
+<Item name="PlayQuality">A simaság</Item>
+<Item name="PlaySpeed">Lejátszási sebesség</Item>
+<Item name="PlayTime">Lejátszási idő</Item>
+<Item name="PlayTimes">Lejátszások száma</Item>
+<Item name="Playback Duration">Lejátszási időtartam</Item>
+<Item name="Player">Lejátszó</Item>
+<Item name="Playing BeginFrames">Lejátszás kezdő kerete</Item>
+<Item name="Playing EndFrames">Lejátszás vég kerete</Item>
+<Item name="Playing Frames">Lejátszási keretek</Item>
+<Item name="PleaseEnterTheBorderWidthOfTheTable">Kérjük, adja meg a táblázat szegélyszélességét.</Item>
+<Item name="PleaseEnterTheNumberOfCloumns">Kérjük, adja meg az oszlopok számát.</Item>
+<Item name="PleaseEnterTheNumberOfRows">Kérjük, adja meg a sorok számát.</Item>
+<Item name="PleaseSelect">Kérjük, válasszon</Item>
+<Item name="PleaseSelectAFile">Kérjük, válasszon egy fájlt!</Item>
+<Item name="PleaseSelectAItem">Kérjük, válasszon egy elemet, ha a szkennelési eredmény üres, kérjük, ellenőrizze a sort!</Item>
+<Item name="PleaseSelectAProgram">Kérjük, válasszon egy programot!</Item>
+<Item name="PleaseSelectScreen">Kérjük, válassza ki a kijelzőt.</Item>
+<Item name="PleaseWait">Kérjük, várjon...</Item>
+<Item name="PlotPointsImage">Pontok ábrázolása</Item>
+<Item name="PointCount">Tizedesjegyek</Item>
+<Item name="Points">Kijelző pontok</Item>
+<Item name="PopUdiskfailure">Nem sikerült megnyitni az U lemezt!</Item>
+<Item name="Port">Port</Item>
+<Item name="PreProgram">Vissza az előző programhoz</Item>
+<Item name="PreProgramConctrl">Program vezérlés</Item>
+<Item name="Prev">Vissza</Item>
+<Item name="PrevScan">Előző</Item>
+<Item name="Preview">Előnézet</Item>
+<Item name="PreviewSetting">Előnézeti beállítások</Item>
+<Item name="PreviousPage">Előző oldal</Item>
+<Item name="ProgramInformation">Program információ</Item>
+<Item name="ProgramSize">Program méret</Item>
+<Item name="ProgramSwitching">Program váltás</Item>
+<Item name="ProtocolError">Hibás protokoll!</Item>
+<Item name="ProtocolTypeError">Hibás protokoll típus!</Item>
+<Item name="PullThreshold">Vonzó</Item>
+<Item name="QRCode">QR kód</Item>
+<Item name="QuitTest">Kilépés a tesztből</Item>
+<Item name="RFID">RF ID</Item>
+<Item name="RFSetting">RF beállítások</Item>
+<Item name="RS232">RS232</Item>
+<Item name="RadioEffect">Egyszeri effektusok</Item>
+<Item name="RandomColor">Véletlenszerű szín</Item>
+<Item name="ReadBack2">Visszaolvasás</Item>
+<Item name="ReadScreenParamsFromUDisk">Kijelző paraméterek importálása U lemezről</Item>
+<Item name="Readback">Visszaolvasás</Item>
+<Item name="RealTimeArea">Valós idejű terület</Item>
+<Item name="RealTimeFindCard">Valós idejű kártyakeresés</Item>
+<Item name="RebootScreen">Képernyő újraindítása</Item>
+<Item name="ReceiveFailure">A vétel sikertelen!</Item>
+<Item name="Record">Felvétel</Item>
+<Item name="RecordTips">Megjegyzés: Ha nem tudja megkapni a helyes képet, ellenőrizze a felvételi lehetőségeket.</Item>
+<Item name="RectangleScreen">Téglalap képernyő</Item>
+<Item name="Red">Piros</Item>
+<Item name="Refresh">Frissítés</Item>
+<Item name="RefreshFrequency">Frissítési gyakoriság</Item>
+<Item name="RefreshRate">Frissítési arány</Item>
+<Item name="RegionHeight">Magasság</Item>
+<Item name="RegionRect">Terület pozíció</Item>
+<Item name="RegionWidth">Szélesség</Item>
+<Item name="Relevance">Kérjük, lépjen be a "Menü-&gt; Művelet-&gt; Kommunikációs beállítások-&gt; TCP-&gt; Kijelző társítása" menüpontba!</Item>
+<Item name="RememberProgram">Program megjegyzése</Item>
+<Item name="Remove">Törlés</Item>
+<Item name="RemoveDevice">Eszköz eltávolítása</Item>
+<Item name="RemoveDeviceSuccess1">Sikeresen eltávolítva</Item>
+<Item name="RemoveDeviceSuccess2">!</Item>
+<Item name="RemoveItemID">ID eltávolítása</Item>
+<Item name="Rename">Átnevezés</Item>
+<Item name="Repeat">Ismétlés</Item>
+<Item name="Reset">Visszaállítás</Item>
+<Item name="ResetProgram">Program visszaállítása</Item>
+<Item name="RestartFailed">Újraindítás sikertelen</Item>
+<Item name="RestartSuccess">A vezérlő kártya sikeresen újraindult</Item>
+<Item name="RevertToDefaultSettings">Visszaállítás az alapértelmezett beállításokra, folytatja?</Item>
+<Item name="RightToLeft">Jobbról balra</Item>
+<Item name="Romaji">Roman betűk</Item>
+<Item name="Round">Kör</Item>
+<Item name="RoundAndDigital">Kör + Digitális</Item>
+<Item name="RoundAndRomaji">Kör + Roman betűk</Item>
+<Item name="RouterAddress">Alapértelmezett átjáró</Item>
+<Item name="Row">Sor</Item>
+<Item name="SRCFile">Forrásfájl</Item>
+<Item name="SWF name">SWF útvonal</Item>
+<Item name="Saturday">Szombat</Item>
+<Item name="Save">Mentés</Item>
+<Item name="SaveToDefaultSetting">Mentés alapértelmezett beállításként</Item>
+<Item name="ScaleAndDigital">Skála + Digit</Item>
+<Item name="ScaleAndRomaji">Skála + Roman betűk</Item>
+<Item name="ScanMode">Beolvasási mód</Item>
+<Item name="ScanRange">Beolvasási küszöb</Item>
+<Item name="ScanValueB">Kék szűrés</Item>
+<Item name="ScanValueG">Zöld szűrés</Item>
+<Item name="ScanValueR">Piros szűrés</Item>
+<Item name="Scanning">Beolvasás</Item>
+<Item name="ScanningComplete">Beolvasás befejezve.</Item>
+<Item name="Schedule">Ütemterv</Item>
+<Item name="ScreenCentered">Képernyő középre</Item>
+<Item name="ScreenChoosePageTip">Válaszd ki a képernyő típusát</Item>
+<Item name="ScreenColor">Szín</Item>
+<Item name="ScreenCount">Csatlakoztatott képernyők mennyisége</Item>
+<Item name="ScreenHeight">Magasság</Item>
+<Item name="ScreenInformation">Képernyő információ</Item>
+<Item name="ScreenParameters">Képernyő paraméterek</Item>
+<Item name="ScreenParametersSetting">Képernyő paraméterek beállítása</Item>
+<Item name="ScreenParamsPageTip">1. Válaszd ki a képernyő szélességét és magasságát (A szélesség és magasság a képernyő teljes pixel számát jelenti)&#x000A;2. Válaszd ki a képernyő színét;&#x000A;3. Az egyes képernyő teljes pixel száma a LED lámpák mennyisége.</Item>
+<Item name="ScreenSize">Képernyő mérete</Item>
+<Item name="ScreenSmartTip">A jelenlegi képernyő normál szöveget mutat, nincs szükség okos beállításra</Item>
+<Item name="ScreenTest">Képernyő teszt</Item>
+<Item name="ScreenType">A képernyő típusa</Item>
+<Item name="ScreenWidth">Szélesség</Item>
+<Item name="Search">Keresés</Item>
+<Item name="Searching">Keresés...</Item>
+<Item name="SearchingBegin">Keresés</Item>
+<Item name="SearchingEnd">Keresés befejezve.</Item>
+<Item name="Sec">Mp</Item>
+<Item name="SecondHand">Másodperc mutató</Item>
+<Item name="SecondRadius">Másodperc sugár</Item>
+<Item name="SelectDataPolarity">Kérjük, válaszd ki az adatok polaritását</Item>
+<Item name="SelectDefault">Ha nem tudod a vezérlőkártya típusát, válaszd az alapértelmezett lehetőséget.</Item>
+<Item name="SelectMode">Mód választás</Item>
+<Item name="SelectOEPolarity">Kérjük, válaszd ki az OE polaritását</Item>
+<Item name="SelectScan">"Kérjük, válaszd ki a beolvasási módot!"</Item>
+<Item name="SelectScree">Kérjük, válaszd ki a megfelelő képernyőt!</Item>
+<Item name="SendFile">Fájl küldése</Item>
+<Item name="SendParamsWhenFinish">A paraméterek módosítása után kérjük, kattints a "Paraméterek küldése" gombra.</Item>
+<Item name="SendScreenParams">Paraméterek küldése</Item>
+<Item name="SendTimeOut">Küldési időtúllépés</Item>
+<Item name="SendingData">Adatok küldése ...</Item>
+<Item name="SentSuccessfully">Sikeresen elküldve</Item>
+<Item name="SerialNumber">Szám.</Item>
+<Item name="SerialPort">Sorport beállítások</Item>
+<Item name="SerialPortIsClosed">A sorportra csatlakoztatott LED vezérlőkártya nem található.</Item>
+<Item name="SerialPortIsOccupied">A sorport foglalt!</Item>
+<Item name="SerialPortOpenError">A sorport megnyitása nem sikerült!</Item>
+<Item name="ServiceExpiration">Szolgáltatás lejárat</Item>
+<Item name="SetBrightnessFailed">A fényerő beállítása nem sikerült!</Item>
+<Item name="SetBrightnessSuccess">Fényerő sikeresen beállítva</Item>
+<Item name="SetScreenParam">A képernyő paramétereit sikeresen beállították</Item>
+<Item name="SetTheBaudrateSuccessfully">A baudráta sikeresen beállítva</Item>
+<Item name="Setting">Beállítások</Item>
+<Item name="SetupFailed">A beállítások nem sikerültek!</Item>
+<Item name="ShowDate">Dátum megjelenítése</Item>
+<Item name="ShowGroup">Csoport megjelenítése</Item>
+<Item name="ShowMode">Kijelző mód</Item>
+<Item name="ShowOnlyControlCardWifi">Csak a vezérlőkártya Wi-Fi megjelenítése</Item>
+<Item name="ShowTime">Idő megjelenítése</Item>
+<Item name="ShowType">Kijelzési módszer</Item>
+<Item name="ShowWeek">Hét megjelenítése</Item>
+<Item name="Showpage">Oldal megjelenítése</Item>
+<Item name="ShuttingDown">Leállítás</Item>
+<Item name="SignalDelay">Rögzített polaritás</Item>
+<Item name="SignalDelayHint">Néhány képernyő (például néhány P5) rögzített STR vagy LAT jelei megfordulnak más képernyőkhöz képest. Ha villogó pont vagy vonal van, próbáld meg ezt az opciót deaktiválni.</Item>
+<Item name="SignalQuality">Jelminőség</Item>
+<Item name="Simplify">Egyszerű mód (UDP)</Item>
+<Item name="SimplifyInfo">Az egyszerű mód csak egyetlen közvetlen csatlakozásra és LAN-ra alkalmazható egy vezérlőkártyával, az IP cím automatikusan illeszkedik ezekben az esetekben.</Item>
+<Item name="Single">Egyszerű</Item>
+<Item name="SingleDirectMode">Közvetlen csatlakozási mód</Item>
+<Item name="SingleLine">Egysoros kijelző</Item>
+<Item name="SingleLineoftext">Egysoros szöveg</Item>
+<Item name="SingleScreenBroadcasts">Másoló mód</Item>
+<Item name="Size">Méret</Item>
+<Item name="Slow">Lassú</Item>
+<Item name="Slowest">A leglassabb</Item>
+<Item name="Small">Kicsi</Item>
+<Item name="SmartScanTips">Ha a képernyő sötét és világos, csökkentsd a clock frekvenciát.</Item>
+<Item name="SmartSetting">Okos beállítás</Item>
+<Item name="SmartSettingName">Okos beállítás neve</Item>
+<Item name="SmartTips">Tipp: egy pixel mint egység</Item>
+<Item name="Snapshot">Képernyőkép</Item>
+<Item name="SnapshotTip">Ha nincsenek világító pontok, helyezzen be üres pontokat</Item>
+<Item name="Solid color">Egyszínű</Item>
+<Item name="Space">Térköz</Item>
+<Item name="SpecifiedDate">Megadott dátum</Item>
+<Item name="SpecifiedTime">Megadott idő</Item>
+<Item name="SpecifyValue">Érték megadása</Item>
+<Item name="Speed">Sebesség</Item>
+<Item name="SpeedPrior">Sebesség első</Item>
+<Item name="SplitCell">Oszd fel a cellát</Item>
+<Item name="SplitHorizontal">Függőlegesen oszd fel</Item>
+<Item name="SplitVertical">Vízszintesen oszd fel</Item>
+<Item name="Standard">Alapértelmezett</Item>
+<Item name="StartUpImage">Indító animáció</Item>
+<Item name="StartingUp">Indulás</Item>
+<Item name="StateA">Állapot A</Item>
+<Item name="StateB">Állapot B</Item>
+<Item name="StateC">Állapot C</Item>
+<Item name="StateD">Állapot D</Item>
+<Item name="Static">Statikus</Item>
+<Item name="Status">Állapot</Item>
+<Item name="StepBack">Visszavonás</Item>
+<Item name="Stop">Megállítás</Item>
+<Item name="Stroke">Vonal</Item>
+<Item name="StyleName">Hatás neve</Item>
+<Item name="StyleText">Szöveg</Item>
+<Item name="SubPacketSequenceNumberError">A részcsomag sorozatszáma hibás!</Item>
+<Item name="SuccessfullyModified">Sikeresen módosítva</Item>
+<Item name="Sunday">Vasárnap</Item>
+<Item name="SupportRegionsOverlap">Támogatja a régiók átfedését</Item>
+<Item name="SuspendPreview">Előnézet szüneteltetése</Item>
+<Item name="SwapBlueGreen">Kék és zöld felcserélése</Item>
+<List name="SystemBusName" id="0">[C1]φ4.75(φ3.75)1R1G   1/16S HUB08 64X32（Indoor）  [A1]</List>
+<List name="SystemBusName" id="10">[C11]P10       1R1G1B 1/8S  HUB08 32X16 HLL</List>
+<List name="SystemBusName" id="11">[C12]P10       1R1G1B 1/4S  HUB75 32X16  [A13]</List>
+<List name="SystemBusName" id="12">[C13]P8        1R1G1B 1/5S   HUB75 40X20 JHG  [A60]</List>
+<List name="SystemBusName" id="13">[C14]P8        1R1G1B 1/4S  HUB08 32X16  [A8]</List>
+<List name="SystemBusName" id="14">[C15]P12/P16   2R1G   1/4S  HUB12 16X8（P16） [A12]</List>
+<List name="SystemBusName" id="15">[C16]P13.33    1R1G1B 1/3S  HUB08 24X12 HLL  [A49]</List>
+<List name="SystemBusName" id="16">[C17]P13.33    1R1G1B 1/3S  HUB08 24X12 JHG  [A57]</List>
+<List name="SystemBusName" id="17">[C18]P16       1R1G1B 1/5S  HUB08 20X10 HLL  [A52]</List>
+<List name="SystemBusName" id="18">[C19]P16       1R1G1B 1/1S  HUB40 16X8  [A29]</List>
+<List name="SystemBusName" id="19">[C20]P10       1R1G1B 1/4S  HUB75 32X16  [A11]</List>
+<List name="SystemBusName" id="1">[C2]φ3.75(φ5)1R     1/16S HUB08 64X32（Indoor）  [A1]</List>
+<List name="SystemBusName" id="20">[C21]P25       2R1G1B 1/1S  HUB40 16X8</List>
+<List name="SystemBusName" id="21">[C22]P10-P20   1G2R1B 1/4S  HUB12 16X8  [A61]</List>
+<List name="SystemBusName" id="22">[C23]P10-P20   2R1G1B 1/4S  HUB12 16X8  [A80]</List>
+<List name="SystemBusName" id="23">[C24]P13.33-P26.66  2R1G1B 1/4S  HUB12 12X6</List>
+<List name="SystemBusName" id="24">[C25]P20  1R1G 1/4S  HUB26 16*16（ZHGD） [A66]</List>
+<List name="SystemBusName" id="25">[C26]P13.33  1R1G1B 1/6S  HUB08 24*12（HLL） [A55]</List>
+<List name="SystemBusName" id="26">[C27]P10  1R 1/4S  HUB12 32*16（QL） [A19]</List>
+<List name="SystemBusName" id="27">[C28]P10  1R1G1B 1/2S  HUB75 16*16</List>
+<List name="SystemBusName" id="28">[C29]P6  1R1G1B 1/8S  HUB75 32*16</List>
+<List name="SystemBusName" id="29">[C30]P6  1R1G1B 1/8S  HUB75 32*32</List>
+<List name="SystemBusName" id="2">[C3]P5         1R1G1B 1/16S HUB08 32X32  [A3]</List>
+<List name="SystemBusName" id="35">[C36]P10  1R1G1B 1/4S  HUB75 16*16</List>
+<List name="SystemBusName" id="31">[C32]P20  1R1G1B 1/1S  HUB75 16*8</List>
+<List name="SystemBusName" id="32">[C33]P25  2R1G1B 1/1S  HUB75 8*8  [A30]</List>
+<List name="SystemBusName" id="33">[C34]P13.33  1R 1/4S  HUB12 24*12 [A71]</List>
+<List name="SystemBusName" id="34">[C35]P10  1R1G 1/4S  HUB12 32*16  [A7]</List>
+<List name="SystemBusName" id="37">[C38]P7.62  1R1G1B 1/8S  HUB08 32*16</List>
+<List name="SystemBusName" id="38">[C39]P5   1R1G1B   1/8S  HUB75 32*16 [A4]</List>
+<List name="SystemBusName" id="3">[C4]P5         1R1G   1/8S  HUB08 32*16（Vehicle screen） [A4]</List>
+<List name="SystemBusName" id="4">[C5]P5/P4      1R1G1B 1/16S HUB75 32X32（Indoor） [A1]</List>
+<List name="SystemBusName" id="5">[C6]P10        1R/1R1G     1/4S  HUB12 32X16（P10） [A8]</List>
+<List name="SystemBusName" id="6">[C7]P10        1R     1/4S  HUB08  32X16</List>
+<List name="SystemBusName" id="7">[C8]P10  1R     1/4S  HUB08   32X16  [A31]</List>
+<List name="SystemBusName" id="36">[C37]P10  1R 1/4S  HUB12 32*16[A25]</List>
+<List name="SystemBusName" id="8">[C9]P10        1R1G   1/4S  HUB08  No 138 32X16  [A13]</List>
+<List name="SystemBusName" id="9">[C10]P10        1R1G   1/4S  HUB12 32X16 [A19]</List>
+<List name="SystemBusName" id="46">[C47]P10-P20   1G2R1B 1/4S  HUB12 32X16  Virtual pixel</List>
+<List name="SystemBusName" id="47">[C48]P10-P20   2R1G1B 1/4S  HUB12 32X16  Virtual pixel</List>
+<List name="SystemBusName" id="48">[C49]P13.33-P26.66  2R1G1B 1/4S  HUB12 24X12 Virtual pixel</List>
+<List name="SystemBusName" id="49">[C50]P10  1R 1/1S  HUB08 RXP</List>
+<List name="SystemBusName" id="50">[C51]P6  1R1G1B 1/5S  HUB75 32X20</List>
+<Item name="SystemBusy">A rendszer foglalt, kérlek próbáld újra később!</Item>
+<Item name="SystemOptimize">Rendszeroptimalizálás</Item>
+<Item name="SystemTime">Rendszeridő</Item>
+<Item name="Table">Asztal</Item>
+<Item name="TargetTime">Célidő</Item>
+<Item name="Temp">Hőmérséklet</Item>
+<Item name="TempAdjust">Hőmérséklet-korrekció</Item>
+<Item name="TempHumidity">Hőmérséklet + Páratartalom</Item>
+<Item name="TempOrRHExist">A hőmérséklet- és a páratartalomterület nem létezhet egyszerre.</Item>
+<Item name="TempUnit">Hőmérséklet egység</Item>
+<Item name="Temppoint1">Győződj meg róla, hogy a használt érzékelő típusa: DS18B20</Item>
+<Item name="Temppoint2">Győződj meg róla, hogy a használt érzékelő típusa: AM2301</Item>
+<Item name="Test">Teszt</Item>
+<Item name="Text">Szöveg</Item>
+<Item name="TextColor">Szöveg színe</Item>
+<Item name="TextFile">.txt fájl</Item>
+<Item name="TextInfo">Szöveges információ</Item>
+<Item name="TextProcess">Szöveg irány</Item>
+<Item name="TextProcessing">Szöveg feldolgozása</Item>
+<Item name="TheDeviceHasBeenOffline">Az eszköz offline állapotban van</Item>
+<Item name="ThisIDAlreadyExists">Az ID már létezik</Item>
+<Item name="ThisModuleNotSupportUDisk">Ez a modell nem támogatja az U lemezt.</Item>
+<Item name="Thursday">Csütörtök</Item>
+<Item name="TimeClock">Digitális óra</Item>
+<Item name="TimeDifference">Időeltérés</Item>
+<Item name="TimeParameters">Időparaméterek</Item>
+<Item name="TimeSettingSuccess">Az idő sikeresen beállítva.</Item>
+<Item name="TimeSwitch">Időkapcsoló</Item>
+<Item name="TimeSwitchSettingSuccess">Az időkapcsoló sikeresen beállítva.</Item>
+<Item name="TimedRestart">Időzített újraindítás</Item>
+<Item name="TimerColor">Óra színe</Item>
+<Item name="Timing Parameters">Időzítési paraméterek</Item>
+<Item name="TimingControl">Időzítési vezérlés</Item>
+<Item name="TimingMode">Időmérés módja</Item>
+<Item name="TimingPause">Időzítés szüneteltetése</Item>
+<Item name="TimingPlay">számláló indítása</Item>
+<Item name="TimingReset">számláló visszaállítása</Item>
+<Item name="TimingSet">Időzítés beállítása</Item>
+<Item name="Tip_Type1">Használja az aktuális kommunikációs címet az UDP-hez való csatlakozáshoz</Item>
+<Item name="Tip_Type2">Használja a visszaadott eszköz IP címét az UDP-hez való csatlakozáshoz</Item>
+<Item name="Tip_Type3">Használja a visszaadott eszköz IP címét a TCP-hez való csatlakozáshoz</Item>
+<Item name="Tip_Type4">Az ügynöki címen keresztül csatlakozó eszköz</Item>
+<Item name="To">Hozzá</Item>
+<Item name="To2">Hozzá</Item>
+<Item name="Toolbar_AddColorful_Bottom">Színes szöveg megjelenítése, a felhasználó animált hátteret adhat hozzá</Item>
+<Item name="Toolbar_AddColorful_Top">Animációs terület hozzáadása</Item>
+<Item name="Toolbar_AddCount_Bottom">Adatok megjelenítése gombból vagy soros, hálózati kábelből nyert</Item>
+<Item name="Toolbar_AddCount_Top">Gomb számláló vagy külső adat</Item>
+<Item name="Toolbar_AddExcel_Bottom">Excel fájlok, válasszon különleges effektusokat és hátteret</Item>
+<Item name="Toolbar_AddExcel_Top">Excel terület hozzáadása</Item>
+<Item name="Toolbar_AddGlobalProgram_Bottom">Csak egy terület hypertext, szöveg, idő stb. beállítása, a program idő szerint lejátszható</Item>
+<Item name="Toolbar_AddGlobalProgram_Top">Globális program hozzáadása</Item>
+<Item name="Toolbar_AddHypertext_Bottom">Képek, videó, SWF stb.</Item>
+<Item name="Toolbar_AddHypertext_Top">Hypertext hozzáadása</Item>
+<Item name="Toolbar_AddProgram_Bottom">20 terület hypertext, szöveg, idő stb. beállítása, a program idő szerint lejátszható</Item>
+<Item name="Toolbar_AddProgram_Top">Program hozzáadása</Item>
+<Item name="Toolbar_AddTempRH_Bottom">Hőmérséklet és páratartalom megjelenítése (érzékelő szükséges)</Item>
+<Item name="Toolbar_AddTempRH_Top">Hőmérséklet és páratartalom hozzáadása</Item>
+<Item name="Toolbar_AddText_Bottom">Szöveg szerkesztése, effektek és háttér kiválasztása</Item>
+<Item name="Toolbar_AddText_Top">Szöveg hozzáadása</Item>
+<Item name="Toolbar_AddTime_Bottom">Digitális óra vagy óra számlap</Item>
+<Item name="Toolbar_AddTime_Top">Idő hozzáadása</Item>
+<Item name="Toolbar_AddTiming_Bottom">Célidő visszaszámlálás, felfelé számolás, gombnyomásra számolás</Item>
+<Item name="Toolbar_AddTiming_Top">Időzítő terület hozzáadása</Item>
+<Item name="Toolbar_Adjusttime_Bottom">A vezérlőkártya időkorrekciója számítógéppel való szinkronizálással</Item>
+<Item name="Toolbar_Adjusttime_Top">Idő korrekció hozzáadása</Item>
+<Item name="Toolbar_Add3D_Bottom">Háttér, előtér, színes szavak, 3D hatások támogatása</Item>
+<Item name="Toolbar_Add3D_Top">3D szöveg hozzáadása</Item>
+<Item name="Toolbar_Check">Ellenőrzés</Item>
+<Item name="Toolbar_Copy">Másolás</Item>
+<Item name="Toolbar_Delete">Törlés</Item>
+<Item name="Toolbar_Down">Lefelé</Item>
+<Item name="Toolbar_ExportToUdisk_Bottom">A képernyő exportálása U lemezre</Item>
+<Item name="Toolbar_ExportToUdisk_Top">Exportálás U lemezre</Item>
+<Item name="Toolbar_Paste">Beillesztés</Item>
+<Item name="Toolbar_Preview1_Bottom">Aktuális képernyő előnézete</Item>
+<Item name="Toolbar_Preview1_Top">Képernyő előnézet</Item>
+<Item name="Toolbar_Preview2_Bottom">Minden elkészített képernyő megjelenítése, dupla kattintás a megadott képernyőre lépéshez.</Item>
+<Item name="Toolbar_Preview2_Top">Csoport nem előnézhető</Item>
+<Item name="Toolbar_Preview_Bottom">Aktuális program előnézete</Item>
+<Item name="Toolbar_Preview_Top">Program előnézete</Item>
+<Item name="Toolbar_Save">Mentés</Item>
+<Item name="Toolbar_Search">Keresés</Item>
+<Item name="Toolbar_Send_Bottom">A képernyő programok küldése a vezérlőkártyára</Item>
+<Item name="Toolbar_Send_Top">Küldés</Item>
+<Item name="Toolbar_Uncheck">Kihúzás</Item>
+<Item name="Toolbar_Up">Felfelé</Item>
+<Item name="TotalECard">A hálózati interfészkártyák összes száma:</Item>
+<Item name="TotalFrames">Összes keret</Item>
+<Item name="TotalSpace">Összes hely</Item>
+<Item name="TracingPoint">Igazítási leírás</Item>
+<Item name="TracingPointArrowKeys">Bal kattintás az igazítási pontra, az iránygombokkal a pont irányítása.</Item>
+<Item name="TracingPointError">Az igazítási pont hibás.</Item>
+<Item name="TracingPointFail">Az igazítási pont sikertelen, kérjük, próbálja újra.</Item>
+<Item name="TransitionThreshold">Átmeneti küszöb</Item>
+<Item name="Transparent">Átlátszó</Item>
+<Item name="Tricolor">Háromszínű</Item>
+<Item name="Tuesday">Kedd</Item>
+<Item name="Twinkle">Pislákolás</Item>
+<Item name="TwoLinedisplay">Két soros kijelző</Item>
+<Item name="Type">Típus</Item>
+<Item name="Type1">Első típus</Item>
+<Item name="Type2">Második típus</Item>
+<Item name="Type3">Harmadik típus</Item>
+<Item name="Type4">Negyedik típus</Item>
+<Item name="TypeName">Típus neve</Item>
+<Item name="U-DiskSucess">U lemez sikeres!</Item>
+<Item name="UDisk">U lemez</Item>
+<Item name="USE_HD2010">A vezérlőkártya észlelve, de nem illeszkedik a jelenlegi szoftverhez, kérjük, használja a HD 2010-et.</Item>
+<Item name="UnableToOpenFile">A fájl nem nyitható meg!</Item>
+<Item name="Unchanged">Változatlan</Item>
+<Item name="Undo">Visszavonás</Item>
+<Item name="UnexpectedError">Kommunikációs időtúllépés</Item>
+<Item name="Unit">Egység</Item>
+<Item name="UnitBoard">Egységpanel</Item>
+<Item name="UnitBoardInfo">Modul információ</Item>
+<Item name="UnitBoardTips">Ha egy modul szélessége meghaladja a 128-at, kérjük, válassza a 128-at</Item>
+<Item name="UnitBoardWidth">Modul szélessége</Item>
+<Item name="UnitBoards">Egységpanelek száma</Item>
+<Item name="UnitColor">Egység színe</Item>
+<Item name="UnitSize">Modulpontok</Item>
+<Item name="Unmerge">Egyesítés megszüntetése</Item>
+<Item name="Unselected">Nincs kiválasztva</Item>
+<Item name="Unspecified">Nem meghatározott</Item>
+<Item name="UnsupportedInstructions">Támogatott utasítások</Item>
+<Item name="Untitled">Cím nélküli</Item>
+<Item name="Update">Frissítések</Item>
+<Item name="UpdateFailed">A frissítés sikertelen.</Item>
+<Item name="UpdateFirmwareFinished">A firmware frissítése befejeződött.</Item>
+<Item name="UpdatedSuccessfully">A frissítés sikeres, szeretné megnyitni a frissítési fájlokat?</Item>
+<Item name="UpdatingFirmware">Firmware frissítése.</Item>
+<Item name="Use">Használ</Item>
+<Item name="Use138Decoder">138-as dekóder használata</Item>
+<List name="Use138" id="0">138 használata</List>
+<List name="Use138" id="1">Nincs 138</List>
+<Item name="UseDefaultSetting">Alapértelmezett beállítások</Item>
+<Item name="UseParams">Paraméterek használata</Item>
+<Item name="UsedMemory">Felhasznált memória</Item>
+<Item name="UsingHardwareSetup">Hardver beállítások használata (Paraméter visszaolvasás)</Item>
+<Item name="VZoom">Függőleges nyújtás</Item>
+<Item name="Valign">Függőleges igazítás</Item>
+<Item name="ValignBottom">Aljára igazítás</Item>
+<Item name="ValignMiddle">Függőlegesen középre igazítás</Item>
+<Item name="ValignTop">Felső igazítás</Item>
+<Item name="Veritical">Függőleges pozíció</Item>
+<Item name="VerticalPosition">Függőleges pozíció</Item>
+<Item name="VerticalScreenshot">Függőleges képernyőkép</Item>
+<Item name="VerticalStretch">Függőleges nyújtás</Item>
+<Item name="Video">Videó</Item>
+<Item name="Video FramesCount">Összes képkocka</Item>
+<Item name="Video name">Videó elérési út</Item>
+<Item name="ViewHelp">Súgó megtekintése</Item>
+<Item name="WaitingForInitialization">Inicializálásra vár</Item>
+<Item name="WaitingToBeSent">Küldésre vár</Item>
+<Item name="Wednesday">Szerda</Item>
+<Item name="WhetherToSaveTheCurrentModifiedFile">Mentse a módosított fájlt?</Item>
+<Item name="White">Fehér</Item>
+<Item name="Width">Szélesség</Item>
+<Item name="WidthOfMoreTthan">"A szélesség meghaladja a maximális értéket!"</Item>
+<Item name="WindowPosition">Ablak pozíció</Item>
+<Item name="WrongParameter">Hibás paraméterek</Item>
+<Item name="Yellow">Sárga</Item>
+<List name="color" id="0">Egyszínű</List>
+<List name="color" id="1">Két színű</List>
+<List name="color" id="2">Teljes színű</List>
+<Item name="delete">Törlés</Item>
+<Item name="flashTips">Megjegyzés: A scriptet tartalmazó SWF fájlok még nem támogatottak, így nem tudja megkapni a helyes képet.</Item>
+<List name="frequency" id="0">Automatikus</List>
+<List name="frequency" id="160">100Hz</List>
+<List name="frequency" id="140">120Hz</List>
+<List name="frequency" id="120">140Hz</List>
+<List name="frequency" id="100">160Hz</List>
+<List name="frequency" id="80">180Hz</List>
+<List name="frequency" id="60">200Hz</List>
+<List name="frequency" id="200">60Hz</List>
+<List name="frequency" id="180">80Hz</List>
+<List name="graylevel" id="1">Nincs szürke szint</List>
+<List name="graylevel" id="2">4 szürke szint</List>
+<List name="graylevel" id="3">8 szürke szint</List>
+<List name="graylevel" id="4">16 szürke szint</List>
+<List name="graylevel" id="5">32 szürke szint</List>
+<Item name="group">Csoport</Item>
+<Item name="hypertext">Hiperszöveg</Item>
+<List name="listCtlDelay" id="0">Magas engedélyezés</List>
+<List name="listCtlDelay" id="1">Alacsony engedélyezés</List>
+<List name="listStrDelay" id="0">0</List>
+<List name="listStrDelay" id="1">1</List>
+<Item name="mAPPFace">APP arc(&amp;A)</Item>
+<Item name="mAbout">Névjegy(&amp;A)</Item>
+<Item name="mBlackStyle">Fekete stílus(L)</Item>
+<Item name="mBludStyle">Kék stílus(B)</Item>
+<Item name="mCalculator">Számológép</Item>
+<Item name="mClearDisplayData">Kijelzett adatok törlése</Item>
+<Item name="mCommSetting">Kommunikációs beállítások</Item>
+<Item name="mExit">Kilépés(&amp;E)</Item>
+<Item name="mFile">Fájl(&amp;F)</Item>
+<Item name="mHardwareSetting">Hardver beállítások</Item>
+<Item name="mHelp">Súgó(&amp;H)</Item>
+<Item name="mIPManagmentTools">IP kezelő eszközök</Item>
+<Item name="mLanguage">Nyelv(&amp;L)</Item>
+<Item name="mLuminanceSetting">Fényerő beállítások</Item>
+<Item name="mNarrow">Kicsinyítés</Item>
+<Item name="mNew">Új képernyő(&amp;N)</Item>
+<Item name="mNotepad">Jegyzettömb</Item>
+<Item name="mOpen">Megnyitás(&amp;O)</Item>
+<Item name="mOperate">Művelet(&amp;O)</Item>
+<Item name="mOutWindow">Információs ablak</Item>
+<Item name="mPaint">Rajzolás</Item>
+<Item name="mSave">Mentés(&amp;S)</Item>
+<Item name="mSaveAs">Mentés másként...</Item>
+<Item name="mScreenSetting">Képernyő beállítások</Item>
+<Item name="mSendProject">Elem küldése</Item>
+<Item name="mSetting">Beállítások(&amp;S)</Item>
+<Item name="mSilverStyle">Ezüst stílus(S)</Item>
+<Item name="mSystemSetting">Rendszer beállítások</Item>
+<Item name="mTimeSetting">Idő beállítások</Item>
+<Item name="mTool">Eszközök(&amp;T)</Item>
+<Item name="mUpdateFirmware">Firmware frissítése</Item>
+<Item name="mView">Nézet(&amp;V)</Item>
+<Item name="mWatergreenStyle">Világos zöld stílus(A)</Item>
+<Item name="mZoom">Nagyítás</Item>
+<Item name="minimum">Min</Item>
+<Item name="ms">ms</Item>
+<List name="polarity" id="0">Alacsony engedélyezés</List>
+<List name="polarity" id="1">Magas engedélyezés</List>
+<Item name="program">Program</Item>
+<Item name="screen">Képernyő</Item>
+<Item name="sec">másodperc</Item>
+<Item name="send">Küldés</Item>
+<Item name="static">Statikus</Item>
+<Item name="time">Idő</Item>
+<Item name="whirl180">Megfordítás</Item>
+<Item name="whirl270">Balra forgatás</Item>
+<Item name="whirl90">Jobbra forgatás</Item>
+<Item name="whirlt">Forgatás</Item>
+<Item name="RemoveDuplicate">Duplikált eltávolítása</Item>
+<Item name="Apply">Alkalmaz</Item>
+<Item name="Remark">Megjegyzés</Item>
+<Item name="FirstMode">Első mód</Item>
+<Item name="FirstMode_Normal">Kiegyensúlyozott</Item>
+<Item name="FirstMode_Speed">Sebesség prioritás</Item>
+<Item name="FirstMode_Text">Fényerő prioritás</Item>
+<Item name="Random">Véletlenszerű</Item>
+<Item name="WhetherToReplace">Cserélni?</Item>
+<Item name="ImportFailed">Importálás sikertelen</Item>
+<Item name="ExportFailed">Exportálás sikertelen</Item>
+<Item name="ExportLanguage">Nyelv exportálása</Item>
+<Item name="ImportLanguage">Nyelv importálása</Item>
+<List name="SystemBusName" id="30">[C31]P10  1R1G1B 1/4S  HUB75 16*16[A17]</List>
+<Item name="ClickHereToUpdate">Kattintson ide a frissítéshez</Item>
+<Item name="ImportFile">Fájl importálása</Item>
+
+<Item name="Imsak">Imszák</Item>
+<Item name="Fajr">Fájr</Item>
+<Item name="Dhuhr">Dhuhr</Item>
+<Item name="Asr">Asr</Item>
+<Item name="Maghrib">Maghrib</Item>
+<Item name="Isha">Isá</Item>
+<Item name="MidNight">Éjféli</Item>
+
+<Item name="Country">Ország</Item>
+<Item name="City">Város</Item>
+<Item name="NumColor">Számok színe</Item>
+<Item name="ExportConfigFile">Profilok exportálása</Item>
+<Item name="SoundModule">Hangkészülék</Item>
+<Item name="SoundSetting">Hangkészülék beállításai</Item>
+<Item name="Year">Év</Item>
+
+<Item name="ImportTable">Tábla importálása</Item>
+<Item name="ExportBable">Tábla exportálása</Item>
+<Item name="ClearAll">Törlés</Item>
+<Item name="cfWords">Színes szavak</Item>
+<Item name="OnlyOnePrayForScreen">Csak egy imaterület támogatott</Item>
+<Item name="BKSpeed">Háttér sebessége</Item>
+<Item name="EffectCycle">Hatások ciklusa</Item>
+<List name="graylevel" id="6">64 szürke szint</List>
+<List name="graylevel" id="7">128 szürke szint</List>
+<List name="graylevel" id="8">256 szürke szint</List>
+<List name="SystemBusName" id="39">[C40]P10  1R1G1B   1/4S  HUB75  32X16[A12]</List>
+<List name="SystemBusName" id="40">[C41]P10  1R1G1B  1/4S  HUB75 32*16</List>
+<List name="SystemBusName" id="41">[C42]P10  1R1G1B  1/2S  HUB75 32*16</List>
+<List name="SystemBusName" id="42">[C43]P3  1R1G1B  1/16S  HUB75 64*64</List>
+<List name="SystemBusName" id="43">[C44]P8  1R1G  1/8S  HUB08 32*32 (WQS)</List>
+<List name="SystemBusName" id="44">[C45]P5  1R1G1B  1/8S  HUB75 32*32 (CXH)</List>
+<List name="SystemBusName" id="45">[C46]P10  1R  1/4S  HUB12 32*16</List>
+<Item name="SelectFirmwareVersion">Firmware verzió kiválasztása</Item>
+<Item name="NoSelectVersion">Nincs kiválasztott verzió</Item>
+<Item name="Ordinal">Sorszám</Item>
+<Item name="VersionNum">Verzió</Item>
+<Item name="ConfirmSelect">Megerősítés</Item>
+<Item name="FileNameAlreadyExistIsCover">A fájl neve már létezik, felülírja?</Item>
+<Item name="VersionAlreadyExist">A verzió már létezik</Item>
+<Item name="FindNewVersionIsUpdate">Új verziót talált, frissíti a firmware-t?</Item>
+<Item name="DeleteThisGroup">Ez a csoport törlése</Item>
+<Item name="UpdateFile">Fájl frissítése</Item>
+<Item name="UdiskUpgrade">Frissítés U lemezzel</Item>
+<Item name="SelectVersionOnTheRight">Kérjük, válassza ki a firmware-t jobbra!</Item>
+<Item name="TheSameSegment">Győződjön meg arról, hogy a vezérlőkártya és a számítógép ugyanabban a hálózati szegmensekben van.</Item>
+<Item name="Step">Lépés</Item>
+<Item name="ShadowMode">Árnyék mód</Item>
+<Item name="3DDeep">3D Mély</Item>
+<Item name="Gradient">Átmenet</Item>
+<Item name="Alpha">Átlátszóság</Item>
+<Item name="BorderStyle">Keret stílus</Item>
+<Item name="RoundRect">Kerekített téglalap</Item>
+<Item name="Octagon">Oktogon</Item>
+<Item name="CustomStyle">Egyedi stílus</Item>
+<Item name="3DText">3D Szöveg</Item>
+<Item name="Whether_to_cancel_the_current_task">Megszakítja a feladatot?</Item>
+<Item name="SinglePage">Egyszerű oldal</Item>
+<Item name="TwinkleStyle">Pislákoló stílus</Item>
+<Item name="TwinkleSpeed">Pislákolás sebessége</Item>
+<Item name="NoTwinkle">Nincs pislákolás</Item>
+<Item name="3Dtwinkle">3D pislákolás</Item>
+<Item name="SaveCountValue">Utolsó szám megjegyzése</Item>
+<Item name="SpecialBorder">Különleges keret</Item>
+<Item name="BootingDelayWasComingOn">Indítás, fokozatos világítás</Item>
+<Item name="RememberToThoose">A jelenlegi választás megjegyzése</Item>
+<Item name="EndPageToEndPage">Vége oldal a végéhez</Item>
+<Item name="WifiSpeedMode1">Magas sebességű mód</Item>
+<Item name="WifiSpeedMode2">Alacsony sebességű mód</Item>
+<Item name="All the devices automatically obtain IP">Minden eszköz automatikusan IP-t kap</Item>
+<Item name="The firmware information">A firmware információ</Item>
+<Item name="The device information">Az eszköz információ</Item>
+<List name="SystemBusName" id="51">[C52]  1R1G  1/8  KR</List>
+<List name="SystemBusName" id="52">[C53]  1R1G1B  1/4S ICN2038S</List>
+<List name="SystemBusName" id="53">[C54]  P10  1R1G  1/4S HUB12 32x16 (YLR)</List>
+<List name="SystemBusName" id="54">[C55]  P8 1R1G1B 1/5S  HUB75 40X20</List>
+<List name="SystemBusName" id="55">[C56]  P10 1/4S No 138 MCGD</List>
+<List name="SystemBusName" id="56">[C57]  P8 1R1G1B 1/4S HUB75 (JJY)</List>
+<List name="SystemBusName" id="57">[C58]  P13.33 1R1G1B 1/3S HUB75 (LLR)</List>
+<List name="SystemBusName" id="58">[C59]  P3 1R1G1B 1/32S HUB75E (RBG) ICN2038S</List>
+<List name="SystemBusName" id="59">[C60]  P3 1R1G1B 1/32S HUB75E (RGB) ICN2038S</List>
+<List name="SystemBusName" id="60">[C61]  P6 1/8S HUB75 (BGR)</List>
+<List name="SystemBusName" id="61">[C62]  P6 1/8S HUB75 GK</List>
+<List name="SystemBusName" id="62">[C63]  P6 1/8S HUB75(HJ)</List>
+<List name="SystemBusName" id="63">[C64]  P6 1R1G1B 1/8S HUB75</List>
+<List name="SystemBusName" id="64">[C65]  P10 1R 1/4s(YLR)</List>
+<List name="SystemBusName" id="65">[C66]  P10 1R 1/4S HUB12</List>
+<List name="SystemBusName" id="66">[C67]  P10 1R1G1B 1/2S HUB75 (HJ)</List>
+<List name="SystemBusName" id="67">[C68]  P10 1R1G1B 1/2S HUB75 </List>
+<List name="SystemBusName" id="68">[C69]  P10 1R1G1B 1/3S HUB73A 24X24 (KSZ)</List>
+<List name="SystemBusName" id="69">[C70]  P10 1R1G1B 1/4S No 138 HUB75</List>
+<List name="SystemBusName" id="70">[C71]  P13.33 1R1G1B 1/3S 24x12</List>
+<List name="SystemBusName" id="71">[C72]  P16 1R1G 1/4S HUB08</List>
+<List name="SystemBusName" id="72">[C73]  P20 1R1G1B 1S</List>
+<List name="SystemBusName" id="73">[C74]  P10 1R1G1B 1/4S HUB75（KT）</List>
+<List name="SystemBusName" id="74">[C75]  P8  1R1G1B 1/4S HUB75 32x16 No138</List>
+<List name="SystemBusName" id="75">[C76]  P8  1R1G1B 1/4S HUB75 32x16 (HJ)</List>
+<List name="SystemBusName" id="76">[C77]  P10 1R1G1B 1/4S HUB75 32x16 No138</List>
+<List name="SystemBusName" id="77">[C78]  P10 1R1G1B 1/2S HUB75 32x16</List>
+<List name="SystemBusName" id="78">[C79]  P10 1R 1/4S HUB08 32x16</List>
+<List name="SystemBusName" id="79">[C80]  P10 1R1G1B 1/2S HUB75 32x16 (GK)</List>
+<List name="SystemBusName" id="80">[C81]  P10 1R1G1B 1/2S HUB75 32x16 (QL)</List>
+<List name="SystemBusName" id="81">[C82]  P16 1R1G 1/1S HUB12 16x8</List>
+<List name="SystemBusName" id="82">[C83]  P10 1R 1/4S HUB12 32x16 (KT)</List>
+<List name="SystemBusName" id="83">[C84]  P10 1R 1/4S HUB12 32x16 (GK)</List>
+<List name="SystemBusName" id="84">[C85]  P5  1R1G1B 1/8S HUB75 64x32</List>
+<List name="SystemBusName" id="85">[C86]  P10 1R1G1B 1/4S HUB75 32x16 No138 (HJCL)</List>
+<List name="SystemBusName" id="86">[C87]  P10 1R1G1B 1/2S HUB75E 32x16 No138 (HLL)</List>
+<List name="SystemBusName" id="87">[C88]  P10 1R1G1B 1/2S HUB75 32x16 No138</List>
+<List name="SystemBusName" id="88">[C89]  P6.66 1R1G1B 1/6S HUB75 48x24</List>
+<List name="SystemBusName" id="89">[C90]  P8  1R1G1B 1/5S HUB75 40x20</List>
+<List name="SystemBusName" id="90">[C91]  P4 1R1G1B 1/10S HUB75 80x40 ICN2038S</List>
+<List name="SystemBusName" id="91">[C92]  P4  1R1G1B 1/20S HUB75 80x40 ICN2038S</List>
+<List name="SystemBusName" id="92">[C93]  P10 1R1G1B 1/4S HUB75 32x16 No138 ICN2038S</List>
+<List name="SystemBusName" id="93">[C94]  P10 1R1G1B 1/2S  32x16 No138 ICN2038S</List>
+<List name="SystemBusName" id="94">[C95]  P10 1R1G1B 1/5S HUB75 40x20 ICN2038S</List>
+<List name="SystemBusName" id="95">[C96]  P10 1R1G1B 1/5S HUB75 40x20 SM16207S</List>
+<List name="SystemBusName" id="96">[C97]  H10 1R1G1B 1/2S HUB75 32x16</List>
+<List name="SystemBusName" id="97">[C98]  P8  1R1G1B 1/5S HUB75 40x20 ICN20378BP</List>
+<List name="SystemBusName" id="98">[C99]  dz0228 1R1G1B 1/1S HUB75 16x16</List>
+<Item name="Server address">Szerver cím</Item>
+<Item name="User name">Felhasználónév</Item>
+<Item name="Fill the same">Ugyanazt töltsd ki</Item>
+<Item name="Cloud server Settings">Felhő szerver beállítások</Item>
+<Item name="Cloud server">Felhő szerver</Item>
+<Item name="ButtonCtrl">Gomb vezérlés be</Item>
+<Item name="NoUse">Gomb vezérlés ki</Item>
+<Item name="Button1">Gomb1</Item>
+<Item name="Button2">Gomb2</Item>
+<Item name="Button3">Gomb3</Item>
+<Item name="Button4">Gomb4</Item>
+<Item name="DefaultBackground">Alap háttér</Item>
+<Item name="ImageBackground">Kép háttér</Item>
+<Item name="SingleProgramSend">Egyszeri program küldés</Item>
+<Item name="latest">legújabb</Item>
+<Item name="newdata">új adat</Item>
+<Item name="pray">Imádkozni</Item>
+<Item name="Music">Zene</Item>
+<Item name="Aglinment">Igazítás</Item>
+<Item name="LeftAglinment">Balra igazítás</Item>
+<Item name="CenterAglinment">Középre igazítás</Item>
+<Item name="RightAglinment">Jobbra igazítás</Item>
+<Item name="SplitType">Felosztás típusa</Item>
+<Item name="SingleChar">Egyszeri karakter</Item>
+<Item name="Word">Szó</Item>
+<Item name="WifiSetting">Wi-Fi beállítás</Item>
+<Item name="SettingSuccessfully">Beállítás sikeresen</Item>
+<Item name="SettingFailed">Beállítás sikertelen</Item>
+<Item name="Connectting">Csatlakozás</Item>
+<Item name="NoFoundAp">Nincs AP találva</Item>
+<Item name="ConnectFailed">Csatlakozás sikertelen</Item>
+<Item name="ConnectOK">Csatlakozás sikeres</Item>
+<Item name="ApMode">AP mód</Item>
+<Item name="StationMode">Állomás mód</Item>
+<Item name="WifiPasswordLenghLess">A Wi-Fi jelszó túl rövid</Item>
+<Item name="WifiSSIDIsNULL">A Wi-Fi név üres</Item>
+<Item name="MaskError">Maszk hiba</Item>
+<Item name="IPError">IP hiba</Item>
+<Item name="WifiSSIDTooLong">A Wi-Fi név túl hosszú.</Item>
+<Item name="WifiPasswordTooLong">A Wi-Fi jelszó túl hosszú.</Item>
+<Item name="SSIDPasswordInputTips">Csak 0-9, a-z, A-Z, _ karakterek megadása engedélyezett</Item>
+<Item name="City">Város</Item>
+<Item name="Date">Dátum</Item>
+<Item name="temp">hőmérséklet</Item>
+<Item name="Weather">Időjárás</Item>
+<Item name="Wind Direction">Szélirány</Item>
+<Item name="Wind speed">Szél sebesség</Item>
+<Item name="Temp Unit">Hőmérséklet egység</Item>
+<Item name="America">Amerika</Item>
+<Item name="Australia">Ausztrália</Item>
+<Item name="Canada">Kanada</Item>
+<Item name="China">Kína</Item>
+<Item name="India">India</Item>
+<Item name="Indonesia">Indonézia</Item>
+<Item name="Irán">Irán</Item>
+<Item name="Japán">Japán</Item>
+<Item name="Korea">Korea</Item>
+<Item name="Malajzia">Malajzia</Item>
+<Item name="Pakisztán">Pakisztán</Item>
+<Item name="Peru">Peru</Item>
+<Item name="Lengyelország">Lengyelország</Item>
+<Item name="Oroszország">Oroszország</Item>
+<Item name="Spanyolország">Spanyolország</Item>
+<Item name="Thaiföld">Thaiföld</Item>
+<Item name="Törökország">Törökország</Item>
+<Item name="Egyesült Arab Emírségek">Egyesült Arab Emírségek</Item>
+<Item name="Vietnam">Vietnam</Item>
+<Item name="Napos">Napos</Item>
+<Item name="Felhős">Felhős</Item>
+<Item name="Néhány felhő">Néhány felhő</Item>
+<Item name="Részben felhős">Részben felhős</Item>
+<Item name="Borongós">Borongós</Item>
+<Item name="Szeles">Szeles</Item>
+<Item name="Nyugodt">Szélcsend</Item>
+<Item name="Enyhe szellő">Enyhe szellő</Item>
+<Item name="Mérsékelt">Mérsékelt</Item>
+<Item name="Friss szellő">Friss szellő</Item>
+<Item name="Erős szellő">Erős szellő</Item>
+<Item name="Magas szél">Magas szél</Item>
+<Item name="Légies">Légies</Item>
+<Item name="Erős légies">Erős légies</Item>
+<Item name="Vihar">Vihar</Item>
+<Item name="Erőszakos vihar">Erőszakos vihar</Item>
+<Item name="Hurrikán">Hurrikán</Item>
+<Item name="Tornádó">Tornádó</Item>
+<Item name="Trópusi vihar">Trópusi vihar</Item>
+<Item name="Zápor">Zápor</Item>
+<Item name="Heves zápor">Heves zápor</Item>
+<Item name="Felhőszakadás">Felhőszakadás</Item>
+<Item name="Heves felhőszakadás">Heves felhőszakadás</Item>
+<Item name="Jégeső">Jégeső</Item>
+<Item name="Enyhe eső">Enyhe eső</Item>
+<Item name="Mérsékelt eső">Mérsékelt eső</Item>
+<Item name="Heves eső">Heves eső</Item>
+<Item name="Extrém eső">Extrém eső</Item>
+<Item name="Drizzle rain">Drizzle rain</Item>
+<Item name="Vihar">Vihar</Item>
+<Item name="Heves vihar">Heves vihar</Item>
+<Item name="Súlyos vihar">Súlyos vihar</Item>
+<Item name="Fagyos eső">Fagyos eső</Item>
+<Item name="Enyhe hó">Enyhe hó</Item>
+<Item name="Mérsékelt hó">Mérsékelt hó</Item>
+<Item name="Heves hó">Heves hó</Item>
+<Item name="Hóvihar">Hóvihar</Item>
+<Item name="Hóesés">Hóesés</Item>
+<Item name="Eső és hó">Eső és hó</Item>
+<Item name="Zápor hó">Zápor hó</Item>
+<Item name="Hózápor">Hózápor</Item>
+<Item name="Köd">Köd</Item>
+<Item name="Zúzmara">Zúzmara</Item>
+<Item name="Párás">Párás</Item>
+<Item name="Homok">Homok</Item>
+<Item name="Por">Por</Item>
+<Item name="Porvihar">Porvihar</Item>
+<Item name="Homokvihar">Homokvihar</Item>
+<Item name="Forró">Forró</Item>
+<Item name="Hideg">Hideg</Item>
+<Item name="Ismeretlen">Ismeretlen</Item>
+<Item name="Tiszta">Tiszta</Item>
+<Item name="Nincs tartós szél">Nincs tartós szél</Item>
+<Item name="Északkeleti szél">Északkeleti szél</Item>
+<Item name="Keleti szél">Keleti szél</Item>
+<Item name="Délkeleti szél">Délkeleti szél</Item>
+<Item name="Déli szél">Déli szél</Item>
+<Item name="Délnyugati szél">Délnyugati szél</Item>
+<Item name="Erős szél">Erős szél</Item>
+<Item name="Nyugati szél">Nyugati szél</Item>
+<Item name="Északnyugati szél">Északnyugati szél</Item>
+<Item name="Északi szél">Északi szél</Item>
+<Item name="Vortex szél">Vortex szél</Item>
+<Item name="A szellő szél">A szellő szél</Item>
+<Item name="Nincs szél">Nincs szél</Item>
+<Item name="Enyhe levegő">Enyhe levegő</Item>
+<Item name="Szellő">Szellő</Item>
+<Item name="Gentle breeze">Lágy szellő</Item>
+<Item name="Strong wind">Erős szél</Item>
+<Item name="Blast">Fújás</Item>
+<Item name="Gale">Szélvihar</Item>
+<Item name="Strong gale">Erős szélvihar</Item>
+<Item name="Whole gale">Teljes szélvihar</Item>
+<Item name="Storm wind">Viharos szél</Item>
+<Item name="Hurricane">Hurrikán</Item>
+<Item name="OfflineMode">Offline mód</Item>
+<Item name="PleaseSelectDevice">Kérjük, válasszon eszközt</Item>
+<Item name="SeeMoreParameters">További paraméterek megtekintése</Item>
+<Item name="ExportProgram">Program exportálása</Item>
+<List name="ErrorTips" id="00">Gyakori problémák tippek</List>
+<List name="ErrorTips" id="01">Hiba / A képernyőbeállításban megadott szélesség és magasság túllépi az irányító tartományát</List>
+<List name="ErrorTips" id="02">Hiba1 / U lemez fájlformátum hiba</List>
+<List name="ErrorTips" id="03">Hiba2 / Túlzott programtartalom</List>
+<List name="ErrorTips" id="04">NincsFájl / Nincs programfájl az U lemezen</List>
+<List name="ErrorTips" id="05">Vége / A beállítás lejárt</List>
+<Item name="ColorfulBorder">Színes keret</Item>
+<Item name="FixedText">Rögzített szöveg</Item>
+<List name="PM25String" id="00">Nincs adat</List>
+<List name="PM25String" id="01">Jó</List>
+<List name="PM25String" id="02">Közepes</List>
+<List name="PM25String" id="03">Enyhén szennyezett</List>
+<List name="PM25String" id="04">Közepesen szennyezett</List>
+<List name="PM25String" id="05">Erősen szennyezett</List>
+<List name="PM25String" id="06">Súlyosan szennyezett</List>
+<Item name="BootTips">Indítási tippek</Item>
+<Item name="ShowAll">Összes megjelenítése</Item>
+<Item name="NoShow">Nem jelenik meg</Item>
+<Item name="PM25Adjust">PM2.5 beállítása</Item>
+<Item name="PM10Adjust">PM10 beállítása</Item>
+<Item name="QuickConfig">Gyors beállítás</Item>
+<Item name="Subtitles">Feliratok</Item>
+<Item name="Toolbar_AddSubtitles_Top">Feliratok hozzáadása</Item>
+<Item name="HelpDoc">Segédlet</Item>
+<Item name="PrayAutioTip">A ima audio modul használatához kérjük, biztosítson több mp3 fájlt a megfelelő ima nevekhez. Imsak->1.mp3 Fajr->2.mp3 Dhuhr->3.mp3 Asr->4.mp3 Maghrib->5.mp3 Isha->6.mp3 MidNight->7.mp3.</Item>
+<Item name="ICSetting">IC beállítás</Item>
+<Item name="NormalIC">Normál IC</Item>
+<Item name="RegisterGroup">Csoport regisztrálása</Item>
+<Item name="RedRegister">Piros regiszter</Item>
+<Item name="GreenRegister">Zöld regiszter</Item>
+<Item name="BlueRegister">Kék regiszter</Item>
+<Item name="HighByte">Magas bájt</Item>
+<Item name="LowByte">Alacsony bájt</Item>
+<Item name="Confirm Password">Jelszó megerősítése</Item>
+<Item name="PasswordInvalidTip">A jelszónak szám + betű kombinációból kell állnia, 8-16 karakter hosszúságban.</Item>
+<Item name="PasswordUnEqual">A megadott jelszavak nem egyeznek.</Item>
+<Item name="PasswordTooSimple">A rendszer észlelte, hogy az eszköz Wi-Fi jelszava túl egyszerű. Kérjük, állítsa vissza.</Item>
+<List name="OutputWindowString" id="75">A rendszer észlelte, hogy az eszköz Wi-Fi jelszava túl egyszerű. Kérjük, állítsa vissza.</List>
+<Item name="Logout">Kijelentkezés</Item>
+<Item name="LogoutYesOrNo">A felhasználó kijelentkezett?</Item>
+<Item name="Login">Bejelentkezés</Item>
+<Item name="WifiSettingOK">A beállítás sikeres, kérjük, csatlakozzon újra a Wi-Fi-hoz.</Item>
+<Item name="UserName">Felhasználónév</Item>
+<Item name="InputPassword">Jelszó megadása</Item>
+<Item name="Register">Regisztráció</Item>
+<Item name="GetCheckCode">Ellenőrző kód beszerzése</Item>
+<Item name="InputCheckCode">Kérjük, adja meg az ellenőrző kódot</Item>
+<Item name="RegisterError">Regisztrációs hiba</Item>
+<Item name="PhoneNum">Mobiltelefon szám</Item>
+<Item name="CheckCode">Ellenőrző kód</Item>
+<Item name="ConnectNetwordToUse">Kérjük, csatlakozzon az internethez a szoftver használata előtt</Item>
+<Item name="AuthorizedSuccess">Sikeres engedélyezés</Item>
+<Item name="UnsupportedLoginType">Nem támogatott bejelentkezési típus</Item>
+<Item name="CheckCodeNotMatch">Az ellenőrző kód nem egyezik</Item>
+<Item name="InputRightPhone">Kérjük, adja meg a helyes telefonszámot</Item>
+<Item name="ResetPassword">Jelszó visszaállítása</Item>
+<Item name="PhoneNumError">Hibás telefonszám formátum.</Item>
+<Item name="CheckCodeTimeoutInOneMinute">A megerősítő kód nem küldhető újra egy percen belül</Item>
+<Item name="CheckCodeTimeout">A megerősítő kód küldési gyakorisága túllépte a határt</Item>
+<Item name="CheckCodeSendError">A megerősítő kód küldése nem sikerült.</Item>
+<Item name="InvalidToken">Érvénytelen token</Item>
+<Item name="MissingRegInfo">Hiányzó regisztrációs információ</Item>
+<Item name="AgreeAndAccept">Elfogadom</Item>
+<Item name="TermsOfService">Szolgáltatási megállapodás</Item>
+<Item name="Reacquire">Újra megszerzés</Item>
+<Item name="SettingLoginPassword">Bejelentkezési jelszó beállítása</Item>
+<Item name="Skip">Kihagyás</Item>
+<Item name="NetworkErrorTip">Hálózati hiba</Item>
+<Item name="Retry">Újrapróbálkozás</Item>
+<Item name="PleaseGetCheckCode">Kérjük, szerezze be az ellenőrző kódot.</Item>
+<Item name="KeepLogin">Bejelentkezés megőrzése</Item>
+<Item name="IsLogoutUser">Kijelentkezik a jelenlegi felhasználóból?</Item>
+<Item name="NotTipsAgin">Ne figyelmeztessen újra</Item>
+<Item name="OpenDeviceLock">Eszközzár engedélyezése</Item>
+<Item name="ModifyDeviceLock">Eszközzár módosítása</Item>
+<Item name="CloseDeviceLock">Eszközzár bezárása</Item>
+<Item name="DeviceHasLockedInfo">Az eszköz zárolva van. Kérjük, adja meg a jelszavát.</Item>
+<Item name="DeviceLockPassword">Eszközzár jelszó</Item>
+<Item name="NoInputNoDeviceLockTip">Jelszóra nincs szükség, ha az eszközzár nincs engedélyezve.</Item>
+<Item name="UseOldPassword">A jelenlegi jelszó használata</Item>
+<Item name="DeviceLockSetting">Eszközzár beállításai</Item>
+<Item name="DeviceLock">Eszközzár</Item>
+<Item name="KeepPassword">Jelszó megőrzése</Item>
+<Item name="AutoLogin">Automatikus bejelentkezés</Item>
+<Item name="PleaseInputOldPassword">Kérjük, adja meg a régi jelszót</Item>
+<Item name="OldPasswordError">Régi jelszó hiba</Item>
+<Item name="Old Password">Régi jelszó</Item>
+<Item name="New Password">Új jelszó</Item>
+<Item name="Action">Művelet</Item>
+<Item name="Boot fade">Indítási átmenet</Item>
+<Item name="Read back log">Napló visszaolvasása</Item>
+<Item name="Power-off reset">Áramtalanítás utáni reset</Item>
+<List name="OutputWindowString" id="76">A készülék zárolási jelszava helytelen.</List>
+<List name="OutputWindowString" id="77">Hiányzik a napló tartalma.</List>
+<List name="OutputWindowString" id="78">A gépkód hibás.</List>
+<List name="OutputWindowString" id="79">A gépkód hossza hibás.</List>
+<List name="OutputWindowString" id="80">A készülék zárolási jelszó hossza hibás.</List>
+<List name="OutputWindowString" id="81">XR809 frissítése folyamatban</List>
+<List name="OutputWindowString" id="82">XR809 érvénytelen cím</List>
+<List name="OutputWindowString" id="83">XR809 hiba</List>
+<List name="OutputWindowString" id="84">Paraméterek olvasása elkezdődött</List>
+<List name="OutputWindowString" id="85">Paraméterek olvasása befejeződött</List>
+<List name="OutputWindowString" id="86">Paraméterek visszaállítása elkezdődött</List>
+<List name="OutputWindowString" id="87">A paraméterek visszaállítása megtörtént</List>
+<List name="OutputWindowString" id="88">A letöltés befejeződött, és vár a visszaállításra.</List>
+<List name="OutputWindowString" id="89">A programok újraolvasása nem támogatott</List>
+<List name="OutputWindowString" id="90">Fájl ellenőrzési hiba</List>
+<Item name="UseWechatQRCode">Használja a WeChat-et a QR-kód beolvasásához</Item>
+<Item name="Activate">Aktiválás</Item>
+<Item name="ActivateOffline">Offline aktiválás</Item>
+<Item name="PleaseInputActiveCode">Kérjük, adja meg az aktiváló kódot</Item>
+<Item name="ErrorActivateCode">Hibás aktiváló kód</Item>
+<Item name="NTPSetting">Hálózati idő beállítása</Item>
+<Item name="NetworkSame">Győződjön meg róla, hogy a készülék IP címe és a router IP címe ugyanabban a hálózati szegmensben van.</Item>
+<List name="SystemBusName" id="99">[C100]  P10 28x16 8 sweep 8 draw points</List>
+</language>
+</root>

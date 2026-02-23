@@ -1,0 +1,1711 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<root>
+	<language name="Indonesian">
+		<!--  color list --> 
+		<List name="color" id="0">Warna Tunggal</List>
+		<List name="color" id="1">Warna ganda</List>
+		<List name="color" id="2">Warna Penuh</List>
+		<!-- polarity -->
+		<List name="polarity" id="0">Aktifkan Rendah</List>
+		<List name="polarity" id="1">Aktifkan Tinggi</List>
+
+		<!-- CtlDelay -->
+		<List name="listCtlDelay" id="0">Aktifkan Rendah</List>
+		<List name="listCtlDelay" id="1">Aktifkan Tinggi</List>
+		<!-- StrDelay -->
+		<List name="listStrDelay" id="0">0</List>
+		<List name="listStrDelay" id="1">1</List>
+		<!-- frequency -->
+		<List name="frequency" id="0">Otomatis</List>
+		<List name="frequency" id="200">60 Hz</List>
+		<List name="frequency" id="180">80 Hz</List>
+		<List name="frequency" id="160">100 Hz</List>
+		<List name="frequency" id="140">120 Hz</List>
+		<List name="frequency" id="120">140Hz</List>
+		<List name="frequency" id="100">160Hz</List>
+		<List name="frequency" id="80">180 Hz</List>
+		<List name="frequency" id="60">200 Hz</List>
+
+
+		<!--  multi-send --> 
+		<Item name="Schedule">Jadwal</Item>
+		<Item name="Status">Status</Item>
+		<Item name="PlotPointsImage">Merancang Poin Gambar</Item>
+		<Item name="Enable">Aktifkan</Item>
+
+		<!--  border effects list --> 
+
+
+		<!--  border directions list -->
+		<Item name="Clockwise rotation">Searah jarum jam</Item>
+		<Item name="AntiClockwise rotation">Berlawanan arah jarum jam</Item>
+		<Item name="Twinkle">Berkedip</Item>
+		<Item name="Static">Statis</Item>
+
+		<!--  display effects list -->
+		<List name="DisplayEffects" id="200">Acak</List>
+		<List name="DisplayEffects" id="202">Terus-menerus bergerak ke kiri</List>
+		<List name="DisplayEffects" id="203">Terus-menerus bergerak ke kanan</List>
+		<List name="DisplayEffects" id="204">Terus-menerus bergerak naik</List>
+		<!--
+		<List name="DisplayEffects" id="205">Terus-menerus bergerak turun</List>
+		-->
+		<List name="DisplayEffects" id="40">Menampilkan Statis</List>
+		<List name="DisplayEffects" id="0">Tunjukkan segera</List>
+		<List name="DisplayEffects" id="1">Berpindah ke kiri</List>
+		<List name="DisplayEffects" id="2">Berpindah ke kanan</List>
+		<List name="DisplayEffects" id="3">Move Up</List>
+		<List name="DisplayEffects" id="4">Pindah ke Bawah</List>
+		<List name="DisplayEffects" id="5">Menutup Ke Kiri</List>
+		<List name="DisplayEffects" id="6">Menutup ke kanan</List>
+		<List name="DisplayEffects" id="7">Menutup Ke Atas</List>
+		<List name="DisplayEffects" id="8">Menutup Ke Bawah</List>
+		<List name="DisplayEffects" id="9">Secara vertikal membuka dari tengah</List>
+		<List name="DisplayEffects" id="10">Menutup naik dan turun</List>
+		<List name="DisplayEffects" id="11">Secara horizontal membuka dari</List>
+		<List name="DisplayEffects" id="12">Menutup dari kedua belah sisi</List>
+		<List name="DisplayEffects" id="14">jendela vertikal</List>
+		<List name="DisplayEffects" id="13">jendela horizontal</List>
+		<List name="DisplayEffects" id="15">Untuk halaman kiri</List>
+		<List name="DisplayEffects" id="16">ke halaman</List>
+		<List name="DisplayEffects" id="17">Kipas dari</List>
+		<List name="DisplayEffects" id="18">Tutup Kipas</List>
+		<List name="DisplayEffects" Id="19">penutup searah jarum jam</List>
+		<List name="DisplayEffects" id="20">berlawanan arah jarum jam penutup</List>
+		<List name="DisplayEffects" id="21">secara horizontal diselingi</List>
+		<List name="DisplayEffects" id="23">Putar Ke Atas</List>
+		<List name="DisplayEffects" id="22">Putar Ke Bawah</List>
+		<List name="DisplayEffects" id="25">Putar Ke Kiri</List>
+		<List name="DisplayEffects" id="24">Putar ke kanan</List>
+		<List name="DisplayEffects" id="26">Pembangkit Horizontal</List>
+		<List name="DisplayEffects" id="27">Pembangkit vertikal</List>
+		<List name="DisplayEffects" id="28">Salju</List>
+		<List name="DisplayEffects" id="29">Jatuh</List>
+		<List name="DisplayEffects" id="30">Salju (reverse)</List>
+		<List name="DisplayEffects" id="31">Jatuh (reverse)</List>
+		<List name="DisplayEffects" id="32">Kiri Laser</List>
+		<List name="DisplayEffects" id="33">Kanan Laser</List>
+		<List name="DisplayEffects" id="34">Berkedip</List>
+		<List name="DisplayEffects" id="35">White-inverse berkedip</List>
+		<List name="DisplayEffects" id="36">Tarik ke bawah</List>
+		<List name="DisplayEffects" id="37">Tarik ke atas</List>
+		<List name="DisplayEffects" id="38">Tarik secara vertikal</List>
+		<List name="DisplayEffects" id="39">Membalik</List>
+
+		<!--  clear effects list -->
+		<List name="ClearEffects" id="200">Acak</List>
+		<List name="ClearEffects" id="201">Jangan bersihkan</List>
+		<List name="ClearEffects" id="0">Segera Jelas</List>
+		<List name="ClearEffects" id="1">Berpindah ke kiri</List>
+		<List name="ClearEffects" id="2">Berpindah ke kanan</List>
+		<List name="ClearEffects" id="3">Move Up</List>
+		<List name="ClearEffects" id="4">Pindah ke Bawah</List>
+		<List name="ClearEffects" id="5">Penutup Ke Kiri</List>
+		<List name="ClearEffects" id="6">Penutup ke kanan</List>
+		<List name="ClearEffects" id="7">Penutup Hingga</List>
+		<List name="ClearEffects" id="8">Penutup Ke Bawah</List>
+		<List name="ClearEffects" id="9">secara vertikal membuka dari tengah</List>
+		<List name="ClearEffects" id="10">ditutup naik dan turun</List>
+		<List name="ClearEffects" id="11">secara horizontal membuka dari tengah</List>
+		<List name="ClearEffects" id="12">tutup dari kedua belah pihak</List>
+		<List name="ClearEffects" id="13">jendelanya Vertikal</List>
+		<List name="ClearEffects" id="14">jendelanya Horizontal</List>
+		<List name="ClearEffects" id="15">Untuk halaman kiri</List>
+		<List name="ClearEffects" id="16">ke halaman</List>
+		<List name="ClearEffects" id="17">Kipas dari</List>
+		<List name="ClearEffects" id="18">Tutup Kipas</List>
+		<List name="ClearEffects" id="19">penutup searah jarum jam</List>
+		<List name="ClearEffects" id="20">berlawanan arah jarum jam penutup</List>
+		<List name="ClearEffects" id="21">secara horizontal diselingi</List>
+		<List name="ClearEffects" id="22">Putar Ke Atas</List>
+		<List name="ClearEffects" id="23">Putar Turun</List>
+		<List name="ClearEffects" id="24">Putar Ke Kiri</List>
+		<List name="ClearEffects" id="25">Putar ke kanan</List>
+		<List name="ClearEffects" id="26">Pembangkit Horizontal</List>
+		<List name="ClearEffects" id="27">Pembangkit vertikal</List>
+		<!-- backgroup effects list -->
+
+		<List name="BackgroupEffects" id="0">Acak</List>
+		<List name="BackgroupEffects" id="1">Statis</List>
+		<List name="BackgroupEffects" id="2">Berpindah ke kiri</List>
+		<List name="BackgroupEffects" id="3">Berpindah ke kanan</List>
+		<List name="BackgroupEffects" id="4">Pindah ke atas</List>
+		<List name="BackgroupEffects" id="5">Pindah ke bawah</List>
+		<List name="BackgroupEffects" id="6">Berpindah ke kiri，kemudian berpindah ke kanan</List>
+		<List name="BackgroupEffects" id="7">Secara horizontal membuka dari tengah</List>
+		<List name="BackgroupEffects" id="8">tutup dari kedua belah sisi</List>
+		<List name="BackgroupEffects" id="9">Memperbesar</List>
+		<List name="BackgroupEffects" id="10">Perkecil</List>
+		<List name="BackgroupEffects" id="11">Bernapas</List>
+		<List name="BackgroupEffects" id="12">Crossover</List>
+		<List name="BackgroupEffects" id="13">Equalizer</List>
+		<List name="BackgroupEffects" id="14">Sistem Reflex</List>
+		<List name="BackgroupEffects" id="15">Berkedip</List>
+		<List name="BackgroupEffects" id="16">Warna Solid</List>
+		<List name="BackgroupEffects" id="17">Pembukaan Pita Menutup</List>
+		<List name="BackgroupEffects" id="18">Memutar Ekspansi</List>
+		<List name="BackgroupEffects" id="19">DiamondShaped Ekspansi</List>
+		<List name="BackgroupEffects" id="20">garis Salib Acak</List>
+		<List name="BackgroupEffects" id="21">Garis Kurva</List>
+        <List name="platformList" id="hdplatform.huidu.cn">Release platform</List>
+        <Item name="platform">platform</Item>
+		<Item name="ClassicBackground">Gambar Latar Belakang</Item>
+		<Item name="Graph">Grafik</Item>
+		<Item name="GraphCount">Kuantitas</Item>
+
+		<Item name="Effect Move">Pindah</Item>
+		<Item name="Effect Cover">penutup</Item>
+		<Item name="Effect OpenAndClose">Buka tutup</Item>
+		<Item name="Effect FanShaped">penutup</Item>
+		<Item name="Effect PageTurning">Halaman</Item>
+		<Item name="Effect Roll">Putar</Item>
+		<Item name="Effect Drift">Salju</Item>
+		<Item name="Effect WaterFall">Jatuh</Item>
+		<Item name="Effect Laser">Menggunakan Laser</Item>
+		<Item name="Effect Flicker">Berkedip</Item>
+		<Item name="Effect Pull">Tarik</Item>
+
+		<!--  Main Menu -->
+		<Item name="mView">Melihat(&amp;V)</Item>
+		<Item name="mFile">File(&amp;F)</Item>
+		<Item name="mSetting">Setelan(&amp;S)</Item>
+		<Item name="mTool">Alat-alat(&amp;T)</Item>
+		<Item name="mOperate">Pengoperasian(&amp;O)</Item>
+		<Item name="mLanguage">Bahasa(&amp;L)</Item>
+		<Item name="mAbout">Tentang(&amp;)</Item>
+		<Item name="mHelp">membantu(&amp;H)</Item>
+		<Item name="mOpen">Buka(&amp;O)</Item>
+		<Item name="mNew">Layar Baru(&amp;N)</Item>
+		<Item name="mSave">Save(&amp;S)</Item>
+		<Item name="mSaveAs">Simpan Sebagai...</Item>
+		<Item name="mExit">Keluar(&amp;E)</Item>
+		<Item name="mScreenSetting">Parameter Layar Setelan</Item>
+		<Item name="mHardwareSetting">Setelan Perangkat Keras</Item>
+		<Item name="mCommSetting">Setelan Komunikasi</Item>
+		<Item name="mSystemSetting">Pengaturan Sistem</Item>
+		<Item name="mSendProject">Mengirim Item</Item>
+		<Item name="mTimeSetting">Setelan Waktu</Item>
+		<Item name="mLuminanceSetting">Setelan Kecerahan</Item>
+		<Item name="mUpdateFirmware">Perbarui Firmware</Item>
+		<Item name="UpdatingFirmware">memperbarui firmware.</Item>
+		<Item name="mIPManagmentTools">Alat Bantu Pengelolaan IP</Item>
+		<Item name="mClearDisplayData">Kosongkan Data ditampilkan</Item>
+		<Item name="DeviceManage">Mengelola Perangkat</Item>
+		<Item name="mNotepad">Notepad</Item>
+		<Item name="mCalculator">Kalkulator</Item>
+		<Item name="mPaint">Menarik</Item>
+		<Item name="mNarrow">Perkecil</Item>
+		<Item name="mZoom">Memperbesar</Item>
+		<Item name="mOutWindow">Jendela Info</Item>
+		<Item name="mBludStyle">gaya Biru(B)</Item>
+		<Item name="mBlackStyle">Black style(L)</Item>
+		<Item name="mSilverStyle">Perak style(s)</Item>
+		<Item name="mWatergreenStyle">Hijau terang style(A)</Item>
+		<Item name="mAPPFace">APPface(&amp;)</Item>
+		<Item name="StartUpImage">Boot Animasi</Item>
+
+		<!--  popup menu --> 
+		<Item name="Rename">Mengganti Nama</Item>
+		<Item name="SendFile">Mengirim File</Item>
+		<Item name="AddProgram">Menambahkan Program</Item>
+		<Item name="AddGroup">Tambah Grup</Item>
+		<Item name="AddRegion">Menambahkan Region</Item>
+		<Item name="OpenFolder">Buka Folder</Item>
+		<Item name="MoveUp">Move Up</Item>
+		<Item name="MoveDown">Pindah ke Bawah</Item>
+		<Item name="ColorSingleSelect">Satu Warna Pilih</Item>
+		<Item name="RectangleScreen">layar Kotak</Item>
+		<!-- Normal -->
+		<Item name="General2">Gen2</Item>
+		<Item name="General6">Gen6</Item>
+		<Item name="General4">Gen4</Item>
+		<Item name="Width">Lebar</Item>
+		<Item name="Height">Tinggi</Item>
+		<Item name="Single">Satu</Item>
+		<Item name="Multi">Beberapa</Item>
+		<Item name="ScreenCount">Kuantitas layar terhubung</Item>
+		<Item name="Associated">Mengaitkan</Item>
+		<Item name="DontChange">Jangan ubah</Item>
+		<Item name="Scanning">memindai</Item>
+		<Item name="Change">Ubah</Item>
+		<Item name="Error">Kesalahan</Item>
+		<Item name="MultipeSend">Beberapa Mengirim</Item>
+		<Item name="MultipeSendHint">Beberapa mengirim hanya berlaku ke mode Ethernet (IP tetap ).</Item>
+		<Item name="CheckAll">Pilih Semua</Item>
+		<Item name="Inverse">Pilih semudah membalikkan</Item>
+		<Item name="Undo">Mengurungkan</Item>
+		<Item name="Copy">Menyalin</Item>
+		<Item name="Cut">Potong</Item>
+		<Item name="Paste">Menempelkan</Item>
+		<Item name="Temp">Temperature</Item> suhu
+		<Item name="Preview">Preview</Item>
+		<Item name="SuspendPreview">Menghentikan preview</Item>
+		<Item name="Stop">Menghentikan</Item>
+		<Item name="Prev">Sebelumnya</Item>
+		<Item name="Next">Berikutnya</Item>
+		<Item name="Finish">Finish</Item>
+		<Item name="BasicSetting">Basic Setelan</Item>
+		<Item name="AdvancedSetting">Setelan Lanjutan</Item>
+		<Item name="Background">Latar Belakang</Item>
+		<Item name="BackgroundColor">Warna Latar Belakang</Item>
+		<Item name="Export">U Disk</Item>
+		<Item name="About">Tentang</Item>
+		<Item name="program">Program</Item>
+		<Item name="Text">Teks</Item>
+		<Item name="hypertext">HyperText</Item>
+		<Item name="time">Waktu</Item>
+		<Item name="TimeClock">Jam Digital</Item>
+		<Item name="DialClock">Dial Jam</Item>
+		<Item name="delete">Menghapus</Item>
+		<Item name="send">Kirim</Item>
+		<Item name="screen">Layar Asal</Item>
+		<Item name="sec">sec</Item>
+		<Item name="ms">ms</Item>
+		<Item name="Sunday">Hari Minggu</Item>
+		<Item name="Monday">Senin</Item>
+		<Item name="Tuesday">Selasa</Item>
+		<Item name="Wednesday">Rabu</Item>
+		<Item name="Thursday">Kamis</Item>
+		<Item name="Friday">Jumat</Item>
+		<Item name="Saturday">Sabtu</Item>
+		<Item name="static">Statis</Item>
+		<Item name="CommonSettings">Setelan Umum</Item>
+		<Item name="Red">Merah</Item>
+		<Item name="Green">Hijau</Item>
+		<Item name="Yellow">Kuning</Item>
+		<Item name="Black">Black</Item>
+		<Item name="Blue">Blue</Item>
+		<Item name="Orange">kain ungu muda</Item>
+		<Item name="Cyan">Cyan</Item>
+		<Item name="White">White</Item>
+		<Item name="Editor">Edit</Item>
+		<Item name="OK">OK</Item>
+		<Item name="Cancel">Batal</Item>
+		<Item name="Open">Buka</Item>
+		<Item name="Save">Simpan</Item>
+		<Item name="Close">Tutup</Item>
+		<Item name="Insert">Masukkan</Item>
+		<Item name="Table">Table</Item>
+		<Item name="Setting">Setelan</Item>
+		<Item name="HDScreenFile">HD File Layar</Item>
+		<Item name="Add">Tambah</Item>
+		<Item name="Images">Gambar</Item>
+		<Item name="File">File</Item>
+		<Item name="Color">Color</Item>
+		<Item name="CharSpacing">Character Spasi</Item>
+		<Item name="LineSpacing">Spasi</Item>
+		<Item name="TextFile">.txt</Item>
+
+		<Item name="Small">Kecil</Item>
+		<Item name="Middle">Sedang</Item>
+		<Item name="Large">Besar</Item>
+		<Item name="Effect">Akibat</Item>
+		<Item name="Speed">Speed</Item>
+		<Item name="Direction">Arah</Item>
+		<Item name="DeleteThisProgram">Hapus program ini?</Item>
+		<Item name="DeleteThisData">menghapus semua program dalam kartu kontrol?</Item>
+		<Item name="DeleteThisRegion">Menghapus wilayah ini?</Item>
+		<Item name="DeleteThisFile">Menghapus file ini?</Item>
+		<Item name="AdjustTime">Menyesuaikan Waktu</Item>
+		<Item name="Clock">Dial</Item>
+		<Item name="Count">Menghitung</Item>
+		<Item name="Copyright">Hak Cipta: Shenzhen Huidu Technology Co.,Ltd.</Item>
+		<Item name="COMURL">URL COM:http://huidu.wicp.net </Item>
+		<Item name="USE_HD2010">kartu kontrol yang terdeteksi, tetapi ia tidak sama dengan perangkat lunak saat ini, harap gunakan HD 2010.</Item>
+		<!--Video--> 
+		<Item name="Video">Video</Item>
+		<Item name="Player">Mainkan</Item>
+		<Item name="Stop">Berhenti</Item>
+		<Item name="Original">Asli</Item>
+		<Item name="Video name">Path Video</Item>
+		<Item name="Video FramesCount">Total Frames</Item>
+		<Item name="Memory Size">Ukuran File</Item><!-- Google-->
+		<Item name="Playing BeginFrames">Memainkan frame awal</Item>
+		<Item name="Playing EndFrames">Memainkan frame akhir</Item>
+		<Item name="Playing Frames">Memainkan Frames</Item>
+		<Item name="Playback Duration">Durasi Playback</Item>
+		<Item name="PlayMemory Size">Memainkan Ukuran File</Item>
+		<Item name="Flash">SWF</Item>
+		<Item name="Begin Play">Mulai</Item>
+		<Item name="End Play">Akhiri</Item>
+		<Item name="Add GIF">Menambahkan GIF</Item>
+		<Item name="GIF name">GIF Path</Item>
+		<Item name="PlayQuality">kelancaran</Item>
+		<Item name="PlaySpeed">Memainkan Speed</Item>
+		<Item name="Low">Rendah</Item>
+		<Item name="High">Tinggi</Item>
+		<Item name="Slow">lambat</Item>
+		<Item name="Fast">Cepat</Item>
+		<Item name="SerialNumber">No.</Item>
+		<Item name="Type">Type</Item>
+		<Item name="Name">Name</Item>
+		<!--  IP managing tool--> 
+		<Item name="CardIpSeting">Setelan IP Kartu</Item>
+		<Item name="EndIpAddr">End IP</Item>
+		<Item name="CardIpSeting">Setelan IP Kartu</Item>
+		<Item name="LocalIpSeting">Setelan IP Lokal</Item>
+		<Item name="NICName">Nama NIC</Item>
+		<Item name="AutoGetingIP">Secara Otomatis mendapatkan IP</Item>
+
+		<!--  operate -->
+		<Item name="SystemTime">Waktu Sistem</Item>
+		<Item name="Custom">Custom</Item>
+		<Item name="FirmwareMismatching">Firmware yang Digunakan Tidak Sama</Item>
+		<Item name="GetFirmwareVersion">Mendapatkan versi firmware</Item>
+		<Item name="FirmwareVersion">Versi Firmware</Item>
+		<Item name="ExportToUDisk">Ekspor ke U disk</Item>
+		<Item name="Device">Perangkat lepas-pasang</Item>
+		<Item name="DiskSpace">Ruang Disk:</Item>
+		<Item name="TotalSpace">Total Ruang</Item>
+		<Item name="FreeSpace">Ruang Kosong</Item>
+		<Item name="NeedSpace">Diperlukan Space</Item>
+
+		<Item name="RemoveDevice">Lepaskan Perangkat</Item>
+		<Item name="PlaseSelectDevice">Harap pilih sebuah perangkat!</Item>
+		<Item name="FoundDisk">menemukan perangkat lepas-pasang!</Item>
+		<Item name="NoFoundDisk">Tidak ada perangkat yang dapat dilepas ditemukan!</Item>
+		<Item name="Detecting">mendeteksi ...</Item>
+		<Item name="DetectDevice">Mendeteksi Perangkat</Item>
+		<Item name="ExportFile">File Ekspor</Item>
+		<Item name="PlaseSelectDevice">Harap pilih sebuah perangkat!</Item>
+		<Item name="ExportAdjustTimeFile">Waktu Ekspor-menyesuaikan file</Item>
+		<Item name="GetSystemTime">Mendapatkan waktu sistem</Item>
+		<Item name="IPResetting">IP Reset</Item>
+		<Item name="ScreenTest">Tes Layar</Item>
+		<Item name="OperationSuccess">Beroperasi berhasil</Item>
+		<Item name="ExportSuccess">Berhasil ekspor, apakah untuk mengangkat U disk?</Item>
+		<Item name="ExportSuccess1">Berhasil ekspor ke</Item>
+		<Item name="ExportSuccess2">.</Item>
+		<Item name="RemoveDeviceSuccess1">Berhasil Dihapus</Item>
+		<Item name="RemoveDeviceSuccess2">.</Item>
+		<Item name="QuitTest">Quit test</Item>
+
+		<!--  table --> 
+		<Item name="NewTable">Tabel Baru</Item>
+		<Item name="BorderSetting">Setelan Batas</Item>
+		<Item name="BorderColor">Warna Perbatasan</Item>
+		<Item name="BorderWidth">Lebar Perbatasan</Item>
+		<Item name="InsertRow">Masukkan Baris</Item>
+		<Item name="OnTop"> Masukkan Di Atas</Item>
+		<Item name="OnBottom">Masukkan di bawah ini</Item>
+		<Item name="InsertColumn">Masukkan</Item> kolom
+		<Item name="OnLeft">pada sebelah kiri</Item>
+		<Item name="OnRight">Pada Sebelah Kanan</Item>
+		<Item name="Row">Baris</Item>
+		<Item name="Column">Kolom Kolom</Item>
+		<Item name="MergeCells">Bergabung ke sel-sel</Item>
+		<Item name="SplitCell">Sel Split</Item>
+		<Item name="SplitVertical">Split secara vertikal</Item>
+		<Item name="SplitHorizontal">Split secara horizontal</Item>
+		<Item name="Unmerge">Unmerge</Item>
+		<Item name="All">Semua</Item>
+		<Item name="Valign">secara vertikal luruskan</Item>
+		<Item name="ValignTop">Luruskan atas</Item>
+		<Item name="ValignBottom">Luruskan bagian bawah</Item>
+		<Item name="ValignMiddle">vertikal keunggulan</Item>
+		<Item name="Border">Batas</Item>
+		<Item name="FixedCellsWidth">Lebar sel tetap</Item>
+		<Item name="PleaseEnterTheBorderWidthOfTheTable">Harap masukkan batas lebar tabel.</Item>
+		<Item name="PleaseEnterTheNumberOfRows">Harap masukkan nomor baris.</Item>
+		<Item name="PleaseEnterTheNumberOfCloumns">Harap masukkan jumlah kolom.</Item>
+
+		<!--  screen parameters  --> 
+		<Item name="SignalDelay">Polaritas Kait</Item>
+		<Item name="SignalDelayHint">Beberapa dari layar asal (seperti beberapa P5) dengan STR atau disebut kait LAT isyarat ini diterbalikkan dengan layar lainnya, jika ada titik flash atau jalur, anda dapat mencoba untuk anti-pilih opsi ini.</Item>
+		<Item name="FitMaxHint">wilayah tersebut dimaksimalkan</Item>
+		<Item name="MaximumOfRange">Jangkauan Maksimal</Item>
+		<Item name="MaximumOfRegions">wilayah Maksimal</Item>
+		<Item name="ProgramInformation">Informasi Program</Item>
+		<Item name="BuildArea">Area Membangun</Item>
+		<Item name="SupportRegionsOverlap">Mendukung Daerah yang tumpang tindih</Item>
+		<Item name="NoLimit">Tidak Ada Batas</Item>
+		<Item name="MaximumOfWidth">Lebar Maksimal</Item>
+		<Item name="MaximumOfHeight">ketinggian maksimal</Item>
+		<Item name="PleaseSelectAFile">Harap pilih sebuah file!</Item>
+		<Item name="ScreenParametersSetting">Setelan Parameter Layar</Item>
+		<Item name="ModuleSelect">Pilihan Modul</Item>
+		<Item name="ScreenParameters">Parameter Layar</Item>
+		<Item name="LuminanceSetting">Setelan Kecerahan</Item>
+		<Item name="TimeSwitch">Saklar Waktu</Item>
+		<Item name="AdvancedSettings">Setelan Lanjutan</Item>
+		<Item name="Module">Modul</Item>
+		<Item name="ScreenWidth">Lebar</Item>
+		<Item name="ScreenHeight">Tinggi</Item>
+		<Item name="ScreenColor">Color</Item>
+		<Item name="DataPolarity">Data polarity</Item>
+		<Item name="DataMirror">Mirror Data</Item>
+		<Item name="Memory">Memori</Item>
+		<Item name="OEPolarity">OE polarity</Item>
+		<Item name="ScanMode">memindai Mode</Item>
+		<Item name="ImportParam">Impor</Item>
+		<Item name="ExportParam">Ekspor</Item>
+		<Item name="Use138Decoder">Gunakan Dari dekoder berkualifikasi 138</Item>
+		<Item name="SaveToDefaultSetting">Simpan sebagai setelan default</Item>
+		<Item name="Default">Default</Item>
+		<Item name="Automatic">Otomatis</Item>
+		<Item name="NeedSensor">Perlu sensor-sensor</Item>
+		<Item name="AutomaticInfo">Saat menggunakan fungsi penyesuaian otomatis, harap pastikan anda telah menginstal sensor kecerahan.</Item>
+		<Item name="CustomTime">oleh peraturan jangka waktu</Item>
+		<Item name="IsSendToCard">Anda ingin mengirimkannya ke kartu kontrol？</Item>
+		<Item name="Use">Gunakan</Item>
+		<Item name="StartingUp">Boot Up</Item>
+		<Item name="ShuttingDown">Shut Down</Item>
+		<Item name="NumberOfProgramHasReachedItsMaximum">program jumlah maksimal telah mencapai!</Item>
+		<Item name="EliminateGhosting">blanking Baris</Item>
+		<Item name="Readback">Readback</Item>
+		<Item name="Frequency">frekuensi pemindaian</Item>
+		<Item name="SystemOptimize">Optimisasi Sistem</Item>
+		<Item name="SpeedPrior">Pertama Kecepatan</Item>
+		<Item name="LuminancePrior">Pertama Kecerahan</Item>
+		<Item name="Equilibrium">Keseimbangan</Item>
+		<Item name="UseDefaultSetting">Setelan Default</Item>
+		<Item name="ButtonSettings">Tombol 1</Item>
+		<Item name="Test">Test</Item>
+		<Item name="ProgramSwitching">Switching Program</Item>
+		<Item name="ButtonSettings2">Tombol 2</Item>
+		<Item name="InfraredRay">Lampu infra-merah ray</Item>
+		<Item name="PreProgram">Berpindah ke program sebelumnya</Item>
+		<Item name="PlayBeforePowerProgram">Terakhir Memori Menunjukkan</Item>
+		<Item name="ButtonSettings3">Tombol 3</Item>
+		<Item name="ButtonorPlaySet">Setelan Tombol</Item>
+		<Item name="Button">Tombol</Item>
+		<Item name="ButtonSettings4">Tombol 4</Item>
+		<Item name="TimingControl">Pewaktuan Control</Item>
+		<Item name="CountAdd">Menghitung plus</Item><!-- Google-->
+		<Item name="TimingPause">Penentuan eda</Item>
+		<Item name="NextProgram">Berpindah ke program berikutnya</Item>
+		<Item name="CountSub">menghitung mundur</Item>
+		<Item name="Count1">Digit</Item>
+		<Item name="TimingReset">Pewaktuan Reset</Item>
+		<Item name="CountReset">Gerai travel Reset</Item>
+		<Item name="DataSource">Sumber Data</Item>
+		<Item name="DataLenght">panjang Data</Item>
+		<Item name="PointCount">angka desimal</Item>
+		<Item name="CLKMirror">CLK polarity</Item>
+		<Item name="From Min To Max">Dari Min hingga MAX</Item>
+		<Item name="From Max To Min">Dari Max Untuk Min</Item>
+		<Item name="InitialState">Status inisial</Item>
+		<Item name="TransitionThreshold">ambang batas Transisi</Item>
+		<Item name="minimum">Min</Item>
+		<Item name="Max">Max</Item>
+		<Item name="MinUseImage">Image bagi Min</Item>
+		<Item name="MaxUseImage">Image bagi Max</Item>
+		<Item name="SpecifyValue">Menentukan nilai</Item>
+		<Item name="BusName">Name</Item>
+		<Item name="BusImage">board Unit gambar</Item>
+		<Item name="BusView">Melihat</Item>
+		<Item name="BusEdit">Edit</Item>
+		<Item name="BusNew">Baru</Item>
+		<Item name="PrevScan">Sebelumnya</Item>
+		<Item name="NextScan">Berikutnya</Item>
+		<Item name="Begin">Memulai</Item>
+		<Item name="Pause">Jeda</Item>
+		<Item name="AutoSearchScans">Secara Otomatis Mencari mode pemindaian</Item>
+		<Item name="SendScreenParams">Mengirim Parameters</Item>
+		<Item name="ExporBus">parameter board unit Ekspor</Item>
+		<Item name="ExporBusIn">parameter board unit Impor</Item>
+		<Item name="ReadBack2">Readback</Item>
+		<Item name="ExportImport">impor dan ekspor</Item>
+		<Item name="UnitBoard">board Unit</Item>
+		<Item name="Built-inUnitBoard">board unit Umum</Item>
+		<Item name="CustomUnitBoard">board unit Khusus</Item>
+		<Item name="UnitBoards">Jumlah board unit</Item>
+		<Item name="Points">Layar Poin</Item>
+		<Item name="UseParams">Parameter Menggunakan</Item>
+
+		<Item name="UsingHardwareSetup">Gunakan setelan perangkat keras(readback Parameter)</Item>
+		<Item name="CardModel">Model Kartu</Item>
+		<Item name="GrayLevel">Tingkat Abu-abu</Item>
+		<Item name="Model">Card</Item>
+		<Item name="Size">Size</Item>
+		<Item name="RememberProgram">Ingat Program</Item>
+		<Item name="BasicPara">Parameter Dasar</Item>
+		<Item name="LockPara">Parameter Kunci</Item>
+		<Item name="P10Colorful">P10 （berwarna-warni)</Item>
+		<!-- Use138 -->
+		<List name="Use138" id="0">Menggunakan 138</List>
+		<List name="Use138" id="1">Tidak Ada 138</List>
+		<!-- bus name list -->
+<List name="SystemBusName" id="0">[C1]φ4.75(φ3.75)1R1G   1/16S HUB08 64X32（Indoor）  [A1]</List>
+<List name="SystemBusName" id="10">[C11]P10       1R1G1B 1/8S  HUB08 32X16 HLL</List>
+<List name="SystemBusName" id="11">[C12]P10       1R1G1B 1/4S  HUB75 32X16  [A13]</List>
+<List name="SystemBusName" id="12">[C13]P8        1R1G1B 1/5S   HUB75 40X20 JHG  [A60]</List>
+<List name="SystemBusName" id="13">[C14]P8        1R1G1B 1/4S  HUB08 32X16  [A8]</List>
+<List name="SystemBusName" id="14">[C15]P12/P16   2R1G   1/4S  HUB12 16X8（P16） [A12]</List>
+<List name="SystemBusName" id="15">[C16]P13.33    1R1G1B 1/3S  HUB08 24X12 HLL  [A49]</List>
+<List name="SystemBusName" id="16">[C17]P13.33    1R1G1B 1/3S  HUB08 24X12 JHG  [A57]</List>
+<List name="SystemBusName" id="17">[C18]P16       1R1G1B 1/5S  HUB08 20X10 HLL  [A52]</List>
+<List name="SystemBusName" id="18">[C19]P16       1R1G1B 1/1S  HUB40 16X8  [A29]</List>
+<List name="SystemBusName" id="19">[C20]P10       1R1G1B 1/4S  HUB75 32X16  [A11]</List>
+<List name="SystemBusName" id="1">[C2]φ3.75(φ5)1R     1/16S HUB08 64X32（Indoor）  [A1]</List>
+<List name="SystemBusName" id="20">[C21]P25       2R1G1B 1/1S  HUB40 16X8</List>
+<List name="SystemBusName" id="21">[C22]P10-P20   1G2R1B 1/4S  HUB12 16X8  [A61]</List>
+<List name="SystemBusName" id="22">[C23]P10-P20   2R1G1B 1/4S  HUB12 16X8  [A80]</List>
+<List name="SystemBusName" id="23">[C24]P13.33-P26.66  2R1G1B 1/4S  HUB12 12X6</List>
+<List name="SystemBusName" id="24">[C25]P20  1R1G 1/4S  HUB26 16*16（ZHGD） [A66]</List>
+<List name="SystemBusName" id="25">[C26]P13.33  1R1G1B 1/6S  HUB08 24*12（HLL） [A55]</List>
+<List name="SystemBusName" id="26">[C27]P10  1R 1/4S  HUB12 32*16（QL） [A19]</List>
+<List name="SystemBusName" id="27">[C28]P10  1R1G1B 1/2S  HUB75 16*16</List>
+<List name="SystemBusName" id="28">[C29]P6  1R1G1B 1/8S  HUB75 32*16</List>
+<List name="SystemBusName" id="29">[C30]P6  1R1G1B 1/8S  HUB75 32*32</List>
+<List name="SystemBusName" id="2">[C3]P5         1R1G1B 1/16S HUB08 32X32  [A3]</List>
+<List name="SystemBusName" id="30">[C31]P10  1R1G1B 1/4S  HUB75 16*16[A17]</List>
+<List name="SystemBusName" id="31">[C32]P20  1R1G1B 1/1S  HUB75 16*8</List>
+<List name="SystemBusName" id="32">[C33]P25  2R1G1B 1/1S  HUB75 8*8  [A30]</List>
+<List name="SystemBusName" id="33">[C34]P13.33  1R 1/4S  HUB12 24*12 [A71]</List>
+<List name="SystemBusName" id="34">[C35]P10  1R1G 1/4S  HUB12 32*16  [A7]</List>
+<List name="SystemBusName" id="3">[C4]P5         1R1G   1/8S  HUB08 32*16（Vehicle screen） [A4]</List>
+<List name="SystemBusName" id="4">[C5]P5/P4      1R1G1B 1/16S HUB75 32X32（Indoor） [A1]</List>
+<List name="SystemBusName" id="5">[C6]P10        1R/1R1G     1/4S  HUB12 32X16（P10） [A8]</List>
+<List name="SystemBusName" id="6">[C7]P10        1R     1/4S  HUB08  32X16</List>
+<List name="SystemBusName" id="7">[C8]P10        1R     1/1S  HUB08 32X16[A31]</List>
+<List name="SystemBusName" id="8">[C9]P10        1R1G   1/4S  HUB08  No 138 32X16  [A13]</List>
+<List name="SystemBusName" id="9">[C10]P10        1R1G   1/4S  HUB12 32X16 [A19]</List>
+		<!--  program parameters --> 
+		<Item name="Solid color">warna Solid</Item>
+		<Item name="Parti-color">warna sebagian</Item>
+		<Item name="Tricolor">tiga warna</Item>
+		<Item name="BorderWidthExceeds">Lebar Perbatasan melebihi.</Item>
+
+		<Item name="BorderSetting">Setelan Batas</Item>
+		<Item name="NoBorder">Tanpa Batas</Item>
+		<Item name="PlayMode">Memainkan Mode</Item>
+		<Item name="FixedTime">Waktu tetap</Item>
+		<Item name="PlayTime">Waktu Main</Item>
+		<Item name="SpecifiedTime">Waktu yang Ditetapkan</Item>
+		<Item name="To">Untuk</Item>
+
+		<!--  region parameters --> 
+		<Item name="RegionRect">Posisi Wilayah</Item>
+		<Item name="EffectSetting">Setelan Efek</Item>
+		<Item name="OriginX">Asal Usul X</Item>
+		<Item name="OriginY">Asal Usul Y</Item>
+		<Item name="RegionWidth">Lebar</Item>
+		<Item name="RegionHeight">Tinggi</Item>
+		<Item name="Display">Tampilan</Item>
+		<Item name="Clear">Bersihkan layar</Item>
+		<Item name="Dwell">Menghentikan atas</Item>
+		<Item name="PleaseSelectAProgram">Harap pilih sebuah program!</Item>
+		<Item name="NumberOfRegionHasReachedItsMaximum">Jumlah wilayah tersebut telah mencapai maksimum!</Item>
+		<Item name="FileList">Daftar File</Item>
+		<Item name="NewHypertext">Aplkasi Hypertext Baru</Item>
+		<Item name="AddHypertext">Menambahkan Hypertext</Item>
+		<Item name="AddPicture">Tambah Gambar</Item>
+		<Item name="TimeParameters">Parameter Waktu</Item>
+		<Item name="Timing Parameters">Parameter Waktu</Item>
+		<Item name="SingleLine">Satu-baris display</Item>
+		<Item name="MultiLine">tampilan multi baris</Item>
+		<Item name="Space">Spasi</Item>
+		<Item name="ShowDate">Tampilkan Tanggal</Item>
+		<Item name="ShowWeek">Tampilkan Seminggu</Item>
+		<Item name="ShowTime">Tampilkan Waktu</Item>
+		<Item name="OnlyAllowContainsATimeRegion">Hanya mengizinkan untuk berisi sebuah wilayah waktu!</Item>
+		<Item name="DateAndWeekLocationReplaced">Perubahan tanggal dan minggu</Item>
+		<Item name="ContentContainMultiLines">efek ini tidak mendukung tabel, Anda ingin menghapusnya?</Item>
+		<Item name="OnlyAllowContainsAClockRegion">Hanya mengizinkan untuk berisi sebuah wilayah panggil cepat!</Item>
+		<Item name="ClockParameters">Atribut Panggil Cepat</Item>
+		<Item name="HourRadius">Radius Jam</Item>
+		<Item name="SecondRadius">Kedua Jari-jari</Item>
+		<Item name="HourHand">Jam Tangan</Item>
+		<Item name="MinuteHand">Menit Tangan</Item>
+		<Item name="SecondHand">Tangan Kedua</Item>
+		<Item name="TargetTime">Waktu Target</Item>
+		<Item name="Horizontal">Posisi Horizontal</Item>
+		<Item name="Veritical">Posisi Vertikal</Item>
+		<Item name="Day">Hari</Item>
+		<Item name="Hour">Jam</Item>
+		<Item name="Min">Menit</Item>
+		<Item name="Sec">Detik</Item>
+		<Item name="AlignCenter">Layar Asal komitmennya</Item>
+		<Item name="Font">Font</Item>
+		<Item name="CountColor">warna Nilai</Item>
+		<Item name="UnitColor">warna Unit</Item>
+		<Item name="TempUnit">unit SET TEMP</Item>
+		<Item name="TempAdjust">Koreksi Suhu</Item>
+		<Item name="CountDown">menghitung mundur</Item>
+		<Item name="CountUp">Menghitung</Item>
+		<Item name="ButtonTiming">Pewaktuan Tombol</Item>
+		<Item name="ButtonDownTiming">menghitung mundur Tombol</Item>
+		<Item name="ButtonUpTiming">Jumlah tombol Naik</Item>
+		<Item name="OnlyAllowContainsATempRegion">Hanya mengizinkan untuk berisi sebuah suhu wilayah !</Item>
+
+		<!--  system setting -->
+		<Item name="TextProcessing">Pemrosesan Teks</Item>
+		<Item name="PictrueProcessing">Pemrosesan Gambar</Item>
+		<Item name="PreviewSetting">Setelan Preview</Item>
+		<Item name="PasswordSetting">Setelan Kata Sandi</Item>
+		<Item name="ScanRange">ambang batas Pemindaian</Item>
+		<Item name="FilterColor">Warna Filter</Item>
+		<Item name="FirstPage">Halaman Pertama</Item>
+		<Item name="LastPage">Halaman Terakhir</Item>
+		<Item name="SwapBlueGreen">Exchange warna biru dan hijau</Item>
+		<Item name="AutoAdjustTime">otomatis menyesuaikan waktu</Item>
+		<Item name="Allow">Enable</Item>
+		<Item name="Deny">Disable</Item>
+		<Item name="AllowPasswordAuthentication">Mengaktifkan otentikasi kata sandi untuk setelan penting.</Item>
+		<Item name="OtherSeting">Setelan Lainnya</Item>
+
+		<!--  password --> 
+		<Item name="PasswordAuthentication">Otentikasi Kata Sandi</Item>
+		<Item name="Password">Kata Sandi</Item>
+		<Item name="PasswordError">Kata sandi salah!</Item>
+		<Item name="OpenAdv">Buka Ad</Item>
+
+		<!--  communication --> 
+		<Item name="ThisModuleNotSupportUDisk">model ini tidak mendukung U disk.</Item>
+		<Item name="CommunicationMode">Komunikasi</Item>
+		<Item name="RS232">RS232</Item>
+		<Item name="UDisk">U Disk</Item>
+		<Item name="Ethernet">Kabel Ethernet</Item>
+		<Item name="SetTheBaudrateSuccessfully">Setel baudrate berhasil</Item>
+		<Item name="DetectFail">Detection gagal!</Item>
+		<Item name="DetectSuccess">Detection berhasil!</Item>
+		<Item name="SerialPortOpenError">gagal untuk membuka port serial!</Item>
+		<Item name="SerialPortIsClosed">kartu LED control yang terhubung ke port serial tidak ditemukan.</Item>
+		<Item name="SerialPortIsOccupied">Port Serial dikenali!</Item>
+		<Item name="CannotFindNetWordDrive">perangkat jaringan tidak ditemukan!</Item>
+		<Item name="SendTimeOut">Mengirim timeout</Item>
+		<Item name="TimeSettingSuccess">Waktu telah berhasil disetel.</Item>
+		<Item name="U-DiskSucess">U disk berhasil!</Item>
+		<Item name="SetBrightnessSuccess">menyetel kecerahan berhasil</Item>
+		<Item name="SetBrightnessFailed">gagal untuk menyetel kecerahan!</Item>
+		<Item name="ViewHelp">Melihat membantu</Item>
+		<Item name="ChecksumError">Checksum salah!</Item>
+		<Item name="ProtocolTypeError">Protocol ketikkan salah!</Item>
+		<Item name="LuminanceSettingSuccess">Kecerahan berhasil disetel.</Item>
+		<Item name="TimeSwitchSettingSuccess">Saklar Waktu berhasil disetel.</Item>
+		<Item name="InitializeSuccess">Inisialisasi berhasil</Item>
+		<Item name="DataLengthError">panjang Paket salah!</Item>
+		<Item name="FileDoesNotMatch">File tidak sama.</Item>
+		<Item name="FileParametersError">parameter File adalah salah!(lebar layar atau tinggi melebihi, atau warna salah.)</Item>
+		<Item name="PacketError">Paket tersebut adalah salah!</Item>
+		<Item name="FileSendComplete">File berhasil dikirim.</Item>
+		<Item name="ConnectionSuccessful">Berhasil menghubungkan</Item>
+		<Item name="SendingData">Mengirim data ...</Item>
+		<Item name="UpdateFirmwareFinished">pembaruan firmware selesai.</Item>
+		<Item name="ModuleMismatching">model kartu kontrol tidak sama.</Item>
+		<Item name="ParametersReadbackSuccess">Berhasil membaca parameter kembali </Item>
+		<Item name="EthernetAddressSettingSuccess">Alamat Ethernet berhasil menyetel.</Item>
+		<Item name="WaitingForInitialization">Menunggu inisialisasi</Item>
+
+
+		<Item name="SendScreenParams">Mengirim parameter Layar</Item>
+		<Item name="SetScreenParam">Berhasil menyetel parameter Layar</Item>
+		<Item name="SearchingBegin">Mencari</Item>
+		<Item name="SearchingEnd">Pencarian selesai.</Item>
+		<Item name="NoSerial">tidak dapat menemukan kartu kontrol terhubung dengan port serial.</Item>
+		<Item name="FindSerial">Menemukan port serial terhubung dengan kartu kontrol.</Item>
+		<Item name="UnexpectedError">Batas Waktu Komunikasi</Item>
+		<Item name="CommStatus1">komunikasi bagus</Item>
+		<Item name="CommStatus2">komunikasi Normal</Item>
+		<Item name="CommStatus3">Komunikasi lemah tapi dapat terhubung.</Item>
+		<Item name="CommStatus4">Tidak Dapat berkomunikasi</Item>
+		<Item name="CommTest">Tes Jaringan</Item>
+		<Item name="Detailed">Rincian...</Item>
+		<Item name="Empty">Kosong</Item>
+
+		<!--  communication setting -->
+		<Item name="CommunicationSetting">Setelan Komunikasi</Item>
+		<Item name="ParametersSetting">Setelan Parameter</Item>
+		<Item name="SerialPort">Setelan Port Serial</Item>
+		<Item name="COM">Port COM</Item>
+		<Item name="Search">Search</Item>
+		<Item name="Baudrate">Baudrate</Item>
+		<Item name="Detect">mendeteksi</Item>
+		<Item name="Detecting">mendeteksi...</Item>
+		<Item name="ContainOverlappingRegions">Berisi wilayah yang tumpang-tindih</Item>
+		<Item name="AlterBaudrate">Mengubah Baudrate</Item>
+		<Item name="PacketSize">Ukuran Paket</Item>
+		<Item name="MFRDate">Mantan Tanggal pabrik</Item>
+		<Item name="Simplify">mode Sederhana(UDP)</Item>
+		<Item name="CustomizeIP">Menyesuaikan(TCP)</Item>
+		<Item name="SimplifyInfo">mode sederhana hanya berlaku untuk koneksi langsung tunggal dan LAN dengan salah satu kartu kontrol, alamat IP secara otomatis akan sama dibawah keadaan-keadaan ini.</Item>
+		<Item name="IPAddress">Alamat IP</Item>
+		<Item name="NetMark">Subnet Mask</Item>
+		<Item name="RouterAddress">Default Gateway</Item>
+		<Item name="MACAddress">Alamat MAC</Item>
+		<Item name="EthernetSettingInfo">Catatan: Saat menggunakan fungsi ini, harap pastikan menghubungkan LAN hanya satu kartu kontrol.</Item>
+		<Item name="GeneratingData">Membuat data</Item>
+		<Item name="WaitingToBeSent">Menunggu dikirim</Item>
+		<Item name="WrongParameter">Parameter Salah</Item>
+		<Item name="IncompleteDataWriting">menulis data Tidak Lengkap</Item>
+		<Item name="SystemBusy">Sistem sibuk, harap coba lagi nanti.</Item>
+		<Item name="EthSettingHelpA">langsung mengubah Setelan terkait, perangkat lunak tidak mengubah alamat perangkat.</Item>
+		<Item name="EthSettingHelpB">Catatan:&#x000A;1. Alamat dari perangkat lunak dan perangkat akan berubah bersama setelan setelah berhasil.&#x000A;2. Ketika beberapa perangkat yang terhubung secara bersamaan, harap pastikan alamat MAC pada perangkat adalah unik.</Item>
+		<Item name="ScanningComplete">memindai selesai.</Item>
+		<Item name="PleaseSelectAItem">Harap pilih sebuah item, jika hasil pemindaian kosong, harap cek line!</Item>
+		<Item name="BorderWidthOutOfRange">Lebar Perbatasan berada di luar jangkauan.</Item>
+		<Item name="DataClearSuccess">Data berhasil dibersihkan.</Item>
+		<Item name="CardOnlySupportFullColor">firmware hanya mendukung tujuh warna-.</Item>
+		<Item name="CardOnlySupportTwoColor">firmware hanya mendukung warna tunggal dan warna ganda.</Item>
+		<Item name="OutOfMemory">Memori kartu kontrol tidak memadai, harap kurangi program!</Item>
+		<Item name="Page">Halaman</Item>
+		<Item name="FileSize">Ukuran File</Item>
+		<Item name="NotSupportLANUpgrade">model ini tidak mendukung Ethernet, harap gunakan port serial atau U disk untuk upgrade firmware!</Item>
+
+
+		<Item name="RFSetting">Setelan RF</Item>
+		<Item name="Channel">Saluran</Item>
+		<Item name="Command">Perintah Perintah</Item>
+		<Item name="Data">Data</Item>
+		<Item name="RFID"> ID RF</Item>
+		<!-- Tool string -->
+		<Item name="ColorfulText">Karakter Animasi</Item>
+		<Item name="CfwBackgroundEdit">Karakter Animasi latar belakang</Item>
+		<Item name="Hollow">geronggang</Item>
+		<Item name="Stroke">stroke</Item>
+		<Item name="AreaBackground">Latar Belakang Area</Item>
+		<Item name="VerticalPosition">Posisi Vertikal</Item>
+		<Item name="VerticalStretch">Secara Vertikal Molor</Item>
+		<Item name="Dll_Data">Data</Item>
+		<Item name="Dll_Add">Mengumpulkan</Item>
+		<Item name="TimeDifference">lag Waktu</Item>
+		<Item name="DialStyle">Dial Style</Item>
+		<Item name="TwoLinedisplay">Dua-line display</Item>
+		<Item name="RoundAndDigital">Di sekeliling + Digit</Item>
+		<Item name="RoundAndRomaji">Di sekeliling + berisi abjad Rom</Item>
+		<Item name="Digital">Digit</Item>
+		<Item name="Romaji">berisi abjad Romawi</Item>
+		<Item name="ScaleAndDigital">Kerak + Digit</Item>
+		<Item name="ScaleAndRomaji">Kerak + berisi abjad Rom</Item>
+		<Item name="OpenFileFail">Tidak dapat membuka file, harap cek jika ianya diduduki!</Item>
+		<Item name="PopUdiskfailure">gagal untuk mengangkat U disk!</Item>
+		<Item name="ExportFileFail">gagal untuk mengekspor file!</Item>
+		<Item name="SelectScree">Harap pilih layar yang bersangkutan.</Item>
+		<Item name="Noarea">Kurangnya program, gagal mengirim!</Item>
+		<Item name="Relevance">Harap masuk ke menu"->Operation->Setelan Komunikasi->TCP->Mengaitkan Menampilkan"!</Item>
+		<Item name="WidthOfMoreTthan">"lebar melebihi Batas maksimal!"</Item>
+		<Item name="HeightOfMoreTthan">"tinggi melebihi ukuran maksimal!"</Item>
+		<Item name="SelectScan">"Harap pilih mode pindai!"</Item>
+		<Item name="SuccessfullyModified">"Berhasil Diubah"</Item>
+		<Item name="DataFill">"melebihi!" Data</Item>
+		<Item name="PannelFill">"wilayah tersebut sudah ada!"</Item>
+		<Item name="OpenScreen">Buka Layar Asal</Item>
+		<Item name="CloseScreen">Tutup Layar</Item>
+		<Item name="ScreenSize">Ukuran Layar</Item>
+		<Item name="CardNumber">Jenis Kartu</Item>
+		<Item name="CardNumber">menemukan kartu kontrol </Item>
+		<Item name="SingleLineoftext">Satu-baris teks</Item>
+		<Item name="MultipleLinesoftext">Teks Multi Baris</Item>
+		<Item name="FeatureNavigator">navigasi Fungsional</Item>
+		<Item name="NoSerialConnection">port serial tidak terhubung</Item>
+		<Item name="ReceiveFailure">gagal untuk menerima!</Item>
+		<Item name="UnsupportedInstructions">Instruksi Yang Tidak Didukung</Item>
+		<Item name="FileMisidentified">File disalahfaham!</Item>
+
+		<Item name="FileConfigurationError">file konfigurasi!</Item>
+		<Item name="SubPacketSequenceNumberError">Sub-paket nomor urutan salah!</Item>
+		<Item name="FileSuccessfullyReceived">File berhasil diterima.</Item>
+		<Item name="DelayedSignal">Ditunda Sinyal</Item>
+		<Item name="SetupFailed">Setelan gagal!</Item>
+		<Item name="ProtocolError">Protocol adalah salah!</Item>
+		<Item name="PackageNumberError">nomor paket salah!</Item>
+		<Item name="IllegalFile">File Ilegal</Item>
+		<Item name="CPUModelError">model CPU salah!</Item>
+		<Item name="Packet">Paket</Item>
+		<Item name="SentSuccessfully">berhasil dikirim</Item>
+		<Item name="FileConfigurationPackageSentSuccessfully">File paket konfigurasi berhasil dikirim.</Item>
+		<Item name="Memory">Ukuran Memori</Item>
+		<Item name="TextProcess">Arah Teks</Item>
+		<Item name="Unspecified">Tidak disebutkan</Item>
+		<Item name="LeftToRight">Kiri->ke kanan</Item>
+		<Item name="RightToLeft">ke kanan->Kiri</Item>
+		<Item name="Round">Di sekeliling</Item>
+		<Item name="TextColor">Warna Teks</Item>
+		<Item name="AlreadyOpened">layar ini sudah dibuka.</Item>
+		<Item name="DisableBrightnessAdjustment">Non Aktif penyesuaian kecerahan</Item>
+		<Item name="NoAssociation">Tidak Ada Hubungannya</Item>
+		<Item name="AreaLeft">Kiri Area</Item>
+		<Item name="AreaRight">Kanan Area</Item>
+		<Item name="AreaUp">Naik Area</Item>
+		<Item name="AreaDown">Turun Area</Item>
+		<Item name="AreaMaximize">Area tersebut Dimaksimalkan</Item>
+		<Item name="PreviousPage">Sebelumnya</Item>
+		<Item name="NextPage">Berikutnya</Item>
+		<Item name="ScreenCentered">Pusat Layar</Item>
+		<Item name="EndToEnd">Akhir-ke-akhir</Item>
+		<Item name="PlayTimes">Perulangan Permainan</Item>
+		<Item name="LocalDisck">Local Disk</Item>
+		<Item name="BootStatus">kartu Kontrol saat ini sedang booting menunggu firmware untuk dapat diperbarui, harap perbarui firmware terlebih dahulu !</Item>
+		<Item name="Searching">Mencari...</Item>
+		<Item name="PullThreshold">unsur genetiknya </Item>
+		<Item name="NetWorkError">kartu kontrol saat ini hanya dapat menggunakan mode ringkas, harap cek apakah kartu kontrol adalah pada segmen jaringan yang sama dengan komputer.</Item>
+		<Item name="DialWeek">Seminggu</Item>
+		<Item name="DialYear">Sehari</Item>
+		<Item name="PleaseWait">Harap tunggu...</Item>
+		<Item name="DigitOnly">Hanya Digit</Item>
+		<Item name="COMERROR">gagal, cek Koneksi tidak ada serial pendek 2,3 kaki?</Item>
+		<Item name="PreProgramConctrl">Kontrol Program</Item>
+		<Item name="COMINFO">Komunikasi</Item>
+		<Item name="FindScree">Menemukan Layar</Item>
+		<Item name="ClearScreeData">Kosongkan tampilan yang ada?</Item>
+		<Item name="CheckProgram">Pilih program</Item>
+		<Item name="SelectMode">Mode Pemilihan</Item>
+		<Item name="MultiScreenDirectConnect">Multi-mode Layar</Item>
+		<Item name="SingleScreenBroadcasts">Menyalin mode</Item>
+		<Item name="ContinueMove">Lanjutkan Pindah</Item>
+		<Item name="MoreSettings">Setelan Tambahan->></Item>
+		<Item name="NotSupportTips">Tip:tidak mendukung waktu, panggil cepat baru,suhu dan kelembapan, bulan Lunar</Item>
+		<Item name="TimingMode">Mode pencatat waktu</Item>
+		<Item name="ShowMode">Mode Tampilan</Item>
+		<Item name="TimerColor">warna Jam</Item>
+		<Item name="TimingSet">Penentuan Masa Setel</Item>
+		<Item name="Foreground">Latar Depan</Item>
+		<Item name="BackgroundSetting">Setelan Latar Belakang</Item>
+		<Item name="EffectType">efek Jenis</Item>
+		<Item name="SpecifiedDate">tanggal yang ditetapkan</Item>
+		<Item name="FontSize">Ukuran Font</Item>
+		<Item name="Fastest">Paling Cepat</Item>
+		<Item name="Slowest">Paling Lambat</Item>
+		<Item name="SmartScanTips">Jika layar terang gelap, harap mengurangi frekuensi clock.</Item>
+		<Item name="PleaseSelectScreen">Harap pilih layar.</Item>
+		<Item name="Unit">Unit</Item> Unit
+		<Item name="Deviation">Kalibrasi Kelembapan</Item>
+		<Item name="TempHumidity">Temp+Humi</Item>
+		<Item name="Temppoint1">Pastikan bahwa model sensor yang anda gunakan :DS18B20</Item>
+		<Item name="Temppoint2">Pastikan bahwa model sensor yang anda gunakan :AM2301</Item>
+		<Item name="TempOrRHExist">Suhu area, suhu kelembapan area tersebut tidak dapat secara bersamaan.</Item>
+		<Item name="SendParamsWhenFinish">Setelah memodifikasi parameter, harap klik "Mengirim tombol Parameters".</Item>
+		<Item name="TotalECard">total jumlah kartu antarmuka jaringan:</Item>
+		<Item name="TimedRestart">kehabisan waktu restart</Item>
+		<!-- Excel -->
+		<Item name="Path">Path</Item>
+		<Item name="AddFile">Menambahkan file</Item>
+		<Item name="ColorInversion">Inversi Warna</Item>
+		<Item name="Center">Tengah</Item>
+		<Item name="Edit">Ubah</Item>
+		<Item name="ContinueMoveUp">bergerak terus-menerus naik</Item>
+		<Item name="ScanValueR">Filter merah</Item>
+		<Item name="ScanValueG">Filter Hijau</Item>
+		<Item name="ScanValueB">Filter biru</Item>
+		<Item name="CannotOpenExcle">Tidak Dapat Membuka Excel, harap cek apakah program excel telah terinstal!</Item>
+		<Item name="UnableToOpenFile">Tidak dapat membuka file.</Item>
+		<Item name="NoFile">File tidak ada.</Item>
+		<Item name="Pages">Halaman</Item>
+		<Item name="From">Dari</Item>
+		<Item name="To2">Untuk</Item>
+		<Item name="Showpage">Tampilkan halaman</Item>
+		<Item name="VerticalScreenshot">Cuplikan Layar vertikal</Item>
+		<Item name="LevelScreenshot">Cuplikan Layar Horizontal</Item>
+		<!-- ColorfulWord Background -->
+		<Item name="Modify">memodifikasi</Item>
+		<Item name="ColorThreshold">ambang batas Warna</Item>
+		<Item name="ColorFilter">Penyesuaian Warna</Item>
+		<Item name="Index">nomor urutan</Item>
+
+		<Item name="Pack">paket Gambar</Item>
+		<Item name="MultiFrame">Multi-frame gambar</Item>
+
+		<Item name="Remove">Menghapus</Item>
+		<Item name="Type">Type</Item>
+		<Item name="TypeName">Ketikkan nama</Item>
+		<Item name="CradID">ID Perangkat</Item>
+		<Item name="CradName">Nama Perangkat</Item>
+
+		<Item name="StyleText">Teks</Item>
+		<Item name="Image">Gambar</Item>
+		<Item name="StyleName">nama Efek</Item>
+		<Item name="Untitled">Untitled</Item>
+		<Item name="Unselected">Dipilih</Item>
+		<Item name="RadioEffect">Efek Tunggal</Item>
+		<Item name="MultipleEffects">Efek Beberapa</Item>
+		<Item name="Transparent">Transparan</Item>
+		<Item name="HZoom">Datar</Item>
+		<Item name="VZoom">vertikal molor</Item>
+		<Item name="TextInfo">Informasi Teks</Item>
+
+		<Item name="whirlt">Rotasi.</Item>
+		<Item name="Standard">standar</Item>
+		<Item name="whirl90">rotasi Kanan</Item>
+		<Item name="whirl180">Kebalikan</Item>
+		<Item name="whirl270">rotasi Kiri</Item>
+		<!-- Flash-->
+
+		<Item name="TotalFrames">Total Frames</Item>
+		<Item name="FramesTooMuch">Frame berlebihan, harap kurangi!</Item>
+		<Item name="NoInstallFlash">Harap cek apakah Adobe Flash Player telah terinstal!</Item>
+		<Item name="flashTips">Catatan: SWF yang berisi skrip yang tidak didukung namun, jadi anda tidak dapat mengambil gambar yang benar.</Item>
+		<Item name="Play">Main</Item>
+		<Item name="Record">rekam</Item>
+		<Item name="RecordTips">Catatan: Jika anda tidak dapat mendapatkan gambar yang benar, periksa opsi rekaman.</Item>
+		<Item name="Add File">Menambahkan File</Item>
+		<Item name="SWF name">SWF Path</Item>
+
+		<!-- Animated characters style-->
+		<List name="ColorfulWordEffects" id="0">Menampilkan Statis</List>
+		<List name="ColorfulWordEffects" id="1">Gelombang Sine</List>
+		<List name="ColorfulWordEffects" id="2">Teks berputar</List><!-- Google-->
+		<List name="ColorfulWordEffects" id="3">ke kiri untuk terbang ke</List><!-- Google-->
+		<List name="ColorfulWordEffects" id="4">Hak untuk terbang ke</List><!-- Google-->
+		<List name="ColorfulWordEffects" id="5">Berkedip</List>
+		<List name="ColorfulWordEffects" id="6">output Persis</List><!-- Google-->
+		<List name="ColorfulWordEffects" id="7">Ayunan sekitar</List><!-- Google-->
+		<List name="ColorfulWordEffects" id="8">Elastisitas teks</List><!-- Google-->
+		<List name="ColorfulWordEffects" id="9">Ayunan</List><!-- Google-->
+		<List name="ColorfulWordEffects" id="10">Flip Vertikal</List><!-- Google-->
+		<List name="ColorfulWordEffects" id="11">Flip Horizontal</List><!-- Google-->
+		<List name="ColorfulWordEffects" id="12">Perbesaran</List><!-- Google-->
+		<List name="ColorfulWordEffects" id="13">terus-menerus bergerak ke kiri</List><!-- Google-->
+		<List name="ColorfulWordEffects" id="14">terus-menerus bergerak ke kanan</List><!-- Google-->
+		<List name="ColorfulWordEffects" id="15">bergerak terus-menerus Naik</List><!-- Google-->
+		<List name="ColorfulWordEffects" id="16">bergerak terus-menerus Turun</List><!-- Google-->
+		<List name="ColorfulWordEffects" id="17">2D memperbesar</List><!-- Google-->
+		<List name="ColorfulWordEffects" id="18">2D memperkecil</List><!-- Google-->
+
+		<!-- Smart Setting-->
+		<Item name="SmartSetting">Setelan Cerdas</Item>
+		<Item name="UnitSize">Modul Poin</Item>
+		<Item name="NotSelected">Tidak Dipilih</Item>
+		<Item name="CommandSmartSetting">Umumnya setelan Cerdas</Item>
+		<Item name="DeviceName">Nama Perangkat</Item>
+		<Item name="DeviceID">ID Perangkat</Item>
+		<Item name="RefreshRate">Refresh Rate</Item>
+		<Item name="ColorChannel">saluran Warna</Item>
+
+		<Item name="BasicInfoSet">setelan Dasar</Item>
+		<Item name="SmartSettingName">setelan Cerdas Nama</Item>
+		<Item name="UnitBoardInfo">Informasi Modul</Item>
+		<Item name="UnitBoardWidth">Lebar Modul </Item>
+		<Item name="UnitBoardTips">Jika Satu Moudle Lebarnya adalah lebih dari 64 ,harap pilih 64</Item>
+
+		<Item name="DataPolaritySet">setelan polaritas Data</Item>
+		<Item name="DisplayState">Menampilkan status</Item>
+		<Item name="AutoSwitching">Auto Switch</Item>
+		<Item name="PleaseSelect">Harap pilih</Item>
+		<Item name="AbrightBoff">Sebuah adalah berwarna putih, sementara B adalah black</Item>
+		<Item name="BbrightAoff">Sebuah berwarna hitam sementara B berwarna putih</Item>
+
+		<Item name="OEPolaritySet">OE polarity Setting</Item>
+		<Item name="ABrighterThanB">Sebuah semakin cerah dari B</Item>
+		<Item name="BBrighterThanA">B adalah lebih terang dari sebuah</Item>
+		<Item name="Unchanged">Tidak berubah</Item>
+
+		<Item name="ColorChannelSet">setelan saluran Warna</Item>
+		<Item name="StateA">Wilayah A</Item>
+		<Item name="StateB">Wilayah B</Item>
+		<Item name="StateC">Wilayah C</Item>
+		<Item name="StateD">Wilayah D</Item>
+
+		<Item name="ConfirmRGBwidth">Garis-garis dikontrol oleh satu RGB data</Item>
+		<Item name="LightRows">Garis-garis dinyalakan dalam satu Moudle</Item>
+
+		<Item name="ConfirmScanMode">Menentukan Mode Pemindaian</Item>
+
+		<Item name="SmartTips">Tip: Sebuah Piksel sebagai Unit</Item>
+		<Item name="TracingPoint">Keterangan pengarah pelurus</Item>
+		<Item name="TracingPointArrowKeys">klik kiri pendeteksian point,Anda dapat menggunakan tombol panah untuk mengontrol menunjuk ke arah.</Item>
+		<Item name="StepBack">Mengurungkan</Item>
+		<Item name="Reset">Reset</Item>
+		<Item name="DestIP">Dest IP </Item>
+		<Item name="ExportSetedParams">Ekspor parameter</Item>
+		<Item name="InputSmartSettingName">Harap masukkan nama setelan Cerdas</Item>
+		<Item name="SelectDataPolarity">Harap pilih data polarity</Item>
+		<Item name="SelectOEPolarity">Harap pilih OE polarity</Item>
+		<Item name="TracingPointError">Menjejaki point adalah kesalahan.</Item>
+		<Item name="FinishTracingPoint">Menjejaki point selesai.</Item>
+		<Item name="IsSaveFile">Anda ingin menyimpan file?</Item>
+		<Item name="TracingPointFail">Menjejaki point adalah gagal, harap pendeteksian point lagi.</Item>
+
+		<Item name="ClockFrequency">frekuensi Jam</Item>
+		<Item name="Humidity">Kelembapan</Item>
+		<Item name="Fahrenheit">Derajat Fahrenheit</Item>
+
+		<!-- CrossScreen-->
+		<Item name="NewCrossScreen">Layar Salib Baru(&amp;C)</Item>
+		<Item name="CrossScreenSetting">Salib Setelan Layar Asal</Item>
+		<Item name="CrossTop">Bagian Atas</Item>
+		<Item name="CrossCenter">Center</Item>
+		<Item name="CrossBottom">Bagian Bawah</Item>
+		<Item name="FlushLeft">Flush Ke Kiri</Item>
+		<Item name="CrossGlobalProgram">Program Global</Item>
+		<Item name="CrossScreen">Salib Layar Asal</Item>
+		<Item name="CrossNoSupport">program Global tidak didukung di area ini.</Item>
+		<!-- NewItems-->
+		<Item name="ReadScreenParamsFromUDisk">layar impor kernel dari U Disk</Item>
+		<Item name="NoFindConfigFiles">layar tidak dapat menemukan file param,melanjutkan?</Item>
+
+		<!-- More-->
+		<Item name="FindNewVersion">Menemukan versi baru, apakah untuk mengunduh pembaruan?</Item>
+		<Item name="IsTheLatestVersion">Versi terbaru sudah.</Item>
+		<Item name="UpdateFailed">Gagal Diperbarui.</Item>
+		<Item name="SRCFile">File Sumber</Item>
+		<Item name="DestFile">file Target</Item>
+		<Item name="DownloadSpeed">Kecepatan Download</Item>
+		<Item name="UpdatedSuccessfully">Pembaruan berhasil, apakah untuk membuka file pembaruan?</Item>
+		<Item name="ExitDownloading">Mendownload file pembaruan, apakah untuk memaksa keluar?</Item>
+		<Item name="AutoUpdate">Pembaruan Otomatis</Item>
+		<Item name="DonotTips">Jangan konfirmasi</Item>
+		<Item name="Update">Updates</Item>
+
+
+		<Item name="IPSetting">Setelan IP</Item>
+		<Item name="NewScreen">Layar Baru</Item>
+		<Item name="CustomIPTips">Jika kartu kontrol diblokir oleh firewall, harap masukkan alamat IP secara manual.</Item>
+
+
+		<Item name="NormalShow">Urutan memainkan</Item>
+		<Item name="ButtonSwitch">Tombol untuk pindah</Item>
+		<Item name="ResetProgram">program Reset</Item>
+		<Item name="FixedPlay">program siaran seluler tetap</Item>
+		<!-- Tips-->
+
+		<Item name="MoreSetting">Setelan Tambahan</Item>
+		<Item name="Example">Contoh</Item>
+		<Item name="RealTimeFindCard">real-time kartu pencarian</Item>
+		<Item name="SelectDefault">Jika Anda tidak tahu jenis kartu kontrol, pilih
+opsi default.</Item>
+		<Item name="EmptyScreen">Kosongkan display</Item>
+		<Item name="IsDeleteAllScreen">menghapus semua layar?</Item>
+
+		<Item name="Out">Info</Item>
+		<Item name="On-line">On-line</Item>
+		<Item name="group">Group</Item>
+		<Item name="ExportScreenFile">Layar Ekspor File</Item>
+		<Item name="ImportScreenFile">Mengimpor File Layar</Item>
+		<Item name="ShowGroup">Tampilkan Grup</Item>
+		<Item name="ScreenInformation">Informasi Layar</Item>
+		<Item name="NewNormalScreen_G">Normal Baru Layar Asal</Item>
+		<Item name="NewCrossScreen_G">Layar Salib Baru</Item>
+		<Item name="DeleteScreen">Menghapus Layar Asal</Item>
+		<Item name="GaryTip1">Mengurangi jangkauan kontrol ke 1/</Item>
+
+		<!-- Guide built screen -->
+		<Item name="NewGuideScreen">layar baru oleh guide</Item>
+		<Item name="ScreenType">Layar ketikkan</Item>
+		<Item name="DeviceChoosePageTip">1.Gunakan U-disk， Harap pilih jenis controller; &#x000A;2.Muncul nama perangkat dan sesuai dengan ID controller; &#x000A;3.Hanya satu perangkat dan telah ditemukan,kemudian klik Berikutnya.</Item>
+		<Item name="ScreenChoosePageTip">Pilih jenis layar </Item>
+		<Item name="ScreenParamsPageTip">1.Pilih layar dan lebar Piksel(dan lebar layar maksud total piksel) &#x000A;2.Pilih warna dari layar Asal ；&#x000A;3.scrren tunggal dari total pixle adalah jumlah lampu LED.</Item>
+
+		<Item name="CrossScreenParamsPageTip">1.layar setelan panjang dan lebar 3 langkah-langkah；&#x000A;2.Pilih warna Layar</Item>
+		<Item name="ScreenSmartTip">layar saat ini menunjukkan teks normal ,tidak perlu memilih smart setel</Item>
+		<Item name="CrossSmartTip">layar saat ini menunjukkan teks normal ,tidak perlu memilih smart setel</Item>
+		<!-- OutputWindowString -->
+		<List name="OutputWindowString" id="0">peralatan yang telah di-scan</List> 
+		<List name="OutputWindowString" id="1">Mendapatkan informasi peralatan...</List> 
+		<List name="OutputWindowString" id="2">peralatan offline</List> 
+		<List name="OutputWindowString" id="3">Harap pilih layar anda ingin mengirim</List> 
+		<List name="OutputWindowString" id="4">Pilih Layar Asal peralatan cabik</List> 
+		<List name="OutputWindowString" id="5">data Program terlalu besar</List> 
+		<List name="OutputWindowString" id="6">Perintah berhasil diselesaikan</List> 
+		<List name="OutputWindowString" id="7">Mengirim Inisialisasi</List> 
+		<List name="OutputWindowString" id="8">Mengirim...</List> 
+		<List name="OutputWindowString" id="9">berhasil dikirim</List> 
+		<List name="OutputWindowString" id="10">nama kartu Kontrol Setel berhasil</List> 
+		<List name="OutputWindowString" id="11">Kosongkan berhasil Layar</List> 
+		<List name="OutputWindowString" id="12">Parameter setelan Layar berhasil</List> 
+		<List name="OutputWindowString" id="13">kartu Kontrol pengaturan waktu berhasil</List> 
+		<List name="OutputWindowString" id="14">setelan Kecerahan berhasil</List> 
+		<List name="OutputWindowString" id="15">setelan Saklar Waktu berhasil</List> 
+		<List name="OutputWindowString" id="16">ditampilkan dalam...</List> 
+		<List name="OutputWindowString" id="17">perintah Tidak Dikenal</List> 
+		<List name="OutputWindowString" id="18">Tidak Ada parameter perangkat keras</List> 
+		<List name="OutputWindowString" id="19">Perintah Tidak Sah</List> 
+		<List name="OutputWindowString" id="20">System adalah busying</List> 
+		<List name="OutputWindowString" id="21">panjang Kepala kesalahan</List> 
+		<List name="OutputWindowString" id="22">Simbol salah</List> 
+		<List name="OutputWindowString" id="23">No. salah </List> 
+		<List name="OutputWindowString" id="24">Tidak Ada Layar parameter Asal</List> 
+		<List name="OutputWindowString" id="25">kesalahan Paket</List> 
+		<List name="OutputWindowString" id="26">Kesalahan Tidak Dikenal</List> 
+		<List name="OutputWindowString" id="27">Mengirim Timeout</List> 
+		<List name="OutputWindowString" id="28">Penguraian paket umpan balik kesalahan</List> 
+		<List name="OutputWindowString" id="29">berhasil diubah IP </List> 
+		<List name="OutputWindowString" id="30">Firmware gagal diperbarui, harap coba lagi</List> 
+		<List name="OutputWindowString" id="31">Mengatur gagal</List> 
+		<List name="OutputWindowString" id="32">Periksa kesalahan</List> 
+		<List name="OutputWindowString" id="33">kesalahan Protokol</List> 
+		<List name="OutputWindowString" id="34">Petunjuk kesalahan</List> 
+		<List name="OutputWindowString" id="35">File tidak cocok dengan</List> 
+		<List name="OutputWindowString" id="36">Nomor Paket kesalahan</List> 
+		<List name="OutputWindowString" id="37">ketidakcocokan jenis Modul</List> 
+		<List name="OutputWindowString" id="38">kesalahan konfigurasi File</List> 
+		<List name="OutputWindowString" id="39">file Ilegal</List> 
+		<List name="OutputWindowString" id="40">tipe CPU kesalahan</List> 
+		<List name="OutputWindowString" id="41">Dukungan hanya tricolor Firmware, tidak mendukung satu dan warna ganda</List> 
+		<List name="OutputWindowString" id="42">Dukungan Firmware hanya warna ganda tunggal, jangan Mendukung tricolor</List> 
+		<List name="OutputWindowString" id="43">Berhasil Diperbarui</List> 
+		<List name="OutputWindowString" id="44">Penerimaan gagal</List> 
+		<List name="OutputWindowString" id="45">panjang Paket kesalahan</List> 
+		<List name="OutputWindowString" id="46">Identifikasi kesalahan File</List> 
+		<List name="OutputWindowString" id="47">Sub-paket nomor urutan kesalahan</List> 
+		<List name="OutputWindowString" id="49">File berhasil diterima</List> 
+		<List name="OutputWindowString" id="50">Ditunda sinyal</List> 
+		<List name="OutputWindowString" id="51">Sistem Sibuk</List> 
+		<List name="OutputWindowString" id="52">Data yang ditulis incompletely</List> 
+		<List name="OutputWindowString" id="53">Firmware berhasil diperbarui！</List> 
+		<List name="OutputWindowString" id="54">Parameter Perangkat keras setel berhasil</List> 
+		<List name="OutputWindowString" id="55">Perangkat terikat sedang offline</List> 
+		<List name="OutputWindowString" id="56">pengaturan dari ukuran layar tidak tepat.</List> 
+		<List name="OutputWindowString" id="57">Mulai mengirim</List> 
+		<List name="OutputWindowString" id="58">Setelan berhasil</List> 
+		<List name="OutputWindowString" id="59">kedaluwarsa Service</List> 
+		<List name="OutputWindowString" id="60">Font berhasil diganti</List> 
+		<List name="OutputWindowString" id="61">Setel berhasil terhubung langsung</List>
+		<List name="OutputWindowString" id="62">Batal secara langsung berhasil terhubung</List>
+		<List name="OutputWindowString" id="63">Peralatan status Boot,harap perbarui firmware</List>
+		<List name="OutputWindowString" id="64">Verifikasi gagal</List>
+		<List name="OutputWindowString" id="65">kembali apa-apa</List>
+		<List name="OutputWindowString" id="66">File terlalu besar</List>
+		<List name="OutputWindowString" id="67">kartu Kontrol ID salah</List>
+		<List name="OutputWindowString" id="68">ID perangkat Tidak Sah[%s]</List>
+		<List name="OutputWindowString" id="69">Reset ID perangkat[%s]</List>
+		<Item name="DefaultConnectDeviceType">metode koneksi default</Item> 
+		<Item name="Type1">Ketikkan satu</Item> 
+		<Item name="Type2">Ketikkan dua</Item> 
+		<Item name="Type3">Ketikkan tiga</Item> 
+		<Item name="Type4">Ketikkan empat</Item>
+		<Item name="Port">Port</Item> 
+		<Item name="AutoScanInterval">Waktu Pemindaian Otomatis</Item> 
+		<Item name="AutoScanMode">Mode Pemindaian Otomatis</Item> 
+		<Item name="Broadcast">Broadcast</Item> 
+		<Item name="Refresh">Perbarui</Item> 
+		<Item name="Offline">Secara Offline</Item> 
+		<Item name="IsExportVideo">Apakah video ekspor?</Item> 
+		<Item name="AddSuccess">Menambahkan Berhasil</Item> 
+		<Item name="AddFailed">Menambahkan Gagal</Item> 
+		<Item name="DeleteSuccess">Menghapus berhasil</Item> 
+		<Item name="DeleteFailed">Menghapus gagal</Item> 
+		<Item name="CanNotFindTheDefaultProfile">tidak dapat menemukan file konfigurasi standar.</Item> 
+		<Item name="RevertToDefaultSettings">Memulihkan ke status standar, lanjutkan?</Item> 
+		<Item name="GammaCorrection">Gamma Pembetulan</Item> 
+		<Item name="RefreshFrequency">frekuensi Perbarui</Item> 
+		<Item name="TheDeviceHasBeenOffline">Perangkat Telah Offline</Item> 
+		<Item name="Idle">Menganggur</Item> 
+		<Item name="Busy">Sibuk</Item> 
+		<Item name="Hide">Sembunyikan</Item> 
+		<Item name="OnlyCard">Hanya kartu untuk</Item> 
+		<Item name="DHCPServerAddr">alamat server DHCP</Item> 
+		<Item name="DHCPMask">DHCP Subnet Mask</Item> 
+		<Item name="DHCPGateway">DHCP Default Gateway</Item> 
+		<Item name="MinIPAddr">Alamat IP Minimum</Item> 
+		<Item name="MaxIPAddr">Alamat TP Maksimal</Item> 
+		<Item name="DHCPDNSAddr">alamat DNS</Item> 
+		<Item name="DHCPLease">DHCP keuangan mencangkup</Item> 
+		<Item name="OldVerCard">Mencari Gen4</Item> 
+		<Item name="RandomColor">warna acak</Item> 
+		<Item name="RealTimeArea">area real-time</Item>  
+		<Item name="AutoReSend">mengirim ulang Otomatis</Item> 
+		<Item name="LiveTime">Waktu Hidup</Item> 
+		<Item name="ProgramSize">Ukuran Program</Item> 
+		<Item name="UsedMemory">Memori yang digunakan</Item>  
+		<Item name="AutoSave">Simpan Otomatis</Item>  
+		<Item name="RebootScreen">Layar Reboot</Item> 
+		<Item name="ExpiredVerification">Kedaluwarsa,memerlukan passward</Item> 
+		<Item name="AreaNoBorder">layar salib tidak mendukung daerah untuk program global</Item>
+		<Item name="RestartSuccess">kartu Kontrol berhasil restart</Item>
+		<Item name="RestartFailed">Hidupkan Ulang Gagal</Item>
+		<Item name="CardRestart">Menghidupkan Ulang</Item>
+		<Item name="ServiceExpiration">Service Expiration</Item>
+		<Item name="IDAlreadyExists">ID telah ada</Item>
+		<Item name="Repeat">Ulangi</Item>
+		<Item name="IDInputError">ID adalah Kesalahan</Item>
+		<Item name="Snapshot">Foto</Item>
+		<Item name="SnapshotTip">Jika tidak ada titik terang, masukkan titik kosong</Item>
+		<Item name="Alignment">Meluruskan ketikan</Item>
+		<Item name="AlignRight">Flush ke kanan</Item>
+		<Item name="CenterAlign">Center</Item>
+		<Item name="SignalQuality">Kualitas Sinyal</Item>
+		<Item name="LinkState">Status Koneksi</Item>
+		<Item name="Connected">Terhubung</Item>
+		<Item name="Disconnected">Terputus</Item>
+		<Item name="Link">Link</Item>
+		<Item name="Noitemisselected">apa-apa dipilih</Item>
+		<Item name="SingleDirectMode">Mode Koneksi Langsung</Item>
+		<Item name="Boot">Boot Status</Item>
+		<Item name="CycleTiming">Pengaturan Waktu Siklus</Item>
+		<Item name="OutOfShowMemory">Kehabisan memori,mengurangi.</Item>
+		<Item name="CLKWidth">Lebar CLK</Item>
+		<Item name="Floating">Floating</Item>
+		<Item name="Docking">perangkat dok</Item>
+		<Item name="AutoHide">Auto menyembunyikan</Item>
+		<Item name="WindowPosition">posisi Jendela</Item>
+		<Item name="ChooseDeive">Pilih perangkat</Item>
+		<Item name="ParallelSend">Parallel mengirim</Item>
+		<Item name="NotSupportGlobalProgram">layar biasa tidak mendukung program global</Item>
+		<Item name="BoundDevice">terikat perangkat</Item>
+		<Item name="QRCode">QR daftar</Item>
+		<Item name="ImageAuto">Gambar Style</Item>
+		<Item name="IPNotLegitimate">IP tidak sah</Item>
+		<Item name="Tip_Type1">Gunakan alamat komunikasi saat ini untuk menghubungkan UDP</Item>
+		<Item name="Tip_Type2">Gunakan Alamat IP dari perangkat kembali untuk menghubungkan UDP</Item>
+		<Item name="Tip_Type3">Gunakan Alamat IP dari perangkat kembali untuk menghubungkan TCP</Item>
+		<Item name="Tip_Type4">Melalui alamat agen perangkat terhubung</Item>
+		<Item name="Toolbar_AddProgram_Top">Menambahkan Program</Item> 
+		<Item name="Toolbar_AddProgram_Bottom">Menyetel 20 wilayah hypertext, teks, waktu, dsb., program dapat memainkan oleh waktu</Item> 
+		<Item name="Toolbar_AddGlobalProgram_Top">Menambahkan Program Global</Item> 
+		<Item name="Toolbar_AddGlobalProgram_Bottom">Menyetel hanya satu wilayah hypertext, teks, Waktu, dsb., program dapat memainkan oleh waktu</Item> 
+		<Item name="Toolbar_AddHypertext_Top">Menambahkan Hypertext</Item> 
+		<Item name="Toolbar_AddHypertext_Bottom">Gambar, video, ZIP, dsb.</Item> 
+		<Item name="Toolbar_AddText_Top">Menambahkan Teks</Item> 
+		<Item name="Toolbar_AddText_Bottom">Mengedit teks, pilih latar belakang dan efek</Item> 
+		<Item name="Toolbar_AddColorful_Top">Menambahkan grafik animasi area karakter</Item> 
+		<Item name="Toolbar_AddColorful_Bottom">Teks menunjukkan digambarkan oleh pengguna, dapat menambahkan latar belakang animasi</Item> 
+		<Item name="Toolbar_AddExcel_Top">Menambahkan area Excel</Item> 
+		<Item name="Toolbar_AddExcel_Bottom">file Excel, pilih efek-efek khusus dan latar belakang</Item> 
+		<Item name="Toolbar_AddTime_Top">Menambahkan Wilayah Waktu</Item> 
+		<Item name="Toolbar_AddTime_Bottom">jam digital atau putaran jam</Item> 
+		<Item name="Toolbar_AddTiming_Top">Menambahkan Wilayah Waktu</Item> 
+		<Item name="Toolbar_AddTiming_Bottom">Target waktu hitung mundur, menghitung jumlah, tombol oleh</Item> 
+		<Item name="Toolbar_AddCount_Top">Jumlah tombol atau data eksternal</Item> 
+		<Item name="Toolbar_AddCount_Bottom">Menampilkan data dari sebuah tombol atau serial, kabel jaringan yang diperoleh</Item> 
+		<Item name="Toolbar_AddTempRH_Top">Menambahkan area suhu dan kelembapan</Item> 
+		<Item name="Toolbar_AddTempRH_Bottom">menunjukkan suhu, kelembapan (sensor memerlukan)</Item> 
+		<Item name="Toolbar_Adjusttime_Top">Menambahkan menyesuaikan waktu</Item> 
+		<Item name="Toolbar_Adjusttime_Bottom">Pembetulan waktu kartu kontrol dengan komputer yang disinkronkan</Item> 
+		<Item name="Toolbar_ExportToUdisk_Top">Ekspor ke U disk</Item> 
+		<Item name="Toolbar_ExportToUdisk_Bottom">Layar diekspor ke U disk</Item> 
+		<Item name="Toolbar_Preview_Top">program Preview</Item> 
+		<Item name="Toolbar_Preview_Bottom">Preview program saat ini</Item> 
+		<Item name="Toolbar_Preview1_Top">Cuplikan Layar</Item> 
+		<Item name="Toolbar_Preview1_Bottom">cuplikan layar saat ini </Item> 
+		<Item name="Toolbar_Preview2_Top">Grup dapat tidak preview</Item> 
+		<Item name="Toolbar_Preview2_Bottom">layar menampilkan semua dibangun, klik ganda untuk masuk ke layar yang ditentukan.</Item> 
+		<Item name="Toolbar_Send_Top">Kirim</Item> 
+		<Item name="Toolbar_Send_Bottom">Mengirim layar program-program untuk kartu kontrol</Item> 
+		<Item name="Toolbar_Save">Simpan</Item>
+		<Item name="Toolbar_Copy">Menyalin</Item>
+		<Item name="Toolbar_Paste">Paste</Item>
+		<Item name="Toolbar_Up">Naik</Item>
+		<Item name="Toolbar_Down">Turun</Item>
+		<Item name="Toolbar_Delete">Menghapus</Item>
+		<Item name="Toolbar_Check">PERIKSA</Item>
+		<Item name="Toolbar_Uncheck">Jangan Tandai</Item>
+		<Item name="Toolbar_Search">Search</Item>
+		<Item name="EnableDhcp">Mengaktifkan DHCP</Item>
+		<Item name="CardVersion">Versi Kartu</Item>
+		<!-- graylevel list -->
+		<List name="graylevel" id="1">Tidak graylevel</List>
+		<List name="graylevel" id="2">4 graylevel</List>
+		<List name="graylevel" id="3">8 graylevel</List>
+		<List name="graylevel" id="4">16 graylevel</List>
+		<List name="graylevel" id="5">32 graylevel</List>
+
+	<Item name="AddItemID">Add ID</Item>
+<Item name="BeginIpAddr">Begin IP</Item>
+<Item name="CurrentSel">Currently selected language</Item>
+<Item name="DetectsThisFileWasNotSaved">Detected by the currently selected file is not saved if coverage</Item>
+<List name="DisplayEffects" id="19">Clockwise cover</List>
+<Item name="English">English</Item>
+<Item name="FillingTheCurrentLanguage">To fill the current language</Item>
+<Item name="IDAndContentCanNotBeEmpty">ID and content can not be empty</Item>
+<Item name="ModificationFails">Modification fails</Item>
+<Item name="ModifyItemID">Modify ID</Item>
+<Item name="ModifyOnlyOneItem">Only modify one ID</Item>
+<Item name="RemoveItemID">Remove ID</Item>
+<Item name="ShowOnlyControlCardWifi">Display only control card Wi-Fi</Item>
+<Item name="ShowType">Display method</Item>
+<Item name="ThisIDAlreadyExists">ID exists already</Item>
+<Item name="WhetherToSaveTheCurrentModifiedFile">Whether to save the changes？</Item>
+<Item name="RemoveDuplicate">Remove duplicate</Item>
+<Item name="Apply">Apply</Item>
+<Item name="Remark">Remark</Item>
+<Item name="FirstMode">Priority mode</Item>
+<Item name="FirstMode_Normal">Balanced</Item>
+<Item name="FirstMode_Speed">Speed Priority</Item>
+<Item name="FirstMode_Text">Brightness Priority</Item>
+<Item name="Random">Random</Item>
+<Item name="WhetherToReplace">Whether to replace?</Item>
+<Item name="ImportFailed">Import Failed</Item>
+<Item name="ExportFailed">Export Failed</Item>
+<Item name="ExportLanguage">Export Language</Item>
+<Item name="ImportLanguage">Import Language</Item>
+<List name="SystemBusName" id="35">[C36]P10  1R1G1B 1/4S  HUB75 16*16</List>
+<Item name="ClickHereToUpdate">Click here to update</Item>
+<Item name="ImportFile">Import File</Item>
+<List name="SystemBusName" id="36">[C37]P10  1R 1/4S  HUB12 32*16[A25]</List>
+<Item name="EditingLanguage">Language Editor</Item>
+<List name="SystemBusName" id="37">[C38]P7.62  1R1G1B 1/8S  HUB08 32*16</List>
+<List name="SystemBusName" id="38">[C39]P5   1R1G1B   1/8S  HUB75 32*16 [A4]</List>
+<Item name="Imask">Imask</Item>
+<Item name="Fajr">Fajr</Item>
+<Item name="Dhuhr">Dhuhr</Item>
+<Item name="Asr">Asr</Item>
+<Item name="Maghrib">Maghrib</Item>
+<Item name="Isha">Isha</Item>
+<Item name="MidNight">Tengah malam</Item>
+<Item name="Country">Negara</Item>
+<Item name="NumColor">Numbers Color</Item>
+<Item name="ExprotConfigFile">Export Profiles</Item>
+<Item name="SoundModule">Sound Module</Item>
+<Item name="Year">Year</Item>
+<Item name="ImportTable">Import Table</Item>
+<Item name="ExportBable">Export Table</Item>
+<Item name="ClearAll">Clear</Item>
+<Item name="cfWords">Colorful word</Item>
+<Item name="OnlyOnePrayForScreen">Only supported a prayer area</Item>
+<Item name="BKSpeed">Background speed</Item>
+<Item name="EffectCycle">Effects cycle</Item>
+<Item name="ExportConfigFile">Export Profiles</Item>
+<Item name="SoundSetting">Sound Setting</Item>
+<List name="graylevel" id="6">64 graylevel</List>
+<List name="graylevel" id="7">128 graylevel</List>
+<List name="graylevel" id="8">256 graylevel</List>
+<List name="SystemBusName" id="39">[C40]P10  1R1G1B   1/4S  HUB75  32X16[A12]</List>
+<Item name="SelectFirmwareVersion">Select Firmware Version </Item>
+<Item name="NoSelectVersion">None selected version</Item>
+<Item name="Ordinal">No.</Item>
+<Item name="VersionNum">Version</Item>
+<Item name="ConfirmSelect">Confirm</Item>
+<List name="SystemBusName" id="40">[C41]P10  1R1G1B  1/4S  HUB75 32*16</List>
+<Item name="FileNameAlreadyExistIsCover">FileName already exist,is cover?</Item>
+<Item name="VersionAlreadyExist">Version already exist</Item>
+<Item name="DeleteThisGroup">Delete this group</Item>
+<Item name="FindNewVersionIsUpdate">Find new version，whether to update the firmware?</Item>
+<Item name="UpdateFile">Update file</Item>
+<List name="SystemBusName" id="41">[C42]P10  1R1G1B  1/2S  HUB75 32*16</List>
+<List name="SystemBusName" id="42">[C43]P3  1R1G1B  1/16S  HUB75 64*64</List>
+<Item name="UdiskUpgrade">Update by U-disk</Item>
+<Item name="TimingPlay">Penentuan Masa Mulai</Item>
+<Item name="SelectVersionOnTheRight">Please select the firmware on the right!</Item>
+<List name="SystemBusName" id="43">[C44]P8  1R1G  1/8S  HUB08 32*32 (WQS)</List>
+<List name="SystemBusName" id="44">[C45]P5  1R1G1B  1/8S  HUB75 32*32 (CXH)</List>
+<Item name="TheSameSegment">Make sure the IP of the control card and the computer is in the same network segment.</Item>
+<Item name="Step">Step</Item>
+<Item name="ShadowMode">Shadow Mode</Item>
+<Item name="3DDeep">3D Deep</Item>
+<Item name="Gradient">Gradient</Item>
+<Item name="Alpha">Transparency</Item>
+<Item name="BorderStyle">Border Style</Item>
+<Item name="RoundRect">Rounded Rectangle</Item>
+<Item name="Octagon">Octagon</Item>
+<Item name="CustomStyle">Custom Style</Item>
+<List name="SystemBusName" id="45">[C46]P10  1R  1/4S  HUB12 32*16</List>
+<Item name="3DText">3D Text</Item>
+<Item name="Whether_to_cancel_the_current_task">Cancel mission or not?</Item>
+<List name="SystemBusName" id="46">[C47]P10-P20   1G2R1B 1/4S  HUB12 32X16  Virtual pixel</List>
+<List name="SystemBusName" id="47">[C48]P10-P20   2R1G1B 1/4S  HUB12 32X16  Virtual pixel</List>
+<List name="SystemBusName" id="48">[C49]P13.33-P26.66  2R1G1B 1/4S  HUB12 24X12 Virtual pixel</List>
+<Item name="SinglePage">Single Page</Item>
+<Item name="TwinkleStyle">Twinkle Style</Item>
+<Item name="TwinkleSpeed">Twinkle Speed</Item>
+<Item name="NoTwinkle">No Twinkle</Item>
+<Item name="3Dtwinkle">3D Twinkle</Item>
+<Item name="SaveCountValue">Remember the last count</Item>
+<Item name="SpecialBorder">Special Border</Item>
+<Item name="BootingDelayWasComingOn">Power on,brighten gradually</Item>
+<Item name="RememberToThoose">Remember the current selection</Item>
+<Item name="EndPageToEndPage">End page to end page</Item>
+<List name="SystemBusName" id="49">[C50]P10  1R 1/1S  HUB08 RXP</List>
+<List name="OutputWindowString" id="70">Click the button to delete programs [ON]</List>
+<List name="OutputWindowString" id="71">Click the button to delete programs [OFF]</List>
+<List name="OutputWindowString" id="72">Parameter Setting  [Enabled]</List>
+<List name="OutputWindowString" id="73">Parameter Setting  [Disabled]</List>
+<Item name="Btn1ClearProgram">Prohibited delete program</Item>
+<Item name="DoubleSidedScreen">Double-sided screen</Item>
+<Item name="networkMonitoring">Monitoring</Item>
+<Item name="Toolbar_Add3D_Bottom">Support background, foreground, colorful words, 3D effects</Item>
+<Item name="Toolbar_Add3D_Top">Add 3D text</Item>
+<List name="SystemBusName" id="50">[C51]P6  1R1G1B 1/5S  HUB75 32X20</List>
+<Item name="WifiSpeedMode1">High-speed mode</Item>
+<Item name="WifiSpeedMode2">Low speed mode</Item>
+<Item name="All the devices automatically obtain IP">All devices are set to "Get IP automatically"</Item>
+<Item name="The firmware information">The firmware information</Item>
+<Item name="The device information">The device information</Item>
+<List name="SystemBusName" id="51">[C52]  1R1G  1/8  KR</List>
+<List name="SystemBusName" id="52">[C53]  1R1G1B  1/4S ICN2038S</List>
+<List name="SystemBusName" id="53">[C54]  P10  1R1G  1/4S HUB12 32x16 (YLR)</List>
+<List name="SystemBusName" id="54">[C55]  P8 1R1G1B 1/5S  HUB75 40X20</List>
+<List name="SystemBusName" id="55">[C56]  P10 1/4S No 138 MCGD</List>
+<List name="SystemBusName" id="56">[C57]  P8 1R1G1B 1/4S HUB75 (JJY)</List>
+<List name="SystemBusName" id="57">[C58]  P13.33 1R1G1B 1/3S HUB75 (LLR)</List>
+<List name="SystemBusName" id="58">[C59]  P3 1R1G1B 1/32S HUB75E (RBG) ICN2038S</List>
+<List name="SystemBusName" id="59">[C60]  P3 1R1G1B 1/32S HUB75E (RGB) ICN2038S</List>
+<List name="SystemBusName" id="60">[C61]  P6 1/8S HUB75 (BGR)</List>
+<List name="SystemBusName" id="61">[C62]  P6 1/8S HUB75 GK</List>
+<List name="SystemBusName" id="62">[C63]  P6 1/8S HUB75(HJ)</List>
+<List name="SystemBusName" id="63">[C64]  P6 1R1G1B 1/8S HUB75</List>
+<List name="SystemBusName" id="64">[C65]  P10 1R 1/4s(YLR)</List>
+<List name="SystemBusName" id="65">[C66]  P10 1R 1/4S HUB12</List>
+<List name="SystemBusName" id="66">[C67]  P10 1R1G1B 1/2S HUB75 (HJ)</List>
+<List name="SystemBusName" id="67">[C68]  P10 1R1G1B 1/2S HUB75 </List>
+<List name="SystemBusName" id="68">[C69]  P10 1R1G1B 1/3S HUB73A 24X24 (KSZ)</List>
+<List name="SystemBusName" id="69">[C70]  P10 1R1G1B 1/4S No 138 HUB75</List>
+<List name="SystemBusName" id="70">[C71]  P13.33 1R1G1B 1/3S 24x12</List>
+<List name="SystemBusName" id="71">[C72]  P16 1R1G 1/4S HUB08</List>
+<List name="SystemBusName" id="72">[C73]  P20 1R1G1B 1S</List>
+<List name="SystemBusName" id="73">[C74]  P10 1R1G1B 1/4S HUB75（KT）</List>
+<List name="SystemBusName" id="74">[C75]  P8  1R1G1B 1/4S HUB75 32x16 No138</List>
+<List name="SystemBusName" id="75">[C76]  P8  1R1G1B 1/4S HUB75 32x16 (HJ)</List>
+<List name="SystemBusName" id="76">[C77]  P10 1R1G1B 1/4S HUB75 32x16 No138</List>
+<List name="SystemBusName" id="77">[C78]  P10 1R1G1B 1/2S HUB75 32x16</List>
+<List name="SystemBusName" id="78">[C79]  P10 1R 1/4S HUB08 32x16</List>
+<List name="SystemBusName" id="79">[C80]  P10 1R1G1B 1/2S HUB75 32x16 (GK)</List>
+<List name="SystemBusName" id="80">[C81]  P10 1R1G1B 1/2S HUB75 32x16 (QL)</List>
+<List name="SystemBusName" id="81">[C82]  P16 1R1G 1/1S HUB12 16x8</List>
+<List name="SystemBusName" id="82">[C83]  P10 1R 1/4S HUB12 32x16 (KT)</List>
+<List name="SystemBusName" id="83">[C84]  P10 1R 1/4S HUB12 32x16 (GK)</List>
+<List name="SystemBusName" id="84">[C85]  P5  1R1G1B 1/8S HUB75 64x32</List>
+<List name="SystemBusName" id="85">[C86]  P10 1R1G1B 1/4S HUB75 32x16 No138 (HJCL)</List>
+<List name="SystemBusName" id="86">[C87]  P10 1R1G1B 1/2S HUB75E 32x16 No138 (HLL)</List>
+<List name="SystemBusName" id="87">[C88]  P10 1R1G1B 1/2S HUB75 32x16 No138</List>
+<List name="SystemBusName" id="88">[C89]  P6.66 1R1G1B 1/6S HUB75 48x24</List>
+<List name="SystemBusName" id="89">[C90]  P8  1R1G1B 1/5S HUB75 40x20</List>
+<List name="SystemBusName" id="90">[C91]  P4 1R1G1B 1/10S HUB75 80x40 ICN2038S</List>
+<List name="SystemBusName" id="91">[C92]  P4  1R1G1B 1/20S HUB75 80x40 ICN2038S</List>
+<List name="SystemBusName" id="92">[C93]  P10 1R1G1B 1/4S HUB75 32x16 No138 ICN2038S</List>
+<List name="SystemBusName" id="93">[C94]  P10 1R1G1B 1/2S  32x16 No138 ICN2038S</List>
+<List name="SystemBusName" id="94">[C95]  P10 1R1G1B 1/5S HUB75 40x20 ICN2038S</List>
+<List name="SystemBusName" id="95">[C96]  P10 1R1G1B 1/5S HUB75 40x20 SM16207S</List>
+<List name="SystemBusName" id="96">[C97]  H10 1R1G1B 1/2S HUB75 32x16</List>
+<List name="SystemBusName" id="97">[C98]  P8  1R1G1B 1/5S HUB75 40x20 ICN20378BP</List>
+<List name="SystemBusName" id="98">[C99]  dz0228 1R1G1B 1/1S HUB75 16x16</List>
+<Item name="Server address">Server address</Item>
+<Item name="User name">User name</Item>
+<Item name="Fill the same">Fill the same</Item>
+<Item name="Cloud server Settings">Cloud server Settings</Item>
+<Item name="Cloud server">Cloud server</Item>
+<Item name="ButtonCtrl">Button Control on</Item>
+<Item name="NoUse">Button Control off</Item>
+<Item name="Button1">Button1</Item>
+<Item name="Button2">Button2</Item>
+<Item name="Button3">Button3</Item>
+<Item name="Button4">Button4</Item>
+<Item name="DefaultBackground">DefaultBackground</Item>
+<Item name="ImageBackground">ImageBackground</Item>
+<Item name="SingleProgramSend">SingleProgramSend</Item>
+<Item name="latest">latest</Item>
+<Item name="newdata">newdata</Item>
+<Item name="Imsak">Imsak</Item>
+<Item name="Music">Music</Item>
+<Item name="Pray">Pray</Item>
+<Item name="Aglinment">Penjajaran</Item>
+<Item name="LeftAglinment">Rata kiri</Item>
+<Item name="CenterAglinment">Penjajaran tengah</Item>
+<Item name="RightAglinment">Rata kanan</Item>
+<Item name="SplitType">SplitType</Item>
+<Item name="SingleChar">SingleChar</Item>
+<Item name="Word">Word</Item>
+<Item name="WifiSetting">Wi-Fi Setting</Item>
+<Item name="SettingSuccessfully">SettingSuccessfully</Item>
+<Item name="SettingFailed">SettingFailed</Item>
+<Item name="Connectting">Connectting</Item>
+<Item name="NoFoundAp">NoFoundAp</Item>
+<Item name="ConnectFailed">ConnectFailed</Item>
+<Item name="ConnectOK">ConnectOK</Item>
+<Item name="ApMode">ApMode</Item>
+<Item name="StationMode">StationMode</Item>
+<Item name="WifiPasswordLenghLess">Wi-Fi password is too short</Item>
+<Item name="WifiSSIDIsNULL">Wi-Fi name is empty</Item>
+<Item name="MaskError">MaskError</Item>
+<Item name="IPError">IPError</Item>
+<Item name="WifiSSIDTooLong">Wi-Fi name is too long.</Item>
+<Item name="WifiPasswordTooLong">Wi-Fi password is too long.</Item>
+<Item name="SSIDPasswordInputTips">Only allow input 0~9 a~z A~Z _</Item>
+    <Item name="City">kota</Item>
+    <Item name="Date">tanggal</Item>
+    <Item name="temp">suhu</Item>
+    <Item name="Weather">cuaca</Item>
+    <Item name="Wind Direction">arah angin</Item>
+    <Item name="Wind speed">Kecepatan angin</Item>
+    <Item name="Temp Unit">unit suhu</Item>
+    <Item name="America">AS</Item>
+    <Item name="Australia">Australia</Item>
+    <Item name="Canada">Kanada</Item>
+    <Item name="China">Cina</Item>
+    <Item name="India">India</Item>
+    <Item name="Indonesia">Indonesia</Item>
+    <Item name="Iran">Iran</Item>
+    <Item name="Japan">Jepang</Item>
+    <Item name="Korea">Korea</Item>
+    <Item name="Malaysia">Malaysia</Item>
+    <Item name="Pakistan">Pakistan</Item>
+    <Item name="Peru">Peru</Item>
+    <Item name="Poland">Polandia</Item>
+    <Item name="Russia">Rusia</Item>
+    <Item name="Spain">Spanyol</Item>
+    <Item name="Thailand">Thailand</Item>
+    <Item name="Turkey">Turki</Item>
+    <Item name="United Arab Emirates">Uni Emirat Arab</Item>
+    <Item name="Vietnam">Vietnam</Item>
+    <Item name="Sunny">jelas</Item>
+    <Item name="Cloudy">berawan</Item>
+    <Item name="Few clouds">berawan</Item>
+    <Item name="Partly cloudy">Mendung</Item>
+    <Item name="Overcast">yin</Item>
+    <Item name="Windy">berangin</Item>
+    <Item name="Calm">tanpa angin</Item>
+    <Item name="Light breeze">Sedikit angin</Item>
+    <Item name="Moderate">angin sepoi-sepoi</Item>
+    <Item name="Fresh breeze">angin sepoi-sepoi</Item>
+    <Item name="Strong breeze">badai</Item>
+    <Item name="High wind">badai</Item>
+    <Item name="Gale">badai</Item>
+    <Item name="Strong gale">ledakan</Item>
+    <Item name="Storm">badai</Item>
+    <Item name="Violent storm">Mad hembusan angin</Item>
+    <Item name="Hurricane">badai</Item>
+    <Item name="Tornado">angin topan</Item>
+    <Item name="Tropical storm">Badai tropis</Item>
+    <Item name="Shower rain">mandi</Item>
+    <Item name="Heavy shower rain">Hujan ringan Shower</Item>
+    <Item name="Thundershower">petir</Item>
+    <Item name="Heavy thunderstorm">badai kuat</Item>
+    <Item name="Hail">hujan es</Item>
+    <Item name="Light rain">hujan gerimis</Item>
+    <Item name="Moderate rain">hujan sedang</Item>
+    <Item name="Heavy rain">hujan deras</Item>
+    <Item name="Extreme rain">curah hujan ekstrim</Item>
+    <Item name="Drizzle rain">gerimis</Item>
+    <Item name="Storm">badai</Item>
+    <Item name="Heavy storm">heavy Rain</Item>
+    <Item name="Severe storm">hujan deras</Item>
+    <Item name="Freezing rain">hujan bercampur salju</Item>
+    <Item name="Light snow">salju</Item>
+    <Item name="Moderate snow">salju</Item>
+    <Item name="Heavy snow">salju</Item>
+    <Item name="Snowstorm">badai salju</Item>
+    <Item name="Sleet">Glaze</Item>
+    <Item name="Rain and snow">hujan bercampur salju</Item>
+    <Item name="Shower snow">Array hujan es</Item>
+    <Item name="Snow flurry">salju mandi</Item>
+    <Item name="Mist">kabut</Item>
+    <Item name="Foggy">kabut</Item>
+    <Item name="Haze">embun</Item>
+    <Item name="Sand">pasir</Item>
+    <Item name="Dust">badai pasir</Item>
+    <Item name="Duststorm">topan debu</Item>
+    <Item name="Sandstorm">badai pasir</Item>
+    <Item name="Hot">panas</Item>
+    <Item name="Cold">dingin</Item>
+    <Item name="Unknown">tidak diketahui</Item>
+    <Item name="Clear">Clear</Item>
+    <Item name="No Sustained Wind">Tidak ada angin berkelanjutan</Item>
+    <Item name="Northeast Wind">dr timur laut</Item>
+    <Item name="East Wind">Dongfeng</Item>
+    <Item name="Southeaster Wind">angin tenggara</Item>
+    <Item name="South Wind">angin selatan</Item>
+    <Item name="Southwest Wind">angin barat daya</Item>
+    <Item name="Strong wind">badai</Item>
+    <Item name="West Wind">barat</Item>
+    <Item name="Northwest Wind">angin laut</Item>
+    <Item name="North Wind">utara</Item>
+    <Item name="Vortex Wind">berputar angin</Item>
+    <Item name="The Breeze Wind">angin sepoi-sepoi</Item>
+    <Item name="No wind">tanpa angin</Item>
+    <Item name="Light air">udara cahaya</Item>
+    <Item name="Breeze">angin sepoi-sepoi</Item>
+    <Item name="Gentle breeze">angin sepoi-sepoi</Item>
+    <Item name="Strong wind">badai</Item>
+    <Item name="Blast">ledakan</Item>
+    <Item name="Gale">badai</Item>
+    <Item name="Strong gale">ledakan</Item>
+    <Item name="Whole gale">angin kencang</Item>
+    <Item name="Storm wind">badai</Item>
+    <Item name="Hurricane">badai</Item>
+	<Item name="OfflineMode">Mode offline</Item>
+	<Item name="PleaseSelectDevice">Please select device</Item>
+	<Item name="SeeMoreParameters">See more parameters</Item>
+	<Item name="ExportProgram">Export program</Item>
+	<List name="ErrorTips" id="00">Common problem hints</List>
+	<List name="ErrorTips" id="01">Error / The width and height set in the screen setting exceeds the control range of the controller</List>
+	<List name="ErrorTips" id="02">Error1 / U disk file format error</List>
+	<List name="ErrorTips" id="03">Error2 / Excessive  program content</List>
+	<List name="ErrorTips" id="04">NoFile / No program file in the U disk</List>
+	<List name="ErrorTips" id="05">End / Setting expired</List>
+	<Item name="ColorfulBorder">Colorful border</Item>
+	<Item name="FixedText">Fixed text</Item>
+	<List name="PM25String" id="00">No data</List>
+	<List name="PM25String" id="01">Good</List>
+	<List name="PM25String" id="02">Moderate</List>
+	<List name="PM25String" id="03">Lightly Polluted</List>
+	<List name="PM25String" id="04">Moderately Polluted</List>
+	<List name="PM25String" id="05">Heavily Polluted</List>
+	<List name="PM25String" id="06">Severely Polluted</List>
+	<Item name="BootTips">Boot tips</Item>
+	<Item name="ShowAll">Show all</Item>
+	<Item name="NoShow">No show</Item>
+	<Item name="PM25Adjust">Adjust PM2.5</Item>
+	<Item name="PM10Adjust">Adjust PM10</Item>
+	<Item name="QuickConfig">Quick config</Item>
+	<Item name="Subtitles">Subtitles</Item>
+	<Item name="Toolbar_AddSubtitles_Top">Add Subtitles</Item>
+	<Item name="ICSetting">IC setting</Item>
+	<Item name="NormalIC">Normal IC</Item>
+	<Item name="RegisterGroup">Register group</Item>
+	<Item name="RedRegister">Red register</Item>
+	<Item name="GreenRegister">Green register</Item>
+	<Item name="BlueRegister">Blue register</Item>
+	<Item name="HighByte">High byte</Item>
+	<Item name="LowByte">Low byte</Item>
+	<Item name="HelpDoc">Help Doc</Item>
+	<Item name="PrayAutioTip">Ketika Anda perlu menggunakan modul audio, berikan beberapa file mp3 yang sesuai dengan nama doa. Imsak->1.mp3 Fajr->2.mp3 Dhuhr->3.mp3 Asr->4.mp3 Maghrib->5.mp3 Isha->6.mp3 MidNight->7.mp3 .</Item>
+<Item name="Confirm Password">Confirm Password</Item>
+<Item name="PasswordInvalidTip">The password must be a number + letter combination with a length of 8~16.</Item>
+<Item name="PasswordUnEqual">The password entered twice is different.</Item>
+<Item name="PasswordTooSimple">The system has detected that the device's Wi-Fi password is too simple. Please reset it.</Item>
+<List name="OutputWindowString" id="75">The system has detected that the device's Wi-Fi password is too simple. Please reset it.</List>
+<Item name="Logout">Logout</Item>
+<Item name="LogoutYesOrNo">Is the user logged out?</Item>
+<Item name="Login">login</Item>
+<Item name="WifiSettingOK">The setting is successful, please reconnect to Wi-Fi.</Item>
+<Item name="UserName">User name</Item>
+<Item name="InputPassword">Input password</Item>
+<Item name="Register">Register</Item>
+<Item name="GetCheckCode">GetCheckCode</Item>
+<Item name="InputCheckCode">Input the check code</Item>
+<Item name="RegisterError">Registration error</Item>
+<Item name="PhoneNum">Cellphone number</Item>
+<Item name="CheckCode">Check code</Item>
+<Item name="ConnectNetwordToUse">Please use the software after connecting to the Internet</Item>
+<Item name="AuthorizedSuccess">Authorized success</Item>
+<Item name="UnsupportedLoginType">Unsupported login type</Item>
+<Item name="CheckCodeNotMatch">Check code does not match</Item>
+<Item name="InputRightPhone">Please enter the correct phone number</Item>
+<Item name="ResetPassword">Reset Password</Item>
+<Item name="PhoneNumError">Wrong format of phone number.</Item>
+<Item name="CheckCodeTimeoutInOneMinute">Verification code cannot be sent repeatedly within one minute</Item>
+<Item name="CheckCodeTimeout">Verification code transmission frequency is exceeded</Item>
+<Item name="CheckCodeSendError">The verification code failed to be sent.</Item>
+<Item name="InvalidToken">Invalid token</Item>
+<Item name="MissingRegInfo">Missing registration information</Item>
+<Item name="AgreeAndAccept">Agreen</Item>
+<Item name="TermsOfService">Services Agreement</Item>
+<Item name="Reacquire">Reacquire</Item>
+<Item name="SettingLoginPassword">Setting login password</Item>
+<Item name="Skip">Skip</Item>
+<Item name="NetworkErrorTip">Network error</Item>
+<Item name="Retry">Retry</Item>
+<Item name="PleaseGetCheckCode">Please get the check code.</Item>
+<Item name="KeepLogin">Keep login</Item>
+<Item name="IsLogoutUser">Logout the current user?</Item>
+<Item name="NotTipsAgin">Do not tips again</Item>
+<Item name="OpenDeviceLock">Enable device lock</Item>
+<Item name="ModifyDeviceLock">Modify device lock</Item>
+<Item name="CloseDeviceLock">Close device lock</Item>
+<Item name="DeviceHasLockedInfo">The device has been locked. Please enter your password.</Item>
+<Item name="DeviceLockPassword">Device lock password</Item>
+<Item name="NoInputNoDeviceLockTip">No password is required when device lock is not enabled.</Item>
+<Item name="UseOldPassword">Use current password</Item>
+<Item name="DeviceLockSetting">Device lock settings</Item>
+<Item name="DeviceLock">Device lock</Item>
+<Item name="KeepPassword">Keep password</Item>
+<Item name="AutoLogin">Auto login</Item>
+<Item name="PleaseInputOldPassword">Please enter the old password</Item>
+<Item name="OldPasswordError">Old password error</Item>
+<Item name="Old Password">Old password</Item>
+<Item name="New Password">New password</Item>
+<Item name="Action">Action</Item>
+
+<List name="OutputWindowString" id="76">The device lock password is incorrect.</List>
+<List name="OutputWindowString" id="77">Missing log content.</List>
+<List name="OutputWindowString" id="78">The machine code is wrong.</List>
+<List name="OutputWindowString" id="79">The length of the machine code is incorrect.</List>
+<List name="OutputWindowString" id="80">The length of the device lock password is incorrect.</List>
+<List name="OutputWindowString" id="81">XR809 is updating</List>
+<List name="OutputWindowString" id="82">XR809 idnvalid address</List>
+<List name="OutputWindowString" id="83">XR809 error</List>
+<List name="OutputWindowString" id="84">Start reading parameters</List>
+<List name="OutputWindowString" id="85">Finish reading parameters</List>
+<List name="OutputWindowString" id="86">Start to restore parameters</List>
+<List name="OutputWindowString" id="87">The parameters have been restored</List>
+<List name="OutputWindowString" id="88">The download is complete and is waiting to recover data.</List>
+<Item name="UseWechatQRCode">Use WeChat to scan the QR code</Item>
+<Item name="Activate">Activate</Item>
+<Item name="ActivateOffline">Activate offline</Item>
+<Item name="PleaseInputActiveCode">Please enter the activation code</Item>
+<Item name="ErrorActivateCode">Wrong activation code</Item>
+<Item name="NTPSetting">pengaturan waktu jaringan</Item>
+<Item name="NetworkSame">Make sure that the device IP and router IP are on the same network segment.</Item>
+<List name="SystemBusName" id="99">[C100]  P10 28x16 8 menyapu 8 poin imbang</List>
+	</language>
+</root>    

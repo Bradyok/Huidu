@@ -1,0 +1,404 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<root pathName ="FirmwareUpdate.xml" firmversionID ="0" fileVersion="V1052_">
+
+<Item id = "65" name ="E61" UPFileName="HD_E61_0.bin" counts= "1">
+  <version num = "HDV4.04"  FileName="HD_E61_0.bin">HDV404</version>
+  <version num = "HDV4.05"  FileName="HD_E61_0-05.bin">HDV405</version>
+  <version num = "HDV4.10"  FileName="HD_E61_0-10.bin">HDV410</version>
+</Item>
+<Item id = "58" name ="E62" UPFileName="HD_E62_0.bin" counts= "1" otherID="88">
+  <version num = "HDV4.04"  FileName="HD_E62_0.bin">HDV404</version>
+  <version num = "HDV4.05"  FileName="HD_E62_0-05.bin">HDV405</version>
+  <version num = "HDV4.10"  FileName="HD_E62_0-10.bin">HDV410</version>
+
+</Item>
+<Item id = "88" name ="E62" UPFileName="HD_E62_1.bin" counts= "1" otherID="58">
+    <version num = "HDV4.11"  FileName="HD_E62_1-11.bin">HDV411-2</version>
+    <version num = "HDV4.12"  FileName="HD_E62_1-12.bin">HDV412</version>
+    <version num = "HDV4.13"  FileName="HD_E62_1-13.bin">HDV413</version>
+	<version num = "HDV4.14"  FileName="HD_E62_1-14.bin">HDV414</version>
+	<version num = "HDV4.15"  FileName="HD_E62_1-15.bin">HDV415</version>
+	<version num = "HDV4.22"  FileName="HD_E62_1-22.bin">HDV422</version>
+	<version num = "HDV4.23"  FileName="HD_E62_1-23.bin">HDV423</version>
+</Item>
+
+<Item id = "47" name ="E63" UPFileName="HD_E63_0.bin" counts= "1" otherID="87,93">
+  <version num = "HDV4.04"  FileName="HD_E63_0.bin">HDV404</version>
+  <version num = "HDV4.05"  FileName="HD_E63_0-05.bin">HDV405</version>
+  <version num = "HDV4.10"  FileName="HD_E63_0-10.bin">HDV410</version>
+
+ </Item>
+<Item id = "87" name ="E63" UPFileName="HD_E63_1.bin" counts= "1" otherID="47,93">
+    <version num = "HDV4.11"  FileName="HD_E63_1-11.bin">HDV411-2</version>
+    <version num = "HDV4.12"  FileName="HD_E63_1-12.bin">HDV412</version>
+    <version num = "HDV4.13"  FileName="HD_E63_1-13.bin">HDV413</version>
+	<version num = "HDV4.22"  FileName="HD_E63_1-22.bin">HDV422</version>
+ </Item>
+ <Item id = "93" name ="E63" UPFileName="HD_E63_2.bin" counts= "1" otherID="47,87">
+  <version num = "HDV4.13"  FileName="HD_E63_2-13.bin">HDV413</version>
+  <version num = "HDV4.14"  FileName="HD_E63_2-14.bin">HDV414</version>
+  <version num = "HDV4.15"  FileName="HD_E63_2-15.bin">HDV415</version>
+  </Item>
+<Item id = "50" name ="E64" UPFileName="HD_E64_0.bin" counts= "1" otherID="71">
+  <version num = "HDV4.04"  FileName="HD_E64_0.bin">HDV404</version>
+  <version num = "HDV4.05"  FileName="HD_E64_0-05.bin">HDV405</version>
+  <version num = "HDV4.10"  FileName="HD_E64_0-10.bin">HDV410</version>
+  <version num = "HDV4.13"  FileName="HD_E64_0-13.bin">HDV413</version>
+  <version num = "HDV4.14"  FileName="HD_E64_0-14.bin">HDV414</version>
+  <version num = "HDV4.15"  FileName="HD_E64_0-15.bin">HDV415</version>
+</Item>
+<Item id = "71" name ="E64" UPFileName="HD_E64_1.bin" counts= "1" otherID="50">
+  <version num = "HDV4.05"  FileName="HD_E64_1-05.bin">HDV405</version>
+  <version num = "HDV4.10"  FileName="HD_E64_1-10.bin">HDV410</version>
+  <version num = "HDV4.11"  FileName="HD_E64_1-11.bin">HDV411-2</version>
+  <version num = "HDV4.12"  FileName="HD_E64_1-12.bin">HDV412</version>
+  <version num = "HDV4.22"  FileName="HD_E64_1-22.bin">HDV422</version>
+</Item>
+<Item id = "57" name ="E65" UPFileName="HD_E65_0.bin" counts= "1">
+  <version num = "HDV4.04"  FileName="HD_E65_0.bin">HDV404</version>
+  <version num = "HDV4.05"  FileName="HD_E65_0-05.bin">HDV405</version>
+</Item>
+
+<Item id = "68" name ="E66A" UPFileName="HD_E66_A.bin" counts= "1">
+  <version num = "HDV4.03"  FileName="HD_E66_A.bin">HDV404_E66A</version>
+  <version num = "HDV4.03(M10 colorful)"  FileName="HD_E66_A-000.bin">HDV404_M10</version>
+</Item>
+<Item id = "66" name ="E66" UPFileName="HD_E66_0.bin" counts= "1" otherID="95">
+  <version num = "HDV4.11"  FileName="HD_E66_0-11.bin">HDV411-2</version>
+  <version num = "HDV4.11(M10 colorful)"  FileName="HD_E66_0-011.bin">HDV404_M10</version>
+  <version num = "HDV4.12"  FileName="HD_E66_0-12.bin">HDV412</version>
+  <version num = "HDV4.13"  FileName="HD_E66_0-13.bin">HDV413</version>
+  <version num = "HDV4.14"  FileName="HD_E66_0-14.bin">HDV414</version>
+  <version num = "HDV4.15"  FileName="HD_E66_0-15.bin">HDV415</version>
+</Item>
+<Item id = "64" name ="S61" UPFileName="HD_S61_0.bin" counts= "1">
+  <version num = "HDV4.04"  FileName="HD_S61_0.bin">HDV404</version>
+  <version num = "HDV4.05"  FileName="HD_S61_0-05.bin">HDV405</version>
+  <version num = "HDV4.10"  FileName="HD_S61_0-10.bin">HDV410</version>
+</Item>
+
+<Item id = "45" name ="S62" UPFileName="HD_S62_0.bin" counts= "1">
+  <version num = "HDV4.04"  FileName="HD_S62_0.bin">HDV404</version>
+  <version num = "HDV4.05"  FileName="HD_S62_0-05.bin">HDV405</version>
+  <version num = "HDV4.10"  FileName="HD_S62_0-10.bin">HDV410</version>
+  <version num = "HDV4.11"  FileName="HD_S62_0-11.bin">HDV411-2</version>
+  <version num = "HDV4.12"  FileName="HD_S62_0-12.bin">HDV412</version>
+  <version num = "HDV4.13"  FileName="HD_S62_0-13.bin">HDV413</version>
+</Item>
+
+<Item id = "51" name ="S63" UPFileName="HD_S63_0.bin" counts= "1">
+  <version num = "HDV4.04"  FileName="HD_S63_0.bin">HDV404</version>
+  <version num = "HDV4.05"  FileName="HD_S63_0-05.bin">HDV405</version>
+  <version num = "HDV4.10"  FileName="HD_S63_0-10.bin">HDV410</version>
+  <version num = "HDV4.11"  FileName="HD_S63_0-11.bin">HDV411-2</version> 
+  <version num = "HDV4.12"  FileName="HD_S63_0-12.bin">HDV412</version>
+  <version num = "HDV4.13"  FileName="HD_S63_0-13.bin">HDV413</version>
+  <version num = "HDV4.14"  FileName="HD_S63_0-14.bin">HDV414</version>
+  <version num = "HDV4.15"  FileName="HD_S63_0-15.bin">HDV415</version>
+  <version num = "HDV4.22"  FileName="HD_S63_0-22.bin">HDV422</version>
+</Item>
+
+<Item id = "54" name ="S64" UPFileName="HD_S64_0.bin" counts= "2" otherID="73">
+  <version num = "HDV4.04"  FileName="HD_S64_0.bin">HDV404</version>
+  <version num = "HDV4.05"  FileName="HD_S64_0-05.bin">HDV405</version>
+  <version num = "HDV4.10"  FileName="HD_S64_0-10.bin">HDV410</version>
+</Item>
+<Item id = "73" name ="S64" UPFileName="HD_S64_1.bin" counts= "1" otherID="54">
+  <version num = "HDV4.05"  FileName="HD_S64_1-05.bin">HDV405</version>
+  <version num = "HDV4.10"  FileName="HD_S64_1-10.bin">HDV410</version>
+</Item>
+<Item id = "61" name ="S65" UPFileName="HD_S65_0.bin" counts= "1">
+  <version num = "HDV4.04"  FileName="HD_S65_0.bin">HDV404</version>
+  <version num = "HDV4.05"  FileName="HD_S65_0-05.bin">HDV405</version>
+</Item>
+
+<Item id = "69" name ="S66A" UPFileName="HD_S66_A.bin" counts= "1">
+  <version num = "HDV4.03"  FileName="HD_S66_A.bin">HDV404_E66A</version>
+</Item>
+
+<Item id = "60" name ="U6B" UPFileName="HD_U6B_0.bin" counts= "1" otherID="85">
+  <version num = "HDV4.04"  FileName="HD_U6B_0.bin">HDV404</version>
+  <version num = "HDV4.05"  FileName="HD_U6B_0-05.bin">HDV405</version>
+  <version num = "HDV4.10"  FileName="HD_U6B_0-10.bin">HDV410</version>
+  <version num = "HDV4.11"  FileName="HD_U6B_0-10.bin">HDV410</version>
+  <version num = "HDV4.12"  FileName="HD_U6B_0-12.bin">HDV412</version>
+</Item>
+<Item id = "85" name ="U6B" UPFileName="HD_U6B_1.bfu" counts= "1" otherID="60">
+  <version num = "HDV4.11"  FileName="HD_U6B_1-11.bfu">HDV411-2</version>
+  <version num = "HDV4.12"  FileName="HD_U6B_1-12.bfu">HDV412</version>
+  <version num = "HDV4.13"  FileName="HD_U6B_1-13.bfu">HDV413</version>
+  <version num = "HDV4.14"  FileName="HD_U6B_1-14.bfu">HDV414</version>
+  <version num = "HDV4.22"  FileName="HD_U6B_1-22.bfu">HDV422</version>
+</Item>
+<Item id = "62" name ="U60" UPFileName="HD_U60_0.bin" counts= "1" otherID="81">
+  <version num = "HDV4.04"  FileName="HD_U60_0.bin">HDV404</version>
+  <version num = "HDV4.05"  FileName="HD_U60_0-05.bin">HDV405</version>
+  <version num = "HDV4.10"  FileName="HD_U60_0-10.bin">HDV410</version>
+  <version num = "HDV4.11"  FileName="HD_U60_0-10.bin">HDV410</version>
+  <version num = "HDV4.12"  FileName="HD_U60_0-12.bin">HDV412</version>
+</Item>
+<Item id = "81" name ="U60" UPFileName="HD_U60_1.bfu" counts= "1" otherID="62">
+  <version num = "HDV4.11"  FileName="HD_U60_1-11.bfu">HDV411-2</version>
+  <version num = "HDV4.12"  FileName="HD_U60_1-12.bfu">HDV412</version>
+  <version num = "HDV4.13"  FileName="HD_U60_1-13.bfu">HDV413</version>
+  <version num = "HDV4.22"  FileName="HD_U60_1-22.bfu">HDV422</version>
+</Item>
+<Item id = "52" name ="U61" UPFileName="HD_U61_0.bin" counts= "1"otherID="83">
+  <version num = "HDV4.04"  FileName="HD_U61_0.bin">HDV404</version>
+  <version num = "HDV4.05"  FileName="HD_U61_0-05.bin">HDV405</version>
+  <version num = "HDV4.10"  FileName="HD_U61_0-10.bin">HDV410</version>
+  <version num = "HDV4.11"  FileName="HD_U61_0-10.bin">HDV410</version>
+  <version num = "HDV4.12"  FileName="HD_U61_0-12.bin">HDV412</version>
+</Item>
+<Item id = "83" name ="U61" UPFileName="HD_U61_1.bfu" counts= "1" otherID="52">
+  <version num = "HDV4.11"  FileName="HD_U61_1-11.bfu">HDV411-2</version>
+  <version num = "HDV4.12"  FileName="HD_U61_1-12.bfu">HDV412</version>
+  <version num = "HDV4.13"  FileName="HD_U61_1-13.bfu">HDV413</version>
+</Item>
+
+<Item id = "53" name ="U62" UPFileName="HD_U62_0.bin" counts= "1" otherID="84">
+  <version num = "HDV4.04"  FileName="HD_U62_0.bin">HDV404</version>
+  <version num = "HDV4.05"  FileName="HD_U62_0-05.bin">HDV405</version>
+  <version num = "HDV4.10"  FileName="HD_U62_0-10.bin">HDV410</version>
+  <version num = "HDV4.12"  FileName="HD_U62_0-12.bin">HDV412</version>
+</Item>
+<Item id = "84" name ="U62N" UPFileName="HD_U62_1.bfu" counts= "1" otherID="53">
+  <version num = "HDV4.11"  FileName="HD_U62_1-11.bfu">HDV411</version>
+  <version num = "HDV4.12"  FileName="HD_U62_1-12.bfu">HDV412</version>
+  <version num = "HDV4.13"  FileName="HD_U62_1-13.bfu">HDV413</version>
+  <version num = "HDV4.14"  FileName="HD_U62_1-14.bfu">HDV414</version>
+  <version num = "HDV4.22"  FileName="HD_U62_1-22.bfu">HDV422</version>
+</Item>
+<Item id = "46" name ="U63" UPFileName="HD_U63_0.bin" counts= "1" otherID="106">
+  <version num = "HDV4.04"  FileName="HD_U63_0.bin">HDV404</version>
+  <version num = "HDV4.05"  FileName="HD_U63_0-05.bin">HDV405</version>
+  <version num = "HDV4.10"  FileName="HD_U63_0-10.bin">HDV410</version>
+  <version num = "HDV4.11"  FileName="HD_U63_0-11.bin">HDV411-2</version>
+  <version num = "HDV4.12"  FileName="HD_U63_0-12.bin">HDV412</version>
+  <version num = "HDV4.13"  FileName="HD_U63_0-13.bin">HDV413</version>
+  <version num = "HDV4.14"  FileName="HD_U63_0-14.bin">HDV414</version>
+  <version num = "HDV4.15"  FileName="HD_U63_0-15.bin">HDV415</version>
+</Item>
+<Item id = "106" name ="U63" UPFileName="HD_U63_1.bin" counts= "1" otherID="46">
+<version num = "HDV4.22"  FileName="HD_U63_1-22.bin">HDV422</version>
+</Item>
+
+<Item id = "63" name ="U64" UPFileName="HD_U64_0.bin" counts= "1">
+  <version num = "HDV4.04"  FileName="HD_U64_0.bin">HDV404</version>
+  <version num = "HDV4.05"  FileName="HD_U64_0-05.bin">HDV405</version>
+  <version num = "HDV4.10"  FileName="HD_U64_0-10.bin">HDV410</version>
+  <version num = "HDV4.11"  FileName="HD_U64_0-11.bin">HDV411-2</version>
+  <version num = "HDV4.12"  FileName="HD_U64_0-12.bin">HDV412</version>
+  <version num = "HDV4.13"  FileName="HD_U64_0-13.bin">HDV413</version>
+  <version num = "HDV4.14"  FileName="HD_U64_0-14.bin">HDV414</version>
+  <version num = "HDV4.15"  FileName="HD_U64_0-15.bin">HDV415</version>
+  <version num = "HDV4.22"  FileName="HD_U64_0-22.bin">HDV422</version>
+</Item>
+
+<Item id = "67" name ="W60" UPFileName="HD_W60_0.bin" counts= "1"  otherID="82,107">
+  <version num = "HDV4.04"  FileName="HD_W60_0.bin">HDV404</version>
+  <version num = "HDV4.05"  FileName="HD_W60_0-05.bin">HDV405</version>
+  <version num = "HDV4.10"  FileName="HD_W60_0-10.bin">HDV410</version>
+  <version num = "HDV4.11"  FileName="HD_W60_0-11.bin">HDV411-2</version>
+  <version num = "HDV4.12"  FileName="HD_W60_0-12.bin">HDV412</version>
+  <version num = "HDV4.14"  FileName="HD_W60_0-14.bin">HDV414</version>
+</Item>
+<Item id = "82" name ="W60+" UPFileName="HD_W60_1.bfu" counts= "1" otherID="67,107">
+  <version num = "HDV4.22"  FileName="HD_W60_1-22.bfu">HDV422</version>
+</Item>
+<Item id = "107" name ="W60" UPFileName="HD_W60_2.bin" counts= "1" otherID="67,82">
+</Item>
+<Item id = "56" name ="W61" UPFileName="HD_W61_0.bin" counts= "1">
+  <version num = "HDV4.04"  FileName="HD_W61_0.bin">HDV404</version>
+  <version num = "HDV4.05"  FileName="HD_W61_0-05.bin">HDV405</version>
+  <version num = "HDV4.10"  FileName="HD_W61_0-10.bin">HDV410</version>
+  <version num = "HDV4.11"  FileName="HD_W61_0-11.bin">HDV411-2</version>
+  <version num = "HDV4.12"  FileName="HD_W61_0-12.bin">HDV412</version>
+  <version num = "HDV4.14"  FileName="HD_W61_0-14.bin">HDV414</version>
+</Item>
+
+<Item id = "49" name ="W62" UPFileName="HD_W62_0.bin" counts= "1" otherID="105">
+  <version num = "HDV4.04"  FileName="HD_W62_0.bin">HDV404</version>
+  <version num = "HDV4.05"  FileName="HD_W62_0-05.bin">HDV405</version>
+  <version num = "HDV4.10"  FileName="HD_W62_0-10.bin">HDV410</version>
+  <version num = "HDV4.11"  FileName="HD_W62_0-11.bin">HDV411-2</version>
+  <version num = "HDV4.12"  FileName="HD_W62_0-12.bin">HDV412</version>
+  <version num = "HDV4.13"  FileName="HD_W62_0-13.bin">HDV413</version>
+  <version num = "HDV4.14"  FileName="HD_W62_0-14.bin">HDV414</version>
+  <version num = "HDV4.15"  FileName="HD_W62_0-15.bin">HDV415</version>
+</Item>
+
+<Item id = "105" name ="W62" UPFileName="HD_W62_1.bin" counts= "1" otherID="49">
+<version num = "HDV4.22"  FileName="HD_W62_1-22.bin">HDV422</version>
+</Item>
+
+<Item id = "59" name ="W63" UPFileName="HD_W63_0.bin" counts= "1">
+  <version num = "HDV4.04"  FileName="HD_W63_0.bin">HDV404</version>
+  <version num = "HDV4.05"  FileName="HD_W63_0-05.bin">HDV405</version>
+  <version num = "HDV4.10"  FileName="HD_W63_0-10.bin">HDV410</version>
+  <version num = "HDV4.11"  FileName="HD_W63_0-11.bin">HDV411-2</version>
+  <version num = "HDV4.12"  FileName="HD_W63_0-12.bin">HDV412</version>
+  <version num = "HDV4.13"  FileName="HD_W63_0-13.bin">HDV413</version>
+  <version num = "HDV4.14"  FileName="HD_W63_0-14.bin">HDV414</version>
+  <version num = "HDV4.15"  FileName="HD_W63_0-15.bin">HDV415</version>
+  <version num = "HDV4.22"  FileName="HD_W63_0-22.bin">HDV422</version>
+</Item>
+
+<Item id = "55" name ="W64" UPFileName="HD_W64_0.bin" counts= "1" otherID="72">
+  <version num = "HDV4.04"  FileName="HD_W64_0.bin">HDV404</version>
+  <version num = "HDV4.05"  FileName="HD_W64_0-05.bin">HDV405</version>
+  <version num = "HDV4.10"  FileName="HD_W64_0-10.bin">HDV410</version>
+
+</Item>
+
+<Item id = "72" name ="W64" UPFileName="HD_W64_1.bin" counts= "1" otherID="55">
+  <version num = "HDV4.05"  FileName="HD_W64_1-05.bin">HDV405</version>
+  <version num = "HDV4.10"  FileName="HD_W64_1-10.bin">HDV410</version>
+  <version num = "HDV4.11"  FileName="HD_W64_1-11.bin">HDV411-2</version>
+  <version num = "HDV4.12"  FileName="HD_W64_1-12.bin">HDV412</version>
+  <version num = "HDV4.13"  FileName="HD_W64_1-13.bin">HDV413</version>
+  <version num = "HDV4.14"  FileName="HD_W64_1-14.bin">HDV414</version>
+  <version num = "HDV4.15"  FileName="HD_W64_1-15.bin">HDV415</version>
+  <version num = "HDV4.22"  FileName="HD_W64_1-22.bin">HDV422</version>
+</Item>
+
+
+
+<Item id = "48" name ="U6A" UPFileName="U6A.cod" counts= "1" otherID="74,90">
+  <version num = "HDV4.04"  FileName="U6A.cod">Empty</version>
+</Item>
+<Item id = "74" name ="U6A" UPFileName="HD_U6A_1.bfu" counts= "1" otherID="48,90">
+  <version num = "HDV4.10"  FileName="HD_U6A_1.bfu">HDV409</version>
+ </Item>
+ <Item id = "90" name ="U6A" UPFileName="HD_U6A_2.bfu" counts= "1" otherID="48,74">
+  <version num = "HDV4.12"  UPFileName="HD_U6A_2.bfu" FileName="HD_U6A_2-12.bfu">HDV412</version>
+  <version num = "HDV4.13"  UPFileName="HD_U6A_2.bfu" FileName="HD_U6A_2-13.bfu">HDV412</version>
+  <version num = "HDV4.22"  UPFileName="HD_U6A_2.bfu" FileName="HD_U6A_2-22.bfu">HDV422</version>
+ </Item>
+
+ <Item id = "76" name ="U60PLUS" UPFileName="HD_U60_P.bin" counts= "1">
+  <version num = "HDV4.11"  FileName="HD_U60_P-11.bin">HDV411-3</version>
+  <version num = "HDV4.12"  FileName="HD_U60_P-12.bin">HDV412</version>
+  <version num = "HDV4.13"  FileName="HD_U60_P-13.bin">HDV413</version>
+  <version num = "HDV4.14"  FileName="HD_U60_P-14.bin">HDV414</version>
+  <version num = "HDV4.15"  FileName="HD_U60_P-15.bin">HDV415</version>
+</Item>
+<Item id = "77" name ="U62PLUS" UPFileName="HD_U62_P.bin" counts= "1">
+  <version num = "HDV4.11"  FileName="HD_U62_P-11.bin">HDV411-3</version>
+  <version num = "HDV4.12"  FileName="HD_U62_P-12.bin">HDV412</version>
+  <version num = "HDV4.13"  FileName="HD_U62_P-13.bin">HDV413</version>
+  <version num = "HDV4.14"  FileName="HD_U62_P-14.bin">HDV414</version>
+  <version num = "HDV4.15"  FileName="HD_U62_P-15.bin">HDV415</version>
+</Item>
+<Item id = "80" name ="E62PLUS" UPFileName="HD_E62_P.bin" counts= "1" otherID="94">
+  <version num = "HDV4.11"  FileName="HD_E62_P-11.bin">HDV411-3</version>
+  <version num = "HDV4.12"  FileName="HD_E62_P-12.bin">HDV412</version>
+</Item>
+<Item id = "94" name ="E62PLUS" UPFileName="HD_E62P_2.bin" counts= "1" otherID="80">
+  <version num = "HDV4.13"  FileName="HD_E62P_2-13.bin">HDV413</version>
+  <version num = "HDV4.14"  FileName="HD_E62P_2-14.bin">HDV414</version>
+  <version num = "HDV4.15"  FileName="HD_E62P_2-15.bin">HDV415</version>
+</Item>
+<Item id = "86" name ="U60-75" UPFileName="HD_U60_7.bin" counts= "1">
+  <version num = "HDV4.11"  FileName="HD_U60_7-11.bin">HDV411-3</version>
+  <version num = "HDV4.12"  FileName="HD_U60_7-12.bin">HDV412</version>
+  <version num = "HDV4.13"  FileName="HD_U60_7-13.bin">HDV413</version>
+  <version num = "HDV4.14"  FileName="HD_U60_7-14.bin">HDV414</version>
+  <version num = "HDV4.15"  FileName="HD_U60_7-15.bin">HDV415</version>
+  <version num = "HDV4.22"  FileName="HD_U60_7-22.bin">HDV422</version>
+</Item>
+<Item id = "89" name ="W60-75" UPFileName="HD_W60_7.bin" counts= "1">
+  <version num = "HDV4.12"  FileName="HD_W60_7-12.bin">HDV412</version>
+  <version num = "HDV4.14"  FileName="HD_W60_7-14.bin">HDV414</version>
+  <version num = "HDV4.15"  FileName="HD_W60_7-15.bin">HDV415</version>
+  <version num = "HDV4.22"  FileName="HD_W60_7-22.bin">HDV422</version>
+</Item>
+<Item id = "95" name ="HD-G62" UPFileName="HD_G62_0.bin" counts= "1">
+</Item>
+<Item id = "96" name ="HD-E66" UPFileName="HD_E66_1.bin" counts= "1" otherID="66">
+</Item>
+<Item id = "97" name ="HD-W6B" UPFileName="HD_W6B_0.bfu" counts= "1" otherID="108">
+<version num = "HDV4.22"  FileName="HD_W6B_0-22.bfu">HDV422</version>
+</Item>
+
+
+<Item id = "98" name ="W62-75" UPFileName="HD_W62_7.bin" counts= "1">
+<version num = "HDV4.22"  FileName="HD_W62_7-22.bin">HDV422</version>
+</Item>
+
+<Item id = "99" name ="HD-W66" UPFileName="HD_W66_0.bin" counts= "1">
+<version num = "HDV4.22"  FileName="HD_W66_0-22.bin">HDV422</version>
+</Item>
+<Item id = "100" name ="W62-R01" UPFileName="HD_R01_0.bin" counts= "1">
+</Item>
+
+<Item id = "101" name ="W00" UPFileName="HD_W0X_0.bfu" counts= "1">
+<version num = "HDV4.22"  FileName="HD_W0X_0-22.bfu">HDV422</version>
+</Item>
+<Item id = "102" name ="W02" UPFileName="HD_W0X_0.bfu" counts= "1">
+<version num = "HDV4.22"  FileName="HD_W0X_0-22.bfu">HDV422</version>
+</Item>
+<Item id = "103" name ="W03" UPFileName="HD_W0X_0.bfu" counts= "1">
+<version num = "HDV4.22"  FileName="HD_W0X_0-22.bfu">HDV422</version>
+</Item>
+<Item id = "104" name ="W04" UPFileName="HD_W0X_0.bfu" counts= "1">
+<version num = "HDV4.22"  FileName="HD_W0X_0-22.bfu">HDV422</version>
+</Item>
+    <Item id="128" name="E63" UPFileName="HD_E63_3.bin" counts="1">        
+    </Item>
+	 <Item id="129" name="G66" UPFileName="HD_G66_0.bin" counts="1">        
+    </Item>
+	 <Item id="130" name="W66" UPFileName="HD_W66_3.bin" counts="1">        
+    </Item>
+	 <Item id="131" name="E62" UPFileName="HD_E62_3.bin" counts="1">        
+    </Item>
+     </Item>
+	 <Item id="132" name="W03" UPFileName="HD_W0X_3.bin" counts="1">        
+    </Item>
+     </Item>
+	 <Item id="134" name="W02" UPFileName="HD_W0X_3.bin" counts="1">        
+    </Item>
+     </Item>
+	 <Item id="133" name="W00" UPFileName="HD_W0X_3.bin" counts="1">        
+    </Item>
+     </Item>
+	 <Item id="135" name="W04" UPFileName="HD_W0X_3.bin" counts="1">        
+    </Item>
+     <Item id="137" name="G62" UPFileName="HD_G62_1.bin" counts="1">        
+    </Item>
+<language name="简体中文">
+  <HDV404>优化速度，增加CLK极性可修改，增加优先模式三个选项</HDV404>
+  <HDV405>修改时间准确度，增加随机边框，增加控制卡提示信息</HDV405>
+  <HDV409>用于新版U6A,优化速度</HDV409>
+  <HDV410>修改温度的问题，优化速度</HDV410>
+  <HDV404_M10>当前控制卡带M10炫彩屏需要升级这个版本固件；优化速度</HDV404_M10>
+  <HDV404_E66A>支持分区背景，支持区域重叠，支持灰度等级</HDV404_E66A>
+  <HDV411>扩大带载范围，优化显示效果</HDV411>
+  <HDV411-2>优化显示效果，修改断电重启节目被清除问题</HDV411-2>
+  <HDV411-3>扩大到32M内存，增加到256级灰度</HDV411-3>
+  <HDV412>优化大部分屏暗亮，闪点问题，修改了亮度调整方案</HDV412>
+  <HDV413>修改外部晶振不起振问题，优化网络卡的通讯方面，添加了文本背景，炫彩字，特殊边框等新功能</HDV413>
+  <HDV414>优化WIFI系列卡通信</HDV414>
+  <HDV415>添加开机提示功能，支持PM2.5传感器，GPS校时，支持单线屏模组</HDV415>
+  <HDV422>优化GPS相关的功能，优化Wi-Fi，优化1688B模组支持</HDV422>
+  <HDV423>E系列卡支持NTP校时，优化了1688B、1688C文字缺笔画的问题</HDV423>
+</language>
+<language name="English">
+  <HDV404>Optimize speed, add the CLK polarity can be modified ,add  three priority mode</HDV404>
+  <HDV405>Modified accuracy,add random borders,add the tips of the card</HDV405>
+  <HDV409>For the new U6A, optimized for speed</HDV409>
+  <HDV410>Change the problem of the temperature, and the speed optimization</HDV410>
+  <HDV404_M10>The card with M10-colorful need to upgrade the firmware</HDV404_M10>
+  <HDV404_E66A>Supports partitioning background, support areas overlap, support the gradation</HDV404_E66A>
+  <HDV411>Expand the range,optimization speed</HDV411>
+  <HDV411-2>Improve the display.Add prohibited delete program.</HDV411-2>
+  <HDV411-3>Expanded to 32M memory,Gray level to 256</HDV411-3>
+  <HDV412>Optimize most of the screen dark, flash point problem, modify the brightness adjustment program</HDV412>
+  <HDV413>Modify the external oscillator, no vibration problem,Optimize network card communication problems,Added new features such as text background, bright colors, special borders</HDV413>
+  <HDV414>Optimize Wi-Fi series card communication.</HDV414>
+  <HDV415>Add boot prompt, support PM2.5 sensor, GPS timing, support single-line screen module.</HDV415>  
+  <HDV422>Optimize GPS, Wi-Fi, and optimize 1688B module support.</HDV422>
+  <HDV423>E series cards support network time and optimize the problem of incorrect text display in 1688B and 1688C.</HDV423>
+  </language>
+</root>

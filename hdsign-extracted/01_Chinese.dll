@@ -1,0 +1,1648 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+<language name="简体中文">
+<Item name="ABrighterThanB">A比B亮</Item>
+<Item name="About">关于</Item>
+<Item name="AbrightBoff">A亮B灭</Item>
+<Item name="Add">添加</Item>
+<Item name="Add File">添加文件</Item>
+<Item name="Add GIF">添加GIF</Item>
+<Item name="AddFailed">添加失败</Item>
+<Item name="AddFile">添加文件</Item>
+<Item name="AddGroup">添加组</Item>
+<Item name="AddHypertext">添加超文本</Item>
+<Item name="AddItemID">添加ID</Item>
+<Item name="AddPicture">添加图片</Item>
+<Item name="AddProgram">添加节目</Item>
+<Item name="AddRegion">添加区域</Item>
+<Item name="AddSuccess">添加成功</Item>
+<Item name="AdjustTime">校时</Item>
+<Item name="AdvancedSetting">高级设置</Item>
+<Item name="AdvancedSettings">高级设置</Item>
+<Item name="AlignCenter">模拟屏居中</Item>
+<Item name="AlignRight">右对齐</Item>
+<Item name="Alignment">对齐方式</Item>
+<Item name="All">全部</Item>
+<Item name="Allow">启用</Item>
+<Item name="AllowPasswordAuthentication">在重要设置时启用密码验证。</Item>
+<Item name="AlreadyOpened">此屏已经打开</Item>
+<Item name="AlterBaudrate">更改波特率</Item>
+<Item name="AntiClockwise rotation">逆时针旋转</Item>
+<Item name="Apply">应用</Item>
+<Item name="AreaBackground">分区背景</Item>
+<Item name="AreaDown">区域靠下</Item>
+<Item name="AreaLeft">区域靠左</Item>
+<Item name="AreaMaximize">区域最大化</Item>
+<Item name="AreaNoBorder">十字屏全局节目不支持边框</Item>
+<Item name="AreaRight">区域靠右</Item>
+<Item name="AreaUp">区域靠上</Item>
+<Item name="Associated">关联</Item>
+<Item name="AutoAdjustTime">自动校时</Item>
+<Item name="AutoGetingIP">自动获取IP</Item>
+<Item name="AutoHide">自动隐藏</Item>
+<Item name="AutoReSend">自动重发</Item>
+<Item name="AutoSave">自动保存</Item>
+<Item name="AutoScanInterval">自动扫描时间</Item>
+<Item name="AutoScanMode">自动扫描方式</Item>
+<Item name="AutoSearchScans">自动搜索扫描方式</Item>
+<Item name="AutoSwitching">自动切换</Item>
+<Item name="AutoUpdate">自动更新</Item>
+<Item name="Automatic">自动调节</Item>
+<Item name="AutomaticInfo">使用自动调节功能时，请确定已安装亮度传感器。</Item>
+<Item name="BBrighterThanA">B比A亮</Item>
+<Item name="Background">背景</Item>
+<Item name="BackgroundColor">背景颜色</Item>
+<Item name="BackgroundSetting">背景设置</Item>
+<List name="BackgroupEffects" id="0">随机</List>
+<List name="BackgroupEffects" id="10">缩小</List>
+<List name="BackgroupEffects" id="11">呼吸</List>
+<List name="BackgroupEffects" id="12">交叉</List>
+<List name="BackgroupEffects" id="13">均衡器</List>
+<List name="BackgroupEffects" id="14">反射</List>
+<List name="BackgroupEffects" id="15">闪烁</List>
+<List name="BackgroupEffects" id="16">纯色</List>
+<List name="BackgroupEffects" id="17">色带开闭</List>
+<List name="BackgroupEffects" id="18">圆形扩展</List>
+<List name="BackgroupEffects" id="19">菱形扩展</List>
+<List name="BackgroupEffects" id="1">静止</List>
+<List name="BackgroupEffects" id="20">十字线</List>
+<List name="BackgroupEffects" id="21">曲线变换</List>
+<List name="BackgroupEffects" id="2">左移</List>
+<List name="BackgroupEffects" id="3">右移</List>
+<List name="BackgroupEffects" id="4">上移</List>
+<List name="BackgroupEffects" id="5">下移</List>
+<List name="BackgroupEffects" id="6">左右移动</List>
+<List name="BackgroupEffects" id="7">左右对开</List>
+<List name="BackgroupEffects" id="8">左右闭合</List>
+<List name="BackgroupEffects" id="9">放大</List>
+<Item name="BasicInfoSet">基本信息设置</Item>
+<Item name="BasicPara">基本参数</Item>
+<Item name="BasicSetting">基本设置</Item>
+<Item name="Baudrate">波特率</Item>
+<Item name="BbrightAoff">B亮A灭</Item>
+<Item name="Begin">开始</Item>
+<Item name="Begin Play">起始点</Item>
+<Item name="BeginIpAddr">开始IP</Item>
+<Item name="Black">黑</Item>
+<Item name="Blue">蓝</Item>
+<Item name="Boot">Boot状态</Item>
+<Item name="BootStatus">控制卡当前处于boot状态等待固件更新，请先更新固件！</Item>
+<Item name="Border">边框</Item>
+<Item name="BorderSetting">边框设置</Item>
+<Item name="BorderColor">边框颜色</Item>
+
+<Item name="BorderWidth">边框宽度</Item>
+<Item name="BorderWidthExceeds">边框宽度超出</Item>
+<Item name="BorderWidthOutOfRange">边框宽度超出当前屏幕所支持的范围！</Item>
+<Item name="BoundDevice">绑定设备</Item>
+<Item name="Broadcast">广播</Item>
+<Item name="BuildArea">已建区域</Item>
+<Item name="Built-inUnitBoard">常用单元板</Item>
+<Item name="BusEdit">编辑</Item>
+<Item name="BusImage">单元板图片</Item>
+<Item name="BusName">名称</Item>
+<Item name="BusNew">新增</Item>
+<Item name="BusView">查看</Item>
+<Item name="Busy">忙碌</Item>
+<Item name="Button">按钮</Item>
+<Item name="ButtonDownTiming">按钮倒计时</Item>
+<Item name="ButtonSettings">按钮1设置</Item>
+<Item name="ButtonSettings2">按钮2设置</Item>
+<Item name="ButtonSettings3">按钮3设置</Item>
+<Item name="ButtonSettings4">按钮4设置</Item>
+<Item name="ButtonSwitch">按钮切换</Item>
+<Item name="ButtonTiming">按钮计时</Item>
+<Item name="ButtonUpTiming">按钮顺计时</Item>
+<Item name="ButtonorPlaySet">按钮设置</Item>
+<Item name="CLKMirror">CLK极性</Item>
+<Item name="CLKWidth">CLK宽度</Item>
+<Item name="COM">串口</Item>
+<Item name="COMERROR">连接失败，请检查串口2,3脚是否短接?</Item>
+<Item name="COMINFO">通讯信息</Item>
+<Item name="COMURL">服务网址 : http://www.huidu.cn</Item>
+<Item name="CPUModelError">CPU型号错误</Item>
+<Item name="CanNotFindTheDefaultProfile">找不到默认配置文件</Item>
+<Item name="Cancel">取消</Item>
+<Item name="CannotFindNetWordDrive">没有找到网络设备！</Item>
+<Item name="CannotOpenExcle">无法启动Excle，请检查本机是否安装Excel！</Item>
+<Item name="CardIpSeting">控制卡IP设置</Item>
+<Item name="CardModel">控制卡型号</Item>
+<Item name="CardNumber">控制卡型号</Item>
+<Item name="CardOnlySupportFullColor">固件只支持三基色,不支持单双色</Item>
+<Item name="CardOnlySupportTwoColor">固件只支持单双色,不支持三基色</Item>
+<Item name="CardRestart">控制卡正在重启</Item>
+<Item name="CardVersion">控制卡版本</Item>
+<Item name="Center">居中</Item>
+<Item name="CenterAlign">居中对齐</Item>
+<Item name="CfwBackgroundEdit">动画字背景</Item>
+<Item name="Change">更改</Item>
+<Item name="Channel">频道</Item>
+<Item name="CharSpacing">字间距</Item>
+<Item name="CheckAll">全选</Item>
+<Item name="CheckProgram">节目勾选</Item>
+<Item name="ChecksumError">校验错误</Item>
+<Item name="ChooseDeive">设备选择</Item>
+<Item name="ClassicBackground">图片背景</Item>
+<Item name="Clear">清屏</Item>
+<List name="ClearEffects" id="0">立即清除</List>
+<List name="ClearEffects" id="10">上下闭合</List>
+<List name="ClearEffects" id="11">左右对开</List>
+<List name="ClearEffects" id="12">左右闭合</List>
+<List name="ClearEffects" id="13">垂直百叶窗</List>
+<List name="ClearEffects" id="14">水平百叶窗</List>
+<List name="ClearEffects" id="15">向左翻页</List>
+<List name="ClearEffects" id="16">向右翻页</List>
+<List name="ClearEffects" id="17">扇形展开</List>
+<List name="ClearEffects" id="18">扇形合并</List>
+<List name="ClearEffects" id="19">顺时针覆盖</List>
+<List name="ClearEffects" id="1">向左平移</List>
+<List name="ClearEffects" id="200">随机</List>
+<List name="ClearEffects" id="201">不清屏</List>
+<List name="ClearEffects" id="20">逆时针覆盖</List>
+<List name="ClearEffects" id="21">水平穿插</List>
+<List name="ClearEffects" id="22">上卷帘</List>
+<List name="ClearEffects" id="23">下卷帘</List>
+<List name="ClearEffects" id="24">左卷帘</List>
+<List name="ClearEffects" id="25">右卷帘</List>
+<List name="ClearEffects" id="26">水平画格展开</List>
+<List name="ClearEffects" id="27">垂直画格展开</List>
+<List name="ClearEffects" id="2">向右平移</List>
+<List name="ClearEffects" id="3">向上平移</List>
+<List name="ClearEffects" id="4">向下平移</List>
+<List name="ClearEffects" id="5">向左覆盖</List>
+<List name="ClearEffects" id="6">向右覆盖</List>
+<List name="ClearEffects" id="7">向上覆盖</List>
+<List name="ClearEffects" id="8">向下覆盖</List>
+<List name="ClearEffects" id="9">上下对开</List>
+<Item name="ClearScreeData">是否清除已有显示屏?</Item>
+<Item name="ClickHereToUpdate">单击此处更新</Item>
+<Item name="Clock">表盘</Item>
+<Item name="ClockFrequency">时钟频率</Item>
+<Item name="ClockParameters">表盘属性</Item>
+<Item name="Clockwise rotation">顺时针旋转</Item>
+<Item name="Close">关闭</Item>
+<Item name="CloseScreen">关屏</Item>
+<Item name="Color">颜色</Item>
+<Item name="ColorChannel">颜色通道</Item>
+<Item name="ColorChannelSet">颜色通道设置</Item>
+<Item name="ColorFilter">颜色过滤</Item>
+<Item name="ColorInversion">颜色反转</Item>
+<Item name="ColorSingleSelect">颜色单选</Item>
+<Item name="ColorThreshold">颜色阈值</Item>
+<Item name="ColorfulText">动画字</Item>
+<List name="ColorfulWordEffects" id="0">静止显示</List>
+<List name="ColorfulWordEffects" id="10">垂直翻转</List>
+<List name="ColorfulWordEffects" id="11">水平翻转</List>
+<List name="ColorfulWordEffects" id="12">缩放</List>
+<List name="ColorfulWordEffects" id="13">连续左移</List>
+<List name="ColorfulWordEffects" id="14">连续右移</List>
+<List name="ColorfulWordEffects" id="15">连续上移</List>
+<List name="ColorfulWordEffects" id="16">连续下移</List>
+<List name="ColorfulWordEffects" id="17">2D放大</List>
+<List name="ColorfulWordEffects" id="18">2D缩小</List>
+<List name="ColorfulWordEffects" id="1">正弦波</List>
+<List name="ColorfulWordEffects" id="2">字旋转</List>
+<List name="ColorfulWordEffects" id="3">向左飞入</List>
+<List name="ColorfulWordEffects" id="4">向右飞入</List>
+<List name="ColorfulWordEffects" id="5">闪烁</List>
+<List name="ColorfulWordEffects" id="6">逐字输出</List>
+<List name="ColorfulWordEffects" id="7">左右摇摆</List>
+<List name="ColorfulWordEffects" id="8">弹性文字</List>
+<List name="ColorfulWordEffects" id="9">摇摆</List>
+<Item name="Column">列</Item>
+<Item name="CommStatus1">通信良好</Item>
+<Item name="CommStatus2">通信正常</Item>
+<Item name="CommStatus3">通信差但可以连通</Item>
+<Item name="CommStatus4">不能通信</Item>
+<Item name="CommTest">网络测试</Item>
+<Item name="Command">命令</Item>
+<Item name="CommandSmartSetting">常用智能设置</Item>
+<Item name="CommonSettings">常用设置</Item>
+<Item name="CommunicationMode">通讯方式</Item>
+<Item name="CommunicationSetting">通讯设置</Item>
+<Item name="ConfirmRGBwidth">确认一组RGB控制的行高</Item>
+<Item name="ConfirmScanMode">确认扫描类型</Item>
+<Item name="Connected">已连接</Item>
+<Item name="ConnectionSuccessful">连接成功</Item>
+<Item name="ContainOverlappingRegions">含有重叠区域</Item>
+<Item name="ContentContainMultiLines">当前特效不支持表格，是否删除表格？</Item>
+<Item name="ContinueMove">连续移动</Item>
+<Item name="ContinueMoveUp">连续上移</Item>
+<Item name="Copy">复制</Item>
+<Item name="Copyright">版权所有 : 深圳市灰度科技有限公司</Item>
+<Item name="Count">计时</Item>
+<Item name="Count1">计数</Item>
+<Item name="CountAdd">计数加</Item>
+<Item name="CountColor">数值颜色</Item>
+<Item name="CountDown">倒计时</Item>
+<Item name="CountReset">计数复位</Item>
+<Item name="CountSub">计数减</Item>
+<Item name="CountUp">顺计时</Item>
+<Item name="CradID">设备ID</Item>
+<Item name="CradName">设备名称</Item>
+<Item name="CrossBottom">底部</Item>
+<Item name="CrossCenter">中部</Item>
+<Item name="CrossGlobalProgram">全局节目</Item>
+<Item name="CrossNoSupport">全局节目不支持此区域。</Item>
+<Item name="CrossScreen">十字屏</Item>
+<Item name="CrossScreenParamsPageTip">1.屏宽屏高分为三部分分别设置；&#x000A;2.选择显示屏的基本颜色；&#x000A;</Item>
+<Item name="CrossScreenSetting">十字屏设置</Item>
+<Item name="CrossSmartTip">当前LED屏正常显示文字，不用勾选智能设置</Item>
+<Item name="CrossTop">顶部</Item>
+<Item name="CurrentSel">当前选择的语言</Item>
+<Item name="Custom">自定义</Item>
+<Item name="CustomIPTips">如果控制卡被防火墙屏蔽，请手动填写IP。</Item>
+<Item name="CustomTime">按时段调节</Item>
+<Item name="CustomUnitBoard">自定义单元板</Item>
+<Item name="CustomizeIP">自定义IP</Item>
+<Item name="Cut">剪切</Item>
+<Item name="Cyan">青</Item>
+<Item name="CycleTiming">循环计时</Item>
+<Item name="DHCPDNSAddr">DNS地址</Item>
+<Item name="DHCPGateway">DHCP默认网关</Item>
+<Item name="DHCPLease">DHCP租期</Item>
+<Item name="DHCPMask">DHCP子网掩码</Item>
+<Item name="DHCPServerAddr">DHCP服务器地址</Item>
+<Item name="Data">数据</Item>
+<Item name="DataClearSuccess">数据清除成功</Item>
+<Item name="DataFill">数据超出范围!</Item>
+<Item name="DataLenght">数据长度</Item>
+<Item name="DataLengthError">数据包长度错误</Item>
+<Item name="DataMirror">数据镜像</Item>
+<Item name="DataPolarity">数据极性</Item>
+<Item name="DataPolaritySet">数据极性设置</Item>
+<Item name="DataSource">数据来源</Item>
+<Item name="DateAndWeekLocationReplaced">日期与星期位置替换</Item>
+<Item name="Day">天</Item>
+<Item name="Day2">日</Item>
+<Item name="DayType">日期类型</Item>
+<Item name="Default">默认</Item>
+<Item name="DefaultConnectDeviceType">默认连接方式</Item>
+<Item name="DelayedSignal">延时信号</Item>
+<Item name="DeleteFailed">删除失败</Item>
+<Item name="DeleteScreen">删除显示屏</Item>
+<Item name="DeleteSuccess">删除成功</Item>
+<Item name="DeleteThisData">是否删除控制卡内所有的节目？</Item>
+<Item name="DeleteThisFile">删除所选文件？</Item>
+<Item name="DeleteThisProgram">删除所选节目？</Item>
+<Item name="DeleteThisRegion">删除所选区域？</Item>
+<Item name="Deny">禁用</Item>
+<Item name="DestFile">目标文件</Item>
+<Item name="DestIP">目标IP</Item>
+<Item name="Detailed">详细...</Item>
+<Item name="Detect">检测</Item>
+<Item name="DetectDevice">检测设备</Item>
+<Item name="DetectFail">检测失败</Item>
+<Item name="DetectSuccess">检测成功</Item>
+<Item name="Detecting">检测 ...</Item>
+<Item name="DetectsThisFileWasNotSaved">检测到当前选中的文件未保存，是否覆盖?</Item>
+<Item name="Deviation">湿度校正</Item>
+<Item name="Device">可移动磁盘</Item>
+<Item name="DeviceChoosePageTip">1.使用U盘，请选择卡的型号;&#x000A;2.出现设备名称，请匹配设备ID;&#x000A;3.只有一个设备，且已经找到，请点击下一步.</Item>
+<Item name="DeviceID">设备ID</Item>
+<Item name="DeviceManage">设备管理</Item>
+<Item name="DeviceName">设备名称</Item>
+<Item name="DialClock">表盘时钟</Item>
+<Item name="DialStyle">表盘样式</Item>
+<Item name="DialWeek">星期</Item>
+<Item name="DialYear">年月日</Item>
+<Item name="DigitOnly">不显示单位</Item>
+<Item name="Digital">数字</Item>
+<Item name="Direction">方向</Item>
+<Item name="DisableBrightnessAdjustment">禁用亮度调节</Item>
+<Item name="Disconnected">未连接</Item>
+<Item name="DiskSpace">磁盘空间:</Item>
+<Item name="Display">显示</Item>
+<List name="DisplayEffects" id="40">静止显示</List>
+<List name="DisplayEffects" id="0">立即显示</List>
+<List name="DisplayEffects" id="10">上下闭合</List>
+<List name="DisplayEffects" id="11">左右对开</List>
+<List name="DisplayEffects" id="12">左右闭合</List>
+<List name="DisplayEffects" id="14">垂直百叶窗</List>
+<List name="DisplayEffects" id="13">水平百叶窗</List>
+<List name="DisplayEffects" id="15">向左翻页</List>
+<List name="DisplayEffects" id="16">向右翻页</List>
+<List name="DisplayEffects" id="17">扇形展开</List>
+<List name="DisplayEffects" id="18">扇形合并</List>
+<List name="DisplayEffects" id="19">顺时针覆盖</List>
+<List name="DisplayEffects" id="1">向左平移</List>
+<List name="DisplayEffects" id="200">随机</List>
+<List name="DisplayEffects" id="202">连续左移</List>
+<List name="DisplayEffects" id="203">连续右移</List>
+<List name="DisplayEffects" id="204">连续上移</List>
+<List name="DisplayEffects" id="20">逆时针覆盖</List>
+<List name="DisplayEffects" id="21">水平穿插</List>
+<List name="DisplayEffects" id="23">上卷帘</List>
+<List name="DisplayEffects" id="22">下卷帘</List>
+<List name="DisplayEffects" id="25">左卷帘</List>
+<List name="DisplayEffects" id="24">右卷帘</List>
+<List name="DisplayEffects" id="26">水平画格展开</List>
+<List name="DisplayEffects" id="27">垂直画格展开</List>
+<List name="DisplayEffects" id="28">向下飘雪</List>
+<List name="DisplayEffects" id="29">向下陨落</List>
+<List name="DisplayEffects" id="2">向右平移</List>
+<List name="DisplayEffects" id="30">向上飘雪</List>
+<List name="DisplayEffects" id="31">向上陨落</List>
+<List name="DisplayEffects" id="32">左镭射</List>
+<List name="DisplayEffects" id="33">右镭射</List>
+<List name="DisplayEffects" id="34">闪烁</List>
+<List name="DisplayEffects" id="35">反白闪烁</List>
+<List name="DisplayEffects" id="36">向下拉伸</List>
+<List name="DisplayEffects" id="37">向上拉伸</List>
+<List name="DisplayEffects" id="38">垂直拉伸</List>
+<List name="DisplayEffects" id="39">腾空翻转</List>
+<List name="DisplayEffects" id="3">向上平移</List>
+<List name="DisplayEffects" id="4">向下平移</List>
+<List name="DisplayEffects" id="5">向左覆盖</List>
+<List name="DisplayEffects" id="6">向右覆盖</List>
+<List name="DisplayEffects" id="7">向上覆盖</List>
+<List name="DisplayEffects" id="8">向下覆盖</List>
+<List name="DisplayEffects" id="9">上下对开</List>
+<Item name="DisplayState">显示状态</Item>
+<Item name="Dll_Add">累加</Item>
+<Item name="Dll_Data">数值</Item>
+<Item name="Docking">停靠</Item>
+<Item name="DonotTips">不再提示</Item>
+<Item name="DontChange">不更改</Item>
+<Item name="DownloadSpeed">下载速度</Item>
+<Item name="Dwell">停留</Item>
+<Item name="Edit">编辑</Item>
+<Item name="EditingLanguage">编辑语言</Item>
+<Item name="Editor">编辑器</Item>
+<Item name="Effect">特效</Item>
+<Item name="Effect Cover">覆盖</Item>
+<Item name="Effect Drift">飘雪</Item>
+<Item name="Effect FanShaped">百叶窗</Item>
+<Item name="Effect Flicker">闪烁</Item>
+<Item name="Effect Laser">镭射</Item>
+<Item name="Effect Move">移动</Item>
+<Item name="Effect OpenAndClose">展开闭合</Item>
+<Item name="Effect PageTurning">翻页</Item>
+<Item name="Effect Pull">拉伸</Item>
+<Item name="Effect Roll">卷帘</Item>
+<Item name="Effect WaterFall">陨落</Item>
+<Item name="EffectSetting">特效设置</Item>
+<Item name="EffectType">特效类型</Item>
+<Item name="EliminateGhosting">行消隐</Item>
+<Item name="Empty">清空</Item>
+<Item name="EmptyScreen">清空显示屏</Item>
+<Item name="Enable">启用</Item>
+<Item name="EnableDhcp">启用DHCP</Item>
+<Item name="End Play">结束点</Item>
+<Item name="EndIpAddr">结束IP</Item>
+<Item name="EndToEnd">首尾相接</Item>
+<Item name="English">英文</Item>
+<Item name="Equilibrium">均衡</Item>
+<Item name="Error">错误</Item>
+<Item name="EthSettingHelpA">直接更改软件中的相关设置，不对设备中的地址进行更改。</Item>
+<Item name="EthSettingHelpB">注意：&#x000A;1. 设置成功后将会同时更改软件与设备中的地址。&#x000A;2. 多个设备同时连接时请确保设备中MAC地址都是唯一的。</Item>
+<Item name="Ethernet">以太网</Item>
+<Item name="EthernetAddressSettingSuccess">以太网地址设置成功</Item>
+<Item name="EthernetSettingInfo">注意：使用此功能时，请确保局域网中只连接了一张控制卡</Item>
+<Item name="Example">示例</Item>
+<Item name="ExitDownloading">正在下载更新文件，是否强制退出？</Item>
+<Item name="ExpiredVerification">过期密码验证</Item>
+<Item name="ExporBus">导出单元板参数</Item>
+<Item name="ExporBusIn">导入单元板参数</Item>
+<Item name="Export">U盘</Item>
+<Item name="ExportAdjustTimeFile">导出校时文件</Item>
+<Item name="ExportFailed">导出失败</Item>
+<Item name="ExportFile">导出文件</Item>
+<Item name="ExportFileFail">导出文件失败!</Item>
+<Item name="ExportImport">导入导出</Item>
+<Item name="ExportLanguage">导出语言</Item>
+<Item name="ExportParam">导出参数</Item>
+<Item name="ExportScreenFile">导出屏幕文件</Item>
+<Item name="ExportSetedParams">导出设置参数</Item>
+<Item name="ExportSuccess">  导出成功,是否弹出U盘!  </Item>
+<Item name="ExportSuccess1">已成功導出到</Item>
+<Item name="ExportSuccess2">!</Item>
+<Item name="ExportToUDisk">导出到 U 盘</Item>
+<Item name="Fahrenheit">华氏度</Item>
+<Item name="Fast">快</Item>
+<Item name="Fastest">最快</Item>
+<Item name="FeatureNavigator">功能导航</Item>
+<Item name="Festival">节日</Item>
+<Item name="FestivalList">节日列表</Item>
+<Item name="File">文件</Item>
+<Item name="FileConfigurationError">文件配置错误</Item>
+<Item name="FileConfigurationPackageSentSuccessfully">文件配置包发送成功</Item>
+<Item name="FileDoesNotMatch">文件不匹配</Item>
+<Item name="FileList">文件列表</Item>
+<Item name="FileMisidentified">文件标识有误</Item>
+<Item name="FileParametersError">文件参数错误(屏宽或屏高超限或者屏颜色选择错误)</Item>
+<Item name="FileSendComplete">文件发送成功</Item>
+<Item name="FileSize">文件大小</Item>
+<Item name="FileSuccessfullyReceived">文件接收成功</Item>
+<Item name="FillingTheCurrentLanguage">填充到当前语言文件</Item>
+<Item name="FilterColor">过滤颜色</Item>
+<Item name="FindNewVersion">发现新版本，是否下载更新?</Item>
+<Item name="FindScree">查屏</Item>
+<Item name="FindSerial">找到与控制卡相连接的串口</Item>
+<Item name="Finish">完成</Item>
+<Item name="FinishTracingPoint">描点完成</Item>
+<Item name="FirmwareMismatching">固件不匹配</Item>
+<Item name="FirmwareVersion">固件版本</Item>
+<Item name="FirstMode">优先模式</Item>
+<Item name="FirstMode_Normal">均衡</Item>
+<Item name="FirstMode_Speed">速度优先</Item>
+<Item name="FirstMode_Text">亮度优先</Item>
+<Item name="FirstPage">数据首幕</Item>
+<Item name="FitMaxHint">区域最大化</Item>
+<Item name="FixedCellsWidth">固定单元格宽度</Item>
+<Item name="FixedPlay">固定播放</Item>
+<Item name="FixedText">固定文字</Item>
+<Item name="FixedTime">定长播放</Item>
+<Item name="Flash">SWF</Item>
+<Item name="Floating">浮动</Item>
+<Item name="FlushLeft">左对齐</Item>
+<Item name="Font">字体设置</Item>
+<Item name="FontSize">字体大小</Item>
+<Item name="Foreground">前景</Item>
+<Item name="FoundDisk">已检测到移动磁盘</Item>
+<Item name="FramesTooMuch">帧数过多，请减少帧数。</Item>
+<Item name="FreeSpace">剩余空间</Item>
+<Item name="Frequency">扫描频率</Item>
+<Item name="Friday">星期五</Item>
+<Item name="From">从</Item>
+<Item name="From Max To Min">从最大值到最小值</Item>
+<Item name="From Min To Max">从最小值到最大值</Item>
+<Item name="GIF name">GIF路径</Item>
+<Item name="GammaCorrection">伽马校正 </Item>
+<Item name="GaryTip1">控制范围为无灰度的1/</Item>
+<Item name="General2">二代</Item>
+<Item name="General4">四代</Item>
+<Item name="General6">六代</Item>
+<Item name="GeneratingData">正在生成数据</Item>
+<Item name="GetFirmwareVersion">获取固件版本</Item>
+<Item name="GetSystemTime">获取系统时间</Item>
+<Item name="Graph">图形</Item>
+<Item name="GraphCount">数量</Item>
+<Item name="GrayLevel">灰度等级</Item>
+<Item name="Green">绿</Item>
+<Item name="HDScreenFile">显示屏文件</Item>
+<Item name="HZoom">水平拉伸</Item>
+<Item name="Height">高度</Item>
+<Item name="HeightOfMoreTthan">高度超过了，控制卡支持的最大高度!</Item>
+<Item name="Hide">隐藏</Item>
+<Item name="High">高</Item>
+<Item name="Hollow">空心</Item>
+<Item name="Horizontal">水平位置</Item>
+<Item name="Hour">时</Item>
+<Item name="HourHand">时针宽度</Item>
+<Item name="HourRadius">时点半径</Item>
+<Item name="Humidity">湿度</Item>
+<Item name="IDAlreadyExists">ID已经存在</Item>
+<Item name="IDAndContentCanNotBeEmpty">ID和内容不能为空</Item>
+<Item name="IDInputError">ID输入错误</Item>
+<Item name="IPAddress">IP 地址</Item>
+<Item name="IPNotLegitimate">IP不合法</Item>
+<Item name="IPResetting">IP 地址重置</Item>
+<Item name="IPSetting">IP设置</Item>
+<Item name="Idle">空闲</Item>
+<Item name="IllegalFile">非法的文件</Item>
+<Item name="Image">图像</Item>
+<Item name="ImageAuto">图片风格</Item>
+<Item name="Images">图片</Item>
+<Item name="ImportFailed">导入失败</Item>
+<Item name="ImportFile">导入文件</Item>
+<Item name="ImportLanguage">导入语言</Item>
+<Item name="ImportParam">导入参数</Item>
+<Item name="ImportScreenFile">导入屏幕文件</Item>
+<Item name="IncompleteDataWriting">数据写入不完整</Item>
+<Item name="Index">序号</Item>
+<Item name="InfraredRay">红外线</Item>
+<Item name="InitialState">初始状态</Item>
+<Item name="InitializeSuccess">初始化成功</Item>
+<Item name="InputSmartSettingName">请输入智能设置名称</Item>
+<Item name="Insert">插入</Item>
+<Item name="InsertColumn">插入列</Item>
+<Item name="InsertRow">插入行</Item>
+<Item name="Inverse">反选</Item>
+<Item name="IsDeleteAllScreen">是否删除所有显示屏？</Item>
+<Item name="IsExportVideo">是否导出视频？</Item>
+<Item name="IsSaveFile">是否保存文件</Item>
+<Item name="IsSendToCard">是否发送到控制卡？</Item>
+<Item name="IsTheLatestVersion">当前版本已经是最新版本。</Item>
+<Item name="Jieqi">节气</Item>
+<Item name="JieriName">节日名称</Item>
+<Item name="JieriType">类型</Item>
+<Item name="Large">大号</Item>
+<Item name="LastPage">数据尾幕</Item>
+<Item name="LeftToRight">左-&gt;右</Item>
+<Item name="LevelScreenshot">水平截图</Item>
+<Item name="LightRows">单元板亮了多少行</Item>
+<Item name="LineSpacing">行间距</Item>
+<Item name="Link">连接</Item>
+<Item name="LinkState">连接状态</Item>
+<Item name="LiveTime">存活时间</Item>
+<Item name="LocalDisck">本地磁盘</Item>
+<Item name="LocalIpSeting">本地IP设置</Item>
+<Item name="LockPara">锁定屏参</Item>
+<Item name="Low">低</Item>
+<Item name="LuminancePrior">亮度优先</Item>
+<Item name="LuminanceSetting">亮度设置</Item>
+<Item name="LuminanceSettingSuccess">亮度设置成功</Item>
+<Item name="MACAddress">MAC 地址</Item>
+<Item name="MFRDate">出厂日期</Item>
+<Item name="Max">最大值</Item>
+<Item name="MaxIPAddr">最大地址</Item>
+<Item name="MaxUseImage">最大值使用图片</Item>
+<Item name="MaximumOfHeight">最大高度</Item>
+<Item name="MaximumOfRange">控制范围</Item>
+<Item name="MaximumOfRegions">支持区域</Item>
+<Item name="MaximumOfWidth">最大宽度</Item>
+<Item name="Memory">内存大小</Item>
+<Item name="Memory Size">文件大小</Item>
+<Item name="MergeCells">合并单元格</Item>
+<Item name="Middle">中号</Item>
+<Item name="Min">分</Item>
+<Item name="MinIPAddr">最小地址</Item>
+<Item name="MinUseImage">最小值使用图片</Item>
+<Item name="MinuteHand">分针宽度</Item>
+<Item name="Model">控制卡</Item>
+<Item name="ModificationFails">修改失败</Item>
+<Item name="Modify">修改</Item>
+<Item name="ModifyItemID">修改ID</Item>
+<Item name="ModifyOnlyOneItem">只能修改一项</Item>
+<Item name="Module">模块</Item>
+<Item name="ModuleMismatching">控制卡型号不匹配</Item>
+<Item name="ModuleSelect">模块选择</Item>
+<Item name="Monday">星期一</Item>
+<Item name="Month">月</Item>
+<Item name="MoreSetting">更多设置</Item>
+<Item name="MoreSettings">更多设置-&gt;&gt;</Item>
+<Item name="MoveDown">下移</Item>
+<Item name="MoveUp">上移</Item>
+<Item name="Multi">多个</Item>
+<Item name="MultiFrame">多帧图像</Item>
+<Item name="MultiLine">多行显示</Item>
+<Item name="MultiScreenDirectConnect">多屏模式</Item>
+<Item name="MultipeSend">集群发送</Item>
+<Item name="MultipeSendHint">集群发送 只适用于以太网(固定IP地址)模式</Item>
+<Item name="MultipleEffects">复选特效</Item>
+<Item name="MultipleLinesoftext">多行文本</Item>
+<Item name="NICName">网卡名称</Item>
+<Item name="Name">名字</Item>
+<Item name="NeedSensor">需要传感器</Item>
+<Item name="NeedSpace">所需空间</Item>
+<Item name="NetMark">子网掩码</Item>
+<Item name="NetWorkError">当前控制卡只能使用精简模式，请检查控制卡是否与电脑在同一个网段！</Item>
+<Item name="NewCrossScreen">新建十字屏(&amp;C)</Item>
+<Item name="NewCrossScreen_G">新建十字屏</Item>
+<Item name="NewGuideScreen">向导建屏</Item>
+<Item name="NewHypertext">新建超文本</Item>
+<Item name="NewNormalScreen_G">新建显示屏</Item>
+<Item name="NewScreen">新建屏幕</Item>
+<Item name="NewTable">新建表格</Item>
+<Item name="Next">下一步</Item>
+<Item name="NextPage">下一页</Item>
+<Item name="NextProgram">下一个节目</Item>
+<Item name="NextScan">下一个</Item>
+<Item name="NoAssociation">没有关联</Item>
+<Item name="NoBorder">无边框</Item>
+<Item name="NoFile">文件不存在！</Item>
+<Item name="NoFindConfigFiles">没有找到屏参配置文件，是否手动添加？</Item>
+<Item name="NoFoundDisk">未检测到移动磁盘</Item>
+<Item name="NoInstallFlash">请检查本机是否安装Adobe Flash Player！</Item>
+<Item name="NoLimit">无限制</Item>
+<Item name="NoSerial">未能找到与串口连接的控制卡</Item>
+<Item name="NoSerialConnection">无串口连接</Item>
+<Item name="Noarea">缺少节目，发送失败!</Item>
+<Item name="Noitemisselected">没有选中项</Item>
+<Item name="Nongli">农历</Item>
+<Item name="NongliParams">农历参数</Item>
+<Item name="NormalShow">顺序播放</Item>
+<Item name="NotSelected">未选择</Item>
+<Item name="NotSupportGlobalProgram">普通屏不支持全局节目</Item>
+<Item name="NotSupportLANUpgrade">此型号不支持以太网升级,
+请使用串口或U盘升级固件</Item>
+<Item name="NotSupportTips">注意:不支持时间、新版表盘、温湿度、农历</Item>
+<Item name="NumberOfProgramHasReachedItsMaximum">节目数已达上限！</Item>
+<Item name="NumberOfRegionHasReachedItsMaximum">区域数已达上限！</Item>
+<Item name="OEPolarity">OE极性</Item>
+<Item name="OEPolaritySet">OE极性设置</Item>
+<Item name="OK">确定</Item>
+<Item name="Offline">离线</Item>
+<Item name="OldVerCard">搜索四代卡</Item>
+<Item name="On-line">在线</Item>
+<Item name="OnBottom">下方插入</Item>
+<Item name="OnLeft">左方插入</Item>
+<Item name="OnRight">右方插入</Item>
+<Item name="OnTop">上方插入</Item>
+<Item name="OnlyAllowContainsAClockRegion">只允许包含一个表盘区域！</Item>
+<Item name="OnlyAllowContainsATempRegion">只允许包含一个温度区域！</Item>
+<Item name="OnlyAllowContainsATimeRegion">只允许包含一个时间区域！</Item>
+<Item name="OnlyCard">只分配给控制卡</Item>
+<Item name="Open">打开</Item>
+<Item name="OpenAdv">开启广告</Item>
+<Item name="OpenFileFail">文件打开失败,请检查文件是否被占用!</Item>
+<Item name="OpenFolder">打开文件夹</Item>
+<Item name="OpenScreen">开屏</Item>
+<Item name="OperationSuccess">操作成功</Item>
+<Item name="Orange">紫</Item>
+<Item name="OriginX">起点 X</Item>
+<Item name="OriginY">起点 Y</Item>
+<Item name="Original">原文件</Item>
+<Item name="OtherSeting">其他设置</Item>
+<Item name="Out">信息</Item>
+<Item name="OutOfMemory">控制卡内存不足,请减少节目</Item>
+<Item name="OutOfShowMemory">节目资源不足，请减少区域数量。</Item>
+<List name="OutputWindowString" id="0">扫描到设备</List>
+<List name="OutputWindowString" id="10">控制卡名称设置成功</List>
+<List name="OutputWindowString" id="11">清空显示屏成功</List>
+<List name="OutputWindowString" id="12">屏幕参数设置成功</List>
+<List name="OutputWindowString" id="13">控制卡时间设置成功</List>
+<List name="OutputWindowString" id="14">亮度设置成功</List>
+<List name="OutputWindowString" id="15">定时开关机设置成功</List>
+<List name="OutputWindowString" id="16">显示屏测试中...</List>
+<List name="OutputWindowString" id="17">未知命令</List>
+<List name="OutputWindowString" id="18">无硬件参数</List>
+<List name="OutputWindowString" id="19">无效命令</List>
+<List name="OutputWindowString" id="1">获取到设备信息！</List>
+<List name="OutputWindowString" id="20">系统繁忙</List>
+<List name="OutputWindowString" id="21">头长度有误</List>
+<List name="OutputWindowString" id="22">标示符有误</List>
+<List name="OutputWindowString" id="23">序号有误</List>
+<List name="OutputWindowString" id="24">没有屏幕参数</List>
+<List name="OutputWindowString" id="25">信息包错误</List>
+<List name="OutputWindowString" id="26">未知错误</List>
+<List name="OutputWindowString" id="27">发送超时</List>
+<List name="OutputWindowString" id="28">反馈包解析出错</List>
+<List name="OutputWindowString" id="29">控制卡IP修改成功</List>
+<List name="OutputWindowString" id="2">设备下线</List>
+<List name="OutputWindowString" id="30">固件升级失败，请再次尝试</List>
+<List name="OutputWindowString" id="31">设置失败</List>
+<List name="OutputWindowString" id="32">校验错误</List>
+<List name="OutputWindowString" id="33">协议错误</List>
+<List name="OutputWindowString" id="34">指令错误</List>
+<List name="OutputWindowString" id="35">文件不匹配</List>
+<List name="OutputWindowString" id="36">包编号错误</List>
+<List name="OutputWindowString" id="37">模块型号不匹配</List>
+<List name="OutputWindowString" id="38">文件配置错误</List>
+<List name="OutputWindowString" id="39">非法的文件</List>
+<List name="OutputWindowString" id="3">请选择要发送的屏幕</List>
+<List name="OutputWindowString" id="40">CPU型号错误</List>
+<List name="OutputWindowString" id="41">固件只支持三基色,不支持单双色</List>
+<List name="OutputWindowString" id="42">固件只支持单双色,不支持三基色</List>
+<List name="OutputWindowString" id="43">升级成功</List>
+<List name="OutputWindowString" id="44">接收失败</List>
+<List name="OutputWindowString" id="45">数据包长度错误</List>
+<List name="OutputWindowString" id="46">文件标识错误</List>
+<List name="OutputWindowString" id="47">子包序列号错误</List>
+<List name="OutputWindowString" id="49">文件接收成功</List>
+<List name="OutputWindowString" id="4">选中屏幕未绑定设备</List>
+<List name="OutputWindowString" id="50">延时信号</List>
+<List name="OutputWindowString" id="51">系统繁忙，请稍后重试！</List>
+<List name="OutputWindowString" id="52">数据写入不完整</List>
+<List name="OutputWindowString" id="53">固件升级成功！</List>
+<List name="OutputWindowString" id="54">硬件参数设置成功</List>
+<List name="OutputWindowString" id="55">绑定的设备已下线</List>
+<List name="OutputWindowString" id="56">屏幕大小设置有误</List>
+<List name="OutputWindowString" id="57">开始发送</List>
+<List name="OutputWindowString" id="58">设置成功</List>
+<List name="OutputWindowString" id="59">服务到期</List>
+<List name="OutputWindowString" id="5">节目数据过大</List>
+<List name="OutputWindowString" id="60">字库修改成功</List>
+<List name="OutputWindowString" id="61">设置单机直连成功</List>
+<List name="OutputWindowString" id="62">取消单机直连成功</List>
+<List name="OutputWindowString" id="63">设备在BOOT状态下，请先更新固件</List>
+<List name="OutputWindowString" id="64">校验失败</List>
+<List name="OutputWindowString" id="65">无返回内容</List>
+<List name="OutputWindowString" id="66">文件过大</List>
+<List name="OutputWindowString" id="67">控制卡标识错误</List>
+<List name="OutputWindowString" id="68">无效的设备ID[%s]</List>
+<List name="OutputWindowString" id="69">重置设备ID[%s]</List>
+<List name="OutputWindowString" id="70">启用按钮清除节目</List>
+<List name="OutputWindowString" id="71">禁用按钮清除节目</List>
+<List name="OutputWindowString" id="72">设置参数[启用]</List>
+<List name="OutputWindowString" id="73">设置参数[禁用]</List>
+<List name="OutputWindowString" id="6">命令执行成功</List>
+<List name="OutputWindowString" id="7">发送初始化</List>
+<List name="OutputWindowString" id="8">正在发送...</List>
+<List name="OutputWindowString" id="9">发送成功</List>
+<List name="OutputWindowString" id="74">设备版本过低，请升级固件。</List>
+<Item name="Btn1ClearProgram">禁用清除节目</Item>
+<Item name="DoubleSidedScreen">双面屏</Item>
+<Item name="networkMonitoring">监控</Item>
+<Item name="P10Colorful">M10（炫彩）</Item>
+<Item name="Pack">图像包</Item>
+<Item name="PackageNumberError">包编号错误</Item>
+<Item name="Packet">包</Item>
+<Item name="PacketError">数据包错误</Item>
+<Item name="PacketSize">数据包大小</Item>
+<Item name="Page"> 页</Item>
+<Item name="Pages">页数</Item>
+<Item name="PannelFill">该区域已经存在!</Item>
+<Item name="ParallelSend">并行发送</Item>
+<Item name="ParametersReadbackSuccess">参数回读成功</Item>
+<Item name="ParametersSetting">参数设置</Item>
+<Item name="Parti-color">花色</Item>
+<Item name="Password">密码</Item>
+<Item name="PasswordAuthentication">密码验证</Item>
+<Item name="PasswordError">密码错误！</Item>
+<Item name="PasswordSetting">密码设置</Item>
+<Item name="Paste">粘贴</Item>
+<Item name="Path">路径</Item>
+<Item name="Pause">暂停</Item>
+<Item name="PictrueProcessing">图片处理</Item>
+<Item name="PlaseSelectDevice">请选择设备</Item>
+<Item name="Play">播放</Item>
+<Item name="PlayBeforePowerProgram">记忆上一次节目</Item>
+<Item name="PlayMemory Size">播放文件大小</Item>
+<Item name="PlayMode">播放模式</Item>
+<Item name="PlayQuality">流畅度</Item>
+<Item name="PlaySpeed">播放速度</Item>
+<Item name="PlayTime">播放时间</Item>
+<Item name="PlayTimes">播放次数</Item>
+<Item name="Playback Duration">播放时长</Item>
+<Item name="Player">播放</Item>
+<Item name="Playing BeginFrames">播放起始帧</Item>
+<Item name="Playing EndFrames">播放结束帧</Item>
+<Item name="Playing Frames">播放帧数</Item>
+<Item name="PleaseEnterTheBorderWidthOfTheTable">请输入边框宽度值</Item>
+<Item name="PleaseEnterTheNumberOfCloumns">请输入拆分列数</Item>
+<Item name="PleaseEnterTheNumberOfRows">请输入拆分行数</Item>
+<Item name="PleaseSelect">请选择</Item>
+<Item name="PleaseSelectAFile">请选择一个文件！</Item>
+<Item name="PleaseSelectAItem">请选择一个项目，如果扫描结果为空，请检查线路。</Item>
+<Item name="PleaseSelectAProgram">请选择一个节目！</Item>
+<Item name="PleaseSelectScreen">请选择屏幕。</Item>
+<Item name="PleaseWait">请稍后...</Item>
+<Item name="PlotPointsImage">描点图</Item>
+<Item name="PointCount">小数位数</Item>
+<Item name="Points">屏点数</Item>
+<Item name="PopUdiskfailure">弹出U盘失败!</Item>
+<Item name="Port">端口</Item>
+<Item name="PreProgram">切换上一节目</Item>
+<Item name="PreProgramConctrl">节目控制</Item>
+<Item name="Prev">上一步</Item>
+<Item name="PrevScan">上一个</Item>
+<Item name="Preview">预览</Item>
+<Item name="PreviewSetting">预览设置</Item>
+<Item name="PreviousPage">上一页</Item>
+<Item name="ProgramInformation">节目信息</Item>
+<Item name="ProgramSize">节目大小</Item>
+<Item name="ProgramSwitching">节目切换</Item>
+<Item name="ProtocolError">协议错误</Item>
+<Item name="ProtocolTypeError">协议类型错误</Item>
+<Item name="PullThreshold">吸附</Item>
+<Item name="QRCode">二维码</Item>
+<Item name="QuitTest">退出测试</Item>
+<Item name="RFID"> RF  ID</Item>
+<Item name="RFSetting">RF设置</Item>
+<Item name="RS232">RS232</Item>
+<Item name="RadioEffect">单选特效</Item>
+<Item name="Random">随机</Item>
+<Item name="RandomColor">随机颜色</Item>
+<Item name="ReadBack2">回读</Item>
+<Item name="ReadScreenParamsFromUDisk">从U盘导入屏参</Item>
+<Item name="Readback">参数回读</Item>
+<Item name="RealTimeArea">实时区域</Item>
+<Item name="RealTimeFindCard">Real-time search card</Item>
+<Item name="RebootScreen">重启显示屏</Item>
+<Item name="ReceiveFailure">接收失败</Item>
+<Item name="Record">录制</Item>
+<Item name="RecordTips">注意：如果无法获得正确的图像，请勾选录制选项。</Item>
+<Item name="RectangleScreen">矩形屏</Item>
+<Item name="Red">红</Item>
+<Item name="Refresh">刷新</Item>
+<Item name="RefreshFrequency">刷新频率</Item>
+<Item name="RefreshRate">刷新率</Item>
+<Item name="RegionHeight">区域高度</Item>
+<Item name="RegionRect">区域位置</Item>
+<Item name="RegionWidth">区域宽度</Item>
+<Item name="Relevance">请先进入“菜单-&gt;操作-&gt;通信设置-&gt;TCP-&gt;关联显示屏”</Item>
+<Item name="Remark">备注</Item>
+<Item name="RememberProgram">记住上一次节目</Item>
+<Item name="Remove">删除</Item>
+<Item name="RemoveDevice">弹出磁盘</Item>
+<Item name="RemoveDeviceSuccess1">已成功移除</Item>
+<Item name="RemoveDeviceSuccess2">!</Item>
+<Item name="RemoveDuplicate">去掉重复</Item>
+<Item name="RemoveItemID">移除ID</Item>
+<Item name="Rename">重命名</Item>
+<Item name="Repeat">重复</Item>
+<Item name="Reset">复位</Item>
+<Item name="ResetProgram">节目复位</Item>
+<Item name="RestartFailed">控制卡重启失败</Item>
+<Item name="RestartSuccess">控制卡重启成功</Item>
+<Item name="RevertToDefaultSettings">恢复到默认状态，是否继续？</Item>
+<Item name="RightToLeft">右-&gt;左</Item>
+<Item name="Romaji">罗马字</Item>
+<Item name="Round">圆形</Item>
+<Item name="RoundAndDigital">圆形+数字</Item>
+<Item name="RoundAndRomaji">圆形+罗马字</Item>
+<Item name="RouterAddress">默认网关</Item>
+<Item name="Row">行</Item>
+<Item name="SRCFile">源文件</Item>
+<Item name="SWF name">SWF路径</Item>
+<Item name="Saturday">星期六</Item>
+<Item name="Save">保存</Item>
+<Item name="SaveToDefaultSetting">保存为默认设置</Item>
+<Item name="ScaleAndDigital">刻度+数字</Item>
+<Item name="ScaleAndRomaji">刻度+罗马字</Item>
+<Item name="ScanMode">扫描方式</Item>
+<Item name="ScanRange">扫描阈值</Item>
+<Item name="ScanValueB">蓝色过滤</Item>
+<Item name="ScanValueG">绿色过滤</Item>
+<Item name="ScanValueR">红色过滤</Item>
+<Item name="Scanning">扫描</Item>
+<Item name="ScanningComplete">扫描完成</Item>
+<Item name="Schedule">进度</Item>
+<Item name="ScreenCentered">模拟屏显示居中</Item>
+<Item name="ScreenChoosePageTip">根据当前屏的形状选择显示屏类型</Item>
+<Item name="ScreenColor">颜色</Item>
+<Item name="ScreenCount">屏幕的连接数量</Item>
+<Item name="ScreenHeight">屏高</Item>
+<Item name="ScreenInformation">显示屏信息</Item>
+<Item name="ScreenParameters">屏幕参数</Item>
+<Item name="ScreenParametersSetting">屏参設置</Item>
+<Item name="ScreenParamsPageTip">1.选择屏宽屏高；（屏宽为长有多少像素点，屏高为高有多少像素点）&#x000A;2.选择显示屏的基本颜色；&#x000A;3.单色屏的像素点即为灯的个数.</Item>
+<Item name="ScreenSize">屏幕大小</Item>
+<Item name="ScreenSmartTip">当前LED屏正常显示文字，不用勾选智能设置</Item>
+<Item name="ScreenTest">显示屏测试</Item>
+<Item name="ScreenType">显示屏类型</Item>
+<Item name="ScreenWidth">屏宽</Item>
+<Item name="Search">搜索</Item>
+<Item name="Searching">搜索中...</Item>
+<Item name="SearchingBegin">正在搜索</Item>
+<Item name="SearchingEnd">搜索完成</Item>
+<Item name="Sec">秒</Item>
+<Item name="SecondHand">秒针宽度</Item>
+<Item name="SecondRadius">秒点半径</Item>
+<Item name="SelectDataPolarity">请选择数据极性</Item>
+<Item name="SelectDefault">如果不清楚控制卡型号，请选择默认选项。</Item>
+<Item name="SelectLanguage">语言选择</Item>
+<Item name="SelectMode">模式选择</Item>
+<Item name="SelectOEPolarity">请选择OE极性</Item>
+<Item name="SelectScan">请选择扫描方式!”!</Item>
+<Item name="SelectScree">请选择相应的屏幕!</Item>
+<Item name="SendFile">发送文件</Item>
+<Item name="SendParamsWhenFinish">修改参数后请点击"发送参数"按钮。</Item>
+<Item name="SendScreenParams">发送参数</Item>
+<Item name="SendTimeOut">发送超时</Item>
+<Item name="SendingData">正在发送数据 ...</Item>
+<Item name="SentSuccessfully">发送成功</Item>
+<Item name="SerialNumber">序号</Item>
+<Item name="SerialPort">串口设置</Item>
+<Item name="SerialPortIsClosed">未找到与串口连接的LED控制卡</Item>
+<Item name="SerialPortIsOccupied">串行端口被占用！</Item>
+<Item name="SerialPortOpenError">串口打开失败</Item>
+<Item name="ServiceExpiration">服务到期</Item>
+<Item name="SetBrightnessFailed">设置亮度失败</Item>
+<Item name="SetBrightnessSuccess">设置亮度成功</Item>
+<Item name="SetScreenParam">设置屏幕参数成功</Item>
+<Item name="SetTheBaudrateSuccessfully">设置波特率成功</Item>
+<Item name="Setting">设置</Item>
+<Item name="SetupFailed">设置失败</Item>
+<Item name="ShowDate">显示日期</Item>
+<Item name="ShowGroup">显示组</Item>
+<Item name="ShowMode">显示模式</Item>
+<Item name="ShowOnlyControlCardWifi">只显示控制卡的Wi-Fi</Item>
+<Item name="ShowTime">显示时间</Item>
+<Item name="ShowType">显示方式</Item>
+<Item name="ShowWeek">显示星期</Item>
+<Item name="Showpage">显示页数</Item>
+<Item name="ShuttingDown">关机时间</Item>
+<Item name="SignalDelay">锁存极性</Item>
+<Item name="SignalDelayHint">部分显示屏（如有些P5）锁存STR或叫LAT
+信号是跟其它屏体反的,如果出现闪点或线，
+可以试下取反此选项</Item>
+<Item name="SignalQuality">信号质量</Item>
+<Item name="Simplify">精简模式</Item>
+<Item name="SimplifyInfo">精简模式只适合单机直连、局域网中只有单一控制卡的情况，IP地址将自动匹配。</Item>
+<Item name="Single">单个</Item>
+<Item name="SingleDirectMode">单机直连模式</Item>
+<Item name="SingleLine">单行显示</Item>
+<Item name="SingleLineoftext">单行文本</Item>
+<Item name="SingleScreenBroadcasts">复制模式</Item>
+<Item name="Size">屏参大小</Item>
+<Item name="Slow">慢</Item>
+<Item name="Slowest">最慢</Item>
+<Item name="Small">小号</Item>
+<Item name="SmartScanTips">如果屏有暗亮，请调低时钟频率。</Item>
+<Item name="SmartSetting">智能设置</Item>
+<Item name="SmartSettingName">智能设置名称</Item>
+<Item name="SmartTips">提示：以一个像素高为单位。</Item>
+<Item name="Snapshot">插入空点</Item>
+<Item name="SnapshotTip">若屏无亮点,请插入空点</Item>
+<Item name="Solid color">纯色</Item>
+<Item name="Space">间距</Item>
+<Item name="SpecifiedDate">指定日期段</Item>
+<Item name="SpecifiedTime">指定时间段</Item>
+<Item name="SpecifyValue">指定数值</Item>
+<Item name="Speed">速度</Item>
+<Item name="SpeedPrior">速度优先</Item>
+<Item name="SplitCell">拆分单元格</Item>
+<Item name="SplitHorizontal">水平拆分</Item>
+<Item name="SplitVertical">垂直拆分</Item>
+<Item name="Standard">标准</Item>
+<Item name="StartUpImage">开机画面</Item>
+<Item name="StartingUp">开机时间</Item>
+<Item name="StateA">状态A</Item>
+<Item name="StateB">状态B</Item>
+<Item name="StateC">状态C</Item>
+<Item name="StateD">状态D</Item>
+<Item name="Static">静止</Item>
+<Item name="Status">状态</Item>
+<Item name="StepBack">退一步</Item>
+<Item name="Stop">停止</Item>
+<Item name="Stroke">描边</Item>
+<Item name="StyleName">特效名称</Item>
+<Item name="StyleText">文本</Item>
+<Item name="SubPacketSequenceNumberError">子包序列号错误</Item>
+<Item name="SuccessfullyModified">修改成功!</Item>
+<Item name="Sunday">星期日</Item>
+<Item name="SupportRegionsOverlap">支持区域重叠</Item>
+<Item name="SuspendPreview">暂停预览</Item>
+<Item name="SwapBlueGreen">蓝绿交换</Item>
+<List name="SystemBusName" id="0">[C1]φ4.75(φ3.75)双色室内08接口64X32  [A1]</List>
+<List name="SystemBusName" id="10">[C11]P10  全彩 1/8S  08接口 32X16 HLL</List>
+<List name="SystemBusName" id="11">[C12]P10  全彩 1/4S  75接口 32X16  [A13]</List>
+<List name="SystemBusName" id="12">[C13]P8   全彩 1/5S   75接口 40X20 JHG  [A60]</List>
+<List name="SystemBusName" id="13">[C14]P8   全彩 1/4S  08接口 32X16  [A8]</List>
+<List name="SystemBusName" id="14">[C15]P16 户外双色12接口16X8 [A12]</List>
+<List name="SystemBusName" id="15">[C16]P13.33  全彩 1/3S  08接口 24X12 HLL   [A49]</List>
+<List name="SystemBusName" id="16">[C17]P13.33  全彩 1/3S  08接口 24X12 JHG   [A57]</List>
+<List name="SystemBusName" id="17">[C18]P16     全彩 1/5S  08接口 20X10 HLL   [A52]</List>
+<List name="SystemBusName" id="18">[C19]P16     全彩 1/1S  40接口 16X8    [A29]</List>
+<List name="SystemBusName" id="19">[C20]P10     全彩 1/4S  75接口 32X16    [A11]</List>
+<List name="SystemBusName" id="1">[C2]φ3.75(φ5)单色室内08接口64X32 [A1]</List>
+<List name="SystemBusName" id="20">[C21]P25   全彩 1/1S  40接口 16X8</List>
+<List name="SystemBusName" id="21">[C22]P10-P20   1G2R1B 1/4S  12接口 16X8    [A61]</List>
+<List name="SystemBusName" id="22">[C23]P10-P20   2R1G1B 1/4S  12接口 16X8    [A80]</List>
+<List name="SystemBusName" id="23">[C24]P13.33-P26.66  2R1G1B 1/4S  12接口 12X6</List>
+<List name="SystemBusName" id="24">[C25]P20  双色 1/4S  26接口 16*16（ZHGD）  [A66]</List>
+<List name="SystemBusName" id="25">[C26]P13.33  全彩 1/6S  08接口 24*12（HLL） [A55]</List>
+<List name="SystemBusName" id="26">[C27]P10  单色 1/4S  12接口 32*16（QL）  [A19]</List>
+<List name="SystemBusName" id="27">[C28]P10  全彩 1/2S  75接口 16*16</List>
+<List name="SystemBusName" id="28">[C29]P6  全彩 1/8S  75接口 32*16</List>
+<List name="SystemBusName" id="29">[C30]P6  全彩 1/8S  75接口 32*32</List>
+<List name="SystemBusName" id="2">[C3]P5  全彩 1/16S 08接口32X32[A3]</List>
+<List name="SystemBusName" id="30">[C31]P10  全彩 1/4S  75接口 16*16[A17]</List>
+<List name="SystemBusName" id="31">[C32]P20  全彩 1/1S  75接口 16*8</List>
+<List name="SystemBusName" id="32">[C33]P25  全彩 1/1S  75接口 8*8   [A30]</List>
+<List name="SystemBusName" id="33">[C34]P13.33  单色 1/4S  12接口 24*12 [A71]</List>
+<List name="SystemBusName" id="34">[C35]P10  双色 1/4S  12接口 32*16   [A7]</List>
+<List name="SystemBusName" id="35">[C36]P10  全彩 1/4S  75接口 16*16</List>
+<List name="SystemBusName" id="37">[C38]P7.62  全彩 1/8S  08接口 32*16</List>
+<List name="SystemBusName" id="38">[C39]P5   全彩   1/8S  75接口 32*16 [A4]</List>
+<List name="SystemBusName" id="3">[C4]P5   双色   1/8S  08接口 32*16（车载） [A4]</List>
+<List name="SystemBusName" id="4">[C5]P5  全彩 1/16S 75接口32X32 [A1]</List>
+<List name="SystemBusName" id="5">[C6]P10  常规户外单/双色12接口32X16[A8]</List>
+<List name="SystemBusName" id="6">[C7]P10  单色     1/4S  08接口  32X16</List>
+<List name="SystemBusName" id="7">[C8]P10  单色     1/1S  08接口 32X16  [A31]</List>
+<List name="SystemBusName" id="8">[C9]P10  双色 1/4S  08接口32X16 无138 [A13]</List>
+<List name="SystemBusName" id="9">[C10]P10  双色   1/4S  12接口 32X16  [A19]</List>
+<List name="SystemBusName" id="46">[C47]P10-P20   1G2R1B 1/4S  12接口 32X16  虚拟像素</List>
+<List name="SystemBusName" id="47">[C48]P10-P20   2R1G1B 1/4S  12接口 32X16  虚拟像素</List>
+<List name="SystemBusName" id="48">[C49]P13.33-P26.66  2R1G1B 1/4S  12接口 24X12 虚拟像素</List>
+<List name="SystemBusName" id="50">[C51]P6  全彩  1/5S  75接口  32X20</List>
+<List name="SystemBusName" id="51">[C52]双色  1/8  KR</List>
+<List name="SystemBusName" id="52">[C53]全彩  1/4S 高刷 ICN2038S</List>
+<List name="SystemBusName" id="53">[C54]P10 双色 1/4S 12接口 32x16 (YLR)</List>
+<List name="SystemBusName" id="54">[C55]P8 全彩 1/5S 75接口 40X20</List>
+<List name="SystemBusName" id="55">[C56]  P10 1/4S 无138 MCGD</List>
+<List name="SystemBusName" id="56">[C57]  P8 全彩 1/4S 75接口 (JJY)</List>
+<List name="SystemBusName" id="57">[C58]  P13.33 全彩 1/3S 75接口 (LLR)</List>
+<List name="SystemBusName" id="58">[C59]  P3 全彩 1/32S 75E接口 RBG排列 ICN2038S</List>
+<List name="SystemBusName" id="59">[C60]  P3 全彩 1/32S 75E接口 RGB排列 ICN2038S</List>
+<List name="SystemBusName" id="60">[C61]  P6 1/8S 75接口 BGR排列</List>
+<List name="SystemBusName" id="61">[C62]  P6 1/8S 75接口 GK</List>
+<List name="SystemBusName" id="62">[C63]  P6 1/8S 75接口(HJ)</List>
+<List name="SystemBusName" id="63">[C64]  P6 全彩 1/8S 75接口</List>
+<List name="SystemBusName" id="64">[C65]  P10 单色 1/4s(YLR)</List>
+<List name="SystemBusName" id="65">[C66]  P10 单色 1/4S 12接口</List>
+<List name="SystemBusName" id="66">[C67]  P10 全彩 1/2S 75接口 （HJ）</List>
+<List name="SystemBusName" id="67">[C68]  P10 全彩 1/2S 75接口 </List>
+<List name="SystemBusName" id="68">[C69]  P10 全彩 1/3S 73A接口 24X24 (KSZ)</List>
+<List name="SystemBusName" id="69">[C70]  P10 全彩 1/4S 无138 75接口</List>
+<List name="SystemBusName" id="70">[C71]  P13.33 全彩 1/3S 24x12</List>
+<List name="SystemBusName" id="71">[C72]  P16 双色 1/4S 08接口</List>
+<List name="SystemBusName" id="72">[C73]  P20 全彩 1S</List>
+<List name="SystemBusName" id="73">[C74]  P10 全彩 1/4S 75接口（KT）</List>
+<List name="SystemBusName" id="74">[C75]  P8  全彩 1/4S 75接口 32x16 无138</List>
+<List name="SystemBusName" id="75">[C76]  P8  全彩 1/4S 75接口 32x16 (HJ)</List>
+<List name="SystemBusName" id="76">[C77]  P10 全彩 1/4S 75接口 32x16 无138</List>
+<List name="SystemBusName" id="77">[C78]  P10 全彩 1/2S 75接口 32x16</List>
+<List name="SystemBusName" id="78">[C79]  P10 单色 1/4S 08接口 32x16</List>
+<List name="SystemBusName" id="79">[C80]  P10 全彩 1/2S 75接口 32x16 (GK)</List>
+<List name="SystemBusName" id="80">[C81]  P10 全彩 1/2S 75接口 32x16 (QL)</List>
+<List name="SystemBusName" id="81">[C82]  P16 双色 1/1S 12接口 16x8</List>
+<List name="SystemBusName" id="82">[C83]  P10 单色 1/4S 12接口 32x16 (KT)</List>
+<List name="SystemBusName" id="83">[C84]  P10 单色 1/4S 12接口 32x16 (GK)</List>
+<List name="SystemBusName" id="84">[C85]  P5  全彩 1/8S 75接口 64x32</List>
+<List name="SystemBusName" id="85">[C86]  P10 全彩 1/4S 75接口 32x16 无138 (HJCL)</List>
+<List name="SystemBusName" id="86">[C87]  P10 全彩 1/2S 75E接口 32x16 无138 (HLL)</List>
+<List name="SystemBusName" id="87">[C88]  P10 全彩 1/2S 75接口 32x16 无138</List>
+<List name="SystemBusName" id="88">[C89]  P6.66 全彩 1/6S 75接口 48x24</List>
+<List name="SystemBusName" id="89">[C90]  P8  全彩 1/5S 75接口 40x20</List>
+<List name="SystemBusName" id="90">[C91]  P4  全彩 1/10S 75接口 80x40 ICN2038S</List>
+<List name="SystemBusName" id="91">[C92]  P4  全彩 1/20S 75接口 80x40 ICN2038S</List>
+<List name="SystemBusName" id="92">[C93]  P10 全彩 1/4S 75接口 32x16 无138 ICN2038S</List>
+<List name="SystemBusName" id="93">[C94]  P10 全彩 1/2S 75接口 32x16 无138 ICN2038S</List>
+<List name="SystemBusName" id="94">[C95]  P10 全彩 1/5S 75接口 40x20 ICN2038S</List>
+<List name="SystemBusName" id="95">[C96]  P10 全彩 1/5S 75接口 40x20 SM16207S</List>
+<List name="SystemBusName" id="96">[C97]  H10 全彩 1/2S 75接口 32x16</List>
+<List name="SystemBusName" id="97">[C98]  P8  全彩 1/5S 75接口 40x20 ICN20378BP</List>
+<List name="SystemBusName" id="98">[C99]  dz0228 全彩 1/1S 75接口 16x16</List>
+<List name="SystemBusName" id="99">[C100]  P10 28x16 8扫8抽点</List>
+<List name="SystemBusName" id="100">[C101] P10 32*16 SC6655</List>
+<Item name="QL">强力</Item>
+<Item name="SystemBusy">系统繁忙，请稍后重试！</Item>
+<Item name="SystemOptimize">系统优化</Item>
+<Item name="SystemTime">系统时间</Item>
+<Item name="Table">表格</Item>
+<Item name="TargetTime">目标时间</Item>
+<Item name="Temp">温度</Item>
+<Item name="TempAdjust">温度校正</Item>
+<Item name="TempHumidity">温湿度</Item>
+<Item name="TempOrRHExist">温度区域和温湿度区域不能同时存在。</Item>
+<Item name="TempUnit">温度单位</Item>
+<Item name="Temppoint1">请确认您使用的传感器型号为:DS18B20</Item>
+<Item name="Temppoint2">请确认您使用的传感器型号为:AM2301</Item>
+<Item name="Test">测试</Item>
+<Item name="Text">文本</Item>
+<Item name="TextColor">文字颜色</Item>
+<Item name="TextFile">文本文件</Item>
+<Item name="TextInfo">文本信息</Item>
+<Item name="TextProcess">文本方向</Item>
+<Item name="TextProcessing">字幕处理</Item>
+<Item name="TheDeviceHasBeenOffline">该设备已下线</Item>
+<Item name="ThisIDAlreadyExists">ID已经存在</Item>
+<Item name="ThisModuleNotSupportUDisk">当前型号不支持U盘功能</Item>
+<Item name="Thursday">星期四</Item>
+<Item name="Tiangan">天干</Item>
+<Item name="TimeClock">数字时钟</Item>
+<Item name="TimeDifference">时差</Item>
+<Item name="TimeParameters">时间参数</Item>
+<Item name="TimeSettingSuccess">时间设置成功</Item>
+<Item name="TimeSwitch">定时开关机</Item>
+<Item name="TimeSwitchSettingSuccess">定时开关机设置成功</Item>
+<Item name="TimedRestart">定时重启</Item>
+<Item name="TimerColor">时钟颜色</Item>
+<Item name="Timing Parameters">计时参数</Item>
+<Item name="TimingControl">计时控制</Item>
+<Item name="TimingMode">计时模式</Item>
+<Item name="TimingPause">计时暂停</Item>
+<Item name="TimingReset">计时复位</Item>
+<Item name="TimingSet">计时设置</Item>
+<Item name="Tip_Type1">使用当前通信地址进行UDP连接</Item>
+<Item name="Tip_Type2">使用设备返回的IP地址进行UDP连接</Item>
+<Item name="Tip_Type3">使用设备返回的IP地址进行TCP连接</Item>
+<Item name="Tip_Type4">通过代理地址连接到设备</Item>
+<Item name="To">至</Item>
+<Item name="To2">到</Item>
+<Item name="Toolbar_AddCalendar_Bottom">可显示农历天干节气，自定义节日</Item>
+<Item name="Toolbar_AddCalendar_Top">新建农历区域</Item>
+<Item name="Toolbar_AddColorful_Bottom">文字炫彩显示，可添加动画背景</Item>
+<Item name="Toolbar_AddColorful_Top">新建动画字区域</Item>
+<Item name="Toolbar_AddCount_Bottom">显示来自按钮或者串口,网线等获取的数据</Item>
+<Item name="Toolbar_AddCount_Top">按钮计数或外部数据</Item>
+<Item name="Toolbar_AddExcel_Bottom">Excel文件、特效选择，背景选择</Item>
+<Item name="Toolbar_AddExcel_Top">新建Excel区域</Item>
+<Item name="Toolbar_AddGlobalProgram_Bottom">只能包含图文、文本、时间等一个区域，节目可以按时间播放</Item>
+<Item name="Toolbar_AddGlobalProgram_Top">新建全局节目</Item>
+<Item name="Toolbar_AddHypertext_Bottom">图片、视频、SWF等</Item>
+<Item name="Toolbar_AddHypertext_Top">新建图文区域</Item>
+<Item name="Toolbar_AddProgram_Bottom">可包含图文、文本、时间等20个区域，节目可以按时间播放</Item>
+<Item name="Toolbar_AddProgram_Top">新建节目</Item>
+<Item name="Toolbar_AddTempRH_Bottom">显示温度、湿度（需要传感器）</Item>
+<Item name="Toolbar_AddTempRH_Top">新建温湿度区域</Item>
+<Item name="Toolbar_AddText_Bottom">文字编辑，特效选择，背景选择</Item>
+<Item name="Toolbar_AddText_Top">新建文本区域</Item>
+<Item name="Toolbar_AddTime_Bottom">当前实时数字时钟或者表盘时钟</Item>
+<Item name="Toolbar_AddTime_Top">新建时间区域</Item>
+<Item name="Toolbar_AddTiming_Bottom">目标时间倒计时、顺计时、按钮计时</Item>
+<Item name="Toolbar_AddTiming_Top">新建计时区域</Item>
+<Item name="Toolbar_Adjusttime_Bottom">校正控制卡的时间与电脑同步</Item>
+<Item name="Toolbar_Adjusttime_Top">时间校正</Item>
+<Item name="Toolbar_Add3D_Bottom">可以添加背景、前景、炫彩字，显示3D效果</Item>
+<Item name="Toolbar_Add3D_Top">新建3D字区域</Item>
+<Item name="Toolbar_Check">勾选</Item>
+<Item name="Toolbar_Copy">复制</Item>
+<Item name="Toolbar_Delete">删除</Item>
+<Item name="Toolbar_Down">下移</Item>
+<Item name="Toolbar_ExportToUdisk_Bottom">将显示屏导出到U盘</Item>
+<Item name="Toolbar_ExportToUdisk_Top">U盘导出</Item>
+<Item name="Toolbar_Paste">粘贴</Item>
+<Item name="Toolbar_Preview1_Bottom">预览当前显示屏</Item>
+<Item name="Toolbar_Preview1_Top">显示屏预览</Item>
+<Item name="Toolbar_Preview2_Bottom">组可显示所有已建显示屏，双击进入指定显示屏</Item>
+<Item name="Toolbar_Preview2_Top">组不可预览</Item>
+<Item name="Toolbar_Preview_Bottom">预览当前节目</Item>
+<Item name="Toolbar_Preview_Top">节目预览</Item>
+<Item name="Toolbar_Save">保存</Item>
+<Item name="Toolbar_Search">寻机</Item>
+<Item name="Toolbar_Send_Bottom">将一个显示屏的内容传输到控制卡</Item>
+<Item name="Toolbar_Send_Top">显示屏发送</Item>
+<Item name="Toolbar_Uncheck">不勾选</Item>
+<Item name="Toolbar_Up">上移</Item>
+<Item name="Total Frames">总帧数</Item>
+<Item name="TotalECard">搜索到网口卡总数:</Item>
+<Item name="TotalFrames">总帧数</Item>
+<Item name="TotalSpace">总空间</Item>
+<Item name="TracingPoint">描点</Item>
+<Item name="TracingPointArrowKeys">描点后可用方向键控制走向</Item>
+<Item name="TracingPointError">描点错误</Item>
+<Item name="TracingPointFail">描点失败，请重新描点</Item>
+<Item name="TransitionThreshold">跳变阀值</Item>
+<Item name="Transparent">透明</Item>
+<Item name="Tricolor">三色</Item>
+<Item name="Tuesday">星期二</Item>
+<Item name="Twinkle">闪烁</Item>
+<Item name="TwoLinedisplay">两行显示</Item>
+<Item name="Type">类型</Item>
+<Item name="Type1">方式一</Item>
+<Item name="Type2">方式二</Item>
+<Item name="Type3">方式三</Item>
+<Item name="Type4">方式四</Item>
+<Item name="TypeName">类型名称</Item>
+<Item name="U-DiskSucess">U盘成功</Item>
+<Item name="UDisk">U盘</Item>
+<Item name="USE_HD2010">检测到控制卡，但与当前软件不匹配，请使用HD 2016软件</Item>
+<Item name="UnableToOpenFile">无法打开文件！</Item>
+<Item name="Unchanged">未改变</Item>
+<Item name="Undo">撤消</Item>
+<Item name="UnexpectedError">通信超时</Item>
+<Item name="Unit">单位</Item>
+<Item name="UnitBoard">单元板</Item>
+<Item name="UnitBoardInfo">单元板信息</Item>
+<Item name="UnitBoardTips">当单元板宽大于128时请选择128</Item>
+<Item name="UnitBoardWidth">单元板宽</Item>
+<Item name="UnitBoards">单元板张数</Item>
+<Item name="UnitColor">单位颜色</Item>
+<Item name="UnitSize">单元板点数</Item>
+<Item name="Unmerge">合并恢复</Item>
+<Item name="Unselected">未选择</Item>
+<Item name="Unspecified">未指定</Item>
+<Item name="UnsupportedInstructions">不支持的指令</Item>
+<Item name="Untitled">未命名</Item>
+<Item name="Update">更新</Item>
+<Item name="UpdateFailed">更新失败。</Item>
+<Item name="UpdateFirmwareFinished">更新固件完成</Item>
+<Item name="UpdatedSuccessfully">更新成功，是否打开更新文件？</Item>
+<Item name="UpdatingFirmware">正在更新固件……</Item>
+<Item name="Use">使用</Item>
+<Item name="Use138Decoder">使用138译码器</Item>
+<List name="Use138" id="0">使用138</List>
+<List name="Use138" id="1">不使用138</List>
+<Item name="UseDefaultSetting">使用默认设置</Item>
+<Item name="UseParams">使用参数</Item>
+<Item name="UsedMemory">已用内存</Item>
+<Item name="UsingHardwareSetup">使用硬件设置（参数回读）</Item>
+<Item name="VZoom">垂直拉伸</Item>
+<Item name="Valign">垂直对齐</Item>
+<Item name="ValignBottom">下对齐</Item>
+<Item name="ValignMiddle">垂直居中</Item>
+<Item name="ValignTop">上对齐</Item>
+<Item name="Veritical">垂直位置</Item>
+<Item name="VerticalPosition">垂直位置</Item>
+<Item name="VerticalScreenshot">垂直截图</Item>
+<Item name="VerticalStretch">垂直拉伸</Item>
+<Item name="Video">视频</Item>
+<Item name="Video FramesCount">总帧数</Item>
+<Item name="Video name">视频路径</Item>
+<Item name="ViewHelp">查看帮助</Item>
+<Item name="WaitingForInitialization">等待初始化...</Item>
+<Item name="WaitingToBeSent">进入发送队列，请等待...</Item>
+<Item name="Wednesday">星期三</Item>
+<Item name="WhetherToReplace">是否替换</Item>
+<Item name="WhetherToSaveTheCurrentModifiedFile">是否保存修改</Item>
+<Item name="White">白</Item>
+<Item name="Width">宽度</Item>
+<Item name="WidthOfMoreTthan">宽度超过了，控制卡支持的最大宽度!</Item>
+<Item name="WindowPosition">窗口位置</Item>
+<Item name="WrongParameter">错误的参数</Item>
+<Item name="Yangli">阳历</Item>
+<Item name="Yellow">黄</Item>
+<List name="color" id="0">单基色</List>
+<List name="color" id="1">双基色</List>
+<List name="color" id="2">三基色</List>
+<Item name="delete">删除</Item>
+<Item name="flashTips">注意：无法获取包含脚本的swf的正确图像，暂不支持包含脚本的swf。</Item>
+<List name="frequency" id="0">自适应</List>
+<List name="frequency" id="160">100Hz</List>
+<List name="frequency" id="140">120Hz</List>
+<List name="frequency" id="120">140Hz</List>
+<List name="frequency" id="100">160Hz</List>
+<List name="frequency" id="80">180Hz</List>
+<List name="frequency" id="60">200Hz</List>
+<List name="frequency" id="200">60Hz</List>
+<List name="frequency" id="180">80Hz</List>
+<List name="graylevel" id="1">无灰度</List>
+<List name="graylevel" id="2">4级灰度</List>
+<List name="graylevel" id="3">8级灰度</List>
+<List name="graylevel" id="4">16级灰度</List>
+<List name="graylevel" id="5">32级灰度</List>
+<Item name="group">组</Item>
+<Item name="hypertext">图文</Item>
+<List name="listCtlDelay" id="0">高有效</List>
+<List name="listCtlDelay" id="1">低有效</List>
+<List name="listStrDelay" id="0">0</List>
+<List name="listStrDelay" id="1">1</List>
+<List name="platformList" id="hdplatform.huidu.cn">发布平台</List>
+<Item name="mAPPFace">程序外观(&amp;A)</Item>
+<Item name="mAbout">关于(&amp;A)</Item>
+<Item name="mBlackStyle">黑色样式(L)</Item>
+<Item name="mBludStyle">蓝色样式(B)</Item>
+<Item name="mCalculator">计算器</Item>
+<Item name="mClearDisplayData">清除显示数据</Item>
+<Item name="mCommSetting">通信设置</Item>
+<Item name="mExit">退出(&amp;E)</Item>
+<Item name="mFile">文件(&amp;F)</Item>
+<Item name="mHardwareSetting">硬件设置</Item>
+<Item name="mHelp">帮助(&amp;H)</Item>
+<Item name="mIPManagmentTools">IP 管理工具</Item>
+<Item name="mLanguage">语言(&amp;L)</Item>
+<Item name="mLuminanceSetting">亮度设置</Item>
+<Item name="mNarrow">缩小</Item>
+<Item name="mNew">新建显示屏(&amp;N)</Item>
+<Item name="mNotepad">记事本</Item>
+<Item name="mOpen">打开(&amp;O)</Item>
+<Item name="mOperate">操作(&amp;O)</Item>
+<Item name="mOutWindow">信息窗口</Item>
+<Item name="mPaint">画图</Item>
+<Item name="mSave">保存(&amp;S)</Item>
+<Item name="mSaveAs">另存为...</Item>
+<Item name="mScreenSetting">屏参设置</Item>
+<Item name="mSendProject">发送项目</Item>
+<Item name="mSetting">设置(&amp;S)</Item>
+<Item name="mSilverStyle">银色样式(S)</Item>
+<Item name="mSystemSetting">系统设置</Item>
+<Item name="mTimeSetting">时间设置</Item>
+<Item name="mTool">工具(&amp;T)</Item>
+<Item name="mUpdateFirmware">固件更新</Item>
+<Item name="mView">视图(&amp;V)</Item>
+<Item name="mWatergreenStyle">水绿色样式(A)</Item>
+<Item name="mZoom">放大</Item>
+<Item name="minimum">最小值</Item>
+<Item name="ms"> 毫秒</Item>
+<List name="polarity" id="0">低有效</List>
+<List name="polarity" id="1">高有效</List>
+<Item name="program">节目</Item>
+<Item name="screen">显示屏</Item>
+<Item name="sec"> 秒</Item>
+<Item name="send">发送</Item>
+<Item name="static">静态</Item>
+<Item name="time">时间</Item>
+<Item name="whirl180">倒转</Item>
+<Item name="whirl270">左旋转</Item>
+<Item name="whirl90">右旋转</Item>
+<Item name="whirlt">旋转</Item>
+<List name="SystemBusName" id="36">[C37]P10  单色   1/4S  12接口  32X16[A25]</List>
+<Item name="Fajr">晨礼</Item>
+<Item name="Dhuhr">晌礼</Item>
+<Item name="Asr">晡礼</Item>
+<Item name="Maghrib">昏礼</Item>
+<Item name="Isha">宵礼</Item>
+<Item name="MidNight">午夜</Item>
+<Item name="platform">平台</Item>
+<Item name="Country">国家</Item>
+<Item name="NumColor">数字颜色</Item>
+<Item name="ExportConfigFile">导出配置文件</Item>
+<Item name="SoundModule">声音模块</Item>
+<Item name="SoundSetting">声音设置</Item>
+<Item name="Year">年</Item>
+
+<Item name="ImportTable">导入表</Item>
+<Item name="ExportBable">导出表</Item>
+<Item name="ClearAll">清空</Item>
+<Item name="cfWords">炫彩字</Item>
+<Item name="OnlyOnePrayForScreen">一个屏只能添加一个祈祷区域</Item>
+<Item name="EffectCycle">特效周期</Item>
+<Item name="BKSpeed">背景速度</Item>
+<List name="graylevel" id="6">64级灰度</List>
+<List name="graylevel" id="7">128级灰度</List>
+<List name="graylevel" id="8">256级灰度</List>
+<Item name="SelectFirmwareVersion">选择固件版本</Item>
+<Item name="NoSelectVersion">未选择版本</Item>
+<Item name="Ordinal">序号</Item>
+<Item name="VersionNum">版本号</Item>
+<Item name="ConfirmSelect">确认选择</Item>
+
+<List name="SystemBusName" id="39">[C40]P10  全彩 1/4S  75接口 32*16[A12]</List>
+<List name="SystemBusName" id="40">[C41]P10  全彩 1/4S  75接口 32*16</List>
+<List name="SystemBusName" id="41">[C42]P10  全彩 1/2S  75接口 32*16</List>
+<Item name="FileNameAlreadyExistIsCover">文件名已经存在，是否覆盖？</Item>
+<Item name="VersionAlreadyExist">版本号已经存在！</Item>
+<Item name="FindNewVersionIsUpdate">发现新版本，是否更新固件？</Item>
+<Item name="DeleteThisGroup">删除组</Item>
+<Item name="UpdateFile">更新文件</Item>
+<List name="SystemBusName" id="42">[C43]P3  全彩  1/16S  HUB75 64*64</List>
+<Item name="UdiskUpgrade">U盘更新</Item>
+<Item name="TimingPlay">计时开始</Item>
+<Item name="SelectVersionOnTheRight">请选择右侧的固件版本</Item>
+<List name="SystemBusName" id="43">[C44]P8  双色  1/8S  HUB08 32*32（WQS）</List>
+<List name="SystemBusName" id="44">[C45]P5  全彩  1/8S  HUB75 32*32（CXH）</List>
+<Item name="TheSameSegment">请确认控制卡的IP与电脑的IP在同一网段！</Item>
+<Item name="Step">步长</Item>
+<Item name="ShadowMode">阴影模式</Item>
+<Item name="3DDeep">3D深度</Item>
+<Item name="Gradient">渐变</Item>
+<Item name="Alpha">透明度</Item>
+<Item name="BorderStyle">边框样式</Item>
+<Item name="RoundRect">圆角矩形</Item>
+<Item name="Octagon">八边形</Item>
+<Item name="CustomStyle">自定义样式</Item>
+<List name="SystemBusName" id="45">[C46]P10  单色  1/4S  12接口 32*16</List>
+<Item name="3DText">3D字</Item>
+<Item name="Whether_to_cancel_the_current_task">是否取消之前的发送任务？</Item>
+<Item name="SinglePage">单页模式</Item>
+<Item name="TwinkleStyle">闪烁风格</Item>
+<Item name="TwinkleSpeed">闪烁速度</Item>
+<Item name="NoTwinkle">不闪烁</Item>
+<Item name="3Dtwinkle">阴影闪烁</Item>
+<Item name="SaveCountValue">记住上一次计数</Item>
+<Item name="SpecialBorder">特殊边框</Item>
+<Item name="BootingDelayWasComingOn">开机渐亮</Item>
+<Item name="RememberToThoose">记住当前选择</Item>
+<Item name="EndPageToEndPage">首尾页相接</Item>
+<List name="SystemBusName" id="49">[C50]P10  单色 1/1S  HUB08 RXP</List>
+<Item name="WifiSpeedMode1">高速模式</Item>
+<Item name="WifiSpeedMode2">低速模式</Item>
+<Item name="All the devices automatically obtain IP">所有设备设置为自动获取IP</Item>
+<Item name="The firmware information">固件信息</Item>
+<Item name="device information">设备信息</Item>
+<Item name="The device information">设备信息</Item>
+<Item name="Server address">服务器地址</Item>
+<Item name="User name">用户名</Item>
+<Item name="Fill the same">填充相同</Item>
+<Item name="Cloud server Settings">云服务器设置</Item>
+<Item name="Cloud server">云服务器</Item>
+<Item name="ButtonCtrl">按钮控制</Item>
+<Item name="NoUse">不使用</Item>
+<Item name="Button1">按钮1</Item>
+<Item name="Button2">按钮2</Item>
+<Item name="Button3">按钮3</Item>
+<Item name="Button4">按钮4</Item>
+<Item name="DefaultBackground">经典背景</Item>
+<Item name="ImageBackground">图像背景</Item>
+<Item name="SingleProgramSend">单节目发送</Item>
+<Item name="latest">已经是最新</Item>
+<Item name="newdata">新数据</Item>
+<Item name="Imsak">封斋</Item>
+<Item name="Music">音乐频谱</Item>
+<Item name="Pray">祈祷</Item>
+<Item name="Aglinment">对齐方式</Item>
+<Item name="LeftAglinment">左对齐</Item>
+<Item name="CenterAglinment">居中对齐</Item>
+<Item name="RightAglinment">右对齐</Item>
+
+<Item name="SplitType">分割方式</Item>
+<Item name="SingleChar">单字</Item>
+<Item name="Word">词组</Item>
+
+<Item name="WifiSetting">Wi-Fi设置</Item>
+<Item name="SettingSuccessfully">设置成功</Item>
+<Item name="SettingFailed">设置失败</Item>
+<Item name="Connectting">正在连接</Item>
+<Item name="NoFoundAp">没有找到路由器</Item>
+<Item name="ConnectFailed">连接失败</Item>
+<Item name="ConnectOK">连接成功</Item>
+<Item name="ApMode">AP模式</Item>
+<Item name="StationMode">Station模式</Item>
+<Item name="WifiPasswordLenghLess">Wi-Fi密码长度过短</Item>
+<Item name="WifiSSIDIsNULL">Wi-Fi名称为空</Item>
+<Item name="MaskError">非法的子网掩码</Item>
+<Item name="IPError">非法的IP</Item>
+<Item name="WifiSSIDTooLong">Wi-Fi名称过长</Item>
+<Item name="WifiPasswordTooLong">Wi-Fi密码过长</Item>
+<Item name="SSIDPasswordInputTips">只允许输入 0~9 a~z A~Z _</Item>
+    <Item name="America">美国</Item>
+    <Item name="Australia">澳大利亚</Item>
+    <Item name="Canada">加拿大</Item>
+    <Item name="China">中国</Item>
+    <Item name="India">印度</Item>
+    <Item name="Indonesia">印度尼西亚</Item>
+    <Item name="Iran">伊朗</Item>
+    <Item name="Japan">日本</Item>
+    <Item name="Korea">韩国</Item>
+    <Item name="Malaysia">马来西亚</Item>
+    <Item name="Pakistan">巴基斯坦</Item>
+    <Item name="Peru">秘鲁</Item>
+    <Item name="Poland">波兰</Item>
+    <Item name="Russia">俄罗斯</Item>
+    <Item name="Spain">西班牙</Item>
+    <Item name="Thailand">泰国</Item>
+    <Item name="Turkey">土耳其</Item>
+    <Item name="United Arab Emirates">阿拉伯联合酋长国</Item>
+    <Item name="Vietnam">越南</Item>
+    <Item name="Sunny">晴</Item>
+    <Item name="Cloudy">多云</Item>
+    <Item name="Few clouds">多云</Item>
+    <Item name="Partly cloudy">局部多云</Item>
+    <Item name="Overcast">阴</Item>
+    <Item name="Windy">有风</Item>
+    <Item name="Calm">无风</Item>
+    <Item name="Light breeze">轻微的微风</Item>
+    <Item name="Moderate">和风</Item>
+    <Item name="Fresh breeze">清风</Item>
+    <Item name="Strong breeze">强风</Item>
+    <Item name="High wind">大风</Item>
+    <Item name="Gale">大风</Item>
+    <Item name="Strong gale">疾风</Item>
+    <Item name="Storm">风暴</Item>
+    <Item name="Violent storm">狂爆风</Item>
+    <Item name="Hurricane">飓风</Item>
+    <Item name="Tornado">龙卷风</Item>
+    <Item name="Tropical storm">热带风暴</Item>
+    <Item name="Shower rain">阵雨</Item>
+    <Item name="Heavy shower rain">强阵雨</Item>
+    <Item name="Thundershower">雷阵雨</Item>
+    <Item name="Heavy thunderstorm">强雷阵雨</Item>
+    <Item name="Hail">冰雹</Item>
+    <Item name="Light rain">小雨</Item>
+    <Item name="Moderate rain">中雨</Item>
+    <Item name="Heavy rain">大雨</Item>
+    <Item name="Extreme rain">极端降雨</Item>
+    <Item name="Drizzle rain">毛毛雨</Item>
+    <Item name="Storm">风暴</Item>
+    <Item name="Heavy storm">大暴雨</Item>
+    <Item name="Severe storm">特大暴雨</Item>
+    <Item name="Freezing rain">冻雨</Item>
+    <Item name="Light snow">小雪</Item>
+    <Item name="Moderate snow">中雪</Item>
+    <Item name="Heavy snow">大雪</Item>
+    <Item name="Snowstorm">暴雪</Item>
+    <Item name="Sleet">雨淞</Item>
+    <Item name="Rain and snow">雨夹雪</Item>
+    <Item name="Shower snow">阵雨夹雪</Item>
+    <Item name="Snow flurry">阵雪</Item>
+    <Item name="Mist">薄雾</Item>
+    <Item name="Foggy">雾</Item>
+    <Item name="Haze">霾</Item>
+    <Item name="Sand">砂</Item>
+    <Item name="Dust">沙尘暴</Item>
+    <Item name="Duststorm">尘暴</Item>
+    <Item name="Sandstorm">沙暴</Item>
+    <Item name="Hot">热</Item>
+    <Item name="Cold">冷</Item>
+    <Item name="Unknown">未知</Item>
+    <Item name="Clear">Clear</Item>
+    <Item name="No Sustained Wind">无持续风向</Item>
+    <Item name="Northeast Wind">东北风</Item>
+    <Item name="East Wind">东风</Item>
+    <Item name="Southeaster Wind">东南风</Item>
+    <Item name="South Wind">南风</Item>
+    <Item name="Southwest Wind">西南风</Item>
+    <Item name="Strong wind">强风</Item>
+    <Item name="West Wind">西风</Item>
+    <Item name="Northwest Wind">西北风</Item>
+    <Item name="North Wind">北风</Item>
+    <Item name="Vortex Wind">旋转风</Item>
+    <Item name="The Breeze Wind">微风</Item>
+    <Item name="No wind">无风</Item>
+    <Item name="Light air">软风</Item>
+    <Item name="Breeze">微风</Item>
+    <Item name="Gentle breeze">和风</Item>
+    <Item name="Strong wind">强风</Item>
+    <Item name="Blast">疾风</Item>
+    <Item name="Gale">大风</Item>
+    <Item name="Strong gale">疾风</Item>
+    <Item name="Whole gale">狂风</Item>
+    <Item name="Storm wind">暴风</Item>
+    <Item name="Hurricane">飓风</Item>
+    <Item name="City">城市</Item>
+    <Item name="Date">日期</Item>
+    <Item name="temp">温度</Item>
+    <Item name="Weather">天气</Item>
+    <Item name="Wind Direction">风向</Item>
+    <Item name="Wind speed">风速</Item>
+    <Item name="Temp Unit">温度单位</Item>
+	<Item name="OfflineMode">离线模式</Item>
+	<Item name="PleaseSelectDevice">请选择设备</Item>
+	<Item name="SeeMoreParameters">查看更多参数</Item>
+	<Item name="ExportProgram">导出节目</Item>
+	<List name="ErrorTips" id="00">常见异常提示说明:</List>
+	<List name="ErrorTips" id="01">Error / 屏参设置里设置的宽高超出当前显示屏上控制卡的带载范围</List>
+	<List name="ErrorTips" id="02">Error1 / U盘的文件系统格式不对</List>
+	<List name="ErrorTips" id="03">Error2 / 节目内容过大</List>
+	<List name="ErrorTips" id="04">NoFile / U盘里无节目文件</List>
+	<List name="ErrorTips" id="05">End / 设置过期</List>
+	<Item name="ColorfulBorder">炫彩边框</Item>
+	<List name="PM25String" id="00">无数据</List>
+	<List name="PM25String" id="01">优</List>
+	<List name="PM25String" id="02">良</List>
+	<List name="PM25String" id="03">轻度污染</List>
+	<List name="PM25String" id="04">中度污染</List>
+	<List name="PM25String" id="05">重度污染</List>
+	<List name="PM25String" id="06">严重污染</List>
+	<Item name="BootTips">开机提示</Item>
+	<Item name="ShowAll">显示所有</Item>
+	<Item name="NoShow">不显示</Item>
+	<Item name="PM25Adjust">PM2.5校正</Item>
+	<Item name="PM10Adjust">PM10校正</Item>
+	<Item name="QuickConfig">快捷配置</Item>
+	<Item name="Subtitles">字幕</Item>
+	<Item name="Toolbar_AddSubtitles_Top">新建字幕区域</Item>
+	<Item name="ICSetting">IC设置</Item>
+	<Item name="NormalIC">常规IC</Item>
+	<Item name="RegisterGroup">寄存器组</Item>
+	<Item name="RedRegister">红色芯片</Item>
+	<Item name="GreenRegister">绿色芯片</Item>
+	<Item name="BlueRegister">蓝色芯片</Item>
+	<Item name="HighByte">高字节</Item>
+	<Item name="LowByte">低字节</Item>
+	<Item name="HelpDoc">帮助文档</Item>
+	<Item name="PrayAutioTip">当您需要使用祈祷音频模块时，请提供与祈祷名称相对应的多个mp3文件。Imsak->1.mp3 Fajr->2.mp3 Dhuhr->3.mp3 Asr->4.mp3 Maghrib->5.mp3 Isha->6.mp3 MidNight->7.mp3。</Item>
+	<Item name="Confirm Password">确认密码</Item>
+	<Item name="PasswordInvalidTip">密码必须是数字+字母组合，长度为8~16</Item>
+	<Item name="PasswordUnEqual">两次输入的密码不一样</Item>
+	<Item name="PasswordTooSimple">系统检测到设备Wi-Fi密码过于简单，请重新设置</Item>
+	<List name="OutputWindowString" id="75">系统检测到设备Wi-Fi密码过于简单，请重新设置</List>
+	<List name="OutputWindowString" id="76">设备锁密码错误。</List>
+	<List name="OutputWindowString" id="77">缺少日志。</List>
+	<List name="OutputWindowString" id="78">机器码错误。</List>
+	<List name="OutputWindowString" id="79">机器码长度有误。</List>
+	<List name="OutputWindowString" id="80">备锁密码长度有误。</List>
+	<List name="OutputWindowString" id="81">正在更新固件</List>
+	<List name="OutputWindowString" id="82">无效地址</List>
+	<List name="OutputWindowString" id="83">操作错误</List>
+	<List name="OutputWindowString" id="84">开始读取配置参数...</List>
+	<List name="OutputWindowString" id="85">成功读取配置参数</List>
+	<List name="OutputWindowString" id="86">开始恢复配置参数...</List>
+	<List name="OutputWindowString" id="87">成功恢复配置参数</List>
+	<List name="OutputWindowString" id="88">文件下载成功，正在等待恢复数据。</List>
+	<List name="OutputWindowString" id="89">节目不支持回读</List>
+	<List name="OutputWindowString" id="90">文件校验失败</List>
+	<List name="OutputWindowString" id="91">系统检测到设备Wi-Fi为开放式，使用前请设置设备密码锁</List>
+	<List name="OutputWindowString" id="92">当前操作软件版本不支持，请升级</List>
+	<Item name="Logout">注销</Item>
+	<Item name="LogoutYesOrNo">是否注销账户?</Item>
+	<Item name="Login">登录</Item>
+<Item name="Logout">注销</Item>
+<Item name="LogoutYesOrNo">是否注销账户?</Item>
+<Item name="WifiSettingOK">设置成功，请重新连接Wi-Fi</Item>
+<Item name="UserName">用户名</Item>
+<Item name="InputPassword">输入密码</Item>
+<Item name="Register">注册</Item>
+<Item name="GetCheckCode">获取验证码</Item>
+<Item name="InputCheckCode">请输入验证码</Item>
+<Item name="RegisterError">注册出错</Item>
+<Item name="PhoneNum">手机号</Item>
+<Item name="CheckCode">验证码</Item>
+<Item name="ConnectNetwordToUse">请连接互联网后使用</Item>
+<Item name="AuthorizedSuccess">授权成功</Item>
+<Item name="UnsupportedLoginType">不支持的登录类型</Item>
+<Item name="CheckCodeNotMatch">校验码不匹配</Item>
+<Item name="InputRightPhone">请输入正确的手机号码</Item>
+<Item name="ResetPassword">重置密码</Item>
+<Item name="PhoneNumError">手机号码格式错误</Item>
+<Item name="CheckCodeTimeoutInOneMinute">验证码一分钟内不能重复发送</Item>
+<Item name="CheckCodeTimeout">验证码发送频率超限</Item>
+<Item name="CheckCodeSendError">验证码发送失败</Item>
+<Item name="InvalidToken">无效的token</Item>
+<Item name="MissingRegInfo">缺少注册信息</Item>
+<Item name="AgreeAndAccept">阅读并接受</Item>
+<Item name="TermsOfService">服务协议</Item>
+<Item name="Reacquire">重新获取</Item>
+<Item name="SettingLoginPassword">设置登录密码</Item>
+<Item name="Skip">跳过</Item>
+<Item name="NetworkErrorTip">网络异常</Item>
+<Item name="Retry">重试</Item>
+<Item name="PleaseGetCheckCode">请获取验证码。</Item>
+<Item name="KeepLogin">保持登录</Item>
+<Item name="IsLogoutUser">是否注销当前用户？</Item>
+<Item name="NotTipsAgin">不再提示</Item>
+<Item name="OpenDeviceLock">开启设备锁</Item>
+<Item name="ModifyDeviceLock">修改设备锁</Item>
+<Item name="CloseDeviceLock">关闭设备锁</Item>
+<Item name="DeviceHasLockedInfo">设备已经加锁，请输入密码</Item>
+<Item name="DeviceLockPassword">设备锁密码</Item>
+<Item name="NoInputNoDeviceLockTip">未开启设备锁时不用输入</Item>
+<Item name="UseCurrentPassword">使用当前密码</Item>
+<Item name="DeviceLockSetting">设备锁设置</Item>
+<Item name="DeviceLock">设备锁</Item>
+<Item name="KeepPassword">记住密码</Item>
+<Item name="AutoLogin">自动登录</Item>
+<Item name="PleaseInputOldPassword">请输入旧密码</Item>
+<Item name="OldPasswordError">旧密码错误</Item>
+<Item name="Old Password">旧密码</Item>
+<Item name="New Password">新密码</Item>
+<Item name="Action">操作</Item>
+<Item name="UseWechatQRCode">使用微信扫一扫</Item>
+<Item name="Activate">激活</Item>
+<Item name="ActivateOffline">离线激活</Item>
+<Item name="PleaseInputActiveCode">请输入激活码</Item>
+<Item name="ErrorActivateCode">激活码错误</Item>
+<Item name="NTPSetting">网络时间设置</Item>
+<Item name="NetworkSame">请确保控制卡IP和路由器IP在同一个网段。</Item>
+<Item name="Please Input City Keyword">请输入城市关键字</Item>
+<Item name="Sketch map custom">描点图定制</Item>
+<Item name="Boot fade">开机渐亮</Item>
+<Item name="Read back log">回读日志</Item>
+<Item name="Power-off reset">断电复位</Item>
+<Item name="Show SSID">显示Wi-Fi热点</Item>
+<Item name="Hidden SSID">隐藏Wi-Fi热点</Item>
+<Item name="Wi-Fi name">Wi-Fi名称</Item>
+<Item name="Enable the Wi-Fi password">启用Wi-Fi密码</Item>
+<Item name="Disable the Wi-Fi password">关闭Wi-Fi密码</Item>
+<Item name="Wi-Fi password">Wi-Fi密码</Item>
+<Item name="All Settings">全部设置</Item>
+<Item name="Wi-Fi channel">Wi-Fi信道</Item>
+<Item name="Auto">自动</Item>
+<Item name="Hidden SSID tips">隐藏后需要手动添加才能连接控制卡，请注意保存，遗失后只能恢复出厂设置</Item>
+</language>
+</root>

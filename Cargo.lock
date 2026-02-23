@@ -1785,6 +1785,32 @@ dependencies = [
 ]
 
 [[package]]
+name = "hdsign"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "base64",
+ "byteorder",
+ "chrono",
+ "clap",
+ "eframe",
+ "egui",
+ "huidu-protocol",
+ "image",
+ "md5",
+ "quick-xml 0.37.5",
+ "reqwest",
+ "rfd",
+ "serde",
+ "serde_json",
+ "thiserror 1.0.69",
+ "tokio",
+ "tracing",
+ "tracing-subscriber",
+ "uuid",
+]
+
+[[package]]
 name = "heck"
 version = "0.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"

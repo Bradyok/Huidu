@@ -28,9 +28,9 @@ use crate::protocol::{Command, Packet, sdk_service_ask_payload};
 use crate::transfer::{FileTransfer, ProgressFn};
 use crate::xml;
 
-pub const DEFAULT_PORT: u16 = 10001;
+pub const DEFAULT_PORT: u16 = huidu_protocol::packet::DEFAULT_PORT;
 pub const SDK_VERSION: u32 = huidu_protocol::packet::SDK_CLIENT_VERSION;
-pub const HEARTBEAT_INTERVAL: Duration = Duration::from_secs(30);
+pub const HEARTBEAT_INTERVAL: Duration = huidu_protocol::packet::HEARTBEAT_INTERVAL;
 pub const CMD_TIMEOUT: Duration = Duration::from_secs(30);
 
 /// Summary info about the connected device.
@@ -132,17 +132,39 @@ impl HdsetClient {
         }
     }
 
-    /// Send an SDK XML command and return the response XML.
+    /// Send an SDK XML command and return the response XML body.
+    ///
+    /// SDK CMD payload framing (confirmed from BoxPlayer server.rs):
+    ///   Request:  [u32 total_xml_len][u32 chunk_index=0][xml_bytes...]
+    ///   Response: [u32 total_xml_len][u32 chunk_index=0][xml_bytes...]
     async fn send_sdk_cmd(&mut self, method: &str, body: &str) -> Result<String> {
+        use crate::protocol::sdk_cmd_ask_payload;
         let req_xml = xml::sdk_request(&self.client_guid, method, body);
-        let payload = req_xml.into_bytes();
+        let payload = sdk_cmd_ask_payload(&req_xml);
         let pkt = Packet::new(Command::SdkCmdAsk, payload);
         self.send_packet(&pkt).await?;
         let resp = self.recv_packet().await?;
-        if resp.command != Command::SdkCmdAnswer {
-            return Err(Error::Protocol(format!("Expected SdkCmdAnswer, got {:?}", resp.command)));
+        match resp.command {
+            Command::SdkCmdAnswer => {}
+            Command::SdkErrorAnswer => {
+                let code = if resp.payload.len() >= 2 {
+                    u16::from_le_bytes(resp.payload[..2].try_into().unwrap_or([0; 2])) as i32
+                } else {
+                    -1
+                };
+                let de = crate::error::DeviceError::from_code(code);
+                return Err(Error::Device { code, message: de.message().into() });
+            }
+            other => {
+                return Err(Error::Protocol(format!("Expected SdkCmdAnswer, got {:?}", other)));
+            }
         }
-        let xml_str = String::from_utf8_lossy(&resp.payload).into_owned();
+        // Strip the [u32 total_len][u32 index] 8-byte prefix from response
+        let xml_bytes = crate::protocol::parse_sdk_cmd_payload(&resp.payload)
+            .ok_or_else(|| Error::Protocol(
+                format!("SdkCmdAnswer too short: {} bytes", resp.payload.len())
+            ))?;
+        let xml_str = String::from_utf8_lossy(xml_bytes).into_owned();
         xml::parse_result(&xml_str)?;
         Ok(xml_str)
     }

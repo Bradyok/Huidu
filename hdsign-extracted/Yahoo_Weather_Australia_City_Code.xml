@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CityID>
+	<City Name="Adelaide" ID="ASXX0001"/>
+	<City Name="Alice Springs" ID="ASXX0002"/>
+	<City Name="Armadale" ID="ASXX0003"/>
+	<City Name="Avon Downs" ID="ASXX0004"/>
+	<City Name="Ayers Rock" ID="ASXX0005"/>
+	<City Name="Ayr" ID="ASXX0006"/>
+	<City Name="Babinda" ID="ASXX0007"/>
+	<City Name="Bajool" ID="ASXX0008"/>
+	<City Name="Bankstown" ID="ASXX0009"/>
+	<City Name="Batchelor" ID="ASXX0010"/>
+	<City Name="Beenleigh" ID="ASXX0011"/>
+	<City Name="Birdum" ID="ASXX0012"/>
+	<City Name="Blacktown" ID="ASXX0013"/>
+	<City Name="Boologooro" ID="ASXX0014"/>
+	<City Name="Bowen" ID="ASXX0015"/>
+	<City Name="Brisbane" ID="ASXX0016"/>
+	<City Name="Broad Arrow" ID="ASXX0017"/>
+	<City Name="Broadmeadows" ID="ASXX0018"/>
+	<City Name="Broome" ID="ASXX0019"/>
+	<City Name="Cairns" ID="ASXX0020"/>
+	<City Name="Caloundra" ID="ASXX0021"/>
+	<City Name="Campbelltown" ID="ASXX0022"/>
+	<City Name="Canberra" ID="ASXX0023"/>
+	<City Name="Carnarvon" ID="ASXX0024"/>
+	<City Name="Cloncurry" ID="ASXX0025"/>
+	<City Name="Coffs Harbour" ID="ASXX0026"/>
+	<City Name="Cooktown" ID="ASXX0027"/>
+	<City Name="Coolgardie" ID="ASXX0028"/>
+	<City Name="Daly Waters" ID="ASXX0029"/>
+	<City Name="Dampier" ID="ASXX0030"/>
+	<City Name="Dandenong" ID="ASXX0031"/>
+	<City Name="Darwin" ID="ASXX0032"/>
+	<City Name="Denham" ID="ASXX0033"/>
+	<City Name="Derby" ID="ASXX0034"/>
+	<City Name="Dongara" ID="ASXX0035"/>
+	<City Name="Edmonton" ID="ASXX0036"/>
+	<City Name="Elizabeth" ID="ASXX0037"/>
+	<City Name="Esperance" ID="ASXX0038"/>
+	<City Name="Fairfield" ID="ASXX0039"/>
+	<City Name="Frankston" ID="ASXX0040"/>
+	<City Name="Fremantle" ID="ASXX0041"/>
+	<City Name="Gawler" ID="ASXX0042"/>
+	<City Name="Geelong" ID="ASXX0043"/>
+	<City Name="Geraldton" ID="ASXX0044"/>
+	<City Name="Gibson" ID="ASXX0045"/>
+	<City Name="Gladstone" ID="ASXX0046"/>
+	<City Name="Gold Coast" ID="ASXX0047"/>
+	<City Name="Goldsworthy" ID="ASXX0048"/>
+	<City Name="Gosford" ID="ASXX0049"/>
+	<City Name="Gosnells" ID="ASXX0050"/>
+	<City Name="Goulburn" ID="ASXX0051"/>
+	<City Name="Granite Downs" ID="ASXX0053"/>
+	<City Name="Greenough" ID="ASXX0054"/>
+	<City Name="Gunnedah" ID="ASXX0055"/>
+	<City Name="Hall" ID="ASXX0056"/>
+	<City Name="Hobart" ID="ASXX0057"/>
+	<City Name="Hopetoun" ID="ASXX0058"/>
+	<City Name="Ingham" ID="ASXX0059"/>
+	<City Name="Innisfail" ID="ASXX0060"/>
+	<City Name="Ipswich" ID="ASXX0061"/>
+	<City Name="Kalbarri" ID="ASXX0062"/>
+	<City Name="Kalgoorlie" ID="ASXX0063"/>
+	<City Name="Kambalda/Lake Lefroy" ID="ASXX0064"/>
+	<City Name="Keilor" ID="ASXX0065"/>
+	<City Name="Kimberley Downs" ID="ASXX0066"/>
+	<City Name="Kingston" ID="ASXX0067"/>
+	<City Name="Kwinana" ID="ASXX0068"/>
+	<City Name="Larrimah" ID="ASXX0069"/>
+	<City Name="Mackay" ID="ASXX0070"/>
+	<City Name="Mandurah" ID="ASXX0071"/>
+	<City Name="Marion" ID="ASXX0072"/>
+	<City Name="Mary Kathleen" ID="ASXX0073"/>
+	<City Name="Mataranka" ID="ASXX0074"/>
+	<City Name="Melbourne" ID="ASXX0075"/>
+	<City Name="Merbein" ID="ASXX0076"/>
+	<City Name="Mildura" ID="ASXX0077"/>
+	<City Name="Mount Gambier" ID="ASXX0078"/>
+	<City Name="Mount Isa" ID="ASXX0079"/>
+	<City Name="Mount Morgan" ID="ASXX0080"/>
+	<City Name="Nambucca Heads" ID="ASXX0081"/>
+	<City Name="New Norfolk" ID="ASXX0082"/>
+	<City Name="Newcastle" ID="ASXX0083"/>
+	<City Name="Noonamah" ID="ASXX0085"/>
+	<City Name="Paddington" ID="ASXX0086"/>
+	<City Name="Parramatta" ID="ASXX0087"/>
+	<City Name="Penrith" ID="ASXX0088"/>
+	<City Name="Perth" ID="ASXX0089"/>
+	<City Name="Port Adelaide" ID="ASXX0090"/>
+	<City Name="Port Arthur" ID="ASXX0091"/>
+	<City Name="Port Hedland" ID="ASXX0092"/>
+	<City Name="Port Macquarie" ID="ASXX0093"/>
+	<City Name="Port Phillip Bay" ID="ASXX0094"/>
+	<City Name="Queanbeyan" ID="ASXX0095"/>
+	<City Name="Rapid Bay" ID="ASXX0096"/>
+	<City Name="Red Cliffs" ID="ASXX0097"/>
+	<City Name="Redcliffe" ID="ASXX0098"/>
+	<City Name="Richmond" ID="ASXX0099"/>
+	<City Name="Rockhampton" ID="ASXX0100"/>
+	<City Name="Rockingham" ID="ASXX0101"/>
+	<City Name="Roebourne" ID="ASXX0102"/>
+	<City Name="Rollingstone" ID="ASXX0103"/>
+	<City Name="Rum Jungle" ID="ASXX0104"/>
+	<City Name="Rumula" ID="ASXX0105"/>
+	<City Name="Salisbury" ID="ASXX0106"/>
+	<City Name="Shellharbour" ID="ASXX0107"/>
+	<City Name="Sorell" ID="ASXX0108"/>
+	<City Name="Southern Cross" ID="ASXX0109"/>
+	<City Name="Springvale" ID="ASXX0110"/>
+	<City Name="Sunbury" ID="ASXX0111"/>
+	<City Name="Sydney" ID="ASXX0112"/>
+	<City Name="Tamworth" ID="ASXX0113"/>
+	<City Name="Tarago" ID="ASXX0114"/>
+	<City Name="Tennant Creek" ID="ASXX0115"/>
+	<City Name="Thangoo" ID="ASXX0116"/>
+	<City Name="Townsville" ID="ASXX0117"/>
+	<City Name="Victor Harbor" ID="ASXX0118"/>
+	<City Name="Wanneroo" ID="ASXX0119"/>
+	<City Name="Wentworth" ID="ASXX0120"/>
+	<City Name="Werris Creek" ID="ASXX0121"/>
+	<City Name="Winton" ID="ASXX0123"/>
+	<City Name="Wollongong" ID="ASXX0124"/>
+	<City Name="Woolgoolga" ID="ASXX0125"/>
+	<City Name="Wooramel" ID="ASXX0126"/>
+	<City Name="Yass" ID="ASXX0127"/>
+	<City Name="Yeppoon" ID="ASXX0128"/>
+	<City Name="Point Stuart" ID="ASXX0130"/>
+	<City Name="Cape Don" ID="ASXX0131"/>
+	<City Name="Tindal" ID="ASXX0132"/>
+	<City Name="Katherine Aerodrome" ID="ASXX0133"/>
+	<City Name="Black Point Port Essington" ID="ASXX0134"/>
+	<City Name="Mccluer Island" ID="ASXX0135"/>
+	<City Name="Jabiru Airport" ID="ASXX0136"/>
+	<City Name="Warruwi" ID="ASXX0137"/>
+	<City Name="Milingimbi" ID="ASXX0138"/>
+	<City Name="Maningrida" ID="ASXX0139"/>
+	<City Name="Elcho Island" ID="ASXX0140"/>
+	<City Name="North East Island" ID="ASXX0141"/>
+	<City Name="Horn Island" ID="ASXX0142"/>
+	<City Name="Coconut Island" ID="ASXX0143"/>
+	<City Name="Coen Airport" ID="ASXX0144"/>
+	<City Name="Cygnet Bay" ID="ASXX0145"/>
+	<City Name="Curtin" ID="ASXX0146"/>
+	<City Name="Rowley Shoals" ID="ASXX0147"/>
+	<City Name="Adele Island" ID="ASXX0148"/>
+	<City Name="Wyndham" ID="ASXX0149"/>
+	<City Name="Kununurra Argyle Aerodrome" ID="ASXX0150"/>
+	<City Name="Victoria River Downs" ID="ASXX0151"/>
+	<City Name="Brunette Downs" ID="ASXX0153"/>
+	<City Name="Centre Island" ID="ASXX0154"/>
+	<City Name="Camooweal" ID="ASXX0155"/>
+	<City Name="Wollogorang" ID="ASXX0156"/>
+	<City Name="Burketown" ID="ASXX0157"/>
+	<City Name="Normanton" ID="ASXX0158"/>
+	<City Name="Georgetown" ID="ASXX0159"/>
+	<City Name="Low Isles" ID="ASXX0160"/>
+	<City Name="Mareeba Airport" ID="ASXX0161"/>
+	<City Name="Holmes Reef" ID="ASXX0162"/>
+	<City Name="Flinders Reef" ID="ASXX0163"/>
+	<City Name="Lucinda Point" ID="ASXX0164"/>
+	<City Name="Marion Reef" ID="ASXX0165"/>
+	<City Name="Thevenard Island" ID="ASXX0166"/>
+	<City Name="Onslow" ID="ASXX0167"/>
+	<City Name="Karratha Legendre Isalnd" ID="ASXX0168"/>
+	<City Name="Port Hedland Bedout Island" ID="ASXX0170"/>
+	<City Name="Port Hedland Pardoo" ID="ASXX0171"/>
+	<City Name="Wittenoom" ID="ASXX0172"/>
+	<City Name="Marble Bar" ID="ASXX0173"/>
+	<City Name="Watarrka Kings Canyon" ID="ASXX0174"/>
+	<City Name="Yuendumu" ID="ASXX0175"/>
+	<City Name="Ali Curung Tennant Creek" ID="ASXX0176"/>
+	<City Name="Jervois" ID="ASXX0177"/>
+	<City Name="Urandangie" ID="ASXX0178"/>
+	<City Name="Boulia" ID="ASXX0180"/>
+	<City Name="Winton Post Office" ID="ASXX0181"/>
+	<City Name="Blackall" ID="ASXX0182"/>
+	<City Name="Proserpine Airport" ID="ASXX0183"/>
+	<City Name="Bowen Airport" ID="ASXX0184"/>
+	<City Name="Hamilton Island" ID="ASXX0185"/>
+	<City Name="St Lawrence Post Office" ID="ASXX0186"/>
+	<City Name="Creal Reef" ID="ASXX0187"/>
+	<City Name="Biloela Thangool Airport" ID="ASXX0189"/>
+	<City Name="Gannet Cay" ID="ASXX0190"/>
+	<City Name="Gladstone Airport" ID="ASXX0191"/>
+	<City Name="Town Of 1770" ID="ASXX0192"/>
+	<City Name="Heron Island" ID="ASXX0193"/>
+	<City Name="Bundaberg Aerodrome" ID="ASXX0194"/>
+	<City Name="Lady Elliot Island" ID="ASXX0195"/>
+	<City Name="Sandy Cape" ID="ASXX0196"/>
+	<City Name="Cato Island" ID="ASXX0197"/>
+	<City Name="Shark Bay Denham" ID="ASXX0198"/>
+	<City Name="Paynes Find" ID="ASXX0199"/>
+	<City Name="Abrolhos Island North Island" ID="ASXX0200"/>
+	<City Name="Leonora" ID="ASXX0201"/>
+	<City Name="Kulgera" ID="ASXX0202"/>
+	<City Name="Oodnadatta Airport" ID="ASXX0203"/>
+	<City Name="Marla" ID="ASXX0204"/>
+	<City Name="Marree" ID="ASXX0205"/>
+	<City Name="Birdsville" ID="ASXX0206"/>
+	<City Name="Tibooburra" ID="ASXX0207"/>
+	<City Name="Windorah" ID="ASXX0208"/>
+	<City Name="Quilpie" ID="ASXX0209"/>
+	<City Name="Cunnamulla" ID="ASXX0210"/>
+	<City Name="Injune Post Office" ID="ASXX0211"/>
+	<City Name="Goondiwindi Airport" ID="ASXX0212"/>
+	<City Name="Dalby Airport" ID="ASXX0213"/>
+	<City Name="Gayndah" ID="ASXX0214"/>
+	<City Name="Kingaroy" ID="ASXX0215"/>
+	<City Name="Warwick" ID="ASXX0216"/>
+	<City Name="Maryborough" ID="ASXX0217"/>
+	<City Name="Amberley Aerodrome" ID="ASXX0218"/>
+	<City Name="Maroochydore Airport" ID="ASXX0219"/>
+	<City Name="Archerfield Aerodrome" ID="ASXX0220"/>
+	<City Name="Gold Coast Seaway" ID="ASXX0221"/>
+	<City Name="Coolangatta Airport" ID="ASXX0222"/>
+	<City Name="Cape Moreton" ID="ASXX0223"/>
+	<City Name="Ballina Airport" ID="ASXX0224"/>
+	<City Name="Cape Naturaliste" ID="ASXX0225"/>
+	<City Name="Rottnest Island" ID="ASXX0226"/>
+	<City Name="Bunbury" ID="ASXX0228"/>
+	<City Name="Mount Lawley Perth Metro" ID="ASXX0230"/>
+	<City Name="Spearwood Jandakot Aerodrome" ID="ASXX0231"/>
+	<City Name="Bullsbrook Pearce Amo" ID="ASXX0232"/>
+	<City Name="Swanbourne" ID="ASXX0233"/>
+	<City Name="Kalamunda" ID="ASXX0234"/>
+	<City Name="Dwellingup" ID="ASXX0235"/>
+	<City Name="Corrigin" ID="ASXX0236"/>
+	<City Name="Lake Grace" ID="ASXX0237"/>
+	<City Name="Norseman" ID="ASXX0238"/>
+	<City Name="Balladonia" ID="ASXX0239"/>
+	<City Name="Tarcoola" ID="ASXX0240"/>
+	<City Name="Elliston Post Office" ID="ASXX0241"/>
+	<City Name="Kyancutta" ID="ASXX0242"/>
+	<City Name="Coles Point" ID="ASXX0243"/>
+	<City Name="Port Lincoln" ID="ASXX0244"/>
+	<City Name="Whyalla" ID="ASXX0245"/>
+	<City Name="Maitland" ID="ASXX0246"/>
+	<City Name="Leigh Creek Airport" ID="ASXX0247"/>
+	<City Name="Yongala" ID="ASXX0249"/>
+	<City Name="Eudunda" ID="ASXX0250"/>
+	<City Name="Nuriootpa" ID="ASXX0251"/>
+	<City Name="Loxton" ID="ASXX0252"/>
+	<City Name="Renmark" ID="ASXX0253"/>
+	<City Name="Lameroo" ID="ASXX0254"/>
+	<City Name="Broken Hill Patton Street" ID="ASXX0255"/>
+	<City Name="Ivanhoe Post Office" ID="ASXX0256"/>
+	<City Name="Hay Miller Street" ID="ASXX0257"/>
+	<City Name="Hillston Airport" ID="ASXX0258"/>
+	<City Name="Hay" ID="ASXX0259"/>
+	<City Name="Griffith" ID="ASXX0260"/>
+	<City Name="Nyngan" ID="ASXX0261"/>
+	<City Name="Cobar Airport" ID="ASXX0262"/>
+	<City Name="Young" ID="ASXX0263"/>
+	<City Name="Walgett" ID="ASXX0264"/>
+	<City Name="Dubbo" ID="ASXX0265"/>
+	<City Name="Mudgee" ID="ASXX0266"/>
+	<City Name="Coonabarabran" ID="ASXX0267"/>
+	<City Name="Mount Boyce" ID="ASXX0268"/>
+	<City Name="Katoomba" ID="ASXX0269"/>
+	<City Name="Bowral" ID="ASXX0270"/>
+	<City Name="Nullo Mountains" ID="ASXX0271"/>
+	<City Name="Murrurundi" ID="ASXX0272"/>
+	<City Name="Bankstown Airport" ID="ASXX0273"/>
+	<City Name="North Sydney" ID="ASXX0274"/>
+	<City Name="Smoky Cape Lighthouse Sw Rocks" ID="ASXX0276"/>
+	<City Name="Cape Borda" ID="ASXX0277"/>
+	<City Name="Edithburgh" ID="ASXX0278"/>
+	<City Name="Parawa Second Valley Forest" ID="ASXX0279"/>
+	<City Name="Cape Jaffa" ID="ASXX0280"/>
+	<City Name="Keith Post Office" ID="ASXX0281"/>
+	<City Name="Naracoorte" ID="ASXX0282"/>
+	<City Name="Cape Willoughby" ID="ASXX0283"/>
+	<City Name="Cape Nelson" ID="ASXX0284"/>
+	<City Name="Portland Airport" ID="ASXX0285"/>
+	<City Name="Hamilton Airport" ID="ASXX0286"/>
+	<City Name="Warrnambool Airport" ID="ASXX0287"/>
+	<City Name="Ararat" ID="ASXX0288"/>
+	<City Name="Lookout Hill" ID="ASXX0289"/>
+	<City Name="Mortlake" ID="ASXX0290"/>
+	<City Name="Swan Hill" ID="ASXX0291"/>
+	<City Name="Aireys Inlet" ID="ASXX0292"/>
+	<City Name="Ballarat" ID="ASXX0293"/>
+	<City Name="Avalon" ID="ASXX0294"/>
+	<City Name="Bendigo Airport" ID="ASXX0295"/>
+	<City Name="Geelong Airport" ID="ASXX0296"/>
+	<City Name="Redesdale" ID="ASXX0297"/>
+	<City Name="Kilmore Gap" ID="ASXX0298"/>
+	<City Name="Sheoaks" ID="ASXX0299"/>
+	<City Name="Coldstream" ID="ASXX0300"/>
+	<City Name="Melbourne Airport" ID="ASXX0301"/>
+	<City Name="Moorabbin Airport" ID="ASXX0302"/>
+	<City Name="Dunns Hill" ID="ASXX0303"/>
+	<City Name="Mangalore Airport" ID="ASXX0304"/>
+	<City Name="Finley" ID="ASXX0305"/>
+	<City Name="Hunters Hill" ID="ASXX0306"/>
+	<City Name="Benalla" ID="ASXX0307"/>
+	<City Name="Wangaratta Aerodrome" ID="ASXX0308"/>
+	<City Name="Latrobe Valley Airport" ID="ASXX0309"/>
+	<City Name="Rhyll" ID="ASXX0310"/>
+	<City Name="Wilsons Promontory Light" ID="ASXX0311"/>
+	<City Name="Mount Buller" ID="ASXX0312"/>
+	<City Name="Cerberus" ID="ASXX0313"/>
+	<City Name="Falls Creek" ID="ASXX0314"/>
+	<City Name="Mount Hotham" ID="ASXX0315"/>
+	<City Name="Gelantipy" ID="ASXX0316"/>
+	<City Name="Combienbar" ID="ASXX0317"/>
+	<City Name="Cooma Airport" ID="ASXX0318"/>
+	<City Name="Braidwood" ID="ASXX0319"/>
+	<City Name="Bombala" ID="ASXX0320"/>
+	<City Name="Gabo Island" ID="ASXX0321"/>
+	<City Name="Green Cape" ID="ASXX0322"/>
+	<City Name="Moruya Heads" ID="ASXX0323"/>
+	<City Name="Ulladulla" ID="ASXX0324"/>
+	<City Name="Jervis Bay" ID="ASXX0325"/>
+	<City Name="Strahan" ID="ASXX0326"/>
+	<City Name="Adamsons Peak" ID="ASXX0327"/>
+	<City Name="Maatsuyker Island" ID="ASXX0328"/>
+	<City Name="Bushy Park" ID="ASXX0329"/>
+	<City Name="Cape Bruny" ID="ASXX0330"/>
+	<City Name="Launceston" ID="ASXX0331"/>
+	<City Name="Hobart Regional Office" ID="ASXX0332"/>
+	<City Name="Cape Sorell" ID="ASXX0333"/>
+	<City Name="Palmers Lookout" ID="ASXX0334"/>
+	<City Name="Flinders Island Airport" ID="ASXX0335"/>
+	<City Name="Macquarie Island" ID="ASXX0337"/>
+	<City Name="Bougainville Reef" ID="ASXX0339"/>
+	<City Name="Green Island" ID="ASXX0340"/>
+	<City Name="Ingham Composite" ID="ASXX0341"/>
+	<City Name="Karratha Aerodrome" ID="ASXX0342"/>
+	<City Name="Karratha King Bay" ID="ASXX0343"/>
+	<City Name="Nambour" ID="ASXX0344"/>
+	<City Name="Jurien" ID="ASXX0345"/>
+	<City Name="Lancelin" ID="ASXX0346"/>
+	<City Name="Mettler" ID="ASXX0347"/>
+	<City Name="Jerramungup Jacup" ID="ASXX0348"/>
+	<City Name="Esperance Aerodrome" ID="ASXX0349"/>
+	<City Name="Port Lincoln Aerodrome" ID="ASXX0350"/>
+	<City Name="Whyalla Airport" ID="ASXX0351"/>
+	<City Name="Edinburgh M. O." ID="ASXX0353"/>
+	<City Name="Parafield Airport" ID="ASXX0354"/>
+	<City Name="Mount Lofty" ID="ASXX0355"/>
+	<City Name="Condobolin Airport" ID="ASXX0356"/>
+	<City Name="Walgett Airport" ID="ASXX0357"/>
+	<City Name="Goulburn Airport" ID="ASXX0358"/>
+	<City Name="Richmond Amo" ID="ASXX0359"/>
+	<City Name="Scone Airport" ID="ASXX0360"/>
+	<City Name="Norah Head Lighthouse" ID="ASXX0361"/>
+	<City Name="Cygnet River Kingstone Aerodrome" ID="ASXX0362"/>
+	<City Name="Wonthaggi Composite" ID="ASXX0363"/>
+	<City Name="Albury Aeroport" ID="ASXX0364"/>
+	<City Name="Lakes Entrance Composite" ID="ASXX0365"/>
+	<City Name="Crackenback" ID="ASXX0366"/>
+	<City Name="Mount Moornapa" ID="ASXX0367"/>
+	<City Name="Bega" ID="ASXX0368"/>
+	<City Name="Wynyard Airport" ID="ASXX0369"/>
+	<City Name="Devonport Airport" ID="ASXX0370"/>
+	<City Name="Low Rocky Point" ID="ASXX0371"/>
+	<City Name="Mount Wellington" ID="ASXX0372"/>
+	<City Name="Swan Island" ID="ASXX0373"/>
+	<City Name="Charleyville" ID="ASXX0375"/>
+	<City Name="Forrest" ID="ASXX0376"/>
+	<City Name="Weipa City" ID="ASXX0380"/>
+	<City Name="Learmonth" ID="ASXX0381"/>
+	<City Name="Woomera" ID="ASXX0382"/>
+	<City Name="Garden Point" ID="ASXX0383"/>
+	<City Name="Channel Point" ID="ASXX0384"/>
+	<City Name="Bathurst Island Cape Fourcroy" ID="ASXX0385"/>
+	<City Name="Taree" ID="ASXX0386"/>
+	<City Name="Alexandra" ID="ASXX0387"/>
+	<City Name="Emerald" ID="ASXX0388"/>
+	<City Name="Roma" ID="ASXX0389"/>
+	<City Name="Moree" ID="ASXX0390"/>
+	<City Name="Kollan Island" ID="ASXX0391"/>
+	<City Name="Shepparton" ID="ASXX0393"/>
+	<City Name="Currie" ID="ASXX0394"/>
+	<City Name="Eucla Motel" ID="ASXX0396"/>
+	<City Name="Kununurra" ID="ASXX0397"/>
+	<City Name="Telfer Mining Centre" ID="ASXX0398"/>
+	<City Name="Newman" ID="ASXX0399"/>
+	<City Name="Meekatharra" ID="ASXX0400"/>
+	<City Name="Mount Magnet" ID="ASXX0401"/>
+	<City Name="Halls Creek" ID="ASXX0402"/>
+	<City Name="Thargomindah" ID="ASXX0403"/>
+	<City Name="Augusta" ID="ASXX0404"/>
+	<City Name="Laverton" ID="ASXX0405"/>
+	<City Name="Bourke" ID="ASXX0407"/>
+	<City Name="Coober Pedy" ID="ASXX0408"/>
+	<City Name="Port Augusta West" ID="ASXX0409"/>
+	<City Name="Yunta" ID="ASXX0410"/>
+	<City Name="Bathurst" ID="ASXX0411"/>
+	<City Name="Nullarbor" ID="ASXX0412"/>
+	<City Name="Albany" ID="ASXX0413"/>
+	<City Name="Wagga Wagga" ID="ASXX0415"/>
+	<City Name="Horsham" ID="ASXX0416"/>
+	<City Name="Wurruk" ID="ASXX0417"/>
+	<City Name="Hordern Vale" ID="ASXX0418"/>
+	<City Name="Smithton" ID="ASXX0419"/>
+	<City Name="Yirrkala Mission" ID="ASXX0420"/>
+	<City Name="Jimna" ID="ASXX0421"/>
+	<City Name="Oakey" ID="ASXX0422"/>
+	<City Name="Longreach" ID="ASXX0423"/>
+	<City Name="Badgingarra" ID="ASXX0424"/>
+	<City Name="Forbes" ID="ASXX0425"/>
+	<City Name="Busselton" ID="ASXX0426"/>
+	<City Name="Nowra" ID="ASXX0428"/>
+	<City Name="Toowoomba" ID="ASXX0429"/>
+	<City Name="Bryon Bay" ID="ASXX0430"/>
+	<City Name="Tatura" ID="ASXX0431"/>
+	<City Name="York" ID="AU2057277"/>
+	<City Name="Yeelirrie" ID="AU2057399"/>
+	<City Name="Port Augusta" ID="AU2063056"/>
+	<City Name="Yarrawonga" ID="AU2142447"/>
+	<City Name="Andamooka" ID="AU2177567"/>
+	<City Name="Armidale" ID="AU2177671"/>
+	<City Name="Alvabeach" ID="AU2177678"/>
+	<City Name="Arlington Reef" ID="AU2177679"/>
+	<City Name="Arltunga" ID="AU2177680"/>
+	<City Name="Austinplains" ID="AU2177681"/>
+	<City Name="Balgohills" ID="AU2177682"/>
+	<City Name="Balranald" ID="AU2177683"/>
+</CityID>

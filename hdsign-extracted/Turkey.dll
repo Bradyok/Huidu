@@ -1,0 +1,1608 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<language name="Türkçe">
+<Item name="ABrighterThanB">A-B'den Daha Parlaktır</Item>
+<Item name="About">Hakkında</Item>
+<Item name="AbrightBoff">A beyaz,B siyah'tır</Item>
+<Item name="Add">Ekle</Item>
+<Item name="Add File">Dosya Ekle</Item>
+<Item name="Add GIF">GIF ekle</Item>
+<Item name="AddFailed">Ekleme Başarısız</Item>
+<Item name="AddFile">Dosya ekle</Item>
+<Item name="AddGroup">Grup Ekle</Item>
+<Item name="AddHypertext">Yazı veya resim ekle</Item>
+<Item name="AddPicture">Resim ekle</Item>
+<Item name="AddProgram">Program ekle</Item>
+<Item name="AddRegion">Yeni ekran alani ekle</Item>
+<Item name="AddSuccess">Ekleme Başarılı</Item>
+<Item name="AdjustTime">Saat ayarı</Item>
+<Item name="AdvancedSetting">Gelişmiş ayarlar</Item>
+<Item name="AdvancedSettings">Gelişmiş ayarlar</Item>
+<Item name="AlignCenter">Ortala</Item>
+<Item name="AlignRight">Sağa Daya</Item>
+<Item name="Alignment">Hizalama</Item>
+<Item name="All">Tümünü</Item>
+<Item name="Allow">İzin ver</Item>
+<Item name="AllowPasswordAuthentication">Gelişmiş ayarlar için şifre doğrulamasını etkinleştir</Item>
+<Item name="AlreadyOpened">Bu ekran zaten açık.</Item>
+<Item name="AlterBaudrate">Değiştirme hızı</Item>
+<Item name="AntiClockwise rotation">Saat yönü tersine</Item>
+<Item name="AreaBackground">Alan arka planı</Item>
+<Item name="AreaDown">Aşağı Yasla</Item>
+<Item name="AreaLeft">Sol'a Yasla</Item>
+<Item name="AreaMaximize">Alan maksimize edildi</Item>
+<Item name="AreaNoBorder">Cross screen don't support border for global program</Item>
+<Item name="AreaRight">Sağ'a Yasla</Item>
+<Item name="AreaUp">Yukarı Yasla</Item>
+<Item name="Associated">İlgili</Item>
+<Item name="AutoAdjustTime">Zamanı otomatik ayarla</Item>
+<Item name="AutoGetingIP">Otomatik IP ayarlari</Item>
+<Item name="AutoHide">Otomatik Gizle</Item>
+<Item name="AutoReSend">Otomatik Tekrar Gönder</Item>
+<Item name="AutoSave">Otomatik Kayıt</Item>
+<Item name="AutoScanInterval">Otomatik Tarama Aralığı</Item>
+<Item name="AutoScanMode">Otomatik Tarama Modu</Item>
+<Item name="AutoSearchScans">Otomatik arama tarama modu</Item>
+<Item name="AutoSwitching">Otomatik Seçim</Item>
+<Item name="AutoUpdate">Otomatik Güncelleştirmeler</Item>
+<Item name="Automatic">Otomatik</Item>
+<Item name="AutomaticInfo">Parlaklık sensorü kullanılmiş olduğundan emin olun</Item>
+<Item name="BBrighterThanA">B-A'dan Daha Parlaktır</Item>
+<Item name="Background">Arka plan</Item>
+<Item name="BackgroundColor">Arka plan rengi</Item>
+<Item name="BackgroundSetting">Arka plan ayarları</Item>
+<List name="BackgroupEffects" id="0">Rasgele</List>
+<List name="BackgroupEffects" id="10">Küçült</List>
+<List name="BackgroupEffects" id="11">Ara Verme</List>
+<List name="BackgroupEffects" id="12">Çapraz</List>
+<List name="BackgroupEffects" id="14">Refleks</List>
+<List name="BackgroupEffects" id="15">Titreme</List>
+<List name="BackgroupEffects" id="16">Saf renk</List>
+<List name="BackgroupEffects" id="17">Şerit açma kapama</List>
+<List name="BackgroupEffects" id="18">Yuvarlak genişleme</List>
+<List name="BackgroupEffects" id="19">Elmas genişleme</List>
+<List name="BackgroupEffects" id="1">Sabit</List>
+<List name="BackgroupEffects" id="20">Çapraz</List>
+<List name="BackgroupEffects" id="21">Eğri</List>
+<List name="BackgroupEffects" id="2">Sola akma</List>
+<List name="BackgroupEffects" id="3">Saga akma</List>
+<List name="BackgroupEffects" id="4">Yukarı akma</List>
+<List name="BackgroupEffects" id="5">Aşagı akma</List>
+<List name="BackgroupEffects" id="6">Önce sola sonra saga akma</List>
+<List name="BackgroupEffects" id="7">Ortolan satay açılma</List>
+<List name="BackgroupEffects" id="8">İki taraftan kapama</List>
+<List name="BackgroupEffects" id="9">Büyüt</List>
+<Item name="BasicInfoSet">Temel ayarlar</Item>
+<Item name="BasicPara">Temel parametreler</Item>
+<Item name="BasicSetting">Temel ayarlar</Item>
+<Item name="Baudrate">Gonderim hizi</Item>
+<Item name="BbrightAoff">A siyah,B beyaz'dır</Item>
+<Item name="Begin">Başlat</Item>
+<Item name="Begin Play">Başlat</Item>
+<Item name="Black">Siyah</Item>
+<Item name="Blue">Mavi</Item>
+<Item name="Boot">Önyükleme durumu</Item>
+<Item name="BootStatus">Kontrol kartı şu anda yükleme durumunda, önce programı güncelleyin lütfen!</Item>
+<Item name="Border">Çerçeve</Item>
+<Item name="BorderColor">Çerçeve rengi</Item>
+<Item name="BorderSetting">Alan sınır ayarı</Item>
+<Item name="BorderWidth">Alan genişliği</Item>
+<Item name="BorderWidthExceeds">Genişlik sınırı aşıyor</Item>
+<Item name="BorderWidthOutOfRange">Kenar genişliği çalışma alanın dışında!</Item>
+<Item name="BoundDevice">Bağlı Aygıt</Item>
+<Item name="Broadcast">Yayın</Item>
+<Item name="BuildArea">Alan oluşturun</Item>
+<Item name="Built-inUnitBoard">Ortak ünite kurulu</Item>
+<Item name="BusEdit">Düzenle</Item>
+<Item name="BusImage">Modül görüntü</Item>
+<Item name="BusName">Ad</Item>
+<Item name="BusNew">Yeni</Item>
+<Item name="BusView">Göster</Item>
+<Item name="Busy">Meşgul</Item>
+<Item name="Button">Buton</Item>
+<Item name="ButtonDownTiming">Butonla geri sayım</Item>
+<Item name="ButtonSettings">Buton 1 (S1)</Item>
+<Item name="ButtonSettings2">Buton 2 (S2)</Item>
+<Item name="ButtonSettings3">Buton 3 (S3)</Item>
+<Item name="ButtonSettings4">Buton 4 (S4)</Item>
+<Item name="ButtonSwitch">Butonla Program geçişi</Item>
+<Item name="ButtonTiming">Zamanlama</Item>
+<Item name="ButtonUpTiming">Butonla ileri sayım</Item>
+<Item name="ButtonorPlaySet">Buton Ayarları</Item>
+<Item name="CLKMirror">CLK Polarite</Item>
+<Item name="CLKWidth">CLK Width</Item>
+<Item name="COM">COM port</Item>
+<Item name="COMERROR">Bağlantı başarısız，kısa seri 2,3 metre var kontrol?</Item>
+<Item name="COMINFO">Bağlantı</Item>
+<Item name="COMURL">COM URL: http://www.huidu.cn</Item>
+<Item name="CPUModelError">CPU modeli yanlıştır.</Item>
+<Item name="CanNotFindTheDefaultProfile">Varsayılan yapılandırma dosyası bulamadınız.</Item>
+<Item name="Cancel">İptal</Item>
+<Item name="CannotFindNetWordDrive">Ağ aygıtı bulamadı!</Item>
+<Item name="CannotOpenExcle">Excle açılamadı, yüklü olup olmadığını kontrol edin.</Item>
+<Item name="CardIpSeting">IP kart ayarları</Item>
+<Item name="CardModel">Kart modeli</Item>
+<Item name="CardNumber">Kart modeli</Item>
+<Item name="CardOnlySupportFullColor">Program sadece yedi rengi destekler.</Item>
+<Item name="CardOnlySupportTwoColor">Program sadece tek renk ve çift renk destekliyor.</Item>
+<Item name="CardRestart">Yeniden Başlatılıyor</Item>
+<Item name="CardVersion">Kart Sürüm</Item>
+<Item name="Center">Merkez</Item>
+<Item name="CenterAlign">Ortala</Item>
+<Item name="CfwBackgroundEdit">Animasyonlu karakterlerin arka planı</Item>
+<Item name="Change">Degiştir</Item>
+<Item name="Channel">Kanal</Item>
+<Item name="CharSpacing">Karakter aralıgı</Item>
+<Item name="CheckAll">Hepsini seç</Item>
+<Item name="CheckProgram">Programı seçin</Item>
+<Item name="ChecksumError">Sağlama hatası</Item>
+<Item name="ChooseDeive">Aygıt Seç</Item>
+<Item name="ClassicBackground">Resim Arkaplanı</Item>
+<Item name="Classics">Klasik</Item>
+<Item name="Clear">Temizle</Item>
+<List name="ClearEffects" id="0">Hemen sil</List>
+<List name="ClearEffects" id="10">Yukari asagi kapanma</List>
+<List name="ClearEffects" id="11">Ortadan acilma</List>
+<List name="ClearEffects" id="12">Ortadan kapanma</List>
+<List name="ClearEffects" id="13">Dikey perdeler</List>
+<List name="ClearEffects" id="14">Yatay perdeler</List>
+<List name="ClearEffects" id="15">Sola sayfa cevirme</List>
+<List name="ClearEffects" id="16">Saga sayfa cevirme</List>
+<List name="ClearEffects" id="17">Fan sekli acilma</List>
+<List name="ClearEffects" id="18">Fan sekli kapanma</List>
+<List name="ClearEffects" id="19">Saat yonune ortme</List>
+<List name="ClearEffects" id="1">Sola akma</List>
+<List name="ClearEffects" id="200">Rasgele</List>
+<List name="ClearEffects" id="201">Silme</List>
+<List name="ClearEffects" id="20">Saat yonune ters ortme</List>
+<List name="ClearEffects" id="21">Yatay dokuma</List>
+<List name="ClearEffects" id="22">Yukari yuvarlanma</List>
+<List name="ClearEffects" id="23">Asagi yuvarlanma</List>
+<List name="ClearEffects" id="24">Sola yuvarlanma</List>
+<List name="ClearEffects" id="25">Saga yuvarlanma</List>
+<List name="ClearEffects" id="26">Yataya asamali</List>
+<List name="ClearEffects" id="27">Dikey asamali</List>
+<List name="ClearEffects" id="2">Saga akma</List>
+<List name="ClearEffects" id="3">Yukarı akma</List>
+<List name="ClearEffects" id="4">Aşagı akma</List>
+<List name="ClearEffects" id="5">Sola örtmek</List>
+<List name="ClearEffects" id="6">Saga örtmek</List>
+<List name="ClearEffects" id="7">Yukarı örtmek</List>
+<List name="ClearEffects" id="8">Aşagı örtmek</List>
+<List name="ClearEffects" id="9">Yukari aşagı açılma</List>
+<Item name="ClearScreeData">Varian ekranı temizlensinmi?</Item>
+<Item name="Clock">Saat</Item>
+<Item name="ClockFrequency">Saat frekansı</Item>
+<Item name="ClockParameters">Saat parametreleri</Item>
+<Item name="Clockwise rotation">Saat yönüne</Item>
+<Item name="Close">Kapat</Item>
+<Item name="CloseScreen">Ekranı kapat</Item>
+<Item name="Color">Renk</Item>
+<Item name="ColorChannel">Renk kanalı</Item>
+<Item name="ColorChannelSet">Renk kanalı ayarı</Item>
+<Item name="ColorFilter">Renk filtresi</Item>
+<Item name="ColorInversion">Renk Tersleme</Item>
+<Item name="ColorSingleSelect">Tek renk seç</Item>
+<Item name="ColorThreshold">Renk eşiği</Item>
+<Item name="ColorfulText">Animasyon</Item>
+<List name="ColorfulWordEffects" id="10">Dikey Çevir</List>
+<List name="ColorfulWordEffects" id="11">Yatay Döndürme</List>
+<List name="ColorfulWordEffects" id="12">Zoom yapma</List>
+<List name="ColorfulWordEffects" id="13">Sabit display</List>
+<List name="ColorfulWordEffects" id="14">Sürekli Sağa Taşı</List>
+<List name="ColorfulWordEffects" id="15">Sürekli Yukarı Taşı</List>
+<List name="ColorfulWordEffects" id="16">Sürekli Aşağı Taşı</List>
+<List name="ColorfulWordEffects" id="17">2D yakınlaştırma</List>
+<List name="ColorfulWordEffects" id="18">2D uzaklaştırmak</List>
+<List name="ColorfulWordEffects" id="1">Sinüs</List>
+<List name="ColorfulWordEffects" id="2">Kelime dönen</List>
+<List name="ColorfulWordEffects" id="3">Sinek Sol</List>
+<List name="ColorfulWordEffects" id="4">Sinek Hakkı</List>
+<List name="ColorfulWordEffects" id="5">Flas</List>
+<List name="ColorfulWordEffects" id="6">Verbatim çıktı</List>
+<List name="ColorfulWordEffects" id="7">Etrafında Salıncak</List>
+<List name="ColorfulWordEffects" id="8">Esneklik metin</List>
+<List name="ColorfulWordEffects" id="9">Salınım</List>
+<Item name="Column">Sütün</Item>
+<Item name="CommStatus1">İyi bağlantı</Item>
+<Item name="CommStatus2">Normal bağlantı</Item>
+<Item name="CommStatus3">Bağlantı kötü ama bağlanabilir</Item>
+<Item name="CommStatus4">Bağlanamıyor</Item>
+<Item name="CommTest">Ağ testi</Item>
+<Item name="Command">Komut</Item>
+<Item name="CommandSmartSetting">Genellikle Akıllı ayarı</Item>
+<Item name="CommonSettings">Genel ayarlar</Item>
+<Item name="CommunicationMode">Bağlantı</Item>
+<Item name="CommunicationSetting">Bağlantı ayarı</Item>
+<Item name="ConfirmRGBwidth">Bir grup RGB kontrol hattı yüksekliği</Item>
+<Item name="ConfirmScanMode">Tarama Modu belirleyin</Item>
+<Item name="Connected">Bağlandı</Item>
+<Item name="ConnectionSuccessful">Başarıyla bağlandı</Item>
+<Item name="ContainOverlappingRegions">Örtüşen bölge</Item>
+<Item name="ContentContainMultiLines">Bu effect taboloyu desteklemiyor, silinsinmi?</Item>
+<Item name="ContinueMove">Sürekli hareket</Item>
+<Item name="ContinueMoveUp">Sürekli yukarı taşımak</Item>
+<Item name="Copy">Kopyala</Item>
+<Item name="Copyright">Telif Hakkı: Shenzhen Huidu Technology Co.,Ltd.</Item>
+<Item name="Count">Kronometre</Item>
+<Item name="Count1">Sayaç</Item>
+<Item name="CountAdd">Sayı (+)</Item>
+<Item name="CountColor">Sayı rengi</Item>
+<Item name="CountDown">Geri Sayım</Item>
+<Item name="CountReset">Sayıyı sıfırla</Item>
+<Item name="CountSub">Sayı (-)</Item>
+<Item name="CountUp">İleri Sayım</Item>
+<Item name="CradID">Kart IDsi</Item>
+<Item name="CradName">Kart adı</Item>
+<Item name="CrossBottom">Dip</Item>
+<Item name="CrossCenter">Merkez</Item>
+<Item name="CrossGlobalProgram">Un programa globales</Item>
+<Item name="CrossNoSupport">Küresel program, bu alanda desteklenmiyor.</Item>
+<Item name="CrossScreen">Çapraz Ekran</Item>
+<Item name="CrossScreenParamsPageTip">1.Setting screen width and height is 3 steps；&#x000A;2.Select the color of screen ；</Item>
+<Item name="CrossScreenSetting">Çapraz ekran ayarlarını</Item>
+<Item name="CrossSmartTip">The current screen showing normal text ,no need select smart set</Item>
+<Item name="CrossTop">Üst</Item>
+<Item name="Custom">Özel</Item>
+<Item name="CustomIPTips">Kontrol kartı bir güvenlik duvarı tarafından bloke olursa,  IP adresini elle giriniz.</Item>
+<Item name="CustomTime">Zaman ayarı</Item>
+<Item name="CustomUnitBoard">Özel birim yönetim kurulu</Item>
+<Item name="CustomizeIP">Özel IP</Item>
+<Item name="Cut">Kes</Item>
+<Item name="Cyan">Cyan</Item>
+<Item name="CycleTiming">Cycle Timing</Item>
+<Item name="DHCPDNSAddr">DNS address</Item>
+<Item name="DHCPGateway">DHCP Default Gateway</Item>
+<Item name="DHCPLease">DHCP leases</Item>
+<Item name="DHCPMask">DHCP Subnet Mask</Item>
+<Item name="DHCPServerAddr">DHCP server address</Item>
+<Item name="Data">Data</Item>
+<Item name="DataClearSuccess">Veri başarıyla temizlendi</Item>
+<Item name="DataFill">"Veri aşıyor!"</Item>
+<Item name="DataLenght">Data süresi</Item>
+<Item name="DataLengthError">Paket uzunluğu hatalı</Item>
+<Item name="DataMirror">Ters</Item>
+<Item name="DataPolarity">Parlaklık</Item>
+<Item name="DataPolaritySet">Veri polarite ayarı</Item>
+<Item name="DataSource">Data kaynak</Item>
+<Item name="DateAndWeekLocationReplaced">Gün ve haftanın yerini değiştir</Item>
+<Item name="Day">Gun</Item>
+<Item name="Default">Varsayılan</Item>
+<Item name="DefaultConnectDeviceType">Varsayılan bağlantı yöntemi</Item>
+<Item name="DelayedSignal">Sinyal Gecikti</Item>
+<Item name="DeleteFailed">Silme başarısız</Item>
+<Item name="DeleteScreen">Ekranı Sil</Item>
+<Item name="DeleteSuccess">Simel başarılı</Item>
+<Item name="DeleteThisData">Cihazdakı tüm program silinsinmi?</Item>
+<Item name="DeleteThisFile">Eklediğin dosya silinsinmi?</Item>
+<Item name="DeleteThisProgram">Program silinsinmi ?</Item>
+<Item name="DeleteThisRegion">Eklediğin bölge silinsinmi?</Item>
+<Item name="Deny">Reddet</Item>
+<Item name="DestFile">Hedef dosya</Item>
+<Item name="DestIP">Hedef IP</Item>
+<Item name="Detailed">Detaylı...</Item>
+<Item name="Detect">Algılamak</Item>
+<Item name="DetectDevice">Cihaz algılama</Item>
+<Item name="DetectFail">Algılayamadı</Item>
+<Item name="DetectSuccess">Gönderim başarılı</Item>
+<Item name="Detecting">Algılama ...</Item>
+<Item name="Deviation">Nem kalibrasyon</Item>
+<Item name="Device">Cihaz</Item>
+<Item name="DeviceChoosePageTip">1.Use U-disk， please select controller type;&#x000A;2.Appear the device name and match controller ID;&#x000A;3.Only one device and been found,then click next.</Item>
+<Item name="DeviceID">Cihaz Kimliği</Item>
+<Item name="DeviceManage">Cihaz Yönetimi</Item>
+<Item name="DeviceName">Aygıt Adı</Item>
+<Item name="DialClock">Analog Saat</Item>
+<Item name="DialStyle">Arama modu</Item>
+<Item name="DialWeek">Hafta</Item>
+<Item name="DialYear">Tarih</Item>
+<Item name="DigitOnly">Sadece hane</Item>
+<Item name="Digital">Haneli</Item>
+<Item name="Direction">Yön</Item>
+<Item name="DisableBrightnessAdjustment">Parlaklık ayarını devre dışı bırak</Item>
+<Item name="Disconnected">Başlantı Kesildi</Item>
+<Item name="DiskSpace">Disk alanı:</Item>
+<Item name="Display">Ekran</Item>
+<List name="DisplayEffects" id="40">Sabit display</List>
+<List name="DisplayEffects" id="0">Hemen göster</List>
+<List name="DisplayEffects" id="10">Yukarı aşağı kapanma</List>
+<List name="DisplayEffects" id="11">Ortadan açılma</List>
+<List name="DisplayEffects" id="12">Ortadan kapanma</List>
+<List name="DisplayEffects" id="14">Dikey perdeler</List>
+<List name="DisplayEffects" id="13">Yatay perdeler</List>
+<List name="DisplayEffects" id="15">Sola sayfa çevirme</List>
+<List name="DisplayEffects" id="16">Saga sayfa çevirme</List>
+<List name="DisplayEffects" id="17">Fan şekli açılma</List>
+<List name="DisplayEffects" id="18">Fan şekli kapanma</List>
+<List name="DisplayEffects" id="19">Saat yönüne kapanma</List>
+<List name="DisplayEffects" id="1">Sola akma</List>
+<List name="DisplayEffects" id="200">Rasgele</List>
+<List name="DisplayEffects" id="202">Devamlı sola akma </List>
+<List name="DisplayEffects" id="203">Devamlı saga akma</List>
+<List name="DisplayEffects" id="204">Devamlı yukarı akma</List>
+<List name="DisplayEffects" id="20">Saat yönüne ters kapanma</List>
+<List name="DisplayEffects" id="21">Yatay örtmek</List>
+<List name="DisplayEffects" id="23">Yukarı örtmek</List>
+<List name="DisplayEffects" id="22">Aşağı örtmek</List>
+<List name="DisplayEffects" id="25">Sola örtmek</List>
+<List name="DisplayEffects" id="24">Saga örtmek</List>
+<List name="DisplayEffects" id="26">Yatay aşamalı</List>
+<List name="DisplayEffects" id="27">Dikey aşamalı</List>
+<List name="DisplayEffects" id="28">Kar rüzgari</List>
+<List name="DisplayEffects" id="29">Şelale</List>
+<List name="DisplayEffects" id="2">Saga akma</List>
+<List name="DisplayEffects" id="30">Kar rüzgari (ters)</List>
+<List name="DisplayEffects" id="31">Şelale (ters akma)</List>
+<List name="DisplayEffects" id="32">Lazer sola akma</List>
+<List name="DisplayEffects" id="33">Lazer saga akma</List>
+<List name="DisplayEffects" id="34">Titreme</List>
+<List name="DisplayEffects" id="35">Ters titreme</List>
+<List name="DisplayEffects" id="36">Aşağıya çekme</List>
+<List name="DisplayEffects" id="37">Yukarıya çekme</List>
+<List name="DisplayEffects" id="38">Dikey çekme</List>
+<List name="DisplayEffects" id="39">Ters çevirmek</List>
+<List name="DisplayEffects" id="3">Yukarı akma</List>
+<List name="DisplayEffects" id="4">Aşağı akma</List>
+<List name="DisplayEffects" id="5">Sola kapanma</List>
+<List name="DisplayEffects" id="6">Saga kapanma</List>
+<List name="DisplayEffects" id="7">Yukarı kapanma</List>
+<List name="DisplayEffects" id="8">Aşağı kapanma</List>
+<List name="DisplayEffects" id="9">Yukarıdan aşağı açılma</List>
+<Item name="DisplayState">Gösterim durumu</Item>
+<Item name="Dll_Add">Birikim</Item>
+<Item name="Dll_Data">Data</Item>
+<Item name="Docking">Yerleştirme</Item>
+<Item name="DonotTips">İpucu İstemiyorum</Item>
+<Item name="DontChange">Asla değiştirme</Item>
+<Item name="DownloadSpeed">Indirme Hızı</Item>
+<Item name="Dwell">Durma Zamanı</Item>
+<Item name="Edit">Düzenle</Item>
+<Item name="Editor">Editör</Item>
+<Item name="Effect">Efekt</Item>
+<Item name="Effect Cover">Örtme</Item>
+<Item name="Effect Drift">Rüzgar</Item>
+<Item name="Effect FanShaped">Fan şekli</Item>
+<Item name="Effect Flicker">Titreme</Item>
+<Item name="Effect Laser">Lazer</Item>
+<Item name="Effect Move">Kayma</Item>
+<Item name="Effect OpenAndClose">Açma ve kapama</Item>
+<Item name="Effect PageTurning">Sayfa çevirme</Item>
+<Item name="Effect Pull">Çekme</Item>
+<Item name="Effect Roll">Sarma</Item>
+<Item name="Effect WaterFall">Şelale</Item>
+<Item name="EffectSetting">Efekt ayarları</Item>
+<Item name="EffectType">Efektlerin türleri</Item>
+<Item name="EliminateGhosting">Gölgelenme giderme</Item>
+<Item name="Empty">Boş</Item>
+<Item name="EmptyScreen">Ekranı boşaltın</Item>
+<Item name="Enable">Etkinleştir</Item>
+<Item name="EnableDhcp">DHCP etkinleştirme</Item>
+<Item name="End Play">Bitir</Item>
+<Item name="EndIpAddr">End IP</Item>
+<Item name="EndToEnd">Uç uça</Item>
+<Item name="Equilibrium">Denge</Item>
+<Item name="Error">Hata</Item>
+<Item name="EthSettingHelpA">Yazılım ayarlarını degiştiriniz, cihaz ayarlarını değiştirmeyiniz!</Item>
+<Item name="EthSettingHelpB">Not:&#x000A;1. Yazılım ve donanım adresleri, ayar başarısından sonra beraber değişecektir.&#x000A;2. Cihaza aynı anda birden fazla aygıt bağlıysa MAC adresinin aynı olmamasına dikkat ediniz.</Item>
+<Item name="Ethernet">Ethernet</Item>
+<Item name="EthernetAddressSettingSuccess">Ethernet adresi başarıyla ayarlandı</Item>
+<Item name="EthernetSettingInfo">Not: LAN sadece bir modül için geçerlidir bağlantınızdan emin olunuz.</Item>
+<Item name="Example">Örneği</Item>
+<Item name="ExitDownloading">Indirme başarısız çıkın. Çıkmak için OK?</Item>
+<Item name="ExpiredVerification">Expired,need passward</Item>
+<Item name="ExporBus">Modülün parametreleri dışarı aktar</Item>
+<Item name="ExporBusIn">Modülün parametreleri içeri aktar</Item>
+<Item name="Export">USB' Gönder</Item>
+<Item name="ExportAdjustTimeFile">Zaman ayarlı dosya gönder</Item>
+<Item name="ExportFile">Dosya gönder</Item>
+<Item name="ExportFileFail">Dosya gönderme başarısız!</Item>
+<Item name="ExportImport">Dışarı ve içeri aktar</Item>
+<Item name="ExportParam">Parametre Dışa Gönder</Item>
+<Item name="ExportScreenFile">Ekran Dosyası Gönder</Item>
+<Item name="ExportSetedParams">Parametreleri Gönder</Item>
+<Item name="ExportSuccess">Gönderme başarılı, flaş belleği çıkarmak istiyormusunuz?</Item>
+<Item name="ExportSuccess1">Aktarma başarılı</Item>
+<Item name="ExportSuccess2"> !</Item>
+<Item name="ExportToUDisk">USB'ye Gönder</Item>
+<Item name="Fahrenheit">Fahrenhayt</Item>
+<Item name="Fast">Hızlı</Item>
+<Item name="Fastest">En hızlı</Item>
+<Item name="FeatureNavigator">Fonksiyon navigasyonu</Item>
+<Item name="File">Dosya</Item>
+<Item name="FileConfigurationError">Dosya belirlenmedi</Item>
+<Item name="FileConfigurationPackageSentSuccessfully">Dosya yapılandırma paketi başarıyla gönderildi.</Item>
+<Item name="FileDoesNotMatch">Dosya eşleşmiyor</Item>
+<Item name="FileList">Dosya listesi</Item>
+<Item name="FileMisidentified">Dosya belirlenmedi</Item>
+<Item name="FileParametersError">Dosya ayarları hatalı(Ekran genişliği, yuksekliği veya renk hatası)</Item>
+<Item name="FileSendComplete">Dosya gonderimi tamamlandı</Item>
+<Item name="FileSize">Dosya boyutu</Item>
+<Item name="FileSuccessfullyReceived">Dosya basarili alındı</Item>
+<Item name="FilterColor">Renkleri filtrele</Item>
+<Item name="FindNewVersion">Güncelleştirmeyi yüklemek için, ister yeni bir sürümünü keşfedin?</Item>
+<Item name="FindScree">Ekranı bul</Item>
+<Item name="FindSerial">Kontrol kartı ile bağlı olan seri bağlantı noktasını bul</Item>
+<Item name="Finish">Tamam</Item>
+<Item name="FinishTracingPoint">Izleme nokta bitti.</Item>
+<Item name="FirmwareMismatching">Program uyumsuz</Item>
+<Item name="FirmwareVersion">Yazılım sürümü</Item>
+<Item name="FirstPage">Birinci sayfa</Item>
+<Item name="FitMaxHint">Max Alan</Item>
+<Item name="FixedCellsWidth">Sabit hucre genisligi</Item>
+<Item name="FixedPlay">Sabit çalma.</Item>
+<Item name="FixedTime">Sabit süre</Item>
+<Item name="Flash">SWF</Item>
+<Item name="Floating">Floating</Item>
+<Item name="FlushLeft">Sola Daya</Item>
+<Item name="Font">Yazı türü</Item>
+<Item name="FontSize">Yazı tipi boyutu</Item>
+<Item name="Foreground">Önalan</Item>
+<Item name="FoundDisk">Çıkarılabilir cihaz bulundu</Item>
+<Item name="FramesTooMuch">Çerçeveler max sayısını aştı, lütfen sayıyı azaltın</Item>
+<Item name="FreeSpace">Boş alan</Item>
+<Item name="Frequency">Frekans</Item>
+<Item name="Friday">Cuma</Item>
+<Item name="From">Itibaren</Item>
+<Item name="From Max To Min">Maksimumdan minimuma</Item>
+<Item name="From Min To Max">Minimumdan maksimuma</Item>
+<Item name="GIF name">GIF ismi</Item>
+<Item name="GammaCorrection">Gama Düzeltme</Item>
+<Item name="GaryTip1">Reduce the control range to 1/</Item>
+<Item name="General2">Nesil 2</Item>
+<Item name="General4">Nesil 4</Item>
+<Item name="General6">Nesil 6</Item>
+<Item name="GeneratingData">Veri oluşturma</Item>
+<Item name="GetFirmwareVersion">Program sürümü</Item>
+<Item name="GetSystemTime">Sistem saati</Item>
+<Item name="Graph">Grafik</Item>
+<Item name="GraphCount">Miktar</Item>
+<Item name="GrayLevel">Gri Seviyesi</Item>
+<Item name="Green">Yeşil</Item>
+<Item name="HDScreenFile">HD Ekran dosyası</Item>
+<Item name="HZoom">Yatay Esnet</Item>
+<Item name="Height">Yükseklik</Item>
+<Item name="HeightOfMoreTthan">"Yükseklik maksimumu aşıyor!"</Item>
+<Item name="Hide">Hide</Item>
+<Item name="High">Yüksek</Item>
+<Item name="Hollow">Konturlu Yazı</Item>
+<Item name="Horizontal">Yatay</Item>
+<Item name="Hour">Saat</Item>
+<Item name="HourHand">Saat oku</Item>
+<Item name="HourRadius">Yariçaplı saat</Item>
+<Item name="Humidity">Nem</Item>
+<Item name="IDAlreadyExists">ID has been exists</Item>
+<Item name="IDInputError">ID is Error</Item>
+<Item name="IPAddress">IP Adres</Item>
+<Item name="IPNotLegitimate">IP is not legitimate</Item>
+<Item name="IPResetting">IP Reset</Item>
+<Item name="IPSetting">IP Ayarlar</Item>
+<Item name="Idle">Idle</Item>
+<Item name="IllegalFile">Yasadışı dosya</Item>
+<Item name="Image">Görüntü</Item>
+<Item name="ImageAuto">Picture Style</Item>
+<Item name="Images">Resim</Item>
+<Item name="ImportParam">Parametre İçeri aktar</Item>
+<Item name="ImportScreenFile">Ekran Dosyası Al</Item>
+<Item name="IncompleteDataWriting">Eksik veri yazma</Item>
+<Item name="Index">Sıra numarası</Item>
+<Item name="InfraredRay">Kızılötesi ışık</Item>
+<Item name="InitialState">Başlangıç hali</Item>
+<Item name="InitializeSuccess">Başlatma başarılı</Item>
+<Item name="InputSmartSettingName">Akıllı ayarların adını giriniz</Item>
+<Item name="Insert">Ekle</Item>
+<Item name="InsertColumn">Sütün ekle</Item>
+<Item name="InsertRow">Satır ekle</Item>
+<Item name="Inverse">Tersini seç</Item>
+<Item name="IsDeleteAllScreen">Ekranın Tümünü sil?</Item>
+<Item name="IsExportVideo">Videoyu dışa aktarmak olmadığı?</Item>
+<Item name="IsSaveFile">Eğer dosyayı kaydetmek istiyor musunuz?</Item>
+<Item name="IsSendToCard">Kontrol kartına göndermek ister misiniz?</Item>
+<Item name="IsTheLatestVersion">Zaten Son Sürümü Kullanıyorsunuz.</Item>
+<Item name="Large">Büyük</Item>
+<Item name="LastPage">Son sayfa</Item>
+<Item name="LeftToRight">Sol-&gt; Sağ</Item>
+<Item name="LevelScreenshot">Yatay ekran görüntüsü</Item>
+<Item name="LightRows">Bir modüldeki yanan çizgiler</Item>
+<Item name="LineSpacing">Satır aralıgı</Item>
+<Item name="Link">Link</Item>
+<Item name="LinkState">Bağlantı Durumu</Item>
+<Item name="LiveTime">Şimdiki Zaman</Item>
+<Item name="LocalDisck">Yerel Disk</Item>
+<Item name="LocalIpSeting">Yerel IP ayarlari</Item>
+<Item name="LockPara">Parametreleri kilitle</Item>
+<Item name="Low">Düşük</Item>
+<Item name="LuminancePrior">Parlaklık</Item>
+<Item name="LuminanceSetting">Parlaklık ayarı</Item>
+<Item name="LuminanceSettingSuccess">Parlaklık başarıyla ayarlandı</Item>
+<Item name="MACAddress">MAC Adresi</Item>
+<Item name="MFRDate">Üretim tarihi</Item>
+<Item name="Magic">Sihirli</Item>
+<Item name="Max">Max</Item>
+<Item name="MaxIPAddr">Maximum TP adres</Item>
+<Item name="MaxUseImage">Max resim</Item>
+<Item name="MaximumOfHeight">En büyük yükseklik</Item>
+<Item name="MaximumOfRange">En buyuk ekran </Item>
+<Item name="MaximumOfRegions">En buyuk alan</Item>
+<Item name="MaximumOfWidth">En büyük genişlik</Item>
+<Item name="Memory">Hafıza</Item>
+<Item name="Memory Size">Dosya boyutu</Item>
+<Item name="MergeCells">Hücreleri birleştir</Item>
+<Item name="Middle">Orta</Item>
+<Item name="Min">Dakika</Item>
+<Item name="MinIPAddr">Minimum IP adres</Item>
+<Item name="MinUseImage">Min resim</Item>
+<Item name="MinuteHand">Dakika oku</Item>
+<Item name="Model">Kart</Item>
+<Item name="Modify">Değiştir</Item>
+<Item name="Module">Modül</Item>
+<Item name="ModuleMismatching">Kontrol cihazın modeli uyuşmuyor</Item>
+<Item name="ModuleSelect">Modül seç</Item>
+<Item name="Monday">Pazartesi</Item>
+<Item name="MoreSetting">Diğer Ayarlar</Item>
+<Item name="MoreSettings">Diğer ayarlar-&gt;&gt;</Item>
+<Item name="MoveDown">Aşagı kaydır</Item>
+<Item name="MoveUp">Yukarı kaydır</Item>
+<Item name="Multi">Cok(ikili)</Item>
+<Item name="MultiFrame">Çoklu çerçeve görüntü</Item>
+<Item name="MultiLine">Çoklu satır</Item>
+<Item name="MultiScreenDirectConnect">Çoklu ekran modu</Item>
+<Item name="MultipeSend">Çoklu gönder</Item>
+<Item name="MultipeSendHint">Çoklu gönderme sadece Ethernet (sabit IP) modu içindir.</Item>
+<Item name="MultipleEffects">Seçimli Efekt</Item>
+<Item name="MultipleLinesoftext">Çok satırlı yazı</Item>
+<Item name="NICName">Kart ismi</Item>
+<Item name="Name">İsim</Item>
+<Item name="NeedSensor">Sensörleri gerektirir</Item>
+<Item name="NeedSpace">Alan gerekir</Item>
+<Item name="NetMark">Ağ maskesi</Item>
+<Item name="NetWorkError">Kontrol kartı basitleştirilmiş modu için uygundur sadece，bu bilgisayar ile aynı ağ segmentinde olup olmadığını kontrol edin.</Item>
+<Item name="NewCrossScreen">Yeni Çapraz ekran(&amp;C)</Item>
+<Item name="NewCrossScreen_G">Yeni Çapraz ekran</Item>
+<Item name="NewGuideScreen">New screen by guide</Item>
+<Item name="NewHypertext">Yeni yazı veya resim</Item>
+<Item name="NewNormalScreen_G">Yeni Normal Ekran</Item>
+<Item name="NewScreen">Yeni ekran</Item>
+<Item name="NewTable">Yeni tablo</Item>
+<Item name="Next">İleri</Item>
+<Item name="NextPage">Sonraki</Item>
+<Item name="NextProgram">Sonraki program</Item>
+<Item name="NextScan">İleri</Item>
+<Item name="NoAssociation">Alakasız</Item>
+<Item name="NoBorder">Sınırsız</Item>
+<Item name="NoFile">Dosya yok!</Item>
+<Item name="NoFindConfigFiles">Devam, ekran parametre dosyasını bulamıyorum?</Item>
+<Item name="NoFoundDisk">Çıkarılabilir bilir cihaz bulunmadı!</Item>
+<Item name="NoInstallFlash">Adobe Flash Player yüklü olup olmadığını lütfen kontrol ediniz!</Item>
+<Item name="NoLimit">Limit yok</Item>
+<Item name="NoSerial">Seri bağlantı noktasına bağlı olan kontrol kart bulunmadı</Item>
+<Item name="NoSerialConnection">Seri port baglı değil</Item>
+<Item name="Noarea">Gönderme başarısız!</Item>
+<Item name="Noitemisselected">Nothing selected</Item>
+<Item name="NormalShow">Normal Program Akışı</Item>
+<Item name="NotSelected">Seçili olmayan</Item>
+<Item name="NotSupportGlobalProgram">Ordinary screen does not support global program</Item>
+<Item name="NotSupportLANUpgrade">Bu modelde ethernet bağlantısı uygun degildir, RS32 veya USB portlarını kullanarak lütfen sistemi güncelleyin.</Item>
+<Item name="NotSupportTips">Ipuçları: Saat desteklenmiyor, yeni çevirmeli, Sıcaklık ve Nem, Lunar</Item>
+<Item name="NumberOfProgramHasReachedItsMaximum">Maksimium program sayısına ulaştı!</Item>
+<Item name="NumberOfRegionHasReachedItsMaximum">Maksimum numara sayısına ulaştı!</Item>
+<Item name="OEPolarity">OE Polarite</Item>
+<Item name="OEPolaritySet">OE polarite ayarı</Item>
+<Item name="OK">OK</Item>
+<Item name="Offline">Çevrimdışı</Item>
+<Item name="OldVerCard">Search for Gen4</Item>
+<Item name="On-line">On-line</Item>
+<Item name="OnBottom">Alt</Item>
+<Item name="OnLeft">Sol</Item>
+<Item name="OnRight">Sağ</Item>
+<Item name="OnTop">Üst</Item>
+<Item name="OnlyAllowContainsAClockRegion">Sadece saat gosterilir!</Item>
+<Item name="OnlyAllowContainsATempRegion">Sadece 1 bolge icin derece gosterilir!</Item>
+<Item name="OnlyAllowContainsATimeRegion">Sadece 1 derece bölgesi için izin verir!</Item>
+<Item name="OnlyCard">Just for card</Item>
+<Item name="Open">Aç</Item>
+<Item name="OpenAdv">Reklamı aç</Item>
+<Item name="OpenFileFail">Dosya açma başarısız, lütfen dosyanın başka yerde açılı olmamasından emin olunuz</Item>
+<Item name="OpenFolder">Dosya aç</Item>
+<Item name="OpenScreen">Ekranı aç</Item>
+<Item name="OperationSuccess">İşlem başarılı</Item>
+<Item name="Orange">Mor</Item>
+<Item name="OriginX">X Başlangıcı</Item>
+<Item name="OriginY">Y Başlangıcı</Item>
+<Item name="Original">Kaynak</Item>
+<Item name="OtherSeting">Diğer ayarlar</Item>
+<Item name="Out">Bilgi</Item>
+<Item name="OutOfMemory">Kontrol cıhazın hafızası yetersiz, lütfen programı küçültün</Item>
+<Item name="OutOfShowMemory">Out of memory,reduce area.</Item>
+<List name="OutputWindowString" id="0">Taranan ekipman</List>
+<List name="OutputWindowString" id="10">Kontrol kartı adı başarıyla ayarlandı</List>
+<List name="OutputWindowString" id="11">Ekranı temizle başarıyla</List>
+<List name="OutputWindowString" id="12">Ekran parametreleri başarıyla ayarlandı</List>
+<List name="OutputWindowString" id="13">Kontrol kartı zamanı başarıyla ayarlanmış</List>
+<List name="OutputWindowString" id="14">Parlaklık Ayarlar başarıyla</List>
+<List name="OutputWindowString" id="15">Ayarlar başarıyla Timer anahtarı</List>
+<List name="OutputWindowString" id="16">Ekran Testi...</List>
+<List name="OutputWindowString" id="17">Bilinmeyen Emir</List>
+<List name="OutputWindowString" id="18">Hiçbir donanım parametreleri</List>
+<List name="OutputWindowString" id="19">Geçersiz Komut</List>
+<List name="OutputWindowString" id="1">Ekipman Bilgi Almak </List>
+<List name="OutputWindowString" id="20">Sistem meşgul</List>
+<List name="OutputWindowString" id="21">Baş uzunluğu hatası</List>
+<List name="OutputWindowString" id="22">Tanımlayıcı yanlış</List>
+<List name="OutputWindowString" id="23">Sayı yanlış </List>
+<List name="OutputWindowString" id="24">Hiçbir ekran parametrelerinin</List>
+<List name="OutputWindowString" id="25">Paket hatası</List>
+<List name="OutputWindowString" id="26">Bilinmeyen hata</List>
+<List name="OutputWindowString" id="27">Zamanaşımı gönder</List>
+<List name="OutputWindowString" id="28">Görüşleriniz paket ayrıştırma hatası</List>
+<List name="OutputWindowString" id="29">IP başarıyla değiştirildi</List>
+<List name="OutputWindowString" id="2">Ekipman çevrimdışı</List>
+<List name="OutputWindowString" id="30">Firmware güncellemesi başarısız, lütfen tekrar deneyin</List>
+<List name="OutputWindowString" id="31">Başarısız ayara</List>
+<List name="OutputWindowString" id="32">Kontrol hatası</List>
+<List name="OutputWindowString" id="33">Protokol hatası</List>
+<List name="OutputWindowString" id="34">Talimat hatası</List>
+<List name="OutputWindowString" id="35">Dosya eşleşmiyor</List>
+<List name="OutputWindowString" id="36">Paketi numarası hatası</List>
+<List name="OutputWindowString" id="37">Modül türü uyuşmazlığı</List>
+<List name="OutputWindowString" id="38">Dosya yapılandırma hatası</List>
+<List name="OutputWindowString" id="39">Yasadışı dosya</List>
+<List name="OutputWindowString" id="3">Göndermek istediğiniz ekranı seçiniz</List>
+<List name="OutputWindowString" id="40">CPU türü hatası</List>
+<List name="OutputWindowString" id="41">Firmware tek renk desteklemiyor, sadece üç temel renk destekliyor</List>
+<List name="OutputWindowString" id="42">Firmware üç ana renk desteği yok, sadece tek rengi destekler</List>
+<List name="OutputWindowString" id="43">Yükseltme Başarı</List>
+<List name="OutputWindowString" id="44">Kabul başarısız</List>
+<List name="OutputWindowString" id="45">Paket uzunluğu hatası</List>
+<List name="OutputWindowString" id="46">Dosya tanımlama hatası</List>
+<List name="OutputWindowString" id="47">Alt paket sıra numarası hatası</List>
+<List name="OutputWindowString" id="49">Alınan Dosya başarıyla</List>
+<List name="OutputWindowString" id="4">Seç ekran bağsız ekipman</List>
+<List name="OutputWindowString" id="50">Gecikmeli sinyal</List>
+<List name="OutputWindowString" id="51">Meşgul Sistemi</List>
+<List name="OutputWindowString" id="52">Veri eksik yazılmıştır</List>
+<List name="OutputWindowString" id="53">Bellenim yükseltmesi başarılı!</List>
+<List name="OutputWindowString" id="54">Donanım parametreleri başarıyla ayarlandı</List>
+<List name="OutputWindowString" id="55">Device bound is offline</List>
+<List name="OutputWindowString" id="56">The setting of the screen size is not right.</List>
+<List name="OutputWindowString" id="57">Start sending</List>
+<List name="OutputWindowString" id="58">Setting successfully</List>
+<List name="OutputWindowString" id="59">Service expiration</List>
+<List name="OutputWindowString" id="5">Program verileri çok büyük</List>
+<List name="OutputWindowString" id="60">Font changed successfully</List>
+<List name="OutputWindowString" id="61">Set directly connected successfully</List>
+<List name="OutputWindowString" id="62">Cancel directly connected successfully</List>
+<List name="OutputWindowString" id="63">Equipment in the Boot status,please update the firmware</List>
+<List name="OutputWindowString" id="64">Verification fails</List>
+<List name="OutputWindowString" id="65">Returns nothing</List>
+<List name="OutputWindowString" id="66">File is too large</List>
+<List name="OutputWindowString" id="67">Control card ID is wrong</List>
+<List name="OutputWindowString" id="68">Invalid device ID[%s]</List>
+<List name="OutputWindowString" id="69">Reset Device ID[%s]</List>
+<List name="OutputWindowString" id="6">Komut başarıyla tamamlandı</List>
+<List name="OutputWindowString" id="7">Başlatma gönder</List>
+<List name="OutputWindowString" id="8">Gönderme...</List>
+<List name="OutputWindowString" id="9">Başarıyla gönderildi</List>
+<Item name="P10Colorful">M10（Ful renk）</Item>
+<Item name="Pack">Görüntü paketi</Item>
+<Item name="PackageNumberError">Paket yanlıştır</Item>
+<Item name="Packet">Paket</Item>
+<Item name="PacketError">Yazılan dosya hatalı</Item>
+<Item name="PacketSize">Dosya boyutu</Item>
+<Item name="Page">Sayfa</Item>
+<Item name="Pages">Sayfalar</Item>
+<Item name="PannelFill">"Bölge zaten var!"</Item>
+<Item name="ParallelSend">Parallel Gönderim</Item>
+<Item name="ParametersReadbackSuccess">Parametreler başarıyla geri alındı</Item>
+<Item name="ParametersSetting">Parametre ayarları</Item>
+<Item name="Parti-color”&gt;Çift renkli&lt;/Item&gt;
+        &lt;Item name=">Üç renkli</Item>
+<Item name="Password">Şifre</Item>
+<Item name="PasswordAuthentication">Şifre doğrulaması</Item>
+<Item name="PasswordError">Hatalı şifre!</Item>
+<Item name="PasswordSetting">Şifre ayarı</Item>
+<Item name="Paste">Yapıştır</Item>
+<Item name="Path">Yolu</Item>
+<Item name="Pause">Duraklat</Item>
+<Item name="PictrueProcessing">Resim işleniyor</Item>
+<Item name="PlaseSelectDevice">Cihazı seçiniz</Item>
+<Item name="Play">Oynat</Item>
+<Item name="PlayBeforePowerProgram">Bellek son göster</Item>
+<Item name="PlayMemory Size">Dosya boyutunu göster</Item>
+<Item name="PlayMode">Çalışma Modu</Item>
+<Item name="PlayQuality">Kalite</Item>
+<Item name="PlaySpeed">Hız</Item>
+<Item name="PlayTime">Çalışma süresi</Item>
+<Item name="PlayTimes">Oynatma Tekrarı</Item>
+<Item name="Playback Duration">Oynatma süresi</Item>
+<Item name="Player">Oyna</Item>
+<Item name="Playing BeginFrames">Başlangıç karesini oynat</Item>
+<Item name="Playing EndFrames">Son çerçevesini oynat</Item>
+<Item name="Playing Frames">Çerçeveleri oynat</Item>
+<Item name="PleaseEnterTheBorderWidthOfTheTable">Lütfen tablo sınır genişliğini giriniz</Item>
+<Item name="PleaseEnterTheNumberOfCloumns">Lütfen sütün sayısını giriniz</Item>
+<Item name="PleaseEnterTheNumberOfRows">Lütfen satır sayısını giriniz</Item>
+<Item name="PleaseSelect">Lütfen seçin</Item>
+<Item name="PleaseSelectAFile">Lütfen dosya seçiniz!</Item>
+<Item name="PleaseSelectAItem">Lütfen bir öğe seçiniz</Item>
+<Item name="PleaseSelectAProgram">Lütfen program seçiniz!</Item>
+<Item name="PleaseSelectScreen">Ekranı seçiniz.</Item>
+<Item name="PleaseWait">Lütfen bekleyin...</Item>
+<Item name="PlotPointsImage">Tarama Noktası</Item>
+<Item name="PointCount">Ondalık sayılar</Item>
+<Item name="Points">Ekran noktaları</Item>
+<Item name="PopUdiskfailure">USB disk çıkarma başarısız oldu!</Item>
+<Item name="Port">Port</Item>
+<Item name="PreProgram">Önceki program</Item>
+<Item name="PreProgramConctrl">Program kontrolü</Item>
+<Item name="Prev">Geri</Item>
+<Item name="PrevScan">Geri</Item>
+<Item name="Preview">Ön izleme</Item>
+<Item name="PreviewSetting">Ön izleme ayarı</Item>
+<Item name="PreviousPage">Önceki</Item>
+<Item name="ProgramInformation">Program Bilgileri</Item>
+<Item name="ProgramSize">Program Ölçüsü</Item>
+<Item name="ProgramSwitching">Program değiştirme</Item>
+<Item name="ProtocolError">Protokol yanlıştır</Item>
+<Item name="ProtocolTypeError">Protokol tipi hatalı</Item>
+<Item name="PullThreshold">Yüzermek</Item>
+<Item name="QRCode">QR code</Item>
+<Item name="QuitTest">Testten Çık</Item>
+<Item name="RFID"> RF  ID</Item>
+<Item name="RFSetting">RF Ayarlar</Item>
+<Item name="RS232">RS232</Item>
+<Item name="RadioEffect">Tekli Efekt</Item>
+<Item name="RandomColor">Rasgele Renk</Item>
+<Item name="ReadBack2">Geri okuma</Item>
+<Item name="ReadScreenParamsFromUDisk">USB'den ekran parametrelerini oku</Item>
+<Item name="Readback">Geri dön</Item>
+<Item name="RealTimeArea">Gerçek Zamanlı alan</Item>
+<Item name="RealTimeFindCard">Gerçek zamanlı arama kartı</Item>
+<Item name="RebootScreen">Reboot Screen</Item>
+<Item name="ReceiveFailure">Kabul etme hatası</Item>
+<Item name="Record">Kayıt</Item>
+<Item name="RecordTips">Not: Eğer doğru görüntü alamıyorsanız, kayıt seçeneklerini kontrol edin.</Item>
+<Item name="RectangleScreen">Dikdörtgen ekranı</Item>
+<Item name="Red">Kırmızı</Item>
+<Item name="Refresh">Yenile</Item>
+<Item name="RefreshFrequency">Frekans Yenileme</Item>
+<Item name="RefreshRate">Yenileme hızı</Item>
+<Item name="RegionHeight">Yükseklik</Item>
+<Item name="RegionRect">Bölge Konumu</Item>
+<Item name="RegionWidth">Genişlik</Item>
+<Item name="Relevance">Seçenekler-&gt;Menu-&gt;Bağlantı ayarları-&gt;TCP-&gt;İlgili ekran”!</Item>
+<Item name="RememberProgram">Programı hatırla</Item>
+<Item name="Remove">Sil</Item>
+<Item name="RemoveDevice">Cihazı kaldır</Item>
+<Item name="RemoveDeviceSuccess1">Başarıyla çıkartıldı</Item>
+<Item name="RemoveDeviceSuccess2">!</Item>
+<Item name="Rename">İsmi degiştir</Item>
+<Item name="Repeat">Tekrar</Item>
+<Item name="Reset">Sıfırla</Item>
+<Item name="ResetProgram">Program Sıfırlama</Item>
+<Item name="RestartFailed">Yeniden başlatılamadı</Item>
+<Item name="RestartSuccess">Control card restart successfully</Item>
+<Item name="RevertToDefaultSettings">Varsayılan duruma dönmek,Devam?</Item>
+<Item name="RightToLeft">Sağ-&gt; Sol</Item>
+<Item name="Romaji">Roma Rakamı</Item>
+<Item name="Round">Yuvarlak</Item>
+<Item name="RoundAndDigital">Yuvarlak ve Rakamlı</Item>
+<Item name="RoundAndRomaji">Yuvarlak ve Roman Rakamlı</Item>
+<Item name="RouterAddress">Router Adresi</Item>
+<Item name="Row">Satır</Item>
+<Item name="SRCFile">Kaynak Dosya</Item>
+<Item name="SWF name">SWF Yolu</Item>
+<Item name="Saturday">Cumartesi</Item>
+<Item name="Save">Kaydet</Item>
+<Item name="SaveToDefaultSetting">Ayarları varsayılan kaydet</Item>
+<Item name="ScaleAndDigital">Ölçek ve haneli</Item>
+<Item name="ScaleAndRomaji">Ölçek ve Roman yazılı</Item>
+<Item name="ScanMode">Tarama modu</Item>
+<Item name="ScanRange">Tarama alanı</Item>
+<Item name="ScanValueB">Mavi filtre</Item>
+<Item name="ScanValueG">Yeşil filtre</Item>
+<Item name="ScanValueR">Kırmızı filtre</Item>
+<Item name="Scanning">Tarama</Item>
+<Item name="ScanningComplete">Tarama tamamlandı</Item>
+<Item name="Schedule">Program</Item>
+<Item name="ScreenCentered">Ekranı Ortala</Item>
+<Item name="ScreenChoosePageTip">Ekran Türünü Seçin</Item>
+<Item name="ScreenColor">Renk</Item>
+<Item name="ScreenCount">Ekran sayısı</Item>
+<Item name="ScreenHeight">Yükseklik</Item>
+<Item name="ScreenInformation">Ekran Bilgisi</Item>
+<Item name="ScreenParameters">Ekran parametreleri</Item>
+<Item name="ScreenParametersSetting">Ekran paramtrelerini ayarlama</Item>
+<Item name="ScreenParamsPageTip">1. Ekranın Pixel genişliğini ve yüksekliğini seçin (Ekranın Toplam Pixel olarak Genişlik ve Yüksekliği)&#x000A;2.Select the color of screen ；&#x000A;3.The single scrren of total pixle is the amount of led lights.</Item>
+<Item name="ScreenSize">Ekran boyutu</Item>
+<Item name="ScreenSmartTip">Normal metin gösteren mevcut ekran, akıllı ayar seçilmesine gerek yok</Item>
+<Item name="ScreenTest">Ekran testi</Item>
+<Item name="ScreenType">Ekran Türü</Item>
+<Item name="ScreenWidth">Genişik</Item>
+<Item name="Search">Arama</Item>
+<Item name="Searching">Aranıyor…</Item>
+<Item name="SearchingBegin">Aranıyor</Item>
+<Item name="SearchingEnd">Arama tamamlandı</Item>
+<Item name="Sec">Saniye</Item>
+<Item name="SecondHand">Saniye oku</Item>
+<Item name="SecondRadius">Dakikalı saat</Item>
+<Item name="SelectDataPolarity">Veri kutuplarını seçiniz</Item>
+<Item name="SelectDefault">Eğer kontrol kartı türünü bilmiyorsanız,varsayılan seçeneği seçin.</Item>
+<Item name="SelectMode">Modu Seç</Item>
+<Item name="SelectOEPolarity">OE kutuplarını seçiniz</Item>
+<Item name="SelectScan">"Tarama modunu seçiniz!”</Item>
+<Item name="SelectScree">Ekran seçiniz!</Item>
+<Item name="SendFile">Dosya gönder</Item>
+<Item name="SendParamsWhenFinish">Parametreleri değiştirdikten sonra, "Parametreler gönder" butonuna tıklayınız.</Item>
+<Item name="SendScreenParams">Parametreleri gönder</Item>
+<Item name="SendTimeOut">Zaman aşımına uğradı</Item>
+<Item name="SendingData">Data gönderiliyor ...</Item>
+<Item name="SentSuccessfully">Gönderme başarılı</Item>
+<Item name="SerialNumber">Seri numarası</Item>
+<Item name="SerialPort">Seri port</Item>
+<Item name="SerialPortIsClosed">Seri porta bağlı kontrol kartı bulunmadı</Item>
+<Item name="SerialPortIsOccupied">Seri portta baska cihaz var!</Item>
+<Item name="SerialPortOpenError">Hatalı seri port</Item>
+<Item name="ServiceExpiration">Sona Erme Tarihi</Item>
+<Item name="SetBrightnessFailed">Parlaklık ayarı başarısız</Item>
+<Item name="SetBrightnessSuccess">Parlaklık ayarı başarılı</Item>
+<Item name="SetScreenParam">Ekran parametreleri başarıyla ayarlandı.</Item>
+<Item name="SetTheBaudrateSuccessfully">Gonderim hızı başarılı ayarlandı</Item>
+<Item name="Setting">Ayarlar</Item>
+<Item name="SetupFailed">Ayarlanamadı</Item>
+<Item name="ShowDate">Tarih göster</Item>
+<Item name="ShowGroup">Grubu Göster</Item>
+<Item name="ShowMode">Görüntü modu</Item>
+<Item name="ShowTime">Saati göster</Item>
+<Item name="ShowWeek">Hafta göster</Item>
+<Item name="Showpage">Sayfasını göster</Item>
+<Item name="ShuttingDown">Kapanma Zamanı</Item>
+<Item name="SignalDelay">Mandal sinyali</Item>
+<Item name="SignalDelayHint">Ekranin bir kismi (ornek bazi P5 gibi) mandali STR veya LAT denir
+                Bir flash nokta veya çizgi varsa sinyal, diğer ekran ile iptal edilir bunu bu seçeneği etkisiz deneyebilirsiniz</Item>
+<Item name="SignalQuality">Sinyal Kalitesi</Item>
+<Item name="Simplify">Basitleştirilmiş modu</Item>
+<Item name="SimplifyInfo">Basit olan tek bağlantıda kullanılan IP için geçerlidir ve otomatik olarak eşleşir</Item>
+<Item name="Single">Tek</Item>
+<Item name="SingleDirectMode">Doğrudan bağlantı modu</Item>
+<Item name="SingleLine">Tek satır</Item>
+<Item name="SingleLineoftext">Tek satırlı yazı</Item>
+<Item name="SingleScreenBroadcasts">Kopyalama modu</Item>
+<Item name="Size">Boyut</Item>
+<Item name="Slow">Yavaş</Item>
+<Item name="Slowest">En yavaş</Item>
+<Item name="Small">Küçük</Item>
+<Item name="SmartScanTips">Ekran ekranın parlaklığı koyu ise, saat frekansını azaltın lütfen.</Item>
+<Item name="SmartSetting">Akıllı Ayarlar</Item>
+<Item name="SmartSettingName">Akıllı ayar Adı</Item>
+<Item name="SmartTips">İpuçları: Birim olarak Pixel</Item>
+<Item name="Snapshot">Snapshot</Item>
+<Item name="SnapshotTip">Parlak nokta yoksa, boş noktaları işaretleyin</Item>
+<Item name="Solid color">Tek renkli</Item>
+<Item name="Space">Boşluk</Item>
+<Item name="SpecifiedDate">Belirtilen tarih</Item>
+<Item name="SpecifiedTime">Belirtilen süre</Item>
+<Item name="SpecifyValue">Değer belirtin</Item>
+<Item name="Speed">Hız</Item>
+<Item name="SpeedPrior">Hız</Item>
+<Item name="SplitCell">Hücreleri ayır</Item>
+<Item name="SplitHorizontal">Yatay bölme</Item>
+<Item name="SplitVertical">Dikey bölme</Item>
+<Item name="Standard">Standart</Item>
+<Item name="StartUpImage">Başlangıç resmi</Item>
+<Item name="StartingUp">Açılma Zamanı</Item>
+<Item name="StateA">Durum A</Item>
+<Item name="StateB">Durum B</Item>
+<Item name="StateC">Durum C</Item>
+<Item name="StateD">Durum D</Item>
+<Item name="Static">Sabit</Item>
+<Item name="Status">Durum</Item>
+<Item name="StepBack">Geri al</Item>
+<Item name="Stop">Durdur</Item>
+<Item name="Stroke">Dolgun Yazı</Item>
+<Item name="StyleName">Efektin adı</Item>
+<Item name="StyleText">Metin</Item>
+<Item name="SubPacketSequenceNumberError">Alt Paket dizi numarası yanlış</Item>
+<Item name="SuccessfullyModified">"Modifiye başarılı!”</Item>
+<Item name="Sunday">Pazar</Item>
+<Item name="SupportRegionsOverlap">Destek Bölgeler Örtüşme</Item>
+<Item name="SuspendPreview">Önizlemeyi durdur</Item>
+<Item name="SwapBlueGreen">Mavi-yeşil değiştir</Item>
+<List name="SystemBusName" id="0">[C1]φ4.75(φ3.75)1R1G   1/16S HUB08 64X32（Indoor）  [A1]</List>
+<List name="SystemBusName" id="10">[C11]P10       1R1G1B 1/8S  HUB08 32X16 HLL</List>
+<List name="SystemBusName" id="11">[C12]P10       1R1G1B 1/4S  HUB75 32X16  [A13]</List>
+<List name="SystemBusName" id="12">[C13]P8        1R1G1B 1/5S   HUB75 40X20 JHG  [A60]</List>
+<List name="SystemBusName" id="13">[C14]P8        1R1G1B 1/4S  HUB08 32X16  [A8]</List>
+<List name="SystemBusName" id="14">[C15]P12/P16   2R1G   1/4S  HUB12 16X8（P16） [A12]</List>
+<List name="SystemBusName" id="15">[C16]P13.33    1R1G1B 1/3S  HUB08 24X12 HLL  [A49]</List>
+<List name="SystemBusName" id="16">[C17]P13.33    1R1G1B 1/3S  HUB08 24X12 JHG  [A57]</List>
+<List name="SystemBusName" id="17">[C18]P16       1R1G1B 1/5S  HUB08 20X10 HLL  [A52]</List>
+<List name="SystemBusName" id="18">[C19]P16       1R1G1B 1/1S  HUB40 16X8  [A29]</List>
+<List name="SystemBusName" id="19">[C20]P10       1R1G1B 1/4S  HUB75 32X16  [A11]</List>
+<List name="SystemBusName" id="1">[C2]φ3.75(φ5)1R     1/16S HUB08 64X32（Indoor）  [A1]</List>
+<List name="SystemBusName" id="20">[C21]P25       2R1G1B 1/1S  HUB40 16X8</List>
+<List name="SystemBusName" id="21">[C22]P10-P20   1G2R1B 1/4S  HUB12 16X8  [A61]</List>
+<List name="SystemBusName" id="22">[C23]P10-P20   2R1G1B 1/4S  HUB12 16X8  [A80]</List>
+<List name="SystemBusName" id="23">[C24]P13.33-P26.66  2R1G1B 1/4S  HUB12 12X6</List>
+<List name="SystemBusName" id="24">[C25]P20  1R1G 1/4S  HUB26 16*16（ZHGD） [A66]</List>
+<List name="SystemBusName" id="25">[C26]P13.33  1R1G1B 1/6S  HUB08 24*12（HLL） [A55]</List>
+<List name="SystemBusName" id="26">[C27]P10  1R 1/4S  HUB12 32*16（QL） [A19]</List>
+<List name="SystemBusName" id="27">[C28]P10  1R1G1B 1/2S  HUB75 16*16</List>
+<List name="SystemBusName" id="28">[C29]P6  1R1G1B 1/8S  HUB75 32*16</List>
+<List name="SystemBusName" id="29">[C30]P6  1R1G1B 1/8S  HUB75 32*32</List>
+<List name="SystemBusName" id="2">[C3]P5         1R1G1B 1/16S HUB08 32X32  [A3]</List>
+<List name="SystemBusName" id="30">[C31]P10  1R1G1B 1/4S  HUB75 16*16[A17]</List>
+<List name="SystemBusName" id="31">[C32]P20  1R1G1B 1/1S  HUB75 16*8</List>
+<List name="SystemBusName" id="32">[C33]P25  2R1G1B 1/1S  HUB75 8*8  [A30]</List>
+<List name="SystemBusName" id="33">[C34]P13.33  1R 1/4S  HUB12 24*12 [A71]</List>
+<List name="SystemBusName" id="34">[C35]P10  1R1G 1/4S  HUB12 32*16  [A7]</List>
+<List name="SystemBusName" id="3">[C4]P5         1R1G   1/8S  HUB08 32*16（Vehicle screen） [A4]</List>
+<List name="SystemBusName" id="4">[C5]P5/P4      1R1G1B 1/16S HUB75 32X32（Indoor） [A1]</List>
+<List name="SystemBusName" id="5">[C6]P10        1R/1R1G     1/4S  HUB12 32X16（P10） [A8]</List>
+<List name="SystemBusName" id="6">[C7]P10        1R     1/4S  HUB08  32X16</List>
+<List name="SystemBusName" id="7">[C8]P10        1R     1/1S  HUB08 32X16[A31]</List>
+<List name="SystemBusName" id="8">[C9]P10        1R1G   1/4S  HUB08  No 138 32X16  [A13]</List>
+<List name="SystemBusName" id="9">[C10]P10        1R1G   1/4S  HUB12 32X16 [A19]</List>
+<Item name="SystemBusy">Sistem meşgul, tekrar gönderiniz!</Item>
+<Item name="SystemOptimize">Sistem en iyi duruma getirme</Item>
+<Item name="SystemTime">PC saati</Item>
+<Item name="Table">Tablo</Item>
+<Item name="TargetTime">Hedef zaman</Item>
+<Item name="Temp">Sıcaklık</Item>
+<Item name="TempAdjust">Derece ayarı</Item>
+<Item name="TempHumidity">Sıcaklık-Nem</Item>
+<Item name="TempOrRHExist">Sıcaklık Bölgeyi ve sıcaklık ve nem alan aynı anda var olamaz.</Item>
+<Item name="TempUnit">Derece birimi</Item>
+<Item name="Temppoint1">Kullandığınız sensör DS18B20 model olduğundan emin olun</Item>
+<Item name="Temppoint2">Kullandığınız sensör AM2301 model olduğundan emin olun</Item>
+<Item name="Test">Test</Item>
+<Item name="Text">Metin yazı</Item>
+<Item name="TextColor">Metin rengi</Item>
+<Item name="TextFile">.txt dosyasi</Item>
+<Item name="TextInfo">Metin bilgileri</Item>
+<Item name="TextProcess">Metin yönü</Item>
+<Item name="TextProcessing">Yazi işleniyor</Item>
+<Item name="TheDeviceHasBeenOffline">Cihaz hatsız olmuştur</Item>
+<Item name="ThisModuleNotSupportUDisk">Bu model USB bellek desteklemez</Item>
+<Item name="Thursday">Perşembe</Item>
+<Item name="TimeClock">Dijital Saat</Item>
+<Item name="TimeDifference">Saat farkı</Item>
+<Item name="TimeParameters">Saat parametreleri</Item>
+<Item name="TimeSettingSuccess">Zaman ayarı başarılı</Item>
+<Item name="TimeSwitch">Zamanlı Açma/Kapama</Item>
+<Item name="TimeSwitchSettingSuccess">Saat anahtarı başarılı ayarlandı</Item>
+<Item name="TimedRestart">Zamanlı yeniden başlatma</Item>
+<Item name="TimerColor">Saat rengı</Item>
+<Item name="Timing Parameters">Triger Parametreleri</Item>
+<Item name="TimingControl">Zamanlama Kpntrolü</Item>
+<Item name="TimingMode">Zaman işleyişi Modu</Item>
+<Item name="TimingPause">Süreci Duraklat</Item>
+<Item name="TimingReset">Süreci sıfırla</Item>
+<Item name="TimingSet">Saat ayarlama</Item>
+<Item name="Tip_Type1">Use  current communication address to connect UDP</Item>
+<Item name="Tip_Type2">Use IP address from returned device to connect UDP</Item>
+<Item name="Tip_Type3">Use IP address from returned device to connect TCP</Item>
+<Item name="Tip_Type4">Through agent address connected device</Item>
+<Item name="To">İle</Item>
+<Item name="To2">-ye</Item>
+<Item name="Toolbar_AddColorful_Bottom">Metnin Renkli ekran, bir animasyonlu arka plan ekleyebilirsiniz</Item>
+<Item name="Toolbar_AddColorful_Top">Renkli ekle</Item>
+<Item name="Toolbar_AddCount_Bottom">Bir Düğme veya seri kablodan gelen bilgilerin ekranda Gösterilmesini sağlar</Item>
+<Item name="Toolbar_AddCount_Top">Buton kontrollü Sayaç Penceresi ekleme</Item>
+<Item name="Toolbar_AddExcel_Bottom">Excel dosyaları, özel efektler seçimi, arka plan seçimi</Item>
+<Item name="Toolbar_AddExcel_Top">Yeni Excel</Item>
+<Item name="Toolbar_AddGlobalProgram_Bottom">Vb Hipermetinde, metin, zaman, sadece bir alanı içerebilir, programın zamanla oynayabilir</Item>
+<Item name="Toolbar_AddGlobalProgram_Top">Un programa globales Ekle</Item>
+<Item name="Toolbar_AddHypertext_Bottom">Resim, video, SWF, vb</Item>
+<Item name="Toolbar_AddHypertext_Top">Çoklu Ekleme, Resim Yazı Animasyon</Item>
+<Item name="Toolbar_AddProgram_Bottom">20 bölgeleri vb hypertext, metin, zaman içerebilir, programın zamanla oynayabilir</Item>
+<Item name="Toolbar_AddProgram_Top">Yeni program ekle</Item>
+<Item name="Toolbar_AddTempRH_Bottom">Isı ve Nem Sensörünün bağlı olduğundan emin olun</Item>
+<Item name="Toolbar_AddTempRH_Top">Sıcaklık ve Nem penceresi ekleme</Item>
+<Item name="Toolbar_AddText_Bottom">Metin düzenleme, efekt seçimi, arka plan seçimi</Item>
+<Item name="Toolbar_AddText_Top">Yeni metin ekle</Item>
+<Item name="Toolbar_AddTime_Bottom">Dijital saat veya saat kadranı</Item>
+<Item name="Toolbar_AddTime_Top">Zaman ekle</Item>
+<Item name="Toolbar_AddTiming_Bottom">Hedef Zaman ileri-geri sayım, buton kontrollü kronograf</Item>
+<Item name="Toolbar_AddTiming_Top">İleri-Geri Zamanlama ekle</Item>
+<Item name="Toolbar_Adjusttime_Bottom">Bilgisayar ile düzeltme kontrol kartı zaman senkronizasyonu</Item>
+<Item name="Toolbar_Adjusttime_Top">Saati Kontrol Kartıyla Senkronize Eder</Item>
+<Item name="Toolbar_Check">Tüm programlar seçili</Item>
+<Item name="Toolbar_Copy">Kopyala</Item>
+<Item name="Toolbar_Delete">Sil</Item>
+<Item name="Toolbar_Down">Aşağı Taşı</Item>
+<Item name="Toolbar_ExportToUdisk_Bottom">USB Diskin takılı olduğundan emin olun</Item>
+<Item name="Toolbar_ExportToUdisk_Top">Yapılan Progrmı USB ye aktarır</Item>
+<Item name="Toolbar_Paste">Yapıştır</Item>
+<Item name="Toolbar_Preview1_Bottom">Mevcut Önizleme ekranı</Item>
+<Item name="Toolbar_Preview1_Top">Görüntü Önizleme</Item>
+<Item name="Toolbar_Preview2_Bottom">Tüm edilmiş yerleşik ekran göster，belirlenen ekranına girmek için çift tıklatın.</Item>
+<Item name="Toolbar_Preview2_Top">Group can not preview</Item>
+<Item name="Toolbar_Preview_Bottom">Önizleme Geçerli bir program</Item>
+<Item name="Toolbar_Preview_Top">Önizleme</Item>
+<Item name="Toolbar_Save">Kaydet</Item>
+<Item name="Toolbar_Search">Ara</Item>
+<Item name="Toolbar_Send_Bottom"></Item>
+<Item name="Toolbar_Send_Top">Wi-Fi veya RS232 ile Gönder</Item>
+<Item name="Toolbar_Uncheck">Seçili program yok</Item>
+<Item name="Toolbar_Up">Yukarı Taşı</Item>
+<Item name="TotalECard">Ağ kartı sayısı:</Item>
+<Item name="TotalFrames">Toplam çerçeveler</Item>
+<Item name="TotalSpace">Toplam alan</Item>
+<Item name="TracingPoint">Hizalama Açıklaması</Item>
+<Item name="TracingPointArrowKeys">Nokta izleme için sol tıklayın, size doğru noktayı kontrol etmek için ok tuşlarını kullanabilirsiniz.</Item>
+<Item name="TracingPointError">Nokta izlemeyi hatadır.</Item>
+<Item name="TracingPointFail">Izleme noktası tekrar gelin Izleme edin, başarısız.</Item>
+<Item name="TransitionThreshold">Geçiş eşiği</Item>
+<Item name="Transparent">Saydam</Item>
+<Item name="Tuesday">Salı</Item>
+<Item name="Twinkle">Titreme</Item>
+<Item name="TwoLinedisplay">Iki satır ekran</Item>
+<Item name="Type">Tür</Item>
+<Item name="Type1">Yöntem biri</Item>
+<Item name="Type2">Yöntem iki</Item>
+<Item name="Type3">Yöntem üç</Item>
+<Item name="Type4">Type four</Item>
+<Item name="TypeName">Tür adı</Item>
+<Item name="U-DiskSucess">Flaş bellek bağlantısı başarılı</Item>
+<Item name="UDisk">USB'ye Gönder</Item>
+<Item name="USE_HD2010">Bir kontrol kartı algılandı, ancak mevcut yazılımı eşleşmiyor, HD2012 kullanın lütfen.</Item>
+<Item name="UnableToOpenFile">Dosya açılamıyor!</Item>
+<Item name="Unchanged">Değişmemiş</Item>
+<Item name="Undo">Geri</Item>
+<Item name="UnexpectedError">Bağlantı zamanaşımı</Item>
+<Item name="Unit">Birim</Item>
+<Item name="UnitBoard">Birim yönetim kurulu</Item>
+<Item name="UnitBoardInfo">Modül bilgi</Item>
+<Item name="UnitBoardTips">Tek modülün Genişliği 32'den fazla ise, lütfen 32 Seçiniz</Item>
+<Item name="UnitBoardWidth">Modül genişliği </Item>
+<Item name="UnitBoards">Birim kurulu sayısı</Item>
+<Item name="UnitColor">Birim rengi</Item>
+<Item name="UnitSize">Modül Nokta</Item>
+<Item name="Unmerge">Ayırma</Item>
+<Item name="Unselected">Seçilmemiş</Item>
+<Item name="Unspecified">Belirtilmemiş</Item>
+<Item name="UnsupportedInstructions">Talimat desteklenmiyor</Item>
+<Item name="Untitled">Başlıksız</Item>
+<Item name="Update">Güncelleme</Item>
+<Item name="UpdateFailed">Güncelleme başarısız.</Item>
+<Item name="UpdateFirmwareFinished">Güncellenme tamamlanmıştır</Item>
+<Item name="UpdatedSuccessfully">Güncelleme başarılı oldu. Aç?</Item>
+<Item name="UpdatingFirmware">Program güncelleme</Item>
+<Item name="Use">Aktifleştir</Item>
+<Item name="Use138Decoder">138 kart entegresini kullan</Item>
+<List name="Use138" id="0">138 Kullan</List>
+<List name="Use138" id="1">138 Kullanma</List>
+<Item name="UseDefaultSetting">Donanım ayarlarını kullan</Item>
+<Item name="UseParams">Parametreleri kullan</Item>
+<Item name="UsedMemory">Kullanılan Hafıza</Item>
+<Item name="UsingHardwareSetup">Donanım ayarlarını kullan(Parametre Geriyükle)</Item>
+<Item name="VZoom">Dikey Esnet</Item>
+<Item name="Valign">Çerçeve ayarı</Item>
+<Item name="ValignBottom">Alt hizalama</Item>
+<Item name="ValignMiddle">Orta hizalama</Item>
+<Item name="ValignTop">Üst hizalama</Item>
+<Item name="Veritical">Dikey</Item>
+<Item name="VerticalPosition">Dikey konum</Item>
+<Item name="VerticalScreenshot">Dikey ekran görüntüsü</Item>
+<Item name="VerticalStretch">Dikey girmek</Item>
+<Item name="Video">Video</Item>
+<Item name="Video FramesCount">Toplam kareler</Item>
+<Item name="Video name">Video ismi</Item>
+<Item name="ViewHelp">Yardım</Item>
+<Item name="WaitingForInitialization">Başlatma bekleniyor</Item>
+<Item name="WaitingToBeSent">Gönderilme bekleniyor</Item>
+<Item name="Wednesday">Çarşamba</Item>
+<Item name="White">Beyaz</Item>
+<Item name="Width">Genişlik</Item>
+<Item name="WidthOfMoreTthan">"Genişlik maksimumu aşıyor!"</Item>
+<Item name="WindowPosition">Pencere Konumu</Item>
+<Item name="WrongParameter">Yanlış parametre</Item>
+<Item name="Yellow">Sarı</Item>
+<List name="color" id="0">Tek renk</List>
+<List name="color" id="1">İki renk</List>
+<List name="color" id="2">Full Renk</List>
+<Item name="delete">Sil</Item>
+<Item name="flashTips">Not: Komut dosyalarını içeren SWF doğru görüntü alınamıyor, komut dosyalarını içeren SWF henüz desteklenmiyor.</Item>
+<List name="graylevel" id="1">Gri tonlama yok</List>
+<List name="graylevel" id="2">Gri Seviyesi 4</List>
+<List name="graylevel" id="3">Gri Seviyesi 8</List>
+<List name="graylevel" id="4">16  Gri Seviyesi</List>
+<List name="graylevel" id="5">32  Gri Seviyesi</List>
+<Item name="group">Grubu</Item>
+<Item name="hypertext">Resim-Yazı</Item>
+<List name="listCtlDelay" id="0">Yüksek</List>
+<List name="listCtlDelay" id="1">Düşük</List>
+<List name="listStrDelay" id="0">0</List>
+<List name="listStrDelay" id="1">1</List>
+<Item name="mAPPFace">Program görünümü(&amp;A)</Item>
+<Item name="mAbout">Hakkında(&amp;A)</Item>
+<Item name="mBlackStyle">Siyah stili(L)</Item>
+<Item name="mBludStyle">Mavi stili(B)</Item>
+<Item name="mCalculator">Hesap makinesi</Item>
+<Item name="mClearDisplayData">Ekran bilgilerini sil</Item>
+<Item name="mCommSetting">İletişim ayarları</Item>
+<Item name="mExit">Çıkış(&amp;E)</Item>
+<Item name="mFile">Dosya(&amp;F)</Item>
+<Item name="mHardwareSetting">Donanım ayarları</Item>
+<Item name="mHelp">Yardım(&amp;H)</Item>
+<Item name="mIPManagmentTools">IP yönetim araçlari</Item>
+<Item name="mLanguage">Dil(&amp;L)</Item>
+<Item name="mLuminanceSetting">Parlaklık ayarı</Item>
+<Item name="mNarrow">Küçült</Item>
+<Item name="mNew">Yeni ekran(&amp;N)</Item>
+<Item name="mNotepad">Not defteri</Item>
+<Item name="mOpen">Aç(&amp;O)</Item>
+<Item name="mOperate">İşletim(&amp;O)</Item>
+<Item name="mOutWindow">Bilgi penceresi</Item>
+<Item name="mPaint">Resim çizme</Item>
+<Item name="mSave">Kaydet(&amp;S)</Item>
+<Item name="mSaveAs">Farklı kaydet...</Item>
+<Item name="mScreenSetting">Ekran ayarları</Item>
+<Item name="mSendProject">Proje gönder</Item>
+<Item name="mSetting">Ayarlar(&amp;S)</Item>
+<Item name="mSilverStyle">Gümüş stili(S)</Item>
+<Item name="mSystemSetting">Sistem ayarları</Item>
+<Item name="mTimeSetting">Saat Ayarı</Item>
+<Item name="mTool">Araçlar(&amp;T)</Item>
+<Item name="mUpdateFirmware">Sistem güncelleme</Item>
+<Item name="mView">Görünüm(&amp;V)</Item>
+<Item name="mWatergreenStyle">Açık yeşil stili(A)</Item>
+<Item name="mZoom">Büyüt</Item>
+<Item name="minimum">En Düşük</Item>
+<Item name="ms">ms</Item>
+<List name="polarity" id="0">Düşük</List>
+<List name="polarity" id="1">Yüksek</List>
+<Item name="program">Program</Item>
+<Item name="screen">Ekran</Item>
+<Item name="sec">s</Item>
+<Item name="send">Gönder</Item>
+<Item name="static">Statik</Item>
+<Item name="time">Saat</Item>
+<Item name="whirl180">Geri çevrilmesi</Item>
+<Item name="whirl270">Sol rotasyon</Item>
+<Item name="whirl90">Sol-sağ rotasyon</Item>
+<Item name="whirlt">Rotasyon</Item>
+<Item name="AddItemID">ID Ekle</Item>
+<List name="BackgroupEffects" id="13">Ekolayzır</List>
+<Item name="BeginIpAddr">Begin IP</Item>
+<List name="ColorfulWordEffects" id="0">Sabit Ekran</List>
+<Item name="CurrentSel">Currently selected language</Item>
+<Item name="DetectsThisFileWasNotSaved">Kapsama alınmışsa, seçili olan dosya tarafından algılanır kaydedilmez</Item>
+<Item name="English">İngilizce</Item>
+<Item name="IDAndContentCanNotBeEmpty">ID ve içerik boş olamaz</Item>
+<Item name="ModificationFails">Değişiklik başarısız</Item>
+<Item name="ModifyItemID">Modify ID</Item>
+<Item name="ModifyOnlyOneItem">Sadece Bir ID Değiştirilebilir</Item>
+<Item name="Parti-color">Karışık Renk</Item>
+<Item name="RemoveItemID">ID Kaldır</Item>
+<Item name="ShowOnlyControlCardWifi">Sadece Wi-Fi kontrol kartı ile gösterir</Item>
+<Item name="ShowType">Display method</Item>
+<Item name="ThisIDAlreadyExists">ID zaten var</Item>
+<Item name="Tricolor">RGB</Item>
+<List name="frequency" id="0">Otomatik</List>
+<Item name="FillingTheCurrentLanguage">Geçerli dili doldurmak için</Item>
+<Item name="WhetherToSaveTheCurrentModifiedFile">Değişiklikleri kaydetmek istiyor musunuz?</Item>
+<List name="frequency" id="160">100Hz</List>
+<List name="frequency" id="140">120Hz</List>
+<List name="frequency" id="120">140Hz</List>
+<List name="frequency" id="100">160Hz</List>
+<List name="frequency" id="80">180Hz</List>
+<List name="frequency" id="60">200Hz</List>
+<List name="frequency" id="200">60Hz</List>
+<List name="frequency" id="180">80Hz</List>
+<Item name="RemoveDuplicate">Yinelenenleri kaldır</Item>
+<Item name="Apply">Onayla</Item>
+<Item name="Remark">Belirle</Item>
+<Item name="FirstMode">Öncelikli mod</Item>
+<Item name="FirstMode_Normal">Balanced</Item>
+<Item name="FirstMode_Speed">Speed Priority</Item>
+<Item name="FirstMode_Text">Brightness Priority</Item>
+<Item name="Random">Rasgele</Item>
+<Item name="WhetherToReplace">Deşğiştirilsinmi?</Item>
+<Item name="ImportFailed">Import Failed</Item>
+<Item name="ExportFailed">Export Failed</Item>
+<Item name="ExportLanguage">Export Language</Item>
+<Item name="ImportLanguage">Import Language</Item>
+<List name="SystemBusName" id="35">[C36]P10  1R1G1B 1/4S  HUB75 16*16</List>
+<Item name="ClickHereToUpdate">Click here to update</Item>
+<Item name="ImportFile">Dosya Aç</Item>
+<List name="SystemBusName" id="36">[C37]P10  1R 1/4S  HUB12 32*16[A25]</List>
+<Item name="EditingLanguage">Dil Düzenleme</Item>
+<List name="SystemBusName" id="37">[C38]P7.62  1R1G1B 1/8S  HUB08 32*16</List>
+<List name="SystemBusName" id="38">[C39]P5   1R1G1B   1/8S  HUB75 32*16 [A4]</List>
+<Item name="Imsak">Imsak</Item>
+<Item name="Fajr">Sabah</Item>
+<Item name="Dhuhr">Öğle</Item>
+<Item name="Asr">İkindi</Item>
+<Item name="Maghrib">Akşam</Item>
+<Item name="Isha">Yatsı</Item>
+<Item name="MidNight">Teheccüd</Item>
+<Item name="Country">Ülke</Item>
+<Item name="City">Şehir</Item>
+<Item name="NumColor">Renkli Sayılar</Item>
+<Item name="ExprotConfigFile">Export Profiles</Item>
+<Item name="SoundModule">Ses modülü</Item>
+<Item name="Year">Yıl</Item>
+<Item name="ImportTable">Import Table</Item>
+<Item name="ExportBable">Export Table</Item>
+<Item name="ClearAll">Sil</Item>
+<Item name="cfWords">Renkli kelimeler</Item>
+<Item name="OnlyOnePrayForScreen">sadece bir ibadet alanını destekler</Item>
+<Item name="BKSpeed">Arkaplan Hızı</Item>
+<Item name="EffectCycle">Efekt cycle</Item>
+<Item name="ExportConfigFile">Export Profiles</Item>
+<Item name="SoundSetting">ses Ayarları</Item>
+<List name="graylevel" id="6">Gri seviyesi 64</List>
+<List name="graylevel" id="7">Gri seviyesi 128</List>
+<List name="graylevel" id="8">Gri seviyesi 256</List>
+<List name="SystemBusName" id="39">[C40]P10  1R1G1B   1/4S  HUB75  32X16[A12]</List>
+<Item name="SelectFirmwareVersion">Select Firmware Version </Item>
+<Item name="NoSelectVersion">None selected version</Item>
+<Item name="Ordinal">No.</Item>
+<Item name="VersionNum">Version</Item>
+<Item name="ConfirmSelect">Confirm</Item>
+<List name="SystemBusName" id="40">[C41]P10  1R1G1B  1/4S  HUB75 32*16</List>
+<Item name="FileNameAlreadyExistIsCover">FileName already exist,is cover?</Item>
+<Item name="VersionAlreadyExist">Version already exist</Item>
+<Item name="DeleteThisGroup">Delete this group</Item>
+<Item name="FindNewVersionIsUpdate">Find new version，whether to update the firmware?</Item>
+<Item name="UpdateFile">Update file</Item>
+<List name="SystemBusName" id="41">[C42]P10  1R1G1B  1/2S  HUB75 32*16</List>
+<List name="SystemBusName" id="42">[C43]P3  1R1G1B  1/16S  HUB75 64*64</List>
+<Item name="UdiskUpgrade">USB'den Güncelle</Item>
+<Item name="TimingPlay">Süreci başlat</Item>
+<Item name="SelectVersionOnTheRight">Lütfen sağdaki yazılımı seçin!</Item>
+<List name="SystemBusName" id="43">[C44]P8  1R1G  1/8S  HUB08 32*32 (WQS)</List>
+<List name="SystemBusName" id="44">[C45]P5  1R1G1B  1/8S  HUB75 32*32 (CXH)</List>
+<Item name="TheSameSegment">Make sure the IP of the control card and the computer is in the same network segment.</Item>
+<Item name="Step">Adım</Item>
+<Item name="ShadowMode">Gölge Modu</Item>
+<Item name="3DDeep">3D Derinlik</Item>
+<Item name="Gradient">Gradient</Item>
+<Item name="Alpha">Şeffaflık</Item>
+<Item name="BorderStyle">Çerçeve Stili</Item>
+<Item name="RoundRect">Yuvarlatılmış dikdörtgen</Item>
+<Item name="Octagon">Sekizgen</Item>
+<Item name="CustomStyle">Özel Stil</Item>
+<List name="SystemBusName" id="45">[C46]P10  1R  1/4S  HUB12 32*16</List>
+<Item name="3DText">3D Yazı</Item>
+<Item name="Whether_to_cancel_the_current_task">Cancel mission or not?</Item>
+<List name="SystemBusName" id="46">[C47]P10-P20   1G2R1B 1/4S  HUB12 32X16  Virtual pixel</List>
+<List name="SystemBusName" id="47">[C48]P10-P20   2R1G1B 1/4S  HUB12 32X16  Virtual pixel</List>
+<List name="SystemBusName" id="48">[C49]P13.33-P26.66  2R1G1B 1/4S  HUB12 24X12 Virtual pixel</List>
+<Item name="SinglePage">Single Page</Item>
+<Item name="TwinkleStyle">Pırıltı Modu</Item>
+<Item name="TwinkleSpeed">Pırıltı Hızı</Item>
+<Item name="NoTwinkle">Pırıltı Yok</Item>
+<Item name="3Dtwinkle">3D Pırıltı</Item>
+<Item name="SaveCountValue">Son Sayıyı Hatırla</Item>
+<Item name="SpecialBorder">Özel Çerçeve</Item>
+<Item name="BootingDelayWasComingOn">Power on,brighten gradually</Item>
+<Item name="RememberToThoose">Remember the current selection</Item>
+<Item name="EndPageToEndPage">End page to end page</Item>
+<List name="SystemBusName" id="49">[C50]P10  1R 1/1S  HUB08 RXP</List>
+<List name="OutputWindowString" id="70">Click the button to delete programs [ON]</List>
+<List name="OutputWindowString" id="71">Click the button to delete programs [OFF]</List>
+<List name="OutputWindowString" id="72">Parameter Setting  [Enabled]</List>
+<List name="OutputWindowString" id="73">Parameter Setting  [Disabled]</List>
+<Item name="Btn1ClearProgram">Prohibited delete program</Item>
+<Item name="DoubleSidedScreen">Çift Taraflı Ekran</Item>
+<Item name="networkMonitoring">Monitoring</Item>
+<Item name="Toolbar_Add3D_Bottom">Arka plan, ön plan, renkli kelimeler, 3D efektler Destekler</Item>
+<Item name="Toolbar_Add3D_Top">3D Yazı ekle</Item>
+<List name="SystemBusName" id="50">[C51]P6  1R1G1B 1/5S  HUB75 32X20</List>
+<Item name="WifiSpeedMode1">Yüksek hızlı mod</Item>
+<Item name="WifiSpeedMode2">Düşük hızlı mod</Item>
+<Item name="All the devices automatically obtain IP">Tüm cihazlar "Otomatik olarak IP Alsın"</Item>
+<Item name="The firmware information">Kontrol Kartı Yazılım Bilgileri</Item>
+<Item name="The device information">Aygıt Bilgileri</Item>
+<List name="SystemBusName" id="51">[C52]  1R1G  1/8  KR</List>
+<List name="SystemBusName" id="52">[C53]  1R1G1B  1/4S ICN2038S</List>
+<List name="SystemBusName" id="53">[C54]  P10  1R1G  1/4S HUB12 32x16 (YLR)</List>
+<List name="SystemBusName" id="54">[C55]  P8 1R1G1B 1/5S  HUB75 40X20</List>
+<List name="SystemBusName" id="55">[C56]  P10 1/4S No 138 MCGD</List>
+<List name="SystemBusName" id="56">[C57]  P8 1R1G1B 1/4S HUB75 (JJY)</List>
+<List name="SystemBusName" id="57">[C58]  P13.33 1R1G1B 1/3S HUB75 (LLR)</List>
+<List name="SystemBusName" id="58">[C59]  P3 1R1G1B 1/32S HUB75E (RBG) ICN2038S</List>
+<List name="SystemBusName" id="59">[C60]  P3 1R1G1B 1/32S HUB75E (RGB) ICN2038S</List>
+<List name="SystemBusName" id="60">[C61]  P6 1/8S HUB75 (BGR)</List>
+<List name="SystemBusName" id="61">[C62]  P6 1/8S HUB75 GK</List>
+<List name="SystemBusName" id="62">[C63]  P6 1/8S HUB75(HJ)</List>
+<List name="SystemBusName" id="63">[C64]  P6 1R1G1B 1/8S HUB75</List>
+<List name="SystemBusName" id="64">[C65]  P10 1R 1/4s(YLR)</List>
+<List name="SystemBusName" id="65">[C66]  P10 1R 1/4S HUB12</List>
+<List name="SystemBusName" id="66">[C67]  P10 1R1G1B 1/2S HUB75 (HJ)</List>
+<List name="SystemBusName" id="67">[C68]  P10 1R1G1B 1/2S HUB75 </List>
+<List name="SystemBusName" id="68">[C69]  P10 1R1G1B 1/3S HUB73A 24X24 (KSZ)</List>
+<List name="SystemBusName" id="69">[C70]  P10 1R1G1B 1/4S No 138 HUB75</List>
+<List name="SystemBusName" id="70">[C71]  P13.33 1R1G1B 1/3S 24x12</List>
+<List name="SystemBusName" id="71">[C72]  P16 1R1G 1/4S HUB08</List>
+<List name="SystemBusName" id="72">[C73]  P20 1R1G1B 1S</List>
+<List name="SystemBusName" id="73">[C74]  P10 1R1G1B 1/4S HUB75（KT）</List>
+<List name="SystemBusName" id="74">[C75]  P8  1R1G1B 1/4S HUB75 32x16 No138</List>
+<List name="SystemBusName" id="75">[C76]  P8  1R1G1B 1/4S HUB75 32x16 (HJ)</List>
+<List name="SystemBusName" id="76">[C77]  P10 1R1G1B 1/4S HUB75 32x16 No138</List>
+<List name="SystemBusName" id="77">[C78]  P10 1R1G1B 1/2S HUB75 32x16</List>
+<List name="SystemBusName" id="78">[C79]  P10 1R 1/4S HUB08 32x16</List>
+<List name="SystemBusName" id="79">[C80]  P10 1R1G1B 1/2S HUB75 32x16 (GK)</List>
+<List name="SystemBusName" id="80">[C81]  P10 1R1G1B 1/2S HUB75 32x16 (QL)</List>
+<List name="SystemBusName" id="81">[C82]  P16 1R1G 1/1S HUB12 16x8</List>
+<List name="SystemBusName" id="82">[C83]  P10 1R 1/4S HUB12 32x16 (KT)</List>
+<List name="SystemBusName" id="83">[C84]  P10 1R 1/4S HUB12 32x16 (GK)</List>
+<List name="SystemBusName" id="84">[C85]  P5  1R1G1B 1/8S HUB75 64x32</List>
+<List name="SystemBusName" id="85">[C86]  P10 1R1G1B 1/4S HUB75 32x16 No138 (HJCL)</List>
+<List name="SystemBusName" id="86">[C87]  P10 1R1G1B 1/2S HUB75E 32x16 No138 (HLL)</List>
+<List name="SystemBusName" id="87">[C88]  P10 1R1G1B 1/2S HUB75 32x16 No138</List>
+<List name="SystemBusName" id="88">[C89]  P6.66 1R1G1B 1/6S HUB75 48x24</List>
+<List name="SystemBusName" id="89">[C90]  P8  1R1G1B 1/5S HUB75 40x20</List>
+<List name="SystemBusName" id="90">[C91]  P4 1R1G1B 1/10S HUB75 80x40 ICN2038S</List>
+<List name="SystemBusName" id="91">[C92]  P4  1R1G1B 1/20S HUB75 80x40 ICN2038S</List>
+<List name="SystemBusName" id="92">[C93]  P10 1R1G1B 1/4S HUB75 32x16 No138 ICN2038S</List>
+<List name="SystemBusName" id="93">[C94]  P10 1R1G1B 1/2S  32x16 No138 ICN2038S</List>
+<List name="SystemBusName" id="94">[C95]  P10 1R1G1B 1/5S HUB75 40x20 ICN2038S</List>
+<List name="SystemBusName" id="95">[C96]  P10 1R1G1B 1/5S HUB75 40x20 SM16207S</List>
+<List name="SystemBusName" id="96">[C97]  H10 1R1G1B 1/2S HUB75 32x16</List>
+<List name="SystemBusName" id="97">[C98]  P8  1R1G1B 1/5S HUB75 40x20 ICN20378BP</List>
+<List name="SystemBusName" id="98">[C99]  dz0228 1R1G1B 1/1S HUB75 16x16</List>
+<Item name="Server address">Sunucu(Server)Adresi</Item>
+<Item name="User name">Kullanıcı Adı</Item>
+<Item name="Fill the same">Aynısını doldurun</Item>
+<Item name="Cloud server Settings">Bulut Sunucu(Server) Ayarları</Item>
+<Item name="Cloud server">Bulut Sunucu(Server)</Item>
+<Item name="ButtonCtrl">Buton Kontrolü Aktif</Item>
+<Item name="NoUse">Buton Kontrolü Kapalı</Item>
+<Item name="Button1">Buton 1 (S1)</Item>
+<Item name="Button2">Buton 2 (S2)</Item>
+<Item name="Button3">Buton 3 (S3)</Item>
+<Item name="Button4">Buton 4 (S4)</Item>
+<Item name="DefaultBackground">Varsayılan Arkaplan</Item>
+<Item name="ImageBackground">Görüntü Arka planı</Item>
+<Item name="SingleProgramSend">Tek Program Gönderimi</Item>
+<Item name="latest">latest</Item>
+<Item name="newdata">Yeni Data</Item>
+<Item name="Imsak">İmsak</Item>
+<Item name="Music">Müzik</Item>
+<Item name="Pray">VakitMatik</Item>
+<Item name="Aglinment">Hizalama</Item>
+<Item name="LeftAglinment">Sola hizalamak</Item>
+<Item name="CenterAglinment">Merkez hizalaması</Item>
+<Item name="RightAglinment">Hizala</Item>
+<Item name="SplitType">SplitType</Item>
+<Item name="SingleChar">SingleChar</Item>
+<Item name="Word">Word</Item>
+<Item name="WifiSetting">Wi-Fi Setting</Item>
+<Item name="SettingSuccessfully">SettingSuccessfully</Item>
+<Item name="SettingFailed">SettingFailed</Item>
+<Item name="Connectting">Connectting</Item>
+<Item name="NoFoundAp">NoFoundAp</Item>
+<Item name="ConnectFailed">ConnectFailed</Item>
+<Item name="ConnectOK">ConnectOK</Item>
+<Item name="ApMode">ApMode</Item>
+<Item name="StationMode">StationMode</Item>
+<Item name="WifiPasswordLenghLess">Wi-Fi password is too short</Item>
+<Item name="WifiSSIDIsNULL">Wi-Fi name is empty</Item>
+<Item name="MaskError">MaskError</Item>
+<Item name="IPError">IPError</Item>
+<Item name="WifiSSIDTooLong">Wi-Fi name is too long.</Item>
+<Item name="WifiPasswordTooLong">Wi-Fi password is too long.</Item>
+<Item name="SSIDPasswordInputTips">Only allow input 0~9 a~z A~Z _</Item>
+    <Item name="City">şehir</Item>
+    <Item name="Date">tarih</Item>
+    <Item name="temp">sıcaklık</Item>
+    <Item name="Weather">hava</Item>
+    <Item name="Wind Direction">rüzgar yönü</Item>
+    <Item name="Wind speed">Rüzgar hızı</Item>
+    <Item name="Temp Unit">sıcaklık birimleri</Item>
+    <Item name="America">Birleşik Devletler</Item>
+    <Item name="Australia">Avustralya</Item>
+    <Item name="Canada">Kanada</Item>
+    <Item name="China">Çin</Item>
+    <Item name="India">Hindistan</Item>
+    <Item name="Indonesia">Endonezya</Item>
+    <Item name="Iran">İran</Item>
+    <Item name="Japan">Japonya</Item>
+    <Item name="Korea">Kore</Item>
+    <Item name="Malaysia">Malezya</Item>
+    <Item name="Pakistan">Pakistan</Item>
+    <Item name="Peru">Peru</Item>
+    <Item name="Poland">Polonya</Item>
+    <Item name="Russia">Rusya</Item>
+    <Item name="Spain">İspanya</Item>
+    <Item name="Thailand">Tayland</Item>
+    <Item name="Turkey">Türkiye</Item>
+    <Item name="United Arab Emirates">Birleşik Arap Emirlikleri</Item>
+    <Item name="Vietnam">Vietnam</Item>
+    <Item name="Sunny">açık</Item>
+    <Item name="Cloudy">bulutlu</Item>
+    <Item name="Few clouds">bulutlu</Item>
+    <Item name="Partly cloudy">Parçalı Bulutlu</Item>
+    <Item name="Overcast">Yin</Item>
+    <Item name="Windy">rüzgarlı</Item>
+    <Item name="Calm">rüzgârsız</Item>
+    <Item name="Light breeze">Hafif rüzgâr</Item>
+    <Item name="Moderate">esinti</Item>
+    <Item name="Fresh breeze">esinti</Item>
+    <Item name="Strong breeze">bora</Item>
+    <Item name="High wind">bora</Item>
+    <Item name="Gale">fırtına</Item>
+    <Item name="Strong gale">üfleme</Item>
+    <Item name="Storm">fırtına</Item>
+    <Item name="Violent storm">Rüzgarın Mad patlama</Item>
+    <Item name="Hurricane">kasırga</Item>
+    <Item name="Tornado">kasırga</Item>
+    <Item name="Tropical storm">tropik Fırtına</Item>
+    <Item name="Shower rain">duş</Item>
+    <Item name="Heavy shower rain">Hafif Yağmur Duş</Item>
+    <Item name="Thundershower">Gök Gürültülü Fırtına</Item>
+    <Item name="Heavy thunderstorm">Güçlü Yağışlı</Item>
+    <Item name="Hail">Dolu</Item>
+    <Item name="Light rain">hafif yağmur</Item>
+    <Item name="Moderate rain">Orta yağmur</Item>
+    <Item name="Heavy rain">yoğun yağış</Item>
+    <Item name="Extreme rain">Aşırı yağış</Item>
+    <Item name="Drizzle rain">ahmak ıslatan</Item>
+    <Item name="Storm">fırtına</Item>
+    <Item name="Heavy storm">yoğun yağış</Item>
+    <Item name="Severe storm">yoğun yağış</Item>
+    <Item name="Freezing rain">sulu kar</Item>
+    <Item name="Light snow">kar</Item>
+    <Item name="Moderate snow">kar</Item>
+    <Item name="Heavy snow">kar</Item>
+    <Item name="Snowstorm">kar fırtınası</Item>
+    <Item name="Sleet">sır</Item>
+    <Item name="Rain and snow">sulu kar</Item>
+    <Item name="Shower snow">Dizi sulu kar</Item>
+    <Item name="Snow flurry">Kar duş</Item>
+    <Item name="Mist">sis</Item>
+    <Item name="Foggy">sis</Item>
+    <Item name="Haze">pus</Item>
+    <Item name="Sand">kum</Item>
+    <Item name="Dust">kum fırtınası</Item>
+    <Item name="Duststorm">tozkoparan fırtına</Item>
+    <Item name="Sandstorm">kum fırtınası</Item>
+    <Item name="Hot">ısı</Item>
+    <Item name="Cold">soğuk</Item>
+    <Item name="Unknown">bilinmeyen</Item>
+    <Item name="Clear">Clear</Item>
+    <Item name="No Sustained Wind">Hiçbir sürekli rüzgar</Item>
+    <Item name="Northeast Wind">kuzeydoğu</Item>
+    <Item name="East Wind">Doğu Rüzgarı</Item>
+    <Item name="Southeaster Wind">Güneydoğu rüzgar</Item>
+    <Item name="South Wind">rüzgar güney</Item>
+    <Item name="Southwest Wind">lodos</Item>
+    <Item name="Strong wind">bora</Item>
+    <Item name="West Wind">batıya</Item>
+    <Item name="Northwest Wind">karayel</Item>
+    <Item name="North Wind">kuzey</Item>
+    <Item name="Vortex Wind">Döner rüzgar</Item>
+    <Item name="The Breeze Wind">esinti</Item>
+    <Item name="No wind">rüzgârsız</Item>
+    <Item name="Light air">Işık hava</Item>
+    <Item name="Breeze">esinti</Item>
+    <Item name="Gentle breeze">esinti</Item>
+    <Item name="Strong wind">bora</Item>
+    <Item name="Blast">üfleme</Item>
+    <Item name="Gale">fırtına</Item>
+    <Item name="Strong gale">üfleme</Item>
+    <Item name="Whole gale">azılı rüzgar</Item>
+    <Item name="Storm wind">fırtına</Item>
+    <Item name="Hurricane">kasırga</Item>
+	<Item name="OfflineMode">Çevrimdışı mod</Item>
+	<Item name="PleaseSelectDevice">Please select device</Item>
+	<Item name="SeeMoreParameters">See more parameters</Item>
+	<Item name="ExportProgram">Export program</Item>
+	<List name="ErrorTips" id="00">Common problem hints</List>
+	<List name="ErrorTips" id="01">Error / The width and height set in the screen setting exceeds the control range of the controller</List>
+	<List name="ErrorTips" id="02">Error1 / U disk file format error</List>
+	<List name="ErrorTips" id="03">Error2 / Excessive  program content</List>
+	<List name="ErrorTips" id="04">NoFile / No program file in the U disk</List>
+	<List name="ErrorTips" id="05">End / Setting expired</List>
+	<Item name="ColorfulBorder">Colorful border</Item>
+	<List name="platformList" id="hdplatform.huidu.cn">Release platform</List>
+	<Item name="platform">platform</Item>
+	<Item name="FixedText">Fixed text</Item>
+	<List name="PM25String" id="00">No data</List>
+	<List name="PM25String" id="01">Good</List>
+	<List name="PM25String" id="02">Moderate</List>
+	<List name="PM25String" id="03">Lightly Polluted</List>
+	<List name="PM25String" id="04">Moderately Polluted</List>
+	<List name="PM25String" id="05">Heavily Polluted</List>
+	<List name="PM25String" id="06">Severely Polluted</List>
+	<Item name="BootTips">Boot tips</Item>
+	<Item name="ShowAll">Show all</Item>
+	<Item name="NoShow">No show</Item>
+	<Item name="PM25Adjust">Adjust PM2.5</Item>
+	<Item name="PM10Adjust">Adjust PM10</Item>
+	<Item name="QuickConfig">Quick config</Item>
+	<Item name="Subtitles">Subtitles</Item>
+	<Item name="Toolbar_AddSubtitles_Top">Add Subtitles</Item>
+	<Item name="ICSetting">IC setting</Item>
+	<Item name="NormalIC">Normal IC</Item>
+	<Item name="RegisterGroup">Register group</Item>
+	<Item name="RedRegister">Red register</Item>
+	<Item name="GreenRegister">Green register</Item>
+	<Item name="BlueRegister">Blue register</Item>
+	<Item name="HighByte">High byte</Item>
+	<Item name="LowByte">Low byte</Item>
+	<Item name="HelpDoc">Help Doc</Item>
+	<Item name="PrayAutioTip">Ses modülünü kullanmanız gerektiğinde, lütfen dua adlarına karşılık gelen birden fazla mp3 dosyası verin. Imsak->1.mp3 Fajr->2.mp3 Dhuhr->3.mp3 Asr->4.mp3 Maghrib->5.mp3 Isha->6.mp3 MidNight->7.mp3 .</Item>
+	<Item name="Confirm Password">Confirm Password</Item>
+<Item name="PasswordInvalidTip">The password must be a number + letter combination with a length of 8~16.</Item>
+<Item name="PasswordUnEqual">The password entered twice is different.</Item>
+<Item name="PasswordTooSimple">The system has detected that the device's Wi-Fi password is too simple. Please reset it.</Item>
+<List name="OutputWindowString" id="75">The system has detected that the device's Wi-Fi password is too simple. Please reset it.</List>
+<Item name="Logout">Logout</Item>
+<Item name="LogoutYesOrNo">Is the user logged out?</Item>
+<Item name="Login">login</Item>
+<Item name="WifiSettingOK">The setting is successful, please reconnect to Wi-Fi.</Item>
+<Item name="UserName">User name</Item>
+<Item name="InputPassword">Input password</Item>
+<Item name="Register">Register</Item>
+<Item name="GetCheckCode">GetCheckCode</Item>
+<Item name="InputCheckCode">Input the check code</Item>
+<Item name="RegisterError">Registration error</Item>
+<Item name="PhoneNum">Cellphone number</Item>
+<Item name="CheckCode">Check code</Item>
+<Item name="ConnectNetwordToUse">Please use the software after connecting to the Internet</Item>
+<Item name="AuthorizedSuccess">Authorized success</Item>
+<Item name="UnsupportedLoginType">Unsupported login type</Item>
+<Item name="CheckCodeNotMatch">Check code does not match</Item>
+<Item name="InputRightPhone">Please enter the correct phone number</Item>
+<Item name="ResetPassword">Reset Password</Item>
+<Item name="PhoneNumError">Wrong format of phone number.</Item>
+<Item name="CheckCodeTimeoutInOneMinute">Verification code cannot be sent repeatedly within one minute</Item>
+<Item name="CheckCodeTimeout">Verification code transmission frequency is exceeded</Item>
+<Item name="CheckCodeSendError">The verification code failed to be sent.</Item>
+<Item name="InvalidToken">Invalid token</Item>
+<Item name="MissingRegInfo">Missing registration information</Item>
+<Item name="AgreeAndAccept">Agreen</Item>
+<Item name="TermsOfService">Services Agreement</Item>
+<Item name="Reacquire">Reacquire</Item>
+<Item name="SettingLoginPassword">Setting login password</Item>
+<Item name="Skip">Skip</Item>
+<Item name="NetworkErrorTip">Network error</Item>
+<Item name="Retry">Retry</Item>
+<Item name="PleaseGetCheckCode">Please get the check code.</Item>
+<Item name="KeepLogin">Keep login</Item>
+<Item name="IsLogoutUser">Logout the current user?</Item>
+<Item name="NotTipsAgin">Do not tips again</Item>
+<Item name="OpenDeviceLock">Enable device lock</Item>
+<Item name="ModifyDeviceLock">Modify device lock</Item>
+<Item name="CloseDeviceLock">Close device lock</Item>
+<Item name="DeviceHasLockedInfo">The device has been locked. Please enter your password.</Item>
+<Item name="DeviceLockPassword">Device lock password</Item>
+<Item name="NoInputNoDeviceLockTip">No password is required when device lock is not enabled.</Item>
+<Item name="UseOldPassword">Use current password</Item>
+<Item name="DeviceLockSetting">Device lock settings</Item>
+<Item name="DeviceLock">Device lock</Item>
+<Item name="KeepPassword">Keep password</Item>
+<Item name="AutoLogin">Auto login</Item>
+<Item name="PleaseInputOldPassword">Please enter the old password</Item>
+<Item name="OldPasswordError">Old password error</Item>
+<Item name="Old Password">Old password</Item>
+<Item name="New Password">New password</Item>
+<Item name="Action">Action</Item>
+
+<List name="OutputWindowString" id="76">The device lock password is incorrect.</List>
+<List name="OutputWindowString" id="77">Missing log content.</List>
+<List name="OutputWindowString" id="78">The machine code is wrong.</List>
+<List name="OutputWindowString" id="79">The length of the machine code is incorrect.</List>
+<List name="OutputWindowString" id="80">The length of the device lock password is incorrect.</List>
+<List name="OutputWindowString" id="81">XR809 is updating</List>
+<List name="OutputWindowString" id="82">XR809 idnvalid address</List>
+<List name="OutputWindowString" id="83">XR809 error</List>
+<List name="OutputWindowString" id="84">Start reading parameters</List>
+<List name="OutputWindowString" id="85">Finish reading parameters</List>
+<List name="OutputWindowString" id="86">Start to restore parameters</List>
+<List name="OutputWindowString" id="87">The parameters have been restored</List>
+<List name="OutputWindowString" id="88">The download is complete and is waiting to recover data.</List>
+<Item name="UseWechatQRCode">Use WeChat to scan the QR code</Item>
+<Item name="Activate">Activate</Item>
+<Item name="ActivateOffline">Activate offline</Item>
+<Item name="PleaseInputActiveCode">Please enter the activation code</Item>
+<Item name="ErrorActivateCode">Wrong activation code</Item>
+<Item name="NTPSetting">ağ zaman ayarı</Item>
+<Item name="NetworkSame">Make sure that the device IP and router IP are on the same network segment.</Item>
+<List name="SystemBusName" id="99">[C100]  P10 28x16 8 tarama 8 çekme noktası</List>
+	</language>
+</root>

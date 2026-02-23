@@ -1,0 +1,1605 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<language name="한국어">
+<Item name="ABrighterThanB">A는 B보다 밝은</Item>
+<Item name="About">관해서</Item>
+<Item name="AbrightBoff">A 은 흰색입니다 동안 B 는 검은 색입니다</Item>
+<Item name="Add">추가</Item>
+<Item name="Add File">Add File</Item>
+<Item name="Add GIF">GIF 파일 추가</Item>
+<Item name="AddFailed">추가하는데 실패하였습니다.</Item>
+<Item name="AddFile">파일 추가</Item>
+<Item name="AddGroup">그룹 추가</Item>
+<Item name="AddHypertext">하이퍼 텍스트 추가</Item>
+<Item name="AddPicture">그림 추가</Item>
+<Item name="AddProgram">프로그램 추가</Item>
+<Item name="AddRegion">지역 추가</Item>
+<Item name="AddSuccess">성공적으로 추가되었습니다.</Item>
+<Item name="AdjustTime">시간을 조정</Item>
+<Item name="AdvancedSetting">고급 설정</Item>
+<Item name="AdvancedSettings">고급 설정</Item>
+<Item name="AlignCenter">중심 정렬</Item>
+<Item name="AlignRight">Flush right</Item>
+<Item name="Alignment">Aligning type</Item>
+<Item name="All">모두</Item>
+<Item name="Allow">사용</Item>
+<Item name="AllowPasswordAuthentication">암호 검증 활성화 중요한 설정을 설정할 때。</Item>
+<Item name="AlreadyOpened">이 화면은 이미 열려</Item>
+<Item name="AlterBaudrate">전송 속도를 변경</Item>
+<Item name="AntiClockwise rotation">시계 반대 회전</Item>
+<Item name="AreaBackground">지역 배경</Item>
+<Item name="AreaDown">아래에 지역</Item>
+<Item name="AreaLeft">왼쪽으로 지역</Item>
+<Item name="AreaMaximize">지역 최대화</Item>
+<Item name="AreaNoBorder">Cross screen don't support border for global program</Item>
+<Item name="AreaRight">오른쪽으로 지역</Item>
+<Item name="AreaUp">최대 지역</Item>
+<Item name="Associated">결합된</Item>
+<Item name="AutoAdjustTime">Auto adjust time</Item>
+<Item name="AutoGetingIP">자동으로 IP 얻기</Item>
+<Item name="AutoHide">Auto hide</Item>
+<Item name="AutoReSend">Auto reSend</Item>
+<Item name="AutoSave">Auto Save</Item>
+<Item name="AutoScanInterval">자동스캔시간</Item>
+<Item name="AutoScanMode">자동스캔모드</Item>
+<Item name="AutoSearchScans">스캔모드 자동검색 </Item>
+<Item name="AutoSwitching">오토 스위치</Item>
+<Item name="AutoUpdate">자동 업데이트</Item>
+<Item name="Automatic">자동 조정</Item>
+<Item name="AutomaticInfo">자동 조정 기능을 사용할 때는,밝기 센서가 설치되어 있는지 확인.</Item>
+<Item name="BBrighterThanA">B 는 A보다 밝은</Item>
+<Item name="Background">배경</Item>
+<Item name="BackgroundColor">배경색r</Item>
+<Item name="BackgroundSetting">배경 설정</Item>
+<List name="BackgroupEffects" id="0">무작위</List>
+<List name="BackgroupEffects" id="10">멀어지기</List>
+<List name="BackgroupEffects" id="11">빠르게</List>
+<List name="BackgroupEffects" id="12">교차하기</List>
+<List name="BackgroupEffects" id="13">평평하게고르기</List>
+<List name="BackgroupEffects" id="14">반사하기</List>
+<List name="BackgroupEffects" id="15">반짝거리기</List>
+<List name="BackgroupEffects" id="16">순수색</List>
+<List name="BackgroupEffects" id="17">리본 열기닫기</List>
+<List name="BackgroupEffects" id="18">원형확대</List>
+<List name="BackgroupEffects" id="19">마름모확대</List>
+<List name="BackgroupEffects" id="1">고정</List>
+<List name="BackgroupEffects" id="20">무작위 교차선</List>
+<List name="BackgroupEffects" id="21">휘어진 선</List>
+<List name="BackgroupEffects" id="2">좌이동</List>
+<List name="BackgroupEffects" id="3">우이동</List>
+<List name="BackgroupEffects" id="4">상향이동</List>
+<List name="BackgroupEffects" id="5">하향이동</List>
+<List name="BackgroupEffects" id="6">좌이동 후 우이동</List>
+<List name="BackgroupEffects" id="7">중간에서 수평으로 열기</List>
+<List name="BackgroupEffects" id="8">양끝에서 중간으로 닫기</List>
+<List name="BackgroupEffects" id="9">당기기</List>
+<List name="platformList" id="hdplatform.huidu.cn">Release platform</List>
+<Item name="platform">platform</Item>
+<Item name="BasicInfoSet">기본 설정</Item>
+<Item name="BasicPara">Basic parameters</Item>
+<Item name="BasicSetting">기본적인 설정</Item>
+<Item name="Baudrate">보드 속도</Item>
+<Item name="BbrightAoff">A는 검은 색입니다 동안  B은 흰색입니다</Item>
+<Item name="Begin">시작</Item>
+<Item name="Begin Play">작동시작</Item>
+<Item name="Black">흑색</Item>
+<Item name="Blue">청색</Item>
+<Item name="Boot">Boot status</Item>
+<Item name="BootStatus">제어 카드가 부팅 상태에서，펌웨어를 업데이트하십시오.</Item>
+<Item name="Border">전광판</Item>
+<Item name="BorderColor">전광판 색상</Item>
+<Item name="BorderSetting">전광판 설정</Item>
+<Item name="BorderWidth">전광판 폭</Item>
+<Item name="BorderWidthExceeds">전광판 폭 초과</Item>
+<Item name="BorderWidthOutOfRange">국경 폭이 범위를 벗어!</Item>
+<Item name="BoundDevice">Bound device</Item>
+<Item name="Broadcast">방송</Item>
+<Item name="BuildArea">구역설정</Item>
+<Item name="Built-inUnitBoard">장치내장된 보드</Item>
+<Item name="BusEdit">데이터회선 편집</Item>
+<Item name="BusImage">데이터회선 이미지</Item>
+<Item name="BusName">데이터회선 이름</Item>
+<Item name="BusNew">새로 만들기</Item>
+<Item name="BusView">데이터회선 미리보기</Item>
+<Item name="Busy">바쁨</Item>
+<Item name="Button">Button</Item>
+<Item name="ButtonDownTiming">Button count down</Item>
+<Item name="ButtonSettings">설정1 누르기</Item>
+<Item name="ButtonSettings2">설정2 누르기</Item>
+<Item name="ButtonSettings3">Button 3</Item>
+<Item name="ButtonSettings4">Button 4</Item>
+<Item name="ButtonSwitch">버튼 전환</Item>
+<Item name="ButtonTiming">시간맞추기</Item>
+<Item name="ButtonUpTiming">Button count up</Item>
+<Item name="ButtonorPlaySet">Button settings</Item>
+<Item name="CLKMirror">CLK polarity</Item>
+<Item name="CLKWidth">CLK Width</Item>
+<Item name="COM">시리얼 포트</Item>
+<Item name="COMERROR">연결에 실패, 직렬 2,3 피트는 짧은 체크?</Item>
+<Item name="COMINFO">통신</Item>
+<Item name="COMURL">서비스 웹 사이트: http://www.huidu.cn</Item>
+<Item name="CPUModelError">CPU 모델 이 잘못.</Item>
+<Item name="CanNotFindTheDefaultProfile">디폴트파일을 찾을 수 없습니다.</Item>
+<Item name="Cancel">취소</Item>
+<Item name="CannotFindNetWordDrive">아무 네트워크 장치 찾을 수 없습니다!</Item>
+<Item name="CannotOpenExcle">Excle 열지 못했습니다, 그것이 설치되어 있는지 여부 확인하시기 바랍니다!</Item>
+<Item name="CardIpSeting">제어 카드의 IP 설정</Item>
+<Item name="CardModel">Card Model</Item>
+<Item name="CardNumber">제어 카드 모델</Item>
+<Item name="CardOnlySupportFullColor">펌웨어는 풀 컬러를 지원합니다 만.</Item>
+<Item name="CardOnlySupportTwoColor">펌웨어는 단일 및 이중 색상을 지원합니다 만.</Item>
+<Item name="CardRestart">Restarting</Item>
+<Item name="CardVersion">카드판(Card Version)</Item>
+<Item name="Center">센터</Item>
+<Item name="CenterAlign">Center</Item>
+<Item name="CfwBackgroundEdit">Animated Characters background</Item>
+<Item name="Change">바꾸다</Item>
+<Item name="Channel">Channel</Item>
+<Item name="CharSpacing">문자 간격</Item>
+<Item name="CheckAll">모두 선택</Item>
+<Item name="CheckProgram">프로그램을 선택</Item>
+<Item name="ChecksumError">체크섬이 잘못.</Item>
+<Item name="ChooseDeive">Select device</Item>
+<Item name="ClassicBackground">사진 배경</Item>
+<Item name="Clear">화면선택 취소</Item>
+<List name="ClearEffects" id="0">바로 지우기</List>
+<List name="ClearEffects" id="10">수직 마감</List>
+<List name="ClearEffects" id="11">수평 분할</List>
+<List name="ClearEffects" id="12">수평 한 마감</List>
+<List name="ClearEffects" id="13">수직 블라인드</List>
+<List name="ClearEffects" id="14">수평 블라인드</List>
+<List name="ClearEffects" id="15">왼쪽 페이지로 켜기</List>
+<List name="ClearEffects" id="16">오른쪽 페이지로 켜기</List>
+<List name="ClearEffects" id="17">점점 멀어짐</List>
+<List name="ClearEffects" id="18">점점 닫기</List>
+<List name="ClearEffects" id="19">시계 방향 커버</List>
+<List name="ClearEffects" id="1">왼쪽으로 이동</List>
+<List name="ClearEffects" id="200">무작위</List>
+<List name="ClearEffects" id="201">화면 보관 해</List>
+<List name="ClearEffects" id="20">반 시계 방향 커버</List>
+<List name="ClearEffects" id="21">가로로 섞어 짜다</List>
+<List name="ClearEffects" id="22">위로 감기</List>
+<List name="ClearEffects" id="23">아래로 감기</List>
+<List name="ClearEffects" id="24">왼쪽으로 감기</List>
+<List name="ClearEffects" id="25">오른쪽으로 감기</List>
+<List name="ClearEffects" id="26">수평 그리드</List>
+<List name="ClearEffects" id="27">수직 그리드</List>
+<List name="ClearEffects" id="2">오른쪽으로 이동</List>
+<List name="ClearEffects" id="3">위쪽으로 이동</List>
+<List name="ClearEffects" id="4">아래쪽으로 이동</List>
+<List name="ClearEffects" id="5">덮다 왼쪽향해</List>
+<List name="ClearEffects" id="6">덮다 우측향해</List>
+<List name="ClearEffects" id="7">위쪽으로 덮다</List>
+<List name="ClearEffects" id="8">아래로 덮다</List>
+<List name="ClearEffects" id="9">수직 분할</List>
+<Item name="ClearScreeData">분명 기존의 디스플레이?</Item>
+<Item name="Clock">시계</Item>
+<Item name="ClockFrequency">클럭 주파수</Item>
+<Item name="ClockParameters">문자판 속성</Item>
+<Item name="Clockwise rotation">시계 방향 회전</Item>
+<Item name="Close">닫기</Item>
+<Item name="CloseScreen">닫다 화면</Item>
+<Item name="Color">색</Item>
+<Item name="ColorChannel">색상 채널</Item>
+<Item name="ColorChannelSet">컬러 채널 설정</Item>
+<Item name="ColorFilter">컬러 필터</Item>
+<Item name="ColorInversion">색 반전</Item>
+<Item name="ColorSingleSelect">한가지 색상 선택</Item>
+<Item name="ColorThreshold">컬러 임계 값</Item>
+<Item name="ColorfulText">애니메이션 된 캐릭터</Item>
+<List name="ColorfulWordEffects" id="0">고정 재생</List>
+<List name="ColorfulWordEffects" id="10">수직뒤집기</List>
+<List name="ColorfulWordEffects" id="11">수평뒤집기</List>
+<List name="ColorfulWordEffects" id="12">점점크게</List>
+<List name="ColorfulWordEffects" id="13">왼쪽으로 계속이동하기</List>
+<List name="ColorfulWordEffects" id="14">오른쪽으로 계속이동하기</List>
+<List name="ColorfulWordEffects" id="15">위로 계속 이동하기</List>
+<List name="ColorfulWordEffects" id="16">아래로 계속 이동하기</List>
+<List name="ColorfulWordEffects" id="17">2D 확대</List>
+<List name="ColorfulWordEffects" id="18">2D 축소</List>
+<List name="ColorfulWordEffects" id="1">사인 곡선</List>
+<List name="ColorfulWordEffects" id="2">글자 회전</List>
+<List name="ColorfulWordEffects" id="3">외쪽에서 날아가기</List>
+<List name="ColorfulWordEffects" id="4">오른쪽에서 날아가기</List>
+<List name="ColorfulWordEffects" id="5">반짝거리기</List>
+<List name="ColorfulWordEffects" id="6">그대로</List>
+<List name="ColorfulWordEffects" id="7">흔들며돌아다니기</List>
+<List name="ColorfulWordEffects" id="8">신축하기</List>
+<List name="ColorfulWordEffects" id="9">흔들기</List>
+<Item name="Column">열</Item>
+<Item name="CommStatus1">좋은</Item>
+<Item name="CommStatus2">정상적인</Item>
+<Item name="CommStatus3">불량 하지만 연결 가능</Item>
+<Item name="CommStatus4">통신 할 수 없음</Item>
+<Item name="CommTest">네트워크 테스트</Item>
+<Item name="Command">Command</Item>
+<Item name="CommandSmartSetting">일반적으로 스마트 설정</Item>
+<Item name="CommonSettings">공통 설정</Item>
+<Item name="CommunicationMode">통신 모드</Item>
+<Item name="CommunicationSetting">통신 설정</Item>
+<Item name="ConfirmRGBwidth">RGB 제어 라인 높이의 집합</Item>
+<Item name="ConfirmScanMode">스캔 모드를 결정</Item>
+<Item name="Connected">Connected</Item>
+<Item name="ConnectionSuccessful">성공적으로 연결</Item>
+<Item name="ContainOverlappingRegions">겹치는 영역이 포함</Item>
+<Item name="ContentContainMultiLines">내용이 다중단락을 포함하고 있습니다. 삭제 하시겠습니까?</Item>
+<Item name="ContinueMove">지속적인 운동</Item>
+<Item name="ContinueMoveUp">계속해서 위로 이동을</Item>
+<Item name="Copy">복사</Item>
+<Item name="Copyright">저작권: 심천 Huidu 기술 유한 회사</Item>
+<Item name="Count">시간</Item>
+<Item name="Count1">Digit</Item>
+<Item name="CountAdd">Count plus</Item>
+<Item name="CountColor">색상값</Item>
+<Item name="CountDown">카운트 다운</Item>
+<Item name="CountReset">Counter Reset</Item>
+<Item name="CountSub">Count down</Item>
+<Item name="CountUp">카운트 업</Item>
+<Item name="CradID">카드 ID</Item>
+<Item name="CradName">카드 이름</Item>
+<Item name="CrossBottom">아래</Item>
+<Item name="CrossCenter">센터</Item>
+<Item name="CrossGlobalProgram">글로벌 프로그램</Item>
+<Item name="CrossNoSupport">글로벌 프로그램은이 지역에서 지원되지 않습니다.</Item>
+<Item name="CrossScreen">크로스 화면</Item>
+<Item name="CrossScreenParamsPageTip">1.스크린의 설정은 3단계로 이루어집니다；&#x000A;2.스크린색상을 선택하십시오 ；</Item>
+<Item name="CrossScreenSetting">크로스 화면 설정</Item>
+<Item name="CrossSmartTip">현재 스크린상에 텍스트가 정상적으로 보인다면 ,스마트설정은 필요하지 않습니다.</Item>
+<Item name="CrossTop">상단</Item>
+<Item name="Custom">사용자 정의</Item>
+<Item name="CustomIPTips">제어 카드가 방화벽에 의해 차단 된 경우 IP 주소를 수동으로 작성하십시오.</Item>
+<Item name="CustomTime">사용자 시간설정</Item>
+<Item name="CustomUnitBoard">사용자 정의 장치 보드</Item>
+<Item name="CustomizeIP">사용자 정의 IP</Item>
+<Item name="Cut">잘라내기</Item>
+<Item name="Cyan">시안색</Item>
+<Item name="CycleTiming">Cycle Timing</Item>
+<Item name="DHCPDNSAddr">DNS 주소</Item>
+<Item name="DHCPGateway">DHCP 기본 게이트웨이</Item>
+<Item name="DHCPLease">DHCP 임대</Item>
+<Item name="DHCPMask">DHCP 서브넷 마스크</Item>
+<Item name="DHCPServerAddr">DHCP 서버 주소</Item>
+<Item name="Data">Data</Item>
+<Item name="DataClearSuccess">성공적으로 데이터를 삭제</Item>
+<Item name="DataFill">범위를 벗어난 데이터!”!</Item>
+<Item name="DataLenght">Data length</Item>
+<Item name="DataLengthError">패킷 길이는 그릇된.</Item>
+<Item name="DataMirror">데이터 미러링</Item>
+<Item name="DataPolarity">데이터 극성</Item>
+<Item name="DataPolaritySet">데이터 극성 설정</Item>
+<Item name="DataSource">Data Source</Item>
+<Item name="DateAndWeekLocationReplaced">날짜와 주의 위치가 갱신되었습니다.</Item>
+<Item name="Day">날짜</Item>
+<Item name="Default">디폴트 값</Item>
+<Item name="DefaultConnectDeviceType">디폴트 연결 방법</Item>
+<Item name="DelayedSignal">지연 신호</Item>
+<Item name="DeleteFailed">제거하지 못하였습니다.</Item>
+<Item name="DeleteScreen">스크린제거</Item>
+<Item name="DeleteSuccess">성공적으로 제거되었습니다.</Item>
+<Item name="DeleteThisData"> 제어카드 내 모든 데이터을 삭제하시겠습니까?</Item>
+<Item name="DeleteThisFile">선택한 파일을 삭제 하시겠습니까?</Item>
+<Item name="DeleteThisProgram">이 프로그램을 삭제 하시겠습니까?</Item>
+<Item name="DeleteThisRegion">선택한 영역을 삭제 하시겠습니까?</Item>
+<Item name="Deny">사용 안 함</Item>
+<Item name="DestFile">대상 파일</Item>
+<Item name="DestIP">목표 IP</Item>
+<Item name="Detailed">상세한...</Item>
+<Item name="Detect">검파하다</Item>
+<Item name="DetectDevice">장치감지</Item>
+<Item name="DetectFail">테스트 실패</Item>
+<Item name="DetectSuccess">검출 성공적인</Item>
+<Item name="Detecting">감지...</Item>
+<Item name="Deviation">습도 교정</Item>
+<Item name="Device">장치</Item>
+<Item name="DeviceChoosePageTip">1. U-disk를 사용하십시오，카드타입을 선택하십시오;  &#x000A;2.장치이름과 카드 ID를 일치시킵니다; &#x000A;3.꼭 하나의 장치를 선택한 후 다음을 누르십시오.</Item>
+<Item name="DeviceID">장치 ID</Item>
+<Item name="DeviceManage">장치 관리</Item>
+<Item name="DeviceName">장치 이름</Item>
+<Item name="DialClock">아나로그시계</Item>
+<Item name="DialStyle">문자판 작풍</Item>
+<Item name="DialWeek">주</Item>
+<Item name="DialYear">날짜</Item>
+<Item name="DigitOnly">디지털 만 표시</Item>
+<Item name="Digital">디지털</Item>
+<Item name="Direction">방향</Item>
+<Item name="DisableBrightnessAdjustment"> 밝기 조정 비활성화</Item>
+<Item name="Disconnected">Disconnected</Item>
+<Item name="DiskSpace">디스크 공간:</Item>
+<Item name="Display">화면에 보이다</Item>
+<List name="DisplayEffects" id="40">정적 전시</List>
+<List name="DisplayEffects" id="0">시립 즉시 显示</List>
+<List name="DisplayEffects" id="10">수직으로 마감</List>
+<List name="DisplayEffects" id="11">수평으로 분할</List>
+<List name="DisplayEffects" id="12">수평으로 마감</List>
+<List name="DisplayEffects" id="14">수직 블라인드</List>
+<List name="DisplayEffects" id="13">수평 블라인드</List>
+<List name="DisplayEffects" id="15">왼쪽 페이지로 켜기</List>
+<List name="DisplayEffects" id="16">오른쪽 페이지로 켜기</List>
+<List name="DisplayEffects" id="17">점점 멀어지기</List>
+<List name="DisplayEffects" id="18">점점 닫기</List>
+<List name="DisplayEffects" id="19">시계 방향 닫기</List>
+<List name="DisplayEffects" id="1">왼쪽으로 이동</List>
+<List name="DisplayEffects" id="200">랜덤</List>
+<List name="DisplayEffects" id="202">왼쪽으로 계속 이동</List>
+<List name="DisplayEffects" id="203">오른쪽으로 계속 이동</List>
+<List name="DisplayEffects" id="204">위쪽으로 계속 이동</List>
+<List name="DisplayEffects" id="20">반 시계 방향 닫기</List>
+<List name="DisplayEffects" id="21">수평 짜집기</List>
+<List name="DisplayEffects" id="23">위로 길게</List>
+<List name="DisplayEffects" id="22">아래로 말기</List>
+<List name="DisplayEffects" id="25">왼쪽으로 말기</List>
+<List name="DisplayEffects" id="24">오른족으로 말기</List>
+<List name="DisplayEffects" id="26">수평 그리드</List>
+<List name="DisplayEffects" id="27">수직 그리드</List>
+<List name="DisplayEffects" id="28">눈 위로</List>
+<List name="DisplayEffects" id="29">낙하</List>
+<List name="DisplayEffects" id="2">오른쪽으로 이동</List>
+<List name="DisplayEffects" id="30">눈 위로</List>
+<List name="DisplayEffects" id="31">오르다</List>
+<List name="DisplayEffects" id="32">레이저 왼쪽으로</List>
+<List name="DisplayEffects" id="33">레이저 오른쪽</List>
+<List name="DisplayEffects" id="34">깜박임</List>
+<List name="DisplayEffects" id="35">하이라이트 깜박</List>
+<List name="DisplayEffects" id="36">내려 뻗다</List>
+<List name="DisplayEffects" id="37">올라 뻗다</List>
+<List name="DisplayEffects" id="38">수직으로 뻗다</List>
+<List name="DisplayEffects" id="39">뒤집다</List>
+<List name="DisplayEffects" id="3">위쪽으로 이동</List>
+<List name="DisplayEffects" id="4">아래쪽으로 이동</List>
+<List name="DisplayEffects" id="5">덮다 오른쪽에서 왼쪽으로 </List>
+<List name="DisplayEffects" id="6">덮다 오른쪽으로</List>
+<List name="DisplayEffects" id="7">위쪽으로 덮다</List>
+<List name="DisplayEffects" id="8">아래쪽으로 덮다</List>
+<List name="DisplayEffects" id="9">수직 분할</List>
+<Item name="DisplayState">표시 상태</Item>
+<Item name="Dll_Add">누적 증가</Item>
+<Item name="Dll_Data">데이터</Item>
+<Item name="Docking">Docking</Item>
+<Item name="DonotTips">메시지를 표시하지 않습니다</Item>
+<Item name="DontChange">변경하지말것</Item>
+<Item name="DownloadSpeed">다운로드 속도</Item>
+<Item name="Dwell">잠시 머물다</Item>
+<Item name="Edit">발행하다</Item>
+<Item name="Editor">편집자</Item>
+<Item name="Effect">효과</Item>
+<Item name="Effect Cover">덮기</Item>
+<Item name="Effect Drift">표류하기</Item>
+<Item name="Effect FanShaped">부채꼴</Item>
+<Item name="Effect Flicker">깜박임</Item>
+<Item name="Effect Laser">레이저</Item>
+<Item name="Effect Move">이동</Item>
+<Item name="Effect OpenAndClose">열기/닫기</Item>
+<Item name="Effect PageTurning">페이지 넘기기</Item>
+<Item name="Effect Pull">당기기</Item>
+<Item name="Effect Roll">감기</Item>
+<Item name="Effect WaterFall">폭포</Item>
+<Item name="EffectSetting">효과 설정</Item>
+<Item name="EffectType">효과의 종류</Item>
+<Item name="EliminateGhosting">잔상제거</Item>
+<Item name="Empty">비우다</Item>
+<Item name="EmptyScreen">디스플레이를 비우기</Item>
+<Item name="Enable">확장</Item>
+<Item name="EnableDhcp">DHCP 동작(프로토콜)</Item>
+<Item name="End Play">종료</Item>
+<Item name="EndIpAddr">최종 IP주소</Item>
+<Item name="EndToEnd">끝과 끝</Item>
+<Item name="Equilibrium">균형 </Item>
+<Item name="Error">오류</Item>
+<Item name="EthSettingHelpA">만 소프트웨어 의 주소를 변경</Item>
+<Item name="EthSettingHelpB">참고:&#x000A;1. 소프트웨어 및 장치의 주소가 변경됩니다 성공적으로 설정 한 후.&#x000A;2. 여러 장치가 연결되어있는 경우, 있는지 확인하십시오 의 MAC 주소가 고유한지.</Item>
+<Item name="Ethernet">이더넷</Item>
+<Item name="EthernetAddressSettingSuccess">성공적으로 이더넷 주소를 설정</Item>
+<Item name="EthernetSettingInfo">참고 :이 기능을 사용하는 경우, 되어 있는지 확인합니다 만 하나 제어 카드가 LAN에 연결.</Item>
+<Item name="Example">실시 예</Item>
+<Item name="ExitDownloading">업데이트 파일을 다운로드. 종료할지 여부?</Item>
+<Item name="ExpiredVerification">Expired,need passward</Item>
+<Item name="ExporBus">모듈파라미터 내보내기</Item>
+<Item name="ExporBusIn">모듈파라미터 들여오기</Item>
+<Item name="Export">내 보내기</Item>
+<Item name="ExportAdjustTimeFile">시간조정 파일 내보내기</Item>
+<Item name="ExportFile">파일 내보내기</Item>
+<Item name="ExportFileFail">파일을 내보낼 실패했습니다!</Item>
+<Item name="ExportImport">가져 오기 및 내보내기</Item>
+<Item name="ExportParam">파라미터 내보내기</Item>
+<Item name="ExportScreenFile">영상파일 내보내기</Item>
+<Item name="ExportSetedParams">매개 변수를 내보내기</Item>
+<Item name="ExportSuccess">성공적으로 보냈습니다，U 디스크를 꺼내시겠습니까?</Item>
+<Item name="ExportSuccess1">1을 성공적으로 보냈습니다.</Item>
+<Item name="ExportSuccess2">2를 성공적으로 보냈습니다.</Item>
+<Item name="ExportToUDisk">U 디스크에 내보내기</Item>
+<Item name="Fahrenheit">화씨</Item>
+<Item name="Fast">빠른</Item>
+<Item name="Fastest">가장 빠른</Item>
+<Item name="FeatureNavigator">기능 탐색</Item>
+<Item name="File">파일</Item>
+<Item name="FileConfigurationError">잘못 구성된 파일</Item>
+<Item name="FileConfigurationPackageSentSuccessfully">패키지는 파일의 구성 성공적으로 전송되었다.</Item>
+<Item name="FileDoesNotMatch">파일 일치하지 않는.</Item>
+<Item name="FileList">파일 목록</Item>
+<Item name="FileMisidentified">파일 식별자가 잘못</Item>
+<Item name="FileParametersError">파일 매개 변수는 잘못된 것입니다.(화면의 폭 또는 높이를 초과 할  또는 색상이 잘못된 것입니다.)</Item>
+<Item name="FileSendComplete">성공적으로 전송 파일</Item>
+<Item name="FileSize">파일 크기</Item>
+<Item name="FileSuccessfullyReceived">파일을 성공적 수신</Item>
+<Item name="FilterColor">필터 색</Item>
+<Item name="FindNewVersion">새 버전에서 발견.업데이트를 다운로드할지 여부?</Item>
+<Item name="FindScree">화면을 확인</Item>
+<Item name="FindSerial">제어 카드와 연결된 직렬 포트 찾기</Item>
+<Item name="Finish">마치다</Item>
+<Item name="FinishTracingPoint">추적 점은 마무리가되어 있습니다.</Item>
+<Item name="FirmwareMismatching">펌웨어 불일치</Item>
+<Item name="FirmwareVersion">펌웨어 버전</Item>
+<Item name="FirstPage">첫 페이지</Item>
+<Item name="FitMaxHint">영역을 최대화</Item>
+<Item name="FixedCellsWidth">고정 셀 너비</Item>
+<Item name="FixedPlay">고정 프로그램</Item>
+<Item name="FixedTime">고정 시간</Item>
+<Item name="Flash">플레쉬 파일(SWF)</Item>
+<Item name="Floating">Floating</Item>
+<Item name="FlushLeft">플러시 왼쪽</Item>
+<Item name="Font">글꼴 설정</Item>
+<Item name="FontSize">글꼴 크기</Item>
+<Item name="Foreground">전경</Item>
+<Item name="FoundDisk">이동식 디스크가 감지되었습니다</Item>
+<Item name="FramesTooMuch">프레임이 너무 많다, 줄여주세요.</Item>
+<Item name="FreeSpace">나머지 공간</Item>
+<Item name="Frequency">스캔 주파수</Item>
+<Item name="Friday">금요일</Item>
+<Item name="From">부터</Item>
+<Item name="From Max To Min">From Max To Min</Item>
+<Item name="From Min To Max">From Min To Max</Item>
+<Item name="GIF name">GIF 제목</Item>
+<Item name="GammaCorrection">감마수정</Item>
+<Item name="GaryTip1">제어 범위를 감소 1/</Item>
+<Item name="General2">제 2 세대</Item>
+<Item name="General4">제 4 세대</Item>
+<Item name="General6">제 6 세대</Item>
+<Item name="GeneratingData">데이터를 생성</Item>
+<Item name="GetFirmwareVersion">펌웨어 버전 획득</Item>
+<Item name="GetSystemTime">시스템 시간 조정</Item>
+<Item name="Graph">그래프</Item>
+<Item name="GraphCount">숫자</Item>
+<Item name="GrayLevel">Gray Level</Item>
+<Item name="Green">녹색</Item>
+<Item name="HDScreenFile">HD 스크린 파일</Item>
+<Item name="HZoom">수평 벌리기</Item>
+<Item name="Height">높이</Item>
+<Item name="HeightOfMoreTthan">높이 최대 값을 초과합니다!”!</Item>
+<Item name="Hide">숨길</Item>
+<Item name="High">높은</Item>
+<Item name="Hollow">중공</Item>
+<Item name="Horizontal">수평의</Item>
+<Item name="Hour">시간</Item>
+<Item name="HourHand">시침</Item>
+<Item name="HourRadius">시간 반경</Item>
+<Item name="Humidity">습도</Item>
+<Item name="IDAlreadyExists">ID has been exists</Item>
+<Item name="IDInputError">ID is Error</Item>
+<Item name="IPAddress">IP 주소</Item>
+<Item name="IPNotLegitimate">IP is not legitimate</Item>
+<Item name="IPResetting">IP 주소 재설정</Item>
+<Item name="IPSetting">IP 설정을</Item>
+<Item name="Idle">대기중</Item>
+<Item name="IllegalFile">불법 파일</Item>
+<Item name="Image">영상</Item>
+<Item name="ImageAuto">Picture Style</Item>
+<Item name="Images">그림</Item>
+<Item name="ImportParam">파라미터 가져오기</Item>
+<Item name="ImportScreenFile">영상파일 들여오기</Item>
+<Item name="IncompleteDataWriting">불완전한 데이터의 기입</Item>
+<Item name="Index">제조 번호</Item>
+<Item name="InfraredRay">적외선</Item>
+<Item name="InitialState">The initial state</Item>
+<Item name="InitializeSuccess">성공적으로 초기화</Item>
+<Item name="InputSmartSettingName">스마트 설정의 이름을 입력하십시오</Item>
+<Item name="Insert">넣기</Item>
+<Item name="InsertColumn">열 삽입</Item>
+<Item name="InsertRow">행 삽입</Item>
+<Item name="Inverse">안티-선택</Item>
+<Item name="IsDeleteAllScreen">디스플레이의 모든을 삭제 하시겠습니까?</Item>
+<Item name="IsExportVideo">비디오를 내보내겠습니까?</Item>
+<Item name="IsSaveFile">파일을 저장 하시겠습니까?</Item>
+<Item name="IsSendToCard">제어 카드에 전송됩니다？</Item>
+<Item name="IsTheLatestVersion">최신 버전은 이미.</Item>
+<Item name="Large">큰</Item>
+<Item name="LastPage">마지막 페이지</Item>
+<Item name="LeftToRight">왼쪽-&gt;오른쪽</Item>
+<Item name="LevelScreenshot">Horizontal Screenshot</Item>
+<Item name="LightRows">행 수를 셀 플레이트 라이트</Item>
+<Item name="LineSpacing">줄 간격</Item>
+<Item name="Link">Link</Item>
+<Item name="LinkState">Connection Status</Item>
+<Item name="LiveTime">Live Time</Item>
+<Item name="LocalDisck">로컬 디스크</Item>
+<Item name="LocalIpSeting">로컬 IP 설정</Item>
+<Item name="LockPara">Lock parameters</Item>
+<Item name="Low">낮은</Item>
+<Item name="LuminancePrior">밝기 우선</Item>
+<Item name="LuminanceSetting">밝기 설정</Item>
+<Item name="LuminanceSettingSuccess">성공적으로 밝기를 설정할</Item>
+<Item name="MACAddress">MAC 주소</Item>
+<Item name="MFRDate">제조 일자</Item>
+<Item name="Max">Max</Item>
+<Item name="MaxIPAddr">최대 TP 주소</Item>
+<Item name="MaxUseImage">Image for Max</Item>
+<Item name="MaximumOfHeight">최대 높이</Item>
+<Item name="MaximumOfRange">최대 제어범위</Item>
+<Item name="MaximumOfRegions">최대 지원영역</Item>
+<Item name="MaximumOfWidth">최대 폭</Item>
+<Item name="Memory">메모리</Item>
+<Item name="Memory Size">메모리 용량</Item>
+<Item name="MergeCells">셀 병합</Item>
+<Item name="Middle">중간</Item>
+<Item name="Min">분</Item>
+<Item name="MinIPAddr">분 IP 어드레스</Item>
+<Item name="MinUseImage">Image for Min</Item>
+<Item name="MinuteHand">분침</Item>
+<Item name="Model">모드1</Item>
+<Item name="Modify">바꾸다</Item>
+<Item name="Module">모듈</Item>
+<Item name="ModuleMismatching">의 모델은 카드 일치하지 않는.</Item>
+<Item name="ModuleSelect">모듈 선택</Item>
+<Item name="Monday">월요일</Item>
+<Item name="MoreSetting">기타 설정</Item>
+<Item name="MoreSettings">기타 설정-&gt;&gt;</Item>
+<Item name="MoveDown">아래로 이동</Item>
+<Item name="MoveUp">위로 이동</Item>
+<Item name="Multi">다중</Item>
+<Item name="MultiFrame">멀티 프레임 이미지</Item>
+<Item name="MultiLine">다단 디스플레이</Item>
+<Item name="MultiScreenDirectConnect">멀티 스크린 모드</Item>
+<Item name="MultipeSend">다중송신</Item>
+<Item name="MultipeSendHint">단지 적용 대상 이더넷 (고정 IP 주소) 모드</Item>
+<Item name="MultipleEffects">다중효과</Item>
+<Item name="MultipleLinesoftext">여러 줄 텍스트</Item>
+<Item name="NICName">NIC 이름</Item>
+<Item name="Name">이름</Item>
+<Item name="NeedSensor">센서 필요</Item>
+<Item name="NeedSpace">필요한 공간</Item>
+<Item name="NetMark">서브넷 마스크</Item>
+<Item name="NetWorkError">이 컨트롤 카드는 컴팩트 모드에만 적합，경우 그것은 와 동일한 네트워크 세그먼트에있는 가진 컴퓨터.</Item>
+<Item name="NewCrossScreen">새로운 크로스 화면(&amp;C)</Item>
+<Item name="NewCrossScreen_G">새로운 교차 스크린-G</Item>
+<Item name="NewGuideScreen">안내 신스크린</Item>
+<Item name="NewHypertext">새로운 하이퍼 텍스트</Item>
+<Item name="NewNormalScreen_G">새로운 정상 스크린-G</Item>
+<Item name="NewScreen">새로운</Item>
+<Item name="NewTable">새 테이블</Item>
+<Item name="Next">다음</Item>
+<Item name="NextPage">다음</Item>
+<Item name="NextProgram">Switch to next program</Item>
+<Item name="NextScan">다음스캔</Item>
+<Item name="NoAssociation">아무 협회</Item>
+<Item name="NoBorder">전광판 없음</Item>
+<Item name="NoFile">파일이 존재하지 않습니다!</Item>
+<Item name="NoFindConfigFiles">계속 화면 파라미터 파일을 찾을 수 없습니까?</Item>
+<Item name="NoFoundDisk">이동식 디스크가 감지되지 않았습니다.</Item>
+<Item name="NoInstallFlash">어도비 플래시 플레이어가 설치되어 있는지 확인하시기 바랍니다.</Item>
+<Item name="NoLimit">무제한</Item>
+<Item name="NoSerial">제어 카드와 연결된 직렬 포트를 찾을 수 없습니다.</Item>
+<Item name="NoSerialConnection">아니 직렬 연결</Item>
+<Item name="Noarea">지역 결여, 송신 실패!</Item>
+<Item name="Noitemisselected">Nothing selected</Item>
+<Item name="NormalShow">플레이의 순서.</Item>
+<Item name="NotSelected">선택되지 않은</Item>
+<Item name="NotSupportGlobalProgram">Ordinary screen does not support global program</Item>
+<Item name="NotSupportLANUpgrade">이더넷이 모델에서 지원되지 않습니다,
+사용하십시오 직렬 포트 또는 U 디스크를 펌웨어를 업그레이드 하기 위해.</Item>
+<Item name="NotSupportTips">팁 : 시간을 지원하지 말라, 새로운 다이얼, 온도와 습도, 음력</Item>
+<Item name="NumberOfProgramHasReachedItsMaximum">프로그램의 수가 최대허용치에 도달하였습니다.</Item>
+<Item name="NumberOfRegionHasReachedItsMaximum">허용된 최대영역을 초과 하였습니다！</Item>
+<Item name="OEPolarity">OE 극성</Item>
+<Item name="OEPolaritySet">OE의 극성 설정</Item>
+<Item name="OK">확인</Item>
+<Item name="Offline">오프라인</Item>
+<Item name="OldVerCard">Gen4의 검색</Item>
+<Item name="On-line">온-라인</Item>
+<Item name="OnBottom">밑으로 삽입</Item>
+<Item name="OnLeft">왼쪽에 삽입</Item>
+<Item name="OnRight">우측에 삽입</Item>
+<Item name="OnTop">위로 삽입</Item>
+<Item name="OnlyAllowContainsAClockRegion">단지 시간영역만을 포함 할 수 있습니다！</Item>
+<Item name="OnlyAllowContainsATempRegion">단지 온도영역만을 포함하는 것을 허용합니다.！</Item>
+<Item name="OnlyAllowContainsATimeRegion">단지 시간영역 포함만을 허락합니다！</Item>
+<Item name="OnlyCard">단지 카드</Item>
+<Item name="Open">열기</Item>
+<Item name="OpenAdv">광고를 열고</Item>
+<Item name="OpenFileFail">파일을 열지 못했습니다,이 파일이 점유되는지 검사하십시오.</Item>
+<Item name="OpenFolder">폴더 열기</Item>
+<Item name="OpenScreen">열다 화면</Item>
+<Item name="OperationSuccess">성공적으로 작동</Item>
+<Item name="Orange">오렌지색</Item>
+<Item name="OriginX">원점 X</Item>
+<Item name="OriginY">원점 Y</Item>
+<Item name="Original">고유의</Item>
+<Item name="OtherSeting">기타 설정</Item>
+<Item name="Out">Info</Item>
+<Item name="OutOfMemory">제어 카드의 메모리가 충분하지, 프로그램을 줄여주세요.</Item>
+<Item name="OutOfShowMemory">Out of memory,reduce area.</Item>
+<List name="OutputWindowString" id="0">기기 스캔읽기</List>
+<List name="OutputWindowString" id="10">콘트롤카드 이름이 성공적으로 설정되었음</List>
+<List name="OutputWindowString" id="11">스크린을 성공적으로 제거하였음</List>
+<List name="OutputWindowString" id="12">스크린매개변수를 성공적으로 설정 하였음</List>
+<List name="OutputWindowString" id="13">콘트롤카드 시간설정이 성공적으로 완료되었음</List>
+<List name="OutputWindowString" id="14">밝기조정이 성공적으로 완료되었음</List>
+<List name="OutputWindowString" id="15">시간변환설정이 성공적으로 완료되었음</List>
+<List name="OutputWindowString" id="16">영상테스트중...</List>
+<List name="OutputWindowString" id="17">명령이 올바르지 않음</List>
+<List name="OutputWindowString" id="18">장치 매개변수 없음</List>
+<List name="OutputWindowString" id="19">유효하지않은 명령</List>
+<List name="OutputWindowString" id="1">기기정보 획득</List>
+<List name="OutputWindowString" id="20">시스템바쁨</List>
+<List name="OutputWindowString" id="21">헤드길이 오류</List>
+<List name="OutputWindowString" id="22">심볼 부정확</List>
+<List name="OutputWindowString" id="23">No. 틀림 </List>
+<List name="OutputWindowString" id="24">스크린 매개변수 없음</List>
+<List name="OutputWindowString" id="25">전송프로그램 오류</List>
+<List name="OutputWindowString" id="26">알려지지않은 오류</List>
+<List name="OutputWindowString" id="27">종료시간 보냄</List>
+<List name="OutputWindowString" id="28">상호교신프로그램분석오류</List>
+<List name="OutputWindowString" id="29">IP 일치성공 </List>
+<List name="OutputWindowString" id="2">기기 오프라인(연결안된 상태)</List>
+<List name="OutputWindowString" id="30">펌웨어최신화실패, 재시도 바랍니다</List>
+<List name="OutputWindowString" id="31">설정에 실패하였습니다.</List>
+<List name="OutputWindowString" id="32">오류를 검사하십시오</List>
+<List name="OutputWindowString" id="33">프로토콜 오류</List>
+<List name="OutputWindowString" id="34">명령 오류</List>
+<List name="OutputWindowString" id="35">파일 불일치</List>
+<List name="OutputWindowString" id="36">팩킷(프로그램)번호 불일치</List>
+<List name="OutputWindowString" id="37">모듈타입 불일치</List>
+<List name="OutputWindowString" id="38">파일구성 오류</List>
+<List name="OutputWindowString" id="39">불법적인 파일</List>
+<List name="OutputWindowString" id="3">보내고자하는 스크린을 선택</List>
+<List name="OutputWindowString" id="40">CPU 타입 오류</List>
+<List name="OutputWindowString" id="41">펌웨어는 3색만을 지원합니다, 단색과 이중색은 지원되지 않습니다.</List>
+<List name="OutputWindowString" id="42">펌웨어는 단색과 이중색만을 지원합니다, 삼색은 지원되지 않습니다.</List>
+<List name="OutputWindowString" id="43">업데이트가 성공적으로 이루어 졌습니다.</List>
+<List name="OutputWindowString" id="44">수신에 실패하였습니다.</List>
+<List name="OutputWindowString" id="45">팩킷의 길이로 인해 실패하였습니다.</List>
+<List name="OutputWindowString" id="46">파일인식을 하지 못하였습니다.</List>
+<List name="OutputWindowString" id="47">보조팩킷 순차번호 오류</List>
+<List name="OutputWindowString" id="49">파일을 성공적으로 수신하였습니다.</List>
+<List name="OutputWindowString" id="4">기기가 연결되지 않은 스크린 선택</List>
+<List name="OutputWindowString" id="50">신호가 지연됨</List>
+<List name="OutputWindowString" id="51">시스템이 바쁨</List>
+<List name="OutputWindowString" id="52">데이터가 불완전하게 작성되었음</List>
+<List name="OutputWindowString" id="53">펌웨어 업데이트가 성공적으로 이루어 졌음！</List>
+<List name="OutputWindowString" id="54">장치매개변수가 정상적으로 설정됨</List>
+<List name="OutputWindowString" id="55">바인딩 장치가 오프라인 상태입니다</List>
+<List name="OutputWindowString" id="56">The setting of the screen size is not right.</List>
+<List name="OutputWindowString" id="57">Start sending</List>
+<List name="OutputWindowString" id="58">Setting successfully</List>
+<List name="OutputWindowString" id="59">Service expiration</List>
+<List name="OutputWindowString" id="5">프로그램용량이 너무크다</List>
+<List name="OutputWindowString" id="60">Font changed successfully</List>
+<List name="OutputWindowString" id="61">Set directly connected successfully</List>
+<List name="OutputWindowString" id="62">Cancel directly connected successfully</List>
+<List name="OutputWindowString" id="63">Equipment in the Boot status,please update the firmware</List>
+<List name="OutputWindowString" id="64">Verification fails</List>
+<List name="OutputWindowString" id="65">Returns nothing</List>
+<List name="OutputWindowString" id="66">File is too large</List>
+<List name="OutputWindowString" id="67">Control card ID is wrong</List>
+<List name="OutputWindowString" id="68">Invalid device ID[%s]</List>
+<List name="OutputWindowString" id="69">Reset Device ID[%s]</List>
+<List name="OutputWindowString" id="6">명령은 성공적으로 수행되었다</List>
+<List name="OutputWindowString" id="7">초기화 보내기</List>
+<List name="OutputWindowString" id="8">보내는 중...</List>
+<List name="OutputWindowString" id="9">성공적으로 보냈슴</List>
+<Item name="P10Colorful">M10（Colorful）</Item>
+<Item name="Pack">이미지 패킷</Item>
+<Item name="PackageNumberError">패킷 번호 이 잘못.</Item>
+<Item name="Packet">패킷</Item>
+<Item name="PacketError">패킷은 잘못된 것입니다.</Item>
+<Item name="PacketSize">패킷 크기</Item>
+<Item name="Page">페이지</Item>
+<Item name="Pages">페이지</Item>
+<Item name="PannelFill">이 지역은 이미 존재하는!”!</Item>
+<Item name="ParallelSend">Parallel send</Item>
+<Item name="ParametersReadbackSuccess">성공적으로 리드 백 매개 변수</Item>
+<Item name="ParametersSetting">매개 변수 설정</Item>
+<Item name="Parti-color">잡색의</Item>
+<Item name="Password">암호 </Item>
+<Item name="PasswordAuthentication">암호 인증</Item>
+<Item name="PasswordError">암호가 잘못되었습니다！</Item>
+<Item name="PasswordSetting">암호 설정이</Item>
+<Item name="Paste">붙이기</Item>
+<Item name="Path">경로</Item>
+<Item name="Pause">중지</Item>
+<Item name="PictrueProcessing">이미지 가공</Item>
+<Item name="PlaseSelectDevice">기기를 선택해주세요</Item>
+<Item name="Play">방송</Item>
+<Item name="PlayBeforePowerProgram">저장된 이전 프로그램 시작</Item>
+<Item name="PlayMemory Size">작동메모리 용량</Item>
+<Item name="PlayMode">재생 모드</Item>
+<Item name="PlayQuality">유창</Item>
+<Item name="PlaySpeed">의 재생 속도</Item>
+<Item name="PlayTime">재생 시간</Item>
+<Item name="PlayTimes">놀다 주파수 </Item>
+<Item name="Playback Duration">구간 돌리기</Item>
+<Item name="Player">플레이어</Item>
+<Item name="Playing BeginFrames">시작프레임을 작동</Item>
+<Item name="Playing EndFrames">종료프레임을 작동</Item>
+<Item name="Playing Frames">프레임 작동</Item>
+<Item name="PleaseEnterTheBorderWidthOfTheTable">테이블상의 전광판 폭의 값을 입력하십시오.</Item>
+<Item name="PleaseEnterTheNumberOfCloumns">열의 수를 입력하십시오.</Item>
+<Item name="PleaseEnterTheNumberOfRows">행(단)의 수를 입력하십시오.</Item>
+<Item name="PleaseSelect">선택하세요</Item>
+<Item name="PleaseSelectAFile">파일을 선택하십시오!</Item>
+<Item name="PleaseSelectAItem">항목을 선택하십시오. 주사 결과는 비어있는 경우면, 라인을 확인하시기 바랍니다.</Item>
+<Item name="PleaseSelectAProgram">프로그램을 선택하세요！</Item>
+<Item name="PleaseSelectScreen">화면을 선택하십시오.</Item>
+<Item name="PleaseWait">기다려주십시오...</Item>
+<Item name="PlotPointsImage">구성이미지</Item>
+<Item name="PointCount">Decimal digits</Item>
+<Item name="Points">화면 포인트</Item>
+<Item name="PopUdiskfailure"> 디스크를 U 꺼낼하지 못했습니다!</Item>
+<Item name="Port">포트</Item>
+<Item name="PreProgram">이전 프로그램으로 전환</Item>
+<Item name="PreProgramConctrl">프로그램 제어</Item>
+<Item name="Prev">이전</Item>
+<Item name="PrevScan">이전스캔</Item>
+<Item name="Preview">미리보기</Item>
+<Item name="PreviewSetting">프리뷰 설정이</Item>
+<Item name="PreviousPage">이전</Item>
+<Item name="ProgramInformation">프로그램정보</Item>
+<Item name="ProgramSize">Program Size</Item>
+<Item name="ProgramSwitching">프로그램 바꾸기</Item>
+<Item name="ProtocolError">프로토콜이 잘못.</Item>
+<Item name="ProtocolTypeError">프로토콜 유형은 그릇된.</Item>
+<Item name="PullThreshold">흡착</Item>
+<Item name="QRCode">QR code</Item>
+<Item name="QuitTest">테스트를 종료합니다.</Item>
+<Item name="RFID"> RF  ID</Item>
+<Item name="RFSetting">RF Setting</Item>
+<Item name="RS232">RS232</Item>
+<Item name="RadioEffect">무선효과</Item>
+<Item name="RandomColor">Random color</Item>
+<Item name="ReadBack2">리드 백</Item>
+<Item name="ReadScreenParamsFromUDisk">u 디스크 가져 오기 스크린 매개 변수</Item>
+<Item name="Readback">리드 백</Item>
+<Item name="RealTimeArea">Real-time area</Item>
+<Item name="RealTimeFindCard">실시간카드찾기</Item>
+<Item name="RebootScreen">Reboot Screen</Item>
+<Item name="ReceiveFailure">수신하는 데 실패</Item>
+<Item name="Record">녹음</Item>
+<Item name="RecordTips">참고 : 정확한 이미지를 얻을 수없는 경우에, 레코딩 옵션을 선택합니다.</Item>
+<Item name="RectangleScreen">사각형 스크린</Item>
+<Item name="Red">홍색</Item>
+<Item name="Refresh">재충전</Item>
+<Item name="RefreshFrequency">주파수조정</Item>
+<Item name="RefreshRate">새로 고침 속도</Item>
+<Item name="RegionHeight">면적 높이</Item>
+<Item name="RegionRect">면적 위치</Item>
+<Item name="RegionWidth">지역 폭</Item>
+<Item name="Relevance">위하여 가십시오 "-&gt;메뉴  - 조작&gt; 통신 설정 -&gt; TCP -&gt; 디스플레이 연결"!</Item>
+<Item name="RememberProgram">Remember Program</Item>
+<Item name="Remove">옮기다</Item>
+<Item name="RemoveDevice">디스크 꺼내기</Item>
+<Item name="RemoveDeviceSuccess1">1 장치를 성공적으로 제거하였습니다.</Item>
+<Item name="RemoveDeviceSuccess2">2 장치를 성공적으로 제거하였습니다.</Item>
+<Item name="Rename">이름 바꾸기</Item>
+<Item name="Repeat">Repeat</Item>
+<Item name="Reset">재설정</Item>
+<Item name="ResetProgram">리셋 프로그램</Item>
+<Item name="RestartFailed">Restart failed</Item>
+<Item name="RestartSuccess">Control card restart successfully</Item>
+<Item name="RevertToDefaultSettings">디폴트상태로 복원됩니다, 게속하시겠습니까?</Item>
+<Item name="RightToLeft">오른쪽-&gt;왼쪽</Item>
+<Item name="Romaji">로마 인</Item>
+<Item name="Round">둥근</Item>
+<Item name="RoundAndDigital">라운드+디지털</Item>
+<Item name="RoundAndRomaji">라운드+로마 인</Item>
+<Item name="RouterAddress">기본 게이트웨이</Item>
+<Item name="Row">행</Item>
+<Item name="SRCFile">소스 파일</Item>
+<Item name="SWF name">SWF Path</Item>
+<Item name="Saturday">토요일</Item>
+<Item name="Save">저장</Item>
+<Item name="SaveToDefaultSetting">기본 설정 저장하기</Item>
+<Item name="ScaleAndDigital">규모+디지털</Item>
+<Item name="ScaleAndRomaji">규모+로마 인</Item>
+<Item name="ScanMode">스캔 모드</Item>
+<Item name="ScanRange">스캔 임계 값</Item>
+<Item name="ScanValueB">블루 필터</Item>
+<Item name="ScanValueG">녹색 필터</Item>
+<Item name="ScanValueR">레드 필터</Item>
+<Item name="Scanning">스캔</Item>
+<Item name="ScanningComplete">스캔이 완료됩니다</Item>
+<Item name="Schedule">일정</Item>
+<Item name="ScreenCentered">아날로그 화면센터</Item>
+<Item name="ScreenChoosePageTip">스크린타입을 선택하십시오 </Item>
+<Item name="ScreenColor">화면 색</Item>
+<Item name="ScreenCount">연결된 디스플레이의 양</Item>
+<Item name="ScreenHeight">화면 높이</Item>
+<Item name="ScreenInformation">스크린 정보</Item>
+<Item name="ScreenParameters">스크린 매개 변수</Item>
+<Item name="ScreenParametersSetting">스크린 매개 변수 설정</Item>
+<Item name="ScreenParamsPageTip">1.스크린의 폭과 높이의 픽셀수를 선택하십시오(폭과 높이의 뜻은 스크린의 총 픽셀수를 의미합니다.) &#x000A;2.스크린의 색상을 선택하십시오 ；&#x000A;3.하나의 스크린 총픽셀수는 그 스크린의 LED 전구수와 같습니다..</Item>
+<Item name="ScreenSize">화면 크기</Item>
+<Item name="ScreenSmartTip">현재 스크린상에 텍스트가 정상적으로 보인다면 ,스마트설정은 필요하지 않습니다.</Item>
+<Item name="ScreenTest">디스플레이 테스트</Item>
+<Item name="ScreenType">스크린타입</Item>
+<Item name="ScreenWidth">화면 폭</Item>
+<Item name="Search">찾다</Item>
+<Item name="Searching">찾다...</Item>
+<Item name="SearchingBegin">찾다</Item>
+<Item name="SearchingEnd">검색이 완료됩니다.</Item>
+<Item name="Sec">초</Item>
+<Item name="SecondHand">중고</Item>
+<Item name="SecondRadius">둘째 반경</Item>
+<Item name="SelectDataPolarity">데이터 극성을 선택하세요</Item>
+<Item name="SelectDefault">상기 제어 카드의 종류를 알 수없는 경우, 디폴트 옵션을 선택한다.</Item>
+<Item name="SelectMode">모드 선택</Item>
+<Item name="SelectOEPolarity">OE 극성을 선택하세요</Item>
+<Item name="SelectScan">스캔 모드를 선택하세요!”!</Item>
+<Item name="SelectScree">대응 화면을 선택주세요!</Item>
+<Item name="SendFile">파일 보내기</Item>
+<Item name="SendParamsWhenFinish">매개 변수를 수정 한 후, "매개 변수를 보내기"버튼을 클릭합니다.</Item>
+<Item name="SendScreenParams">매개 변수 보내기</Item>
+<Item name="SendTimeOut">타임 아웃 보내</Item>
+<Item name="SendingData">데이터를 보내는...</Item>
+<Item name="SentSuccessfully">성공적으로 전송</Item>
+<Item name="SerialNumber">시리얼번호</Item>
+<Item name="SerialPort">시리얼 포트 설정</Item>
+<Item name="SerialPortIsClosed">직렬 포트에 연결된 LED 제어 카드를 찾을 수 없습니다.</Item>
+<Item name="SerialPortIsOccupied">시리얼 포트를 점령이다！</Item>
+<Item name="SerialPortOpenError">직렬 포트를 열 수 없습니다</Item>
+<Item name="ServiceExpiration">Service expiration</Item>
+<Item name="SetBrightnessFailed">밝기 설정 실패</Item>
+<Item name="SetBrightnessSuccess">성공적으로 밝기를 설정할</Item>
+<Item name="SetScreenParam">성공적으로 스크린 매개 변수를 설정</Item>
+<Item name="SetTheBaudrateSuccessfully">성공적으로 보 속도를 설정</Item>
+<Item name="Setting">설정</Item>
+<Item name="SetupFailed">설정 실패</Item>
+<Item name="ShowDate">보이다 날짜</Item>
+<Item name="ShowGroup">그룹보기</Item>
+<Item name="ShowMode">디스플레이 모드</Item>
+<Item name="ShowTime">보이다 시간</Item>
+<Item name="ShowWeek">보이다 주</Item>
+<Item name="Showpage">보기 페이지</Item>
+<Item name="ShuttingDown">종료되다</Item>
+<Item name="SignalDelay">신호지연</Item>
+<Item name="SignalDelayHint">중 일부는 디스플레이 (예를 들어, 일부 P5) ​​STR 신호(LAT 신호)은 다른 화면과 반대,
+                가있는 경우 번쩍 포인트 나 선이있는 경우에, 당신은 반대 옵션을 선택할 수 있습니다.</Item>
+<Item name="SignalQuality">Signal Quality</Item>
+<Item name="Simplify">컴팩트 모드</Item>
+<Item name="SimplifyInfo">컴팩트 모드가 직접 연결 하나의 적합 만, 및 LAN와 에 하나 제어 카드，IP 주소가 자동으로됩니다 일치합니다.</Item>
+<Item name="Single">하나</Item>
+<Item name="SingleDirectMode">Direct connection mode</Item>
+<Item name="SingleLine">1단</Item>
+<Item name="SingleLineoftext">한 줄 텍스트</Item>
+<Item name="SingleScreenBroadcasts">복사 모드</Item>
+<Item name="Size">규격</Item>
+<Item name="Slow">느린</Item>
+<Item name="Slowest">가장 느린</Item>
+<Item name="Small">작은</Item>
+<Item name="SmartScanTips">화면이 어두운 밝은있는 경우 클록 주파수를 감소주세요.</Item>
+<Item name="SmartSetting">스마트 설정</Item>
+<Item name="SmartSettingName">스마트 설정 이름</Item>
+<Item name="SmartTips">팁 : 단위로 픽셀</Item>
+<Item name="Snapshot">Snapshot</Item>
+<Item name="SnapshotTip">If no bright spots, insert empty points</Item>
+<Item name="Solid color">순수한</Item>
+<Item name="Space">공간</Item>
+<Item name="SpecifiedDate">날짜 지정</Item>
+<Item name="SpecifiedTime">지정된 시간</Item>
+<Item name="SpecifyValue">Specify a value</Item>
+<Item name="Speed">속도</Item>
+<Item name="SpeedPrior">스피드 우선</Item>
+<Item name="SplitCells">셀 스플릿</Item>
+<Item name="SplitHorizontal">수평으로 스플릿</Item>
+<Item name="SplitVertical">수직으로 스플릿</Item>
+<Item name="Standard">표준</Item>
+<Item name="StartUpImage">Boot animation</Item>
+<Item name="StartingUp">시작되다</Item>
+<Item name="StateA">상태 A</Item>
+<Item name="StateB">상태 B</Item>
+<Item name="StateC">상태 C</Item>
+<Item name="StateD">상태 D</Item>
+<Item name="Static">정적</Item>
+<Item name="Status">상태</Item>
+<Item name="StepBack">취소</Item>
+<Item name="Stop">정지</Item>
+<Item name="Stroke">뇌졸중</Item>
+<Item name="StyleName">효과 이름</Item>
+<Item name="StyleText">원본</Item>
+<Item name="SubPacketSequenceNumberError">서브 패킷의 시퀀스 번호는 틀리다.</Item>
+<Item name="SuccessfullyModified">성공적으로 수정!”!</Item>
+<Item name="Sunday">일요일</Item>
+<Item name="SupportRegionsOverlap">중복구간 지원</Item>
+<Item name="SuspendPreview">나중에 보기</Item>
+<Item name="SwapBlueGreen">블루/그린 의 교류</Item>
+<List name="SystemBusName" id="0">[C1]φ4.75(φ3.75)1R1G   1/16S HUB08 64X32（Indoor）  [A1]</List>
+<List name="SystemBusName" id="10">[C11]P10       1R1G1B 1/8S  HUB08 32X16 HLL</List>
+<List name="SystemBusName" id="11">[C12]P10       1R1G1B 1/4S  HUB75 32X16  [A13]</List>
+<List name="SystemBusName" id="12">[C13]P8        1R1G1B 1/5S   HUB75 40X20 JHG  [A60]</List>
+<List name="SystemBusName" id="13">[C14]P8        1R1G1B 1/4S  HUB08 32X16  [A8]</List>
+<List name="SystemBusName" id="14">[C15]P12/P16   2R1G   1/4S  HUB12 16X8（P16） [A12]</List>
+<List name="SystemBusName" id="15">[C16]P13.33    1R1G1B 1/3S  HUB08 24X12 HLL  [A49]</List>
+<List name="SystemBusName" id="16">[C17]P13.33    1R1G1B 1/3S  HUB08 24X12 JHG  [A57]</List>
+<List name="SystemBusName" id="17">[C18]P16       1R1G1B 1/5S  HUB08 20X10 HLL  [A52]</List>
+<List name="SystemBusName" id="18">[C19]P16       1R1G1B 1/1S  HUB40 16X8  [A29]</List>
+<List name="SystemBusName" id="19">[C20]P10       1R1G1B 1/4S  HUB75 32X16  [A11]</List>
+<List name="SystemBusName" id="1">[C2]φ3.75(φ5)1R     1/16S HUB08 64X32（Indoor）  [A1]</List>
+<List name="SystemBusName" id="20">[C21]P25       2R1G1B 1/1S  HUB40 16X8</List>
+<List name="SystemBusName" id="21">[C22]P10-P20   1G2R1B 1/4S  HUB12 16X8  [A61]</List>
+<List name="SystemBusName" id="22">[C23]P10-P20   2R1G1B 1/4S  HUB12 16X8  [A80]</List>
+<List name="SystemBusName" id="23">[C24]P13.33-P26.66  2R1G1B 1/4S  HUB12 12X6</List>
+<List name="SystemBusName" id="24">[C25]P20  1R1G 1/4S  HUB26 16*16（ZHGD） [A66]</List>
+<List name="SystemBusName" id="25">[C26]P13.33  1R1G1B 1/6S  HUB08 24*12（HLL） [A55]</List>
+<List name="SystemBusName" id="26">[C27]P10  1R 1/4S  HUB12 32*16（QL） [A19]</List>
+<List name="SystemBusName" id="27">[C28]P10  1R1G1B 1/2S  HUB75 16*16</List>
+<List name="SystemBusName" id="28">[C29]P6  1R1G1B 1/8S  HUB75 32*16</List>
+<List name="SystemBusName" id="29">[C30]P6  1R1G1B 1/8S  HUB75 32*32</List>
+<List name="SystemBusName" id="2">[C3]P5         1R1G1B 1/16S HUB08 32X32  [A3]</List>
+<List name="SystemBusName" id="30">[C31]P10  1R1G1B 1/4S  HUB75 16*16[A17]</List>
+<List name="SystemBusName" id="31">[C32]P20  1R1G1B 1/1S  HUB75 16*8</List>
+<List name="SystemBusName" id="32">[C33]P25  2R1G1B 1/1S  HUB75 8*8  [A30]</List>
+<List name="SystemBusName" id="33">[C34]P13.33  1R 1/4S  HUB12 24*12 [A71]</List>
+<List name="SystemBusName" id="34">[C35]P10  1R1G 1/4S  HUB12 32*16  [A7]</List>
+<List name="SystemBusName" id="3">[C4]P5         1R1G   1/8S  HUB08 32*16（Vehicle screen） [A4]</List>
+<List name="SystemBusName" id="4">[C5]P5/P4      1R1G1B 1/16S HUB75 32X32（Indoor） [A1]</List>
+<List name="SystemBusName" id="5">[C6]P10        1R/1R1G     1/4S  HUB12 32X16（P10） [A8]</List>
+<List name="SystemBusName" id="6">[C7]P10        1R     1/4S  HUB08  32X16</List>
+<List name="SystemBusName" id="7">[C8]P10        1R     1/1S  HUB08 32X16[A31]</List>
+<List name="SystemBusName" id="8">[C9]P10        1R1G   1/4S  HUB08  No 138 32X16  [A13]</List>
+<List name="SystemBusName" id="9">[C10]P10        1R1G   1/4S  HUB12 32X16 [A19]</List>
+<Item name="SystemBusy">시스템이 바쁜 나중에 다시 시도해주십시오!</Item>
+<Item name="SystemOptimize">시스템 최적화</Item>
+<Item name="SystemTime">시스템 시간</Item>
+<Item name="Table">표</Item>
+<Item name="TargetTime">목표 시간</Item>
+<Item name="Temp">온도</Item>
+<Item name="TempAdjust">온도 조정</Item>
+<Item name="TempHumidity">온도 및 습도</Item>
+<Item name="TempOrRHExist">온도 영역 및 온도 습도 영역은 동시에 존재할 수 없다.</Item>
+<Item name="TempUnit">온도 단위</Item>
+<Item name="Temppoint1">당신이 센서 모델을 사용하고 있는지 확인:DS18B20</Item>
+<Item name="Temppoint2">당신이 센서 모델을 사용하고 있는지 확인:AM2301</Item>
+<Item name="Test">테스트</Item>
+<Item name="Text">문자</Item>
+<Item name="TextColor">텍스트 색상</Item>
+<Item name="TextFile">텍스트 파일</Item>
+<Item name="TextInfo">텍스트정보</Item>
+<Item name="TextProcess">텍스트 방향</Item>
+<Item name="TextProcessing">자막 가공</Item>
+<Item name="TheDeviceHasBeenOffline">장치가 오프라인 상태입니다.</Item>
+<Item name="ThisModuleNotSupportUDisk">현재의 모델은 U 디스크를 지원하지 않습니다.</Item>
+<Item name="Thursday">목요일</Item>
+<Item name="TimeClock">디지탈시계</Item>
+<Item name="TimeDifference">시간차</Item>
+<Item name="TimeParameters">시간 매개 변수</Item>
+<Item name="TimeSettingSuccess">시간 성공적으로 설정</Item>
+<Item name="TimeSwitch">타임스 위치</Item>
+<Item name="TimeSwitchSettingSuccess">성공적으로 시간 스위치 세트</Item>
+<Item name="TimedRestart">시간 초과를 다시 시작</Item>
+<Item name="TimerColor">시계 색상</Item>
+<Item name="Timing Parameters">매개변수 시제일치</Item>
+<Item name="TimingControl">Timing Control</Item>
+<Item name="TimingMode">시간 유지 모드</Item>
+<Item name="TimingPause">Timing Pause</Item>
+<Item name="TimingReset">Timing Reset</Item>
+<Item name="TimingSet">세트 타이밍</Item>
+<Item name="Tip_Type1">Use  current communication address to connect UDP</Item>
+<Item name="Tip_Type2">Use IP address from returned device to connect UDP</Item>
+<Item name="Tip_Type3">Use IP address from returned device to connect TCP</Item>
+<Item name="Tip_Type4">Through agent address connected device</Item>
+<Item name="To">에게</Item>
+<Item name="To2">에게</Item>
+<Item name="Toolbar_AddColorful_Bottom">문자의 색이 다양하게 표현됩니다, 사용자는 배경에 애니메이션을 추가할 수 있습니다.</Item>
+<Item name="Toolbar_AddColorful_Top">에니메이션 영역을 추가</Item>
+<Item name="Toolbar_AddCount_Bottom">Display data from a button or serial, network cables acquired</Item>
+<Item name="Toolbar_AddCount_Top">Button count or external data</Item>
+<Item name="Toolbar_AddExcel_Bottom">엑셀파일, 배경과 특별한 효과를 선합니다.</Item>
+<Item name="Toolbar_AddExcel_Top">엑셀영역을 추가</Item>
+<Item name="Toolbar_AddGlobalProgram_Bottom">다음중 어느 한가지 영역을 설정합니다. hypertext, text, time, 등., 프로그램은 시간에 의해 재생됩니다</Item>
+<Item name="Toolbar_AddGlobalProgram_Top">종합적인 프로그램을 추가</Item>
+<Item name="Toolbar_AddHypertext_Bottom">사진, 비디오, SWF, 등.</Item>
+<Item name="Toolbar_AddHypertext_Top">하이퍼텍스트 추가</Item>
+<Item name="Toolbar_AddProgram_Bottom">20영역을 구성합니다. 하이퍼텍스트, 텍스트, 시간, 등.,  프로그램은 시간에 의해 재생됩니다.</Item>
+<Item name="Toolbar_AddProgram_Top">프로그램을 추가</Item>
+<Item name="Toolbar_AddTempRH_Bottom">온도와 습도를 보여줍니다. (센서가 있어야 합니다)</Item>
+<Item name="Toolbar_AddTempRH_Top">온도와 습도영역을 추가합니다.</Item>
+<Item name="Toolbar_AddText_Bottom">문자를 편집, 배경과 효과를 선택하십시오</Item>
+<Item name="Toolbar_AddText_Top">문자를 추가</Item>
+<Item name="Toolbar_AddTime_Bottom">디지탈시계 혹은 아날로그시계중 택일</Item>
+<Item name="Toolbar_AddTime_Top">시계영역을 추가합니다.</Item>
+<Item name="Toolbar_AddTiming_Bottom">목적시간이 설정됩니다, 버튼으로 시간을 맞춥니다.</Item>
+<Item name="Toolbar_AddTiming_Top">맞춤시간영역을 추가</Item>
+<Item name="Toolbar_Adjusttime_Bottom">콘트롤카드의 시간조정은 콤퓨터에 의해 동조됩니다. </Item>
+<Item name="Toolbar_Adjusttime_Top">시간조정</Item>
+<Item name="Toolbar_Check">Check</Item>
+<Item name="Toolbar_Copy">Copy</Item>
+<Item name="Toolbar_Delete">Delete</Item>
+<Item name="Toolbar_Down">Down</Item>
+<Item name="Toolbar_ExportToUdisk_Bottom">프로그램된 영상이 U disk로 보내졌습니다.</Item>
+<Item name="Toolbar_ExportToUdisk_Top">U disk로 보내기</Item>
+<Item name="Toolbar_Paste">Paste</Item>
+<Item name="Toolbar_Preview1_Bottom">현재의 스크린영상을 보여줍니다. </Item>
+<Item name="Toolbar_Preview1_Top">스크린영상 미리보기</Item>
+<Item name="Toolbar_Preview2_Bottom">프로그램이 완성되면, 설계된 스크린에서 보기위해 더블클릭합니다.</Item>
+<Item name="Toolbar_Preview2_Top">그룹 모두는 동시에 보이지 않습니다.</Item>
+<Item name="Toolbar_Preview_Bottom">현재의 프로그램 보기</Item>
+<Item name="Toolbar_Preview_Top">이전 프로그램 보기</Item>
+<Item name="Toolbar_Save">Save</Item>
+<Item name="Toolbar_Search">Search</Item>
+<Item name="Toolbar_Send_Bottom">콘트롤카드에 스크린프로그램을 보냅니다. </Item>
+<Item name="Toolbar_Send_Top">보내기</Item>
+<Item name="Toolbar_Uncheck">Uncheck</Item>
+<Item name="Toolbar_Up">Up</Item>
+<Item name="TotalECard">네트워크 카드의 총 수 :</Item>
+<Item name="TotalFrames">합계 프레임</Item>
+<Item name="TotalSpace">전체 공간</Item>
+<Item name="TracingPoint">정렬 상세 설명</Item>
+<Item name="TracingPointArrowKeys">지점을 추적 왼쪽 클릭, 당신은으로 포인트를 제어하는 화살표 키를 사용할 수 있습니다.</Item>
+<Item name="TracingPointError">지점을 추적하는 것은 오류입니다.</Item>
+<Item name="TracingPointFail">추적 점은 실패, 다시 지점을 추적하십시오.</Item>
+<Item name="TransitionThreshold">Transition Threshold</Item>
+<Item name="Transparent">투명도</Item>
+<Item name="Tricolor">삼색</Item>
+<Item name="Tuesday">화요일</Item>
+<Item name="Twinkle">깜박거림</Item>
+<Item name="TwoLinedisplay">두 줄의 표시</Item>
+<Item name="Type">형태</Item>
+<Item name="Type1">타입 1</Item>
+<Item name="Type2">타입 2</Item>
+<Item name="Type3">타입 3</Item>
+<Item name="Type4">Type four</Item>
+<Item name="TypeName">유형 이름</Item>
+<Item name="U-DiskSucess">U 디스크가 성공합니다</Item>
+<Item name="UDisk">U 디스크를</Item>
+<Item name="USE_HD2010"> 소프트웨어"HD 2010"을 이용해주세요 </Item>
+<Item name="UnableToOpenFile">파일 열지 못했습니다!</Item>
+<Item name="Unchanged">변하지 않은</Item>
+<Item name="Undo">취소하기</Item>
+<Item name="UnexpectedError">통신 시간 초과</Item>
+<Item name="Unit">단위</Item>
+<Item name="UnitBoard">장치 보드</Item>
+<Item name="UnitBoardInfo">모듈 정보</Item>
+<Item name="UnitBoardTips">단일 Moudle의 폭이 64 개 이상있는 경우 ，64를 선택하세요</Item>
+<Item name="UnitBoardWidth">모듈 폭</Item>
+<Item name="UnitBoards">장치 보드의 수</Item>
+<Item name="UnitColor">단위 색상</Item>
+<Item name="UnitSize">모듈 규격</Item>
+<Item name="Unmerge">병합취소</Item>
+<Item name="Unselected">선택하지</Item>
+<Item name="Unspecified">불특정</Item>
+<Item name="UnsupportedInstructions">지원되지 않거나 지시 사항</Item>
+<Item name="Untitled">제목 없음</Item>
+<Item name="Update">업데이트 </Item>
+<Item name="UpdateFailed">업데이트에 실패했습니다.</Item>
+<Item name="UpdateFirmwareFinished">펌웨어 업데이트가 완료됩니다.</Item>
+<Item name="UpdatedSuccessfully">업데이트에 성공했습니다. 업데이트 파일을 열 것인지?</Item>
+<Item name="UpdatingFirmware">펌웨어 업데이트.</Item>
+<Item name="Use">사용합니다</Item>
+<Item name="Use138Decoder">138 디코더 사용하십시오.</Item>
+<List name="Use138" id="0">Use 138</List>
+<List name="Use138" id="1">No 138</List>
+<Item name="UseDefaultSetting">내정값 설정</Item>
+<Item name="UseParams">매개 변수를 사용하여</Item>
+<Item name="UsedMemory">Used Memory</Item>
+<Item name="UsingHardwareSetup">하드웨어 설정을 사용하여(Parameter readback)</Item>
+<Item name="VZoom">수직 벌리기</Item>
+<Item name="Valign">수직으로 정렬</Item>
+<Item name="ValignBottom">아래 끝선에 정렬</Item>
+<Item name="ValignMiddle">중간에 정렬</Item>
+<Item name="ValignTop">위 끝선에 정렬</Item>
+<Item name="Veritical">수직의</Item>
+<Item name="VerticalPosition">수직 위치</Item>
+<Item name="VerticalScreenshot">세로 형 스크린 샷</Item>
+<Item name="VerticalStretch">수직 뻗다</Item>
+<Item name="Video">비디오</Item>
+<Item name="Video FramesCount">비디오 프레임수</Item>
+<Item name="Video name">비디오 제목</Item>
+<Item name="ViewHelp">시간 초과 보내</Item>
+<Item name="WaitingForInitialization">초기화를 기다립니다...</Item>
+<Item name="WaitingToBeSent">전송 대기중인...</Item>
+<Item name="Wednesday">수요일</Item>
+<Item name="White">백색</Item>
+<Item name="Width">폭</Item>
+<Item name="WidthOfMoreTthan">폭이 최대 값을 초과합니다!”!</Item>
+<Item name="WindowPosition">Window position</Item>
+<Item name="WrongParameter">그릇된 매개 변수</Item>
+<Item name="Yellow">황색</Item>
+<List name="color" id="0">단색</List>
+<List name="color" id="1">이색</List>
+<List name="color" id="2">자연색</List>
+<Item name="delete">삭제</Item>
+<Item name="flashTips">참고: 스크립트가 포함 된 SWF올바른 이미지를 얻을 수 없습니다 스크립트를 SWF는 아직 지원되지 않습니다.</Item>
+<List name="frequency" id="0">자동조절</List>
+<List name="frequency" id="160">100Hz</List>
+<List name="frequency" id="140">120Hz</List>
+<List name="frequency" id="120">140Hz</List>
+<List name="frequency" id="100">160Hz</List>
+<List name="frequency" id="80">180Hz</List>
+<List name="frequency" id="60">200Hz</List>
+<List name="frequency" id="200">60Hz</List>
+<List name="frequency" id="180">80Hz</List>
+<List name="graylevel" id="1">graylevel 없음</List>
+<List name="graylevel" id="2">graylevel #4</List>
+<List name="graylevel" id="3">graylevel #8</List>
+<List name="graylevel" id="4">graylevel #16</List>
+<List name="graylevel" id="5">graylevel #32</List>
+<Item name="group">그룹</Item>
+<Item name="hypertext">하이퍼텍스트</Item>
+<List name="listCtlDelay" id="0">저효과</List>
+<List name="listCtlDelay" id="1">고효과</List>
+<List name="listStrDelay" id="0">0</List>
+<List name="listStrDelay" id="1">1</List>
+<Item name="mAPPFace">프로그램 출연(&amp;A)</Item>
+<Item name="mAbout">관하여(&amp;A)</Item>
+<Item name="mBlackStyle">어두운 스타일(L)</Item>
+<Item name="mBludStyle">은은한스타일(B)</Item>
+<Item name="mCalculator">계산기</Item>
+<Item name="mClearDisplayData">기존 스크린 데이터 제거</Item>
+<Item name="mCommSetting">통신 설정</Item>
+<Item name="mExit">종료(&amp;E)</Item>
+<Item name="mFile">파일(&amp;F)</Item>
+<Item name="mHardwareSetting">기기 설정</Item>
+<Item name="mHelp">도움(&amp;H)</Item>
+<Item name="mIPManagmentTools">IP 관리 도구</Item>
+<Item name="mLanguage">언어(&amp;L)</Item>
+<Item name="mLuminanceSetting">밝기 설정</Item>
+<Item name="mNarrow">좁히기</Item>
+<Item name="mNew">새로운(&amp;N)</Item>
+<Item name="mNotepad">메모장</Item>
+<Item name="mOpen">열기(&amp;O)</Item>
+<Item name="mOperate">운영(&amp;O)</Item>
+<Item name="mOutWindow">Info Window</Item>
+<Item name="mPaint">색칠하기</Item>
+<Item name="mSave">저장(&amp;S)</Item>
+<Item name="mSaveAs">다른이름으로 저장...</Item>
+<Item name="mScreenSetting">스크린 매개 변수 설정</Item>
+<Item name="mSendProject">완성프로그램 보내기</Item>
+<Item name="mSetting">설정(&amp;S)</Item>
+<Item name="mSilverStyle">은색 스타일(S)</Item>
+<Item name="mSystemSetting">체제 설정</Item>
+<Item name="mTimeSetting">시간 설정</Item>
+<Item name="mTool">도구(&amp;T)</Item>
+<Item name="mUpdateFirmware">펌웨어 갱신</Item>
+<Item name="mView">보기(&amp;V)</Item>
+<Item name="mWatergreenStyle">물빛 스타일(A)</Item>
+<Item name="mZoom"> 확대</Item>
+<Item name="minimum">Min</Item>
+<Item name="ms">백만분의 1초</Item>
+<List name="polarity" id="0">저효과</List>
+<List name="polarity" id="1">고효과</List>
+<Item name="program">프로그램</Item>
+<Item name="screen">스크린(화면)</Item>
+<Item name="sec">초</Item>
+<Item name="send">보내기</Item>
+<Item name="static">정적</Item>
+<Item name="time">시간</Item>
+<Item name="whirl180">180도 회전</Item>
+<Item name="whirl270">270도 회전</Item>
+<Item name="whirl90">오른쪽으로 90도</Item>
+<Item name="whirlt">회전</Item>
+<Item name="AddItemID">Add ID</Item>
+<Item name="BeginIpAddr">Begin IP</Item>
+<Item name="CurrentSel">Currently selected language</Item>
+<Item name="DetectsThisFileWasNotSaved">Detected by the currently selected file is not saved if coverage</Item>
+<Item name="English">English</Item>
+<Item name="IDAndContentCanNotBeEmpty">ID and content can not be empty</Item>
+<Item name="ModificationFails">Modification fails</Item>
+<Item name="ModifyItemID">Modify ID</Item>
+<Item name="ModifyOnlyOneItem">Only modify one ID</Item>
+<Item name="RemoveItemID">Remove ID</Item>
+<Item name="ShowOnlyControlCardWifi">Display only control card Wi-Fi</Item>
+<Item name="ShowType">Display method</Item>
+<Item name="SplitCell">Split Cell</Item>
+<Item name="ThisIDAlreadyExists">ID exists already</Item>
+<Item name="FillingTheCurrentLanguage">To fill the current language</Item>
+<Item name="WhetherToSaveTheCurrentModifiedFile">Whether to save the changes？</Item>
+<Item name="RemoveDuplicate">Remove duplicate</Item>
+<Item name="Apply">Apply</Item>
+<Item name="Remark">Remark</Item>
+<Item name="FirstMode">Priority mode</Item>
+<Item name="FirstMode_Normal">Balanced</Item>
+<Item name="FirstMode_Speed">Speed Priority</Item>
+<Item name="FirstMode_Text">Brightness Priority</Item>
+<Item name="Random">Random</Item>
+<Item name="WhetherToReplace">Whether to replace?</Item>
+<Item name="ImportFailed">Import Failed</Item>
+<Item name="ExportFailed">Export Failed</Item>
+<Item name="ExportLanguage">Export Language</Item>
+<Item name="ImportLanguage">Import Language</Item>
+<List name="SystemBusName" id="35">[C36]P10  1R1G1B 1/4S  HUB75 16*16</List>
+<Item name="ClickHereToUpdate">Click here to update</Item>
+<Item name="ImportFile">Import File</Item>
+<List name="SystemBusName" id="36">[C37]P10  1R 1/4S  HUB12 32*16[A25]</List>
+<Item name="EditingLanguage">Language Editor</Item>
+<List name="SystemBusName" id="37">[C38]P7.62  1R1G1B 1/8S  HUB08 32*16</List>
+<List name="SystemBusName" id="38">[C39]P5   1R1G1B   1/8S  HUB75 32*16 [A4]</List>
+<Item  name="Imsak">빨리</Item>
+<Item  name="Fajr">아침  행사</Item>
+<Item  name="Dhuhr">경례</Item>
+<Item  name="Asr">Asr</Item>
+<Item  name="Maghrib">코마</Item>
+<Item  name="Isha">만찬</Item>
+<Item  name="MidNight">자정</Item>
+<Item name="Country">국가</Item>
+<Item name="NumColor">Numbers Color</Item>
+<Item name="ExprotConfigFile">Export Profiles</Item>
+<Item name="SoundModule">Sound Module</Item>
+<Item name="Year">Year</Item>
+<Item name="ImportTable">Import Table</Item>
+<Item name="ExportBable">Export Table</Item>
+<Item name="ClearAll">Clear</Item>
+<Item name="cfWords">Colorful word</Item>
+<Item name="OnlyOnePrayForScreen">Only supported a prayer area</Item>
+<Item name="BKSpeed">Background speed</Item>
+<Item name="EffectCycle">Effects cycle</Item>
+<Item name="ExportConfigFile">Export Profiles</Item>
+<Item name="SoundSetting">Sound Setting</Item>
+<List name="graylevel" id="6">64 graylevel</List>
+<List name="graylevel" id="7">128 graylevel</List>
+<List name="graylevel" id="8">256 graylevel</List>
+<List name="SystemBusName" id="39">[C40]P10  1R1G1B   1/4S  HUB75  32X16[A12]</List>
+<Item name="SelectFirmwareVersion">Select Firmware Version </Item>
+<Item name="NoSelectVersion">None selected version</Item>
+<Item name="Ordinal">No.</Item>
+<Item name="VersionNum">Version</Item>
+<Item name="ConfirmSelect">Confirm</Item>
+<List name="SystemBusName" id="40">[C41]P10  1R1G1B  1/4S  HUB75 32*16</List>
+<Item name="FileNameAlreadyExistIsCover">FileName already exist,is cover?</Item>
+<Item name="VersionAlreadyExist">Version already exist</Item>
+<Item name="DeleteThisGroup">Delete this group</Item>
+<Item name="FindNewVersionIsUpdate">Find new version，whether to update the firmware?</Item>
+<Item name="UpdateFile">Update file</Item>
+<List name="SystemBusName" id="41">[C42]P10  1R1G1B  1/2S  HUB75 32*16</List>
+<List name="SystemBusName" id="42">[C43]P3  1R1G1B  1/16S  HUB75 64*64</List>
+<Item name="UdiskUpgrade">Update by U-disk</Item>
+<Item name="TimingPlay">Timing Start</Item>
+<Item name="SelectVersionOnTheRight">Please select the firmware on the right!</Item>
+<List name="SystemBusName" id="43">[C44]P8  1R1G  1/8S  HUB08 32*32 (WQS)</List>
+<List name="SystemBusName" id="44">[C45]P5  1R1G1B  1/8S  HUB75 32*32 (CXH)</List>
+<Item name="TheSameSegment">Make sure the IP of the control card and the computer is in the same network segment.</Item>
+<Item name="Step">Step</Item>
+<Item name="ShadowMode">Shadow Mode</Item>
+<Item name="3DDeep">3D Deep</Item>
+<Item name="Gradient">Gradient</Item>
+<Item name="Alpha">Transparency</Item>
+<Item name="BorderStyle">Border Style</Item>
+<Item name="RoundRect">Rounded Rectangle</Item>
+<Item name="Octagon">Octagon</Item>
+<Item name="CustomStyle">Custom Style</Item>
+<List name="SystemBusName" id="45">[C46]P10  1R  1/4S  HUB12 32*16</List>
+<Item name="3DText">3D Text</Item>
+<Item name="Whether_to_cancel_the_current_task">Cancel mission or not?</Item>
+<List name="SystemBusName" id="46">[C47]P10-P20   1G2R1B 1/4S  HUB12 32X16  Virtual pixel</List>
+<List name="SystemBusName" id="47">[C48]P10-P20   2R1G1B 1/4S  HUB12 32X16  Virtual pixel</List>
+<List name="SystemBusName" id="48">[C49]P13.33-P26.66  2R1G1B 1/4S  HUB12 24X12 Virtual pixel</List>
+<Item name="SinglePage">Single Page</Item>
+<Item name="TwinkleStyle">Twinkle Style</Item>
+<Item name="TwinkleSpeed">Twinkle Speed</Item>
+<Item name="NoTwinkle">No Twinkle</Item>
+<Item name="3Dtwinkle">3D Twinkle</Item>
+<Item name="SaveCountValue">Remember the last count</Item>
+<Item name="SpecialBorder">Special Border</Item>
+<Item name="BootingDelayWasComingOn">Power on,brighten gradually</Item>
+<Item name="RememberToThoose">Remember the current selection</Item>
+<Item name="EndPageToEndPage">End page to end page</Item>
+<List name="SystemBusName" id="49">[C50]P10  1R 1/1S  HUB08 RXP</List>
+<List name="OutputWindowString" id="70">Click the button to delete programs [ON]</List>
+<List name="OutputWindowString" id="71">Click the button to delete programs [OFF]</List>
+<List name="OutputWindowString" id="72">Parameter Setting  [Enabled]</List>
+<List name="OutputWindowString" id="73">Parameter Setting  [Disabled]</List>
+<Item name="Btn1ClearProgram">Prohibited delete program</Item>
+<Item name="DoubleSidedScreen">Double-sided screen</Item>
+<Item name="networkMonitoring">Monitoring</Item>
+<Item name="Toolbar_Add3D_Bottom">Support background, foreground, colorful words, 3D effects</Item>
+<Item name="Toolbar_Add3D_Top">Add 3D text</Item>
+<List name="SystemBusName" id="50">[C51]P6  1R1G1B 1/5S  HUB75 32X20</List>
+<Item name="WifiSpeedMode1">High-speed mode</Item>
+<Item name="WifiSpeedMode2">Low speed mode</Item>
+<Item name="All the devices automatically obtain IP">All devices are set to "Get IP automatically"</Item>
+<Item name="The firmware information">The firmware information</Item>
+<Item name="The device information">The device information</Item>
+<List name="SystemBusName" id="51">[C52]  1R1G  1/8  KR</List>
+<List name="SystemBusName" id="52">[C53]  1R1G1B  1/4S ICN2038S</List>
+<List name="SystemBusName" id="53">[C54]  P10  1R1G  1/4S HUB12 32x16 (YLR)</List>
+<List name="SystemBusName" id="54">[C55]  P8 1R1G1B 1/5S  HUB75 40X20</List>
+<List name="SystemBusName" id="55">[C56]  P10 1/4S No 138 MCGD</List>
+<List name="SystemBusName" id="56">[C57]  P8 1R1G1B 1/4S HUB75 (JJY)</List>
+<List name="SystemBusName" id="57">[C58]  P13.33 1R1G1B 1/3S HUB75 (LLR)</List>
+<List name="SystemBusName" id="58">[C59]  P3 1R1G1B 1/32S HUB75E (RBG) ICN2038S</List>
+<List name="SystemBusName" id="59">[C60]  P3 1R1G1B 1/32S HUB75E (RGB) ICN2038S</List>
+<List name="SystemBusName" id="60">[C61]  P6 1/8S HUB75 (BGR)</List>
+<List name="SystemBusName" id="61">[C62]  P6 1/8S HUB75 GK</List>
+<List name="SystemBusName" id="62">[C63]  P6 1/8S HUB75(HJ)</List>
+<List name="SystemBusName" id="63">[C64]  P6 1R1G1B 1/8S HUB75</List>
+<List name="SystemBusName" id="64">[C65]  P10 1R 1/4s(YLR)</List>
+<List name="SystemBusName" id="65">[C66]  P10 1R 1/4S HUB12</List>
+<List name="SystemBusName" id="66">[C67]  P10 1R1G1B 1/2S HUB75 (HJ)</List>
+<List name="SystemBusName" id="67">[C68]  P10 1R1G1B 1/2S HUB75 </List>
+<List name="SystemBusName" id="68">[C69]  P10 1R1G1B 1/3S HUB73A 24X24 (KSZ)</List>
+<List name="SystemBusName" id="69">[C70]  P10 1R1G1B 1/4S No 138 HUB75</List>
+<List name="SystemBusName" id="70">[C71]  P13.33 1R1G1B 1/3S 24x12</List>
+<List name="SystemBusName" id="71">[C72]  P16 1R1G 1/4S HUB08</List>
+<List name="SystemBusName" id="72">[C73]  P20 1R1G1B 1S</List>
+<List name="SystemBusName" id="73">[C74]  P10 1R1G1B 1/4S HUB75（KT）</List>
+<List name="SystemBusName" id="74">[C75]  P8  1R1G1B 1/4S HUB75 32x16 No138</List>
+<List name="SystemBusName" id="75">[C76]  P8  1R1G1B 1/4S HUB75 32x16 (HJ)</List>
+<List name="SystemBusName" id="76">[C77]  P10 1R1G1B 1/4S HUB75 32x16 No138</List>
+<List name="SystemBusName" id="77">[C78]  P10 1R1G1B 1/2S HUB75 32x16</List>
+<List name="SystemBusName" id="78">[C79]  P10 1R 1/4S HUB08 32x16</List>
+<List name="SystemBusName" id="79">[C80]  P10 1R1G1B 1/2S HUB75 32x16 (GK)</List>
+<List name="SystemBusName" id="80">[C81]  P10 1R1G1B 1/2S HUB75 32x16 (QL)</List>
+<List name="SystemBusName" id="81">[C82]  P16 1R1G 1/1S HUB12 16x8</List>
+<List name="SystemBusName" id="82">[C83]  P10 1R 1/4S HUB12 32x16 (KT)</List>
+<List name="SystemBusName" id="83">[C84]  P10 1R 1/4S HUB12 32x16 (GK)</List>
+<List name="SystemBusName" id="84">[C85]  P5  1R1G1B 1/8S HUB75 64x32</List>
+<List name="SystemBusName" id="85">[C86]  P10 1R1G1B 1/4S HUB75 32x16 No138 (HJCL)</List>
+<List name="SystemBusName" id="86">[C87]  P10 1R1G1B 1/2S HUB75E 32x16 No138 (HLL)</List>
+<List name="SystemBusName" id="87">[C88]  P10 1R1G1B 1/2S HUB75 32x16 No138</List>
+<List name="SystemBusName" id="88">[C89]  P6.66 1R1G1B 1/6S HUB75 48x24</List>
+<List name="SystemBusName" id="89">[C90]  P8  1R1G1B 1/5S HUB75 40x20</List>
+<List name="SystemBusName" id="90">[C91]  P4 1R1G1B 1/10S HUB75 80x40 ICN2038S</List>
+<List name="SystemBusName" id="91">[C92]  P4  1R1G1B 1/20S HUB75 80x40 ICN2038S</List>
+<List name="SystemBusName" id="92">[C93]  P10 1R1G1B 1/4S HUB75 32x16 No138 ICN2038S</List>
+<List name="SystemBusName" id="93">[C94]  P10 1R1G1B 1/2S  32x16 No138 ICN2038S</List>
+<List name="SystemBusName" id="94">[C95]  P10 1R1G1B 1/5S HUB75 40x20 ICN2038S</List>
+<List name="SystemBusName" id="95">[C96]  P10 1R1G1B 1/5S HUB75 40x20 SM16207S</List>
+<List name="SystemBusName" id="96">[C97]  H10 1R1G1B 1/2S HUB75 32x16</List>
+<List name="SystemBusName" id="97">[C98]  P8  1R1G1B 1/5S HUB75 40x20 ICN20378BP</List>
+<List name="SystemBusName" id="98">[C99]  dz0228 1R1G1B 1/1S HUB75 16x16</List>
+<Item name="Server address">Server address</Item>
+<Item name="User name">User name</Item>
+<Item name="Fill the same">Fill the same</Item>
+<Item name="Cloud server Settings">Cloud server Settings</Item>
+<Item name="Cloud server">Cloud server</Item>
+<Item name="ButtonCtrl">Button Control on</Item>
+<Item name="NoUse">Button Control off</Item>
+<Item name="Button1">Button1</Item>
+<Item name="Button2">Button2</Item>
+<Item name="Button3">Button3</Item>
+<Item name="Button4">Button4</Item>
+<Item name="DefaultBackground">DefaultBackground</Item>
+<Item name="ImageBackground">ImageBackground</Item>
+<Item name="SingleProgramSend">SingleProgramSend</Item>
+<Item name="latest">latest</Item>
+<Item name="newdata">newdata</Item>
+<Item name="Imsak">Imsak</Item>
+<Item name="Music">Music</Item>
+<Item name="Pray">Pray</Item>
+<Item name="Aglinment">정렬</Item>
+<Item name="LeftAglinment">왼쪽에 맞 춥니 다</Item>
+<Item name="CenterAglinment">중심 정렬</Item>
+<Item name="RightAglinment">오른쪽으로 맞 춥니 다</Item>
+<Item name="SplitType">SplitType</Item>
+<Item name="SingleChar">SingleChar</Item>
+<Item name="Word">Word</Item>
+<Item name="WifiSetting">Wi-Fi Setting</Item>
+<Item name="SettingSuccessfully">SettingSuccessfully</Item>
+<Item name="SettingFailed">SettingFailed</Item>
+<Item name="Connectting">Connectting</Item>
+<Item name="NoFoundAp">NoFoundAp</Item>
+<Item name="ConnectFailed">ConnectFailed</Item>
+<Item name="ConnectOK">ConnectOK</Item>
+<Item name="ApMode">ApMode</Item>
+<Item name="StationMode">StationMode</Item>
+<Item name="WifiPasswordLenghLess">Wi-Fi password is too short</Item>
+<Item name="WifiSSIDIsNULL">Wi-Fi name is empty</Item>
+<Item name="MaskError">MaskError</Item>
+<Item name="IPError">IPError</Item>
+<Item name="WifiSSIDTooLong">Wi-Fi name is too long.</Item>
+<Item name="WifiPasswordTooLong">Wi-Fi password is too long.</Item>
+<Item name="SSIDPasswordInputTips">Only allow input 0~9 a~z A~Z _</Item>
+    <Item name="City">도시</Item>
+    <Item name="Date">날짜</Item>
+    <Item name="temp">온도</Item>
+    <Item name="Weather">날씨</Item>
+    <Item name="Wind Direction">풍향</Item>
+    <Item name="Wind speed">풍속</Item>
+    <Item name="Temp Unit">온도 단위</Item>
+    <Item name="America">미국</Item>
+    <Item name="Australia">호주</Item>
+    <Item name="Canada">캐나다</Item>
+    <Item name="China">중국</Item>
+    <Item name="India">인도</Item>
+    <Item name="Indonesia">인도네시아</Item>
+    <Item name="Iran">이란</Item>
+    <Item name="Japan">일본</Item>
+    <Item name="Korea">한국</Item>
+    <Item name="Malaysia">말레이시아</Item>
+    <Item name="Pakistan">파키스탄</Item>
+    <Item name="Peru">페루</Item>
+    <Item name="Poland">폴란드</Item>
+    <Item name="Russia">러시아</Item>
+    <Item name="Spain">스페인</Item>
+    <Item name="Thailand">태국</Item>
+    <Item name="Turkey">터키</Item>
+    <Item name="United Arab Emirates">아랍 에미리트</Item>
+    <Item name="Vietnam">베트남</Item>
+    <Item name="Sunny">맑은</Item>
+    <Item name="Cloudy">흐린</Item>
+    <Item name="Few clouds">흐린</Item>
+    <Item name="Partly cloudy">구름 조금</Item>
+    <Item name="Overcast">음</Item>
+    <Item name="Windy">바람이 센</Item>
+    <Item name="Calm">잔잔한</Item>
+    <Item name="Light breeze">약간의 바람</Item>
+    <Item name="Moderate">미풍</Item>
+    <Item name="Fresh breeze">미풍</Item>
+    <Item name="Strong breeze">강풍</Item>
+    <Item name="High wind">강풍</Item>
+    <Item name="Gale">강풍</Item>
+    <Item name="Strong gale">돌풍</Item>
+    <Item name="Storm">폭풍</Item>
+    <Item name="Violent storm">바람의 화가 폭발</Item>
+    <Item name="Hurricane">허리케인</Item>
+    <Item name="Tornado">회오리 바람</Item>
+    <Item name="Tropical storm">열대 폭풍우</Item>
+    <Item name="Shower rain">샤워</Item>
+    <Item name="Heavy shower rain">소나기 샤워</Item>
+    <Item name="Thundershower">천둥 번개</Item>
+    <Item name="Heavy thunderstorm">강한 뇌우</Item>
+    <Item name="Hail">우박</Item>
+    <Item name="Light rain">빛 비</Item>
+    <Item name="Moderate rain">보통 비</Item>
+    <Item name="Heavy rain">폭우</Item>
+    <Item name="Extreme rain">익스트림 강우량</Item>
+    <Item name="Drizzle rain">이슬비</Item>
+    <Item name="Storm">폭풍</Item>
+    <Item name="Heavy storm">폭우</Item>
+    <Item name="Severe storm">폭우</Item>
+    <Item name="Freezing rain">진눈깨비</Item>
+    <Item name="Light snow">눈</Item>
+    <Item name="Moderate snow">눈</Item>
+    <Item name="Heavy snow">눈</Item>
+    <Item name="Snowstorm">눈보라</Item>
+    <Item name="Sleet">유약</Item>
+    <Item name="Rain and snow">진눈깨비</Item>
+    <Item name="Shower snow">배열 진눈깨비</Item>
+    <Item name="Snow flurry">눈 샤워</Item>
+    <Item name="Mist">안개</Item>
+    <Item name="Foggy">안개</Item>
+    <Item name="Haze">안개</Item>
+    <Item name="Sand">모래</Item>
+    <Item name="Dust">모래 폭풍</Item>
+    <Item name="Duststorm">모래 바람</Item>
+    <Item name="Sandstorm">모래 폭풍</Item>
+    <Item name="Hot">열</Item>
+    <Item name="Cold">감기</Item>
+    <Item name="Unknown">알 수없는</Item>
+    <Item name="Clear">Clear</Item>
+    <Item name="No Sustained Wind">더 지속 바람 없음</Item>
+    <Item name="Northeast Wind">북동쪽으로</Item>
+    <Item name="East Wind">동풍</Item>
+    <Item name="Southeaster Wind">동남 바람</Item>
+    <Item name="South Wind">남쪽 바람</Item>
+    <Item name="Southwest Wind">사우스 웨스트 바람</Item>
+    <Item name="Strong wind">강풍</Item>
+    <Item name="West Wind">서방의</Item>
+    <Item name="Northwest Wind">노스 웨스트 바람</Item>
+    <Item name="North Wind">북쪽</Item>
+    <Item name="Vortex Wind">회전 바람</Item>
+    <Item name="The Breeze Wind">미풍</Item>
+    <Item name="No wind">잔잔한</Item>
+    <Item name="Light air">빛 공기</Item>
+    <Item name="Breeze">미풍</Item>
+    <Item name="Gentle breeze">미풍</Item>
+    <Item name="Strong wind">강풍</Item>
+    <Item name="Blast">돌풍</Item>
+    <Item name="Gale">강풍</Item>
+    <Item name="Strong gale">돌풍</Item>
+    <Item name="Whole gale">사나운 바람</Item>
+    <Item name="Storm wind">폭풍</Item>
+    <Item name="Hurricane">허리케인</Item>
+	<Item name="OfflineMode">둥펑</Item>
+	<Item name="PleaseSelectDevice">Please select device</Item>
+	<Item name="SeeMoreParameters">See more parameters</Item>
+	<Item name="ExportProgram">Export program</Item>
+	<List name="ErrorTips" id="00">Common problem hints</List>
+	<List name="ErrorTips" id="01">Error / The width and height set in the screen setting exceeds the control range of the controller</List>
+	<List name="ErrorTips" id="02">Error1 / U disk file format error</List>
+	<List name="ErrorTips" id="03">Error2 / Excessive  program content</List>
+	<List name="ErrorTips" id="04">NoFile / No program file in the U disk</List>
+	<List name="ErrorTips" id="05">End / Setting expired</List>
+	<Item name="ColorfulBorder">Colorful border</Item>
+	<Item name="FixedText">Fixed text</Item>
+	<List name="PM25String" id="00">No data</List>
+	<List name="PM25String" id="01">Good</List>
+	<List name="PM25String" id="02">Moderate</List>
+	<List name="PM25String" id="03">Lightly Polluted</List>
+	<List name="PM25String" id="04">Moderately Polluted</List>
+	<List name="PM25String" id="05">Heavily Polluted</List>
+	<List name="PM25String" id="06">Severely Polluted</List>
+	<Item name="BootTips">Boot tips</Item>
+	<Item name="ShowAll">Show all</Item>
+	<Item name="NoShow">No show</Item>
+	<Item name="PM25Adjust">Adjust PM2.5</Item>
+	<Item name="PM10Adjust">Adjust PM10</Item>
+	<Item name="QuickConfig">Quick config</Item>
+	<Item name="Subtitles">Subtitles</Item>
+	<Item name="Toolbar_AddSubtitles_Top">Add Subtitles</Item>
+	<Item name="ICSetting">IC setting</Item>
+	<Item name="NormalIC">Normal IC</Item>
+	<Item name="RegisterGroup">Register group</Item>
+	<Item name="RedRegister">Red register</Item>
+	<Item name="GreenRegister">Green register</Item>
+	<Item name="BlueRegister">Blue register</Item>
+	<Item name="HighByte">High byte</Item>
+	<Item name="LowByte">Low byte</Item>
+	<Item name="HelpDoc">Help Doc</Item>
+	<Item name="PrayAutioTip">기도 오디오 모듈을 사용해야 할 경우기도 이름에 해당하는 여러 mp3 파일을 제공하십시오. Imsak->1.mp3 Fajr->2.mp3 Dhuhr->3.mp3 Asr->4.mp3 Maghrib->5.mp3 Isha->6.mp3 MidNight->7.mp3 .</Item>
+<Item name="Confirm Password">Confirm Password</Item>
+<Item name="PasswordInvalidTip">The password must be a number + letter combination with a length of 8~16.</Item>
+<Item name="PasswordUnEqual">The password entered twice is different.</Item>
+<Item name="PasswordTooSimple">The system has detected that the device's Wi-Fi password is too simple. Please reset it.</Item>
+<List name="OutputWindowString" id="75">The system has detected that the device's Wi-Fi password is too simple. Please reset it.</List>
+<Item name="Logout">Logout</Item>
+<Item name="LogoutYesOrNo">Is the user logged out?</Item>
+<Item name="Login">login</Item>
+<Item name="WifiSettingOK">The setting is successful, please reconnect to Wi-Fi.</Item>
+<Item name="UserName">User name</Item>
+<Item name="InputPassword">Input password</Item>
+<Item name="Register">Register</Item>
+<Item name="GetCheckCode">GetCheckCode</Item>
+<Item name="InputCheckCode">Input the check code</Item>
+<Item name="RegisterError">Registration error</Item>
+<Item name="PhoneNum">Cellphone number</Item>
+<Item name="CheckCode">Check code</Item>
+<Item name="ConnectNetwordToUse">Please use the software after connecting to the Internet</Item>
+<Item name="AuthorizedSuccess">Authorized success</Item>
+<Item name="UnsupportedLoginType">Unsupported login type</Item>
+<Item name="CheckCodeNotMatch">Check code does not match</Item>
+<Item name="InputRightPhone">Please enter the correct phone number</Item>
+<Item name="ResetPassword">Reset Password</Item>
+<Item name="PhoneNumError">Wrong format of phone number.</Item>
+<Item name="CheckCodeTimeoutInOneMinute">Verification code cannot be sent repeatedly within one minute</Item>
+<Item name="CheckCodeTimeout">Verification code transmission frequency is exceeded</Item>
+<Item name="CheckCodeSendError">The verification code failed to be sent.</Item>
+<Item name="InvalidToken">Invalid token</Item>
+<Item name="MissingRegInfo">Missing registration information</Item>
+<Item name="AgreeAndAccept">Agreen</Item>
+<Item name="TermsOfService">Services Agreement</Item>
+<Item name="Reacquire">Reacquire</Item>
+<Item name="SettingLoginPassword">Setting login password</Item>
+<Item name="Skip">Skip</Item>
+<Item name="NetworkErrorTip">Network error</Item>
+<Item name="Retry">Retry</Item>
+<Item name="PleaseGetCheckCode">Please get the check code.</Item>
+<Item name="KeepLogin">Keep login</Item>
+<Item name="IsLogoutUser">Logout the current user?</Item>
+<Item name="NotTipsAgin">Do not tips again</Item>
+<Item name="OpenDeviceLock">Enable device lock</Item>
+<Item name="ModifyDeviceLock">Modify device lock</Item>
+<Item name="CloseDeviceLock">Close device lock</Item>
+<Item name="DeviceHasLockedInfo">The device has been locked. Please enter your password.</Item>
+<Item name="DeviceLockPassword">Device lock password</Item>
+<Item name="NoInputNoDeviceLockTip">No password is required when device lock is not enabled.</Item>
+<Item name="UseOldPassword">Use current password</Item>
+<Item name="DeviceLockSetting">Device lock settings</Item>
+<Item name="DeviceLock">Device lock</Item>
+<Item name="KeepPassword">Keep password</Item>
+<Item name="AutoLogin">Auto login</Item>
+<Item name="PleaseInputOldPassword">Please enter the old password</Item>
+<Item name="OldPasswordError">Old password error</Item>
+<Item name="Old Password">Old password</Item>
+<Item name="New Password">New password</Item>
+<Item name="Action">Action</Item>
+
+<List name="OutputWindowString" id="76">The device lock password is incorrect.</List>
+<List name="OutputWindowString" id="77">Missing log content.</List>
+<List name="OutputWindowString" id="78">The machine code is wrong.</List>
+<List name="OutputWindowString" id="79">The length of the machine code is incorrect.</List>
+<List name="OutputWindowString" id="80">The length of the device lock password is incorrect.</List>
+<List name="OutputWindowString" id="81">XR809 is updating</List>
+<List name="OutputWindowString" id="82">XR809 idnvalid address</List>
+<List name="OutputWindowString" id="83">XR809 error</List>
+<List name="OutputWindowString" id="84">Start reading parameters</List>
+<List name="OutputWindowString" id="85">Finish reading parameters</List>
+<List name="OutputWindowString" id="86">Start to restore parameters</List>
+<List name="OutputWindowString" id="87">The parameters have been restored</List>
+<List name="OutputWindowString" id="88">The download is complete and is waiting to recover data.</List>
+<Item name="UseWechatQRCode">Use WeChat to scan the QR code</Item>
+<Item name="Activate">Activate</Item>
+<Item name="ActivateOffline">Activate offline</Item>
+<Item name="PleaseInputActiveCode">Please enter the activation code</Item>
+<Item name="ErrorActivateCode">Wrong activation code</Item>
+<Item name="NTPSetting">네트워크 시간 설정</Item>
+<Item name="NetworkSame">Make sure that the device IP and router IP are on the same network segment.</Item>
+<List name="SystemBusName" id="99">[C100]  P10 28x16 8 스윕 8 드로우 포인트</List>
+	</language>
+</root>

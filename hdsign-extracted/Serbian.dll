@@ -1,0 +1,1612 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<root>
+<language name="Srpski">
+<Item name="ABrighterThanB">A is brighter than B</Item>
+<Item name="About">O nama</Item>
+<Item name="AbrightBoff">A is white while B is black</Item>
+<Item name="Add">Dodaj</Item>
+<Item name="Add File">Add File</Item>
+<Item name="Add GIF">Add GIF</Item>
+<Item name="AddFailed">Add Failed</Item>
+<Item name="AddFile">Add file</Item>
+<Item name="AddGroup">Dodaj grupu</Item>
+<Item name="AddHypertext">Dodaj animaciju</Item>
+<Item name="AddPicture">Dodaj sliku</Item>
+<Item name="AddProgram">Dodaj program</Item>
+<Item name="AddRegion">Dodaj region</Item>
+<Item name="AddSuccess">Add Successfully</Item>
+<Item name="AdjustTime">Podesi vreme</Item>
+<Item name="AdvancedSetting">Napredna podesavanja</Item>
+<Item name="AdvancedSettings">Napredna podesavanja</Item>
+<Item name="AlignCenter">Screen Centered</Item>
+<Item name="AlignRight">Desno</Item>
+<Item name="Alignment">Vrsta poravnanja</Item>
+<Item name="All">Sve</Item>
+<Item name="Allow">Enable</Item>
+<Item name="AllowPasswordAuthentication">Enable the password authentication for important settings.</Item>
+<Item name="AlreadyOpened">Ovaj ekran je vec otvoren.</Item>
+<Item name="AlterBaudrate">Alter Baudrate</Item>
+<Item name="AntiClockwise rotation">Na levo</Item>
+<Item name="AreaBackground">Pozadina za polje</Item>
+<Item name="AreaDown">Polje dole</Item>
+<Item name="AreaLeft">Polje levo</Item>
+<Item name="AreaMaximize">Maksimalno povecaj polje</Item>
+<Item name="AreaNoBorder">Cross screen don't support border for global program</Item>
+<Item name="AreaRight">Polje desno</Item>
+<Item name="AreaUp">Polje gore</Item>
+<Item name="Associated">Pridruzi</Item>
+<Item name="AutoAdjustTime">Automatsko pod. vremena</Item>
+<Item name="AutoGetingIP">Automatski preuzmi IP</Item>
+<Item name="AutoHide">Auto hide</Item>
+<Item name="AutoReSend">Auto slanje</Item>
+<Item name="AutoSave">Automatsko cuvanje</Item>
+<Item name="AutoScanInterval">Auto Scan Time</Item>
+<Item name="AutoScanMode">Auto Scan Mode</Item>
+<Item name="AutoSearchScans">Automatically search the scan mode</Item>
+<Item name="AutoSwitching">Auto switch</Item>
+<Item name="AutoUpdate">Automatsko azuriranje</Item>
+<Item name="Automatic">Automatski</Item>
+<Item name="AutomaticInfo">Kada koristite funkciju automatskog podesavanja, proverite da li je ugradjen senzor za ovu funkciju.</Item>
+<Item name="BBrighterThanA">B is brighter than A</Item>
+<Item name="Background">Pozadina</Item>
+<Item name="BackgroundColor">Boja pozadine</Item>
+<Item name="BackgroundSetting">Background Settings</Item>
+<List name="BackgroupEffects" id="0">Nasumicno</List>
+<List name="BackgroupEffects" id="10">Smanji</List>
+<List name="BackgroupEffects" id="11">Pulsiraj</List>
+<List name="BackgroupEffects" id="12">Preklopi</List>
+<List name="BackgroupEffects" id="13">Ekvilajzer</List>
+<List name="BackgroupEffects" id="14">Refleksija</List>
+<List name="BackgroupEffects" id="15">Svetlucanje</List>
+<List name="BackgroupEffects" id="16">Cista boja</List>
+<List name="BackgroupEffects" id="17">Trakasto otvaranje-zatvaranje</List>
+<List name="BackgroupEffects" id="18">Ciklicno sirenje</List>
+<List name="BackgroupEffects" id="19">Romboidno sirenje</List>
+<List name="BackgroupEffects" id="1">Staticno</List>
+<List name="BackgroupEffects" id="20">Nasumicne linije</List>
+<List name="BackgroupEffects" id="21">Krive linije</List>
+<List name="BackgroupEffects" id="2">Pomeri levo</List>
+<List name="BackgroupEffects" id="3">Pomeri desno</List>
+<List name="BackgroupEffects" id="4">Pomeri gore</List>
+<List name="BackgroupEffects" id="5">Pomeri dole</List>
+<List name="BackgroupEffects" id="6">Pomeri levo pa desno</List>
+<List name="BackgroupEffects" id="7">Otvori horizontalno iz sredine</List>
+<List name="BackgroupEffects" id="8">Zatvori sa obe strane</List>
+<List name="BackgroupEffects" id="9">Povecaj</List>
+<List name="platformList" id="hdplatform.huidu.cn">Release platform</List>
+<Item name="platform">platform</Item>
+<Item name="BasicInfoSet">Basic setting</Item>
+<Item name="BasicPara">Osnovni parametri</Item>
+<Item name="BasicSetting">Osnovna podesavanja</Item>
+<Item name="Baudrate">Baudrate</Item>
+<Item name="BbrightAoff">A is black while B is white</Item>
+<Item name="Begin">Pocni</Item>
+<Item name="Begin Play">Start</Item>
+<Item name="Black">Crna</Item>
+<Item name="Blue">Plava</Item>
+<Item name="Boot">Boot status</Item>
+<Item name="BootStatus">Control card is currently in boot state waiting for the firmware to be updated, please update the firmware first!</Item>
+<Item name="Border">Okvir</Item>
+<Item name="BorderColor">Boja okvira</Item>
+<Item name="BorderSetting">Podesavanje okvira</Item>
+<Item name="BorderWidth">Debljina okvira</Item>
+<Item name="BorderWidthExceeds">Prekoracena debljina okvira.</Item>
+<Item name="BorderWidthOutOfRange">Border width is out of range!</Item>
+<Item name="BoundDevice">Bound device</Item>
+<Item name="Broadcast">Broadcast</Item>
+<Item name="BuildArea">Kreirana polja</Item>
+<Item name="Built-inUnitBoard">Common unit board</Item>
+<Item name="BusEdit">Izmeni</Item>
+<Item name="BusImage">Unit board pictures</Item>
+<Item name="BusName">Name</Item>
+<Item name="BusNew">Novi</Item>
+<Item name="BusView">Pogledaj</Item>
+<Item name="Busy">Busy</Item>
+<Item name="Button">Button</Item>
+<Item name="ButtonDownTiming">Odbrojavanje na taster</Item>
+<Item name="ButtonSettings">Button 1</Item>
+<Item name="ButtonSettings2">Button 2</Item>
+<Item name="ButtonSettings3">Button 3</Item>
+<Item name="ButtonSettings4">Button 4</Item>
+<Item name="ButtonSwitch">Button to switch</Item>
+<Item name="ButtonTiming">Button Timing</Item>
+<Item name="ButtonUpTiming">Brojanje na taster</Item>
+<Item name="ButtonorPlaySet">Button settings</Item>
+<Item name="CLKMirror">CLK polarity</Item>
+<Item name="CLKWidth">CLK Width</Item>
+<Item name="COM">COM Port</Item>
+<Item name="COMERROR">Connection fails, check there are no short serial 2,3 feet?</Item>
+<Item name="COMINFO">Komunikacija</Item>
+<Item name="COMURL">COM URL:http://huidu.wicp.net </Item>
+<Item name="CPUModelError">CPU model is wrong!</Item>
+<Item name="CanNotFindTheDefaultProfile">Can not find the default configuration file.</Item>
+<Item name="Cancel">Ponisti</Item>
+<Item name="CannotFindNetWordDrive">Nije pronadjen mrezni uredjaj!</Item>
+<Item name="CannotOpenExcle">Cannot open the Excel, please check whether it has been installed!</Item>
+<Item name="CardIpSeting">IP podesavanja</Item>
+<Item name="CardModel">Kontroler</Item>
+<Item name="CardNumber">Tip kontrolera</Item>
+<Item name="CardOnlySupportFullColor">The firmware only supports seven-color.</Item>
+<Item name="CardOnlySupportTwoColor">The firmware only supports single color and dual color.</Item>
+<Item name="CardRestart">Restarting</Item>
+<Item name="CardVersion">Card Version</Item>
+<Item name="Center">Centar</Item>
+<Item name="CenterAlign">Centar</Item>
+<Item name="CfwBackgroundEdit">Pozadine za animirane karaktere</Item>
+<Item name="Change">Promeni</Item>
+<Item name="Channel">Channel</Item>
+<Item name="CharSpacing">Razmak izmedju slova</Item>
+<Item name="CheckAll">Selektuj sve</Item>
+<Item name="CheckProgram">Choose program</Item>
+<Item name="ChecksumError">Checksum is wrong!</Item>
+<Item name="ChooseDeive">Select device</Item>
+<Item name="ClassicBackground">Slika kao pozadina</Item>
+<Item name="Clear">Obrisi ekran</Item>
+<List name="ClearEffects" id="0">Isprazni sadrzaj</List>
+<List name="ClearEffects" id="10">Zatvori gore i dole</List>
+<List name="ClearEffects" id="11">Otvori horizontalno iz sredine</List>
+<List name="ClearEffects" id="12">Zatvori sa obe strane</List>
+<List name="ClearEffects" id="13">Vertikalna zavesa</List>
+<List name="ClearEffects" id="14">Horizontalna zavesa</List>
+<List name="ClearEffects" id="15">Na levu stranicu</List>
+<List name="ClearEffects" id="16">Na desnu stranicu</List>
+<List name="ClearEffects" id="17">Ciklicno spolja</List>
+<List name="ClearEffects" id="18">Ciklicno unutra</List>
+<List name="ClearEffects" id="19">Poklopi na desno</List>
+<List name="ClearEffects" id="1">Pomeri levo</List>
+<List name="ClearEffects" id="200">Nasumicno</List>
+<List name="ClearEffects" id="201">Ostavi sadrzaj</List>
+<List name="ClearEffects" id="20">Poklopi na levo</List>
+<List name="ClearEffects" id="21">Horizontalno preklapanje</List>
+<List name="ClearEffects" id="22">Zamotaj na gore</List>
+<List name="ClearEffects" id="23">Zamotaj na dole</List>
+<List name="ClearEffects" id="24">Zamotaj na levo</List>
+<List name="ClearEffects" id="25">Zamotaj na desno</List>
+<List name="ClearEffects" id="26">Horizontalna resetka</List>
+<List name="ClearEffects" id="27">Vertikalna resetka</List>
+<List name="ClearEffects" id="2">Pomeri desno</List>
+<List name="ClearEffects" id="3">Pomeri gore</List>
+<List name="ClearEffects" id="4">Pomeri dole</List>
+<List name="ClearEffects" id="5">Poklopi levo</List>
+<List name="ClearEffects" id="6">Poklopi desno</List>
+<List name="ClearEffects" id="7">Poklopi gore</List>
+<List name="ClearEffects" id="8">Poklopi dole</List>
+<List name="ClearEffects" id="9">Otvori vertikalno iz sredine</List>
+<Item name="ClearScreeData">Clear existing display ?</Item>
+<Item name="Clock">Analogni sat</Item>
+<Item name="ClockFrequency">Clock frequency</Item>
+<Item name="ClockParameters">Osobine sata</Item>
+<Item name="Clockwise rotation">Na desno</Item>
+<Item name="Close">Zatvori</Item>
+<Item name="CloseScreen">Zatvori ekran</Item>
+<Item name="Color">Boja</Item>
+<Item name="ColorChannel">Color channel</Item>
+<Item name="ColorChannelSet">Color channel setting</Item>
+<Item name="ColorFilter">Color Adjustment</Item>
+<Item name="ColorInversion">Inverzna boja</Item>
+<Item name="ColorSingleSelect">Odabir boje</Item>
+<Item name="ColorThreshold">Color threshold</Item>
+<Item name="ColorfulText">Animirani karakteri</Item>
+<List name="ColorfulWordEffects" id="0">Staticno</List>
+<List name="ColorfulWordEffects" id="10">Vertikalni flip</List>
+<List name="ColorfulWordEffects" id="11">Horizontalni flip</List>
+<List name="ColorfulWordEffects" id="12">Zooming</List>
+<List name="ColorfulWordEffects" id="13">Kontinualno levo</List>
+<List name="ColorfulWordEffects" id="14">Kontinualno desno</List>
+<List name="ColorfulWordEffects" id="15">Kontinualno gore</List>
+<List name="ColorfulWordEffects" id="16">Kontinualno dole</List>
+<List name="ColorfulWordEffects" id="17">2D zoom napred</List>
+<List name="ColorfulWordEffects" id="18">2D zoom nazad</List>
+<List name="ColorfulWordEffects" id="1">Sinusoidno</List>
+<List name="ColorfulWordEffects" id="2">Rotacija</List>
+<List name="ColorfulWordEffects" id="3">Popuni sa leve strane</List>
+<List name="ColorfulWordEffects" id="4">Popuni sa desne strane</List>
+<List name="ColorfulWordEffects" id="5">Blinkanje</List>
+<List name="ColorfulWordEffects" id="6">Slovo po slovo</List>
+<List name="ColorfulWordEffects" id="7">Zaokretanje</List>
+<List name="ColorfulWordEffects" id="8">Elastican tekst</List>
+<List name="ColorfulWordEffects" id="9">Swing</List>
+<Item name="Column">Kolona</Item>
+<Item name="CommStatus1">Good communication</Item>
+<Item name="CommStatus2">Normal communication</Item>
+<Item name="CommStatus3">Communication is poor but can be connected.</Item>
+<Item name="CommStatus4">Cannot communicate</Item>
+<Item name="CommTest">Network Test</Item>
+<Item name="Command">Command</Item>
+<Item name="CommandSmartSetting">panel scanning</Item>
+<Item name="CommonSettings">Op�ta podesavanja</Item>
+<Item name="CommunicationMode">Communication</Item>
+<Item name="CommunicationSetting">Podesavanja za komunikaciju</Item>
+<Item name="ConfirmRGBwidth">Lines controlled by one RGB data</Item>
+<Item name="ConfirmScanMode">Determine the Scan Mode</Item>
+<Item name="Connected">Connected</Item>
+<Item name="ConnectionSuccessful">Successfully connect</Item>
+<Item name="ContainOverlappingRegions">Contain overlapping regions</Item>
+<Item name="ContentContainMultiLines">Ovaj efekat ne podrzava tabele, obrisati?</Item>
+<Item name="ContinueMove">Pokretni tekst</Item>
+<Item name="ContinueMoveUp">Continuously move up</Item>
+<Item name="Copy">Kopiraj</Item>
+<Item name="Copyright">Copyright: Shenzhen Huidu Technology Co.,Ltd.</Item>
+<Item name="Count">Odbrojavanje</Item>
+<Item name="Count1">Digit</Item>
+<Item name="CountAdd">Count plus</Item>
+<Item name="CountColor">Value color</Item>
+<Item name="CountDown">Odbrojavanje</Item>
+<Item name="CountReset">Counter Reset</Item>
+<Item name="CountSub">Count down</Item>
+<Item name="CountUp">Brojanje</Item>
+<Item name="CradID">Broj uredjaja</Item>
+<Item name="CradName">Uredjaj</Item>
+<Item name="CrossBottom">Dole</Item>
+<Item name="CrossCenter">Centar</Item>
+<Item name="CrossGlobalProgram">Specifican program</Item>
+<Item name="CrossNoSupport">Global program is not supported in this area.</Item>
+<Item name="CrossScreen">Ekran za krst</Item>
+<Item name="CrossScreenParamsPageTip">1.Podesavanje sirine i visine ekrana u 3 koraka &#x000A;2.Odaberi boju ekrana</Item>
+<Item name="CrossScreenSetting">Podesavanja ekrana za krst</Item>
+<Item name="CrossSmartTip">Ekran prikazuje tekst normalno, nema potreba za SMART podesavanjima</Item>
+<Item name="CrossTop">Gore</Item>
+<Item name="Custom">Custom</Item>
+<Item name="CustomIPTips">If the control card blocked by a firewall, please fill out the IP address manually.</Item>
+<Item name="CustomTime">Vremensko podesavanje</Item>
+<Item name="CustomUnitBoard">Custom unit board</Item>
+<Item name="CustomizeIP">Customize(TCP)</Item>
+<Item name="Cut">Odseci</Item>
+<Item name="Cyan">Svetlo plava</Item>
+<Item name="CycleTiming">Cycle Timing</Item>
+<Item name="DHCPDNSAddr">DNS address</Item>
+<Item name="DHCPGateway">DHCP Default Gateway</Item>
+<Item name="DHCPLease">DHCP leases</Item>
+<Item name="DHCPMask">DHCP Subnet Mask</Item>
+<Item name="DHCPServerAddr">DHCP server address</Item>
+<Item name="Data">Data</Item>
+<Item name="DataClearSuccess">Data was successfully cleared.</Item>
+<Item name="DataFill">"Data exceeds!"</Item>
+<Item name="DataLenght">Data length</Item>
+<Item name="DataLengthError">Packet length is wrong!</Item>
+<Item name="DataMirror">Data Mirror</Item>
+<Item name="DataPolarity">Data Polarity</Item>
+<Item name="DataPolaritySet">Data polarity setting</Item>
+<Item name="DataSource">Data Source</Item>
+<Item name="DateAndWeekLocationReplaced">Zameni datum i dan</Item>
+<Item name="Day">Dan</Item>
+<Item name="Default">Default</Item>
+<Item name="DefaultConnectDeviceType">The default connection method</Item>
+<Item name="DelayedSignal">Delayed Signal</Item>
+<Item name="DeleteFailed">Delete failed</Item>
+<Item name="DeleteScreen">Obrisi ekran</Item>
+<Item name="DeleteSuccess">Delete successful</Item>
+<Item name="DeleteThisData">Obrisi sve programe iz kontrolera?</Item>
+<Item name="DeleteThisFile">Obrisi ovu datoteku?</Item>
+<Item name="DeleteThisProgram">Obrisi ovaj program?</Item>
+<Item name="DeleteThisRegion">Obrisi ovu oblast?</Item>
+<Item name="Deny">Disable</Item>
+<Item name="DestFile">Konacna datoteka</Item>
+<Item name="DestIP">Dest IP </Item>
+<Item name="Detailed">Detailed...</Item>
+<Item name="Detect">Detect</Item>
+<Item name="DetectDevice">Detect Device</Item>
+<Item name="DetectFail">Detection failed!</Item>
+<Item name="DetectSuccess">Detection succeeds!</Item>
+<Item name="Detecting">Detecting ...</Item>
+<Item name="Deviation">Kalibracija vlaznosti</Item>
+<Item name="Device">Removable Device</Item>
+<Item name="DeviceChoosePageTip">1.Use U-disk? please select controller type; &#x000A;2.Appear the device name and match controller ID; &#x000A;3.Only one device and been found,then click next.</Item>
+<Item name="DeviceID">Device ID</Item>
+<Item name="DeviceManage">Upravljanje kontrolerom</Item>
+<Item name="DeviceName">Uredjaj</Item>
+<Item name="DialClock">Analogni</Item>
+<Item name="DialStyle">Dial Style</Item>
+<Item name="DialWeek">Week</Item>
+<Item name="DialYear">Date</Item>
+<Item name="DigitOnly">Digit only</Item>
+<Item name="Digital">Digit</Item>
+<Item name="Direction">Pravac</Item>
+<Item name="DisableBrightnessAdjustment">Onemoguci podesavanje osvetljaja</Item>
+<Item name="Disconnected">Disconnected</Item>
+<Item name="DiskSpace">Disk Space:</Item>
+<Item name="Display">Ekran</Item>
+<List name="DisplayEffects" id="0">Pokaži takoj</List>
+<List name="DisplayEffects" id="40">Statican prikaz</List>
+<List name="DisplayEffects" id="10">Zatvori na dole</List>
+<List name="DisplayEffects" id="11">Otvori horizontalno iz sredine</List>
+<List name="DisplayEffects" id="12">Zatvori sa obe strane</List>
+<List name="DisplayEffects" id="14">Vertikalna zavesa</List>
+<List name="DisplayEffects" id="13">Horizontalna zavesa</List>
+<List name="DisplayEffects" id="15">Na levu stranicu</List>
+<List name="DisplayEffects" id="16">Na desnu stranicu</List>
+<List name="DisplayEffects" id="17">Ciklicno spolja</List>
+<List name="DisplayEffects" id="18">Ciklicno unutra</List>
+<List name="DisplayEffects" id="19">Poklopi na desno</List>
+<List name="DisplayEffects" id="1">Pomeranje u levo</List>
+<List name="DisplayEffects" id="200">Nasumicno</List>
+<List name="DisplayEffects" id="202">Konstantno levo</List>
+<List name="DisplayEffects" id="203">Konstantno desno</List>
+<List name="DisplayEffects" id="204">Konstantno gore</List>
+<List name="DisplayEffects" id="20">Poklopi na levo</List>
+<List name="DisplayEffects" id="21">Smeniti horizontalno</List>
+<List name="DisplayEffects" id="23">Zamotaj na gore</List>
+<List name="DisplayEffects" id="22">Zamotaj na dole</List>
+<List name="DisplayEffects" id="25">Zamotaj na levo</List>
+<List name="DisplayEffects" id="24">Zamotaj na desno</List>
+<List name="DisplayEffects" id="26">Horizontalna resetka</List>
+<List name="DisplayEffects" id="27">Vertikalna resetka</List>
+<List name="DisplayEffects" id="28">Sneg</List>
+<List name="DisplayEffects" id="29">Padanje</List>
+<List name="DisplayEffects" id="2">Pomeranje u desno</List>
+<List name="DisplayEffects" id="30">Sneg inverzan</List>
+<List name="DisplayEffects" id="31">Padanje inverzno</List>
+<List name="DisplayEffects" id="32">Laser levo</List>
+<List name="DisplayEffects" id="33">Laser desno</List>
+<List name="DisplayEffects" id="34">Svetlucanje</List>
+<List name="DisplayEffects" id="35">Svetlucanje inverzno</List>
+<List name="DisplayEffects" id="36">Povlacenje na gore</List>
+<List name="DisplayEffects" id="37">Povlacenje na dole</List>
+<List name="DisplayEffects" id="38">Povlacenje vertikalno</List>
+<List name="DisplayEffects" id="39">Horizontalno preklapanje</List>
+<List name="DisplayEffects" id="3">Pomeranje na gore</List>
+<List name="DisplayEffects" id="4">Pomeranje na dole</List>
+<List name="DisplayEffects" id="5">Otvori na levo</List>
+<List name="DisplayEffects" id="6">Otvori na desno</List>
+<List name="DisplayEffects" id="7">Otvori na gore</List>
+<List name="DisplayEffects" id="8">Otvori na dole</List>
+<List name="DisplayEffects" id="9">Otvori vertikalno iz sredine</List>
+<Item name="DisplayState">Display status</Item>
+<Item name="Dll_Add">Sacuvaj</Item>
+<Item name="Dll_Data">Data</Item>
+<Item name="Docking">Docking</Item>
+<Item name="DonotTips">Do not prompt</Item>
+<Item name="DontChange">Ne menjaj</Item>
+<Item name="DownloadSpeed">Brzina preuzimanja</Item>
+<Item name="Dwell">Zaustavi</Item>
+<Item name="Edit">Izmeni</Item>
+<Item name="Editor">Izmene</Item>
+<Item name="Effect">Efekti</Item>
+<Item name="Effect Cover">Poklopiti</Item>
+<Item name="Effect Drift">Sneg</Item>
+<Item name="Effect FanShaped">Zavese</Item>
+<Item name="Effect Flicker">Svetlucanje</Item>
+<Item name="Effect Laser">Laser</Item>
+<Item name="Effect Move">Pomeriti</Item>
+<Item name="Effect OpenAndClose">Otvori-zatvori</Item>
+<Item name="Effect PageTurning">Stranica</Item>
+<Item name="Effect Pull">Povuci</Item>
+<Item name="Effect Roll">Zamotati</Item>
+<Item name="Effect WaterFall">Padati</Item>
+<Item name="EffectSetting">Podesavanje efekata</Item>
+<Item name="EffectType">Types of effects</Item>
+<Item name="EliminateGhosting">Line blanking</Item>
+<Item name="Empty">Isprazni</Item>
+<Item name="EmptyScreen">Empty the display</Item>
+<Item name="Enable">Omoguci</Item>
+<Item name="EnableDhcp">Omoguci DHCP</Item>
+<Item name="End Play">End</Item>
+<Item name="EndIpAddr">End IP</Item>
+<Item name="EndToEnd">Do kraja</Item>
+<Item name="Equilibrium">Equilibrium</Item>
+<Item name="Error">Greska</Item>
+<Item name="EthSettingHelpA">Directly change the related settings of software, do not change the device address.</Item>
+<Item name="EthSettingHelpB">Note: &#x000A;1. The addresses of software and device will be changed together after settings succeed.&#x000A;2. When multiple devices are connected simultaneously, please make sure the MAC address of device is unique.</Item>
+<Item name="Ethernet">Ethernet</Item>
+<Item name="EthernetAddressSettingSuccess">Ethernet address was successfully set.</Item>
+<Item name="EthernetSettingInfo">Note: When using this function, please ensure that LAN connects only one control card.</Item>
+<Item name="Example">Example</Item>
+<Item name="ExitDownloading">Preuzimanje neuspesno, prekinuti?</Item>
+<Item name="ExpiredVerification">Expired,need passward</Item>
+<Item name="ExporBus">Izvezi jedinicne parametre</Item>
+<Item name="ExporBusIn">Uvezi jedinicne parametre</Item>
+<Item name="Export">USB Disk</Item>
+<Item name="ExportAdjustTimeFile">Export time-adjusting file</Item>
+<Item name="ExportFile">Izvezi datoteku</Item>
+<Item name="ExportFileFail">Failed to export the file!</Item>
+<Item name="ExportImport">Uvezi i izvezi</Item>
+<Item name="ExportParam">Izvezi</Item>
+<Item name="ExportScreenFile">Izvezi datoteku ekrana</Item>
+<Item name="ExportSetedParams">Export the parameters</Item>
+<Item name="ExportSuccess">Uspesno izvezeno, mozete izvuci USB disk.</Item>
+<Item name="ExportSuccess1">Uspesno izvezeno na</Item>
+<Item name="ExportSuccess2">!</Item>
+<Item name="ExportToUDisk">Eksportuj na USB disk</Item>
+<Item name="Fahrenheit">Degrees F</Item>
+<Item name="Fast">Fast</Item>
+<Item name="Fastest">Najbrze</Item>
+<Item name="FeatureNavigator">Functional navigation</Item>
+<Item name="File">Datoteka</Item>
+<Item name="FileConfigurationError">The file misconfigured!</Item>
+<Item name="FileConfigurationPackageSentSuccessfully">Konfiguraciona datoteka uspesno poslata.</Item>
+<Item name="FileDoesNotMatch">File does not match.</Item>
+<Item name="FileList">Lista datoteka</Item>
+<Item name="FileMisidentified">The file misidentified!</Item>
+<Item name="FileParametersError"> File parameter is wrong!(Screen width or height exceeds, or color is wrong.)</Item>
+<Item name="FileSendComplete">The file was successfully sent.</Item>
+<Item name="FileSize">File Size</Item>
+<Item name="FileSuccessfullyReceived">The file was successfully received.</Item>
+<Item name="FilterColor">Filter Color</Item>
+<Item name="FindNewVersion">Pronadjena nova verzija, preuzeti za azuriranje?</Item>
+<Item name="FindScree">Find the screen</Item>
+<Item name="FindSerial">Find the serial port connected with the control card.</Item>
+<Item name="Finish">Zavrsetak</Item>
+<Item name="FinishTracingPoint">Tracing point  is finished .</Item>
+<Item name="FirmwareMismatching">Firmware se ne podudara</Item>
+<Item name="FirmwareVersion">Firmware Verzija</Item>
+<Item name="FirstPage">First Page</Item>
+<Item name="FitMaxHint">Region maximized</Item>
+<Item name="FixedCellsWidth">Fiksna sirina polja</Item>
+<Item name="FixedPlay">Fixed broadcast programs</Item>
+<Item name="FixedTime">Fiksno vreme</Item>
+<Item name="Flash">SWF</Item>
+<Item name="Floating">Floating</Item>
+<Item name="FlushLeft">Levo</Item>
+<Item name="Font">Font</Item>
+<Item name="FontSize">Velicina slova</Item>
+<Item name="Foreground">Foreground</Item>
+<Item name="FoundDisk">Found the removable device!</Item>
+<Item name="FramesTooMuch">Frames are excessive, please reduce!</Item>
+<Item name="FreeSpace">Free Space</Item>
+<Item name="Frequency">Scan Frequency</Item>
+<Item name="Friday">Petak</Item>
+<Item name="From">Od</Item>
+<Item name="From Max To Min">Od Max do Min</Item>
+<Item name="From Min To Max">Od Min do Max</Item>
+<Item name="GIF name">GIF Path</Item>
+<Item name="GammaCorrection">Gamma Correction</Item>
+<Item name="GaryTip1">Reduce the control range to 1/</Item>
+<Item name="General2">Gen2</Item>
+<Item name="General4">Gen4</Item>
+<Item name="General6">Gen6</Item>
+<Item name="GeneratingData">Generating data</Item>
+<Item name="GetFirmwareVersion">Preuzmi Firmware verziju</Item>
+<Item name="GetSystemTime">Preuzmi vreme sa racunara</Item>
+<Item name="Graph">Grafika</Item>
+<Item name="GraphCount">Kolicina</Item>
+<Item name="GrayLevel">Nijanse</Item>
+<Item name="Green">Zelena</Item>
+<Item name="HDScreenFile">HD datoteka ekrana</Item>
+<Item name="HZoom">Prosiri X</Item>
+<Item name="Height">Visina</Item>
+<Item name="HeightOfMoreTthan">"Height exceeds the maximum!"</Item>
+<Item name="Hide">Hide</Item>
+<Item name="High">High</Item>
+<Item name="Hollow">Izdubljeno</Item>
+<Item name="Horizontal">Horizontalna pozicija</Item>
+<Item name="Hour">Sat</Item>
+<Item name="HourHand">Skazaljka za sate</Item>
+<Item name="HourRadius">Velicina za sate</Item>
+<Item name="Humidity">Vlaznost</Item>
+<Item name="IDAlreadyExists">ID has been exists</Item>
+<Item name="IDInputError">ID is Error</Item>
+<Item name="IPAddress">IP Address</Item>
+<Item name="IPNotLegitimate">IP is not legitimate</Item>
+<Item name="IPResetting">IP Resetovanje</Item>
+<Item name="IPSetting">IP podesavanja</Item>
+<Item name="Idle">Idle</Item>
+<Item name="IllegalFile">Illegal File</Item>
+<Item name="Image">Image</Item>
+<Item name="ImageAuto">Picture Style</Item>
+<Item name="Images">Slika</Item>
+<Item name="ImportParam">Uvezi</Item>
+<Item name="ImportScreenFile">Uvezi datoteku ekrana</Item>
+<Item name="IncompleteDataWriting">Incomplete data writing</Item>
+<Item name="Index">Sequence number</Item>
+<Item name="InfraredRay">Infrared ray</Item>
+<Item name="InitialState">Pocetno stanje</Item>
+<Item name="InitializeSuccess">Initialize successfully</Item>
+<Item name="InputSmartSettingName">Please enter the name of Smart settings</Item>
+<Item name="Insert">Ubaci</Item>
+<Item name="InsertColumn">Ubaci kolonu</Item>
+<Item name="InsertRow">Ubaci red</Item>
+<Item name="Inverse">Inverzna selekcija</Item>
+<Item name="IsDeleteAllScreen">Delete all of the display?</Item>
+<Item name="IsExportVideo">Whether  export video?</Item>
+<Item name="IsSaveFile">Do you want to save the file?</Item>
+<Item name="IsSendToCard">Zelite li da posaljete odabrana podesavanja?</Item>
+<Item name="IsTheLatestVersion">Poslednja verzija je vec instalirana.</Item>
+<Item name="Large">Veliki</Item>
+<Item name="LastPage">Last Page</Item>
+<Item name="LeftToRight">Levo-&gt;Desno</Item>
+<Item name="LevelScreenshot">Horizontalni zoom</Item>
+<Item name="LightRows">Lines Lit in one Moudle</Item>
+<Item name="LineSpacing">Razmak izmedju redova</Item>
+<Item name="Link">Link</Item>
+<Item name="LinkState">Connection Status</Item>
+<Item name="LiveTime">Vreme trajanja</Item>
+<Item name="LocalDisck">Local Disk</Item>
+<Item name="LocalIpSeting">Lokalna IP podesavanja</Item>
+<Item name="LockPara">Zakljucaj parametre</Item>
+<Item name="Low">Low</Item>
+<Item name="LuminancePrior">Brightness first</Item>
+<Item name="LuminanceSetting">Podesavanje jacine osvetljaja</Item>
+<Item name="LuminanceSettingSuccess">Osvetljaj je uspesno podesen.</Item>
+<Item name="MACAddress">MAC Address</Item>
+<Item name="MFRDate">Ex-factory Date</Item>
+<Item name="Max">Max</Item>
+<Item name="MaxIPAddr">Maximum TP address</Item>
+<Item name="MaxUseImage">Slika za Max</Item>
+<Item name="MaximumOfHeight">Maksimalna visina</Item>
+<Item name="MaximumOfRange">Maksimalne vrednosti</Item>
+<Item name="MaximumOfRegions">Maksimalan broj polja</Item>
+<Item name="MaximumOfWidth">Maksimalna sirina</Item>
+<Item name="Memory">Memorija</Item>
+<Item name="Memory Size">File size</Item>
+<Item name="MergeCells">Spoji polja</Item>
+<Item name="Middle">Srednji</Item>
+<Item name="Min">Minut</Item>
+<Item name="MinIPAddr">Minimum IP address</Item>
+<Item name="MinUseImage">Slika za Min</Item>
+<Item name="MinuteHand">Skazaljka za minute</Item>
+<Item name="Model">Card</Item>
+<Item name="Modify">Izmeni</Item>
+<Item name="Module">Modul</Item>
+<Item name="ModuleMismatching">The model of control card does not match.</Item>
+<Item name="ModuleSelect">Izbor modula</Item>
+<Item name="Monday">Ponedeljak</Item>
+<Item name="MoreSetting">Dodatna podesavanja</Item>
+<Item name="MoreSettings">Dodatna podesavanja-&gt;&gt;</Item>
+<Item name="MoveDown">Pomeri dole</Item>
+<Item name="MoveUp">Pomeri gore</Item>
+<Item name="Multi">Visestruko</Item>
+<Item name="MultiFrame">Multi-frame image</Item>
+<Item name="MultiLine">Viseredni prikaz</Item>
+<Item name="MultiScreenDirectConnect">Vise ekrana</Item>
+<Item name="MultipeSend">Visestruko slanje</Item>
+<Item name="MultipeSendHint">Visestruko slanje koristi samo za Ethernet (fixed IP) mod.</Item>
+<Item name="MultipleEffects">Vise efekata</Item>
+<Item name="MultipleLinesoftext">Viselinijski tekst</Item>
+<Item name="NICName">NIC Name</Item>
+<Item name="Name">Name</Item>
+<Item name="NeedSensor">Potreban senzor</Item>
+<Item name="NeedSpace">Needed Space</Item>
+<Item name="NetMark">Subnet Mask</Item>
+<Item name="NetWorkError">Current control card can only use compact mode, please check whether the control card is on the same network segment with the computer!</Item>
+<Item name="NewCrossScreen">Novi ekran za krst(&amp;C)</Item>
+<Item name="NewCrossScreen_G">Novi ekran za krst</Item>
+<Item name="NewGuideScreen">Novi ekran po odabiru</Item>
+<Item name="NewHypertext">Nova animacija</Item>
+<Item name="NewNormalScreen_G">Novi ekran</Item>
+<Item name="NewScreen">Nov ekran</Item>
+<Item name="NewTable">Nova tabela</Item>
+<Item name="Next">Sledeci</Item>
+<Item name="NextPage">Sledeca stranica</Item>
+<Item name="NextProgram">Switch to next program</Item>
+<Item name="NextScan">Sledeci</Item>
+<Item name="NoAssociation">No Association</Item>
+<Item name="NoBorder">Bez okvira</Item>
+<Item name="NoFile">The file does not exist!</Item>
+<Item name="NoFindConfigFiles">Nemogu da nadjem parametre ekrana, nastavi?</Item>
+<Item name="NoFoundDisk">No removable device was found!</Item>
+<Item name="NoInstallFlash">Please check whether the Adobe Flash Player has been installed!</Item>
+<Item name="NoLimit">Bez limita</Item>
+<Item name="NoSerial">Could not find the control card connected with the serial port.</Item>
+<Item name="NoSerialConnection">No serial port connected</Item>
+<Item name="Noarea">Lack of program, failed to send!</Item>
+<Item name="Noitemisselected">Nothing selected</Item>
+<Item name="NormalShow">Reprodukovanje redom</Item>
+<Item name="NotSelected">Unselected</Item>
+<Item name="NotSupportGlobalProgram">Ordinary screen does not support global program</Item>
+<Item name="NotSupportLANUpgrade">This model does not support the Ethernet, please use serial port or U disk to upgrade the firmware!</Item>
+<Item name="NotSupportTips">Tips:Don't support the time, the new dial,the temperature and humidity, the Lunar</Item>
+<Item name="NumberOfProgramHasReachedItsMaximum">Maksimalan broj programa!</Item>
+<Item name="NumberOfRegionHasReachedItsMaximum">Dostignute je maksimalan broj poja!</Item>
+<Item name="OEPolarity">OE Polarity</Item>
+<Item name="OEPolaritySet">OE polarity setting</Item>
+<Item name="OK">U redu</Item>
+<Item name="Offline">Offline</Item>
+<Item name="OldVerCard">Search for Gen4</Item>
+<Item name="On-line">On-line</Item>
+<Item name="OnBottom">Ubaci ispod</Item>
+<Item name="OnLeft">Levo</Item>
+<Item name="OnRight">Desno</Item>
+<Item name="OnTop">Ubaci odozgo</Item>
+<Item name="OnlyAllowContainsAClockRegion">Only allow to contain a dial region!</Item>
+<Item name="OnlyAllowContainsATempRegion">Only allow to contain a temperature region!</Item>
+<Item name="OnlyAllowContainsATimeRegion">Only allow to contain a time region!</Item>
+<Item name="OnlyCard">Just for card</Item>
+<Item name="Open">Otvori</Item>
+<Item name="OpenAdv">Open the Ad</Item>
+<Item name="OpenFileFail">Unable to open the file, please check if it is occupied!</Item>
+<Item name="OpenFolder">Otvori datoteku</Item>
+<Item name="OpenScreen">Otvori ekran</Item>
+<Item name="OperationSuccess">Operate successfully</Item>
+<Item name="Orange">Ljubicasta</Item>
+<Item name="OriginX">Pocetna tacka po X</Item>
+<Item name="OriginY">Pocetna tacka po Y</Item>
+<Item name="Original">Original</Item>
+<Item name="OtherSeting">Other Settings</Item>
+<Item name="Out">Info</Item>
+<Item name="OutOfMemory">The memory of control card is insufficient, please reduce the program!</Item>
+<Item name="OutOfShowMemory">Out of memory,reduce area.</Item>
+<List name="OutputWindowString" id="0">Scanned equipment</List>
+<List name="OutputWindowString" id="10">Control card name set successfully</List>
+<List name="OutputWindowString" id="11">Clear screen successfully</List>
+<List name="OutputWindowString" id="12">Uspesno poslati parametri ekrana</List>
+<List name="OutputWindowString" id="13">Azuriranje vremena uspesno</List>
+<List name="OutputWindowString" id="14">Podesavanje osvetljaja uspesno</List>
+<List name="OutputWindowString" id="15">Podesavanje tajmera uspesno</List>
+<List name="OutputWindowString" id="16">Display in test...</List>
+<List name="OutputWindowString" id="17">Nepoznata komanda</List>
+<List name="OutputWindowString" id="18">No hardware parameters</List>
+<List name="OutputWindowString" id="19">Pogresna komanda</List>
+<List name="OutputWindowString" id="1">Get the device information.</List>
+<List name="OutputWindowString" id="20">System is busying</List>
+<List name="OutputWindowString" id="21">Head length error</List>
+<List name="OutputWindowString" id="22">Symbol is incorrect</List>
+<List name="OutputWindowString" id="23">No. is incorrect </List>
+<List name="OutputWindowString" id="24">Nema parametara ekrana</List>
+<List name="OutputWindowString" id="25">Packet error</List>
+<List name="OutputWindowString" id="26">Unknown error</List>
+<List name="OutputWindowString" id="27">Vreme za slanje je prekoraceno</List>
+<List name="OutputWindowString" id="28">Feedback packet parsing error</List>
+<List name="OutputWindowString" id="29">IP adresa uspesno postavljena</List>
+<List name="OutputWindowString" id="2">Equipment offline</List>
+<List name="OutputWindowString" id="30">Azuriranje firmvera neuspesno, pokusaj ponovo!</List>
+<List name="OutputWindowString" id="31">Setting failed</List>
+<List name="OutputWindowString" id="32">Check error</List>
+<List name="OutputWindowString" id="33">Protocol error</List>
+<List name="OutputWindowString" id="34">Instruction error</List>
+<List name="OutputWindowString" id="35">File does not match</List>
+<List name="OutputWindowString" id="36">Packet number error</List>
+<List name="OutputWindowString" id="37">Module type mismatch</List>
+<List name="OutputWindowString" id="38">File configuration error</List>
+<List name="OutputWindowString" id="39">Illegal file</List>
+<List name="OutputWindowString" id="3">Izaberi ekran na koji se salje sadrzaj</List>
+<List name="OutputWindowString" id="40">CPU type error</List>
+<List name="OutputWindowString" id="41">Firmware support tricolor only, do not support single and dual color</List>
+<List name="OutputWindowString" id="42">Firmware support single dual color only, do not support tricolor</List>
+<List name="OutputWindowString" id="43">Uspesno azuriranje</List>
+<List name="OutputWindowString" id="44">Reception failed</List>
+<List name="OutputWindowString" id="45">Packet length error</List>
+<List name="OutputWindowString" id="46">File identification error</List>
+<List name="OutputWindowString" id="47">Sub-packet sequence number error</List>
+<List name="OutputWindowString" id="49">Datoteka uspesno prihvacena</List>
+<List name="OutputWindowString" id="4">Izabrani ekran je nepovezan</List>
+<List name="OutputWindowString" id="50">Delayed signal</List>
+<List name="OutputWindowString" id="51">System Busy</List>
+<List name="OutputWindowString" id="52">Data is written incompletely</List>
+<List name="OutputWindowString" id="53">Firmver uspesno azuriran?</List>
+<List name="OutputWindowString" id="54">Hardware parameters set successfully</List>
+<List name="OutputWindowString" id="55">Device bound is offline</List>
+<List name="OutputWindowString" id="56">The setting of the screen size is not right.</List>
+<List name="OutputWindowString" id="57">Pocetak slanja</List>
+<List name="OutputWindowString" id="58">Podesavanje uspesno</List>
+<List name="OutputWindowString" id="59">Service expiration</List>
+<List name="OutputWindowString" id="5">Program data is too large</List>
+<List name="OutputWindowString" id="60">Font changed successfully</List>
+<List name="OutputWindowString" id="61">Set directly connected successfully</List>
+<List name="OutputWindowString" id="62">Cancel directly connected successfully</List>
+<List name="OutputWindowString" id="63">Equipment in the Boot status,please update the firmware</List>
+<List name="OutputWindowString" id="64">Verification fails</List>
+<List name="OutputWindowString" id="65">Returns nothing</List>
+<List name="OutputWindowString" id="66">File is too large</List>
+<List name="OutputWindowString" id="67">Control card ID is wrong</List>
+<List name="OutputWindowString" id="68">Invalid device ID[%s]</List>
+<List name="OutputWindowString" id="69">Reset Device ID[%s]</List>
+<List name="OutputWindowString" id="6">Uspesna komanda</List>
+<List name="OutputWindowString" id="7">Pokretanje slanja</List>
+<List name="OutputWindowString" id="8">Slanje...</List>
+<List name="OutputWindowString" id="9">Slanje uspesno</List>
+<Item name="P10Colorful">M10��Colorful��</Item>
+<Item name="Pack">Image package</Item>
+<Item name="PackageNumberError">Packet number is wrong!</Item>
+<Item name="Packet">Packet</Item>
+<Item name="PacketError">Packet is wrong!</Item>
+<Item name="PacketSize">Packet Size</Item>
+<Item name="Page">Page</Item>
+<Item name="Pages">Pages</Item>
+<Item name="PannelFill">"The region already exists!"</Item>
+<Item name="ParallelSend">Parallel send</Item>
+<Item name="ParametersReadbackSuccess">Uspesno procitani parametri</Item>
+<Item name="ParametersSetting">Podesavanje parametara</Item>
+<Item name="Parti-color">Visebojno</Item>
+<Item name="Password">Lozinka</Item>
+<Item name="PasswordAuthentication">Password Authentication</Item>
+<Item name="PasswordError">Pogresna lozinka!</Item>
+<Item name="PasswordSetting">Podesavanje lozinke</Item>
+<Item name="Paste">Zalepi</Item>
+<Item name="Path">Path</Item>
+<Item name="Pause">Pauza</Item>
+<Item name="PictrueProcessing">Picture Processing</Item>
+<Item name="PlaseSelectDevice">Please select a device!</Item>
+<Item name="Play">Pokreni</Item>
+<Item name="PlayBeforePowerProgram">Memory Last Show</Item>
+<Item name="PlayMemory Size">Play File Size</Item>
+<Item name="PlayMode">Nacin kretanja</Item>
+<Item name="PlayQuality">The fluency</Item>
+<Item name="PlaySpeed">Brzina reprodukovanja</Item>
+<Item name="PlayTime">Vreme rada</Item>
+<Item name="PlayTimes">Ponavljanje</Item>
+<Item name="Playback Duration">Playback duration</Item>
+<Item name="Player">Pokreni</Item>
+<Item name="Playing BeginFrames">Play start frame</Item>
+<Item name="Playing EndFrames">Play end frame</Item>
+<Item name="Playing Frames">Play frames</Item>
+<Item name="PleaseEnterTheBorderWidthOfTheTable">Unesite debljinu okvira od tabele.</Item>
+<Item name="PleaseEnterTheNumberOfCloumns">Unesite broj kolona.</Item>
+<Item name="PleaseEnterTheNumberOfRows">Unesite broj redova.</Item>
+<Item name="PleaseSelect">Please select</Item>
+<Item name="PleaseSelectAFile">Izaberite datoteku!</Item>
+<Item name="PleaseSelectAItem">Please select an item, if the scan result is empty, please check the line!</Item>
+<Item name="PleaseSelectAProgram">Selektuj program!</Item>
+<Item name="PleaseSelectScreen">Please select screen.</Item>
+<Item name="PleaseWait">Please wait...</Item>
+<Item name="PlotPointsImage">Geometrijska slika</Item>
+<Item name="PointCount">Broj decimala</Item>
+<Item name="Points">Rezolucija</Item>
+<Item name="PopUdiskfailure">Failed to pop up U disk!</Item>
+<Item name="Port">Port</Item>
+<Item name="PreProgram">Switch to previous program</Item>
+<Item name="PreProgramConctrl">Program control</Item>
+<Item name="Prev">Predhodni</Item>
+<Item name="PrevScan">Prethodni</Item>
+<Item name="Preview">Pregled</Item>
+<Item name="PreviewSetting">Preview Settings</Item>
+<Item name="PreviousPage">Prethodna stranica</Item>
+<Item name="ProgramInformation">Informacije o programu</Item>
+<Item name="ProgramSize">Velicina programa</Item>
+<Item name="ProgramSwitching">Program Switching</Item>
+<Item name="ProtocolError">Protocol is wrong!</Item>
+<Item name="ProtocolTypeError">Protocol type is wrong!</Item>
+<Item name="PullThreshold">Adsorb </Item>
+<Item name="QRCode">QR code</Item>
+<Item name="QuitTest">Zavrsi test</Item>
+<Item name="RFID"> RF  ID</Item>
+<Item name="RFSetting">RF podesavanja</Item>
+<Item name="RS232">RS232</Item>
+<Item name="RadioEffect">Jedan efekat</Item>
+<Item name="RandomColor">Nasumicna boja</Item>
+<Item name="ReadBack2">Preuzmi</Item>
+<Item name="ReadScreenParamsFromUDisk">Uvezi parametre sa USB diska.</Item>
+<Item name="Readback">Readback</Item>
+<Item name="RealTimeArea">Polje u realnom vremenu</Item>
+<Item name="RealTimeFindCard">Real-time search card</Item>
+<Item name="RebootScreen">Reboot Screen</Item>
+<Item name="ReceiveFailure">Failed to receive!</Item>
+<Item name="Record">Record</Item>
+<Item name="RecordTips">Note: If you can not get the correct image, check the recording options.</Item>
+<Item name="RectangleScreen">Pravougani ekran</Item>
+<Item name="Red">Crvena</Item>
+<Item name="Refresh">Refresh</Item>
+<Item name="RefreshFrequency">Refresh frequency</Item>
+<Item name="RefreshRate">Refresh rate</Item>
+<Item name="RegionHeight">Visina</Item>
+<Item name="RegionRect">Pozicija polja</Item>
+<Item name="RegionWidth">Sirina</Item>
+<Item name="Relevance">Please get into�Menu-&gt;Operation-&gt;Communication Settings-&gt;TCP-&gt;Associate Display?</Item>
+<Item name="RememberProgram">Remember Program</Item>
+<Item name="Remove">Obrisi</Item>
+<Item name="RemoveDevice">Remove Device</Item>
+<Item name="RemoveDeviceSuccess1">Successfully removed</Item>
+<Item name="RemoveDeviceSuccess2">!</Item>
+<Item name="Rename">Preimenuj</Item>
+<Item name="Repeat">Repeat</Item>
+<Item name="Reset">Reset</Item>
+<Item name="ResetProgram">Reset program</Item>
+<Item name="RestartFailed">Restart failed</Item>
+<Item name="RestartSuccess">Control card restart successfully</Item>
+<Item name="RevertToDefaultSettings">Recover to the default status, continue?</Item>
+<Item name="RightToLeft">Desno-Levo</Item>
+<Item name="Romaji">Roman alphabets</Item>
+<Item name="Round">Round</Item>
+<Item name="RoundAndDigital">Round + Digit</Item>
+<Item name="RoundAndRomaji">Round + Roman alphabets</Item>
+<Item name="RouterAddress">Default Gateway</Item>
+<Item name="Row">Red</Item>
+<Item name="SRCFile">Izvorna datoteka</Item>
+<Item name="SWF name">SWF Path</Item>
+<Item name="Saturday">Subota</Item>
+<Item name="Save">Sacuvaj</Item>
+<Item name="SaveToDefaultSetting">Sacuvaj kao podrazumevana podesavanja</Item>
+<Item name="ScaleAndDigital">Scale + Digit</Item>
+<Item name="ScaleAndRomaji">Scale + Roman alphabets</Item>
+<Item name="ScanMode">Scan Mode</Item>
+<Item name="ScanRange">Scan Threshold</Item>
+<Item name="ScanValueB">Filter blue</Item>
+<Item name="ScanValueG">Filter green</Item>
+<Item name="ScanValueR">Filter red</Item>
+<Item name="Scanning">Scan</Item>
+<Item name="ScanningComplete">Scan completed.</Item>
+<Item name="Schedule">Raspored</Item>
+<Item name="ScreenCentered">Centriraj polje za program</Item>
+<Item name="ScreenChoosePageTip">Select the screen type </Item>
+<Item name="ScreenColor">Boja</Item>
+<Item name="ScreenCount">Broj povezanih ekrana</Item>
+<Item name="ScreenHeight">Visina</Item>
+<Item name="ScreenInformation">Informacije o ekranu</Item>
+<Item name="ScreenParameters">Parametri ekrana</Item>
+<Item name="ScreenParametersSetting">Podesavanje parametara ekrana</Item>
+<Item name="ScreenParamsPageTip">1.Select the screen width and height Pixel(Width and Height meaning screen total Pixel)&#x000A;2.Select the color of screen? &#x000A;3.The single scrren of total pixle is the amount of led lights.</Item>
+<Item name="ScreenSize">Velicina ekrana</Item>
+<Item name="ScreenSmartTip">Ekran prikazuje tekst normalno, nema potreba za SMART podesavanjima</Item>
+<Item name="ScreenTest">Test ekrana</Item>
+<Item name="ScreenType">Vrsta ekrana</Item>
+<Item name="ScreenWidth">Sirina</Item>
+<Item name="Search">Pretrazi</Item>
+<Item name="Searching">Searching...</Item>
+<Item name="SearchingBegin">Pretraga</Item>
+<Item name="SearchingEnd">Pretraga zavrsena.</Item>
+<Item name="Sec">Sec</Item>
+<Item name="SecondHand">Skazaljka za sekunde</Item>
+<Item name="SecondRadius">Velicina za minute</Item>
+<Item name="SelectDataPolarity">Please select the data polarity</Item>
+<Item name="SelectDefault">If you do not know the type of the control card, select the 
+default option.</Item>
+<Item name="SelectMode">Mode selection</Item>
+<Item name="SelectOEPolarity">Please select OE polarity</Item>
+<Item name="SelectScan">"Please select the scan mode!"</Item>
+<Item name="SelectScree">Please select the corresponding screen!</Item>
+<Item name="SendFile">Posalji sadr�aj</Item>
+<Item name="SendParamsWhenFinish">After modifying the parameters, please click the "Send Parameters" button.</Item>
+<Item name="SendScreenParams">Posalji parametre</Item>
+<Item name="SendTimeOut">Slanje nespesno</Item>
+<Item name="SendingData">Sending data ...</Item>
+<Item name="SentSuccessfully">Slanje uspelo</Item>
+<Item name="SerialNumber">No.</Item>
+<Item name="SerialPort">Serial Port Settings</Item>
+<Item name="SerialPortIsClosed">LED control card which is connected to the serial port is not found.</Item>
+<Item name="SerialPortIsOccupied">Serial port is occupied!</Item>
+<Item name="SerialPortOpenError">Failed to open the serial port!</Item>
+<Item name="ServiceExpiration">Service expiration</Item>
+<Item name="SetBrightnessFailed">Neuspesno podesavanje osvetljaja!</Item>
+<Item name="SetBrightnessSuccess">Osvetljaj je uspesno podesen</Item>
+<Item name="SetScreenParam">Uspesno poslati parametri na ekran</Item>
+<Item name="SetTheBaudrateSuccessfully">Set the baudrate successfully</Item>
+<Item name="Setting">Podesavanja</Item>
+<Item name="SetupFailed">Settings failed!</Item>
+<Item name="ShowDate">Prikazi datum</Item>
+<Item name="ShowGroup">Prikazi grupu</Item>
+<Item name="ShowMode">Nacin prikaza</Item>
+<Item name="ShowTime">Prikazi vreme</Item>
+<Item name="ShowWeek">Prikazi dan</Item>
+<Item name="Showpage">Show page</Item>
+<Item name="ShuttingDown">Iskljuci</Item>
+<Item name="SignalDelay">Latch Polarity</Item>
+<Item name="SignalDelayHint">Some of screen (such as some P5) latch STR or called LAT signals are reversed with other screen, if there is flash point or line, you can try to anti-select this option.</Item>
+<Item name="SignalQuality">Signal Quality</Item>
+<Item name="Simplify">Simple mode(UDP)</Item>
+<Item name="SimplifyInfo">Simple mode applies only to single direct connection and LAN with one control card, the IP address will automatically match under these circumstances.</Item>
+<Item name="Single">Pojedinacno</Item>
+<Item name="SingleDirectMode">Direktno povezivanje na PC</Item>
+<Item name="SingleLine">Jednoredni prikaz</Item>
+<Item name="SingleLineoftext">Jednolinijski tekst</Item>
+<Item name="SingleScreenBroadcasts">Posalji na sve ekrane</Item>
+<Item name="Size">Size</Item>
+<Item name="Slow">Slow</Item>
+<Item name="Slowest">Najsporije</Item>
+<Item name="Small">Mali</Item>
+<Item name="SmartScanTips">If the screen has a dark bright, please reduced clock frequency.</Item>
+<Item name="SmartSetting">SMART podesavanja</Item>
+<Item name="SmartSettingName">Smart setting Name</Item>
+<Item name="SmartTips">Tips: a Pixel as Unit</Item>
+<Item name="Snapshot">Snapshot</Item>
+<Item name="SnapshotTip">If no bright spots, insert empty points</Item>
+<Item name="Solid color">Puna boja</Item>
+<Item name="Space">Razmak</Item>
+<Item name="SpecifiedDate">Odabrani datum</Item>
+<Item name="SpecifiedTime">Odredjeno vreme</Item>
+<Item name="SpecifyValue">Postavi vrednost</Item>
+<Item name="Speed">Brzina</Item>
+<Item name="SpeedPrior">Speed first</Item>
+<Item name="SplitCell">Razdvoji polja</Item>
+<Item name="SplitHorizontal">Razdvoji horizontalno</Item>
+<Item name="SplitVertical">Razdvoji vertikalno</Item>
+<Item name="Standard">Standard</Item>
+<Item name="StartUpImage">Pocetna animacija</Item>
+<Item name="StartingUp">Ukljuci</Item>
+<Item name="StateA">State A</Item>
+<Item name="StateB">State B</Item>
+<Item name="StateC">State C</Item>
+<Item name="StateD">State D</Item>
+<Item name="Static">Staticno</Item>
+<Item name="Status">Status</Item>
+<Item name="StepBack">Undo</Item>
+<Item name="Stop">Stop</Item>
+<Item name="Stroke">Prosireno</Item>
+<Item name="StyleName">Effect name</Item>
+<Item name="StyleText">Tekst</Item>
+<Item name="SubPacketSequenceNumberError">Sub-packet sequence number is wrong!</Item>
+<Item name="SuccessfullyModified">"Successfully modified"</Item>
+<Item name="Sunday">Nedelja</Item>
+<Item name="SupportRegionsOverlap">Podrzano preklapanje</Item>
+<Item name="SuspendPreview">Pauziraj pregled</Item>
+<Item name="SwapBlueGreen">Exchange blue and green</Item>
+<List name="SystemBusName" id="0">[C1]φ4.75(φ3.75)1R1G   1/16S HUB08 64X32��Indoor��  [A1]</List>
+<List name="SystemBusName" id="10">[C11]P10       1R1G1B 1/8S  HUB08 32X16 HLL</List>
+<List name="SystemBusName" id="11">[C12]P10       1R1G1B 1/4S  HUB75 32X16  [A13]</List>
+<List name="SystemBusName" id="12">[C13]P8        1R1G1B 1/5S   HUB75 40X20 JHG  [A60]</List>
+<List name="SystemBusName" id="13">[C14]P8        1R1G1B 1/4S  HUB08 32X16  [A8]</List>
+<List name="SystemBusName" id="14">[C15]P12/P16   2R1G   1/4S  HUB12 16X8��P16�� [A12]</List>
+<List name="SystemBusName" id="15">[C16]P13.33    1R1G1B 1/3S  HUB08 24X12 HLL  [A49]</List>
+<List name="SystemBusName" id="16">[C17]P13.33    1R1G1B 1/3S  HUB08 24X12 JHG  [A57]</List>
+<List name="SystemBusName" id="17">[C18]P16       1R1G1B 1/5S  HUB08 20X10 HLL  [A52]</List>
+<List name="SystemBusName" id="18">[C19]P16       1R1G1B 1/1S  HUB40 16X8  [A29]</List>
+<List name="SystemBusName" id="19">[C20]P10       1R1G1B 1/4S  HUB75 32X16  [A11]</List>
+<List name="SystemBusName" id="1">[C2]��3.75(��5)1R     1/16S HUB08 64X32��Indoor��  [A1]</List>
+<List name="SystemBusName" id="20">[C21]P25       2R1G1B 1/1S  HUB40 16X8</List>
+<List name="SystemBusName" id="21">[C22]P10-P20   1G2R1B 1/4S  HUB12 16X8  [A61]</List>
+<List name="SystemBusName" id="22">[C23]P10-P20   2R1G1B 1/4S  HUB12 16X8  [A80]</List>
+<List name="SystemBusName" id="23">[C24]P13.33-P26.66  2R1G1B 1/4S  HUB12 12X6</List>
+<List name="SystemBusName" id="24">[C25]P20  1R1G 1/4S  HUB26 16*16��ZHGD�� [A66]</List>
+<List name="SystemBusName" id="25">[C26]P13.33  1R1G1B 1/6S  HUB08 24*12��HLL�� [A55]</List>
+<List name="SystemBusName" id="26">[C27]P10  1R 1/4S  HUB12 32*16��QL�� [A19]</List>
+<List name="SystemBusName" id="27">[C28]P10  1R1G1B 1/2S  HUB75 16*16</List>
+<List name="SystemBusName" id="28">[C29]P6  1R1G1B 1/8S  HUB75 32*16</List>
+<List name="SystemBusName" id="29">[C30]P6  1R1G1B 1/8S  HUB75 32*32</List>
+<List name="SystemBusName" id="2">[C3]P5         1R1G1B 1/16S HUB08 32X32  [A3]</List>
+<List name="SystemBusName" id="30">[C31]P10  1R1G1B 1/4S  HUB75 16*16[A17]</List>
+<List name="SystemBusName" id="31">[C32]P20  1R1G1B 1/1S  HUB75 16*8</List>
+<List name="SystemBusName" id="32">[C33]P25  2R1G1B 1/1S  HUB75 8*8  [A30]</List>
+<List name="SystemBusName" id="33">[C34]P13.33  1R 1/4S  HUB12 24*12 [A71]</List>
+<List name="SystemBusName" id="34">[C35]P10  1R1G 1/4S  HUB12 32*16  [A7]</List>
+<List name="SystemBusName" id="3">[C4]P5         1R1G   1/8S  HUB08 32*16��Vehicle screen�� [A4]</List>
+<List name="SystemBusName" id="4">[C5]P5/P4      1R1G1B 1/16S HUB75 32X32��Indoor�� [A1]</List>
+<List name="SystemBusName" id="5">[C6]P10        1R/1R1G     1/4S  HUB12 32X16（P10） [A8]</List>
+<List name="SystemBusName" id="6">[C7]P10        1R     1/4S  HUB08  32X16</List>
+<List name="SystemBusName" id="7">[C8]P10        1R     1/1S  HUB08 32X16[A31]</List>
+<List name="SystemBusName" id="8">[C9]P10        1R1G   1/4S  HUB08  No 138 32X16  [A13]</List>
+<List name="SystemBusName" id="9">[C10]P10        1R1G   1/4S  HUB12 32X16 [A19]</List>
+<Item name="SystemBusy">System is busy, please try again later!</Item>
+<Item name="SystemOptimize">System optimization</Item>
+<Item name="SystemTime">Sistemsko vreme</Item>
+<Item name="Table">Tabela</Item>
+<Item name="TargetTime">Ciljano vreme</Item>
+<Item name="Temp">Temperatura</Item>
+<Item name="TempAdjust">Korekcija temperature</Item>
+<Item name="TempHumidity">Temp+Vlaznost</Item>
+<Item name="TempOrRHExist">Temperature region and the temperature and humidity area can not exist simultaneously.</Item>
+<Item name="TempUnit">Jedinica</Item>
+<Item name="Temppoint1">Make sure that  the sensor model  you are using is:DS18B20</Item>
+<Item name="Temppoint2">Make sure that  the sensor model  you are using is:AM2301</Item>
+<Item name="Test">Test</Item>
+<Item name="Text">Tekst</Item>
+<Item name="TextColor">Boja teksta</Item>
+<Item name="TextFile">.txt datoteka</Item>
+<Item name="TextInfo">Informacije o tekstu</Item>
+<Item name="TextProcess">Smer teksta</Item>
+<Item name="TextProcessing">Text Processing</Item>
+<Item name="TheDeviceHasBeenOffline">The device has been offline</Item>
+<Item name="ThisModuleNotSupportUDisk">This model does not support U disk.</Item>
+<Item name="Thursday">Cetvrtak</Item>
+<Item name="TimeClock">Digitalni</Item>
+<Item name="TimeDifference">Korekcija</Item>
+<Item name="TimeParameters">Parametri vremena</Item>
+<Item name="TimeSettingSuccess">Vreme je uspesno podeseno.</Item>
+<Item name="TimeSwitch">Vreme ukljucivanja i iskljucivanja</Item>
+<Item name="TimeSwitchSettingSuccess">Vremensko ukljucivanje je uspesno podeseno.</Item>
+<Item name="TimedRestart">Timed restart</Item>
+<Item name="TimerColor">Clock color</Item>
+<Item name="Timing Parameters">Vremenski parametri</Item>
+<Item name="TimingControl">Timing Control</Item>
+<Item name="TimingMode">Vrsta prikaza</Item>
+<Item name="TimingPause">Timing Pause</Item>
+<Item name="TimingReset">Timing Reset</Item>
+<Item name="TimingSet">Timing Set</Item>
+<Item name="Tip_Type1">Use  current communication address to connect UDP</Item>
+<Item name="Tip_Type2">Use IP address from returned device to connect UDP</Item>
+<Item name="Tip_Type3">Use IP address from returned device to connect TCP</Item>
+<Item name="Tip_Type4">Through agent address connected device</Item>
+<Item name="To">Do</Item>
+<Item name="To2">To</Item>
+<Item name="Toolbar_AddColorful_Bottom">Animirani tekst sa mogucnoscu animirane pozadine</Item>
+<Item name="Toolbar_AddColorful_Top">Dodaj animirani tekst</Item>
+<Item name="Toolbar_AddCount_Bottom">Prikazuju se podatci sa eksternih uredjaja, potrebna mrezna konekcija</Item>
+<Item name="Toolbar_AddCount_Top">Prikaz podataka sa eksternih uredjaja</Item>
+<Item name="Toolbar_AddExcel_Bottom">Excel datoteke, efekti i pozadine</Item>
+<Item name="Toolbar_AddExcel_Top">Dodaj polje za Excel datoteku</Item>
+<Item name="Toolbar_AddGlobalProgram_Bottom">Tekst, slike, animacije za ekrane u obliku krsta</Item>
+<Item name="Toolbar_AddGlobalProgram_Top">Dodaj sepcifican program</Item>
+<Item name="Toolbar_AddHypertext_Bottom">Slike, video, SWF, itd...</Item>
+<Item name="Toolbar_AddHypertext_Top">Dodaj animaciju</Item>
+<Item name="Toolbar_AddProgram_Bottom">Mogucnost dodavanja 20 polja za tekst, animaciju, animirani tekst...</Item>
+<Item name="Toolbar_AddProgram_Top">Dodaj program</Item>
+<Item name="Toolbar_AddTempRH_Bottom">Prikazivanje temperature i vlaznosti vazduha (ugraditi odgovarajuci senzor)</Item>
+<Item name="Toolbar_AddTempRH_Top">Dodaj polje za temperaturu i vlaznost vazduha</Item>
+<Item name="Toolbar_AddText_Bottom">Tekst editor sa razlicitim efektima i pozadinama</Item>
+<Item name="Toolbar_AddText_Top">Dodaj tekst</Item>
+<Item name="Toolbar_AddTime_Bottom">Digitalni ili analogni sat</Item>
+<Item name="Toolbar_AddTime_Top">Dodaj polje za vreme</Item>
+<Item name="Toolbar_AddTiming_Bottom">Odbrojavanje vremena, brojanje vremena.</Item>
+<Item name="Toolbar_AddTiming_Top">Dodaj polje za odbrojavanje</Item>
+<Item name="Toolbar_Adjusttime_Bottom">Sinhronizacija prikazanog vremena sa racunarom</Item>
+<Item name="Toolbar_Adjusttime_Top">Dodaj podesavanje vremena</Item>
+<Item name="Toolbar_Check">Oznaci</Item>
+<Item name="Toolbar_Copy">Kopiraj</Item>
+<Item name="Toolbar_Delete">Obrisi</Item>
+<Item name="Toolbar_Down">Dole</Item>
+<Item name="Toolbar_ExportToUdisk_Bottom">Kreirani sadrzaj se izvozi na USB disk</Item>
+<Item name="Toolbar_ExportToUdisk_Top">Izvezi na USB disk</Item>
+<Item name="Toolbar_Paste">Zalepi</Item>
+<Item name="Toolbar_Preview1_Bottom">Pregled selektovanog ekrana</Item>
+<Item name="Toolbar_Preview1_Top">Pogledaj ekran</Item>
+<Item name="Toolbar_Preview2_Bottom">Prikaz svih ekrana, dupli klik za pristup odredjenom ekranu.</Item>
+<Item name="Toolbar_Preview2_Top">Grupa se ne moze pregledati</Item>
+<Item name="Toolbar_Preview_Bottom">Pregled selektovanog programa</Item>
+<Item name="Toolbar_Preview_Top">Pogledaj program</Item>
+<Item name="Toolbar_Save">Sacuvaj</Item>
+<Item name="Toolbar_Search">Pretrazi</Item>
+<Item name="Toolbar_Send_Bottom">Slanje programa na selektovani ekran</Item>
+<Item name="Toolbar_Send_Top">Slanje</Item>
+<Item name="Toolbar_Uncheck">Ukloni</Item>
+<Item name="Toolbar_Up">Gore</Item>
+<Item name="TotalECard">The total number of network interface card :</Item>
+<Item name="TotalFrames">Total frames</Item>
+<Item name="TotalSpace">Total Space</Item>
+<Item name="TracingPoint">Alignment Description</Item>
+<Item name="TracingPointArrowKeys">Left-click tracing point,you can use the arrow keys to control point toward.</Item>
+<Item name="TracingPointError">Tracing point is error.</Item>
+<Item name="TracingPointFail">Tracing point is failed, please Tracing point again.</Item>
+<Item name="TransitionThreshold">Prag prenosa</Item>
+<Item name="Transparent">Transparent</Item>
+<Item name="Tricolor">Trobojno</Item>
+<Item name="Tuesday">Utorak</Item>
+<Item name="Twinkle">Svetlucanje</Item>
+<Item name="TwoLinedisplay">Two-line display</Item>
+<Item name="Type">Type</Item>
+<Item name="Type1">Type one</Item>
+<Item name="Type2">Type two</Item>
+<Item name="Type3">Type three</Item>
+<Item name="Type4">Type four</Item>
+<Item name="TypeName">Type name</Item>
+<Item name="U-DiskSucess">U disk succeeds!</Item>
+<Item name="UDisk">U Disk</Item>
+<Item name="USE_HD2010">The control card was detected, but it does not match with the current software, please use the HD 2010.</Item>
+<Item name="UnableToOpenFile">Cannot open the file!</Item>
+<Item name="Unchanged">Unchanged</Item>
+<Item name="Undo">Korak unazad</Item>
+<Item name="UnexpectedError">Communication timeout</Item>
+<Item name="Unit">Jedinica</Item>
+<Item name="UnitBoard">Unit board</Item>
+<Item name="UnitBoardInfo">Module information</Item>
+<Item name="UnitBoardTips">If a Single Moudle's Width is more than 64 ,please select 64</Item>
+<Item name="UnitBoardWidth">Module width </Item>
+<Item name="UnitBoards">Number of unit board</Item>
+<Item name="UnitColor">Unit color</Item>
+<Item name="UnitSize">Module Points</Item>
+<Item name="Unmerge">Razdvoji</Item>
+<Item name="Unselected">Unselected</Item>
+<Item name="Unspecified">Unspecified</Item>
+<Item name="UnsupportedInstructions">Unsupported Instructions</Item>
+<Item name="Untitled">Untitled</Item>
+<Item name="Update">Azuriranje</Item>
+<Item name="UpdateFailed">Azuriranje neuspesno.</Item>
+<Item name="UpdateFirmwareFinished">Firmware update completed.</Item>
+<Item name="UpdatedSuccessfully">Preuzimanje uspesno, otvoriti datoteku?</Item>
+<Item name="UpdatingFirmware">Updating firmware.</Item>
+<Item name="Use">Omoguci</Item>
+<Item name="Use138Decoder">Use 138 decoder</Item>
+<List name="Use138" id="0">Use 138</List>
+<List name="Use138" id="1">No 138</List>
+<Item name="UseDefaultSetting">Default settings</Item>
+<Item name="UseParams">Using Parameters</Item>
+<Item name="UsedMemory">Used Memory</Item>
+<Item name="UsingHardwareSetup">Koristi hardverska podesavanja(Parameter readback)</Item>
+<Item name="VZoom">Prosiri Y</Item>
+<Item name="Valign">Vertikalno ravnjanje</Item>
+<Item name="ValignBottom">Poravnaj dole</Item>
+<Item name="ValignMiddle">Vertikalno centriranje</Item>
+<Item name="ValignTop">Poravnaj gore</Item>
+<Item name="Veritical">Vertikalna pozicija</Item>
+<Item name="VerticalPosition">Vertikalna pozicija</Item>
+<Item name="VerticalScreenshot">Vertikalni zoom</Item>
+<Item name="VerticalStretch">Prosiri Y</Item>
+<Item name="Video">Video</Item>
+<Item name="Video FramesCount">Total frames</Item>
+<Item name="Video name">Video Path</Item>
+<Item name="ViewHelp">View help</Item>
+<Item name="WaitingForInitialization">Waiting for initialization</Item>
+<Item name="WaitingToBeSent">Waiting to be sent</Item>
+<Item name="Wednesday">Sreda</Item>
+<Item name="White">Bela</Item>
+<Item name="Width">Sirina</Item>
+<Item name="WidthOfMoreTthan">"Width exceeds the maximum!"</Item>
+<Item name="WindowPosition">Window position</Item>
+<Item name="WrongParameter">Wrong parameters</Item>
+<Item name="Yellow">Zuta</Item>
+<List name="color" id="0">Jednobojni</List>
+<List name="color" id="1">Dvobojni</List>
+<List name="color" id="2">Visebojni</List>
+<Item name="delete">Obrisi</Item>
+<Item name="flashTips">Note: The SWF containing scripts is not supported yet, so you can not get its correct image.</Item>
+<List name="frequency" id="0">Auto</List>
+<List name="frequency" id="160">100Hz</List>
+<List name="frequency" id="140">120Hz</List>
+<List name="frequency" id="120">140Hz</List>
+<List name="frequency" id="100">160Hz</List>
+<List name="frequency" id="80">180Hz</List>
+<List name="frequency" id="60">200Hz</List>
+<List name="frequency" id="200">60Hz</List>
+<List name="frequency" id="180">80Hz</List>
+<List name="graylevel" id="1">Bez nijansi</List>
+<List name="graylevel" id="2">4 nijanse</List>
+<List name="graylevel" id="3">8 nijansi</List>
+<List name="graylevel" id="4">16 nijansi</List>
+<List name="graylevel" id="5">32 nijanse</List>
+<Item name="group">Grupa</Item>
+<Item name="hypertext">Animirani sadrzaj</Item>
+<List name="listCtlDelay" id="0">Pozitivan</List>
+<List name="listCtlDelay" id="1">Negativan</List>
+<List name="listStrDelay" id="0">0</List>
+<List name="listStrDelay" id="1">1</List>
+<Item name="mAPPFace">APPface(&amp;A)</Item>
+<Item name="mAbout">O programu(&amp;A)</Item>
+<Item name="mBlackStyle">Black style(L)</Item>
+<Item name="mBludStyle">Blue style(B)</Item>
+<Item name="mCalculator">Digitron</Item>
+<Item name="mClearDisplayData">Obrisi podatke sa ekrana</Item>
+<Item name="mCommSetting">Podesavanja za povezivanje</Item>
+<Item name="mExit">Izlaz(&amp;E)</Item>
+<Item name="mFile">Datoteka(&amp;F)</Item>
+<Item name="mHardwareSetting">Hardverdska podesavanja</Item>
+<Item name="mHelp">Pomoc(&amp;H)</Item>
+<Item name="mIPManagmentTools">Alati za IP podesavanja</Item>
+<Item name="mLanguage">Jezik(&amp;L)</Item>
+<Item name="mLuminanceSetting">Podesavanje osvetljaja</Item>
+<Item name="mNarrow">Smanji</Item>
+<Item name="mNew">Novi ekran(&amp;N)</Item>
+<Item name="mNotepad">Beleznica</Item>
+<Item name="mOpen">Otvori(&amp;O)</Item>
+<Item name="mOperate">Operacije(&amp;O)</Item>
+<Item name="mOutWindow">Info prozor</Item>
+<Item name="mPaint">Crtanje</Item>
+<Item name="mSave">Sacuvaj(&amp;S)</Item>
+<Item name="mSaveAs">Sacuvaj kao...</Item>
+<Item name="mScreenSetting">Podesavanje parametara ekrana</Item>
+<Item name="mSendProject">Slanje</Item>
+<Item name="mSetting">Podesavanja(&amp;S)</Item>
+<Item name="mSilverStyle">Silver style(S)</Item>
+<Item name="mSystemSetting">Sistemska podesavanja</Item>
+<Item name="mTimeSetting">Podesavanje vremena</Item>
+<Item name="mTool">Alati(&amp;T)</Item>
+<Item name="mUpdateFirmware">Update Firmware</Item>
+<Item name="mView">Pogled(&amp;V)</Item>
+<Item name="mWatergreenStyle">Light green style(A)</Item>
+<Item name="mZoom">Povecaj</Item>
+<Item name="minimum">Min</Item>
+<Item name="ms">ms</Item>
+<List name="polarity" id="0">Negativan</List>
+<List name="polarity" id="1">Pozitivan</List>
+<Item name="program">Program</Item>
+<Item name="screen">Ekran</Item>
+<Item name="sec">sec</Item>
+<Item name="send">Posalji</Item>
+<Item name="static">Staticno</Item>
+<Item name="time">Vreme</Item>
+<Item name="whirl180">Inverzna</Item>
+<Item name="whirl270">Leva rot.</Item>
+<Item name="whirl90">Desna rot.</Item>
+<Item name="whirlt">Rotacija</Item>
+<Item name="AddItemID">Add ID</Item>
+<Item name="BeginIpAddr">Begin IP</Item>
+<Item name="CurrentSel">Currently selected language</Item>
+<Item name="DetectsThisFileWasNotSaved">Detected by the currently selected file is not saved if coverage</Item>
+<Item name="English">English</Item>
+<Item name="IDAndContentCanNotBeEmpty">ID and content can not be empty</Item>
+<Item name="ModificationFails">Modification fails</Item>
+<Item name="ModifyItemID">Modify ID</Item>
+<Item name="ModifyOnlyOneItem">Only modify one ID</Item>
+<Item name="RemoveItemID">Remove ID</Item>
+<Item name="ShowOnlyControlCardWifi">Display only control card Wi-Fi</Item>
+<Item name="ShowType">Display method</Item>
+<Item name="ThisIDAlreadyExists">ID exists already</Item>
+<Item name="FillingTheCurrentLanguage">To fill the current language</Item>
+<Item name="WhetherToSaveTheCurrentModifiedFile">Whether to save the changes？</Item>
+<Item name="RemoveDuplicate">Remove duplicate</Item>
+<Item name="Apply">Apply</Item>
+<Item name="Remark">Remark</Item>
+<Item name="FirstMode">Priority mode</Item>
+<Item name="FirstMode_Normal">Balanced</Item>
+<Item name="FirstMode_Speed">Speed Priority</Item>
+<Item name="FirstMode_Text">Brightness Priority</Item>
+<Item name="Random">Random</Item>
+<Item name="WhetherToReplace">Whether to replace?</Item>
+<Item name="ImportFailed">Import Failed</Item>
+<Item name="ExportFailed">Export Failed</Item>
+<Item name="ExportLanguage">Export Language</Item>
+<Item name="ImportLanguage">Import Language</Item>
+<List name="SystemBusName" id="35">[C36]P10  1R1G1B 1/4S  HUB75 16*16</List>
+<Item name="ClickHereToUpdate">Click here to update</Item>
+<Item name="ImportFile">Import File</Item>
+<List name="SystemBusName" id="36">[C37]P10  1R 1/4S  HUB12 32*16[A25]</List>
+<Item name="EditingLanguage">Language Editor</Item>
+<List name="SystemBusName" id="37">[C38]P7.62  1R1G1B 1/8S  HUB08 32*16</List>
+<List name="SystemBusName" id="38">[C39]P5   1R1G1B   1/8S  HUB75 32*16 [A4]</List>
+<Item  name="Imsak">Брзо</Item>
+<Item  name="Fajr">Јутарња  церемонија</Item>
+<Item  name="Dhuhr">Поздрав</Item>
+<Item  name="Asr">Asr</Item>
+<Item  name="Maghrib">Кома</Item>
+<Item  name="Isha">Вечера</Item>
+<Item name="MidNight">Ponoć</Item>
+<Item name="Country">Zemlje</Item>
+<Item name="City">Grad</Item>
+<Item name="NumColor">Numbers Color</Item>
+<Item name="ExprotConfigFile">Export Profiles</Item>
+<Item name="SoundModule">Sound Module</Item>
+<Item name="Year">Year</Item>
+<Item name="ImportTable">Import Table</Item>
+<Item name="ExportBable">Export Table</Item>
+<Item name="ClearAll">Clear</Item>
+<Item name="cfWords">Colorful word</Item>
+<Item name="OnlyOnePrayForScreen">Only supported a prayer area</Item>
+<Item name="BKSpeed">Background speed</Item>
+<Item name="EffectCycle">Effects cycle</Item>
+<Item name="ExportConfigFile">Export Profiles</Item>
+<Item name="SoundSetting">Sound Setting</Item>
+<List name="graylevel" id="6">64 graylevel</List>
+<List name="graylevel" id="7">128 graylevel</List>
+<List name="graylevel" id="8">256 graylevel</List>
+<List name="SystemBusName" id="39">[C40]P10  1R1G1B   1/4S  HUB75  32X16[A12]</List>
+<Item name="SelectFirmwareVersion">Select Firmware Version </Item>
+<Item name="NoSelectVersion">None selected version</Item>
+<Item name="Ordinal">No.</Item>
+<Item name="VersionNum">Version</Item>
+<Item name="ConfirmSelect">Confirm</Item>
+<List name="SystemBusName" id="40">[C41]P10  1R1G1B  1/4S  HUB75 32*16</List>
+<Item name="FileNameAlreadyExistIsCover">FileName already exist,is cover?</Item>
+<Item name="VersionAlreadyExist">Version already exist</Item>
+<Item name="DeleteThisGroup">Delete this group</Item>
+<Item name="FindNewVersionIsUpdate">Find new version，whether to update the firmware?</Item>
+<Item name="UpdateFile">Update file</Item>
+<List name="SystemBusName" id="41">[C42]P10  1R1G1B  1/2S  HUB75 32*16</List>
+<List name="SystemBusName" id="42">[C43]P3  1R1G1B  1/16S  HUB75 64*64</List>
+<Item name="UdiskUpgrade">Update by U-disk</Item>
+<Item name="TimingPlay">Timing Start</Item>
+<Item name="SelectVersionOnTheRight">Please select the firmware on the right!</Item>
+<List name="SystemBusName" id="43">[C44]P8  1R1G  1/8S  HUB08 32*32 (WQS)</List>
+<List name="SystemBusName" id="44">[C45]P5  1R1G1B  1/8S  HUB75 32*32 (CXH)</List>
+<Item name="TheSameSegment">Make sure the IP of the control card and the computer is in the same network segment.</Item>
+<Item name="Step">Step</Item>
+<Item name="ShadowMode">Shadow Mode</Item>
+<Item name="3DDeep">3D Deep</Item>
+<Item name="Gradient">Gradient</Item>
+<Item name="Alpha">Transparency</Item>
+<Item name="BorderStyle">Border Style</Item>
+<Item name="RoundRect">Rounded Rectangle</Item>
+<Item name="Octagon">Octagon</Item>
+<Item name="CustomStyle">Custom Style</Item>
+<List name="SystemBusName" id="45">[C46]P10  1R  1/4S  HUB12 32*16</List>
+<Item name="3DText">3D Text</Item>
+<Item name="Whether_to_cancel_the_current_task">Cancel mission or not?</Item>
+<List name="SystemBusName" id="46">[C47]P10-P20   1G2R1B 1/4S  HUB12 32X16  Virtual pixel</List>
+<List name="SystemBusName" id="47">[C48]P10-P20   2R1G1B 1/4S  HUB12 32X16  Virtual pixel</List>
+<List name="SystemBusName" id="48">[C49]P13.33-P26.66  2R1G1B 1/4S  HUB12 24X12 Virtual pixel</List>
+<Item name="SinglePage">Single Page</Item>
+<Item name="TwinkleStyle">Twinkle Style</Item>
+<Item name="TwinkleSpeed">Twinkle Speed</Item>
+<Item name="NoTwinkle">No Twinkle</Item>
+<Item name="3Dtwinkle">3D Twinkle</Item>
+<Item name="SaveCountValue">Remember the last count</Item>
+<Item name="SpecialBorder">Special Border</Item>
+<Item name="BootingDelayWasComingOn">Power on,brighten gradually</Item>
+<Item name="RememberToThoose">Remember the current selection</Item>
+<Item name="EndPageToEndPage">End page to end page</Item>
+<List name="SystemBusName" id="49">[C50]P10  1R 1/1S  HUB08 RXP</List>
+<List name="OutputWindowString" id="70">Click the button to delete programs [ON]</List>
+<List name="OutputWindowString" id="71">Click the button to delete programs [OFF]</List>
+<List name="OutputWindowString" id="72">Parameter Setting  [Enabled]</List>
+<List name="OutputWindowString" id="73">Parameter Setting  [Disabled]</List>
+<Item name="Btn1ClearProgram">Prohibited delete program</Item>
+<Item name="DoubleSidedScreen">Double-sided screen</Item>
+<Item name="networkMonitoring">Monitoring</Item>
+<Item name="Toolbar_Add3D_Bottom">Support background, foreground, colorful words, 3D effects</Item>
+<Item name="Toolbar_Add3D_Top">Add 3D text</Item>
+<List name="SystemBusName" id="50">[C51]P6  1R1G1B 1/5S  HUB75 32X20</List>
+<Item name="WifiSpeedMode1">High-speed mode</Item>
+<Item name="WifiSpeedMode2">Low speed mode</Item>
+<Item name="All the devices automatically obtain IP">All devices are set to "Get IP automatically"</Item>
+<Item name="The firmware information">The firmware information</Item>
+<Item name="The device information">The device information</Item>
+<List name="SystemBusName" id="51">[C52]  1R1G  1/8  KR</List>
+<List name="SystemBusName" id="52">[C53]  1R1G1B  1/4S ICN2038S</List>
+<List name="SystemBusName" id="53">[C54]  P10  1R1G  1/4S HUB12 32x16 (YLR)</List>
+<List name="SystemBusName" id="54">[C55]  P8 1R1G1B 1/5S  HUB75 40X20</List>
+<List name="SystemBusName" id="55">[C56]  P10 1/4S No 138 MCGD</List>
+<List name="SystemBusName" id="56">[C57]  P8 1R1G1B 1/4S HUB75 (JJY)</List>
+<List name="SystemBusName" id="57">[C58]  P13.33 1R1G1B 1/3S HUB75 (LLR)</List>
+<List name="SystemBusName" id="58">[C59]  P3 1R1G1B 1/32S HUB75E (RBG) ICN2038S</List>
+<List name="SystemBusName" id="59">[C60]  P3 1R1G1B 1/32S HUB75E (RGB) ICN2038S</List>
+<List name="SystemBusName" id="60">[C61]  P6 1/8S HUB75 (BGR)</List>
+<List name="SystemBusName" id="61">[C62]  P6 1/8S HUB75 GK</List>
+<List name="SystemBusName" id="62">[C63]  P6 1/8S HUB75(HJ)</List>
+<List name="SystemBusName" id="63">[C64]  P6 1R1G1B 1/8S HUB75</List>
+<List name="SystemBusName" id="64">[C65]  P10 1R 1/4s(YLR)</List>
+<List name="SystemBusName" id="65">[C66]  P10 1R 1/4S HUB12</List>
+<List name="SystemBusName" id="66">[C67]  P10 1R1G1B 1/2S HUB75 (HJ)</List>
+<List name="SystemBusName" id="67">[C68]  P10 1R1G1B 1/2S HUB75 </List>
+<List name="SystemBusName" id="68">[C69]  P10 1R1G1B 1/3S HUB73A 24X24 (KSZ)</List>
+<List name="SystemBusName" id="69">[C70]  P10 1R1G1B 1/4S No 138 HUB75</List>
+<List name="SystemBusName" id="70">[C71]  P13.33 1R1G1B 1/3S 24x12</List>
+<List name="SystemBusName" id="71">[C72]  P16 1R1G 1/4S HUB08</List>
+<List name="SystemBusName" id="72">[C73]  P20 1R1G1B 1S</List>
+<List name="SystemBusName" id="73">[C74]  P10 1R1G1B 1/4S HUB75（KT）</List>
+<List name="SystemBusName" id="74">[C75]  P8  1R1G1B 1/4S HUB75 32x16 No138</List>
+<List name="SystemBusName" id="75">[C76]  P8  1R1G1B 1/4S HUB75 32x16 (HJ)</List>
+<List name="SystemBusName" id="76">[C77]  P10 1R1G1B 1/4S HUB75 32x16 No138</List>
+<List name="SystemBusName" id="77">[C78]  P10 1R1G1B 1/2S HUB75 32x16</List>
+<List name="SystemBusName" id="78">[C79]  P10 1R 1/4S HUB08 32x16</List>
+<List name="SystemBusName" id="79">[C80]  P10 1R1G1B 1/2S HUB75 32x16 (GK)</List>
+<List name="SystemBusName" id="80">[C81]  P10 1R1G1B 1/2S HUB75 32x16 (QL)</List>
+<List name="SystemBusName" id="81">[C82]  P16 1R1G 1/1S HUB12 16x8</List>
+<List name="SystemBusName" id="82">[C83]  P10 1R 1/4S HUB12 32x16 (KT)</List>
+<List name="SystemBusName" id="83">[C84]  P10 1R 1/4S HUB12 32x16 (GK)</List>
+<List name="SystemBusName" id="84">[C85]  P5  1R1G1B 1/8S HUB75 64x32</List>
+<List name="SystemBusName" id="85">[C86]  P10 1R1G1B 1/4S HUB75 32x16 No138 (HJCL)</List>
+<List name="SystemBusName" id="86">[C87]  P10 1R1G1B 1/2S HUB75E 32x16 No138 (HLL)</List>
+<List name="SystemBusName" id="87">[C88]  P10 1R1G1B 1/2S HUB75 32x16 No138</List>
+<List name="SystemBusName" id="88">[C89]  P6.66 1R1G1B 1/6S HUB75 48x24</List>
+<List name="SystemBusName" id="89">[C90]  P8  1R1G1B 1/5S HUB75 40x20</List>
+<List name="SystemBusName" id="90">[C91]  P4 1R1G1B 1/10S HUB75 80x40 ICN2038S</List>
+<List name="SystemBusName" id="91">[C92]  P4  1R1G1B 1/20S HUB75 80x40 ICN2038S</List>
+<List name="SystemBusName" id="92">[C93]  P10 1R1G1B 1/4S HUB75 32x16 No138 ICN2038S</List>
+<List name="SystemBusName" id="93">[C94]  P10 1R1G1B 1/2S  32x16 No138 ICN2038S</List>
+<List name="SystemBusName" id="94">[C95]  P10 1R1G1B 1/5S HUB75 40x20 ICN2038S</List>
+<List name="SystemBusName" id="95">[C96]  P10 1R1G1B 1/5S HUB75 40x20 SM16207S</List>
+<List name="SystemBusName" id="96">[C97]  H10 1R1G1B 1/2S HUB75 32x16</List>
+<List name="SystemBusName" id="97">[C98]  P8  1R1G1B 1/5S HUB75 40x20 ICN20378BP</List>
+<List name="SystemBusName" id="98">[C99]  dz0228 1R1G1B 1/1S HUB75 16x16</List>
+<Item name="Server address">Server address</Item>
+<Item name="User name">User name</Item>
+<Item name="Fill the same">Fill the same</Item>
+<Item name="Cloud server Settings">Cloud server Settings</Item>
+<Item name="Cloud server">Cloud server</Item>
+<Item name="ButtonCtrl">Button Control on</Item>
+<Item name="NoUse">Button Control off</Item>
+<Item name="Button1">Button1</Item>
+<Item name="Button2">Button2</Item>
+<Item name="Button3">Button3</Item>
+<Item name="Button4">Button4</Item>
+<Item name="DefaultBackground">DefaultBackground</Item>
+<Item name="ImageBackground">ImageBackground</Item>
+<Item name="SingleProgramSend">SingleProgramSend</Item>
+<Item name="latest">latest</Item>
+<Item name="newdata">newdata</Item>
+<Item name="Imsak">Imsak</Item>
+<Item name="Music">Music</Item>
+<Item name="Pray">Pray</Item>
+<Item name="Aglinment">Poravnanje</Item>
+<Item name="LeftAglinment">Poravnaj ulijevo</Item>
+<Item name="CenterAglinment">Centrirano poravnavanje</Item>
+<Item name="RightAglinment">Poravnajte desno</Item>
+<Item name="SplitType">SplitType</Item>
+<Item name="SingleChar">SingleChar</Item>
+<Item name="Word">Word</Item>
+<Item name="WifiSetting">Wi-Fi Setting</Item>
+<Item name="SettingSuccessfully">SettingSuccessfully</Item>
+<Item name="SettingFailed">SettingFailed</Item>
+<Item name="Connectting">Connectting</Item>
+<Item name="NoFoundAp">NoFoundAp</Item>
+<Item name="ConnectFailed">ConnectFailed</Item>
+<Item name="ConnectOK">ConnectOK</Item>
+<Item name="ApMode">ApMode</Item>
+<Item name="StationMode">StationMode</Item>
+<Item name="WifiPasswordLenghLess">Wi-Fi password is too short</Item>
+<Item name="WifiSSIDIsNULL">Wi-Fi name is empty</Item>
+<Item name="MaskError">MaskError</Item>
+<Item name="IPError">IPError</Item>
+<Item name="WifiSSIDTooLong">Wi-Fi name is too long.</Item>
+<Item name="WifiPasswordTooLong">Wi-Fi password is too long.</Item>
+<Item name="SSIDPasswordInputTips">Only allow input 0~9 a~z A~Z _</Item>
+  
+    <Item name="Date">Date</Item>
+    <Item name="temp">temp</Item>
+    <Item name="Weather">Weather</Item>
+    <Item name="Wind Direction">Wind Direction</Item>
+    <Item name="Wind speed">Wind speed</Item>
+    <Item name="Temp Unit">Temp Unit</Item>
+    <Item name="America">America</Item>
+    <Item name="Australia">Australia</Item>
+    <Item name="Canada">Canada</Item>
+    <Item name="China">China</Item>
+    <Item name="India">India</Item>
+    <Item name="Indonesia">Indonesia</Item>
+    <Item name="Iran">Iran</Item>
+    <Item name="Japan">Japan</Item>
+    <Item name="Korea">Korea</Item>
+    <Item name="Malaysia">Malaysia</Item>
+    <Item name="Pakistan">Pakistan</Item>
+    <Item name="Peru">Peru</Item>
+    <Item name="Poland">Poland</Item>
+    <Item name="Russia">Russia</Item>
+    <Item name="Spain">Spain</Item>
+    <Item name="Thailand">Thailand</Item>
+    <Item name="Turkey">Turkey</Item>
+    <Item name="United Arab Emirates">United Arab Emirates</Item>
+    <Item name="Vietnam">Vietnam</Item>
+    <Item name="Sunny">Sunny</Item>
+    <Item name="Cloudy">Cloudy</Item>
+    <Item name="Few clouds">Few clouds</Item>
+    <Item name="Partly cloudy">Partly cloudy</Item>
+    <Item name="Overcast">Overcast</Item>
+    <Item name="Windy">Windy</Item>
+    <Item name="Calm">No wind</Item>
+    <Item name="Light breeze">Light breeze</Item>
+    <Item name="Moderate">Moderate</Item>
+    <Item name="Fresh breeze">Fresh breeze</Item>
+    <Item name="Strong breeze">Strong breeze</Item>
+    <Item name="High wind">High wind</Item>
+    <Item name="Gale">Gale</Item>
+    <Item name="Strong gale">Strong gale</Item>
+    <Item name="Storm">storm</Item>
+    <Item name="Violent storm">Violent storm</Item>
+    <Item name="Hurricane">Hurricane</Item>
+    <Item name="Tornado">Tornado</Item>
+    <Item name="Tropical storm">Tropical storm</Item>
+    <Item name="Shower rain">Shower rain</Item>
+    <Item name="Heavy shower rain">Heavy shower rain</Item>
+    <Item name="Thundershower">Thunderstorms</Item>
+    <Item name="Heavy thunderstorm">Heavy thunderstorm</Item>
+    <Item name="Hail">Hail</Item>
+    <Item name="Light rain">Light rain</Item>
+    <Item name="Moderate rain">Moderate rain</Item>
+    <Item name="Heavy rain">Heavy rain</Item>
+    <Item name="Extreme rain">Extreme rain</Item>
+    <Item name="Drizzle rain">Drizzle rain</Item>
+    <Item name="Storm">storm</Item>
+    <Item name="Heavy storm">Heavy storm</Item>
+    <Item name="Severe storm">Severe storm</Item>
+    <Item name="Freezing rain">Freezing rain</Item>
+    <Item name="Light snow">Light snow</Item>
+    <Item name="Moderate snow">Moderate snow</Item>
+    <Item name="Heavy snow">Heavy snow</Item>
+    <Item name="Snowstorm">Snowstorm</Item>
+    <Item name="Sleet">Sleet</Item>
+    <Item name="Rain and snow">Rain and snow</Item>
+    <Item name="Shower snow">Shower snow</Item>
+    <Item name="Snow flurry">Snow flurry</Item>
+    <Item name="Mist">mist</Item>
+    <Item name="Foggy">Foggy</Item>
+    <Item name="Haze">Haze</Item>
+    <Item name="Sand">sand</Item>
+    <Item name="Dust">Dust</Item>
+    <Item name="Duststorm">dust storm</Item>
+    <Item name="Sandstorm">sandstorm</Item>
+    <Item name="Hot">Hot</Item>
+    <Item name="Cold">Cold</Item>
+    <Item name="Unknown">Unknown</Item>
+    <Item name="Clear">Clear</Item>
+    <Item name="No Sustained Wind">No Sustained Wind</Item>
+    <Item name="Northeast Wind">Northeast Wind</Item>
+    <Item name="East Wind">East Wind</Item>
+    <Item name="Southeaster Wind">Southeaster Wind</Item>
+    <Item name="South Wind">South Wind</Item>
+    <Item name="Southwest Wind">Southwest Wind</Item>
+    <Item name="Strong wind">Strong wind</Item>
+    <Item name="West Wind">West Wind</Item>
+    <Item name="Northwest Wind">Northwest Wind</Item>
+    <Item name="North Wind">North Wind</Item>
+    <Item name="Vortex Wind">Vortex Wind</Item>
+    <Item name="The Breeze Wind">The Breeze Wind</Item>
+    <Item name="No wind">No wind</Item>
+    <Item name="Light air">Light air</Item>
+    <Item name="Breeze">Breeze</Item>
+    <Item name="Gentle breeze">Gentle breeze</Item>
+    <Item name="Strong wind">Strong wind</Item>
+    <Item name="Blast">Blast</Item>
+    <Item name="Gale">Gale</Item>
+    <Item name="Strong gale">Strong gale</Item>
+    <Item name="Whole gale">Whole gale</Item>
+    <Item name="Storm wind">Storm wind</Item>
+    <Item name="Hurricane">Hurricane</Item>
+	<Item name="OfflineMode">Offline Mode</Item>
+	<Item name="PleaseSelectDevice">Please select device</Item>
+	<Item name="SeeMoreParameters">See more parameters</Item>
+	<Item name="ExportProgram">Export program</Item>
+	<List name="ErrorTips" id="00">Common problem hints</List>
+	<List name="ErrorTips" id="01">Error / The width and height set in the screen setting exceeds the control range of the controller</List>
+	<List name="ErrorTips" id="02">Error1 / U disk file format error</List>
+	<List name="ErrorTips" id="03">Error2 / Excessive  program content</List>
+	<List name="ErrorTips" id="04">NoFile / No program file in the U disk</List>
+	<List name="ErrorTips" id="05">End / Setting expired</List>
+	<Item name="ColorfulBorder">Colorful border</Item>
+	<Item name="FixedText">Fixed text</Item>
+	<List name="PM25String" id="00">No data</List>
+	<List name="PM25String" id="01">Good</List>
+	<List name="PM25String" id="02">Moderate</List>
+	<List name="PM25String" id="03">Lightly Polluted</List>
+	<List name="PM25String" id="04">Moderately Polluted</List>
+	<List name="PM25String" id="05">Heavily Polluted</List>
+	<List name="PM25String" id="06">Severely Polluted</List>
+	<Item name="BootTips">Boot tips</Item>
+	<Item name="ShowAll">Show all</Item>
+	<Item name="NoShow">No show</Item>
+	<Item name="PM25Adjust">Adjust PM2.5</Item>
+	<Item name="PM10Adjust">Adjust PM10</Item>
+	<Item name="QuickConfig">Quick config</Item>
+	<Item name="Subtitles">Subtitles</Item>
+	<Item name="Toolbar_AddSubtitles_Top">Add Subtitles</Item>
+	<Item name="ICSetting">IC setting</Item>
+	<Item name="NormalIC">Normal IC</Item>
+	<Item name="RegisterGroup">Register group</Item>
+	<Item name="RedRegister">Red register</Item>
+	<Item name="GreenRegister">Green register</Item>
+	<Item name="BlueRegister">Blue register</Item>
+	<Item name="HighByte">High byte</Item>
+	<Item name="LowByte">Low byte</Item>
+	<Item name="ICSetting">IC setting</Item>
+	<Item name="NormalIC">Normal IC</Item>
+	<Item name="RegisterGroup">Register group</Item>
+	<Item name="RedRegister">Red register</Item>
+	<Item name="GreenRegister">Green register</Item>
+	<Item name="BlueRegister">Blue register</Item>
+	<Item name="HighByte">High byte</Item>
+	<Item name="LowByte">Low byte</Item>
+	<Item name="HelpDoc">Help Doc</Item>
+	<Item name="PrayAutioTip">Kad trebate koristiti audio modul za molitvu, navedite više mp3 datoteka koje odgovaraju nazivu molitve. Imsak->1.mp3 Fajr->2.mp3 Dhuhr->3.mp3 Asr->4.mp3 Maghrib->5.mp3 Isha->6.mp3 MidNight->7.mp3 .</Item>
+<Item name="Confirm Password">Confirm Password</Item>
+<Item name="PasswordInvalidTip">The password must be a number + letter combination with a length of 8~16.</Item>
+<Item name="PasswordUnEqual">The password entered twice is different.</Item>
+<Item name="PasswordTooSimple">The system has detected that the device's Wi-Fi password is too simple. Please reset it.</Item>
+<List name="OutputWindowString" id="75">The system has detected that the device's Wi-Fi password is too simple. Please reset it.</List>
+<Item name="Logout">Logout</Item>
+<Item name="LogoutYesOrNo">Is the user logged out?</Item>
+<Item name="Login">login</Item>
+<Item name="WifiSettingOK">The setting is successful, please reconnect to Wi-Fi.</Item>
+<Item name="UserName">User name</Item>
+<Item name="InputPassword">Input password</Item>
+<Item name="Register">Register</Item>
+<Item name="GetCheckCode">GetCheckCode</Item>
+<Item name="InputCheckCode">Input the check code</Item>
+<Item name="RegisterError">Registration error</Item>
+<Item name="PhoneNum">Cellphone number</Item>
+<Item name="CheckCode">Check code</Item>
+<Item name="ConnectNetwordToUse">Please use the software after connecting to the Internet</Item>
+<Item name="AuthorizedSuccess">Authorized success</Item>
+<Item name="UnsupportedLoginType">Unsupported login type</Item>
+<Item name="CheckCodeNotMatch">Check code does not match</Item>
+<Item name="InputRightPhone">Please enter the correct phone number</Item>
+<Item name="ResetPassword">Reset Password</Item>
+<Item name="PhoneNumError">Wrong format of phone number.</Item>
+<Item name="CheckCodeTimeoutInOneMinute">Verification code cannot be sent repeatedly within one minute</Item>
+<Item name="CheckCodeTimeout">Verification code transmission frequency is exceeded</Item>
+<Item name="CheckCodeSendError">The verification code failed to be sent.</Item>
+<Item name="InvalidToken">Invalid token</Item>
+<Item name="MissingRegInfo">Missing registration information</Item>
+<Item name="AgreeAndAccept">Agreen</Item>
+<Item name="TermsOfService">Services Agreement</Item>
+<Item name="Reacquire">Reacquire</Item>
+<Item name="SettingLoginPassword">Setting login password</Item>
+<Item name="Skip">Skip</Item>
+<Item name="NetworkErrorTip">Network error</Item>
+<Item name="Retry">Retry</Item>
+<Item name="PleaseGetCheckCode">Please get the check code.</Item>
+<Item name="KeepLogin">Keep login</Item>
+<Item name="IsLogoutUser">Logout the current user?</Item>
+<Item name="NotTipsAgin">Do not tips again</Item>
+<Item name="OpenDeviceLock">Enable device lock</Item>
+<Item name="ModifyDeviceLock">Modify device lock</Item>
+<Item name="CloseDeviceLock">Close device lock</Item>
+<Item name="DeviceHasLockedInfo">The device has been locked. Please enter your password.</Item>
+<Item name="DeviceLockPassword">Device lock password</Item>
+<Item name="NoInputNoDeviceLockTip">No password is required when device lock is not enabled.</Item>
+<Item name="UseOldPassword">Use current password</Item>
+<Item name="DeviceLockSetting">Device lock settings</Item>
+<Item name="DeviceLock">Device lock</Item>
+<Item name="KeepPassword">Keep password</Item>
+<Item name="AutoLogin">Auto login</Item>
+<Item name="PleaseInputOldPassword">Please enter the old password</Item>
+<Item name="OldPasswordError">Old password error</Item>
+<Item name="Old Password">Old password</Item>
+<Item name="New Password">New password</Item>
+<Item name="Action">Action</Item>
+
+<List name="OutputWindowString" id="76">The device lock password is incorrect.</List>
+<List name="OutputWindowString" id="77">Missing log content.</List>
+<List name="OutputWindowString" id="78">The machine code is wrong.</List>
+<List name="OutputWindowString" id="79">The length of the machine code is incorrect.</List>
+<List name="OutputWindowString" id="80">The length of the device lock password is incorrect.</List>
+<List name="OutputWindowString" id="81">XR809 is updating</List>
+<List name="OutputWindowString" id="82">XR809 idnvalid address</List>
+<List name="OutputWindowString" id="83">XR809 error</List>
+<List name="OutputWindowString" id="84">Start reading parameters</List>
+<List name="OutputWindowString" id="85">Finish reading parameters</List>
+<List name="OutputWindowString" id="86">Start to restore parameters</List>
+<List name="OutputWindowString" id="87">The parameters have been restored</List>
+<List name="OutputWindowString" id="88">The download is complete and is waiting to recover data.</List>
+<Item name="UseWechatQRCode">Use WeChat to scan the QR code</Item>
+<Item name="Activate">Activate</Item>
+<Item name="ActivateOffline">Activate offline</Item>
+<Item name="PleaseInputActiveCode">Please enter the activation code</Item>
+<Item name="ErrorActivateCode">Wrong activation code</Item>
+<Item name="NTPSetting">подешавање времена мреже</Item>
+<Item name="NetworkSame">Make sure that the device IP and router IP are on the same network segment.</Item>
+<List name="SystemBusName" id="99">[C100]  P10 28x16 8 померања 8 извлачења</List>
+	</language>
+</root>                                                                                                                                                                                                                                                                                          

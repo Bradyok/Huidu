@@ -1,0 +1,1604 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<root>
+	<language name="Русский">
+<Item name="ABrighterThanB">A ярче, чем B</Item>
+<Item name="About">Версия</Item>
+<Item name="AbrightBoff">A белый в то время как B Черный</Item>
+<Item name="Add">Добавить</Item>
+<Item name="Add File">Add File</Item>
+<Item name="Add GIF">Add GIF</Item>
+<Item name="AddFailed">Add Failed</Item>
+<Item name="AddFile">Добавить файл</Item>
+<Item name="AddGroup">Add Group</Item>
+<Item name="AddHypertext">Добавить гипертекст X.hf</Item>
+<Item name="AddPicture">Добавить фото X.jpg,X.jpeg,X.gif,X.png,X.bmp</Item>
+<Item name="AddProgram">Добавить программу</Item>
+<Item name="AddRegion">Добавить окно</Item>
+<Item name="AddSuccess">Add Successfully</Item>
+<Item name="AdjustTime">Синхронизировать</Item>
+<Item name="AdvancedSetting">Дополнительные настройки</Item>
+<Item name="AdvancedSettings">Дополнительные настройки</Item>
+<Item name="AlignCenter">Аналоговый экран по центру</Item>
+<Item name="AlignRight">Flush right</Item>
+<Item name="Alignment">Aligning type</Item>
+<Item name="All">Все</Item>
+<Item name="Allow">Включить</Item>
+<Item name="AllowPasswordAuthentication">Введите пароль идентификации</Item>
+<Item name="AlreadyOpened">Это уже открытом экране.</Item>
+<Item name="AlterBaudrate">Скорость передачи данных</Item>
+<Item name="AntiClockwise rotation">Вращ против часовой</Item>
+<Item name="AreaBackground">Площадь фона</Item>
+<Item name="AreaDown">Регион вниз</Item>
+<Item name="AreaLeft">Регион слева</Item>
+<Item name="AreaMaximize">Регион Максимизируйте</Item>
+<Item name="AreaNoBorder">Cross screen don't support border for global program</Item>
+<Item name="AreaRight">Регион справа</Item>
+<Item name="AreaUp">Регион вверх</Item>
+<Item name="Associated">Связанный</Item>
+<Item name="AutoAdjustTime">Auto adjust time</Item>
+<Item name="AutoGetingIP">Автоопределение IP</Item>
+<Item name="AutoHide">Auto hide</Item>
+<Item name="AutoReSend">Auto reSend</Item>
+<Item name="AutoSave">Auto Save</Item>
+<Item name="AutoScanInterval">Auto Scan Time</Item>
+<Item name="AutoScanMode">Auto Scan Mode</Item>
+<Item name="AutoSearchScans">Режим сканирования автоматически искать</Item>
+<Item name="AutoSwitching">Автоматический переключатель</Item>
+<Item name="AutoUpdate">Автоматическое обновление</Item>
+<Item name="Automatic">Через датчик</Item>
+<Item name="AutomaticInfo">Автоматическая функция регулировки, убедитесь, что датчик яркости установлен</Item>
+<Item name="BBrighterThanA">В ярче, чем А</Item>
+<Item name="Background">Фон</Item>
+<Item name="BackgroundColor">Background Color</Item>
+<Item name="BackgroundSetting">Фоновые Настройки</Item>
+<List name="BackgroupEffects" id="0">Random</List>
+<List name="BackgroupEffects" id="10">Zoom out</List>
+<List name="BackgroupEffects" id="11">Breathe</List>
+<List name="BackgroupEffects" id="12">Crossover</List>
+<List name="BackgroupEffects" id="13">Equalizer</List>
+<List name="BackgroupEffects" id="14">Reflex</List>
+<List name="BackgroupEffects" id="15">Twinkle</List>
+<List name="BackgroupEffects" id="16">Solid color</List>
+<List name="BackgroupEffects" id="17">Ribbon Opening Closing</List>
+<List name="BackgroupEffects" id="18">Circular Expansion</List>
+<List name="BackgroupEffects" id="19">DiamondShaped Expansion</List>
+<List name="BackgroupEffects" id="1">Static</List>
+<List name="BackgroupEffects" id="20">Ranbom Cross Line</List>
+<List name="BackgroupEffects" id="21">Curve Line</List>
+<List name="BackgroupEffects" id="2">Move Left</List>
+<List name="BackgroupEffects" id="3">Move Right</List>
+<List name="BackgroupEffects" id="4">Move Up</List>
+<List name="BackgroupEffects" id="5">Move Down</List>
+<List name="BackgroupEffects" id="6">Move Left，then Move Right</List>
+<List name="BackgroupEffects" id="7">Horizontally open from middle</List>
+<List name="BackgroupEffects" id="8">Close from both sides</List>
+<List name="BackgroupEffects" id="9">Zoom in</List>
+<List name="platformList" id="hdplatform.huidu.cn">Release platform</List>
+<Item name="platform">platform</Item>
+<Item name="BasicInfoSet">Базовая регулировка</Item>
+<Item name="BasicPara">Basic parameters</Item>
+<Item name="BasicSetting">Основные настройки</Item>
+<Item name="Baudrate">Скорость передачи данных</Item>
+<Item name="BbrightAoff">A Черный в то время как B белый</Item>
+<Item name="Begin">начинать</Item>
+<Item name="Begin Play">Start</Item>
+<Item name="Black">Черный</Item>
+<Item name="Blue">синий</Item>
+<Item name="Boot">Boot status</Item>
+<Item name="BootStatus">Плата управления в настоящее время в состоянии ботинок, пожалуйста, обновите прошивку первым!</Item>
+<Item name="Border">кадр</Item>
+<Item name="BorderColor">Цвет границы</Item>
+<Item name="BorderSetting">Установите контур</Item>
+<Item name="BorderWidth">Ширина границы</Item>
+<Item name="BorderWidthExceeds">Превышение ширины контура</Item>
+<Item name="BorderWidthOutOfRange">Ширина границы вне диапазона</Item>
+<Item name="BoundDevice">Bound device</Item>
+<Item name="Broadcast">Broadcast</Item>
+<Item name="BuildArea">Build Area</Item>
+<Item name="Built-inUnitBoard">Общие блок доска</Item>
+<Item name="BusEdit">отредактировать</Item>
+<Item name="BusImage">Модуль изображения</Item>
+<Item name="BusName">название</Item>
+<Item name="BusNew">новый</Item>
+<Item name="BusView">смотреть</Item>
+<Item name="Busy">Busy</Item>
+<Item name="Button">Button</Item>
+<Item name="ButtonDownTiming">Button count down</Item>
+<Item name="ButtonSettings">Кнопка настройки 1</Item>
+<Item name="ButtonSettings2">Кнопка настройки 2</Item>
+<Item name="ButtonSettings3">Button 3</Item>
+<Item name="ButtonSettings4">Button 4</Item>
+<Item name="ButtonSwitch">Кнопка переключения</Item>
+<Item name="ButtonTiming">Button Timing</Item>
+<Item name="ButtonUpTiming">Button count up</Item>
+<Item name="ButtonorPlaySet">Button settings</Item>
+<Item name="CLKMirror">CLK polarity</Item>
+<Item name="CLKWidth">CLK Width</Item>
+<Item name="COM">COM порт</Item>
+<Item name="COMERROR">Соединения не удается, проверьте нет коротких последовательных 2,3 футов?</Item>
+<Item name="COMINFO">коммуникация</Item>
+<Item name="COMURL">COM URL: http://www.huidu.cn</Item>
+<Item name="CPUModelError">Модели процессоров не правы.</Item>
+<Item name="CanNotFindTheDefaultProfile">Can not find the default configuration file.</Item>
+<Item name="Cancel">Отменить</Item>
+<Item name="CannotFindNetWordDrive">Не удалось найти сетевое устройство!</Item>
+<Item name="CannotOpenExcle">Невозможно открыть Excle, пожалуйста, проверьте, если он установлен.</Item>
+<Item name="CardIpSeting">Настройки IP контроллера</Item>
+<Item name="CardModel">Card Model</Item>
+<Item name="CardNumber">Тип карты</Item>
+<Item name="CardOnlySupportFullColor">Прошивка поддерживает только полноцвет(7 Color)</Item>
+<Item name="CardOnlySupportTwoColor">Прошивка поддерживает два цвета</Item>
+<Item name="CardRestart">Restarting</Item>
+<Item name="CardVersion">Card Version</Item>
+<Item name="Center">центр</Item>
+<Item name="CenterAlign">Center</Item>
+<Item name="CfwBackgroundEdit">Animated Characters background</Item>
+<Item name="Change">Менять</Item>
+<Item name="Channel">Channel</Item>
+<Item name="CharSpacing">Межбуквенный</Item>
+<Item name="CheckAll">Проверить все</Item>
+<Item name="CheckProgram">Выберите программу</Item>
+<Item name="ChecksumError">Ошибка валидации</Item>
+<Item name="ChooseDeive">Select device</Item>
+<Item name="ClassicBackground">Image Background</Item>
+<Item name="Clear">Исчезно</Item>
+<List name="ClearEffects" id="0">Исчезает сразу полностью</List>
+<List name="ClearEffects" id="10">Шторка сверху-снизу к Ц</List>
+<List name="ClearEffects" id="11">Шторка в стороны от Ц</List>
+<List name="ClearEffects" id="12">Шторка слева-справа к Ц</List>
+<List name="ClearEffects" id="13">Вертик жалюзи вправо</List>
+<List name="ClearEffects" id="14">Горизонт жалюзи вниз</List>
+<List name="ClearEffects" id="15">Закр полувеером справа</List>
+<List name="ClearEffects" id="16">Закр полувеером слева</List>
+<List name="ClearEffects" id="17">Закр веером от Ц</List>
+<List name="ClearEffects" id="18">Закр веером к Ц</List>
+<List name="ClearEffects" id="19">Закр пропелл по часовой</List>
+<List name="ClearEffects" id="1">Уезжает налево</List>
+<List name="ClearEffects" id="200">В случайном порядке</List>
+<List name="ClearEffects" id="201">Тянет/Не исчезает (прогр)</List>
+<List name="ClearEffects" id="20">Закр пропелл против час</List>
+<List name="ClearEffects" id="21">Расплетение в стороны</List>
+<List name="ClearEffects" id="22">Горизонт жалюзи вниз</List>
+<List name="ClearEffects" id="23">Горизонт жалюзи вверх</List>
+<List name="ClearEffects" id="24">Закр гармошкой вправо</List>
+<List name="ClearEffects" id="25">Закр гармошкой влево</List>
+<List name="ClearEffects" id="26">Закр шахм доской вправо</List>
+<List name="ClearEffects" id="27">Закр шахм доской вниз</List>
+<List name="ClearEffects" id="2">Уезжает направо</List>
+<List name="ClearEffects" id="3">Уезжает вверх</List>
+<List name="ClearEffects" id="4">Уезжает вниз</List>
+<List name="ClearEffects" id="5">Закр шторки направо</List>
+<List name="ClearEffects" id="6">Закр шторки налево</List>
+<List name="ClearEffects" id="7">Закр шторки сверху</List>
+<List name="ClearEffects" id="8">Закр шторки снизу</List>
+<List name="ClearEffects" id="9">Шторка вверх-вниз от Ц</List>
+<Item name="ClearScreeData">Ясно существующие дисплей?</Item>
+<Item name="Clock">Циферблат</Item>
+<Item name="ClockFrequency">Тактовая частота</Item>
+<Item name="ClockParameters"> Свойства часов</Item>
+<Item name="Clockwise rotation">Вращ по часовой</Item>
+<Item name="Close">Закрыть</Item>
+<Item name="CloseScreen">Закрыть экран</Item>
+<Item name="Color">Цвет</Item>
+<Item name="ColorChannel">Цвет канал</Item>
+<Item name="ColorChannelSet">Установка цветовой канала</Item>
+<Item name="ColorFilter">Цвет фильтр</Item>
+<Item name="ColorInversion">инверсия Цвет</Item>
+<Item name="ColorSingleSelect">Color Single Select</Item>
+<Item name="ColorThreshold">Цвет порог</Item>
+<Item name="ColorfulText"> Анимация</Item>
+<List name="ColorfulWordEffects" id="0">Display Static</List>
+<List name="ColorfulWordEffects" id="10">Flip Vertical</List>
+<List name="ColorfulWordEffects" id="11">Flip Horizontal</List>
+<List name="ColorfulWordEffects" id="12">Zooming</List>
+<List name="ColorfulWordEffects" id="13">Continuously Move Left</List>
+<List name="ColorfulWordEffects" id="14">Continuously Move Right</List>
+<List name="ColorfulWordEffects" id="15">Continuously Move Up</List>
+<List name="ColorfulWordEffects" id="16">Continuously Move Down</List>
+<List name="ColorfulWordEffects" id="17">2D zoom in</List>
+<List name="ColorfulWordEffects" id="18">2D zoom out</List>
+<List name="ColorfulWordEffects" id="1">Sine wave</List>
+<List name="ColorfulWordEffects" id="2">Word rotating</List>
+<List name="ColorfulWordEffects" id="3">Left to fly into</List>
+<List name="ColorfulWordEffects" id="4">The right to fly into</List>
+<List name="ColorfulWordEffects" id="5">Twinkle</List>
+<List name="ColorfulWordEffects" id="6">Verbatim output</List>
+<List name="ColorfulWordEffects" id="7">Swing around</List>
+<List name="ColorfulWordEffects" id="8">Elasticity text</List>
+<List name="ColorfulWordEffects" id="9">Swing</List>
+<Item name="Column">Столбец</Item>
+<Item name="CommStatus1">Хорошее</Item>
+<Item name="CommStatus2">Обычная</Item>
+<Item name="CommStatus3">Плохо, но может быть подключен</Item>
+<Item name="CommStatus4">Невозможно связаться</Item>
+<Item name="CommTest">Сеть Тестирование</Item>
+<Item name="Command">Command</Item>
+<Item name="CommandSmartSetting">Обычно Смарт настройки</Item>
+<Item name="CommonSettings">Общие установки</Item>
+<Item name="CommunicationMode">Режим связи</Item>
+<Item name="CommunicationSetting">установки связи</Item>
+<Item name="ConfirmRGBwidth">Линии, контролируемые одним данным RGB</Item>
+<Item name="ConfirmScanMode">Определить режим сканирования</Item>
+<Item name="Connected">Connected</Item>
+<Item name="ConnectionSuccessful">Успешное соединение</Item>
+<Item name="ContainOverlappingRegions">содержит перекрывающиеся окна</Item>
+<Item name="ContentContainMultiLines">Этот эффект не поддерживает таблицу, удалить его?</Item>
+<Item name="ContinueMove">Непрерывное движение</Item>
+<Item name="ContinueMoveUp">Непрерывно двигаться вверх</Item>
+<Item name="Copy">Копировать</Item>
+<Item name="Copyright">Авторские права: Шэньчжэнь Huidu технологии Лтд</Item>
+<Item name="Count">таймер</Item>
+<Item name="Count1">Digit</Item>
+<Item name="CountAdd">Count plus</Item>
+<Item name="CountColor">Значение цвета</Item>
+<Item name="CountDown">Обратный отсчет</Item>
+<Item name="CountReset">Counter Reset</Item>
+<Item name="CountSub">Count down</Item>
+<Item name="CountUp">Прямой отсчёт</Item>
+<Item name="CradID">карты ID</Item>
+<Item name="CradName">карты Название</Item>
+<Item name="CrossBottom">дно</Item>
+<Item name="CrossCenter">центр</Item>
+<Item name="CrossGlobalProgram">Глобальная программа</Item>
+<Item name="CrossNoSupport">Глобальный программа не поддерживается в этой области.</Item>
+<Item name="CrossScreen">Крест экрана</Item>
+<Item name="CrossScreenParamsPageTip">1.Setting screen width and height is 3 steps；&#x000A;2.Select the color of screen ；</Item>
+<Item name="CrossScreenSetting">Креста настройки экрана</Item>
+<Item name="CrossSmartTip">The current screen showing normal text ,no need select smart set</Item>
+<Item name="CrossTop">топ</Item>
+<Item name="Custom">Настроить</Item>
+<Item name="CustomIPTips">Если плата управления блокируется брандмауэром, заполните IP-адрес вручную.</Item>
+<Item name="CustomTime">К тому времени, регулирование</Item>
+<Item name="CustomUnitBoard">Пользовательские блок доска</Item>
+<Item name="CustomizeIP">Настроить IP</Item>
+<Item name="Cut">Сократить</Item>
+<Item name="Cyan">Голубой</Item>
+<Item name="CycleTiming">Cycle Timing</Item>
+<Item name="DHCPDNSAddr">DNS address</Item>
+<Item name="DHCPGateway">DHCP Default Gateway</Item>
+<Item name="DHCPLease">DHCP leases</Item>
+<Item name="DHCPMask">DHCP Subnet Mask</Item>
+<Item name="DHCPServerAddr">DHCP server address</Item>
+<Item name="Data">Data</Item>
+<Item name="DataClearSuccess">Данные удалены</Item>
+<Item name="DataFill">"Данные превышает!"</Item>
+<Item name="DataLenght">Data length</Item>
+<Item name="DataLengthError">Длина данных об ошибках</Item>
+<Item name="DataMirror">Отражение данных</Item>
+<Item name="DataPolarity">Полярность</Item>
+<Item name="DataPolaritySet">Настройка полярности данных</Item>
+<Item name="DataSource">Data Source</Item>
+<Item name="DateAndWeekLocationReplaced">Измените дату и время в неделе</Item>
+<Item name="Day">д</Item>
+<Item name="Default">По умолчанию</Item>
+<Item name="DefaultConnectDeviceType">The default connection method</Item>
+<Item name="DelayedSignal">Задержка сигнала</Item>
+<Item name="DeleteFailed">Delete failed</Item>
+<Item name="DeleteScreen">Delete Screen</Item>
+<Item name="DeleteSuccess">Delete successful</Item>
+<Item name="DeleteThisData">Удалить все данные из контроллера?</Item>
+<Item name="DeleteThisFile">Удалить выбранный файл</Item>
+<Item name="DeleteThisProgram">Удалить эту программу？</Item>
+<Item name="DeleteThisRegion">Удалить выделенное окно</Item>
+<Item name="Deny">Отключить</Item>
+<Item name="DestFile">Целевой файл</Item>
+<Item name="DestIP">Целевая IP</Item>
+<Item name="Detailed">Подробное...</Item>
+<Item name="Detect">Обнаружение</Item>
+<Item name="DetectDevice">Найти съемный диск</Item>
+<Item name="DetectFail">Обнаружены неисправности</Item>
+<Item name="DetectSuccess">Успешное обнаружение</Item>
+<Item name="Detecting">Поиск...</Item>
+<Item name="Deviation">Влажность Калибровка</Item>
+<Item name="Device">Съемный диск</Item>
+<Item name="DeviceChoosePageTip">1.Use U-disk， please select controller type;&#x000A;2.Appear the device name and match controller ID;&#x000A;3.Only one device and been found,then click next.</Item>
+<Item name="DeviceID">ID устройства</Item>
+<Item name="DeviceManage">Device Manage</Item>
+<Item name="DeviceName">Имя устройства</Item>
+<Item name="DialClock">Dial Clock</Item>
+<Item name="DialStyle">Наберите стиль</Item>
+<Item name="DialWeek">неделя</Item>
+<Item name="DialYear">дате</Item>
+<Item name="DigitOnly">Цифровой только</Item>
+<Item name="Digital">Цифровые</Item>
+<Item name="Direction">Направление</Item>
+<Item name="DisableBrightnessAdjustment">запрещать регулировка яркости</Item>
+<Item name="Disconnected">Disconnected</Item>
+<Item name="DiskSpace">Свободно места:</Item>
+<Item name="Display">Появлен</Item>
+<List name="DisplayEffects" id="40">Показать</List>
+<List name="DisplayEffects" id="0">На экране сразу</List>
+<List name="DisplayEffects" id="10">Сверху-снизу к центру</List>
+<List name="DisplayEffects" id="11">Влево-вправо от центра</List>
+<List name="DisplayEffects" id="12">Слева-справа к центру</List>
+<List name="DisplayEffects" id="14">Вертик жалюзи вправо</List>
+<List name="DisplayEffects" id="13">Горизонт жалюзи вниз</List>
+<List name="DisplayEffects" id="15">Откр полувеера справа</List>
+<List name="DisplayEffects" id="16">Откр полувеера слева</List>
+<List name="DisplayEffects" id="17">Откр веера от центра</List>
+<List name="DisplayEffects" id="18">Откр веера к центру</List>
+<List name="DisplayEffects" id="19">Пропеллер по часовой</List>
+<List name="DisplayEffects" id="1">Бежит налево и исчезает</List>
+<List name="DisplayEffects" id="200">В случайном порядке</List>
+<List name="DisplayEffects" id="202">Бежит налево</List>
+<List name="DisplayEffects" id="203">Бежит направо</List>
+<List name="DisplayEffects" id="204">Бежит вверх</List>
+<List name="DisplayEffects" id="20">Пропеллер против часовой</List>
+<List name="DisplayEffects" id="21">Сплетение от сторон</List>
+<List name="DisplayEffects" id="23">Горизонт жалюзи вниз</List>
+<List name="DisplayEffects" id="22">Горизонт жалюзи вверх</List>
+<List name="DisplayEffects" id="25">Гармошка направо</List>
+<List name="DisplayEffects" id="24">Гармошка налево</List>
+<List name="DisplayEffects" id="26">Шахматная доска направо</List>
+<List name="DisplayEffects" id="27">Шахматная доска вниз</List>
+<List name="DisplayEffects" id="28">Снег вниз</List>
+<List name="DisplayEffects" id="29">Дождь вниз</List>
+<List name="DisplayEffects" id="2">Бежит направо и исчезает</List>
+<List name="DisplayEffects" id="30">Снег вверх</List>
+<List name="DisplayEffects" id="31">Дождь вверх</List>
+<List name="DisplayEffects" id="32">Лазер слева</List>
+<List name="DisplayEffects" id="33">Лазер справа</List>
+<List name="DisplayEffects" id="34">Мерцание</List>
+<List name="DisplayEffects" id="35">Молния в грозу</List>
+<List name="DisplayEffects" id="36">Пузырь падает</List>
+<List name="DisplayEffects" id="37">Пузырь взлетает</List>
+<List name="DisplayEffects" id="38">Вверх-вниз вперевалку</List>
+<List name="DisplayEffects" id="39">Вращающийся перевёртыш</List>
+<List name="DisplayEffects" id="3">Поднимается и исчезает</List>
+<List name="DisplayEffects" id="4">Опускается и исчезает</List>
+<List name="DisplayEffects" id="5">Откр шторки слева</List>
+<List name="DisplayEffects" id="6">Откр шторки справа</List>
+<List name="DisplayEffects" id="7">Откр шторки вниз</List>
+<List name="DisplayEffects" id="8">Откр шторки вверх</List>
+<List name="DisplayEffects" id="9">Вверх-вниз от центра</List>
+<Item name="DisplayState">Отображение состояния</Item>
+<Item name="Dll_Add">Добавить</Item>
+<Item name="Dll_Data">данных</Item>
+<Item name="Docking">Docking</Item>
+<Item name="DonotTips">нет советы</Item>
+<Item name="DontChange">Не менять</Item>
+<Item name="DownloadSpeed">Скорость скачивания</Item>
+<Item name="Dwell">Задерж</Item>
+<Item name="Edit">редактировать</Item>
+<Item name="Editor">Редактор</Item>
+<Item name="Effect">Эффекты</Item>
+<Item name="Effect Cover">Появляется</Item>
+<Item name="Effect Drift">Снег</Item>
+<Item name="Effect FanShaped">Затвор</Item>
+<Item name="Effect Flicker">Мерцание</Item>
+<Item name="Effect Laser">Лазер</Item>
+<Item name="Effect Move">Двигается</Item>
+<Item name="Effect OpenAndClose">Открывается-закрывается</Item>
+<Item name="Effect PageTurning">Перелист страницы</Item>
+<Item name="Effect Pull">Тянет</Item>
+<Item name="Effect Roll">Катится</Item>
+<Item name="Effect WaterFall">Водопад</Item>
+<Item name="EffectSetting">Выбор спецэффектов</Item>
+<Item name="EffectType">Типы эффектов</Item>
+<Item name="EliminateGhosting">Побочное изображение</Item>
+<Item name="Empty">выливать</Item>
+<Item name="EmptyScreen">Пустые дисплей</Item>
+<Item name="Enable">Enable</Item>
+<Item name="EnableDhcp">Enable DHCP</Item>
+<Item name="End Play">End</Item>
+<Item name="EndIpAddr">End IP</Item>
+<Item name="EndToEnd">Конца в конец</Item>
+<Item name="Equilibrium">В равновесии</Item>
+<Item name="Error">Ошибка</Item>
+<Item name="EthSettingHelpA">Изменяет настройки программы, и не меняет адрес устройства</Item>
+<Item name="EthSettingHelpB">Примечание: &#x000A;1. После успеха программного обеспечения и оборудования повлечет за собой изменение адреса. &#x000A;2. когда несколько устройств, подключенных одновременно к тому, чтобы MAC-адрес устройства является уникальным.</Item>
+<Item name="Ethernet">через Ethernet-контроллер</Item>
+<Item name="EthernetAddressSettingSuccess">Интернет-адрес установлен успешно</Item>
+<Item name="EthernetSettingInfo">Примечание: использовать эту функцию, убедитесь в локальной сети подключен только модуль</Item>
+<Item name="Example">пример</Item>
+<Item name="ExitDownloading">Скачивая файл обновления, необходимо ли принудительно выйти?</Item>
+<Item name="ExpiredVerification">Expired,need passward</Item>
+<Item name="ExporBus">Параметры модуля экспорта</Item>
+<Item name="ExporBusIn">Параметры модуля Импорт</Item>
+<Item name="Export">Экспорт в U диске</Item>
+<Item name="ExportAdjustTimeFile">Настроить время экспорта файла</Item>
+<Item name="ExportFile">Экспорт на съемный диск</Item>
+<Item name="ExportFileFail">Не удалось экспортировать файл!</Item>
+<Item name="ExportImport">Импорт и экспорт</Item>
+<Item name="ExportParam">вывозить</Item>
+<Item name="ExportScreenFile">Export Screen File</Item>
+<Item name="ExportSetedParams">Экспорт параметров</Item>
+<Item name="ExportSuccess"> Экспорт завершен. </Item>
+<Item name="ExportSuccess1">Экспорт на</Item>
+<Item name="ExportSuccess2">завершен!</Item>
+<Item name="ExportToUDisk">Экспорт в U диске</Item>
+<Item name="Fahrenheit">Фаренгейт</Item>
+<Item name="Fast">Fast</Item>
+<Item name="Fastest">Самый быстрый</Item>
+<Item name="FeatureNavigator">Функция навигации</Item>
+<Item name="File">Файл</Item>
+<Item name="FileConfigurationError">Файл неправильно настроен.</Item>
+<Item name="FileConfigurationPackageSentSuccessfully">Конфигурации пакетов Файл успешно отправлено.</Item>
+<Item name="FileDoesNotMatch">Файл не соответствует</Item>
+<Item name="FileList">Список файлов</Item>
+<Item name="FileMisidentified">Идентификатор файла неверно.</Item>
+<Item name="FileParametersError">Файл параметров ошибок</Item>
+<Item name="FileSendComplete">Файл отправлен</Item>
+<Item name="FileSize">Размер файла</Item>
+<Item name="FileSuccessfullyReceived">Файл успешно получено</Item>
+<Item name="FilterColor">Цвет фильтра</Item>
+<Item name="FindNewVersion">Откройте для себя новую версию, следует ли загрузить обновление?</Item>
+<Item name="FindScree">Проверьте экран</Item>
+<Item name="FindSerial">Найти плату управления, подключенный к последовательному порту.</Item>
+<Item name="Finish">Завершить</Item>
+<Item name="FinishTracingPoint">Трассировка точка закончена.</Item>
+<Item name="FirmwareMismatching">Прошивка не соответствует</Item>
+<Item name="FirmwareVersion">Версия прошивки</Item>
+<Item name="FirstPage">Перв страница</Item>
+<Item name="FitMaxHint">Максимальный диапазон</Item>
+<Item name="FixedCellsWidth">Фиксированная ширина ячейки</Item>
+<Item name="FixedPlay">Фиксированные программы вещания</Item>
+<Item name="FixedTime">В течении</Item>
+<Item name="Flash">SWF</Item>
+<Item name="Floating">Floating</Item>
+<Item name="FlushLeft">Флеш Левый</Item>
+<Item name="Font">Настройка шрифтов</Item>
+<Item name="FontSize">Размер шрифта</Item>
+<Item name="Foreground">передний план</Item>
+<Item name="FoundDisk">Съемный диск найден!</Item>
+<Item name="FramesTooMuch">Рамки являются чрезмерными, пожалуйста, уменьшить.</Item>
+<Item name="FreeSpace">Доступно места:</Item>
+<Item name="Frequency">Частота сканирования</Item>
+<Item name="Friday">Пятница</Item>
+<Item name="From">от</Item>
+<Item name="From Max To Min">From Max To Min</Item>
+<Item name="From Min To Max">From Min To Max</Item>
+<Item name="GIF name">GIF Path</Item>
+<Item name="GammaCorrection">Gamma Correction</Item>
+<Item name="GaryTip1">Reduce the control range to 1/</Item>
+<Item name="General2">Gen2</Item>
+<Item name="General4">Gen4</Item>
+<Item name="General6">Gen6</Item>
+<Item name="GeneratingData">Генерация данных</Item>
+<Item name="GetFirmwareVersion">Получить версию прошивки</Item>
+<Item name="GetSystemTime">Получить системное время</Item>
+<Item name="Graph">Graph</Item>
+<Item name="GraphCount">Quantity</Item>
+<Item name="GrayLevel">Gray Level</Item>
+<Item name="Green">Зеленый</Item>
+<Item name="HDScreenFile">HDПоказать файл</Item>
+<Item name="HZoom">Level stretch</Item>
+<Item name="Height">Высота</Item>
+<Item name="HeightOfMoreTthan">"Высота находится вне диапазона!"</Item>
+<Item name="Hide">Hide</Item>
+<Item name="High">High</Item>
+<Item name="Hollow">полый</Item>
+<Item name="Horizontal">Горизонтальное положение</Item>
+<Item name="Hour">ч</Item>
+<Item name="HourHand">Час стрелка</Item>
+<Item name="HourRadius">Внутр радиус</Item>
+<Item name="Humidity">влажность</Item>
+<Item name="IDAlreadyExists">ID has been exists</Item>
+<Item name="IDInputError">ID is Error</Item>
+<Item name="IPAddress">IP-адрес</Item>
+<Item name="IPNotLegitimate">IP is not legitimate</Item>
+<Item name="IPResetting">Сброс IP</Item>
+<Item name="IPSetting">IP Установить</Item>
+<Item name="Idle">Idle</Item>
+<Item name="IllegalFile">Незаконное файл</Item>
+<Item name="Image">изображение</Item>
+<Item name="ImageAuto">Picture Style</Item>
+<Item name="Images">Фотографии</Item>
+<Item name="ImportParam">ввозить</Item>
+<Item name="ImportScreenFile">Import Screen File</Item>
+<Item name="IncompleteDataWriting">Неполные записи данных</Item>
+<Item name="Index">Нет.</Item>
+<Item name="InfraredRay">ультракрасного луча</Item>
+<Item name="InitialState">The initial state</Item>
+<Item name="InitializeSuccess">Инициализация завершена</Item>
+<Item name="InputSmartSettingName">Пожалуйста, введите имя предустановках см</Item>
+<Item name="Insert">Вставить</Item>
+<Item name="InsertColumn">Вставьте столбец</Item>
+<Item name="InsertRow">Вставьте строку</Item>
+<Item name="Inverse">Обратный</Item>
+<Item name="IsDeleteAllScreen">Удалить все дисплей?</Item>
+<Item name="IsExportVideo">Whether  export video?</Item>
+<Item name="IsSaveFile">Вы хотите, чтобы сохранить файл?</Item>
+<Item name="IsSendToCard">Вы хотите, чтобы отправить его на плату управления?</Item>
+<Item name="IsTheLatestVersion">Текущая версия уже последняя версия.</Item>
+<Item name="Large">Большой</Item>
+<Item name="LastPage">Посл страница</Item>
+<Item name="LeftToRight">Левый-&gt; Правой</Item>
+<Item name="LevelScreenshot">Horizontal Screenshot</Item>
+<Item name="LightRows">Линии Lit в одном Moudle</Item>
+<Item name="LineSpacing">Межстрочный</Item>
+<Item name="Link">Link</Item>
+<Item name="LinkState">Connection Status</Item>
+<Item name="LiveTime">Live Time</Item>
+<Item name="LocalDisck">Локальный диск</Item>
+<Item name="LocalIpSeting">Локальные настройки IP</Item>
+<Item name="LockPara">Lock parameters</Item>
+<Item name="Low">Low</Item>
+<Item name="LuminancePrior">Приоритет яркости</Item>
+<Item name="LuminanceSetting">Настройка яркости</Item>
+<Item name="LuminanceSettingSuccess">Яркость настроена</Item>
+<Item name="MACAddress">MAC-адресов</Item>
+<Item name="MFRDate">MFR Дата</Item>
+<Item name="Max">Max</Item>
+<Item name="MaxIPAddr">Maximum TP address</Item>
+<Item name="MaxUseImage">Image for Max</Item>
+<Item name="MaximumOfHeight">Максимальная высота</Item>
+<Item name="MaximumOfRange">Максимальный диапазон</Item>
+<Item name="MaximumOfRegions">Максимальное количество окон</Item>
+<Item name="MaximumOfWidth">Максимальная ширина</Item>
+<Item name="Memory">Память</Item>
+<Item name="Memory Size">File size</Item>
+<Item name="MergeCells">Объединить ячейки</Item>
+<Item name="Middle">Средний</Item>
+<Item name="Min">мин</Item>
+<Item name="MinIPAddr">Minimum IP address</Item>
+<Item name="MinUseImage">Image for Min</Item>
+<Item name="MinuteHand">Мин стрелка</Item>
+<Item name="Model">Card</Item>
+<Item name="Modify">модифицировать</Item>
+<Item name="Module">Модуль</Item>
+<Item name="ModuleMismatching">Не соответствующий тип платы управления</Item>
+<Item name="ModuleSelect">Выбор модуля</Item>
+<Item name="Monday">Понедельник</Item>
+<Item name="MoreSetting">Больше настроек</Item>
+<Item name="MoreSettings">Больше настроек-&gt;&gt;</Item>
+<Item name="MoveDown">Вниз</Item>
+<Item name="MoveUp">Вверх</Item>
+<Item name="Multi">Несколько контроллеров</Item>
+<Item name="MultiFrame">мульти-кадр изображения</Item>
+<Item name="MultiLine"> Многострочный экран</Item>
+<Item name="MultiScreenDirectConnect">Режим Multi-экран</Item>
+<Item name="MultipeSend">Отправить все</Item>
+<Item name="MultipeSendHint">Отправка на несколько контроллеров возможна при использовании фиксированного IP</Item>
+<Item name="MultipleEffects">Multiple effects</Item>
+<Item name="MultipleLinesoftext">много строк текста</Item>
+<Item name="NICName">Имя NIC</Item>
+<Item name="Name">Name</Item>
+<Item name="NeedSensor">Требовать датчики</Item>
+<Item name="NeedSpace">Требуется места:</Item>
+<Item name="NetMark">Чистая</Item>
+<Item name="NetWorkError">Это контроль карта подходит только для упрощенном режиме, пожалуйста, проверьте, если он находится в том же сегменте сети со компьютером.</Item>
+<Item name="NewCrossScreen">Новый крест экрана(&amp;C)</Item>
+<Item name="NewCrossScreen_G">New Cross Screen</Item>
+<Item name="NewGuideScreen">New screen by guide</Item>
+<Item name="NewHypertext">Новый гипертекст X.hf</Item>
+<Item name="NewNormalScreen_G">New Normal Screen</Item>
+<Item name="NewScreen">Новый проект</Item>
+<Item name="NewTable">Новая таблица</Item>
+<Item name="Next">Вперёд</Item>
+<Item name="NextPage">Следующая</Item>
+<Item name="NextProgram">Switch to next program</Item>
+<Item name="NextScan">следующий</Item>
+<Item name="NoAssociation">нет актуальность</Item>
+<Item name="NoBorder">Без полей</Item>
+<Item name="NoFile">Файл не существует!</Item>
+<Item name="NoFindConfigFiles">Не можете найти экрана файл парам, продолжать?</Item>
+<Item name="NoFoundDisk">Нет съемного диска!</Item>
+<Item name="NoInstallFlash">Пожалуйста, проверьте, если вы установили Adobe Flash Player.</Item>
+<Item name="NoLimit">No Limit</Item>
+<Item name="NoSerial">Не удалось найти плату управления, подключенный к последовательному порту.</Item>
+<Item name="NoSerialConnection">Последовательное подключение не удалось!</Item>
+<Item name="Noarea">Отсутствие регионе, не удалось отправить!</Item>
+<Item name="Noitemisselected">Nothing selected</Item>
+<Item name="NormalShow">Порядок игры</Item>
+<Item name="NotSelected">неотобранный</Item>
+<Item name="NotSupportGlobalProgram">Ordinary screen does not support global program</Item>
+<Item name="NotSupportLANUpgrade">Ethernet не поддерживается этой модели, пожалуйста, используйте последовательный порт или U диск, чтобы обновить прошивку.</Item>
+<Item name="NotSupportTips">Советы: Не поддерживайте время, новый циферблат, температура и влажность, лунный</Item>
+<Item name="NumberOfProgramHasReachedItsMaximum">Количество программ достигло своего максимума!</Item>
+<Item name="NumberOfRegionHasReachedItsMaximum">Окно достигло максимального размера</Item>
+<Item name="OEPolarity">OE Полярность</Item>
+<Item name="OEPolaritySet">Настройка полярности О.Е.</Item>
+<Item name="OK">ОК</Item>
+<Item name="Offline">Offline</Item>
+<Item name="OldVerCard">Search for Gen4</Item>
+<Item name="On-line">On-line</Item>
+<Item name="OnBottom">Вставте сверху</Item>
+<Item name="OnLeft">Вставьте справа</Item>
+<Item name="OnRight">Вставьте слева</Item>
+<Item name="OnTop">Вставьте снизу</Item>
+<Item name="OnlyAllowContainsAClockRegion">Часы только в этом окне</Item>
+<Item name="OnlyAllowContainsATempRegion">Может содержать только умеренные окна</Item>
+<Item name="OnlyAllowContainsATimeRegion">Содержит только часы в окне</Item>
+<Item name="OnlyCard">Just for card</Item>
+<Item name="Open">Открыть</Item>
+<Item name="OpenAdv">Открыть объявление</Item>
+<Item name="OpenFileFail">Не удалось открыть файл, пожалуйста, проверьте, если он занят!</Item>
+<Item name="OpenFolder">Открыть папку</Item>
+<Item name="OpenScreen">Открыть экран</Item>
+<Item name="OperationSuccess">Удачно</Item>
+<Item name="Orange">фиолетовый</Item>
+<Item name="OriginX">От точки X</Item>
+<Item name="OriginY">От точки Y</Item>
+<Item name="Original">Original</Item>
+<Item name="OtherSeting">Другие настройки</Item>
+<Item name="Out">Info</Item>
+<Item name="OutOfMemory">Не хватает памяти</Item>
+<Item name="OutOfShowMemory">Out of memory,reduce area.</Item>
+<List name="OutputWindowString" id="0">Scanned equipment</List>
+<List name="OutputWindowString" id="10">Control card name set successfully</List>
+<List name="OutputWindowString" id="11">Clear screen successfully</List>
+<List name="OutputWindowString" id="12">Screen parameters setting successfully</List>
+<List name="OutputWindowString" id="13">Control card time setting successfully</List>
+<List name="OutputWindowString" id="14">Brightness setting successfully</List>
+<List name="OutputWindowString" id="15">Time switch setting successfully</List>
+<List name="OutputWindowString" id="16">Display in test...</List>
+<List name="OutputWindowString" id="17">Unknown command</List>
+<List name="OutputWindowString" id="18">No hardware parameters</List>
+<List name="OutputWindowString" id="19">Invalid Command</List>
+<List name="OutputWindowString" id="1">Get the device information.</List>
+<List name="OutputWindowString" id="20">System is busying</List>
+<List name="OutputWindowString" id="21">Head length error</List>
+<List name="OutputWindowString" id="22">Symbol is incorrect</List>
+<List name="OutputWindowString" id="23">No. is incorrect </List>
+<List name="OutputWindowString" id="24">No screen parameters</List>
+<List name="OutputWindowString" id="25">Packet error</List>
+<List name="OutputWindowString" id="26">Unknown error</List>
+<List name="OutputWindowString" id="27">Send Timeout</List>
+<List name="OutputWindowString" id="28">Feedback packet parsing error</List>
+<List name="OutputWindowString" id="29">IP modified successfully </List>
+<List name="OutputWindowString" id="2">Equipment offline</List>
+<List name="OutputWindowString" id="30">Firmware updated failed, please try again</List>
+<List name="OutputWindowString" id="31">Setting failed</List>
+<List name="OutputWindowString" id="32">Check error</List>
+<List name="OutputWindowString" id="33">Protocol error</List>
+<List name="OutputWindowString" id="34">Instruction error</List>
+<List name="OutputWindowString" id="35">File does not match</List>
+<List name="OutputWindowString" id="36">Packet number error</List>
+<List name="OutputWindowString" id="37">Module type mismatch</List>
+<List name="OutputWindowString" id="38">File configuration error</List>
+<List name="OutputWindowString" id="39">Illegal file</List>
+<List name="OutputWindowString" id="3">Please select the screen you want to send</List>
+<List name="OutputWindowString" id="40">CPU type error</List>
+<List name="OutputWindowString" id="41">Firmware support tricolor only, do not support single and dual color</List>
+<List name="OutputWindowString" id="42">Firmware support single dual color only, do not support tricolor</List>
+<List name="OutputWindowString" id="43">Updated  successfully</List>
+<List name="OutputWindowString" id="44">Reception failed</List>
+<List name="OutputWindowString" id="45">Packet length error</List>
+<List name="OutputWindowString" id="46">File identification error</List>
+<List name="OutputWindowString" id="47">Sub-packet sequence number error</List>
+<List name="OutputWindowString" id="49">File successfully received</List>
+<List name="OutputWindowString" id="4">Select screen unbound equipment</List>
+<List name="OutputWindowString" id="50">Delayed signal</List>
+<List name="OutputWindowString" id="51">System Busy</List>
+<List name="OutputWindowString" id="52">Data is written incompletely</List>
+<List name="OutputWindowString" id="53">Firmware updated is successfully！</List>
+<List name="OutputWindowString" id="54">Hardware parameters set successfully</List>
+<List name="OutputWindowString" id="55">Device bound is offline</List>
+<List name="OutputWindowString" id="56">The setting of the screen size is not right.</List>
+<List name="OutputWindowString" id="57">Start sending</List>
+<List name="OutputWindowString" id="58">Setting successfully</List>
+<List name="OutputWindowString" id="59">Service expiration</List>
+<List name="OutputWindowString" id="5">Program data is too large</List>
+<List name="OutputWindowString" id="60">Font changed successfully</List>
+<List name="OutputWindowString" id="61">Set directly connected successfully</List>
+<List name="OutputWindowString" id="62">Cancel directly connected successfully</List>
+<List name="OutputWindowString" id="63">Equipment in the Boot status,please update the firmware</List>
+<List name="OutputWindowString" id="64">Verification fails</List>
+<List name="OutputWindowString" id="65">Returns nothing</List>
+<List name="OutputWindowString" id="66">File is too large</List>
+<List name="OutputWindowString" id="67">Control card ID is wrong</List>
+<List name="OutputWindowString" id="68">Invalid device ID[%s]</List>
+<List name="OutputWindowString" id="69">Reset Device ID[%s]</List>
+<List name="OutputWindowString" id="6">The command completed successfully</List>
+<List name="OutputWindowString" id="7">Send initialization</List>
+<List name="OutputWindowString" id="8">Sending...</List>
+<List name="OutputWindowString" id="9">Sent successfully</List>
+<Item name="P10Colorful">M10（Colorful）</Item>
+<Item name="Pack">Изображения Пакет</Item>
+<Item name="PackageNumberError">Пакет номер неверен.</Item>
+<Item name="Packet">Пакет</Item>
+<Item name="PacketError">Данные об ошибках(Ширина экрана или высота превышает или цвет не так.)</Item>
+<Item name="PacketSize">размер пакета</Item>
+<Item name="Page">ҳ</Item>
+<Item name="Pages">Страницы</Item>
+<Item name="PannelFill">"В регионе уже существует!"</Item>
+<Item name="ParallelSend">Parallel send</Item>
+<Item name="ParametersReadbackSuccess">Параметры считаны успешно</Item>
+<Item name="ParametersSetting">Parameter Settings</Item>
+<Item name="Parti-color">Разноцвет</Item>
+<Item name="Password">Пароль</Item>
+<Item name="PasswordAuthentication">Пароль идентификации</Item>
+<Item name="PasswordError">Ошибочный пароль</Item>
+<Item name="PasswordSetting">Настройки пароля</Item>
+<Item name="Paste">Вставить</Item>
+<Item name="Path">путь</Item>
+<Item name="Pause">делать паузу</Item>
+<Item name="PictrueProcessing">Обработка изображений</Item>
+<Item name="PlaseSelectDevice">Выберите устройство</Item>
+<Item name="Play">Играть</Item>
+<Item name="PlayBeforePowerProgram">Memory Last Show</Item>
+<Item name="PlayMemory Size">Play File Size</Item>
+<Item name="PlayMode">Режим воспроизведения</Item>
+<Item name="PlayQuality">The fluency</Item>
+<Item name="PlaySpeed">Play speed</Item>
+<Item name="PlayTime">Время воспроизведения</Item>
+<Item name="PlayTimes">Играть частоты</Item>
+<Item name="Playback Duration">Playback duration</Item>
+<Item name="Player">Play</Item>
+<Item name="Playing BeginFrames">Play start frame</Item>
+<Item name="Playing EndFrames">Play end frame</Item>
+<Item name="Playing Frames">Play frames</Item>
+<Item name="PleaseEnterTheBorderWidthOfTheTable">Пожалуйста, введите ширину границы таблицы</Item>
+<Item name="PleaseEnterTheNumberOfCloumns">Пожалуйста, введите число столбцов</Item>
+<Item name="PleaseEnterTheNumberOfRows">Пожалуйста, введите число строк</Item>
+<Item name="PleaseSelect">Пожалуйста, выберите</Item>
+<Item name="PleaseSelectAFile">Пожалуйста, выберите файл</Item>
+<Item name="PleaseSelectAItem">Пожалуйста, выберите пункт</Item>
+<Item name="PleaseSelectAProgram">Пожалуйста, выберите программу</Item>
+<Item name="PleaseSelectScreen">Пожалуйста, выберите экран.</Item>
+<Item name="PleaseWait">Пожалуйста, подождите...</Item>
+<Item name="PlotPointsImage">Plot Points Image</Item>
+<Item name="PointCount">Decimal digits</Item>
+<Item name="Points">экран очки</Item>
+<Item name="PopUdiskfailure">Не удалось поп U-диск!</Item>
+<Item name="Port">Port</Item>
+<Item name="PreProgram">Перейти к предыдущей программе</Item>
+<Item name="PreProgramConctrl">программное регулирование</Item>
+<Item name="Prev">Назад</Item>
+<Item name="PrevScan">Пред</Item>
+<Item name="Preview">Просмотреть</Item>
+<Item name="PreviewSetting">Предварительные настройки</Item>
+<Item name="PreviousPage">Пред</Item>
+<Item name="ProgramInformation">Program Information</Item>
+<Item name="ProgramSize">Program Size</Item>
+<Item name="ProgramSwitching">Программа переключения</Item>
+<Item name="ProtocolError">Протокол является неверным.</Item>
+<Item name="ProtocolTypeError">Тип протокола ошибок</Item>
+<Item name="PullThreshold">Адсорбируйте</Item>
+<Item name="QRCode">QR code</Item>
+<Item name="QuitTest">Окончание теста табло</Item>
+<Item name="RFID"> RF  ID</Item>
+<Item name="RFSetting">RF Setting</Item>
+<Item name="RS232">RS232</Item>
+<Item name="RadioEffect">Single effects</Item>
+<Item name="RandomColor">Random color</Item>
+<Item name="ReadBack2">обратного считывания</Item>
+<Item name="ReadScreenParamsFromUDisk">читать параметры экрана от U Disk</Item>
+<Item name="Readback">Считывание</Item>
+<Item name="RealTimeArea">Real-time area</Item>
+<Item name="RealTimeFindCard">Real-time search card</Item>
+<Item name="RebootScreen">Reboot Screen</Item>
+<Item name="ReceiveFailure">Сбой при получении!</Item>
+<Item name="Record">запись</Item>
+<Item name="RecordTips">Примечание: Если вы не можете получить правильное изображение, пожалуйста выберите параметры ведения журнала.</Item>
+<Item name="RectangleScreen">Rectangle screen</Item>
+<Item name="Red">Красный</Item>
+<Item name="Refresh">Refresh</Item>
+<Item name="RefreshFrequency">Refresh frequency</Item>
+<Item name="RefreshRate">Частота обновления</Item>
+<Item name="RegionHeight">Высота окна</Item>
+<Item name="RegionRect">Параметры окна</Item>
+<Item name="RegionWidth">Ширина окна</Item>
+<Item name="Relevance">Пожалуйста, перейдите в раздел "Меню -&gt; Операции -&gt; Параметры связи -&gt; TCP-&gt; Подключите дисплей"!</Item>
+<Item name="RememberProgram">Remember Program</Item>
+<Item name="Remove">Удалить</Item>
+<Item name="RemoveDevice">Извлечь съемный диск</Item>
+<Item name="RemoveDeviceSuccess1">Извлечение</Item>
+<Item name="RemoveDeviceSuccess2">завершен!</Item>
+<Item name="Rename">Переименовать</Item>
+<Item name="Repeat">Repeat</Item>
+<Item name="Reset">сброс</Item>
+<Item name="ResetProgram">Сброс программы</Item>
+<Item name="RestartFailed">Restart failed</Item>
+<Item name="RestartSuccess">Control card restart successfully</Item>
+<Item name="RevertToDefaultSettings">Recover to the default status, continue?</Item>
+<Item name="RightToLeft">Правой&gt; Левый</Item>
+<Item name="Romaji">Ромажи</Item>
+<Item name="Round">Круглая</Item>
+<Item name="RoundAndDigital">Круглый+цифровой</Item>
+<Item name="RoundAndRomaji">Круглый+Ромажи</Item>
+<Item name="RouterAddress">Адрес маршрутизатора</Item>
+<Item name="Row">Строка</Item>
+<Item name="SRCFile">Источник файла</Item>
+<Item name="SWF name">SWF Path</Item>
+<Item name="Saturday">Суббота</Item>
+<Item name="Save">Сохранить</Item>
+<Item name="SaveToDefaultSetting">Сохранить настройки по умолчанию</Item>
+<Item name="ScaleAndDigital">градация+Цифровой</Item>
+<Item name="ScaleAndRomaji">градация+Ромажи</Item>
+<Item name="ScanMode">Метод сканирования</Item>
+<Item name="ScanRange">Сканирование диапазона</Item>
+<Item name="ScanValueB">Фильтр синий</Item>
+<Item name="ScanValueG">Фильтр зеленый</Item>
+<Item name="ScanValueR">Фильтр красный</Item>
+<Item name="Scanning">Сканировать</Item>
+<Item name="ScanningComplete">Сканирование полного</Item>
+<Item name="Schedule">график</Item>
+<Item name="ScreenCentered">Аналоговый экран по центру</Item>
+<Item name="ScreenChoosePageTip">Select the screen type </Item>
+<Item name="ScreenColor">Цвет</Item>
+<Item name="ScreenCount">Экран подсчёта</Item>
+<Item name="ScreenHeight">Высота экрана</Item>
+<Item name="ScreenInformation">Screen Information</Item>
+<Item name="ScreenParameters">Параметры экрана</Item>
+<Item name="ScreenParametersSetting">Настройка параметров экрана</Item>
+<Item name="ScreenParamsPageTip">1.Select the screen width and height Pixel(Width and Height meaning screen total Pixel)&#x000A;2.Select the color of screen ；&#x000A;3.The single scrren of total pixle is the amount of led lights.</Item>
+<Item name="ScreenSize">Размер экрана</Item>
+<Item name="ScreenSmartTip">The current screen showing normal text ,no need select smart set</Item>
+<Item name="ScreenTest">Протестировать экран табло</Item>
+<Item name="ScreenType">The screen type</Item>
+<Item name="ScreenWidth">Ширина экрана</Item>
+<Item name="Search">Поиск</Item>
+<Item name="Searching">искать...</Item>
+<Item name="SearchingBegin">искать</Item>
+<Item name="SearchingEnd">Поиск завершен.</Item>
+<Item name="Sec">Секунд</Item>
+<Item name="SecondHand">Сек стрелка</Item>
+<Item name="SecondRadius">Внеш радиус</Item>
+<Item name="SelectDataPolarity">Пожалуйста, выберите полярности данных</Item>
+<Item name="SelectDefault">Если вы не знаете тип управления картой,выберите опцию по умолчанию.</Item>
+<Item name="SelectMode">выбор режима</Item>
+<Item name="SelectOEPolarity">Пожалуйста, выберите OE полярность</Item>
+<Item name="SelectScan">"Пожалуйста, выберите режим сканирования!"</Item>
+<Item name="SelectScree">Пожалуйста, выберите соответствующий экран!</Item>
+<Item name="SendFile">Отправить файл</Item>
+<Item name="SendParamsWhenFinish">После изменения параметров, нажмите на кнопку "Отправить параметров".</Item>
+<Item name="SendScreenParams">Отправить параметров</Item>
+<Item name="SendTimeOut">Отправлено</Item>
+<Item name="SendingData">Передача данных...</Item>
+<Item name="SentSuccessfully">успешно отправлено</Item>
+<Item name="SerialNumber">No.</Item>
+<Item name="SerialPort">серийного порт</Item>
+<Item name="SerialPortIsClosed">LED платы управления, который подключен к последовательному порту не найден.</Item>
+<Item name="SerialPortIsOccupied">Последовательный порт занят</Item>
+<Item name="SerialPortOpenError">Не удалось открыть порт</Item>
+<Item name="ServiceExpiration">Service expiration</Item>
+<Item name="SetBrightnessFailed">Не удалось установить яркость.</Item>
+<Item name="SetBrightnessSuccess">Настройки яркости завершена.</Item>
+<Item name="SetScreenParam">Успешно установить экран параметры</Item>
+<Item name="SetTheBaudrateSuccessfully">Скорость передачи данных установлена</Item>
+<Item name="Setting">Установить</Item>
+<Item name="SetupFailed">Настройки не удалось.</Item>
+<Item name="ShowDate">Показать дату</Item>
+<Item name="ShowGroup">Show Group</Item>
+<Item name="ShowMode">Режим отображения</Item>
+<Item name="ShowTime">Время вывода</Item>
+<Item name="ShowWeek">Показать неделю</Item>
+<Item name="Showpage">Показать страницу</Item>
+<Item name="ShuttingDown">до</Item>
+<Item name="SignalDelay">Задержка сигнала</Item>
+<Item name="SignalDelayHint">Частичная задержка сигнала(например, некоторые P5) STR задержка или LAT
+                Если есть вспышки или линии, Вы можете попробовать этот параметр</Item>
+<Item name="SignalQuality">Signal Quality</Item>
+<Item name="Simplify">Simlify режим </Item>
+<Item name="SimplifyInfo">упрощенное модель подходит только для одного прямого соединения LAN, IP-адреса будут автоматически соответствовать</Item>
+<Item name="Single">Один контроллер</Item>
+<Item name="SingleDirectMode">Direct connection mode</Item>
+<Item name="SingleLine">Однострочный экран</Item>
+<Item name="SingleLineoftext">Одна строка текста</Item>
+<Item name="SingleScreenBroadcasts">режим копирования</Item>
+<Item name="Size">Size</Item>
+<Item name="Slow">Slow</Item>
+<Item name="Slowest">Самый медленный</Item>
+<Item name="Small">Малый</Item>
+<Item name="SmartScanTips">Если экран имеет темно-яркий, пожалуйста, уменьшить тактовую частоту.</Item>
+<Item name="SmartSetting">Смарт настройки</Item>
+<Item name="SmartSettingName">Смарт настройки имени</Item>
+<Item name="SmartTips">Советы: пикселей качестве Группы</Item>
+<Item name="Snapshot">Snapshot</Item>
+<Item name="SnapshotTip">If no bright spots, insert empty points</Item>
+<Item name="Solid color">Одноцвет</Item>
+<Item name="Space">Интервал</Item>
+<Item name="SpecifiedDate">Указанная дата</Item>
+<Item name="SpecifiedTime">В период</Item>
+<Item name="SpecifyValue">Specify a value</Item>
+<Item name="Speed">Скорость</Item>
+<Item name="SpeedPrior">Приоритет скорости</Item>
+<Item name="SplitCell">Разъединить ячейки</Item>
+<Item name="SplitHorizontal">Горизонтальное разъединение</Item>
+<Item name="SplitVertical">Вертикальное разъединение</Item>
+<Item name="Standard">Standard</Item>
+<Item name="StartUpImage">Boot animation</Item>
+<Item name="StartingUp">с</Item>
+<Item name="StateA">государство A</Item>
+<Item name="StateB">государство B</Item>
+<Item name="StateC">государство C</Item>
+<Item name="StateD">государство D</Item>
+<Item name="Static">На месте</Item>
+<Item name="Status">статус</Item>
+<Item name="StepBack">Aннулировать</Item>
+<Item name="Stop">Стоп</Item>
+<Item name="Stroke">погладить</Item>
+<Item name="StyleName">название Эффект</Item>
+<Item name="StyleText">текст</Item>
+<Item name="SubPacketSequenceNumberError">Sub-пакет номер неверен.</Item>
+<Item name="SuccessfullyModified">"Модификация завершен!"</Item>
+<Item name="Sunday">Воскресенье</Item>
+<Item name="SupportRegionsOverlap">Support Regions Overlap</Item>
+<Item name="SuspendPreview">Pause preview</Item>
+<Item name="SwapBlueGreen">Сине-зеленые обмен</Item>
+<List name="SystemBusName" id="0">[C1]φ4.75(φ3.75)1R1G   1/16S HUB08 64X32（Indoor）  [A1]</List>
+<List name="SystemBusName" id="10">[C11]P10       1R1G1B 1/8S  HUB08 32X16 HLL</List>
+<List name="SystemBusName" id="11">[C12]P10       1R1G1B 1/4S  HUB75 32X16  [A13]</List>
+<List name="SystemBusName" id="12">[C13]P8        1R1G1B 1/5S   HUB75 40X20 JHG  [A60]</List>
+<List name="SystemBusName" id="13">[C14]P8        1R1G1B 1/4S  HUB08 32X16  [A8]</List>
+<List name="SystemBusName" id="14">[C15]P12/P16   2R1G   1/4S  HUB12 16X8（P16） [A12]</List>
+<List name="SystemBusName" id="15">[C16]P13.33    1R1G1B 1/3S  HUB08 24X12 HLL  [A49]</List>
+<List name="SystemBusName" id="16">[C17]P13.33    1R1G1B 1/3S  HUB08 24X12 JHG  [A57]</List>
+<List name="SystemBusName" id="17">[C18]P16       1R1G1B 1/5S  HUB08 20X10 HLL  [A52]</List>
+<List name="SystemBusName" id="18">[C19]P16       1R1G1B 1/1S  HUB40 16X8  [A29]</List>
+<List name="SystemBusName" id="19">[C20]P10       1R1G1B 1/4S  HUB75 32X16  [A11]</List>
+<List name="SystemBusName" id="1">[C2]φ3.75(φ5)1R     1/16S HUB08 64X32（Indoor）  [A1]</List>
+<List name="SystemBusName" id="20">[C21]P25       2R1G1B 1/1S  HUB40 16X8</List>
+<List name="SystemBusName" id="21">[C22]P10-P20   1G2R1B 1/4S  HUB12 16X8  [A61]</List>
+<List name="SystemBusName" id="22">[C23]P10-P20   2R1G1B 1/4S  HUB12 16X8  [A80]</List>
+<List name="SystemBusName" id="23">[C24]P13.33-P26.66  2R1G1B 1/4S  HUB12 12X6</List>
+<List name="SystemBusName" id="24">[C25]P20  1R1G 1/4S  HUB26 16*16（ZHGD） [A66]</List>
+<List name="SystemBusName" id="25">[C26]P13.33  1R1G1B 1/6S  HUB08 24*12（HLL） [A55]</List>
+<List name="SystemBusName" id="26">[C27]P10  1R 1/4S  HUB12 32*16（QL） [A19]</List>
+<List name="SystemBusName" id="27">[C28]P10  1R1G1B 1/2S  HUB75 16*16</List>
+<List name="SystemBusName" id="28">[C29]P6  1R1G1B 1/8S  HUB75 32*16</List>
+<List name="SystemBusName" id="29">[C30]P6  1R1G1B 1/8S  HUB75 32*32</List>
+<List name="SystemBusName" id="2">[C3]P5         1R1G1B 1/16S HUB08 32X32  [A3]</List>
+<List name="SystemBusName" id="30">[C31]P10  1R1G1B 1/4S  HUB75 16*16[A17]</List>
+<List name="SystemBusName" id="31">[C32]P20  1R1G1B 1/1S  HUB75 16*8</List>
+<List name="SystemBusName" id="32">[C33]P25  2R1G1B 1/1S  HUB75 8*8  [A30]</List>
+<List name="SystemBusName" id="33">[C34]P13.33  1R 1/4S  HUB12 24*12 [A71]</List>
+<List name="SystemBusName" id="34">[C35]P10  1R1G 1/4S  HUB12 32*16  [A7]</List>
+<List name="SystemBusName" id="3">[C4]P5         1R1G   1/8S  HUB08 32*16（Vehicle screen） [A4]</List>
+<List name="SystemBusName" id="4">[C5]P5/P4      1R1G1B 1/16S HUB75 32X32（Indoor） [A1]</List>
+<List name="SystemBusName" id="5">[C6]P10        1R/1R1G     1/4S  HUB12 32X16（P10） [A8]</List>
+<List name="SystemBusName" id="6">[C7]P10        1R     1/4S  HUB08  32X16</List>
+<List name="SystemBusName" id="7">[C8]P10        1R     1/1S  HUB08 32X16[A31]</List>
+<List name="SystemBusName" id="8">[C9]P10        1R1G   1/4S  HUB08  No 138 32X16  [A13]</List>
+<List name="SystemBusName" id="9">[C10]P10        1R1G   1/4S  HUB12 32X16 [A19]</List>
+<Item name="SystemBusy">система занята, пожалуйста, повторите попытку позже!</Item>
+<Item name="SystemOptimize">Оптимизация системы</Item>
+<Item name="SystemTime">Системное время</Item>
+<Item name="Table">Таблица</Item>
+<Item name="TargetTime">Норма времени</Item>
+<Item name="Temp">Температура</Item>
+<Item name="TempAdjust">Корректировка</Item>
+<Item name="TempHumidity">Температура и влажность</Item>
+<Item name="TempOrRHExist">Температура область и область температура и влажность не могут существовать одновременно.</Item>
+<Item name="TempUnit">Единицы температуры</Item>
+<Item name="Temppoint1">Убедитесь в том, что модель датчика вы используете:DS18B20</Item>
+<Item name="Temppoint2">Убедитесь в том, что модель датчика вы используете:AM2301</Item>
+<Item name="Test">Проверка</Item>
+<Item name="Text">Текст в окне</Item>
+<Item name="TextColor">Цвет текста</Item>
+<Item name="TextFile">Текстовый файл</Item>
+<Item name="TextInfo">Text information</Item>
+<Item name="TextProcess">направление текста</Item>
+<Item name="TextProcessing">Обработка текста</Item>
+<Item name="TheDeviceHasBeenOffline">The device has been offline</Item>
+<Item name="ThisModuleNotSupportUDisk">Функция U-Disk не поддерживается</Item>
+<Item name="Thursday">Четверг</Item>
+<Item name="TimeClock">Digital Clock</Item>
+<Item name="TimeDifference">Разница во времени</Item>
+<Item name="TimeParameters">Временные параметры</Item>
+<Item name="TimeSettingSuccess">Время устанавлено</Item>
+<Item name="TimeSwitch">Настроить интервал работы</Item>
+<Item name="TimeSwitchSettingSuccess">Таймер-свитч установлен</Item>
+<Item name="TimedRestart">ймеру</Item>
+<Item name="TimerColor">Часы цвет</Item>
+<Item name="Timing Parameters">Timing Parameters</Item>
+<Item name="TimingControl">Timing Control</Item>
+<Item name="TimingMode">Pежим Ремень</Item>
+<Item name="TimingPause">Timing Pause</Item>
+<Item name="TimingReset">Timing Reset</Item>
+<Item name="TimingSet">Ремень Set</Item>
+<Item name="Tip_Type1">Use  current communication address to connect UDP</Item>
+<Item name="Tip_Type2">Use IP address from returned device to connect UDP</Item>
+<Item name="Tip_Type3">Use IP address from returned device to connect TCP</Item>
+<Item name="Tip_Type4">Through agent address connected device</Item>
+<Item name="To">до </Item>
+<Item name="To2">к</Item>
+<Item name="Toolbar_AddColorful_Bottom">Text showing colorfully, user can add  animated background</Item>
+<Item name="Toolbar_AddColorful_Top">Add animated Character  area</Item>
+<Item name="Toolbar_AddCount_Bottom">Display data from a button or serial, network cables acquired</Item>
+<Item name="Toolbar_AddCount_Top">Button count or external data</Item>
+<Item name="Toolbar_AddExcel_Bottom">Excel files, select special effects and background</Item>
+<Item name="Toolbar_AddExcel_Top">Add Excel area</Item>
+<Item name="Toolbar_AddGlobalProgram_Bottom">Set up only one area of hypertext, text, time, etc.,  program can play by time</Item>
+<Item name="Toolbar_AddGlobalProgram_Top">Add Global Program</Item>
+<Item name="Toolbar_AddHypertext_Bottom">Pictures, video, SWF, etc.</Item>
+<Item name="Toolbar_AddHypertext_Top">Add Hypertext</Item>
+<Item name="Toolbar_AddProgram_Bottom">Set up 20 regions hypertext, text, time, etc.,  programs can play by time</Item>
+<Item name="Toolbar_AddProgram_Top">Add Program</Item>
+<Item name="Toolbar_AddTempRH_Bottom">Showing temperature, humidity (requires sensor)</Item>
+<Item name="Toolbar_AddTempRH_Top">Add Temperature and humidity area</Item>
+<Item name="Toolbar_AddText_Bottom">Edit text, select effects and background</Item>
+<Item name="Toolbar_AddText_Top">Add Text</Item>
+<Item name="Toolbar_AddTime_Bottom">Digital clock or clock dial</Item>
+<Item name="Toolbar_AddTime_Top">Add Time area</Item>
+<Item name="Toolbar_AddTiming_Bottom">Target time countdown, count up, count by button</Item>
+<Item name="Toolbar_AddTiming_Top">Add Timing area</Item>
+<Item name="Toolbar_Adjusttime_Bottom">Correction control card time  with the computer synchronized</Item>
+<Item name="Toolbar_Adjusttime_Top">Add Adjust time</Item>
+<Item name="Toolbar_Check">Check</Item>
+<Item name="Toolbar_Copy">Copy</Item>
+<Item name="Toolbar_Delete">Delete</Item>
+<Item name="Toolbar_Down">Down</Item>
+<Item name="Toolbar_ExportToUdisk_Bottom">The screen  is exported to the U disk</Item>
+<Item name="Toolbar_ExportToUdisk_Top">Export To U disk</Item>
+<Item name="Toolbar_Paste">Paste</Item>
+<Item name="Toolbar_Preview1_Bottom">Preview the current screen </Item>
+<Item name="Toolbar_Preview1_Top">Screen  Preview</Item>
+<Item name="Toolbar_Preview2_Bottom">Showing all screens built, double-click to enter the designated screen.</Item>
+<Item name="Toolbar_Preview2_Top">Group can not preview</Item>
+<Item name="Toolbar_Preview_Bottom">Preview the current program</Item>
+<Item name="Toolbar_Preview_Top">Preview program</Item>
+<Item name="Toolbar_Save">Save</Item>
+<Item name="Toolbar_Search">Search</Item>
+<Item name="Toolbar_Send_Bottom">Sending  the screen programs to control card</Item>
+<Item name="Toolbar_Send_Top">Send</Item>
+<Item name="Toolbar_Uncheck">Uncheck</Item>
+<Item name="Toolbar_Up">Up</Item>
+<Item name="TotalECard">Общее количество сетевой карты:</Item>
+<Item name="TotalFrames">Всего кадров</Item>
+<Item name="TotalSpace">Всего места:</Item>
+<Item name="TracingPoint">Выравнивание Описание</Item>
+<Item name="TracingPointArrowKeys">Щелкните левой кнопкой мыши отслеживания точки, вы можете использовать клавиши со стрелками для управления точку в направлении.</Item>
+<Item name="TracingPointError">Трассировка точкой является ошибка.</Item>
+<Item name="TracingPointFail">Трассировка точка не удалось, Трассировка точку снова.</Item>
+<Item name="TransitionThreshold">Transition Threshold</Item>
+<Item name="Transparent">Transparent</Item>
+<Item name="Tricolor">Триколор</Item>
+<Item name="Tuesday">Вторник</Item>
+<Item name="Twinkle">Мигание</Item>
+<Item name="TwoLinedisplay">Двухстрочный дисплей</Item>
+<Item name="Type">Type</Item>
+<Item name="Type1">Type one</Item>
+<Item name="Type2">Type two</Item>
+<Item name="Type3">Type three</Item>
+<Item name="Type4">Type four</Item>
+<Item name="TypeName">Типе имя</Item>
+<Item name="U-DiskSucess">U-Disk Успех</Item>
+<Item name="UDisk">U-Disk</Item>
+<Item name="USE_HD2010">Контроллер обнаружен, но Вы должны использовать программу HD 2010</Item>
+<Item name="UnableToOpenFile">Не удается открыть файл!</Item>
+<Item name="Unchanged">без изменений</Item>
+<Item name="Undo">Отменить</Item>
+<Item name="UnexpectedError">Тайм-аут связи</Item>
+<Item name="Unit">Eдиница</Item>
+<Item name="UnitBoard">Блок доска</Item>
+<Item name="UnitBoardInfo">информация Модуль</Item>
+<Item name="UnitBoardTips">Если ширина в единой Moudle составляет более 64, выберите 64</Item>
+<Item name="UnitBoardWidth">ширина модуля </Item>
+<Item name="UnitBoards">Количество единицу борту</Item>
+<Item name="UnitColor">Группа цвета</Item>
+<Item name="UnitSize">Модуль Очков</Item>
+<Item name="Unmerge">Комбинированное восстановление</Item>
+<Item name="Unselected">Неотобранный</Item>
+<Item name="Unspecified">Не выбрано</Item>
+<Item name="UnsupportedInstructions">Неподдерживаемая инструкцию</Item>
+<Item name="Untitled">Без названия</Item>
+<Item name="Update">Обновление </Item>
+<Item name="UpdateFailed">Не удалось выполнить обновление.</Item>
+<Item name="UpdateFirmwareFinished">Обновление прошивки готово</Item>
+<Item name="UpdatedSuccessfully">Обновление прошло успешно, нужно ли открывать файлы обновления?</Item>
+<Item name="UpdatingFirmware">Обновление прошивки.</Item>
+<Item name="Use">Вкл</Item>
+<Item name="Use138Decoder">Использование 138 декодера</Item>
+<List name="Use138" id="0">Use 138</List>
+<List name="Use138" id="1">No 138</List>
+<Item name="UseDefaultSetting">Используйте настройки оборудования</Item>
+<Item name="UseParams">Использование параметров</Item>
+<Item name="UsedMemory">Used Memory</Item>
+<Item name="UsingHardwareSetup">Use hardware settings(Parameter readback)</Item>
+<Item name="VZoom">Vertical stretch</Item>
+<Item name="Valign">Выровнять</Item>
+<Item name="ValignBottom">Выровнять низ</Item>
+<Item name="ValignMiddle">Выровнять середину</Item>
+<Item name="ValignTop">Выровнять верх</Item>
+<Item name="Veritical">Вертикальное положение</Item>
+<Item name="VerticalPosition">Вертикальное положение</Item>
+<Item name="VerticalScreenshot">Вертикальная Скриншот</Item>
+<Item name="VerticalStretch">растянуть по вертикали</Item>
+<Item name="Video">Video</Item>
+<Item name="Video FramesCount">Total frames</Item>
+<Item name="Video name">Video Path</Item>
+<Item name="ViewHelp">Справка</Item>
+<Item name="WaitingForInitialization">Ожидание инициализации...</Item>
+<Item name="WaitingToBeSent">Ожидание отправки</Item>
+<Item name="Wednesday">Среда</Item>
+<Item name="White">Белый</Item>
+<Item name="Width">Ширина</Item>
+<Item name="WidthOfMoreTthan">"Ширина находится вне диапазона!"</Item>
+<Item name="WindowPosition">Window position</Item>
+<Item name="WrongParameter">Неправильный параметр</Item>
+<Item name="Yellow">Желтый</Item>
+<List name="color" id="0">Одиночный цвет</List>
+<List name="color" id="1">Двухцветный</List>
+<List name="color" id="2">Полноцветный</List>
+<Item name="delete">Удалить</Item>
+<Item name="flashTips">Примечание: Вы не можете получить правильный образ SWF содержащей сценарии, SWF содержащей сценарии пока не поддерживается.</Item>
+<List name="frequency" id="0">Адаптивный</List>
+<List name="frequency" id="160">100Hz</List>
+<List name="frequency" id="140">120Hz</List>
+<List name="frequency" id="120">140Hz</List>
+<List name="frequency" id="100">160Hz</List>
+<List name="frequency" id="80">180Hz</List>
+<List name="frequency" id="60">200Hz</List>
+<List name="frequency" id="200">60Hz</List>
+<List name="frequency" id="180">80Hz</List>
+<List name="graylevel" id="1">No graylevel</List>
+<List name="graylevel" id="2">4 graylevel</List>
+<List name="graylevel" id="3">8 graylevel</List>
+<List name="graylevel" id="4">16 graylevel</List>
+<List name="graylevel" id="5">32 graylevel</List>
+<Item name="group">Group</Item>
+<Item name="hypertext">Фото</Item>
+<List name="listCtlDelay" id="0">Высокоэффективные</List>
+<List name="listCtlDelay" id="1">Низкий эффективной</List>
+<List name="listStrDelay" id="0">0</List>
+<List name="listStrDelay" id="1">1</List>
+<Item name="mAPPFace">APPface(&amp;A)</Item>
+<Item name="mAbout">Версия(&amp;A)</Item>
+<Item name="mBlackStyle">Черный стиль(L)</Item>
+<Item name="mBludStyle">Голубой стиль(B)</Item>
+<Item name="mCalculator">калькулятор</Item>
+<Item name="mClearDisplayData">Очистить экран</Item>
+<Item name="mCommSetting">Настроить параметры связи</Item>
+<Item name="mExit">Выход(&amp;E)</Item>
+<Item name="mFile">Файл (&amp;F)</Item>
+<Item name="mHardwareSetting">Hardware Settings</Item>
+<Item name="mHelp">Справка(&amp;H)</Item>
+<Item name="mIPManagmentTools">Настроить IP</Item>
+<Item name="mLanguage">Язык (&amp;L)</Item>
+<Item name="mLuminanceSetting">Настроить яркость</Item>
+<Item name="mNarrow">Уменьшить</Item>
+<Item name="mNew">Новый проект(&amp;N)</Item>
+<Item name="mNotepad">блокнот</Item>
+<Item name="mOpen">Открыть(&amp;O)</Item>
+<Item name="mOperate">Операции (&amp;O)</Item>
+<Item name="mOutWindow">Info Window</Item>
+<Item name="mPaint">Рисовать</Item>
+<Item name="mSave">Сохранить(&amp;S)</Item>
+<Item name="mSaveAs">Сохранить как...</Item>
+<Item name="mScreenSetting">Настроить параметры табло</Item>
+<Item name="mSendProject">Отправить прект</Item>
+<Item name="mSetting">Установки (&amp;S)</Item>
+<Item name="mSilverStyle">Серебристый стиль(S)</Item>
+<Item name="mSystemSetting">Настроить систему</Item>
+<Item name="mTimeSetting">Настроить календарь и часы</Item>
+<Item name="mTool">инструмент(&amp;T)</Item>
+<Item name="mUpdateFirmware">Обновить прошивку</Item>
+<Item name="mView">Просмотреть(&amp;V)</Item>
+<Item name="mWatergreenStyle">Стиль зеленой воды(A)</Item>
+<Item name="mZoom">Увеличить</Item>
+<Item name="minimum">Min</Item>
+<Item name="ms"> мсек</Item>
+<List name="polarity" id="0">Низкий эффективной</List>
+<List name="polarity" id="1">Высокоэффективные</List>
+<Item name="program">Программа</Item>
+<Item name="screen">Проект</Item>
+<Item name="sec"> сек</Item>
+<Item name="send">Отправить</Item>
+<Item name="static">Статический</Item>
+<Item name="time">Календарь</Item>
+<Item name="whirl180">Reversal</Item>
+<Item name="whirl270">Left rotation</Item>
+<Item name="whirl90">Right rotation</Item>
+<Item name="whirlt">Rotation</Item>
+<Item name="AddItemID">Add ID</Item>
+<Item name="BeginIpAddr">Begin IP</Item>
+<Item name="CurrentSel">Currently selected language</Item>
+<Item name="DetectsThisFileWasNotSaved">Detected by the currently selected file is not saved if coverage</Item>
+<Item name="English">English</Item>
+<Item name="IDAndContentCanNotBeEmpty">ID and content can not be empty</Item>
+<Item name="ModificationFails">Modification fails</Item>
+<Item name="ModifyItemID">Modify ID</Item>
+<Item name="ModifyOnlyOneItem">Only modify one ID</Item>
+<Item name="RemoveItemID">Remove ID</Item>
+<Item name="ShowOnlyControlCardWifi">Display only control card Wi-Fi</Item>
+<Item name="ShowType">Display method</Item>
+<Item name="ThisIDAlreadyExists">ID exists already</Item>
+<Item name="FillingTheCurrentLanguage">To fill the current language</Item>
+<Item name="WhetherToSaveTheCurrentModifiedFile">Whether to save the changes？</Item>
+<Item name="RemoveDuplicate">Remove duplicate</Item>
+<Item name="Apply">Apply</Item>
+<Item name="Remark">Remark</Item>
+<Item name="FirstMode">Priority mode</Item>
+<Item name="FirstMode_Normal">Balanced</Item>
+<Item name="FirstMode_Speed">Speed Priority</Item>
+<Item name="FirstMode_Text">Brightness Priority</Item>
+<Item name="Random">Random</Item>
+<Item name="WhetherToReplace">Whether to replace?</Item>
+<Item name="ImportFailed">Import Failed</Item>
+<Item name="ExportFailed">Export Failed</Item>
+<Item name="ExportLanguage">Export Language</Item>
+<Item name="ImportLanguage">Import Language</Item>
+<List name="SystemBusName" id="35">[C36]P10  1R1G1B 1/4S  HUB75 16*16</List>
+<Item name="ClickHereToUpdate">Click here to update</Item>
+<Item name="ImportFile">Import File</Item>
+<List name="SystemBusName" id="36">[C37]P10  1R 1/4S  HUB12 32*16[A25]</List>
+<Item name="EditingLanguage">Language Editor</Item>
+<List name="SystemBusName" id="37">[C38]P7.62  1R1G1B 1/8S  HUB08 32*16</List>
+<List name="SystemBusName" id="38">[C39]P5   1R1G1B   1/8S  HUB75 32*16 [A4]</List>
+<Item  name="Imsak">Пост</Item>
+<Item  name="Fajr">Утренняя  церемония</Item>
+<Item  name="Dhuhr">Зухр</Item>
+<Item  name="Asr">Аср</Item>
+<Item  name="Maghrib">Магриб</Item>
+<Item  name="Isha">Иша</Item>
+<Item  name="MidNight">полуночный</Item>
+<Item name="Country">Страна</Item>
+<Item name="NumColor">Numbers Color</Item>
+<Item name="ExprotConfigFile">Export Profiles</Item>
+<Item name="SoundModule">Sound Module</Item>
+<Item name="Year">Year</Item>
+<Item name="ImportTable">Import Table</Item>
+<Item name="ExportBable">Export Table</Item>
+<Item name="ClearAll">Clear</Item>
+<Item name="cfWords">Colorful word</Item>
+<Item name="OnlyOnePrayForScreen">Only supported a prayer area</Item>
+<Item name="BKSpeed">Background speed</Item>
+<Item name="EffectCycle">Effects cycle</Item>
+<Item name="ExportConfigFile">Export Profiles</Item>
+<Item name="SoundSetting">Sound Setting</Item>
+<List name="graylevel" id="6">64 graylevel</List>
+<List name="graylevel" id="7">128 graylevel</List>
+<List name="graylevel" id="8">256 graylevel</List>
+<List name="SystemBusName" id="39">[C40]P10  1R1G1B   1/4S  HUB75  32X16[A12]</List>
+<Item name="SelectFirmwareVersion">Select Firmware Version </Item>
+<Item name="NoSelectVersion">None selected version</Item>
+<Item name="Ordinal">No.</Item>
+<Item name="VersionNum">Version</Item>
+<Item name="ConfirmSelect">Confirm</Item>
+<List name="SystemBusName" id="40">[C41]P10  1R1G1B  1/4S  HUB75 32*16</List>
+<Item name="FileNameAlreadyExistIsCover">FileName already exist,is cover?</Item>
+<Item name="VersionAlreadyExist">Version already exist</Item>
+<Item name="DeleteThisGroup">Delete this group</Item>
+<Item name="FindNewVersionIsUpdate">Find new version，whether to update the firmware?</Item>
+<Item name="UpdateFile">Update file</Item>
+<List name="SystemBusName" id="41">[C42]P10  1R1G1B  1/2S  HUB75 32*16</List>
+<List name="SystemBusName" id="42">[C43]P3  1R1G1B  1/16S  HUB75 64*64</List>
+<Item name="UdiskUpgrade">Update by U-disk</Item>
+<Item name="TimingPlay">Timing Start</Item>
+<Item name="SelectVersionOnTheRight">Please select the firmware on the right!</Item>
+<List name="SystemBusName" id="43">[C44]P8  1R1G  1/8S  HUB08 32*32 (WQS)</List>
+<List name="SystemBusName" id="44">[C45]P5  1R1G1B  1/8S  HUB75 32*32 (CXH)</List>
+<Item name="TheSameSegment">Make sure the IP of the control card and the computer is in the same network segment.</Item>
+<Item name="Step">Step</Item>
+<Item name="ShadowMode">Shadow Mode</Item>
+<Item name="3DDeep">3D Deep</Item>
+<Item name="Gradient">Gradient</Item>
+<Item name="Alpha">Transparency</Item>
+<Item name="BorderStyle">Border Style</Item>
+<Item name="RoundRect">Rounded Rectangle</Item>
+<Item name="Octagon">Octagon</Item>
+<Item name="CustomStyle">Custom Style</Item>
+<List name="SystemBusName" id="45">[C46]P10  1R  1/4S  HUB12 32*16</List>
+<Item name="3DText">3D Text</Item>
+<Item name="Whether_to_cancel_the_current_task">Cancel mission or not?</Item>
+<List name="SystemBusName" id="46">[C47]P10-P20   1G2R1B 1/4S  HUB12 32X16  Virtual pixel</List>
+<List name="SystemBusName" id="47">[C48]P10-P20   2R1G1B 1/4S  HUB12 32X16  Virtual pixel</List>
+<List name="SystemBusName" id="48">[C49]P13.33-P26.66  2R1G1B 1/4S  HUB12 24X12 Virtual pixel</List>
+<Item name="SinglePage">Single Page</Item>
+<Item name="TwinkleStyle">Twinkle Style</Item>
+<Item name="TwinkleSpeed">Twinkle Speed</Item>
+<Item name="NoTwinkle">No Twinkle</Item>
+<Item name="3Dtwinkle">3D Twinkle</Item>
+<Item name="SaveCountValue">Remember the last count</Item>
+<Item name="SpecialBorder">Special Border</Item>
+<Item name="BootingDelayWasComingOn">Power on,brighten gradually</Item>
+<Item name="RememberToThoose">Remember the current selection</Item>
+<Item name="EndPageToEndPage">End page to end page</Item>
+<List name="SystemBusName" id="49">[C50]P10  1R 1/1S  HUB08 RXP</List>
+<List name="OutputWindowString" id="70">Click the button to delete programs [ON]</List>
+<List name="OutputWindowString" id="71">Click the button to delete programs [OFF]</List>
+<List name="OutputWindowString" id="72">Parameter Setting  [Enabled]</List>
+<List name="OutputWindowString" id="73">Parameter Setting  [Disabled]</List>
+<Item name="Btn1ClearProgram">Prohibited delete program</Item>
+<Item name="DoubleSidedScreen">Double-sided screen</Item>
+<Item name="networkMonitoring">Monitoring</Item>
+<Item name="Toolbar_Add3D_Bottom">Support background, foreground, colorful words, 3D effects</Item>
+<Item name="Toolbar_Add3D_Top">Add 3D text</Item>
+<List name="SystemBusName" id="50">[C51]P6  1R1G1B 1/5S  HUB75 32X20</List>
+<List name="SystemBusName" id="52">[C53]  1R1G1B  1/4S ICN2038S</List>
+<List name="SystemBusName" id="53">[C54]  P10  1R1G  1/4S HUB12 32x16 (YLR)</List>
+<List name="SystemBusName" id="54">[C55]  P8 1R1G1B 1/5S  HUB75 40X20</List>
+<List name="SystemBusName" id="55">[C56]  P10 1/4S No 138 MCGD</List>
+<List name="SystemBusName" id="56">[C57]  P8 1R1G1B 1/4S HUB75 (JJY)</List>
+<List name="SystemBusName" id="57">[C58]  P13.33 1R1G1B 1/3S HUB75 (LLR)</List>
+<List name="SystemBusName" id="58">[C59]  P3 1R1G1B 1/32S HUB75E (RBG) ICN2038S</List>
+<List name="SystemBusName" id="59">[C60]  P3 1R1G1B 1/32S HUB75E (RGB) ICN2038S</List>
+<List name="SystemBusName" id="60">[C61]  P6 1/8S HUB75 (BGR)</List>
+<List name="SystemBusName" id="61">[C62]  P6 1/8S HUB75 GK</List>
+<List name="SystemBusName" id="62">[C63]  P6 1/8S HUB75(HJ)</List>
+<List name="SystemBusName" id="63">[C64]  P6 1R1G1B 1/8S HUB75</List>
+<List name="SystemBusName" id="64">[C65]  P10 1R 1/4s(YLR)</List>
+<List name="SystemBusName" id="65">[C66]  P10 1R 1/4S HUB12</List>
+<List name="SystemBusName" id="66">[C67]  P10 1R1G1B 1/2S HUB75 (HJ)</List>
+<List name="SystemBusName" id="67">[C68]  P10 1R1G1B 1/2S HUB75 </List>
+<List name="SystemBusName" id="68">[C69]  P10 1R1G1B 1/3S HUB73A 24X24 (KSZ)</List>
+<List name="SystemBusName" id="69">[C70]  P10 1R1G1B 1/4S No 138 HUB75</List>
+<List name="SystemBusName" id="70">[C71]  P13.33 1R1G1B 1/3S 24x12</List>
+<List name="SystemBusName" id="71">[C72]  P16 1R1G 1/4S HUB08</List>
+<List name="SystemBusName" id="72">[C73]  P20 1R1G1B 1S</List>
+<List name="SystemBusName" id="73">[C74]  P10 1R1G1B 1/4S HUB75（KT）</List>
+<List name="SystemBusName" id="74">[C75]  P8  1R1G1B 1/4S HUB75 32x16 No138</List>
+<List name="SystemBusName" id="75">[C76]  P8  1R1G1B 1/4S HUB75 32x16 (HJ)</List>
+<List name="SystemBusName" id="76">[C77]  P10 1R1G1B 1/4S HUB75 32x16 No138</List>
+<List name="SystemBusName" id="77">[C78]  P10 1R1G1B 1/2S HUB75 32x16</List>
+<List name="SystemBusName" id="78">[C79]  P10 1R 1/4S HUB08 32x16</List>
+<List name="SystemBusName" id="79">[C80]  P10 1R1G1B 1/2S HUB75 32x16 (GK)</List>
+<List name="SystemBusName" id="80">[C81]  P10 1R1G1B 1/2S HUB75 32x16 (QL)</List>
+<List name="SystemBusName" id="81">[C82]  P16 1R1G 1/1S HUB12 16x8</List>
+<List name="SystemBusName" id="82">[C83]  P10 1R 1/4S HUB12 32x16 (KT)</List>
+<List name="SystemBusName" id="83">[C84]  P10 1R 1/4S HUB12 32x16 (GK)</List>
+<List name="SystemBusName" id="84">[C85]  P5  1R1G1B 1/8S HUB75 64x32</List>
+<List name="SystemBusName" id="85">[C86]  P10 1R1G1B 1/4S HUB75 32x16 No138 (HJCL)</List>
+<List name="SystemBusName" id="86">[C87]  P10 1R1G1B 1/2S HUB75E 32x16 No138 (HLL)</List>
+<List name="SystemBusName" id="87">[C88]  P10 1R1G1B 1/2S HUB75 32x16 No138</List>
+<List name="SystemBusName" id="88">[C89]  P6.66 1R1G1B 1/6S HUB75 48x24</List>
+<List name="SystemBusName" id="89">[C90]  P8  1R1G1B 1/5S HUB75 40x20</List>
+<List name="SystemBusName" id="90">[C91]  P4 1R1G1B 1/10S HUB75 80x40 ICN2038S</List>
+<List name="SystemBusName" id="91">[C92]  P4  1R1G1B 1/20S HUB75 80x40 ICN2038S</List>
+<List name="SystemBusName" id="92">[C93]  P10 1R1G1B 1/4S HUB75 32x16 No138 ICN2038S</List>
+<List name="SystemBusName" id="93">[C94]  P10 1R1G1B 1/2S  32x16 No138 ICN2038S</List>
+<List name="SystemBusName" id="94">[C95]  P10 1R1G1B 1/5S HUB75 40x20 ICN2038S</List>
+<List name="SystemBusName" id="95">[C96]  P10 1R1G1B 1/5S HUB75 40x20 SM16207S</List>
+<List name="SystemBusName" id="96">[C97]  H10 1R1G1B 1/2S HUB75 32x16</List>
+<List name="SystemBusName" id="97">[C98]  P8  1R1G1B 1/5S HUB75 40x20 ICN20378BP</List>
+<List name="SystemBusName" id="98">[C99]  dz0228 1R1G1B 1/1S HUB75 16x16</List>
+<Item name="WifiSpeedMode1">High-speed mode</Item>
+<Item name="WifiSpeedMode2">Low speed mode</Item>
+<Item name="All the devices automatically obtain IP">All devices are set to "Get IP automatically"</Item>
+<Item name="The firmware information">The firmware information</Item>
+<Item name="The device information">The device information</Item>
+<List name="SystemBusName" id="51">[C52]  1R1G  1/8  KR</List>
+<Item name="Server address">Server address</Item>
+<Item name="User name">User name</Item>
+<Item name="Fill the same">Fill the same</Item>
+<Item name="Cloud server Settings">Cloud server Settings</Item>
+<Item name="Cloud server">Cloud server</Item>
+<Item name="ButtonCtrl">Button Control on</Item>
+<Item name="NoUse">Button Control off</Item>
+<Item name="Button1">Button1</Item>
+<Item name="Button2">Button2</Item>
+<Item name="Button3">Button3</Item>
+<Item name="Button4">Button4</Item>
+<Item name="DefaultBackground">DefaultBackground</Item>
+<Item name="ImageBackground">ImageBackground</Item>
+<Item name="SingleProgramSend">SingleProgramSend</Item>
+<Item name="latest">latest</Item>
+<Item name="newdata">newdata</Item>
+<Item name="Imsak">Imsak</Item>
+<Item name="Music">Music</Item>
+<Item name="Pray">Pray</Item>
+<Item name="Aglinment">Выравнивание</Item>
+<Item name="LeftAglinment">Выровнять по левому краю</Item>
+<Item name="CenterAglinment">Выравнивание по центру</Item>
+<Item name="RightAglinment">Выровняйте правильно</Item>
+<Item name="SplitType">SplitType</Item>
+<Item name="SingleChar">SingleChar</Item>
+<Item name="Word">Word</Item>
+<Item name="WifiSetting">Wi-Fi Setting</Item>
+<Item name="SettingSuccessfully">SettingSuccessfully</Item>
+<Item name="SettingFailed">SettingFailed</Item>
+<Item name="Connectting">Connectting</Item>
+<Item name="NoFoundAp">NoFoundAp</Item>
+<Item name="ConnectFailed">ConnectFailed</Item>
+<Item name="ConnectOK">ConnectOK</Item>
+<Item name="ApMode">ApMode</Item>
+<Item name="StationMode">StationMode</Item>
+<Item name="WifiPasswordLenghLess">Wi-Fi password is too short</Item>
+<Item name="WifiSSIDIsNULL">Wi-Fi name is empty</Item>
+<Item name="MaskError">MaskError</Item>
+<Item name="IPError">IPError</Item>
+<Item name="WifiSSIDTooLong">Wi-Fi name is too long.</Item>
+<Item name="WifiPasswordTooLong">Wi-Fi password is too long.</Item>
+<Item name="SSIDPasswordInputTips">Only allow input 0~9 a~z A~Z _</Item>
+  <Item name="City">город</Item>
+    <Item name="Date">дата</Item>
+    <Item name="temp">температура</Item>
+    <Item name="Weather">погода</Item>
+    <Item name="Wind Direction">направление ветра</Item>
+    <Item name="Wind speed">скорость ветра</Item>
+    <Item name="Temp Unit">единицы измерения температуры</Item>
+    <Item name="America">США</Item>
+    <Item name="Australia">Австралия</Item>
+    <Item name="Canada">Канада</Item>
+    <Item name="China">Китай</Item>
+    <Item name="India">Индия</Item>
+    <Item name="Indonesia">Индонезия</Item>
+    <Item name="Iran">Иран</Item>
+    <Item name="Japan">Япония</Item>
+    <Item name="Korea">Корея</Item>
+    <Item name="Malaysia">Малайзия</Item>
+    <Item name="Pakistan">Пакистан</Item>
+    <Item name="Peru">Перу</Item>
+    <Item name="Poland">Польша</Item>
+    <Item name="Russia">Россия</Item>
+    <Item name="Spain">Испания</Item>
+    <Item name="Thailand">Таиланд</Item>
+    <Item name="Turkey">индейка</Item>
+    <Item name="United Arab Emirates">Объединенные Арабские Эмираты</Item>
+    <Item name="Vietnam">Вьетнам</Item>
+    <Item name="Sunny">ясно</Item>
+    <Item name="Cloudy">облачный</Item>
+    <Item name="Few clouds">облачный</Item>
+    <Item name="Partly cloudy">Переменная облачность</Item>
+    <Item name="Overcast">Инь</Item>
+    <Item name="Windy">ветреный</Item>
+    <Item name="Calm">безветренный</Item>
+    <Item name="Light breeze">Незначительный ветер</Item>
+    <Item name="Moderate">ветер</Item>
+    <Item name="Fresh breeze">ветер</Item>
+    <Item name="Strong breeze">штормить</Item>
+    <Item name="High wind">штормить</Item>
+    <Item name="Gale">штормить</Item>
+    <Item name="Strong gale">взрыв</Item>
+    <Item name="Storm">штормовой</Item>
+    <Item name="Violent storm">Mad порыв ветра</Item>
+    <Item name="Hurricane">ураган</Item>
+    <Item name="Tornado">торнадо</Item>
+    <Item name="Tropical storm">Тропический шторм</Item>
+    <Item name="Shower rain">душ</Item>
+    <Item name="Heavy shower rain">Свет душ дождь</Item>
+    <Item name="Thundershower">Грозы</Item>
+    <Item name="Heavy thunderstorm">Сильные грозы</Item>
+    <Item name="Hail">Радуйся</Item>
+    <Item name="Light rain">небольшой дождь</Item>
+    <Item name="Moderate rain">Умеренный дождь</Item>
+    <Item name="Heavy rain">сильный дождь</Item>
+    <Item name="Extreme rain">Экстремальные осадки</Item>
+    <Item name="Drizzle rain">изморось</Item>
+    <Item name="Storm">штормовой</Item>
+    <Item name="Heavy storm">сильный дождь</Item>
+    <Item name="Severe storm">сильный дождь</Item>
+    <Item name="Freezing rain">мокрый снег</Item>
+    <Item name="Light snow">снег</Item>
+    <Item name="Moderate snow">снег</Item>
+    <Item name="Heavy snow">снег</Item>
+    <Item name="Snowstorm">метель</Item>
+    <Item name="Sleet">Глазурь</Item>
+    <Item name="Rain and snow">мокрый снег</Item>
+    <Item name="Shower snow">Массив мокрый снег</Item>
+    <Item name="Snow flurry">сильный снегопад</Item>
+    <Item name="Mist">дымка</Item>
+    <Item name="Foggy">туман</Item>
+    <Item name="Haze">дымка</Item>
+    <Item name="Sand">песок</Item>
+    <Item name="Dust">песчаная буря</Item>
+    <Item name="Duststorm">пыльная буря</Item>
+    <Item name="Sandstorm">самум</Item>
+    <Item name="Hot">тепло</Item>
+    <Item name="Cold">холодный</Item>
+    <Item name="Unknown">неизвестный</Item>
+    <Item name="Clear">Clear</Item>
+    <Item name="No Sustained Wind">Нет устойчивый ветер</Item>
+    <Item name="Northeast Wind">северо-восточный</Item>
+    <Item name="East Wind">Восточный ветер</Item>
+    <Item name="Southeaster Wind">ветер юго-восточный</Item>
+    <Item name="South Wind">южный ветер</Item>
+    <Item name="Southwest Wind">Юго-западный ветер</Item>
+    <Item name="Strong wind">штормить</Item>
+    <Item name="West Wind">западный</Item>
+    <Item name="Northwest Wind">Северо-Западный ветер</Item>
+    <Item name="North Wind">север</Item>
+    <Item name="Vortex Wind">Поворот ветра</Item>
+    <Item name="The Breeze Wind">ветер</Item>
+    <Item name="No wind">безветренный</Item>
+    <Item name="Light air">тихий ветер</Item>
+    <Item name="Breeze">ветер</Item>
+    <Item name="Gentle breeze">ветер</Item>
+    <Item name="Strong wind">штормить</Item>
+    <Item name="Blast">взрыв</Item>
+    <Item name="Gale">штормить</Item>
+    <Item name="Strong gale">взрыв</Item>
+    <Item name="Whole gale">Свирепый ветер</Item>
+    <Item name="Storm wind">штормовой</Item>
+    <Item name="Hurricane">ураган</Item>
+	<Item name="OfflineMode">Автономный режим</Item>
+	<Item name="PleaseSelectDevice">Please select device</Item>
+	<Item name="SeeMoreParameters">See more parameters</Item>
+	<Item name="ExportProgram">Export program</Item>
+	<List name="ErrorTips" id="00">Common problem hints</List>
+	<List name="ErrorTips" id="01">Error / The width and height set in the screen setting exceeds the control range of the controller</List>
+	<List name="ErrorTips" id="02">Error1 / U disk file format error</List>
+	<List name="ErrorTips" id="03">Error2 / Excessive  program content</List>
+	<List name="ErrorTips" id="04">NoFile / No program file in the U disk</List>
+	<List name="ErrorTips" id="05">End / Setting expired</List>
+	<Item name="ColorfulBorder">Colorful border</Item>
+	<Item name="FixedText">Fixed text</Item>
+	<List name="PM25String" id="00">No data</List>
+	<List name="PM25String" id="01">Good</List>
+	<List name="PM25String" id="02">Moderate</List>
+	<List name="PM25String" id="03">Lightly Polluted</List>
+	<List name="PM25String" id="04">Moderately Polluted</List>
+	<List name="PM25String" id="05">Heavily Polluted</List>
+	<List name="PM25String" id="06">Severely Polluted</List>
+	<Item name="BootTips">Boot tips</Item>
+	<Item name="ShowAll">Show all</Item>
+	<Item name="NoShow">No show</Item>
+	<Item name="PM25Adjust">Adjust PM2.5</Item>
+	<Item name="PM10Adjust">Adjust PM10</Item>
+	<Item name="QuickConfig">Quick config</Item>
+	<Item name="Subtitles">Subtitles</Item>
+	<Item name="Toolbar_AddSubtitles_Top">Add Subtitles</Item>
+	<Item name="ICSetting">IC setting</Item>
+	<Item name="NormalIC">Normal IC</Item>
+	<Item name="RegisterGroup">Register group</Item>
+	<Item name="RedRegister">Red register</Item>
+	<Item name="GreenRegister">Green register</Item>
+	<Item name="BlueRegister">Blue register</Item>
+	<Item name="HighByte">High byte</Item>
+	<Item name="LowByte">Low byte</Item>
+	<Item name="HelpDoc">Help Doc</Item>
+	<Item name="PrayAutioTip">Если вам нужно использовать аудио модуль, предоставьте несколько mp3-файлов, соответствующих именам молитв. Imsak->1.mp3 Fajr->2.mp3 Dhuhr->3.mp3 Asr->4.mp3 Maghrib->5.mp3 Isha->6.mp3 MidNight->7.mp3 .</Item>
+<Item name="Confirm Password">Confirm Password</Item>
+<Item name="PasswordInvalidTip">The password must be a number + letter combination with a length of 8~16.</Item>
+<Item name="PasswordUnEqual">The password entered twice is different.</Item>
+<Item name="PasswordTooSimple">The system has detected that the device's Wi-Fi password is too simple. Please reset it.</Item>
+<List name="OutputWindowString" id="75">The system has detected that the device's Wi-Fi password is too simple. Please reset it.</List>
+<Item name="Logout">Logout</Item>
+<Item name="LogoutYesOrNo">Is the user logged out?</Item>
+<Item name="Login">login</Item>
+<Item name="WifiSettingOK">The setting is successful, please reconnect to Wi-Fi.</Item>
+<Item name="UserName">User name</Item>
+<Item name="InputPassword">Input password</Item>
+<Item name="Register">Register</Item>
+<Item name="GetCheckCode">GetCheckCode</Item>
+<Item name="InputCheckCode">Input the check code</Item>
+<Item name="RegisterError">Registration error</Item>
+<Item name="PhoneNum">Cellphone number</Item>
+<Item name="CheckCode">Check code</Item>
+<Item name="ConnectNetwordToUse">Please use the software after connecting to the Internet</Item>
+<Item name="AuthorizedSuccess">Authorized success</Item>
+<Item name="UnsupportedLoginType">Unsupported login type</Item>
+<Item name="CheckCodeNotMatch">Check code does not match</Item>
+<Item name="InputRightPhone">Please enter the correct phone number</Item>
+<Item name="ResetPassword">Reset Password</Item>
+<Item name="PhoneNumError">Wrong format of phone number.</Item>
+<Item name="CheckCodeTimeoutInOneMinute">Verification code cannot be sent repeatedly within one minute</Item>
+<Item name="CheckCodeTimeout">Verification code transmission frequency is exceeded</Item>
+<Item name="CheckCodeSendError">The verification code failed to be sent.</Item>
+<Item name="InvalidToken">Invalid token</Item>
+<Item name="MissingRegInfo">Missing registration information</Item>
+<Item name="AgreeAndAccept">Agreen</Item>
+<Item name="TermsOfService">Services Agreement</Item>
+<Item name="Reacquire">Reacquire</Item>
+<Item name="SettingLoginPassword">Setting login password</Item>
+<Item name="Skip">Skip</Item>
+<Item name="NetworkErrorTip">Network error</Item>
+<Item name="Retry">Retry</Item>
+<Item name="PleaseGetCheckCode">Please get the check code.</Item>
+<Item name="KeepLogin">Keep login</Item>
+<Item name="IsLogoutUser">Logout the current user?</Item>
+<Item name="NotTipsAgin">Do not tips again</Item>
+<Item name="OpenDeviceLock">Enable device lock</Item>
+<Item name="ModifyDeviceLock">Modify device lock</Item>
+<Item name="CloseDeviceLock">Close device lock</Item>
+<Item name="DeviceHasLockedInfo">The device has been locked. Please enter your password.</Item>
+<Item name="DeviceLockPassword">Device lock password</Item>
+<Item name="NoInputNoDeviceLockTip">No password is required when device lock is not enabled.</Item>
+<Item name="UseOldPassword">Use current password</Item>
+<Item name="DeviceLockSetting">Device lock settings</Item>
+<Item name="DeviceLock">Device lock</Item>
+<Item name="KeepPassword">Keep password</Item>
+<Item name="AutoLogin">Auto login</Item>
+<Item name="PleaseInputOldPassword">Please enter the old password</Item>
+<Item name="OldPasswordError">Old password error</Item>
+<Item name="Old Password">Old password</Item>
+<Item name="New Password">New password</Item>
+<Item name="Action">Action</Item>
+
+<List name="OutputWindowString" id="76">The device lock password is incorrect.</List>
+<List name="OutputWindowString" id="77">Missing log content.</List>
+<List name="OutputWindowString" id="78">The machine code is wrong.</List>
+<List name="OutputWindowString" id="79">The length of the machine code is incorrect.</List>
+<List name="OutputWindowString" id="80">The length of the device lock password is incorrect.</List>
+<List name="OutputWindowString" id="81">XR809 is updating</List>
+<List name="OutputWindowString" id="82">XR809 idnvalid address</List>
+<List name="OutputWindowString" id="83">XR809 error</List>
+<List name="OutputWindowString" id="84">Start reading parameters</List>
+<List name="OutputWindowString" id="85">Finish reading parameters</List>
+<List name="OutputWindowString" id="86">Start to restore parameters</List>
+<List name="OutputWindowString" id="87">The parameters have been restored</List>
+<List name="OutputWindowString" id="88">The download is complete and is waiting to recover data.</List>
+<Item name="UseWechatQRCode">Use WeChat to scan the QR code</Item>
+<Item name="Activate">Activate</Item>
+<Item name="ActivateOffline">Activate offline</Item>
+<Item name="PleaseInputActiveCode">Please enter the activation code</Item>
+<Item name="ErrorActivateCode">Wrong activation code</Item>
+<Item name="NTPSetting">настройка времени сети</Item>
+<Item name="NetworkSame">Make sure that the device IP and router IP are on the same network segment.</Item>
+<List name="SystemBusName" id="99">[C100]  P10 28x16 8 развертки 8 точек рисования</List>
+	</language>
+</root>
+

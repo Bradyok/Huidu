@@ -1,0 +1,1601 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<language name="فارسی">
+<Item name="ABrighterThanB">گزینه آ پرنورتر از ب است</Item>
+<Item name="About">درباره</Item>
+<Item name="AbrightBoff">گزینه آ سفید و گزینه ب سیاه است</Item>
+<Item name="Add">اضافه كردن</Item>
+<Item name="Add File">اضافه کردن فایل</Item>
+<Item name="Add GIF">اضافه کردن گیف</Item>
+<Item name="AddFailed">اضافه کردن ناموفق است</Item>
+<Item name="AddFile">اضافه کردن فایل</Item>
+<Item name="AddGroup">اضافه کردن گروه</Item>
+<Item name="AddHypertext">اضافه كردن هايپرتكست</Item>
+<Item name="AddPicture">اضافه كردن عكس</Item>
+<Item name="AddProgram">اضافه كرد برنامه</Item>
+<Item name="AddRegion">اضافه كردن ناحيه</Item>
+<Item name="AddSuccess">اضافه کردن با موفقیت انجام شد</Item>
+<Item name="AdjustTime">تنظيم زمان</Item>
+<Item name="AdvancedSetting">پيشرفته</Item>
+<Item name="AdvancedSettings">تنظيمات پيشرفته</Item>
+<Item name="AlignCenter">مركز</Item>
+<Item name="AlignRight">راست چین</Item>
+<Item name="Alignment">Aligning type</Item>
+<Item name="All">همه</Item>
+<Item name="Allow">اجازه دادن</Item>
+<Item name="AllowPasswordAuthentication">اجازه تایید رمز عبور</Item>
+<Item name="AlreadyOpened">این صفحه نمایش در حال حاضر باز است</Item>
+<Item name="AlterBaudrate">Alter Baudrate</Item>
+<Item name="AntiClockwise rotation">چرخش خلاف جهت عقربه های ساعت</Item>
+<Item name="AreaBackground">منطقه پس زمینه</Item>
+<Item name="AreaDown">منطقه پایین</Item>
+<Item name="AreaLeft">منطقه چپ</Item>
+<Item name="AreaMaximize">حداکثر اندازه منطقه</Item>
+<Item name="AreaNoBorder">صفحه نمایش به علاوه شکل از کادر دور برای برنامه اصلی پشتیبانی نمی کند</Item>
+<Item name="AreaRight">منطقه راست</Item>
+<Item name="AreaUp">منطقه بالا</Item>
+<Item name="Associated">Associated</Item>
+<Item name="AutoAdjustTime">تنظیم اتوماتیک ساعت</Item>
+<Item name="AutoGetingIP">دریافت اتوماتیک ای پی</Item>
+<Item name="AutoHide">پنهان شدن اتوماتیک</Item>
+<Item name="AutoReSend">ارسال مجدد اتوماتیک</Item>
+<Item name="AutoSave">ذخیره اتوماتیک</Item>
+<Item name="AutoScanInterval">Auto Scan Time</Item>
+<Item name="AutoScanMode">Auto Scan Mode</Item>
+<Item name="AutoSearchScans">جستوجو اتوماتیک اسکن</Item>
+<Item name="AutoSwitching">انتقال خودکار</Item>
+<Item name="AutoUpdate">به روز رسانی اتوماتیک</Item>
+<Item name="Automatic">اتوماتیک</Item>
+<Item name="AutomaticInfo">اطلاعات اتوماتیک</Item>
+<Item name="BBrighterThanA">گزینه ب پرنورتر از گزینه آ است</Item>
+<Item name="Background">پس زمينه</Item>
+<Item name="BackgroundColor">رنگ پس زمینه</Item>
+<Item name="BackgroundSetting">تنظیمات پس زمینه</Item>
+<List name="BackgroupEffects" id="0">انتخاب تصادفی</List>
+<List name="BackgroupEffects" id="10">دور شدن</List>
+<List name="BackgroupEffects" id="11">نزدیک شدن و دور شدن پشت سرهم</List>
+<List name="BackgroupEffects" id="12">متقاطع شدن خطوط</List>
+<List name="BackgroupEffects" id="13">ایکولایزر</List>
+<List name="BackgroupEffects" id="14">حرکت به صورت هفت و هشت</List>
+<List name="BackgroupEffects" id="15">خاموش و روشن شدن</List>
+<List name="BackgroupEffects" id="16">رنگ ثابت</List>
+<List name="BackgroupEffects" id="17">شروع از وسط  و حرکت به سمت دو طرف و سمت وسط</List>
+<List name="BackgroupEffects" id="18">حرکت دایره از دور و نزدیک شدن</List>
+<List name="BackgroupEffects" id="19">حرکت لوزی از دور و نزدیک شدن</List>
+<List name="BackgroupEffects" id="1">ثابت</List>
+<List name="BackgroupEffects" id="20">حرکت تصادفی خطوط</List>
+<List name="BackgroupEffects" id="21">حرکت خطوط شکسته</List>
+<List name="BackgroupEffects" id="2">حرکت به سمت چپ</List>
+<List name="BackgroupEffects" id="3">حرکت به سمت راست</List>
+<List name="BackgroupEffects" id="4">حرکت به سمت بالا</List>
+<List name="BackgroupEffects" id="5">حرکت به سمت پایین</List>
+<List name="BackgroupEffects" id="6">حرکت به سمت چپ سپس حرکت به سمت راست</List>
+<List name="BackgroupEffects" id="7">شروع از وسط و  حرکت به سمت دو طرف</List>
+<List name="BackgroupEffects" id="8">شروع از دو طرف و پایان در وسط</List>
+<List name="BackgroupEffects" id="9">نزدیک شدن</List>
+<Item name="BasicInfoSet">تنظیمات اطلاعات اولیه</Item>
+<Item name="BasicPara">مشخصات اولیه</Item>
+<Item name="BasicSetting">تنظيمات اوليه</Item>
+<Item name="Baudrate">Baudrate</Item>
+<Item name="BbrightAoff">گزینه آ مشکی است و گزینه ب سفید است</Item>
+<Item name="Begin">شروع کردن</Item>
+<Item name="Begin Play">شروع به پخش کردن</Item>
+<Item name="Black">مشكي</Item>
+<Item name="Blue">آبی</Item>
+<Item name="Boot">Boot status</Item>
+<Item name="BootStatus">Control card is currently in boot state waiting for the firmware update, please update the firmware!</Item>
+<Item name="Border">کادر دور</Item>
+<Item name="BorderColor">رنگ کادر دور</Item>
+<Item name="BorderSetting">تنظيمات کادر دور</Item>
+<Item name="BorderWidth">طول حاشیه دور</Item>
+<Item name="BorderWidthExceeds">بيشتر از عرض حاشیه دور</Item>
+<Item name="BorderWidthOutOfRange">عرض حاشیه دور ،خارج از رنج است</Item>
+<Item name="BoundDevice">Bound device</Item>
+<Item name="Broadcast">Broadcast</Item>
+<Item name="BuildArea">Build Area</Item>
+<Item name="Built-inUnitBoard">Common unit board</Item>
+<Item name="BusEdit">ویرایشگر</Item>
+<Item name="BusImage">Unit board pictures</Item>
+<Item name="BusName">اسم</Item>
+<Item name="BusNew">جدید</Item>
+<Item name="BusView">دیدن</Item>
+<Item name="Busy">در حال استفاده</Item>
+<Item name="Button">دکمه</Item>
+<Item name="ButtonDownTiming">دکمه زمان بندی به سمت پایین</Item>
+<Item name="ButtonSettings">دکمه اول</Item>
+<Item name="ButtonSettings2">دکمه دوم</Item>
+<Item name="ButtonSettings3">دکمه سوم</Item>
+<Item name="ButtonSettings4">دکمه چهارم</Item>
+<Item name="ButtonSwitch">دکمه انتقال برنامه ها</Item>
+<Item name="ButtonTiming">دکمه زمان بندی</Item>
+<Item name="ButtonUpTiming">دکمه زمان بندی به سمت بالا</Item>
+<Item name="ButtonorPlaySet">تنظیمات دکمه و پخش</Item>
+<Item name="CLKMirror">CLK polarity</Item>
+<Item name="CLKWidth">CLK Width</Item>
+<Item name="COM">پورت کام</Item>
+<Item name="COMERROR">ارتباط ناموفق است.لطفا سوکت های 2.3 را بررسی کنید</Item>
+<Item name="COMINFO">درباره ارتباط</Item>
+<Item name="COMURL">COM URL : http://www.huidu.cn</Item>
+<Item name="CPUModelError">پیغام درباره مدل سی پی یو</Item>
+<Item name="CanNotFindTheDefaultProfile">فایل کانفیگ پیش فرض را نمی تواند پیدا کند</Item>
+<Item name="Cancel">لغو کردن</Item>
+<Item name="CannotFindNetWordDrive">درایو و یا خود کارت شبکه را نمی تواند پیدا کند</Item>
+<Item name="CannotOpenExcle">فایل اکسل را نمی تواند باز کند.نرم افزار اکسل را بر روی سیستم خود نصب کنید</Item>
+<Item name="CardIpSeting">تنظیمات ای پی کارت کنترلر</Item>
+<Item name="CardModel">مدل کارت کنترلر</Item>
+<Item name="CardNumber">شماره کارت کنترلر</Item>
+<Item name="CardOnlySupportFullColor">کارت کنترلر فقط 7 رنگ را پشتیبانی می کند</Item>
+<Item name="CardOnlySupportTwoColor">کارت کنترلر فقط 3 رنگ را پشتیبانی می کند</Item>
+<Item name="CardRestart">راه اندازی مجدد کارت کنترلر..ری استارت</Item>
+<Item name="CardVersion">ورژن کارت کنترلر</Item>
+<Item name="Center">مرکز</Item>
+<Item name="CenterAlign">وسط چین</Item>
+<Item name="CfwBackgroundEdit">ویرایش انیمیشن پس زمینه</Item>
+<Item name="Change">تغيير</Item>
+<Item name="Channel">کانال</Item>
+<Item name="CharSpacing">فاصله کاراکترها</Item>
+<Item name="CheckAll">انتخاب همه</Item>
+<Item name="CheckProgram">بررسی برنامه</Item>
+<Item name="ChecksumError">بررسی پیغام خطا</Item>
+<Item name="ChooseDeive">انتخاب دیوایس</Item>
+<Item name="ClassicBackground">پس زمینه</Item>
+<Item name="Clear">پاك كردن</Item>
+<List name="ClearEffects" id="0">پاک شدن بلافاصله</List>
+<List name="ClearEffects" id="10">بازشدن به سمت وسط از بالا و پایین</List>
+<List name="ClearEffects" id="11">باز شدن به از وسط به سمت چپ و راست</List>
+<List name="ClearEffects" id="12">باز شدن از چپ و راست به سمت وسط</List>
+<List name="ClearEffects" id="13">چسبیدن تیکه تیکه از سمت چپ</List>
+<List name="ClearEffects" id="14">چسبیدن تیکه تیکه از سمت بالا</List>
+<List name="ClearEffects" id="15">باز شدن از گوشه پایین سمت چپ</List>
+<List name="ClearEffects" id="16">باز شدن از گوشه پایین سمت راست</List>
+<List name="ClearEffects" id="17">باز شدن مثلثی از وسط به سمت دو طرف</List>
+<List name="ClearEffects" id="18">باز شدن مثلثی از دو طرف به سمت وسط</List>
+<List name="ClearEffects" id="19">پوشاندن چرخشی از وسط هم جهت چرخش عقربه های ساعت</List>
+<List name="ClearEffects" id="1">حرکت به چپ</List>
+<List name="ClearEffects" id="200">انتخاب تصادفی</List>
+<List name="ClearEffects" id="201">هیچ</List>
+<List name="ClearEffects" id="20">پوشاندن چرخشی از وسط عکس چرخش عقربه های ساعت</List>
+<List name="ClearEffects" id="21">به هم وصل شدن از سمت چپ وراست</List>
+<List name="ClearEffects" id="22">وصل شدن تیکه های خطی از بالا به هم</List>
+<List name="ClearEffects" id="23">وصل شدن تیکه های خطی از پایین به هم</List>
+<List name="ClearEffects" id="24">وصل شدن تیکه های خطی از چپ به هم</List>
+<List name="ClearEffects" id="25">وصل شدن تیکه های خطی از راست به هم</List>
+<List name="ClearEffects" id="26">وصل شدن تیکه های شطرنجی از چپ به هم</List>
+<List name="ClearEffects" id="27">وصل شدن تیکه های شطرنجی از بالا به هم</List>
+<List name="ClearEffects" id="2">حرکت به سمت راست</List>
+<List name="ClearEffects" id="3">حرکت به سمت بالا</List>
+<List name="ClearEffects" id="4">حرکت به سمت پایین</List>
+<List name="ClearEffects" id="5">حرکت به سمت چپ</List>
+<List name="ClearEffects" id="6">حرکت به سمت راست</List>
+<List name="ClearEffects" id="7">پوشاندن به سمت بالا</List>
+<List name="ClearEffects" id="8">پوشاندن به سمت پایین</List>
+<List name="ClearEffects" id="9">بازشدن به سمت بالا و پایین از وسط</List>
+<List name="platformList" id="hdplatform.huidu.cn">Release platform</List>
+<Item name="platform">platform</Item>
+<Item name="ClearScreeData">پاک کردن برنامه های صفحه نمایش</Item>
+<Item name="Clock">ساعت</Item>
+<Item name="ClockFrequency">فرکانس</Item>
+<Item name="ClockParameters">گزینه های تنظيم ساعت</Item>
+<Item name="Clockwise rotation">چرخش هم جهت عقربه های ساعت</Item>
+<Item name="Close">بستن</Item>
+<Item name="CloseScreen">بستن صفحه</Item>
+<Item name="Color">رنگ</Item>
+<Item name="ColorChannel">نوع رنگ</Item>
+<Item name="ColorChannelSet">تنظیمات نوع رنگ</Item>
+<Item name="ColorFilter">فیلتر رنگ</Item>
+<Item name="ColorInversion">وارونگی رنگ</Item>
+<Item name="ColorSingleSelect">انتخاب تک رنگ</Item>
+<Item name="ColorThreshold">Color threshold</Item>
+<Item name="ColorfulText">متن رنگارنگ</Item>
+<List name="ColorfulWordEffects" id="0">ثابت</List>
+<List name="ColorfulWordEffects" id="10">ضربه عمودی</List>
+<List name="ColorfulWordEffects" id="11">ضربه افقی</List>
+<List name="ColorfulWordEffects" id="12">نزدیک شدن</List>
+<List name="ColorfulWordEffects" id="13">حرکت رونده به سمت چپ</List>
+<List name="ColorfulWordEffects" id="14">حرکت رونده به سمت راست</List>
+<List name="ColorfulWordEffects" id="15">حرکت رونده به سمت بالا</List>
+<List name="ColorfulWordEffects" id="16">حرکت رونده به سمت پایین</List>
+<List name="ColorfulWordEffects" id="17">نزدیک شدن دو بعدی</List>
+<List name="ColorfulWordEffects" id="18">دور شدن دو بعدی</List>
+<List name="ColorfulWordEffects" id="1">حرکت موجی</List>
+<List name="ColorfulWordEffects" id="2">چرخش لغت</List>
+<List name="ColorfulWordEffects" id="3">ضربه ای به سمت چپ</List>
+<List name="ColorfulWordEffects" id="4">ضربه ای به سمت راست</List>
+<List name="ColorfulWordEffects" id="5">خاموش روشن</List>
+<List name="ColorfulWordEffects" id="6">ظاهر شدن لغت به لغت</List>
+<List name="ColorfulWordEffects" id="7">چرخش به چپ و راست</List>
+<List name="ColorfulWordEffects" id="8">کشیدن به سمت بالا</List>
+<List name="ColorfulWordEffects" id="9">تاب خوردن</List>
+<Item name="Column">ستون</Item>
+<Item name="CommStatus1">ارتباطات خوب</Item>
+<Item name="CommStatus2">ارتباطات عادی</Item>
+<Item name="CommStatus3">ارتباط ضعیف است.می تواند با آن ارتباط برقرار کند</Item>
+<Item name="CommStatus4">نمی تواند با آن ارتباط برقرار کند</Item>
+<Item name="CommTest">تست شبکه</Item>
+<Item name="Command">دستور دادن</Item>
+<Item name="CommandSmartSetting">تنظیمات هوشمند عادی</Item>
+<Item name="CommonSettings">تنظیمات عادی</Item>
+<Item name="CommunicationMode">حالت ارتباط</Item>
+<Item name="CommunicationSetting">تنظيمات ارتباطي</Item>
+<Item name="ConfirmRGBwidth">خطوط توسط یک داده ار جی بی کنترل می شود</Item>
+<Item name="ConfirmScanMode">تعیین حالت اسکن</Item>
+<Item name="Connected">ارتباط برقرار است</Item>
+<Item name="ConnectionSuccessful">ارتباط با موفقيت انجام شد</Item>
+<Item name="ContainOverlappingRegions">ناحيه اي که ايجاد کرده ايد ؛ روي هم قرار گرفته</Item>
+<Item name="ContentContainMultiLines">محتوای حاوی چند خطوط</Item>
+<Item name="ContinueMove">حرکت رونده</Item>
+<Item name="ContinueMoveUp">حرکت رونده به سمت بالا</Item>
+<Item name="Copy">كپي</Item>
+<Item name="Copyright">نماینده رسمی هویدو در ایران 1 67 57 67 0921</Item>
+<Item name="Count">شمارشگر</Item>
+<Item name="Count1">رقم</Item>
+<Item name="CountAdd">اضافه کردن عدد</Item>
+<Item name="CountColor">رنگ شمارشگر</Item>
+<Item name="CountDown">شمارشگر نزولي</Item>
+<Item name="CountReset">ری استارت شمارشگر</Item>
+<Item name="CountSub">کم کردن عدد</Item>
+<Item name="CountUp">شمارشگر صعودي</Item>
+<Item name="CradID">سریال کنترلر</Item>
+<Item name="CradName">اسم کنترلر</Item>
+<Item name="CrossBottom">دکمه</Item>
+<Item name="CrossCenter">مرکز</Item>
+<Item name="CrossGlobalProgram">برنامه کلی</Item>
+<Item name="CrossNoSupport">در این منطقه برنامه کلی پشتیبانی نمی شود.</Item>
+<Item name="CrossScreen">صفحه نمایش به علاوه شکل</Item>
+<Item name="CrossScreenParamsPageTip">1.Setting screen width and height is 3 steps；&#x000A;2.Select the color of screen ；</Item>
+<Item name="CrossScreenSetting">Cross screen settings</Item>
+<Item name="CrossSmartTip">The current screen showing normal text ,no need select smart set</Item>
+<Item name="CrossTop">Top</Item>
+<Item name="Custom">دستي</Item>
+<Item name="CustomIPTips">اگر کارت کنترل مسدود شده توسط فایروال، لطفا با پر کردن آدرس IP را به صورت دستی.</Item>
+<Item name="CustomTime">زمان دستی</Item>
+<Item name="CustomUnitBoard">Custom unit board</Item>
+<Item name="CustomizeIP">شخصی سازی ای پی IP</Item>
+<Item name="Cut">برش</Item>
+<Item name="Cyan">فیروزه ای</Item>
+<Item name="CycleTiming">چرخه زمان بندی</Item>
+<Item name="DHCPDNSAddr">DNS آدرس</Item>
+<Item name="DHCPGateway">DHCP Default Gateway</Item>
+<Item name="DHCPLease">DHCP leases</Item>
+<Item name="DHCPMask">DHCP Subnet Mask</Item>
+<Item name="DHCPServerAddr">DHCP server address</Item>
+<Item name="Data">اطلاعات</Item>
+<Item name="DataClearSuccess">اطلاعات با موفقیت پاک شد</Item>
+<Item name="DataFill">پرکردن اطلاعات</Item>
+<Item name="DataLenght">طول اطلاعات</Item>
+<Item name="DataLengthError">خطا در طول اطلاعات</Item>
+<Item name="DataMirror">اطلاعات برعکس</Item>
+<Item name="DataPolarity">قطب اطلاعات</Item>
+<Item name="DataPolaritySet">تنظیم قطب اطلاعات</Item>
+<Item name="DataSource">منبع اطلاعات</Item>
+<Item name="DateAndWeekLocationReplaced">روز و هفته محلي جايگزين شدند</Item>
+<Item name="Day">روز</Item>
+<Item name="Default">حالت پيشفرض</Item>
+<Item name="DefaultConnectDeviceType">حالت پیش فرض وصل شدن به کنترلر</Item>
+<Item name="DelayedSignal">سیگنال تاخیر</Item>
+<Item name="DeleteFailed">پاک نشد</Item>
+<Item name="DeleteScreen">پاک کردن صفحه نمایش</Item>
+<Item name="DeleteSuccess">پاک کردن با موفقیت انجام شد</Item>
+<Item name="DeleteThisData">تمامي برنامه هاي داخل کنترلر پاک شوند؟</Item>
+<Item name="DeleteThisFile">آيا اين فايل را پاك مي كنيد؟</Item>
+<Item name="DeleteThisProgram">آیا اين برنامه پاك شود؟</Item>
+<Item name="DeleteThisRegion">آیا اين ناحيه حذف شود؟</Item>
+<Item name="Deny">رد کردن</Item>
+<Item name="DestFile">فایل مورد نظر</Item>
+<Item name="DestIP">Dest IP </Item>
+<Item name="Detailed">دقیق</Item>
+<Item name="Detect">شناسايي</Item>
+<Item name="DetectDevice">تشخیص دستگاه</Item>
+<Item name="DetectFail">شناسايي انجام نشد</Item>
+<Item name="DetectSuccess">شناسايي با موفقیت انجام شد</Item>
+<Item name="Detecting">در حال شناسایی</Item>
+<Item name="Deviation">کالیبراسیون رطوبت</Item>
+<Item name="Device">دیوایس متحرک</Item>
+<Item name="DeviceChoosePageTip">1.Use U-disk， please select controller type;&#x000A;2.Appear the device name and match controller ID;&#x000A;3.Only one device and been found,then click next.</Item>
+<Item name="DeviceID">سریال کنترلر</Item>
+<Item name="DeviceManage">مدیریت کنترلر</Item>
+<Item name="DeviceName">اسم کنترلر</Item>
+<Item name="DialClock">ساعت دیجیتال</Item>
+<Item name="DialStyle">مدل ساعت</Item>
+<Item name="DialWeek">هفته</Item>
+<Item name="DialYear">تاریخ</Item>
+<Item name="DigitOnly">Digit only</Item>
+<Item name="Digital">ديجيتال</Item>
+<Item name="Direction">جهت</Item>
+<Item name="DisableBrightnessAdjustment">غیر فعال کردن تنظیم روشنایی</Item>
+<Item name="Disconnected">قطع شدن ارتباط</Item>
+<Item name="DiskSpace">فضای حافظه:</Item>
+<Item name="Display">نمایش دادن</Item>
+<List name="DisplayEffects" id="40">هنوز نمایش داده می شود</List>
+<List name="DisplayEffects" id="0">بدون حرکت</List>
+<List name="DisplayEffects" id="10">بازشدن به سمت وسط از بالا و پایین</List>
+<List name="DisplayEffects" id="11">باز شدن به از وسط به سمت چپ و راست</List>
+<List name="DisplayEffects" id="12">باز شدن از چپ و راست به سمت وسط</List>
+<List name="DisplayEffects" id="14">چسبیدن تیکه تیکه از سمت چپ</List>
+<List name="DisplayEffects" id="13">چسبیدن تیکه تیکه از سمت بالا</List>
+<List name="DisplayEffects" id="15">باز شدن از گوشه پایین سمت چپ</List>
+<List name="DisplayEffects" id="16">باز شدن از گوشه پایین سمت راست</List>
+<List name="DisplayEffects" id="17">باز شدن مثلثی از وسط به سمت دو طرف</List>
+<List name="DisplayEffects" id="18">باز شدن مثلثی از دو طرف به سمت وسط</List>
+<List name="DisplayEffects" id="19">پوشاندن چرخشی از وسط هم جهت چرخش عقربه های ساعت</List>
+<List name="DisplayEffects" id="1">حرکت به سمت چپ</List>
+<List name="DisplayEffects" id="200">انتخاب تصادفی</List>
+<List name="DisplayEffects" id="202">حرکت رونده به سمت چپ</List>
+<List name="DisplayEffects" id="203">حرکت رونده به سمت راست</List>
+<List name="DisplayEffects" id="204">حرکت رونده به سمت بالا</List>
+<List name="DisplayEffects" id="20">پوشاندن چرخشی از وسط..عکس چرخش عقربه های ساعت</List>
+<List name="DisplayEffects" id="21">به هم وصل شدن از سمت چپ وراست</List>
+<List name="DisplayEffects" id="23">وصل شدن تیکه های خطی از بالا</List>
+<List name="DisplayEffects" id="22">وصل شدن تیکه های خطی از پایین</List>
+<List name="DisplayEffects" id="25">وصل شدن تیکه های خطی از چپ</List>
+<List name="DisplayEffects" id="24">وصل شدن تیکه های خطی از راست</List>
+<List name="DisplayEffects" id="26">وصل شدن تیکه های شطرنجی از چپ</List>
+<List name="DisplayEffects" id="27">وصل شدن تیکه های شطرنجی از بالا </List>
+<List name="DisplayEffects" id="28">چسبیدن دانه برف از بالا</List>
+<List name="DisplayEffects" id="29">حرکت آبشاری از بالا</List>
+<List name="DisplayEffects" id="2">حرکت به سمت راست</List>
+<List name="DisplayEffects" id="30">چسبیدن دانه برف از پایین</List>
+<List name="DisplayEffects" id="31">حرکت آبشاری از پایین</List>
+<List name="DisplayEffects" id="32">حرکت لیزری از چپ</List>
+<List name="DisplayEffects" id="33">حرکت لیزری از راست</List>
+<List name="DisplayEffects" id="34">خاموش روشن شدن</List>
+<List name="DisplayEffects" id="35">چشمک زن</List>
+<List name="DisplayEffects" id="36">کشیدن به پایین</List>
+<List name="DisplayEffects" id="37">کشیدن به بالا</List>
+<List name="DisplayEffects" id="38">کشیدن به بالاوپایین از وسط</List>
+<List name="DisplayEffects" id="39">برعکس کردن</List>
+<List name="DisplayEffects" id="3">حرکت به سمت بالا</List>
+<List name="DisplayEffects" id="4">حرکت به سمت پایین</List>
+<List name="DisplayEffects" id="5">حرکت به سمت چپ</List>
+<List name="DisplayEffects" id="6">حرکت به سمت راست</List>
+<List name="DisplayEffects" id="7">پوشاندن به سمت بالا</List>
+<List name="DisplayEffects" id="8">پوشاندن به سمت پایین</List>
+<List name="DisplayEffects" id="9">ازشدن به سمت بالا و پایین از وسط</List>
+<Item name="DisplayState">نمایش وضعیت</Item>
+<Item name="Dll_Add">اضافه کردن</Item>
+<Item name="Dll_Data">اطلاعات</Item>
+<Item name="Docking">پادشاه توضیحات</Item>
+<Item name="DonotTips">آیا نکات نیست</Item>
+<Item name="DontChange">تغییر ندهید</Item>
+<Item name="DownloadSpeed">سرعت دانلود</Item>
+<Item name="Dwell">مکث روی صفحه</Item>
+<Item name="Edit">ویرایش</Item>
+<Item name="Editor">ويرايشگر</Item>
+<Item name="Effect">افکت نمایش</Item>
+<Item name="Effect Cover">cover</Item>
+<Item name="Effect Drift">snow</Item>
+<Item name="Effect FanShaped">shutter</Item>
+<Item name="Effect Flicker">flicker</Item>
+<Item name="Effect Laser">laser</Item>
+<Item name="Effect Move">move</Item>
+<Item name="Effect OpenAndClose">open-close</Item>
+<Item name="Effect PageTurning">paging</Item>
+<Item name="Effect Pull">pull</Item>
+<Item name="Effect Roll">roll</Item>
+<Item name="Effect WaterFall">fall</Item>
+<Item name="EffectSetting">تنظيمات افكت</Item>
+<Item name="EffectType">نوع افکت</Item>
+<Item name="EliminateGhosting">خط</Item>
+<Item name="Empty">خالی</Item>
+<Item name="EmptyScreen">صفحه نمایش خالی است</Item>
+<Item name="Enable">فعال کردن</Item>
+<Item name="EnableDhcp">DHCP فعال کردن</Item>
+<Item name="End Play">پایان پخش</Item>
+<Item name="EndIpAddr">End IP</Item>
+<Item name="EndToEnd">پشت سر هم</Item>
+<Item name="Equilibrium">تعادل</Item>
+<Item name="Error">خطا</Item>
+<Item name="EthSettingHelpA">براي تغيير تنظيمات نرم افزار ،بطور مستقيم ؛ ، آدرس کنترلر را تغيير ندهيد.</Item>
+<Item name="EthSettingHelpB">توجه:&#x000A;1.پس از موفقیت نرم افزار و تجهیزات آدرس نیز تغییر خواهد کرد.&#x000A;2. زمانی که چندین دستگاه متصل به طور همزمان به اطمینان حاصل شود که دستگاه آدرس MAC منحصر به فرد است.</Item>
+<Item name="Ethernet">شبکه</Item>
+<Item name="EthernetAddressSettingSuccess">تنظیمات آدرس شبکه با موفقیت انجام شد</Item>
+<Item name="EthernetSettingInfo">اطلاعات درباره تنظیمات شبکه</Item>
+<Item name="Example">مثال</Item>
+<Item name="ExitDownloading">خروج از دانلود</Item>
+<Item name="ExpiredVerification">منقضی شده، نیاز به رمز عبور است</Item>
+<Item name="ExporBus">خروجی گرفتن از مشخصات کنترلر</Item>
+<Item name="ExporBusIn">وارد کردن مشخصات کنترلر</Item>
+<Item name="Export">خروجی گرفتن</Item>
+<Item name="ExportAdjustTimeFile">ارسال کردن فايل تنظيم زمان</Item>
+<Item name="ExportFile">خروجی گرفتن فایل </Item>
+<Item name="ExportFileFail">خروجی گرفتن انجام نشد</Item>
+<Item name="ExportImport">صادر کردن و واردکردن</Item>
+<Item name="ExportParam">خروجی گرفتن از مشخصات ماژول</Item>
+<Item name="ExportScreenFile">خروجی گرفتن از فایل صفحه نمایش</Item>
+<Item name="ExportSetedParams">خروجی گرفتن از مشخصات ماژول</Item>
+<Item name="ExportSuccess">خروجی گرفتن با موفقیت انجام شد.آیا فلش از سیستم شما به صورت امن جدا شود؟</Item>
+<Item name="ExportSuccess1">ارسال</Item>
+<Item name="ExportSuccess2">ارسال با موفقیت انجام شد</Item>
+<Item name="ExportToUDisk">خروجی گرفتن روی  فلش</Item>
+<Item name="Fahrenheit">درجه فارنهایت</Item>
+<Item name="Fast">سریع</Item>
+<Item name="Fastest">سریع ترین</Item>
+<Item name="FeatureNavigator">نمایندگی رسمی هویدو در ایران  1 67 57 67 0921</Item>
+<Item name="File">فايل</Item>
+<Item name="FileConfigurationError">خطا در تنظيمات فايل</Item>
+<Item name="FileConfigurationPackageSentSuccessfully">فایل تنظیمات با موفقیت ارسال شد</Item>
+<Item name="FileDoesNotMatch">فايل مطابقت ندارد</Item>
+<Item name="FileList">ليست فايلها</Item>
+<Item name="FileMisidentified">اشتباه در شناسایی فایل</Item>
+<Item name="FileParametersError">اشكال در تنظيمات فايل(اشتباه در طول و عرض. و یا رنگ صفحه نمایش)</Item>
+<Item name="FileSendComplete">فايل با موفقيت ارسال شد</Item>
+<Item name="FileSize">حجم فایل</Item>
+<Item name="FileSuccessfullyReceived">دریافت فایل با موفقیت انجام شد</Item>
+<Item name="FilterColor">فيلتر رنگ</Item>
+<Item name="FindNewVersion">پیدا کردن نسخه جدید</Item>
+<Item name="FindScree">بررسی صفحه نمایش</Item>
+<Item name="FindSerial">پیدا کردن یک کنترلر با استفاده از پورت سریال</Item>
+<Item name="Finish">پايان</Item>
+<Item name="FinishTracingPoint">نقاط جستوجو پایان یافته است .</Item>
+<Item name="FirmwareMismatching">فریموار سازگار نیست</Item>
+<Item name="FirmwareVersion">نسخه فریموار</Item>
+<Item name="FirstPage">صفحه اول</Item>
+<Item name="FitMaxHint">حداکثر محدوده</Item>
+<Item name="FixedCellsWidth">طول سلول ها درست شد</Item>
+<Item name="FixedPlay">پخش درست شد.</Item>
+<Item name="FixedTime">زمان اختصاصی</Item>
+<Item name="Flash">swfفایل فلش</Item>
+<Item name="Floating">شناور</Item>
+<Item name="FlushLeft">چپ چین</Item>
+<Item name="Font">فونت</Item>
+<Item name="FontSize">سایز فونت</Item>
+<Item name="Foreground">روی زمینه</Item>
+<Item name="FoundDisk">حافظه جانبی پیدا شد</Item>
+<Item name="FramesTooMuch">تعداد زادی فریم داریم.تعداد فریم ها را کاهش دهیم.</Item>
+<Item name="FreeSpace">فضای آزاد</Item>
+<Item name="Frequency">فركانس</Item>
+<Item name="Friday">جمعه</Item>
+<Item name="From">از</Item>
+<Item name="From Max To Min">از بیشترین به کمترین</Item>
+<Item name="From Min To Max">از کمترین به بیشترین</Item>
+<Item name="GIF name">GIF Path</Item>
+<Item name="GammaCorrection">اصلاح گاما</Item>
+<Item name="GaryTip1">افزایش استفاده از حافظه به میزان 1/</Item>
+<Item name="General2">نسل 2</Item>
+<Item name="General4">نسل 4</Item>
+<Item name="General6">نسل 6</Item>
+<Item name="GeneratingData">اطلاعات تولید</Item>
+<Item name="GetFirmwareVersion">دریافت نسخه فریموار</Item>
+<Item name="GetSystemTime">دریافت زمان سیستم</Item>
+<Item name="Graph">مدل گرافیکی</Item>
+<Item name="GraphCount">تعداد</Item>
+<Item name="GrayLevel">میزان سطح طیف</Item>
+<Item name="Green">سبز</Item>
+<Item name="HDScreenFile">فایل صفحه نمایش اچ دی</Item>
+<Item name="HZoom">کشش افقی</Item>
+<Item name="Height">ارتفاع</Item>
+<Item name="HeightOfMoreTthan">"ارتفاع بیشتر از حد است"</Item>
+<Item name="Hide">مخفی</Item>
+<Item name="High">زیاد</Item>
+<Item name="Hollow">نوشته تو خالی</Item>
+<Item name="Horizontal">افقي</Item>
+<Item name="Hour">ساعت</Item>
+<Item name="HourHand">عقربه ساعت شمار</Item>
+<Item name="HourRadius">شعاع ساعت</Item>
+<Item name="Humidity">رطوبت</Item>
+<Item name="IDAlreadyExists">سریال وجود دارد</Item>
+<Item name="IDInputError">سریال با خطا مواجه شد است</Item>
+<Item name="IPAddress">ای پی آدرس</Item>
+<Item name="IPNotLegitimate">ای پی قانونی نیست</Item>
+<Item name="IPResetting">ری استارت کردن ای پی</Item>
+<Item name="IPSetting">تنظیمات ای پی</Item>
+<Item name="Idle">بیهوده</Item>
+<Item name="IllegalFile">فایل غیرقانونی</Item>
+<Item name="Image">عکس</Item>
+<Item name="ImageAuto">مدل عکس</Item>
+<Item name="Images">عكس</Item>
+<Item name="ImportParam">واردکردن مشخصات</Item>
+<Item name="ImportScreenFile">واردکردن فایل صفحه نمایش</Item>
+<Item name="IncompleteDataWriting">نوشتن اطلاعات درحال کامل شدن است</Item>
+<Item name="Index">فهرست</Item>
+<Item name="InfraredRay">اشعه مادون قرمز</Item>
+<Item name="InitialState">حالت اولیه</Item>
+<Item name="InitializeSuccess">مقدار دهی اولیه با موفقیت انجام شد</Item>
+<Item name="InputSmartSettingName">لطفا نام تنظیمات هوشمند خود را وارد کنید</Item>
+<Item name="Insert">واردکردن</Item>
+<Item name="InsertColumn">درج ستون</Item>
+<Item name="InsertRow">درج رديف</Item>
+<Item name="Inverse">برعکس</Item>
+<Item name="IsDeleteAllScreen">همه  صفحه نمایش ها حذف شود؟</Item>
+<Item name="IsExportVideo">از چه فیلم هایی خروجی گرفته شود</Item>
+<Item name="IsSaveFile">آیا شما میخواهید این فایل ها ذخیره شود؟</Item>
+<Item name="IsSendToCard">آیا میخواهید این فایل به کنترلر ارسال شود؟</Item>
+<Item name="IsTheLatestVersion">جهت دریافت جدیدترین نرم افزار با شماره 1 67 57 67 0921 نمایندگی ایران تماس بگیرید</Item>
+<Item name="Large">بزرگ</Item>
+<Item name="LastPage">آخرین صفحه</Item>
+<Item name="LeftToRight">چب به راست</Item>
+<Item name="LevelScreenshot">صفحه افقی</Item>
+<Item name="LightRows">تعداد خط های روشن در یک ماژول</Item>
+<Item name="LineSpacing">فاصله خطوط</Item>
+<Item name="Link">لینک</Item>
+<Item name="LinkState">وضعیت اتصال</Item>
+<Item name="LiveTime">زمان زنده</Item>
+<Item name="LocalDisck">هارد دیسک</Item>
+<Item name="LocalIpSeting">تنظیمات ای پی محلی</Item>
+<Item name="LockPara">قفل کردن مشخصات</Item>
+<Item name="Low">کم</Item>
+<Item name="LuminancePrior">درخشندگي</Item>
+<Item name="LuminanceSetting">تنظيمات شدت نور</Item>
+<Item name="LuminanceSettingSuccess">تنظيم شدت نور با موفقيت انجام شد</Item>
+<Item name="MACAddress">مک آدرس</Item>
+<Item name="MFRDate">MFR تاریخ</Item>
+<Item name="Max">حداکثر</Item>
+<Item name="MaxIPAddr">حداکثر ادرس ای پی</Item>
+<Item name="MaxUseImage">حداکثر استفاده از تصویر</Item>
+<Item name="MaximumOfHeight">حداكثر ارتفاع</Item>
+<Item name="MaximumOfRange">حداكثر پيكسل مجاز</Item>
+<Item name="MaximumOfRegions">حداكثر ناحيه</Item>
+<Item name="MaximumOfWidth">حداكثر طول</Item>
+<Item name="Memory">حافظه</Item>
+<Item name="Memory Size">سایز حافظه</Item>
+<Item name="MergeCells">ادغام كردن سلولها</Item>
+<Item name="Middle">متوسط</Item>
+<Item name="Min">دقيقه</Item>
+<Item name="MinIPAddr">کمترین مقدار آدرس آی پی</Item>
+<Item name="MinUseImage">حداقل استفاده از تصویر</Item>
+<Item name="MinuteHand">عقربه دقيقه شمار</Item>
+<Item name="Model">کارت کنترلر</Item>
+<Item name="Modify">تغییر</Item>
+<Item name="Module">ماژول</Item>
+<Item name="ModuleMismatching">نوع کنترلر باهم همخوانی ندارد</Item>
+<Item name="ModuleSelect">انتخاب برد کنترلر</Item>
+<Item name="Monday">دوشنبه</Item>
+<Item name="MoreSetting">تنظیمات بیشتر</Item>
+<Item name="MoreSettings">تنظیمات اضافه</Item>
+<Item name="MoveDown">حركت به سمت پايين</Item>
+<Item name="MoveUp">حركت به سمت بالا</Item>
+<Item name="Multi">Multi</Item>
+<Item name="MultiFrame">تصویر چند قاب</Item>
+<Item name="MultiLine">چند خط</Item>
+<Item name="MultiScreenDirectConnect">حالت چند صفحه نمایش</Item>
+<Item name="MultipeSend">ارسال چندتایی</Item>
+<Item name="MultipeSendHint">ارسال متعدد؛فقط در حالت IP ثابت قابل استفاده است</Item>
+<Item name="MultipleEffects">افکت چندتایی</Item>
+<Item name="MultipleLinesoftext">متن چند خطی</Item>
+<Item name="NICName">اسم مستعار</Item>
+<Item name="Name">اسم</Item>
+<Item name="NeedSensor">نیاز به سنسور است</Item>
+<Item name="NeedSpace">نیاز به فضای بیشتر</Item>
+<Item name="NetMark">Net Mark</Item>
+<Item name="NetWorkError">Current control card can only use compact mode, check whether the control card and the computer on the same network segment!</Item>
+<Item name="NewCrossScreen">صفحه نمایش به علاوه شکل جدید(&amp;C)</Item>
+<Item name="NewCrossScreen_G">صفحه نمایش به علاوه شکل جدید</Item>
+<Item name="NewGuideScreen">راهنما ساخت صفحه نمایش جدید</Item>
+<Item name="NewHypertext">فایل جديد</Item>
+<Item name="NewNormalScreen_G">صفحه نمایش جدید</Item>
+<Item name="NewScreen">&amp;صفحه جديد</Item>
+<Item name="NewTable">جدول جدید</Item>
+<Item name="Next">بعدي</Item>
+<Item name="NextPage">صفحه بعد</Item>
+<Item name="NextProgram">انتقال به برنامه بعدی</Item>
+<Item name="NextScan">اسکن بعدی</Item>
+<Item name="NoAssociation">هیچ ارتباطی</Item>
+<Item name="NoBorder">بدون کادر دور</Item>
+<Item name="NoFile">هیچ فایلی</Item>
+<Item name="NoFindConfigFiles">نمی تواند فایل مشخصات صفحه نمایش را پیدا کند،آیا ادامه می دهید</Item>
+<Item name="NoFoundDisk">هیچ حافظه ای یافت نشد!</Item>
+<Item name="NoInstallFlash">لطفا بررسی کنید که روی سیستم شما فلش پلیر نصب شده باشه</Item>
+<Item name="NoLimit">بدون محدودیت</Item>
+<Item name="NoSerial">کارت کنترلری که به پورت سریال وصل هست را نمی تواند پیدا کند</Item>
+<Item name="NoSerialConnection">ارتباط با پورت سریال ناموفق است</Item>
+<Item name="Noarea">بدون برنامه،ارسال ناموفق است</Item>
+<Item name="Noitemisselected">هیچ چیزی انتخاب نشده است</Item>
+<Item name="NormalShow">پخش عادی</Item>
+<Item name="NotSelected">بدون انتخاب</Item>
+<Item name="NotSupportGlobalProgram">صفحه نمایش از برنامه کلی پشتیبانی نمی کند</Item>
+<Item name="NotSupportLANUpgrade">برای بروز رسانی از کابل شبکه پشتیبانی نمی کند.لطفا از فلش و پورت سریال استفاده کنید</Item>
+<Item name="NotSupportTips">نکته:از ساعت.شمارشگر جدید.دما و رطوبت و تاریخ قمری پشتیبانی نمی کند</Item>
+<Item name="NumberOfProgramHasReachedItsMaximum">تعداد برنامه ها به حداکثر خود رسیده است</Item>
+<Item name="NumberOfRegionHasReachedItsMaximum">شماره ناحيه ها به حداکثر خود رسيده است</Item>
+<Item name="OEPolarity">OE Polarity</Item>
+<Item name="OEPolaritySet">OE polarity تنظیمات</Item>
+<Item name="OK">تاييد</Item>
+<Item name="Offline">آفلاین</Item>
+<Item name="OldVerCard">جستوجو برای کارت نسل 4</Item>
+<Item name="On-line">از خط</Item>
+<Item name="OnBottom">از پایین</Item>
+<Item name="OnLeft">از چپ</Item>
+<Item name="OnRight">از راست</Item>
+<Item name="OnTop">از بالا</Item>
+<Item name="OnlyAllowContainsAClockRegion">شما فقط مي توانيد يك ناحيه براي ساعت داشته باشيد</Item>
+<Item name="OnlyAllowContainsATempRegion">شما فقط مي توانيد يك ناحيه براي دما داشته باشيد</Item>
+<Item name="OnlyAllowContainsATimeRegion">فقط يک منطقه زماني زا انتخاب کنيد!</Item>
+<Item name="OnlyCard">فقط برای کارت کنترلر</Item>
+<Item name="Open">باز كردن</Item>
+<Item name="OpenAdv">بازکردن پیشرفته</Item>
+<Item name="OpenFileFail">باز کردن فايل مشکل دارد، ممکن است فايل شما خراب شده باشد</Item>
+<Item name="OpenFolder">بازکردن پوشه</Item>
+<Item name="OpenScreen">بازکردن صفحه نمایش</Item>
+<Item name="OperationSuccess">عمليات موفق</Item>
+<Item name="Orange">نارنجی</Item>
+<Item name="OriginX">X تنظيم</Item>
+<Item name="OriginY">Y تنظيم</Item>
+<Item name="Original">اصلی</Item>
+<Item name="OtherSeting">تنظيمات ديگر</Item>
+<Item name="Out">اطلاعات</Item>
+<Item name="OutOfMemory">بیشتر از حافظه است</Item>
+<Item name="OutOfShowMemory">بیشتر از حد نمایش حافظه است</Item>
+<List name="OutputWindowString" id="0">تجهیزات اسکن</List>
+<List name="OutputWindowString" id="10">اسم کارت کنترلر با موفقیت تنظیم شد</List>
+<List name="OutputWindowString" id="11">پاک کردن صفحه نمایش با موفقیت انجام شد</List>
+<List name="OutputWindowString" id="12">تنظیمات مشخصات صفحه نمایش با موفقیت انجام شد</List>
+<List name="OutputWindowString" id="13">تنظیمات زمان کارت کنترلر با موفقیت انجام شد</List>
+<List name="OutputWindowString" id="14">تنظیمات شدت نور با موفقیت انجام شد</List>
+<List name="OutputWindowString" id="15">تنظیمات زمان خاموش روشن شدن با موفقیت انجام شد</List>
+<List name="OutputWindowString" id="16">صفحه نمایش در تست</List>
+<List name="OutputWindowString" id="17">دستور ناشناخته</List>
+<List name="OutputWindowString" id="18">بدون مشخصات سخت افزار</List>
+<List name="OutputWindowString" id="19">دستور نامعتبر</List>
+<List name="OutputWindowString" id="1">دریافت مشخصات دستگاه</List>
+<List name="OutputWindowString" id="20">سیستم مشغول است</List>
+<List name="OutputWindowString" id="21">خطای طول</List>
+<List name="OutputWindowString" id="22">علامت نادرست است</List>
+<List name="OutputWindowString" id="23">شماره نادرست است </List>
+<List name="OutputWindowString" id="24">بدون مشخصات صفحه نمایش</List>
+<List name="OutputWindowString" id="25">خطا بسته</List>
+<List name="OutputWindowString" id="26">خطای ناشناختهr</List>
+<List name="OutputWindowString" id="27">اتمام مهلت ارسال</List>
+<List name="OutputWindowString" id="28">بازخورد خطای تجزیه بسته</List>
+<List name="OutputWindowString" id="29">آی پی با موفقیت اصلاح شد </List>
+<List name="OutputWindowString" id="2">تجهیزات آفلاین</List>
+<List name="OutputWindowString" id="30">بروز رسانی فریموار ناموفق است.لطفا دوباره تلاش کنید</List>
+<List name="OutputWindowString" id="31">تنظیمات انجام نشد</List>
+<List name="OutputWindowString" id="32">خطا را چک کنید</List>
+<List name="OutputWindowString" id="33">خطای پروتکل</List>
+<List name="OutputWindowString" id="34">خطای آموزش</List>
+<List name="OutputWindowString" id="35">فایل ها باهم مطابقت ندارن</List>
+<List name="OutputWindowString" id="36">خطای شماره بسته</List>
+<List name="OutputWindowString" id="37">عدم مطابقت نوع ماژول</List>
+<List name="OutputWindowString" id="38">خطای کانفیگ فایل</List>
+<List name="OutputWindowString" id="39">فایل های غیرقانونی</List>
+<List name="OutputWindowString" id="3">لطفا صفحه نمایش را میخواهید ارسال کنید را انتخاب کنید</List>
+<List name="OutputWindowString" id="40">خطای نوع سی پی یو</List>
+<List name="OutputWindowString" id="41">فریموار فقط هفت رنگ را پشتیبانی می کند،تک رنگ و سه رنگ را پشتیبانی نمی کند</List>
+<List name="OutputWindowString" id="42">فریموار فقط تک رنگ و سه رنگ را پشتیانی میکند،هفت رنگ را پشتیبانی نمی کنده</List>
+<List name="OutputWindowString" id="43">بروز رسانی با موفقیت انجام شد</List>
+<List name="OutputWindowString" id="44">پذیرش ناموفق است</List>
+<List name="OutputWindowString" id="45">خطای طول بسته</List>
+<List name="OutputWindowString" id="46">خطای شناسایی فایل</List>
+<List name="OutputWindowString" id="47">Sub-packet sequence number error</List>
+<List name="OutputWindowString" id="49">فایل با موفقیت دریافت شد</List>
+<List name="OutputWindowString" id="4">Select screen unbound equipment</List>
+<List name="OutputWindowString" id="50">سیگنال تاخیری</List>
+<List name="OutputWindowString" id="51">سیستم مشغول است</List>
+<List name="OutputWindowString" id="52">اطلاعات ناقص نوشته شده است</List>
+<List name="OutputWindowString" id="53">فریموار با موفقیت بروز رسانی شده است</List>
+<List name="OutputWindowString" id="54">مشخصات سخت افزار با موفقیت تنظیم شده است</List>
+<List name="OutputWindowString" id="55">Device bound is offline</List>
+<List name="OutputWindowString" id="56">تنظیمات اندازه صفحه نمایش نادرست است</List>
+<List name="OutputWindowString" id="57">شروع ارسال</List>
+<List name="OutputWindowString" id="58">تنظیمات با موفقیت انجام شد</List>
+<List name="OutputWindowString" id="59">انقضا سرویس</List>
+<List name="OutputWindowString" id="5">برنامه های ایجاد شده بیشتر از حافظه کنترلر است</List>
+<List name="OutputWindowString" id="60">تغییر فونت با موفقیت انجام شد</List>
+<List name="OutputWindowString" id="61">ارتباط مستقیم با موفقیت انجام شد</List>
+<List name="OutputWindowString" id="62">لغو ارتباط مستقیم با موفقیت انجام شد</List>
+<List name="OutputWindowString" id="63">Equipment in the Boot status,please update the firmware</List>
+<List name="OutputWindowString" id="64">تایید ناموفق است</List>
+<List name="OutputWindowString" id="65">چیزی را باز نمی گرداند</List>
+<List name="OutputWindowString" id="66">حجم فایل زیاد است</List>
+<List name="OutputWindowString" id="67">سریال کنترلر اشتباه است</List>
+<List name="OutputWindowString" id="68">سریال دستگاه نامعتبر است[%s]</List>
+<List name="OutputWindowString" id="69">تنظیم مجدد سریال دستگاه[%s]</List>
+<List name="OutputWindowString" id="6">فرمان با موفقیت انجام شد</List>
+<List name="OutputWindowString" id="7">ارسال اولیه</List>
+<List name="OutputWindowString" id="8">در حال ارسال</List>
+<List name="OutputWindowString" id="9">با موفقیت ارسال شد</List>
+<Item name="P10Colorful">M10（Colorful）</Item>
+<Item name="Pack">بسته عکس</Item>
+<Item name="PackageNumberError">خطای شماره بستهr</Item>
+<Item name="Packet">بسته</Item>
+<Item name="PacketError">خطای بسته</Item>
+<Item name="PacketSize">اندازه بسته</Item>
+<Item name="Page">ҳ</Item>
+<Item name="Pages">صفحات</Item>
+<Item name="PannelFill">"منظقه وجود دارد!"</Item>
+<Item name="ParallelSend">موازی ارسال کنید</Item>
+<Item name="ParametersReadbackSuccess">بازخواني پارامترها با موفقيت انجام شد</Item>
+<Item name="ParametersSetting">تنظیمات پارامتر</Item>
+<Item name="Parti-color">سه رنگ</Item>
+<Item name="Password">رمز عبور</Item>
+<Item name="PasswordAuthentication">تاييديه رمزعبور</Item>
+<Item name="PasswordError">رمز عبور اشتباه است</Item>
+<Item name="PasswordSetting">تنظيمات پسورد</Item>
+<Item name="Paste">چسباندن</Item>
+<Item name="Path">مسیر</Item>
+<Item name="Pause">مکث</Item>
+<Item name="PictrueProcessing">پردازش تصویر</Item>
+<Item name="PlaseSelectDevice">لطفا دستگاه را انتخاب کنید</Item>
+<Item name="Play">پخش</Item>
+<Item name="PlayBeforePowerProgram">Memory Last Show</Item>
+<Item name="PlayMemory Size">اندازه فایل در حال پخش</Item>
+<Item name="PlayMode">حالت پخش</Item>
+<Item name="PlayQuality">کیفت پخش</Item>
+<Item name="PlaySpeed">سرعت پخش</Item>
+<Item name="PlayTime">زمان نمايش</Item>
+<Item name="PlayTimes">زمان پخش</Item>
+<Item name="Playback Duration">مدت زمان پخش</Item>
+<Item name="Player">پخش کننده</Item>
+<Item name="Playing BeginFrames">شروع پخش فریم</Item>
+<Item name="Playing EndFrames">پایان پخش فریم</Item>
+<Item name="Playing Frames">پخش فریم</Item>
+<Item name="PleaseEnterTheBorderWidthOfTheTable">لطفا عرض مرز جدول را وارد کنید</Item>
+<Item name="PleaseEnterTheNumberOfCloumns">لطفا تعداد ستونها را وارد كنيد</Item>
+<Item name="PleaseEnterTheNumberOfRows">لطفا تعداد سطرها را وارد كنيد</Item>
+<Item name="PleaseSelect">لطفا انتخاب کنید</Item>
+<Item name="PleaseSelectAFile">لطفا يك فايل انتخاب كنيد</Item>
+<Item name="PleaseSelectAItem">لطفا يک آيتم انتخاب کنيد!</Item>
+<Item name="PleaseSelectAProgram">لطفا يك برنامه انتخاب كنيد!</Item>
+<Item name="PleaseSelectScreen">لطفا یک صفحه نمایش را انتخاب کنید</Item>
+<Item name="PleaseWait">لطفا منتظر بمانید</Item>
+<Item name="PlotPointsImage">Plot Points Image</Item>
+<Item name="PointCount">رقم دهی</Item>
+<Item name="Points">امتیازات صفحه نمایش</Item>
+<Item name="PopUdiskfailure">Popupfailed!</Item>
+<Item name="Port">پورت</Item>
+<Item name="PreProgram">انتقال به برنامه قبلی</Item>
+<Item name="PreProgramConctrl">کنترل برنامه</Item>
+<Item name="Prev">قبلي</Item>
+<Item name="PrevScan">قبلی</Item>
+<Item name="Preview">پيش نمايش</Item>
+<Item name="PreviewSetting">تنظيمات پيش نمايش</Item>
+<Item name="PreviousPage">صفحه قبلی</Item>
+<Item name="ProgramInformation">اطلاعات برنامه</Item>
+<Item name="ProgramSize">اندازه برنامه</Item>
+<Item name="ProgramSwitching">درحال انتقال برنامه</Item>
+<Item name="ProtocolError">خطای پروتکل</Item>
+<Item name="ProtocolTypeError">اشكال در نوع پروتكل ارتباطي</Item>
+<Item name="PullThreshold">آستانه کشیدن</Item>
+<Item name="QRCode">QR کد</Item>
+<Item name="QuitTest">خروج از تست</Item>
+<Item name="RFID"> RF  سریال</Item>
+<Item name="RFSetting">RF تنظیمات</Item>
+<Item name="RS232">RS232</Item>
+<Item name="RadioEffect">تک افکت</Item>
+<Item name="RandomColor">انتخاب رنگ به صورت تصادفی</Item>
+<Item name="ReadBack2">خواندن مجدد</Item>
+<Item name="ReadScreenParamsFromUDisk">خواندن مشخصات صفحه نمایش از روی حافظه جانبی</Item>
+<Item name="Readback">خواندن مجدد</Item>
+<Item name="RealTimeArea">منطقه زمانی</Item>
+<Item name="RealTimeFindCard">Real-time search card</Item>
+<Item name="RebootScreen">راه اندازی مجدد صفحه نمایش</Item>
+<Item name="ReceiveFailure">دریافت ناموفق</Item>
+<Item name="Record">ضبط کردن</Item>
+<Item name="RecordTips">Note: اگر نمی توانید تصویر را صحیح دریافت کنید . گزینه های ضبط را بررسی کنید</Item>
+<Item name="RectangleScreen">صفحه نمایش مستطیلی</Item>
+<Item name="Red">قرمز</Item>
+<Item name="Refresh">رفرش</Item>
+<Item name="RefreshFrequency">فرکانس رفرش</Item>
+<Item name="RefreshRate">رفرش ریت</Item>
+<Item name="RegionHeight">ارتفاع</Item>
+<Item name="RegionRect">Region Rect</Item>
+<Item name="RegionWidth">طول</Item>
+<Item name="Relevance">prior"menu-&gt;cooperate-&gt;communicate-&gt;TCP-&gt;relevant display"!</Item>
+<Item name="RememberProgram">برنامه را به یاد داشته باشید</Item>
+<Item name="Remove">پاک کردن</Item>
+<Item name="RemoveDevice">حذف دستگاه</Item>
+<Item name="RemoveDeviceSuccess1">حذف دستگاه با موفقیت انجام شد</Item>
+<Item name="RemoveDeviceSuccess2">حذف دستگاه با موفقیت انجام شد</Item>
+<Item name="Rename">تغيير نام</Item>
+<Item name="Repeat">تکرار</Item>
+<Item name="Reset">راه اندازی مجدد</Item>
+<Item name="ResetProgram">راه اندازی مجدد برنامه</Item>
+<Item name="RestartFailed">راه اندازی مجدد ناموفق است</Item>
+<Item name="RestartSuccess">راه اندازی مجدد کنترلر با موفیت انجام شد</Item>
+<Item name="RevertToDefaultSettings">بازیابی به حالت پیش فرض.آیا ادامه می دهید?</Item>
+<Item name="RightToLeft">راست-&gt;چپ</Item>
+<Item name="Romaji">رومی</Item>
+<Item name="Round">دور</Item>
+<Item name="RoundAndDigital">RoundAndDigital</Item>
+<Item name="RoundAndRomaji">RoundAndRomaji</Item>
+<Item name="RouterAddress">آدرس روتر</Item>
+<Item name="Row">سطر</Item>
+<Item name="SRCFile">منبع فایل</Item>
+<Item name="SWF name">SWF Path</Item>
+<Item name="Saturday">شنبه</Item>
+<Item name="Save">ذخيره</Item>
+<Item name="SaveToDefaultSetting">بعنوان حالت پيشفرض ذخيره شود</Item>
+<Item name="ScaleAndDigital">ScaleAndDigital</Item>
+<Item name="ScaleAndRomaji">ScaleAndRomaji</Item>
+<Item name="ScanMode">نوع اسکن</Item>
+<Item name="ScanRange">Scan Range</Item>
+<Item name="ScanValueB">فیلتر آبی</Item>
+<Item name="ScanValueG">فیلتر سبز</Item>
+<Item name="ScanValueR">فیلتر قرمز</Item>
+<Item name="Scanning">Scan</Item>
+<Item name="ScanningComplete">اسکن کامل شد</Item>
+<Item name="Schedule">روند</Item>
+<Item name="ScreenCentered">مرکز صفحه نمایش</Item>
+<Item name="ScreenChoosePageTip">Select the screen type </Item>
+<Item name="ScreenColor">رنگ صفحه نمایش</Item>
+<Item name="ScreenCount">تعداد صفحه نمایش</Item>
+<Item name="ScreenHeight">ارتفاع</Item>
+<Item name="ScreenInformation">اطلاعات صفحه نمایش</Item>
+<Item name="ScreenParameters">پارامترهاي صفحه نمايش</Item>
+<Item name="ScreenParametersSetting">تنظیمات مشخصات صفحه نمایش</Item>
+<Item name="ScreenParamsPageTip">1.Select the screen width and height Pixel(Width and Height meaning screen total Pixel)&#x000A;2.Select the color of screen ； &#x000A;3.The single scrren of total pixle is the amount of led lights.</Item>
+<Item name="ScreenSize">ابعاد صفحه نمای</Item>
+<Item name="ScreenSmartTip">The current screen showing normal text ,no need select smart set</Item>
+<Item name="ScreenTest">تست تابلو</Item>
+<Item name="ScreenType">نوع صفحه نمایش</Item>
+<Item name="ScreenWidth">طول</Item>
+<Item name="Search">جستجو</Item>
+<Item name="Searching">درحال جستوجو.</Item>
+<Item name="SearchingBegin">در حال جستوجو</Item>
+<Item name="SearchingEnd">پایان جستوجو</Item>
+<Item name="Sec">ثانيه</Item>
+<Item name="SecondHand">عقربه ثانيه شمار</Item>
+<Item name="SecondRadius">شعاع ثانيه</Item>
+<Item name="SelectDataPolarity">Please select the data polarity</Item>
+<Item name="SelectDefault">اگر شما نوع کارت کنترل نمی دانند، گزینه ای به طور پیش فرض انتخاب کنید.</Item>
+<Item name="SelectMode">انتخاب حالت</Item>
+<Item name="SelectOEPolarity">را لطفا انتخاب کنید OE polarity</Item>
+<Item name="SelectScan">"انتخاب!"</Item>
+<Item name="SelectScree">صفحه نمایش را انتخاب کنید</Item>
+<Item name="SendFile">ارسال فايل</Item>
+<Item name="SendParamsWhenFinish">پس از اصلاح پارامترها، لطفا روی «ارسال پارامترها» کلیک کنید</Item>
+<Item name="SendScreenParams">ارسال پارامتر</Item>
+<Item name="SendTimeOut">ارتباط برقرار نشد</Item>
+<Item name="SendingData">در حال ارسال اطلاعات...</Item>
+<Item name="SentSuccessfully">ارسال با موفقیت انجام شد</Item>
+<Item name="SerialNumber">شماره سریال</Item>
+<Item name="SerialPort">پورت سريال</Item>
+<Item name="SerialPortIsClosed">کارت کنترل LED که به پورت سریال متصل است یافت نشد.</Item>
+<Item name="SerialPortIsOccupied">پورت سریال اشغال شده است</Item>
+<Item name="SerialPortOpenError">اشكال در باز كردن پورت سريال</Item>
+<Item name="ServiceExpiration">انقضا خدمات</Item>
+<Item name="SetBrightnessFailed">روشنایی تنظیم نشد</Item>
+<Item name="SetBrightnessSuccess">تنظیم روشنایی با موفقیت انجام شد</Item>
+<Item name="SetScreenParam">تنظیمات صفحه نمایش با موفقیت انجام شد</Item>
+<Item name="SetTheBaudrateSuccessfully">تنظيم بادريت با موفقيت انجام شد</Item>
+<Item name="Setting">تنظيمات</Item>
+<Item name="SetupFailed">راه انداز ی ناموفق</Item>
+<Item name="ShowDate">نمايش تاريخ</Item>
+<Item name="ShowGroup">نشان دادن صفحه نمایش</Item>
+<Item name="ShowMode">حالت نمایش</Item>
+<Item name="ShowTime">نمايش ساعت</Item>
+<Item name="ShowWeek">نمايش هفته</Item>
+<Item name="Showpage">نشان دادن صفحات</Item>
+<Item name="ShuttingDown">خاموش شدن</Item>
+<Item name="SignalDelay">سیگنال تاخیر</Item>
+<Item name="SignalDelayHint">Part of the screen (such as some P5) latch STR or called LAT The signal is reversed with the other screen, if there is a flash point or line You can try it negated this option</Item>
+<Item name="SignalQuality">کیفیت سیگنال</Item>
+<Item name="Simplify">ساده کردن</Item>
+<Item name="SimplifyInfo">Simlify model is only suitable for single direct connection, LAN, only one module of the circumstances, IP addresses will automatically match.</Item>
+<Item name="Single">تكرنگ</Item>
+<Item name="SingleDirectMode">حالت اتصال مستقیم</Item>
+<Item name="SingleLine">تك خط</Item>
+<Item name="SingleLineoftext">متن رونده تک خط</Item>
+<Item name="SingleScreenBroadcasts">پخش تک صفحه</Item>
+<Item name="Size">سایز</Item>
+<Item name="Slow">آرام</Item>
+<Item name="Slowest">آهسته تر</Item>
+<Item name="Small">كوچك</Item>
+<Item name="SmartScanTips">گر صفحه نمایش تاریک روشن باشد، لطفا فرکانس ساعت را کاهش دهید.</Item>
+<Item name="SmartSetting">تنظیمات هوشمند</Item>
+<Item name="SmartSettingName">اسم تنظیمات هوشمند</Item>
+<Item name="SmartTips">Tips: a Pixel as Unit</Item>
+<Item name="Snapshot">Snapshot</Item>
+<Item name="SnapshotTip">اگر نقاط روشن نباشد، نقاط خالی را وارد کنید</Item>
+<Item name="Solid color">تک رنگ</Item>
+<Item name="Space">فاصله</Item>
+<Item name="SpecifiedDate">تاریخ اختصاص داده شده</Item>
+<Item name="SpecifiedTime">زمان اختصاص داده شده</Item>
+<Item name="SpecifyValue">یک مقدار را مشخص کنید</Item>
+<Item name="Speed">سرعت</Item>
+<Item name="SpeedPrior">سرعت</Item>
+<Item name="SplitCell">از هم جدا كردن سلولها</Item>
+<Item name="SplitHorizontal">جدا كردن افقي</Item>
+<Item name="SplitVertical">جدا كردن عمودي</Item>
+<Item name="Standard">استاندارد</Item>
+<Item name="StartUpImage">انیمیشن آغازین</Item>
+<Item name="StartingUp">روشن كردن</Item>
+<Item name="StateA">State A</Item>
+<Item name="StateB">State B</Item>
+<Item name="StateC">State C</Item>
+<Item name="StateD">State D</Item>
+<Item name="Static">Static</Item>
+<Item name="Status">حالت</Item>
+<Item name="StepBack">برگرداندن</Item>
+<Item name="Stop">ֹͣ</Item>
+<Item name="Stroke">حاشیه</Item>
+<Item name="StyleName">اسم مدل</Item>
+<Item name="StyleText">متن</Item>
+<Item name="SubPacketSequenceNumberError">خطای شماره سریال بسته</Item>
+<Item name="SuccessfullyModified">"menddone!"</Item>
+<Item name="Sunday">يكشنبه</Item>
+<Item name="SupportRegionsOverlap">پشتیبانی از منطقه هم پوشانی</Item>
+<Item name="SuspendPreview">مکث پیش نمایش</Item>
+<Item name="SwapBlueGreen">تبادل آبی و سبز</Item>
+<List name="SystemBusName" id="0">[C1]φ4.75(φ3.75)1R1G   1/16S HUB08 64X32（Indoor）  [A1]</List>
+<List name="SystemBusName" id="10">[C11]P10       1R1G1B 1/8S  HUB08 32X16 HLL</List>
+<List name="SystemBusName" id="11">[C12]P10       1R1G1B 1/4S  HUB75 32X16  [A13]</List>
+<List name="SystemBusName" id="12">[C13]P8        1R1G1B 1/5S   HUB75 40X20 JHG  [A60]</List>
+<List name="SystemBusName" id="13">[C14]P8        1R1G1B 1/4S  HUB08 32X16  [A8]</List>
+<List name="SystemBusName" id="14">[C15]P12/P16   2R1G   1/4S  HUB12 16X8（P16） [A12]</List>
+<List name="SystemBusName" id="15">[C16]P13.33    1R1G1B 1/3S  HUB08 24X12 HLL  [A49]</List>
+<List name="SystemBusName" id="16">[C17]P13.33    1R1G1B 1/3S  HUB08 24X12 JHG  [A57]</List>
+<List name="SystemBusName" id="17">[C18]P16       1R1G1B 1/5S  HUB08 20X10 HLL  [A52]</List>
+<List name="SystemBusName" id="18">[C19]P16       1R1G1B 1/1S  HUB40 16X8  [A29]</List>
+<List name="SystemBusName" id="19">[C20]P10       1R1G1B 1/4S  HUB75 32X16  [A11]</List>
+<List name="SystemBusName" id="1">[C2]φ3.75(φ5)1R     1/16S HUB08 64X32（Indoor）  [A1]</List>
+<List name="SystemBusName" id="20">[C21]P25       2R1G1B 1/1S  HUB40 16X8</List>
+<List name="SystemBusName" id="21">[C22]P10-P20   1G2R1B 1/4S  HUB12 16X8  [A61]</List>
+<List name="SystemBusName" id="22">[C23]P10-P20   2R1G1B 1/4S  HUB12 16X8  [A80]</List>
+<List name="SystemBusName" id="23">[C24]P13.33-P26.66  2R1G1B 1/4S  HUB12 12X6</List>
+<List name="SystemBusName" id="24">[C25]P20  1R1G 1/4S  HUB26 16*16（ZHGD） [A66]</List>
+<List name="SystemBusName" id="25">[C26]P13.33  1R1G1B 1/6S  HUB08 24*12（HLL） [A55]</List>
+<List name="SystemBusName" id="26">[C27]P10  1R 1/4S  HUB12 32*16（QL） [A19]</List>
+<List name="SystemBusName" id="27">[C28]P10  1R1G1B 1/2S  HUB75 16*16</List>
+<List name="SystemBusName" id="28">[C29]P6  1R1G1B 1/8S  HUB75 32*16</List>
+<List name="SystemBusName" id="29">[C30]P6  1R1G1B 1/8S  HUB75 32*32</List>
+<List name="SystemBusName" id="2">[C3]P5         1R1G1B 1/16S HUB08 32X32  [A3]</List>
+<List name="SystemBusName" id="30">[C31]P10  1R1G1B 1/4S  HUB75 16*16[A17]</List>
+<List name="SystemBusName" id="31">[C32]P20  1R1G1B 1/1S  HUB75 16*8</List>
+<List name="SystemBusName" id="32">[C33]P25  2R1G1B 1/1S  HUB75 8*8  [A30]</List>
+<List name="SystemBusName" id="33">[C34]P13.33  1R 1/4S  HUB12 24*12 [A71]</List>
+<List name="SystemBusName" id="34">[C35]P10  1R1G 1/4S  HUB12 32*16  [A7]</List>
+<List name="SystemBusName" id="3">[C4]P5         1R1G   1/8S  HUB08 32*16（Vehicle screen） [A4]</List>
+<List name="SystemBusName" id="4">[C5]P5/P4      1R1G1B 1/16S HUB75 32X32（Indoor） [A1]</List>
+<List name="SystemBusName" id="5">[C6]P10        1R/1R1G     1/4S  HUB12 32X16（P10） [A8]</List>
+<List name="SystemBusName" id="6">[C7]P10        1R     1/4S  HUB08  32X16</List>
+<List name="SystemBusName" id="7">[C8]P10        1R     1/1S  HUB08 32X16[A31]</List>
+<List name="SystemBusName" id="8">[C9]P10        1R1G   1/4S  HUB08  No 138 32X16  [A13]</List>
+<List name="SystemBusName" id="9">[C10]P10        1R1G   1/4S  HUB12 32X16 [A19]</List>
+<Item name="SystemBusy">سيستم مشغول است،لطفا بعدا تلاش کنيد!</Item>
+<Item name="SystemOptimize">بهینه سازی سیستم</Item>
+<Item name="SystemTime">ساعت سيستم</Item>
+<Item name="Table">جدول</Item>
+<Item name="TargetTime">مقصد</Item>
+<Item name="Temp">دما</Item>
+<Item name="TempAdjust">تنظیم کنید</Item>
+<Item name="TempHumidity">دما+رطوبت</Item>
+<Item name="TempOrRHExist">منطقه دما و منطقه دما و رطوبت به طور همزمان نمی تواند وجود داشته باشد.</Item>
+<Item name="TempUnit">واحد دما</Item>
+<Item name="Temppoint1">اطمینان حاصل کنید که مدل حسگر آنچه که شما استفاده می کنید: DS18B20 است</Item>
+<Item name="Temppoint2">اطمینان حاصل کنید که مدل حسگر چیزی است که شما استفاده می کنید: AM2301</Item>
+<Item name="Test">تست</Item>
+<Item name="Text">متن</Item>
+<Item name="TextColor">رنگ متن</Item>
+<Item name="TextFile">.txt File</Item>
+<Item name="TextInfo">اطلاعات متن</Item>
+<Item name="TextProcess">پردازش متن</Item>
+<Item name="TextProcessing">پردازش متن</Item>
+<Item name="TheDeviceHasBeenOffline">دستگاه آفلاین است</Item>
+<Item name="ThisModuleNotSupportUDisk">تابلوي شما از فلش پشتيباني نمي كند</Item>
+<Item name="Thursday">پنجشنبه</Item>
+<Item name="TimeClock">ساعت دیجیتالk</Item>
+<Item name="TimeDifference">اختلاف زمانی</Item>
+<Item name="TimeParameters">تنظيم پارامترهاي زمان</Item>
+<Item name="TimeSettingSuccess">تنظيم ساعت با موفقيت انجام شد</Item>
+<Item name="TimeSwitch">زمان خاموش روشن شدن</Item>
+<Item name="TimeSwitchSettingSuccess">تنظيم روشن و خاموش شدن تابلو با موفقيت انجام شد</Item>
+<Item name="TimedRestart">راه اندازی مجدد زمان</Item>
+<Item name="TimerColor">رنگ ساعت</Item>
+<Item name="Timing Parameters">مشخصات زمان بندی</Item>
+<Item name="TimingControl">کنترل زمان</Item>
+<Item name="TimingMode">زمان نگهداری حا‍لت</Item>
+<Item name="TimingPause">زمانبدی مکث</Item>
+<Item name="TimingReset">زمانبندی راه اندازی مجدد</Item>
+<Item name="TimingSet">تنظیم زمان</Item>
+<Item name="Tip_Type1">Use  current communication address to connect UDP</Item>
+<Item name="Tip_Type2">Use IP address from returned device to connect UDP</Item>
+<Item name="Tip_Type3">Use IP address from returned device to connect TCP</Item>
+<Item name="Tip_Type4">Through agent address connected device</Item>
+<Item name="To">To</Item>
+<Item name="To2">To</Item>
+<Item name="Toolbar_AddColorful_Bottom">نشان دادن متن رنگی.کاربر می تواند انمیشن زمینه استفاده کند</Item>
+<Item name="Toolbar_AddColorful_Top">اضافه کردن منظقه انمیشنی</Item>
+<Item name="Toolbar_AddCount_Bottom">نشان دادن اطلاعات روی صفحه نمایش و تغییر دادن آن با استفاده از دکمه .پورت سریال و کابل شبکه</Item>
+<Item name="Toolbar_AddCount_Top">دکمه رقم</Item>
+<Item name="Toolbar_AddExcel_Bottom">فایل اکسل.جلوه های ویژه و پس زمینه انتخاب کنید</Item>
+<Item name="Toolbar_AddExcel_Top">منقظقه اضافه کردن اکسل</Item>
+<Item name="Toolbar_AddGlobalProgram_Bottom">Set up only one area of hypertext, text, time, etc.,  program can play by time</Item>
+<Item name="Toolbar_AddGlobalProgram_Top">اضافه کردن برنامه کلی</Item>
+<Item name="Toolbar_AddHypertext_Bottom">اضافه کردن عکس.فیلم.فلش.فایل</Item>
+<Item name="Toolbar_AddHypertext_Top">اضافه کردن فایل</Item>
+<Item name="Toolbar_AddProgram_Bottom">تنظیم 20 منطقه برای متن .عکس.فیلم.زمان و غیره</Item>
+<Item name="Toolbar_AddProgram_Top">اضافه کردن برنامه</Item>
+<Item name="Toolbar_AddTempRH_Bottom">نشان دادن دما و رطوبت با استفاده از سنسور</Item>
+<Item name="Toolbar_AddTempRH_Top">اضافه کردن منطقه دما و رطوبت</Item>
+<Item name="Toolbar_AddText_Bottom">اضافه کردن متن.انتخاب افکت و پس زمینه</Item>
+<Item name="Toolbar_AddText_Top">اضافه کردن متن</Item>
+<Item name="Toolbar_AddTime_Bottom">تاریخ.ساعت دیجیتال و عقربه ای</Item>
+<Item name="Toolbar_AddTime_Top">اضافه کردن زمان</Item>
+<Item name="Toolbar_AddTiming_Bottom">شمارشگر معکوس به سمت بالا و پایین.با استفاده از دکمه</Item>
+<Item name="Toolbar_AddTiming_Top">اضافه کردن شمارشگر</Item>
+<Item name="Toolbar_Adjusttime_Bottom">تنظیم کردن زمان کنترلر با کامپیوتر</Item>
+<Item name="Toolbar_Adjusttime_Top">تنظیم زمان</Item>
+<Item name="Toolbar_Check">تیک دار کردن برنامه</Item>
+<Item name="Toolbar_Copy">کپی</Item>
+<Item name="Toolbar_Delete">حذف</Item>
+<Item name="Toolbar_Down">پایین</Item>
+<Item name="Toolbar_ExportToUdisk_Bottom">ارسال صفحه نمایش ساخته شده به کنترلر</Item>
+<Item name="Toolbar_ExportToUdisk_Top">خروجی گرفتن روی حافظه جانبی</Item>
+<Item name="Toolbar_Paste">چسباندن</Item>
+<Item name="Toolbar_Preview1_Bottom">پیش نمایش صفحه</Item>
+<Item name="Toolbar_Preview1_Top">پیش نمایش صفحه نمایش</Item>
+<Item name="Toolbar_Preview2_Bottom">نمایش تمام صفحه های ساخته شده، برای ورود به صفحه تعیین شده، دوبار کلیک کنید.</Item>
+<Item name="Toolbar_Preview2_Top">پیش نمایش گروه ممکن نیست</Item>
+<Item name="Toolbar_Preview_Bottom">پیش نمایش برنامه</Item>
+<Item name="Toolbar_Preview_Top">پیش نمایش برنامه</Item>
+<Item name="Toolbar_Save">ذخیره</Item>
+<Item name="Toolbar_Search">جستوجو</Item>
+<Item name="Toolbar_Send_Bottom">ارسال برنامه های ساخته شده به روی تابلو</Item>
+<Item name="Toolbar_Send_Top">ارسال</Item>
+<Item name="Toolbar_Uncheck">برداشتن تیک برنامه</Item>
+<Item name="Toolbar_Up">بالا</Item>
+<Item name="TotalECard">تعد کل کارت های رابط شبکه</Item>
+<Item name="TotalFrames">کل فریم</Item>
+<Item name="TotalSpace">فضای کل</Item>
+<Item name="TracingPoint">شرح ترازبندی</Item>
+<Item name="TracingPointArrowKeys">نقطه ردیابی چپ کلیک کنید، می توانید از کلید های arrow برای کنترل نقطه به سمت استفاده کنید.</Item>
+<Item name="TracingPointError">خطا در نقطه ردیابی</Item>
+<Item name="TracingPointFail">ردیابی نقطه ناموفق است لطفا دوباره ردیابی کنید</Item>
+<Item name="TransitionThreshold">آستانه گذار</Item>
+<Item name="Transparent">شفافیت</Item>
+<Item name="Tricolor">هفت رنگ</Item>
+<Item name="Tuesday">سه شنبه</Item>
+<Item name="Twinkle">چشمک زن</Item>
+<Item name="TwoLinedisplay">دو صفحه نمایش</Item>
+<Item name="Type">مدل</Item>
+<Item name="Type1">مدل اول</Item>
+<Item name="Type2">مدل دوم</Item>
+<Item name="Type3">مدل سوم</Item>
+<Item name="Type4">مدل چهارم</Item>
+<Item name="TypeName">اسم مدل</Item>
+<Item name="U-DiskSucess">ارسال به حافظه جانبی با موفقیت انجام شد</Item>
+<Item name="UDisk">فلش</Item>
+<Item name="USE_HD2010">يک برد کنترل شناسايي شد، ولي شما بايد از ورژن هاي قديميتر نرم افزار استفاده کنيد.</Item>
+<Item name="UnableToOpenFile">فایل را نمی تواند باز کند</Item>
+<Item name="Unchanged">بدون تغییر</Item>
+<Item name="Undo">برگشت</Item>
+<Item name="UnexpectedError">قطع شدن ارتباط</Item>
+<Item name="Unit">واحد</Item>
+<Item name="UnitBoard">Unit board</Item>
+<Item name="UnitBoardInfo">اطلاعات ماژول</Item>
+<Item name="UnitBoardTips">اگر از ماژولی استفاده می کنید که طول آن بیشتر از 64 است. شما 64 را وارد کنید</Item>
+<Item name="UnitBoardWidth">طول ماژول</Item>
+<Item name="UnitBoards">Number of unit board</Item>
+<Item name="UnitColor">Unit color</Item>
+<Item name="UnitSize">امتیاز ماژول</Item>
+<Item name="Unmerge">لغو ادغام</Item>
+<Item name="Unselected">بدون انتخاب</Item>
+<Item name="Unspecified">Unspecified</Item>
+<Item name="UnsupportedInstructions">سفارش غیر قابل پشتیبانی</Item>
+<Item name="Untitled">Untitled</Item>
+<Item name="Update">به روز رسانی</Item>
+<Item name="UpdateFailed">به روز رسانی شکست خورده است.</Item>
+<Item name="UpdateFirmwareFinished">بروزرساني نرم افزار با موفقيت انجام شد</Item>
+<Item name="UpdatedSuccessfully">به روز رسانی موفق است، که آیا برای باز کردن فایل های به روز رسانی؟</Item>
+<Item name="UpdatingFirmware">بروز رسانی فریموار</Item>
+<Item name="Use">استفاده</Item>
+<Item name="Use138Decoder"> 138 decoder استفاده از آیسی</Item>
+<List name="Use138" id="0">استفاده از 138</List>
+<List name="Use138" id="1">بدون 138</List>
+<Item name="UseDefaultSetting">استفاده از تنظیمات سخت افزار</Item>
+<Item name="UseParams">با استفاده از مشخصات</Item>
+<Item name="UsedMemory">حافظه مورد استفاده</Item>
+<Item name="UsingHardwareSetup">استفاده از مشخصات سخت افزار(خواندن مشخصات)</Item>
+<Item name="VZoom">کشش عمودی</Item>
+<Item name="Valign">Valign</Item>
+<Item name="ValignBottom">پایین</Item>
+<Item name="ValignMiddle">وسط</Item>
+<Item name="ValignTop">بالا</Item>
+<Item name="Veritical">عمودي</Item>
+<Item name="VerticalPosition">موقعیت عمودی</Item>
+<Item name="VerticalScreenshot">عکس صفحه عمودی</Item>
+<Item name="VerticalStretch">کشش عمودی</Item>
+<Item name="Video">فیلم</Item>
+<Item name="Video FramesCount">کل فریم ها</Item>
+<Item name="Video name">مسیر فیلم</Item>
+<Item name="ViewHelp">مشاهده کمک</Item>
+<Item name="WaitingForInitialization">انتظار برای مقدار دهی اولیه</Item>
+<Item name="WaitingToBeSent">منتظر ارسال باشيد</Item>
+<Item name="Wednesday">چهارشنبه </Item>
+<Item name="White">سفيد</Item>
+<Item name="Width">طول</Item>
+<Item name="WidthOfMoreTthan">"عرض حداکثر!"</Item>
+<Item name="WindowPosition">موقعیت پنجره</Item>
+<Item name="WrongParameter">پارامتر اشتباه</Item>
+<Item name="Yellow">زرد</Item>
+<List name="color" id="0">تكرنگ</List>
+<List name="color" id="1">سه رنگ</List>
+<List name="color" id="2">فول کالر</List>
+<Item name="delete">پاك كردن</Item>
+<Item name="flashTips">Note: The SWF containing scripts is not supported yet, so you can not get its correct image.</Item>
+<List name="frequency" id="0">اتوماتيک</List>
+<List name="frequency" id="160">100Hz</List>
+<List name="frequency" id="140">120Hz</List>
+<List name="frequency" id="120">140Hz</List>
+<List name="frequency" id="100">160Hz</List>
+<List name="frequency" id="80">180Hz</List>
+<List name="frequency" id="60">200Hz</List>
+<List name="frequency" id="200">60Hz</List>
+<List name="frequency" id="180">80Hz</List>
+<List name="graylevel" id="1">بدون طیف</List>
+<List name="graylevel" id="2">4لول سطح طیف</List>
+<List name="graylevel" id="3">8لول سطح طیف</List>
+<List name="graylevel" id="4">16لول سطح طیف</List>
+<List name="graylevel" id="5">32لول سطح طیف</List>
+<Item name="group">گروه</Item>
+<Item name="hypertext">فایل ها</Item>
+<List name="listCtlDelay" id="0">بالا موثر</List>
+<List name="listCtlDelay" id="1">پایین موثر</List>
+<List name="listStrDelay" id="0">0</List>
+<List name="listStrDelay" id="1">1</List>
+<Item name="mAPPFace">تم نرم افزار(&amp;A)</Item>
+<Item name="mAbout">درباره(&amp;A)</Item>
+<Item name="mBlackStyle">مدل مشکی(L)</Item>
+<Item name="mBludStyle">مدل آبی(B)</Item>
+<Item name="mCalculator">ماشين حساب</Item>
+<Item name="mClearDisplayData">پاک کردن اطلاعات صفحه نمایش</Item>
+<Item name="mCommSetting">تنظيمات ارتباطي</Item>
+<Item name="mExit">خروج(&amp;E)</Item>
+<Item name="mFile">فايل(&amp;F)</Item>
+<Item name="mHardwareSetting">تنظیمات سخت افزار</Item>
+<Item name="mHelp">کمک(&amp;H)</Item>
+<Item name="mIPManagmentTools">ابزار مدیریت آی پی</Item>
+<Item name="mLanguage">زبان(&amp;L)</Item>
+<Item name="mLuminanceSetting">تنظيم روشنايي</Item>
+<Item name="mNarrow">zoom out</Item>
+<Item name="mNew">در صورت بروز مشکل با نمایندگی رسمی ایران09216757671 تماس بگیرید.... صفحه جديد(&amp;N)</Item>
+<Item name="mNotepad">نوت پد</Item>
+<Item name="mOpen">بازکردن(&amp;O)</Item>
+<Item name="mOperate">فعاليت(&amp;O)</Item>
+<Item name="mOutWindow">((پنجره اطلاعات((نمایندگی رسمی هویدو در ایران 1 67 57 67 0921</Item>
+<Item name="mPaint">کشیدن</Item>
+<Item name="mSave">ذخيره(&amp;S)</Item>
+<Item name="mSaveAs">ذخیره در</Item>
+<Item name="mScreenSetting"> در صورت بروز مشکل با نمایندگی رسمی ایران 09216757671 تماس بگیرید.......تنظيمات صفحه نمايش </Item>
+<Item name="mSendProject">ارسال برنامه</Item>
+<Item name="mSetting">تنظيمات(&amp;S)</Item>
+<Item name="mSilverStyle">مدل نقره ای(S)</Item>
+<Item name="mSystemSetting">تنظيمات</Item>
+<Item name="mTimeSetting">تنظيم زمان</Item>
+<Item name="mTool">ابزار(&amp;T)</Item>
+<Item name="mUpdateFirmware">بروز رسانی فریموار (در صورت بروز مشکل با نمایندگی رسمی ایران به شماره 09216757671 تماس بگیرید)</Item>
+<Item name="mView">نما(&amp;V)</Item>
+<Item name="mWatergreenStyle">مدل سبز آب(A)</Item>
+<Item name="mZoom">بزرگنمایی</Item>
+<Item name="minimum">دقیقه</Item>
+<Item name="ms"> ميلي ثانيه</Item>
+<List name="polarity" id="0">پایین موثر</List>
+<List name="polarity" id="1">بالا موثر</List>
+<Item name="program">برنامه</Item>
+<Item name="screen">صفحه</Item>
+<Item name="sec"> ثانيه</Item>
+<Item name="send">ارسال</Item>
+<Item name="static">ثابت</Item>
+<Item name="time">زمان</Item>
+<Item name="whirl180">برعکس کردن</Item>
+<Item name="whirl270">چرخش چپ</Item>
+<Item name="whirl90">چرخش راست</Item>
+<Item name="whirlt">چرخش</Item>
+<Item name="AddItemID">اضافه کردن ای دی</Item>
+<Item name="BeginIpAddr">شروع آی پی</Item>
+<Item name="CurrentSel">زبان انتخاب شده در حال حاضر</Item>
+<Item name="DetectsThisFileWasNotSaved">Detected by the currently selected file is not saved if coverage</Item>
+<Item name="English">انگلیسی</Item>
+<Item name="IDAndContentCanNotBeEmpty">شناسه و محتوا نباید خالی باشد</Item>
+<Item name="ModificationFails">اصلاح ناموفق است</Item>
+<Item name="ModifyItemID">اصلاح آی دی</Item>
+<Item name="ModifyOnlyOneItem">فقط یه آی دی را تغییر دهید</Item>
+<Item name="RemoveItemID">پاک کردن آی دی</Item>
+<Item name="ShowOnlyControlCardWifi">فقط کارت کنترل وای فای را نمایش دهید</Item>
+<Item name="ShowType">مدل نشان دادن</Item>
+<Item name="ThisIDAlreadyExists">آی دی موجود است</Item>
+<Item name="FillingTheCurrentLanguage">برای پر کردن زبان فعلی</Item>
+<Item name="WhetherToSaveTheCurrentModifiedFile">آیا تغییرات را ذخیره می کنید</Item>
+<Item name="RemoveDuplicate">حذف تکراری</Item>
+<Item name="Apply">درخواست</Item>
+<Item name="Remark">یادداشت</Item>
+<Item name="FirstMode">حالت اولویت</Item>
+<Item name="FirstMode_Normal">متعادل کننده</Item>
+<Item name="FirstMode_Speed">اولویت با سرعت</Item>
+<Item name="FirstMode_Text">اولویت با شدت نور</Item>
+<Item name="Random">انتخاب تصادفی</Item>
+<Item name="WhetherToReplace">آیا جایگزین شود؟</Item>
+<Item name="ImportFailed">وارد کردن ناموفق</Item>
+<Item name="ExportFailed">خروجی گرفتن ناموفق</Item>
+<Item name="ExportLanguage">خروجی گرفتن زبان</Item>
+<Item name="ImportLanguage">وارد کردن زبان</Item>
+<List name="SystemBusName" id="35">[C36]P10  1R1G1B 1/4S  HUB75 16*16</List>
+<Item name="ClickHereToUpdate">برای بروز رسانی اینجا کلیک کنید</Item>
+<Item name="ImportFile">وارد کردن فایل</Item>
+<List name="SystemBusName" id="36">[C37]P10  1R 1/4S  HUB12 32*16[A25]</List>
+<Item name="EditingLanguage">ویرایشگر زبان</Item>
+<List name="SystemBusName" id="37">[C38]P7.62  1R1G1B 1/8S  HUB08 32*16</List>
+<List name="SystemBusName" id="38">[C39]P5   1R1G1B   1/8S  HUB75 32*16 [A4]</List>
+<Item name="Fajr">صبح</Item>
+<Item name="Dhuhr">ظهر</Item>
+<Item name="Asr">عصر</Item>
+<Item name="Maghrib">مغرب</Item>
+<Item name="Isha">عشا</Item>
+<Item name="MidNight">نیمه شب</Item>
+<Item name="Country">کشور</Item>
+<Item name="City">شهر</Item>
+<Item name="NumColor">شماره رنگ</Item>
+<Item name="ExprotConfigFile">مشخصات خروجی</Item>
+<Item name="SoundModule">ماژول صدا</Item>
+<Item name="Year">سال</Item>
+<Item name="ImportTable">وارد کردن جدول</Item>
+<Item name="ExportBable">خروجی گرفتن جدول</Item>
+<Item name="ClearAll">پاک کردن</Item>
+<Item name="cfWords">کلمه رنگارنگ</Item>
+<Item name="OnlyOnePrayForScreen">Only supported a prayer area</Item>
+<Item name="BKSpeed">سرعت پس زمینه</Item>
+<Item name="EffectCycle">چرخش افکت</Item>
+<Item name="ExportConfigFile">خروجی گرفتن مشخصات</Item>
+<Item name="SoundSetting">تنظیمات صدا</Item>
+<List name="graylevel" id="6">64لول سطح طیف</List>
+<List name="graylevel" id="7">128لول سطح طیف</List>
+<List name="graylevel" id="8">256لول سطح طیف</List>
+<List name="SystemBusName" id="39">[C40]P10  1R1G1B   1/4S  HUB75  32X16[A12]</List>
+<Item name="SelectFirmwareVersion">انتخاب نسخه فریموار </Item>
+<Item name="NoSelectVersion">هیچ نسخه ای انتخاب نشد</Item>
+<Item name="Ordinal">شماره</Item>
+<Item name="VersionNum">نسخه</Item>
+<Item name="ConfirmSelect">تایید کردن</Item>
+<List name="SystemBusName" id="40">[C41]P10  1R1G1B  1/4S  HUB75 32*16</List>
+<Item name="FileNameAlreadyExistIsCover">نام فایل در حال حاضر وجود دارد، پوشش است؟</Item>
+<Item name="VersionAlreadyExist">نسخه در حال حاضر وجود دارد</Item>
+<Item name="DeleteThisGroup">این گروه را حذف کنید</Item>
+<Item name="FindNewVersionIsUpdate">نسخه جدید را پیدا کنید، آیا برای ارتقاء سیستم عامل به روز باشید؟</Item>
+<Item name="UpdateFile">بروز رسانی فایل</Item>
+<List name="SystemBusName" id="41">[C42]P10  1R1G1B  1/2S  HUB75 32*16</List>
+<List name="SystemBusName" id="42">[C43]P3  1R1G1B  1/16S  HUB75 64*64</List>
+<Item name="UdiskUpgrade">بروز رسانی با حاغظه جانبی</Item>
+<Item name="TimingPlay">شروع زمان</Item>
+<Item name="SelectVersionOnTheRight">لطفا نرم افزار را در سمت راست انتخاب کنید</Item>
+<List name="SystemBusName" id="43">[C44]P8  1R1G  1/8S  HUB08 32*32 (WQS)</List>
+<List name="SystemBusName" id="44">[C45]P5  1R1G1B  1/8S  HUB75 32*32 (CXH)</List>
+<Item name="TheSameSegment">اطمینان حاصل کنید که IP کارت کنترل و کامپیوتر در همان بخش شبکه قرار دارد.</Item>
+<Item name="Step">مکث</Item>
+<Item name="ShadowMode">حالت سایه</Item>
+<Item name="3DDeep">3D عمق</Item>
+<Item name="Gradient">شیب</Item>
+<Item name="Alpha">شفافیت</Item>
+<Item name="BorderStyle">مدل کادر دور</Item>
+<Item name="RoundRect">بیضی</Item>
+<Item name="Octagon">هشت وجهی</Item>
+<Item name="CustomStyle">سبک سفارشی</Item>
+<List name="SystemBusName" id="45">[C46]P10  1R  1/4S  HUB12 32*16</List>
+<Item name="3DText">متن سه بعدی</Item>
+<Item name="Whether_to_cancel_the_current_task">Cancel mission or not?</Item>
+<List name="SystemBusName" id="46">[C47]P10-P20   1G2R1B 1/4S  HUB12 32X16  Virtual pixel</List>
+<List name="SystemBusName" id="47">[C48]P10-P20   2R1G1B 1/4S  HUB12 32X16  Virtual pixel</List>
+<List name="SystemBusName" id="48">[C49]P13.33-P26.66  2R1G1B 1/4S  HUB12 24X12 Virtual pixel</List>
+<Item name="SinglePage">Single Page</Item>
+<Item name="TwinkleStyle">مدل چشمک زن</Item>
+<Item name="TwinkleSpeed">سرعت چشمک زن</Item>
+<Item name="NoTwinkle">بدون چشمک زن</Item>
+<Item name="3Dtwinkle">چشمک زن سه بعدی</Item>
+<Item name="SaveCountValue">به یاد آخرین شمارش</Item>
+<Item name="SpecialBorder">کادر دور ویژه</Item>
+<Item name="BootingDelayWasComingOn">روشن شدن، به تدریج روشن شود</Item>
+<Item name="RememberToThoose">انتخاب فعلی را به خاطر بسپارید</Item>
+<Item name="EndPageToEndPage">پایان صفحه برای پایان دادن به صفحه</Item>
+<List name="SystemBusName" id="49">[C50]P10  1R 1/1S  HUB08 RXP</List>
+<List name="OutputWindowString" id="70">برای حذف برنامه ها روی دکمه کلیک کنید[ON]</List>
+<List name="OutputWindowString" id="71">برای حذف برنامه ها روی دکمه کلیک کنید[OFF]</List>
+<List name="OutputWindowString" id="72">تنظیمات مشخصات[Enabled]</List>
+<List name="OutputWindowString" id="73">تنظیمات مشخصات[Disabled]</List>
+<Item name="Btn1ClearProgram">حذف برنامه ممنوع</Item>
+<Item name="DoubleSidedScreen">صفحه نمایش دو طرفه</Item>
+<Item name="networkMonitoring">نظارت بر</Item>
+<Item name="Toolbar_Add3D_Bottom">پشتیبانی از پس زمینه.روی زمینه.کلمات رنگارنگ.جلوه های سه بعدی</Item>
+<Item name="Toolbar_Add3D_Top">اضافه کردن متن سه بعدی</Item>
+<List name="SystemBusName" id="50">[C51]P6  1R1G1B 1/5S  HUB75 32X20</List>
+<Item name="WifiSpeedMode1">حالت سرعت زیاد</Item>
+<Item name="WifiSpeedMode2">حالت سرعت کم</Item>
+<Item name="All the devices automatically obtain IP">کلیه دستگاه ها بر روی دریافت آی پی خودکار تنظیم شدند"</Item>
+<Item name="The firmware information">اطلاعات فریموار</Item>
+<Item name="The device information">اطلاعات دستگاه</Item>
+<List name="SystemBusName" id="51">[C52]  1R1G  1/8  KR</List>
+<Item name="Server address">ادرس سرور</Item>
+<Item name="User name">اسم کاربر</Item>
+<Item name="Fill the same">همان را پر کنید</Item>
+<Item name="Cloud server Settings">Cloud تنظیمات سرور</Item>
+<Item name="Cloud server">Cloud سرور</Item>
+<Item name="Imsak">سریع</Item>
+<List name="SystemBusName" id="52">[C53]  1R1G1B  1/4S ICN2038S</List>
+<List name="SystemBusName" id="53">[C54]  P10  1R1G  1/4S HUB12 32x16 (YLR)</List>
+<List name="SystemBusName" id="54">[C55]  P8 1R1G1B 1/5S  HUB75 40X20</List>
+<List name="SystemBusName" id="55">[C56]  P10 1/4S No 138 MCGD</List>
+<List name="SystemBusName" id="56">[C57]  P8 1R1G1B 1/4S HUB75 (JJY)</List>
+<List name="SystemBusName" id="57">[C58]  P13.33 1R1G1B 1/3S HUB75 (LLR)</List>
+<List name="SystemBusName" id="58">[C59]  P3 1R1G1B 1/32S HUB75E (RBG) ICN2038S</List>
+<List name="SystemBusName" id="59">[C60]  P3 1R1G1B 1/32S HUB75E (RGB) ICN2038S</List>
+<List name="SystemBusName" id="60">[C61]  P6 1/8S HUB75 (BGR)</List>
+<List name="SystemBusName" id="61">[C62]  P6 1/8S HUB75 GK</List>
+<List name="SystemBusName" id="62">[C63]  P6 1/8S HUB75(HJ)</List>
+<List name="SystemBusName" id="63">[C64]  P6 1R1G1B 1/8S HUB75</List>
+<List name="SystemBusName" id="64">[C65]  P10 1R 1/4s(YLR)</List>
+<List name="SystemBusName" id="65">[C66]  P10 1R 1/4S HUB12</List>
+<List name="SystemBusName" id="66">[C67]  P10 1R1G1B 1/2S HUB75 (HJ)</List>
+<List name="SystemBusName" id="67">[C68]  P10 1R1G1B 1/2S HUB75 </List>
+<List name="SystemBusName" id="68">[C69]  P10 1R1G1B 1/3S HUB73A 24X24 (KSZ)</List>
+<List name="SystemBusName" id="69">[C70]  P10 1R1G1B 1/4S No 138 HUB75</List>
+<List name="SystemBusName" id="70">[C71]  P13.33 1R1G1B 1/3S 24x12</List>
+<List name="SystemBusName" id="71">[C72]  P16 1R1G 1/4S HUB08</List>
+<List name="SystemBusName" id="72">[C73]  P20 1R1G1B 1S</List>
+<List name="SystemBusName" id="73">[C74]  P10 1R1G1B 1/4S HUB75（KT）</List>
+<List name="SystemBusName" id="74">[C75]  P8  1R1G1B 1/4S HUB75 32x16 No138</List>
+<List name="SystemBusName" id="75">[C76]  P8  1R1G1B 1/4S HUB75 32x16 (HJ)</List>
+<List name="SystemBusName" id="76">[C77]  P10 1R1G1B 1/4S HUB75 32x16 No138</List>
+<List name="SystemBusName" id="77">[C78]  P10 1R1G1B 1/2S HUB75 32x16</List>
+<List name="SystemBusName" id="78">[C79]  P10 1R 1/4S HUB08 32x16</List>
+<List name="SystemBusName" id="79">[C80]  P10 1R1G1B 1/2S HUB75 32x16 (GK)</List>
+<List name="SystemBusName" id="80">[C81]  P10 1R1G1B 1/2S HUB75 32x16 (QL)</List>
+<List name="SystemBusName" id="81">[C82]  P16 1R1G 1/1S HUB12 16x8</List>
+<List name="SystemBusName" id="82">[C83]  P10 1R 1/4S HUB12 32x16 (KT)</List>
+<List name="SystemBusName" id="83">[C84]  P10 1R 1/4S HUB12 32x16 (GK)</List>
+<List name="SystemBusName" id="84">[C85]  P5  1R1G1B 1/8S HUB75 64x32</List>
+<List name="SystemBusName" id="85">[C86]  P10 1R1G1B 1/4S HUB75 32x16 No138 (HJCL)</List>
+<List name="SystemBusName" id="86">[C87]  P10 1R1G1B 1/2S HUB75E 32x16 No138 (HLL)</List>
+<List name="SystemBusName" id="87">[C88]  P10 1R1G1B 1/2S HUB75 32x16 No138</List>
+<List name="SystemBusName" id="88">[C89]  P6.66 1R1G1B 1/6S HUB75 48x24</List>
+<List name="SystemBusName" id="89">[C90]  P8  1R1G1B 1/5S HUB75 40x20</List>
+<List name="SystemBusName" id="90">[C91]  P4 1R1G1B 1/10S HUB75 80x40 ICN2038S</List>
+<List name="SystemBusName" id="91">[C92]  P4  1R1G1B 1/20S HUB75 80x40 ICN2038S</List>
+<List name="SystemBusName" id="92">[C93]  P10 1R1G1B 1/4S HUB75 32x16 No138 ICN2038S</List>
+<List name="SystemBusName" id="93">[C94]  P10 1R1G1B 1/2S  32x16 No138 ICN2038S</List>
+<List name="SystemBusName" id="94">[C95]  P10 1R1G1B 1/5S HUB75 40x20 ICN2038S</List>
+<List name="SystemBusName" id="95">[C96]  P10 1R1G1B 1/5S HUB75 40x20 SM16207S</List>
+<List name="SystemBusName" id="96">[C97]  H10 1R1G1B 1/2S HUB75 32x16</List>
+<List name="SystemBusName" id="97">[C98]  P8  1R1G1B 1/5S HUB75 40x20 ICN20378BP</List>
+<List name="SystemBusName" id="98">[C99]  dz0228 1R1G1B 1/1S HUB75 16x16</List>
+<Item name="ButtonCtrl">Button Control on</Item>
+<Item name="NoUse">Button Control off</Item>
+<Item name="Button1">دکمه 1</Item>
+<Item name="Button2">دکمه 2</Item>
+<Item name="Button3">دکمه 3</Item>
+<Item name="Button4">دکمه 4</Item>
+<Item name="DefaultBackground">پس زمینه پیشفرض</Item>
+<Item name="ImageBackground">عکس پس زمینه</Item>
+<Item name="SingleProgramSend">ارسال تک برنامه</Item>
+<Item name="latest">آخرین</Item>
+<Item name="newdata">اطلاعات جدید</Item>
+<Item name="Music">موزیک</Item>
+<Item name="Pray">اوقات شرعی</Item>
+<Item name="Aglinment">موقعیت</Item>
+<Item name="LeftAglinment">موقعیت چپ</Item>
+<Item name="CenterAglinment">موقعیت مرکز</Item>
+<Item name="RightAglinment">موقعیت راست</Item>
+<Item name="SplitType">مدل نوشته</Item>
+<Item name="SingleChar">حروف جداگانه</Item>
+<Item name="Word">کلمه</Item>
+<Item name="WifiSetting"> تنظیمات وای فای</Item>
+<Item name="SettingSuccessfully">تنظیمات با موفقیت انجام شد</Item>
+<Item name="SettingFailed">تنظیمات  ناموفق</Item>
+<Item name="Connectting">برقراری ارتباط</Item>
+<Item name="NoFoundAp">اپ را پیدا نکرد</Item>
+<Item name="ConnectFailed">ارتباط ناموفق</Item>
+<Item name="ConnectOK">ارتباط انجام شد</Item>
+<Item name="ApMode">ApMode</Item>
+<Item name="StationMode">StationMode</Item>
+<Item name="WifiPasswordLenghLess">رمز وای فای کوتاه است</Item>
+<Item name="WifiSSIDIsNULL">اسم وای فای خالی است</Item>
+<Item name="MaskError">MaskError</Item>
+<Item name="IPError">ای پی اررور</Item>
+<Item name="WifiSSIDTooLong">اسم وای فای طولانی است.</Item>
+<Item name="WifiPasswordTooLong">رمز وای فای طولانی است</Item>
+<Item name="SSIDPasswordInputTips">فقط اجازه دارید اعداد و حروف را وارد کنید 0~9 a~z A~Z _</Item>
+<Item name="Date">تاریخ</Item>
+<Item name="temp">درجه حرارت</Item>
+<Item name="Weather">هوا</Item>
+<Item name="Wind Direction">جهت باد</Item>
+<Item name="Wind speed">سرعت باد</Item>
+<Item name="Temp Unit">واحد دما</Item>
+<Item name="America">ایالات متحده</Item>
+<Item name="Australia">استرالیا</Item>
+<Item name="Canada">کانادا</Item>
+<Item name="China">چین</Item>
+<Item name="India">هندوستان</Item>
+<Item name="Indonesia">اندونزی</Item>
+<Item name="Iran">ایران</Item>
+<Item name="Japan">ژاپن</Item>
+<Item name="Korea">کشور کره</Item>
+<Item name="Malaysia">مالزی</Item>
+<Item name="Pakistan">پاکستان</Item>
+<Item name="Peru">پرو</Item>
+<Item name="Poland">لهستان</Item>
+<Item name="Russia">روسیه</Item>
+<Item name="Spain">اسپانیا</Item>
+<Item name="Thailand">تایلند</Item>
+<Item name="Turkey">ترکیه</Item>
+<Item name="United Arab Emirates">امارات متحده عربی</Item>
+<Item name="Vietnam">ویتنام</Item>
+<Item name="Sunny">واضح</Item>
+<Item name="Cloudy">ابری</Item>
+<Item name="Few clouds">ابری</Item>
+<Item name="Partly cloudy">تا قسمتی ابری</Item>
+<Item name="Overcast">یین</Item>
+<Item name="Windy">پر باد</Item>
+<Item name="Calm">Windless</Item>
+<Item name="Light breeze">نسیم ملایمی</Item>
+<Item name="Moderate">نسیم</Item>
+<Item name="Fresh breeze">نسیم</Item>
+<Item name="Strong breeze">باد</Item>
+<Item name="High wind">باد</Item>
+<Item name="Gale">باد</Item>
+<Item name="Strong gale">انفجار</Item>
+<Item name="Storm">طوفان</Item>
+<Item name="Violent storm">انفجار دیوانه باد</Item>
+<Item name="Hurricane">طوفان</Item>
+<Item name="Tornado">گردباد</Item>
+<Item name="Tropical storm">طوفان گرمسیری</Item>
+<Item name="Shower rain">دوش</Item>
+<Item name="Heavy shower rain">نور باران دوش</Item>
+<Item name="Thundershower">رعد و برق</Item>
+<Item name="Heavy thunderstorm">رعد و برق قوی</Item>
+<Item name="Hail">تگرگ</Item>
+<Item name="Light rain">باران نور</Item>
+<Item name="Moderate rain">باران ملایم</Item>
+<Item name="Heavy rain">باران سنگین</Item>
+<Item name="Extreme rain">بارندگی های شدید</Item>
+<Item name="Drizzle rain">نمنم باران</Item>
+<Item name="Storm">طوفان</Item>
+<Item name="Heavy storm">باران سنگین</Item>
+<Item name="Severe storm">باران سنگین</Item>
+<Item name="Freezing rain">برف و باران</Item>
+<Item name="Light snow">برف</Item>
+<Item name="Moderate snow">برف</Item>
+<Item name="Heavy snow">برف</Item>
+<Item name="Snowstorm">کولاک</Item>
+<Item name="Sleet">لعاب</Item>
+<Item name="Rain and snow">برف و باران</Item>
+<Item name="Shower snow">برف و باران آرایه</Item>
+<Item name="Snow flurry">دوش برف</Item>
+<Item name="Mist">غبار</Item>
+<Item name="Foggy">مه</Item>
+<Item name="Haze">مه</Item>
+<Item name="Sand">شن</Item>
+<Item name="Dust">طوفان شن</Item>
+<Item name="Duststorm">طوفان گرد و غبار</Item>
+<Item name="Sandstorm">طوفان شن</Item>
+<Item name="Hot">حرارت</Item>
+<Item name="Cold">سرد</Item>
+<Item name="Unknown">ناشناخته</Item>
+<Item name="Clear">Clear</Item>
+<Item name="No Sustained Wind">بدون باد پایدار</Item>
+<Item name="Northeast Wind">Northeasterly</Item>
+<Item name="East Wind">دانگ فنگ</Item>
+<Item name="Southeaster Wind">باد جنوب شرقی</Item>
+<Item name="South Wind">باد جنوب</Item>
+<Item name="Southwest Wind">باد جنوب غربی</Item>
+<Item name="Strong wind">باد</Item>
+<Item name="West Wind">غربی</Item>
+<Item name="Northwest Wind">باد شمال غربی</Item>
+<Item name="North Wind">شمال</Item>
+<Item name="Vortex Wind">چرخش باد</Item>
+<Item name="The Breeze Wind">نسیم</Item>
+<Item name="No wind">Windless</Item>
+<Item name="Light air">ملایم</Item>
+<Item name="Breeze">نسیم</Item>
+<Item name="Gentle breeze">نسیم</Item>
+<Item name="Strong wind">باد</Item>
+<Item name="Blast">انفجار</Item>
+<Item name="Gale">باد</Item>
+<Item name="Strong gale">انفجار</Item>
+<Item name="Whole gale">باد شدید</Item>
+<Item name="Storm wind">طوفان</Item>
+<Item name="Hurricane">طوفان</Item>
+<Item name="OfflineMode">حالت آفلاین</Item>
+<Item name="PleaseSelectDevice">Please select device</Item>
+<Item name="SeeMoreParameters">See more parameters</Item>
+<Item name="ExportProgram">Export program</Item>
+<List name="ErrorTips" id="00">Common problem hints</List>
+<List name="ErrorTips" id="01">Error / The width and height set in the screen setting exceeds the control range of the controller</List>
+<List name="ErrorTips" id="02">Error1 / U disk file format error</List>
+<List name="ErrorTips" id="03">Error2 / Excessive  program content</List>
+<List name="ErrorTips" id="04">NoFile / No program file in the U disk</List>
+<List name="ErrorTips" id="05">End / Setting expired</List>
+<Item name="ColorfulBorder">Colorful border</Item>
+<Item name="FixedText">Fixed text</Item>
+<List name="PM25String" id="00">No data</List>
+<List name="PM25String" id="01">Good</List>
+<List name="PM25String" id="02">Moderate</List>
+<List name="PM25String" id="03">Lightly Polluted</List>
+<List name="PM25String" id="04">Moderately Polluted</List>
+<List name="PM25String" id="05">Heavily Polluted</List>
+<List name="PM25String" id="06">Severely Polluted</List>
+<Item name="BootTips">Boot tips</Item>
+<Item name="ShowAll">Show all</Item>
+<Item name="NoShow">No show</Item>
+<Item name="PM25Adjust">Adjust PM2.5</Item>
+<Item name="PM10Adjust">Adjust PM10</Item>
+<Item name="QuickConfig">Quick config</Item>
+<Item name="Subtitles">Subtitles</Item>
+<Item name="Toolbar_AddSubtitles_Top">Add Subtitles</Item>
+<Item name="ICSetting">IC setting</Item>
+<Item name="NormalIC">Normal IC</Item>
+<Item name="RegisterGroup">Register group</Item>
+<Item name="RedRegister">Red register</Item>
+<Item name="GreenRegister">Green register</Item>
+<Item name="BlueRegister">Blue register</Item>
+<Item name="HighByte">High byte</Item>
+<Item name="LowByte">Low byte</Item>
+<Item name="HelpDoc">Help Doc</Item>
+<Item name="PrayAutioTip">هنگامی که شما نیاز به استفاده از ماژول صوتی دارید ، لطفاً چندین فایل mp3 متناسب با نامهای نماز ارائه دهید. Imsak->1.mp3 Fajr->2.mp3 Dhuhr->3.mp3 Asr->4.mp3 Maghrib->5.mp3 Isha->6.mp3 MidNight->7.mp3 .</Item>
+<Item name="Confirm Password">Confirm Password</Item>
+<Item name="PasswordInvalidTip">The password must be a number + letter combination with a length of 8~16.</Item>
+<Item name="PasswordUnEqual">The password entered twice is different.</Item>
+<Item name="PasswordTooSimple">The system has detected that the device's Wi-Fi password is too simple. Please reset it.</Item>
+<List name="OutputWindowString" id="75">The system has detected that the device's Wi-Fi password is too simple. Please reset it.</List>
+<Item name="Logout">Logout</Item>
+<Item name="LogoutYesOrNo">Is the user logged out?</Item>
+<Item name="Login">login</Item>
+<Item name="WifiSettingOK">The setting is successful, please reconnect to Wi-Fi.</Item>
+<Item name="UserName">User name</Item>
+<Item name="InputPassword">Input password</Item>
+<Item name="Register">Register</Item>
+<Item name="GetCheckCode">GetCheckCode</Item>
+<Item name="InputCheckCode">Input the check code</Item>
+<Item name="RegisterError">Registration error</Item>
+<Item name="PhoneNum">Cellphone number</Item>
+<Item name="CheckCode">Check code</Item>
+<Item name="ConnectNetwordToUse">Please use the software after connecting to the Internet</Item>
+<Item name="AuthorizedSuccess">Authorized success</Item>
+<Item name="UnsupportedLoginType">Unsupported login type</Item>
+<Item name="CheckCodeNotMatch">Check code does not match</Item>
+<Item name="InputRightPhone">Please enter the correct phone number</Item>
+<Item name="ResetPassword">Reset Password</Item>
+<Item name="PhoneNumError">Wrong format of phone number.</Item>
+<Item name="CheckCodeTimeoutInOneMinute">Verification code cannot be sent repeatedly within one minute</Item>
+<Item name="CheckCodeTimeout">Verification code transmission frequency is exceeded</Item>
+<Item name="CheckCodeSendError">The verification code failed to be sent.</Item>
+<Item name="InvalidToken">Invalid token</Item>
+<Item name="MissingRegInfo">Missing registration information</Item>
+<Item name="AgreeAndAccept">Agreen</Item>
+<Item name="TermsOfService">Services Agreement</Item>
+<Item name="Reacquire">Reacquire</Item>
+<Item name="SettingLoginPassword">Setting login password</Item>
+<Item name="Skip">Skip</Item>
+<Item name="NetworkErrorTip">Network error</Item>
+<Item name="Retry">Retry</Item>
+<Item name="PleaseGetCheckCode">Please get the check code.</Item>
+<Item name="KeepLogin">Keep login</Item>
+<Item name="IsLogoutUser">Logout the current user?</Item>
+<Item name="NotTipsAgin">Do not tips again</Item>
+<Item name="OpenDeviceLock">Enable device lock</Item>
+<Item name="ModifyDeviceLock">Modify device lock</Item>
+<Item name="CloseDeviceLock">Close device lock</Item>
+<Item name="DeviceHasLockedInfo">The device has been locked. Please enter your password.</Item>
+<Item name="DeviceLockPassword">Device lock password</Item>
+<Item name="NoInputNoDeviceLockTip">No password is required when device lock is not enabled.</Item>
+<Item name="UseOldPassword">Use current password</Item>
+<Item name="DeviceLockSetting">Device lock settings</Item>
+<Item name="DeviceLock">Device lock</Item>
+<Item name="KeepPassword">Keep password</Item>
+<Item name="AutoLogin">Auto login</Item>
+<Item name="PleaseInputOldPassword">Please enter the old password</Item>
+<Item name="OldPasswordError">Old password error</Item>
+<Item name="Old Password">Old password</Item>
+<Item name="New Password">New password</Item>
+<Item name="Action">Action</Item>
+
+<List name="OutputWindowString" id="76">The device lock password is incorrect.</List>
+<List name="OutputWindowString" id="77">Missing log content.</List>
+<List name="OutputWindowString" id="78">The machine code is wrong.</List>
+<List name="OutputWindowString" id="79">The length of the machine code is incorrect.</List>
+<List name="OutputWindowString" id="80">The length of the device lock password is incorrect.</List>
+<List name="OutputWindowString" id="81">XR809 is updating</List>
+<List name="OutputWindowString" id="82">XR809 idnvalid address</List>
+<List name="OutputWindowString" id="83">XR809 error</List>
+<List name="OutputWindowString" id="84">Start reading parameters</List>
+<List name="OutputWindowString" id="85">Finish reading parameters</List>
+<List name="OutputWindowString" id="86">Start to restore parameters</List>
+<List name="OutputWindowString" id="87">The parameters have been restored</List>
+<List name="OutputWindowString" id="88">The download is complete and is waiting to recover data.</List>
+<Item name="UseWechatQRCode">Use WeChat to scan the QR code</Item>
+<Item name="Activate">Activate</Item>
+<Item name="ActivateOffline">Activate offline</Item>
+<Item name="PleaseInputActiveCode">Please enter the activation code</Item>
+<Item name="ErrorActivateCode">Wrong activation code</Item>
+<Item name="NTPSetting">تنظیم زمان شبکه</Item>
+<Item name="NetworkSame">Make sure that the device IP and router IP are on the same network segment.</Item>
+<List name="SystemBusName" id="99">[C100]  P10 28x16 8 رفتگر 8 امتیاز قرعه کشی</List>
+</language>
+</root>

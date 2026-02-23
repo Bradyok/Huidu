@@ -18,13 +18,13 @@ use crate::transfer::FileTransfer;
 use crate::xml;
 
 /// Default TCP port for Huidu BoxPlayer SDK protocol.
-pub const DEFAULT_PORT: u16 = 10001;
+pub const DEFAULT_PORT: u16 = huidu_protocol::packet::DEFAULT_PORT;
 
 /// SDK protocol version sent in SdkServiceAsk (confirmed from HCatNet.dll analysis).
 pub const SDK_VERSION: u32 = huidu_protocol::packet::SDK_CLIENT_VERSION;
 
 /// Heartbeat interval.
-pub const HEARTBEAT_INTERVAL: Duration = Duration::from_secs(30);
+pub const HEARTBEAT_INTERVAL: Duration = huidu_protocol::packet::HEARTBEAT_INTERVAL;
 
 /// Response timeout for SDK commands.
 pub const CMD_TIMEOUT: Duration = Duration::from_secs(15);
@@ -114,10 +114,11 @@ impl Client {
 
     async fn send_packet(&mut self, packet: &Packet) -> Result<()> {
         let bytes = packet.to_bytes();
+        let hex: String = bytes.iter().map(|b| format!("{b:02X}")).collect::<Vec<_>>().join("-");
+        debug!("Sent {:?} ({} bytes): {}", packet.command, bytes.len(), hex);
         let mut stream = self.stream.lock().await;
         stream.write_all(&bytes).await?;
         stream.flush().await?;
-        debug!("Sent {:?} ({} bytes)", packet.command, bytes.len());
         Ok(())
     }
 
@@ -137,6 +138,8 @@ impl Client {
                 return Err(Error::Connection("connection closed by device".into()));
             }
             drop(stream);
+            let hex: String = tmp[..n].iter().map(|b| format!("{b:02X}")).collect::<Vec<_>>().join("-");
+            debug!("Recv raw {} bytes: {}", n, hex);
             self.read_buf.extend_from_slice(&tmp[..n]);
         }
     }
@@ -155,8 +158,23 @@ impl Client {
         self.send_packet(&pkt).await?;
         // Wait for SdkServiceAnswer
         let resp = self.recv_with_timeout(CMD_TIMEOUT).await?;
-        if resp.command != Command::SdkServiceAnswer {
-            warn!("Expected SdkServiceAnswer, got {:?}", resp.command);
+        match resp.command {
+            Command::SdkServiceAnswer => {}
+            Command::SdkErrorAnswer => {
+                let code = if resp.payload.len() >= 2 {
+                    u16::from_le_bytes(resp.payload[..2].try_into().unwrap_or([0; 2])) as i32
+                } else {
+                    -1
+                };
+                let de = crate::error::DeviceError::from_code(code);
+                return Err(Error::Device {
+                    code,
+                    message: format!("SDK version rejected: {}", de.message()),
+                });
+            }
+            other => {
+                warn!("Expected SdkServiceAnswer, got {:?}", other);
+            }
         }
         Ok(())
     }
@@ -187,6 +205,18 @@ impl Client {
                     debug!("SDK response for {method}: {} bytes", response_xml.len());
                     xml::parse_result(&response_xml)?;
                     return Ok(response_xml);
+                }
+                Command::SdkErrorAnswer => {
+                    let code = if resp.payload.len() >= 2 {
+                        u16::from_le_bytes(resp.payload[..2].try_into().unwrap_or([0; 2])) as i32
+                    } else {
+                        -1
+                    };
+                    let de = crate::error::DeviceError::from_code(code);
+                    return Err(Error::Device {
+                        code,
+                        message: de.message().into(),
+                    });
                 }
                 Command::TcpHeartbeatAsk => {
                     // Auto-respond to heartbeat
