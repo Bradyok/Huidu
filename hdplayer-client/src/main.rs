@@ -283,6 +283,10 @@ enum Commands {
         /// Maximum seconds to wait for the device to report completion.
         #[arg(long, default_value_t = 600)]
         timeout: u64,
+        /// TCP port for the binary upgrade protocol (default 9528).
+        /// Use 10001 for legacy devices that only have port 10001 open.
+        #[arg(long, default_value_t = 9528)]
+        upgrade_port: u16,
     },
 
     /// Get file list with MD5 hashes and sizes (for verifying transfer integrity)
@@ -480,6 +484,111 @@ async fn main() -> anyhow::Result<()> {
             }
         }
     };
+
+    // UpgradeNative connects directly to the binary upgrade port — no SDK client needed.
+    if let Commands::UpgradeNative { file, poll_interval, timeout, upgrade_port } = &cli.command {
+        let path = std::path::Path::new(file.as_str());
+        if !path.exists() {
+            eprintln!("File not found: {file}");
+            std::process::exit(1);
+        }
+
+        // ── Version: firmware file ────────────────────────────────────────────
+        let raw = tokio::fs::read(path).await?;
+        let fw_version = hdplayer::upgrade::firmware_file_version(&raw)
+            .unwrap_or_else(|| "unknown".to_string());
+        drop(raw); // release 330 MB before the upgrade re-reads the file
+        println!("Firmware file version:  {fw_version}");
+
+        // ── Version: device before upgrade (via UDP discovery) ───────────────
+        // Use discovery rather than BoxStream so we don't depend on the SDK
+        // handshake succeeding (device may reject BoxStreamInit while busy).
+        let before_version = Discovery::scan(Duration::from_secs(4)).await
+            .ok()
+            .and_then(|devs| devs.into_iter().find(|d| d.addr.to_string() == host))
+            .and_then(|d| d.firmware_version)
+            .unwrap_or_default();
+        if before_version.is_empty() {
+            println!("Device version before:  (not found via discovery)");
+        } else {
+            println!("Device version before:  {before_version}");
+        }
+        if !before_version.is_empty() && before_version == fw_version {
+            println!("Note: device already reports {fw_version} — upgrade may be a no-op.");
+        }
+
+        println!("Starting native firmware upgrade: {}", path.display());
+        println!("  Device: {host}:{upgrade_port}");
+        let opts = hdplayer::upgrade::UpgradeOptions {
+            poll_interval: Duration::from_secs(*poll_interval),
+            poll_timeout: Duration::from_secs(*timeout),
+            progress: Some(Box::new(|sent, total| {
+                print!(
+                    "\r  {sent}/{total} bytes ({:.1}%)  ",
+                    sent as f64 / total as f64 * 100.0
+                );
+                let _ = std::io::Write::flush(&mut std::io::stdout());
+            })),
+            phase: Some(Box::new(|msg: &str| {
+                println!("\n  [{msg}]");
+            })),
+        };
+        let host_owned = host.clone();
+        let path_owned = path.to_path_buf();
+        let upgrade_port = *upgrade_port;
+        std::thread::Builder::new()
+            .stack_size(64 * 1024 * 1024)
+            .spawn(move || {
+                tokio::runtime::Builder::new_current_thread()
+                    .enable_all()
+                    .build()
+                    .expect("tokio runtime")
+                    .block_on(hdplayer::upgrade::run_upgrade(&host_owned, upgrade_port, &path_owned, opts))
+            })?
+            .join()
+            .map_err(|_| anyhow::anyhow!("upgrade thread panicked"))??;
+
+        // ── Version: device after upgrade (via UDP discovery) ────────────────
+        println!("\nWaiting for device to come back online…");
+        let reconnect_deadline = std::time::Instant::now() + Duration::from_secs(120);
+        let after_version = loop {
+            if std::time::Instant::now() > reconnect_deadline {
+                println!("  Timed out — device did not respond within 120 s.");
+                break String::new();
+            }
+            tokio::time::sleep(Duration::from_secs(5)).await;
+            let found = Discovery::scan(Duration::from_secs(3)).await
+                .ok()
+                .and_then(|devs| devs.into_iter().find(|d| d.addr.to_string() == host))
+                .and_then(|d| d.firmware_version);
+            if let Some(v) = found {
+                break v;
+            }
+        };
+
+        println!("─────────────────────────────────────────");
+        println!("Firmware file version:  {fw_version}");
+        if before_version.is_empty() {
+            println!("Device version before:  unknown");
+        } else {
+            println!("Device version before:  {before_version}");
+        }
+        if after_version.is_empty() {
+            println!("Device version after:   unknown");
+        } else {
+            println!("Device version after:   {after_version}");
+        }
+        if !after_version.is_empty() && !before_version.is_empty() {
+            if after_version == before_version {
+                println!("RESULT: UNCHANGED — upgrade did not apply.");
+            } else if after_version == fw_version {
+                println!("RESULT: SUCCESS — device updated to {after_version}.");
+            } else {
+                println!("RESULT: version changed to {after_version} (expected {fw_version}).");
+            }
+        }
+        return Ok(());
+    }
 
     // Auto-select protocol: port 9527 → BoxStream; anything else → legacy SdkService (port 10001)
     let mut client = if cli.port == 9527 {
@@ -983,35 +1092,7 @@ async fn main() -> anyhow::Result<()> {
             }
         }
 
-        Commands::UpgradeNative { file, poll_interval, timeout } => {
-            let path = std::path::Path::new(file.as_str());
-            if !path.exists() {
-                eprintln!("File not found: {file}");
-                std::process::exit(1);
-            }
-            // UpgradeNative connects directly to port 9528, independent of the SDK client.
-            // The `host` variable already holds the resolved device IP.
-            println!("Starting native firmware upgrade: {}", path.display());
-            println!("  Device: {host}:9528");
-            let opts = hdplayer::upgrade::UpgradeOptions {
-                poll_interval: Duration::from_secs(*poll_interval),
-                poll_timeout: Duration::from_secs(*timeout),
-                progress: Some(Box::new(|sent, total| {
-                    print!(
-                        "\r  {sent}/{total} bytes ({:.1}%)  ",
-                        sent as f64 / total as f64 * 100.0
-                    );
-                    let _ = std::io::Write::flush(&mut std::io::stdout());
-                })),
-                phase: Some(Box::new(|msg: &str| {
-                    println!("\n  [{msg}]");
-                })),
-            };
-            // Box::pin to heap-allocate the large async state machine and avoid
-            // stack overflow in the tokio block_on context.
-            Box::pin(hdplayer::upgrade::run_upgrade(&host, path, opts)).await?;
-            println!("\nFirmware upgrade complete.");
-        }
+        Commands::UpgradeNative { .. } => unreachable!(),
 
         Commands::Checklist => {
             let files = client.get_file_checklist().await?;

@@ -189,6 +189,41 @@ fn xml_text<'a>(xml: &'a str, tag: &str) -> Option<&'a str> {
     let end = xml[start..].find(&close)?;
     Some(xml[start..start + end].trim())
 }
+
+/// Extract the BoxPlayer firmware version string from in-memory firmware data.
+///
+/// Handles `.zbin` (ZIP bundle containing `BoxPlayer*.bin`) and plain HDPLAYER `.bin`
+/// formats.  Returns `None` if the format is unrecognised or the `<Version>` tag is absent.
+pub fn firmware_file_version(data: &[u8]) -> Option<String> {
+    if data.starts_with(b"PK\x03\x04") {
+        // .zbin → find BoxPlayer*.bin inside and recurse on its contents
+        let cursor = std::io::Cursor::new(data);
+        let mut archive = zip::ZipArchive::new(cursor).ok()?;
+        let bin_name = (0..archive.len()).find_map(|i| {
+            archive.by_index(i).ok().and_then(|f| {
+                let name = f.name().to_string();
+                if name.starts_with("BoxPlayer") && name.ends_with(".bin") {
+                    Some(name)
+                } else {
+                    None
+                }
+            })
+        })?;
+        let mut entry = archive.by_name(&bin_name).ok()?;
+        // Read only the HDPLAYER header (first 678 bytes) — no need to
+        // decompress the full 330 MB payload just to extract the version tag.
+        let mut hdr = Vec::new();
+        entry.by_ref().take(BIN_PAYLOAD_OFFSET as u64).read_to_end(&mut hdr).ok()?;
+        return firmware_file_version(&hdr);
+    }
+    if data.starts_with(b"HDPLAYER") && data.len() > 18 {
+        let xml_end = BIN_PAYLOAD_OFFSET.min(data.len());
+        let xml_region = std::str::from_utf8(&data[18..xml_end]).ok()?;
+        return xml_text(xml_region, "Version").map(str::to_string);
+    }
+    None
+}
+
 /// UpgradeExec parameter observed in capture (frame 103931: 08 00 00 00 00 00 00 00 → u64=8).
 const UPGRADE_EXEC_PARAM: u64 = 8;
 
@@ -377,12 +412,13 @@ fn report_phase(opts: &UpgradeOptions, msg: &str) {
 
 // ── Main upgrade entry point ──────────────────────────────────────────────────
 
-/// Run the full port-9528 firmware upgrade.
+/// Run the full firmware upgrade via the binary streaming protocol.
 ///
 /// `addr` — device IP address (without port).
+/// `port` — TCP port for the upgrade protocol (normally 9528; use 10001 for legacy devices).
 /// `file_path` — local path to the firmware archive (`.zbin` as released by Huidu,
 ///               e.g. `BoxPlayer_V7.11.18.0_MagicPlayer_V2.12.8.0.zbin`).
-pub async fn run_upgrade(addr: &str, file_path: &Path, opts: UpgradeOptions) -> Result<()> {
+pub async fn run_upgrade(addr: &str, port: u16, file_path: &Path, opts: UpgradeOptions) -> Result<()> {
     // ── Phase 0: parse firmware file ─────────────────────────────────────────
     // .zbin is a ZIP bundle → extract BoxPlayer*.bin → strip 678-byte header
     // → send only the inner tar.gz payload.  The real HDPlayer client does this
@@ -401,7 +437,7 @@ pub async fn run_upgrade(addr: &str, file_path: &Path, opts: UpgradeOptions) -> 
 
     // ── Phase 1: connect and handshake ────────────────────────────────────────
     report_phase(&opts, "Connecting…");
-    let mut conn = Conn::connect(addr, 9528).await?;
+    let mut conn = Conn::connect(addr, port).await?;
     report_phase(&opts, "Handshaking…");
     handshake(&mut conn).await?;
 
@@ -477,7 +513,7 @@ pub async fn run_upgrade(addr: &str, file_path: &Path, opts: UpgradeOptions) -> 
     drop(conn);
     report_phase(&opts, "Applying upgrade…");
     info!("Opening second connection for UpgradeControl + UpgradeExec…");
-    let mut conn2 = Conn::connect(addr, 9528).await?;
+    let mut conn2 = Conn::connect(addr, port).await?;
     handshake(&mut conn2).await?;
     debug!("Second connection handshake ok");
 
