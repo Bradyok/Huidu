@@ -121,6 +121,8 @@ pub struct DeviceInfo {
     /// Rotation in degrees (0, 90, 180, 270).
     pub rotation: Option<u16>,
     pub screen_on: Option<bool>,
+    /// MAC address (from binary fields in cmd=0x04/0x05 UDP packets), e.g. "28:32:fd:be:36:40".
+    pub mac_address: Option<String>,
 }
 
 impl DeviceInfo {
@@ -198,6 +200,12 @@ impl DeviceInfo {
         let ip = data.get(ip_start..ip_start + 4)?;
         let addr = IpAddr::V4(Ipv4Addr::new(ip[0], ip[1], ip[2], ip[3]));
 
+        // MAC: 6 bytes at ip_start+4 (confirmed offset MAC/unk6 for cmd=0x05: [30..36))
+        let mac_address = data.get(ip_start + 4..ip_start + 10).map(|b| {
+            format!("{:02x}:{:02x}:{:02x}:{:02x}:{:02x}:{:02x}",
+                b[0], b[1], b[2], b[3], b[4], b[5])
+        });
+
         // Screen dimensions: width at 76+extra (base 72 for cmd=0x04 + 4 extra for cmd=0x05).
         // Confirmed offsets from 221-byte live capture: width=[76..78), height=[78..80).
         let sw_start = 72 + extra; // = 76 for cmd=0x05, 72 for cmd=0x04
@@ -256,6 +264,7 @@ impl DeviceInfo {
         Some(DeviceInfo {
             device_id, addr, name, info_xml, device_type, firmware_version,
             screen_width, screen_height, current_program, brightness, rotation, screen_on,
+            mac_address,
         })
     }
 
@@ -323,6 +332,7 @@ impl DeviceInfo {
         Some(DeviceInfo {
             device_id, addr, name, info_xml, device_type, firmware_version,
             screen_width, screen_height, current_program, brightness, rotation, screen_on,
+            mac_address: None, // old format doesn't include MAC in binary fields
         })
     }
 }
@@ -371,7 +381,14 @@ impl DeviceInfo {
 /// udp_register(device_ip, Duration::from_secs(12)).await?;
 /// // now safe to TcpStream::connect(device_ip:9527)
 /// ```
-pub async fn udp_register(device_ip: Ipv4Addr, timeout: Duration) -> Result<()> {
+/// Session token returned by a successful UDP registration.
+///
+/// When `udp_register` returns `Ok(Some(token))`, the token is the 4-byte value
+/// from cmd=0x0005 that the device expects to see in the TCP BoxStreamInit payload.
+/// Some older devices don't send cmd=0x0005 and return `Ok(None)` (use `[0u8;4]`).
+pub type SessionToken = Option<[u8; 4]>;
+
+pub async fn udp_register(device_ip: Ipv4Addr, timeout: Duration) -> Result<(SessionToken, Option<DeviceInfo>)> {
     use tracing::info;
 
     // Bind to the controller's UDP port that the device sends unicast to.
@@ -387,6 +404,7 @@ pub async fn udp_register(device_ip: Ipv4Addr, timeout: Duration) -> Result<()> 
     let mut pending_token: Option<[u8; 4]> = None;
     let mut pending_device_id: Option<[u8; 15]> = None;
     let mut got_cmd340 = false;
+    let mut udp_device_info: Option<DeviceInfo> = None;
 
     // Send trigger to device so it responds to OUR port (9526).
     // The device sends cmd=0x0002 to the source port of the trigger packet.
@@ -411,7 +429,7 @@ pub async fn udp_register(device_ip: Ipv4Addr, timeout: Duration) -> Result<()> 
             if sent_cmd3 {
                 // Sent cmd=0x0003, treat as registered even if we didn't get cmd=0x0005/0x0340
                 info!("UDP registration: timeout waiting for extended handshake — proceeding");
-                return Ok(());
+                return Ok((None, udp_device_info));
             }
             return Err(Error::Connection(
                 format!("UDP registration: no announce from {device_ip} within {timeout:?}")
@@ -422,7 +440,7 @@ pub async fn udp_register(device_ip: Ipv4Addr, timeout: Duration) -> Result<()> 
         else {
             if sent_cmd3 {
                 info!("UDP registration: socket timeout — proceeding with partial handshake");
-                return Ok(());
+                return Ok((None, udp_device_info));
             }
             break;
         };
@@ -459,8 +477,15 @@ pub async fn udp_register(device_ip: Ipv4Addr, timeout: Duration) -> Result<()> 
                 info!("UDP registration: sent cmd=0x0003 acknowledgment");
             }
             0x0004 => {
-                // Extended info response after cmd=0x0003 — acknowledged, keep waiting
+                // Extended info response after cmd=0x0003 — acknowledged, keep waiting.
+                // Capture full device info (IP, MAC, name, screen size) from this packet.
                 debug!("UDP registration: received cmd=0x0004 (extended info)");
+                if udp_device_info.is_none() {
+                    udp_device_info = DeviceInfo::parse(data);
+                    if udp_device_info.is_some() {
+                        debug!("UDP registration: captured device info from cmd=0x0004");
+                    }
+                }
             }
             0x0005 if n >= 25 && sent_cmd3 => {
                 // Token + device info.  Token is at bytes [6..10], device_id at [10..25].
@@ -474,6 +499,10 @@ pub async fn udp_register(device_ip: Ipv4Addr, timeout: Duration) -> Result<()> 
                 debug!("UDP registration: received cmd=0x0005, token={token:?}");
                 pending_token = Some(token);
                 pending_device_id = Some(device_id);
+                // Also capture device info from cmd=0x0005 if we missed cmd=0x0004
+                if udp_device_info.is_none() {
+                    udp_device_info = DeviceInfo::parse(data);
+                }
             }
             0x0340 if sent_cmd3 => {
                 // Ext1 status XML — sent together with cmd=0x0005.
@@ -514,13 +543,13 @@ pub async fn udp_register(device_ip: Ipv4Addr, timeout: Duration) -> Result<()> 
             socket.send_to(&pkt341, device_addr).await
                 .map_err(|e| Error::Connection(format!("send cmd=0x0341: {e}")))?;
 
-            info!("UDP registration: sent cmd=0x0006 + cmd=0x0341 — registration complete");
-            return Ok(());
+            info!("UDP registration: sent cmd=0x0006 + cmd=0x0341 — registration complete (token={token:?})");
+            return Ok((Some(token), udp_device_info));
         }
     }
 
     Err(Error::Connection(format!(
-        "UDP registration failed: device {device_ip} did not complete handshake"
+        "UDP registration failed: device {device_ip} did not complete handshake within {timeout:?}"
     )))
 }
 

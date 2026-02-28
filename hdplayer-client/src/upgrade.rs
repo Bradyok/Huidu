@@ -4,41 +4,51 @@
 //! The protocol is entirely binary (no XML), using the same
 //! `[u16 LE length][u16 LE cmd][payload]` framing as the BoxStream protocol.
 //!
-//! ## Wire-confirmed packet sequence
+//! ## Wire-confirmed packet sequence (PCAP timestamps)
 //!
 //! **First TCP connection (port 9528):**
 //!
-//! 1. ConnectReq (0x000b): `[u32 LE 0x01000007]`
-//! 2. ConnectAck (0x000c): version echo
-//! 3. ClientInfoReq (0x0410): null-terminated CSV
-//! 4. ClientInfoAck (0x0411): `[u16 LE 0]`
-//! 5. NullCapQuery (0x0053): empty
-//! 6. NullCapResp (0x0054): `[u32 LE 0]`
-//! 7. CapQuery (0x040a): `[u16 LE 0]`
-//! 8. CapResp (0x040b): `[u8 0]`
-//! 9. UpgradeControl mode=1 (0x0055): `[u16 LE 1]`
+//! 1.  ConnectReq (0x000b): `[u32 LE 0x01000007]`
+//! 2.  ConnectAck (0x000c): device version echo
+//! 3.  ClientInfoReq (0x0410): null-terminated CSV
+//! 4.  ClientInfoAck (0x0411): `[u16 LE 0]`
+//! 5.  NullCapQuery (0x0053): empty
+//! 6.  NullCapResp (0x0054): `[u32 LE 0]`
+//! 7.  CapQuery (0x040a): `[u16 LE 0]`
+//! 8.  CapResp (0x040b): `[u8 0]`
+//! 9.  UpgradeControl mode=1 (0x0055): `[u16 LE 1]`
 //! 10. UpgradeStatus (0x0056): 6-byte status payload
 //! 11. FileTransferReq (0x0017): `[/tmp/Box.tar.gz\0][u64 LE size]`
 //! 12. FileTransferAck (0x0018): `[u32 LE 0]`
 //! 13. FileDataChunks (0x0019): 9212-byte chunks, streaming
-//!     - Device sends periodic acks (0x001a) and heartbeat responses (0x001c)
-//! 14. Device sends FileComplete (0x0060): empty payload
+//!     - Device sends periodic acks (0x001a) during transfer
+//! 14. Heartbeat (0x005f): PC confirms last chunk received
+//!     - HeartbeatAck (0x001c): device ack (or 0x0060 on older firmware)
 //! 15. UpgradeControl mode=3 (0x0055): `[u16 LE 3]["killall -1 BoxDaemon; tar zxvf %s -C %s \0"]`
-//! 16. UpgradeStatus (0x0056): status=3 (in progress)
+//!     (Command string comes from the `<Decompress>` tag in the .bin XML header.)
+//! 16. UpgradeStatus (0x0056): status=3 (decompress in progress)
 //! 17. UpgradeControl mode=2 (0x0055): `[u16 LE 2]["upgrade.sh\0"]`
+//!     - Device acknowledges with TCP ACK only (no UpgradeStatus for mode=2)
+//! 18. Poll UpgradeControl mode=0 every ~5 s for ~52 s — device responds with
+//!     TCP ACKs only (busy decompressing).  No UpgradeStatus during this phase.
+//!     Then ~32 s of silence (device finishes decompression).
 //!
-//! **Second TCP connection (port 9528):**
+//! **Second TCP connection (port 9528) — opens ~84 s after mode=2:**
 //!
-//! 18. ConnectReq (0x000b): `[u32 LE 0x01000007]`
-//! 19. ConnectAck (0x000c): version echo (device may return different version)
-//! 20. UpgradeExec (0x0730): `[u64 LE 8]`
-//! 21. UpgradeExecAck (0x0731): `[u16 LE 0]`
+//! 19. ConnectReq (0x000b): `[u32 LE 0x01000007]`
+//! 20. ConnectAck (0x000c): arrives ~14.5 s later (device finishes decompress)
+//! 21. UpgradeExec (0x0730): `[u64 LE 8]`
+//! 22. UpgradeExecAck (0x0731): arrives ~10 s later
+//! 23. ClientInfoReq (0x0410): null-terminated CSV  ← REQUIRED after ExecAck
+//! 24. ClientInfoAck (0x0411): `[u16 LE 0]`
+//! 25. NullCapQuery (0x0053): empty
+//! 26. NullCapResp (0x0054): `[u32 LE 0]`
+//! 27. Poll UpgradeControl mode=0 + Heartbeat on THIS connection until
+//!     UpgradeStatus=0 (upgrade script complete, ~41 s after UpgradeExec)
 //!
-//! **Back on first connection:**
-//!
-//! 22. Poll UpgradeControl mode=0 (0x0055): `[u16 LE 0]`
-//! 23. Heartbeat (0x005f): empty
-//! 24. UpgradeStatus (0x0056): repeat until status=0 (success)
+//! **IMPORTANT:** completion polling MUST happen on the second connection.
+//! The device does NOT respond with UpgradeStatus on the first connection
+//! during decompress.  Dropping conn2 after UpgradeExec aborts the upgrade.
 
 use std::io::Read as _;
 use std::path::Path;
@@ -114,10 +124,14 @@ fn parse_firmware_file(data: &[u8]) -> Result<FirmwareParsed> {
     if data.starts_with(b"HDPLAYER") {
         return parse_bin(data);
     }
-    // Raw payload — use as-is with the defaults from the BIN XML
+    // Raw payload (custom tar.gz, not a .zbin/.bin with BIN XML).
+    // Do NOT include "killall -1 BoxDaemon" in the decompress command: sending
+    // SIGHUP to BoxDaemon causes it to restart, losing the upgrade state it needs
+    // to accept UpgradeExec.  For raw archives we keep BoxDaemon alive so it can
+    // respond to UpgradeExec on the same connection that delivered the file.
     Ok(FirmwareParsed {
         payload: data.to_vec(),
-        decompress_cmd: b"killall -1 BoxDaemon; tar zxvf %s -C %s \0".to_vec(),
+        decompress_cmd: b"tar zxvf %s -C %s \0".to_vec(),
         script_name: b"upgrade.sh\0".to_vec(),
     })
 }
@@ -158,10 +172,26 @@ fn parse_bin(data: &[u8]) -> Result<FirmwareParsed> {
     // XML metadata occupies bytes 18..678; search it for Decompress and Script tags.
     let xml_end = BIN_PAYLOAD_OFFSET.min(data.len());
     let xml_region = std::str::from_utf8(&data[18..xml_end]).unwrap_or("");
-    let decompress = xml_text(xml_region, "Decompress")
+    let decompress_raw = xml_text(xml_region, "Decompress")
         .unwrap_or("killall -1 BoxDaemon; tar zxvf %s -C %s");
+    // Strip any "killall ...;" prefix from the decompress command.
+    // On this device, SIGHUP causes BoxDaemon to reload config (not restart),
+    // so killall -1 is a no-op for our purposes.  SIGTERM kills BoxDaemon but
+    // new BoxDaemon has no upgrade state and rejects UpgradeExec.
+    // Best approach: strip killall entirely, send UpgradeExec on the same
+    // connection (conn1) that delivered the file — BoxDaemon still has the
+    // upgrade state in memory and accepts UpgradeExec on conn1.
+    let decompress_owned;
+    let decompress = match decompress_raw.find(';') {
+        Some(pos) => {
+            let after = decompress_raw[pos + 1..].trim_start();
+            decompress_owned = after.to_string();
+            decompress_owned.as_str()
+        }
+        None => decompress_raw,
+    };
     let script = xml_text(xml_region, "Script").unwrap_or("upgrade.sh");
-    info!("BIN Decompress: {}", decompress);
+    info!("BIN Decompress (killall stripped): {}", decompress);
     info!("BIN Script: {}", script);
 
     // Build null-terminated byte vectors (trailing space matches PCAP for Decompress)
@@ -170,12 +200,14 @@ fn parse_bin(data: &[u8]) -> Result<FirmwareParsed> {
     let mut script_name = script.as_bytes().to_vec();
     script_name.push(0);
 
-    // IMPORTANT: send the FULL .bin file including the 678-byte HDPLAYER header.
-    // The device's BoxUpgrade service understands the HDPLAYER binary format natively.
-    // Confirmed from PCAP: FileTransferReq size = 330,110,795 = full .bin size,
-    // NOT 330,110,117 (which would be the size with the header stripped).
+    // IMPORTANT: strip the 678-byte HDPLAYER header and send ONLY the raw tar.gz payload.
+    // Confirmed from PCAP (Upgrade Huidu.pcapng frame 1463): the first FileDataChunk
+    // starts with bytes 1f 8b 08 00 (gzip magic), meaning the real HDPlayer client
+    // strips the header before uploading.  Sending the full .bin (starting with
+    // "HDPLAYER") causes `tar zxvf` on the device to fail immediately, which puts
+    // the device back to idle state and causes UpgradeExec to be rejected.
     Ok(FirmwareParsed {
-        payload: data.to_vec(),
+        payload: data[BIN_PAYLOAD_OFFSET..].to_vec(),
         decompress_cmd,
         script_name,
     })
@@ -209,12 +241,14 @@ pub fn firmware_file_version(data: &[u8]) -> Option<String> {
                 }
             })
         })?;
-        let mut entry = archive.by_name(&bin_name).ok()?;
-        // Read only the HDPLAYER header (first 678 bytes) — no need to
-        // decompress the full 330 MB payload just to extract the version tag.
-        let mut hdr = Vec::new();
-        entry.by_ref().take(BIN_PAYLOAD_OFFSET as u64).read_to_end(&mut hdr).ok()?;
-        return firmware_file_version(&hdr);
+        // Extract version from the filename — no decompression required.
+        // "BoxPlayer_7_11_18_0.bin"  → "7.11.18.0"
+        // "BoxPlayer_V7.11.18.0.bin" → "7.11.18.0"
+        let stem = bin_name
+            .strip_prefix("BoxPlayer_").unwrap_or(&bin_name)
+            .strip_suffix(".bin").unwrap_or(&bin_name);
+        let stem = stem.strip_prefix('V').unwrap_or(stem);
+        return Some(stem.replace('_', "."));
     }
     if data.starts_with(b"HDPLAYER") && data.len() > 18 {
         let xml_end = BIN_PAYLOAD_OFFSET.min(data.len());
@@ -506,52 +540,207 @@ pub async fn run_upgrade(addr: &str, port: u16, file_path: &Path, opts: UpgradeO
             );
         }
     }
-    // ── Phase 6+7: second connection — UpgradeControl + UpgradeExec ──────────
-    // The device closes the first connection (TCP FIN) immediately after
-    // sending CMD_FILE_COMPLETE.  All post-transfer commands therefore run on
-    // a fresh second connection.
-    drop(conn);
-    report_phase(&opts, "Applying upgrade…");
-    info!("Opening second connection for UpgradeControl + UpgradeExec…");
-    let mut conn2 = Conn::connect(addr, port).await?;
-    handshake(&mut conn2).await?;
-    debug!("Second connection handshake ok");
+    // ── Phase 5: confirm file received via heartbeat ─────────────────────────
+    // PCAP: after last data chunk, client sends CMD_HEARTBEAT (0x005f) and
+    // waits for CMD_HEARTBEAT_ACK (0x001c) before proceeding to mode=3.
+    // Some firmware versions send CMD_FILE_COMPLETE (0x0060) spontaneously
+    // instead of the explicit heartbeat handshake — accept either.
+    report_phase(&opts, "Confirming file receipt…");
+    conn.send(CMD_HEARTBEAT, &[]).await?;
+    loop {
+        let (cmd, _) = conn.recv().await?;
+        match cmd {
+            CMD_FILE_DATA_ACK => {} // drain leftover periodic acks
+            CMD_HEARTBEAT_ACK => {
+                info!("Heartbeat ack — file transfer confirmed (conn1 alive)");
+                break;
+            }
+            CMD_FILE_COMPLETE => {
+                // 0x0060 = spontaneous file-complete or heartbeat-answer on
+                // older firmware.  Either way, the device has the file.
+                info!("File-complete / heartbeat-answer received — file transfer confirmed");
+                break;
+            }
+            other => {
+                debug!("Phase 5: ignoring cmd=0x{:04x} while waiting for ack", other);
+            }
+        }
+    }
 
-    // UpgradeControl mode=3: [u16 LE 3][decompress_cmd\0]
-    // The decompress_cmd comes from the BIN header's <Decompress> XML field.
+    // ── Phase 6: UpgradeControl mode=3 and mode=2 on the first connection ────
+    // PCAP steps 15-17: these commands MUST go on the same TCP connection that
+    // delivered the file.  Sending mode=3 on a fresh second connection returns
+    // status=0 (idle) because the device tracks upgrade state per-connection.
+    report_phase(&opts, "Starting decompression…");
+    info!("Sending decompress command (mode=3) on conn1…");
     let mut ctrl3 = Vec::with_capacity(2 + fw.decompress_cmd.len());
     ctrl3.extend_from_slice(&3u16.to_le_bytes());
     ctrl3.extend_from_slice(&fw.decompress_cmd);
-    conn2.send(CMD_UPGRADE_CTRL, &ctrl3).await?;
-    let st = conn2.expect(CMD_UPGRADE_STATUS).await?;
+    conn.send(CMD_UPGRADE_CTRL, &ctrl3).await?;
+    let st = conn.expect(CMD_UPGRADE_STATUS).await?;
     let sc = if st.len() >= 2 { u16::from_le_bytes([st[0], st[1]]) } else { 0 };
-    debug!("UpgradeStatus after extract cmd: {}", sc);
-    info!("Extract command accepted (status {})", sc);
+    info!("Decompress command accepted (status {})", sc);
+    // status=3 = in-progress (device started decompressing the 330 MB payload)
 
-    // UpgradeControl mode=2: [u16 LE 2][script_name\0]
-    // The script_name comes from the BIN header's <Script> XML field.
     let mut ctrl2 = Vec::with_capacity(2 + fw.script_name.len());
     ctrl2.extend_from_slice(&2u16.to_le_bytes());
     ctrl2.extend_from_slice(&fw.script_name);
-    conn2.send(CMD_UPGRADE_CTRL, &ctrl2).await?;
-    info!("Upgrade script queued");
+    conn.send(CMD_UPGRADE_CTRL, &ctrl2).await?;
+    info!("Upgrade script queued (mode=2)");
+    let mode2_sent_at = Instant::now();
 
-    // UpgradeExec: payload = u64 LE 8 (confirmed from PCAP frame 103931)
-    conn2.send(CMD_UPGRADE_EXEC, &UPGRADE_EXEC_PARAM.to_le_bytes()).await?;
-    // Device may respond with UpgradeExecAck (0x0731, PCAP) or UpgradeStatus
-    // (0x0056, observed on our firmware version) — accept either.
-    let (exec_resp, _) = conn2.recv().await?;
-    match exec_resp {
-        CMD_UPGRADE_EXEC_ACK | CMD_UPGRADE_STATUS => {
-            info!("UpgradeExec acknowledged (cmd=0x{:04x}) — device is applying firmware", exec_resp);
+    // ── Phase 7a: poll conn1 while tar extracts (up to 600 s) ────────────────
+    // The decompress command (mode=3) now has no killall prefix, so BoxDaemon
+    // stays alive on conn1 with its upgrade session state intact.
+    // We poll mode=0 every 5 s to keep conn1 alive and monitor activity.
+    // The firmware payload is ~330 MB of gzip; decompressing on an ARM device
+    // can take several minutes.  We wait the full 600 s before sending
+    // UpgradeExec so upgrade.sh finds the fully extracted files.
+    report_phase(&opts, "Waiting for extraction (up to 10 min)…");
+    info!(
+        "Polling conn1 with mode=0 every 5 s — waiting up to 600 s for tar to finish…"
+    );
+    let tar_deadline = mode2_sent_at + Duration::from_secs(600);
+    'tar_wait: loop {
+        if Instant::now() >= tar_deadline {
+            info!(
+                "{:.0} s elapsed since mode=2 — tar should be done, proceeding to UpgradeExec",
+                mode2_sent_at.elapsed().as_secs_f32(),
+            );
+            break 'tar_wait;
         }
-        other => bail!("unexpected response to UpgradeExec: cmd=0x{:04x}", other),
+        // Send a mode=0 poll to keep conn1 alive.
+        if conn.send(CMD_UPGRADE_CTRL, &0u16.to_le_bytes()).await.is_err() {
+            bail!("conn1 closed unexpectedly during tar wait — BoxDaemon died");
+        }
+        // Drain responses for up to 5 s, then send the next poll.
+        let poll_until = Instant::now() + Duration::from_secs(5);
+        loop {
+            let remaining = poll_until.saturating_duration_since(Instant::now());
+            if remaining.is_zero() { break; }
+            match tokio::time::timeout(remaining, conn.recv()).await {
+                Ok(Ok((cmd, p))) => {
+                    let sc = if p.len() >= 2 { u16::from_le_bytes([p[0], p[1]]) } else { 0 };
+                    debug!(
+                        "conn1 tar-wait poll: cmd=0x{:04x} status={} elapsed={:.0}s",
+                        cmd, sc, mode2_sent_at.elapsed().as_secs_f32(),
+                    );
+                }
+                Ok(Err(e)) => {
+                    bail!("conn1 closed during tar wait: {} — BoxDaemon died unexpectedly", e);
+                }
+                Err(_) => break, // 5 s elapsed, send next poll
+            }
+        }
     }
 
-    // ── Phase 8: poll for completion on second connection ────────────────────
-    report_phase(&opts, "Polling for completion…");
+    // ── Phase 7b: UpgradeExec on conn1 ───────────────────────────────────────
+    // UpgradeExec triggers upgrade.sh now that tar has finished extracting.
+    // We send it on the same connection (conn1) that delivered the file;
+    // BoxDaemon accepts UpgradeExec on conn1 because the upgrade session state
+    // is still in memory.  Our device returns UpgradeStatus (0x0056) instead
+    // of the PCAP-canonical ExecAck (0x0731) — we accept both.
+    report_phase(&opts, "Triggering upgrade (UpgradeExec)…");
+    info!("Sending UpgradeExec (0x0730) on conn1…");
+    conn.send(CMD_UPGRADE_EXEC, &UPGRADE_EXEC_PARAM.to_le_bytes()).await?;
+
+    let exec_ack_deadline = Instant::now() + Duration::from_secs(120);
+    loop {
+        let remaining = exec_ack_deadline.saturating_duration_since(Instant::now());
+        if remaining.is_zero() {
+            bail!("No response to UpgradeExec within 120 s");
+        }
+        match tokio::time::timeout(remaining, conn.recv_skip_acks()).await {
+            Ok(Ok((CMD_UPGRADE_EXEC_ACK, _))) => {
+                info!("ExecAck (0x0731) received — upgrade executing");
+                break;
+            }
+            Ok(Ok((CMD_UPGRADE_STATUS, p))) => {
+                let sc = if p.len() >= 2 { u16::from_le_bytes([p[0], p[1]]) } else { 0 };
+                info!("UpgradeStatus={} after UpgradeExec — upgrade executing", sc);
+                break;
+            }
+            Ok(Ok((cmd, _))) => {
+                info!("cmd=0x{:04x} after UpgradeExec — skipping", cmd);
+            }
+            Ok(Err(e)) => {
+                info!("conn1 closed after UpgradeExec: {} — upgrade may be running", e);
+                break;
+            }
+            Err(_) => bail!("No response to UpgradeExec within 120 s"),
+        }
+    }
+
+    let mut conn2 = conn; // reuse conn1 as conn2 for Phases 8+9
+
+    // ── Phase 8: post-exec handshake ──────────────────────────────────────────
+    // PCAP steps 23-26: ClientInfoReq → ClientInfoAck → NullCapQuery → NullCapResp.
+    // Non-fatal: firmware 7.4.x may not respond to ClientInfoReq (device closes
+    // conn1 as soon as the upgrade script runs).  Skip any UpgradeStatus packets.
+    report_phase(&opts, "Upgrade executing — monitoring…");
+
+    let info_bytes = build_client_info();
+    if conn2.send(CMD_CLIENT_INFO_REQ, &info_bytes).await.is_ok() {
+        'client_info: loop {
+            match tokio::time::timeout(Duration::from_secs(30), conn2.recv_skip_acks()).await {
+                Ok(Ok((CMD_CLIENT_INFO_ACK, _))) => {
+                    info!("ClientInfoAck ok");
+                    break 'client_info;
+                }
+                Ok(Ok((CMD_UPGRADE_STATUS, p))) => {
+                    let sc = if p.len() >= 2 { u16::from_le_bytes([p[0], p[1]]) } else { 0 };
+                    debug!("UpgradeStatus={} before ClientInfoAck — skipping", sc);
+                }
+                Ok(Ok((cmd, _))) => {
+                    info!("unexpected cmd=0x{:04x} waiting for ClientInfoAck — skipping Phase 8", cmd);
+                    break 'client_info;
+                }
+                Ok(Err(e)) => {
+                    info!("conn closed waiting for ClientInfoAck ({}) — proceeding to Phase 9", e);
+                    break 'client_info;
+                }
+                Err(_) => {
+                    info!("ClientInfoAck timeout — skipping Phase 8");
+                    break 'client_info;
+                }
+            }
+        }
+
+        if conn2.send(CMD_NULL_CAP_QUERY, &[]).await.is_ok() {
+            'null_cap: loop {
+                match tokio::time::timeout(Duration::from_secs(30), conn2.recv_skip_acks()).await {
+                    Ok(Ok((CMD_NULL_CAP_RESP, _))) => {
+                        info!("NullCapResp — upgrade script running");
+                        break 'null_cap;
+                    }
+                    Ok(Ok((CMD_UPGRADE_STATUS, p))) => {
+                        let sc = if p.len() >= 2 { u16::from_le_bytes([p[0], p[1]]) } else { 0 };
+                        debug!("UpgradeStatus={} before NullCapResp — skipping", sc);
+                    }
+                    Ok(Ok((cmd, _))) => {
+                        info!("unexpected cmd=0x{:04x} waiting for NullCapResp — skipping", cmd);
+                        break 'null_cap;
+                    }
+                    Ok(Err(e)) => {
+                        info!("conn closed waiting for NullCapResp ({}) — proceeding", e);
+                        break 'null_cap;
+                    }
+                    Err(_) => {
+                        info!("NullCapResp timeout — proceeding to Phase 9");
+                        break 'null_cap;
+                    }
+                }
+            }
+        }
+    }
+
+    report_phase(&opts, "Upgrade script running — waiting for completion…");
+
+    // ── Phase 9: poll conn2 for completion ────────────────────────────────────
+    // PCAP: device sends UpgradeStatus=0 on conn2 when the script finishes.
+    // Poll with mode=0 + heartbeat every poll_interval until status=0.
     info!(
-        "Polling for upgrade completion (interval={:?}, timeout={:?}) ...",
+        "Polling conn2 for completion (interval={:?}, timeout={:?})",
         opts.poll_interval, opts.poll_timeout,
     );
     let deadline = Instant::now() + opts.poll_timeout;
@@ -559,20 +748,17 @@ pub async fn run_upgrade(addr: &str, port: u16, file_path: &Path, opts: UpgradeO
     loop {
         if Instant::now() > deadline {
             bail!(
-                "Upgrade timed out after {:?} — device did not report completion",
+                "Upgrade timed out after {:?} — script did not complete",
                 opts.poll_timeout
             );
         }
 
-        // Send status poll
         if conn2.send(CMD_UPGRADE_CTRL, &0u16.to_le_bytes()).await.is_err() {
             report_phase(&opts, "Device rebooting — upgrade applied");
             return Ok(());
         }
-        // Interleave heartbeat (matches real client)
         let _ = conn2.send(CMD_HEARTBEAT, &[]).await;
 
-        // Wait up to poll_interval for UpgradeStatus
         let wait_until = Instant::now() + opts.poll_interval;
         loop {
             let remaining = wait_until.saturating_duration_since(Instant::now());
@@ -586,31 +772,23 @@ pub async fn run_upgrade(addr: &str, port: u16, file_path: &Path, opts: UpgradeO
                     } else {
                         0
                     };
-                    info!("UpgradeStatus poll: {}", status);
+                    info!("Upgrade status: {}", status);
                     if status == 0 {
                         report_phase(&opts, "Upgrade complete!");
                         return Ok(());
                     }
-                    report_phase(&opts, &format!("Applying… (status {})", status));
-                    // Non-zero status → still in progress; break inner loop to re-poll
+                    report_phase(&opts, &format!("Upgrade in progress (status {})", status));
                     break;
                 }
-                Ok(Ok((CMD_FILE_DATA_ACK, _)))
-                | Ok(Ok((CMD_HEARTBEAT_ACK, _))) => {
-                    // Ignore transparent acks
-                }
+                Ok(Ok((CMD_FILE_DATA_ACK, _))) | Ok(Ok((CMD_HEARTBEAT_ACK, _))) => {}
                 Ok(Ok((cmd, _))) => {
-                    debug!("Poll: unhandled cmd=0x{:04x}", cmd);
+                    debug!("conn2 poll: unhandled cmd=0x{:04x}", cmd);
                 }
                 Ok(Err(_)) => {
-                    // Connection dropped — device rebooted
-                    report_phase(&opts, "Device rebooting — upgrade applied");
+                    report_phase(&opts, "Device rebooted — upgrade applied");
                     return Ok(());
                 }
-                Err(_) => {
-                    // Timeout waiting for response — send another poll
-                    break;
-                }
+                Err(_) => break,
             }
         }
     }

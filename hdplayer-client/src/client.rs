@@ -103,6 +103,241 @@ pub struct Client {
     read_buf: Vec<u8>,
     /// True when using the legacy port-10001 SdkService/SdkCmd protocol instead of BoxStream.
     use_legacy: bool,
+    /// Session token from UDP registration (cmd=0x0005), used as BoxStreamInit payload.
+    /// Devices with newer firmware reject BoxStreamInit [0,0,0,0] and require the token.
+    session_token: [u8; 4],
+    /// Port 9528 management connection — kept alive to maintain authorization for port 9527.
+    ///
+    /// Real HDPlayer always establishes a port 9528 TCP session (ConnectReq → ConnectAck →
+    /// ClientInfoReq → ClientInfoAck handshake) before opening port 9527.  The device tracks
+    /// authorized controllers per port-9528 connection; dropping it causes BoxStreamInit on
+    /// port 9527 to be rejected with FIN.
+    #[allow(dead_code)] // intentionally held alive; value is never read back
+    mgmt_stream: Option<TcpStream>,
+    /// Target host IP/hostname (stored for use as fallback ip_address in DeviceDetails).
+    host: String,
+    /// Firmware version string from port-9528 VersionResp (e.g. "7.4.59.0").
+    /// Used as fallback when legacy TCP query returns empty.
+    mgmt_firmware: String,
+    /// Device info captured from UDP registration (cmd=0x0004/0x0005).
+    /// Used as fallback for name, MAC, screen size when TCP queries return empty.
+    udp_device_info: Option<huidu_protocol::DeviceInfo>,
+}
+
+// ── Port 9528 management login helpers ───────────────────────────────────────
+//
+// Real HDPlayer establishes a port 9528 TCP session and authenticates with a
+// client-info CSV string BEFORE opening port 9527.  The device uses this to
+// track "registered controllers"; any BoxStreamInit received on port 9527 from
+// a client that has not completed the port 9528 handshake is rejected with FIN.
+//
+// Confirmed from Upgrade Huidu.pcapng (frame-by-frame analysis):
+//   t=23.264 s : PC → port 9528 ConnectReq (0x000B)
+//   t=23.264 s : ConnectAck (0x000C) received
+//   t=23.264 s : ClientInfoReq (0x0410) sent
+//   t=23.265 s : ClientInfoAck (0x0411) received
+//   ...
+//   t=195.873 s: PC → port 9527 TCP SYN (device was rebooting — FIN expected)
+//
+// Sequence:
+//   PC→Dev: ConnectReq  (0x000B) [u32 LE 0x01000007]
+//   Dev→PC: ConnectAck  (0x000C) [version echo]
+//   PC→Dev: ClientInfoReq (0x0410) [OS,App,User,Host,...\0]
+//   Dev→PC: ClientInfoAck (0x0411) [u16 LE 0]
+//   PC→Dev: NullCapQuery  (0x0053) []
+//   Dev→PC: NullCapResp   (0x0054) [u32 LE 0]
+//   PC→Dev: CapQuery      (0x040A) []
+//   Dev→PC: CapResp       (0x040B) [u8 0]
+
+/// Build a raw port-9528 framed packet.
+/// Wire format: `[u16 LE total][u16 LE cmd][payload]`
+fn mgmt_build_packet(cmd: u16, payload: &[u8]) -> Vec<u8> {
+    let total = (4u32 + payload.len() as u32) as u16;
+    let mut pkt = Vec::with_capacity(total as usize);
+    pkt.extend_from_slice(&total.to_le_bytes());
+    pkt.extend_from_slice(&cmd.to_le_bytes());
+    pkt.extend_from_slice(payload);
+    pkt
+}
+
+/// Read the next complete framed packet from a raw TcpStream.
+async fn mgmt_recv_packet(
+    stream: &mut TcpStream,
+    buf: &mut Vec<u8>,
+) -> Result<(u16, Vec<u8>)> {
+    loop {
+        if buf.len() >= 4 {
+            let total = u16::from_le_bytes([buf[0], buf[1]]) as usize;
+            if total < 4 {
+                return Err(Error::Protocol(format!(
+                    "port 9528: bad packet length {total}"
+                )));
+            }
+            if buf.len() >= total {
+                let cmd = u16::from_le_bytes([buf[2], buf[3]]);
+                let payload = buf[4..total].to_vec();
+                buf.drain(..total);
+                return Ok((cmd, payload));
+            }
+        }
+        let mut tmp = [0u8; 4096];
+        let n = stream.read(&mut tmp).await?;
+        if n == 0 {
+            return Err(Error::Connection(
+                "port 9528: connection closed by device".into(),
+            ));
+        }
+        buf.extend_from_slice(&tmp[..n]);
+    }
+}
+
+/// Build the null-terminated CSV payload for ClientInfoReq (0x0410).
+///
+/// Format confirmed from Upgrade Huidu.pcapng frame 1423:
+/// `OS,App,User,Hostname,,,_,YYYY-MM-DD_HH:MM:SS,<net>,<uuid>,YYYY/MM/DD HH:MM:SS\0`
+fn mgmt_build_client_info() -> Vec<u8> {
+    use chrono::Local;
+    use uuid::Uuid;
+    let now = Local::now();
+    let date1 = now.format("%Y-%m-%d_%H:%M:%S").to_string();
+    let date2 = now.format("%Y/%m/%d %H:%M:%S").to_string();
+    let username = std::env::var("USERNAME")
+        .or_else(|_| std::env::var("USER"))
+        .unwrap_or_else(|_| "user".to_string());
+    let hostname = std::env::var("COMPUTERNAME")
+        .or_else(|_| std::env::var("HOSTNAME"))
+        .unwrap_or_else(|_| "HDPLAYER".to_string());
+    let session_id = Uuid::new_v4().to_string();
+    let csv = format!(
+        "Windows,HDPlayer,{},{},,,_,{},Ethernet 00-00-00-00-00-00,{},{}",
+        username, hostname, date1, session_id, date2,
+    );
+    let mut bytes = csv.into_bytes();
+    bytes.push(0); // null terminator
+    bytes
+}
+
+/// Connect to port 9528 and complete the management login handshake.
+///
+/// Returns `(TcpStream, firmware_version)`.  The `TcpStream` MUST be kept
+/// alive for the duration of the port 9527 session — the device tracks
+/// authorized controllers per port-9528 connection and rejects BoxStreamInit
+/// when no such session is active.  The firmware version string (e.g.
+/// "7.4.59.0") is parsed from the VersionResp packet.
+async fn mgmt_login(host: &str) -> Result<(TcpStream, String)> {
+    const MGMT_PORT: u16 = 9528;
+    const CONNECT_VERSION: u32 = 0x01000007;
+
+    let addr = format!("{host}:{MGMT_PORT}");
+    info!("Port 9528: connecting for management login…");
+    let mut stream = TcpStream::connect(&addr)
+        .await
+        .map_err(|e| Error::Connection(format!("TCP connect to {addr}: {e}")))?;
+    stream.set_nodelay(true)?;
+    let mut buf = Vec::with_capacity(1024);
+    let mut firmware_version = String::new();
+
+    // Step 1-2: ConnectReq → ConnectAck
+    stream
+        .write_all(&mgmt_build_packet(0x000b, &CONNECT_VERSION.to_le_bytes()))
+        .await?;
+    stream.flush().await?;
+    let (cmd, _) = tokio::time::timeout(
+        Duration::from_secs(10),
+        mgmt_recv_packet(&mut stream, &mut buf),
+    )
+    .await
+    .map_err(|_| Error::Timeout)??;
+    if cmd != 0x000c {
+        return Err(Error::Protocol(format!(
+            "port 9528: expected ConnectAck (0x000c), got 0x{cmd:04x}"
+        )));
+    }
+    debug!("Port 9528 ConnectAck ok");
+
+    // Step 3-4: ClientInfoReq → ClientInfoAck
+    let info = mgmt_build_client_info();
+    stream.write_all(&mgmt_build_packet(0x0410, &info)).await?;
+    stream.flush().await?;
+    let (cmd, _) = tokio::time::timeout(
+        Duration::from_secs(10),
+        mgmt_recv_packet(&mut stream, &mut buf),
+    )
+    .await
+    .map_err(|_| Error::Timeout)??;
+    if cmd != 0x0411 {
+        return Err(Error::Protocol(format!(
+            "port 9528: expected ClientInfoAck (0x0411), got 0x{cmd:04x}"
+        )));
+    }
+    info!("Port 9528 management login authorised (ClientInfoAck ok)");
+
+    // Step 5-6: NullCapQuery → NullCapResp
+    stream.write_all(&mgmt_build_packet(0x0053, &[])).await?;
+    stream.flush().await?;
+    match tokio::time::timeout(
+        Duration::from_secs(10),
+        mgmt_recv_packet(&mut stream, &mut buf),
+    )
+    .await
+    {
+        Ok(Ok((0x0054, _))) => debug!("Port 9528 NullCapResp ok"),
+        Ok(Ok((c, _))) => warn!("Port 9528: expected NullCapResp (0x0054), got 0x{c:04x}"),
+        Ok(Err(e)) => warn!("Port 9528 NullCapResp error: {e}"),
+        Err(_) => warn!("Port 9528 NullCapResp timeout"),
+    }
+
+    // Step 7-8: CapQuery → CapResp
+    stream.write_all(&mgmt_build_packet(0x040a, &[])).await?;
+    stream.flush().await?;
+    match tokio::time::timeout(
+        Duration::from_secs(10),
+        mgmt_recv_packet(&mut stream, &mut buf),
+    )
+    .await
+    {
+        Ok(Ok((0x040b, _))) => debug!("Port 9528 CapResp ok"),
+        Ok(Ok((c, _))) => warn!("Port 9528: expected CapResp (0x040b), got 0x{c:04x}"),
+        Ok(Err(e)) => warn!("Port 9528 CapResp error: {e}"),
+        Err(_) => warn!("Port 9528 CapResp timeout"),
+    }
+
+    // Step 9-10: VersionQuery (0x0055) → VersionResp (0x0056)
+    //
+    // Confirmed from Upgrade Huidu.pcapng frames 1429-1430: after CapResp the real
+    // HDPlayer sends cmd=0x0055 [0x01, 0x00] and the device replies with cmd=0x0056
+    // [0x01, 0x00, fw_major, fw_minor, fw_patch, fw_build].
+    //
+    // Frame 1429: PC→Dev  06 00 55 00 01 00
+    // Frame 1430: Dev→PC  0a 00 56 00 01 00 07 04 3b 00  (firmware 7.4.59.0)
+    stream.write_all(&mgmt_build_packet(0x0055, &[0x01, 0x00])).await?;
+    stream.flush().await?;
+    match tokio::time::timeout(
+        Duration::from_secs(10),
+        mgmt_recv_packet(&mut stream, &mut buf),
+    )
+    .await
+    {
+        Ok(Ok((0x0056, ref p))) if p.len() >= 6 => {
+            firmware_version = format!("{}.{}.{}.{}", p[2], p[3], p[4], p[5]);
+            info!("Port 9528 VersionResp: firmware={firmware_version}");
+        }
+        Ok(Ok((0x0056, _))) => debug!("Port 9528 VersionResp ok (short payload)"),
+        Ok(Ok((c, _))) => warn!("Port 9528: expected VersionResp (0x0056), got 0x{c:04x}"),
+        Ok(Err(e)) => warn!("Port 9528 VersionResp error: {e}"),
+        Err(_) => warn!("Port 9528 VersionResp timeout"),
+    }
+
+    Ok((stream, firmware_version))
+}
+
+/// Query the firmware version from a device's port-9528 management port.
+///
+/// Faster than a full BoxStream connection and works even when port 9527
+/// rejects BoxStreamInit (e.g. firmware 7.4.59.0).
+pub async fn firmware_version_via_9528(host: &str) -> Result<String> {
+    let (_stream, version) = mgmt_login(host).await?;
+    Ok(version)
 }
 
 impl Client {
@@ -118,14 +353,56 @@ impl Client {
         // The device sends unicast UDP from port 9527 TO port 9526 on the controller.
         // We must respond with cmd=0x0003 (and optionally cmd=0x0006/0x0341) to be
         // "registered" as an authorised controller.
+        // Perform UDP registration and capture the session token.
+        // Newer firmware (≥ ~7.2) requires the session token from cmd=0x0005 to be sent
+        // as the BoxStreamInit payload; older devices accept [0,0,0,0].
+        let mut session_token = [0u8; 4];
+        let mut udp_device_info: Option<huidu_protocol::DeviceInfo> = None;
         if let Ok(ip) = Ipv4Addr::from_str(host) {
             match huidu_protocol::udp_register(ip, Duration::from_secs(12)).await {
-                Ok(()) => info!("UDP registration complete"),
+                Ok((Some(token), dev)) => {
+                    info!("UDP registration complete — session token: {:02x?}", token);
+                    session_token = token;
+                    udp_device_info = dev;
+                }
+                Ok((None, dev)) => {
+                    info!("UDP registration complete (no session token)");
+                    udp_device_info = dev;
+                }
                 Err(e) => warn!("UDP registration failed ({e}) — attempting TCP anyway"),
             }
+            // Wait for the device to process our cmd=0x0006 registration before TCP.
+            //
+            // From Huidu.pcapng analysis: in a working session the PC was already
+            // registered (cmd=0x0006 sent in a previous session), so TcpHeartbeatAnswer
+            // arrived immediately (<1ms) as a connection greeting.  When we register
+            // fresh and connect TCP 1ms later, the device hasn't finished processing the
+            // registration yet — TcpHeartbeatAnswer only arrives ~6s later (periodic
+            // heartbeat, not a greeting), and BoxStreamInit is rejected with FIN.
+            //
+            // Giving the device 5s after cmd=0x0006 before TCP connect lets it finish
+            // registration so it recognises us as an authorised controller.
+            info!("Waiting 5s for device to process UDP registration...");
+            tokio::time::sleep(Duration::from_secs(5)).await;
         } else {
             warn!("Host '{host}' is not an IPv4 address — skipping UDP registration");
         }
+
+        // Port 9528 management login — MUST happen before port 9527 BoxStreamInit.
+        //
+        // Real HDPlayer authenticates on port 9528 before connecting to port 9527.
+        // Without the prior ClientInfoAck handshake the device rejects BoxStreamInit
+        // with a FIN regardless of timing or UDP registration state.
+        let (mgmt_stream, mgmt_firmware) = match mgmt_login(host).await {
+            Ok((s, fw)) => {
+                info!("Port 9528 management login complete — device will accept BoxStreamInit");
+                (Some(s), fw)
+            }
+            Err(e) => {
+                warn!("Port 9528 management login failed ({e}) — attempting port 9527 anyway");
+                (None, String::new())
+            }
+        };
 
         let addr = format!("{host}:{port}");
         info!("Connecting to {addr}");
@@ -134,65 +411,43 @@ impl Client {
         stream.set_nodelay(true)?;
         info!("Connected to {addr}");
 
-        let mut client = Self {
+        let client = Self {
             stream: Arc::new(Mutex::new(stream)),
             // BoxStream protocol uses the literal "##GUID" placeholder (not a real UUID).
             // Confirmed from Huidu.pcapng: all SDK requests and responses use guid="##GUID".
             client_guid: "##GUID".to_string(),
             read_buf: Vec::with_capacity(65536),
             use_legacy: false,
+            session_token,
+            mgmt_stream,
+            host: host.to_string(),
+            mgmt_firmware,
+            udp_device_info,
         };
 
-        // Handshake sequence confirmed from Huidu.pcapng (working capture):
+        // BoxStream connect sequence (confirmed from More Huidu.pcapng):
         //
-        //  1. TCP connect
-        //  2. Device → PC: TcpHeartbeatAnswer (0x0060)  ← device signals "ready"
-        //  3. PC → Device: TcpHeartbeatAsk   (0x005F)   ← PC acknowledges device greeting
-        //  4. ~107ms gap  (device processes TcpHeartbeatAsk before next packet)
-        //  5. PC → Device: BoxStreamInit      (0x0200)   ← done by send_xml_request()
+        //  1. TCP connect to port 9527
+        //  2. PC → Device: BoxStreamInit (0x0200) — sent IMMEDIATELY as first data packet
+        //  3. Device → PC: BoxStreamInitAck (0x0201)
         //
-        // From live testing failures (confirmed by packet captures):
-        //  - BoxStreamInit before TcpHeartbeatAnswer  → RST  (app not ready)
-        //  - BoxStreamInit immediately after TcpHeartbeatAnswer without TcpHeartbeatAsk → FIN
-        //  - TcpHeartbeatAsk + BoxStreamInit with 0ms gap → FIN
-        //  - TcpHeartbeatAsk + BoxStreamInit with 2s gap → FIN (too slow overall)
+        // IMPORTANT: The device has a short acceptance window after TCP connect.  If
+        // BoxStreamInit does not arrive within ~2–3 seconds the device closes the
+        // connection (FIN) on the next periodic heartbeat tick (~5–6 s).
         //
-        // The 150ms sleep after TcpHeartbeatAsk matches the observed ~107ms gap in the
-        // working capture and gives the device time to process TcpHeartbeatAsk before
-        // BoxStreamInit arrives.
-        // Wait for ONE TcpHeartbeatAnswer before attempting BoxStreamInit.
+        // Earlier tests showed RST when BoxStreamInit arrived immediately, but those
+        // tests were run WITHOUT the port 9528 management login.  With port 9528 login
+        // completed first, immediate BoxStreamInit is accepted.
         //
-        // Confirmed from live_test8.pcapng:
-        //   1. Device → PC: TcpHeartbeatAnswer  (greeting, sent immediately on connect)
-        //   2. PC → Device: TcpHeartbeatAsk     (acknowledge)
-        //   3. ~150ms gap
-        //   4. PC → Device: BoxStreamInit
+        // Historical note — these all failed when port 9528 login was NOT done:
+        //   BoxStreamInit before heartbeat (no port-9528) → RST
+        //   BoxStreamInit after heartbeat  (no port-9528) → FIN
+        //   BoxStreamInit after heartbeat  (with port-9528, 5.9 s delay) → FIN
         //
-        // Only 1 heartbeat is needed — the device sends it as a connection greeting.
-        // Waiting for 2 caused ~30s+ connection delays (one full 30s heartbeat interval).
-        info!("Waiting for TcpHeartbeatAnswer...");
-        let mut heartbeat_count = 0u32;
-        loop {
-            match client.recv_with_timeout(Duration::from_secs(20)).await {
-                Ok(pkt) if pkt.command == Command::TcpHeartbeatAnswer => {
-                    heartbeat_count += 1;
-                    info!("Received TcpHeartbeatAnswer #{heartbeat_count} — sending TcpHeartbeatAsk");
-                    client.send_packet(&Packet::new(Command::TcpHeartbeatAsk, vec![])).await?;
-                    // One heartbeat is enough — device is ready for BoxStreamInit.
-                    tokio::time::sleep(Duration::from_millis(150)).await;
-                    info!("Heartbeat acknowledged — ready for BoxStreamInit");
-                    break;
-                }
-                Ok(pkt) => {
-                    warn!("Expected TcpHeartbeatAnswer, got {:?} — ignoring", pkt.command);
-                }
-                Err(Error::Timeout) => {
-                    warn!("No TcpHeartbeatAnswer within 20s — proceeding anyway");
-                    break;
-                }
-                Err(e) => return Err(e),
-            }
-        }
+        // Brief settle delay to ensure the TCP connection is fully established on
+        // both ends before the first data write.
+        tokio::time::sleep(Duration::from_millis(200)).await;
+        info!("TCP connection settled — ready for BoxStreamInit");
 
         Ok(client)
     }
@@ -217,6 +472,19 @@ impl Client {
     /// XML is then sent as SdkCmdAsk and received as SdkCmdAnswer, both with
     /// an 8-byte `[u32 total][u32 chunk_index]` framing header before the XML bytes.
     pub async fn connect_legacy(host: &str, port: u16) -> Result<Self> {
+        // Try port 9528 login to capture firmware version (non-fatal).
+        // Older C-series devices may not have port 9528 — connection will fail quickly.
+        let mgmt_firmware = match mgmt_login(host).await {
+            Ok((_, fw)) => {
+                info!("Port 9528 firmware version on legacy path: {fw}");
+                fw
+            }
+            Err(e) => {
+                debug!("Port 9528 login failed on legacy path ({e}) — no firmware fallback");
+                String::new()
+            }
+        };
+
         // Probe to discover the device's SDK version.
         let device_version = Self::probe_legacy_version(host, port).await?;
         let use_version = device_version.min(SDK_CLIENT_VERSION);
@@ -237,6 +505,11 @@ impl Client {
             client_guid: "##GUID".to_string(),
             read_buf: Vec::with_capacity(65536),
             use_legacy: true,
+            session_token: [0u8; 4], // port 10001 doesn't use BoxStreamInit
+            mgmt_stream: None,       // legacy protocol doesn't hold port 9528 open
+            host: host.to_string(),
+            mgmt_firmware,
+            udp_device_info: None,   // no UDP registration on legacy path
         };
 
         info!("Sending SdkServiceAsk (version 0x{use_version:08X})...");
@@ -302,6 +575,11 @@ impl Client {
             client_guid: String::new(),
             read_buf: Vec::with_capacity(256),
             use_legacy: true,
+            session_token: [0u8; 4],
+            mgmt_stream: None,
+            host: String::new(),
+            mgmt_firmware: String::new(),
+            udp_device_info: None,
         };
 
         let payload = sdk_service_ask_payload(SDK_CLIENT_VERSION);
@@ -377,11 +655,21 @@ impl Client {
 
     /// Initiate a BoxStream session (port 9527 protocol).
     ///
-    /// Sends `BoxStreamInit` with payload `[0,0,0,0]` and waits for `BoxStreamInitAck`.
-    /// Confirmed from Huidu.pcapng frames 8–10.
+    /// Sends `BoxStreamInit` with the session token as payload and waits for
+    /// `BoxStreamInitAck`.
+    ///
+    /// Payload layout (4 bytes = 8-byte total packet):
+    ///   bytes 0-3: session token from UDP cmd=0x0005 (or `[0,0,0,0]` for older devices).
+    ///
+    /// Confirmed from DLL analysis (NetIOServices.dll 0x044700): the 8-byte BoxStreamInit
+    /// packet is `[len=0x0008][cmd=0x0200][channel_u16][0x0000]` where `channel` is the
+    /// value from the XML `[channel]` tag / UDP registration token.  Devices running
+    /// firmware ≥ ~7.2 reject `[0,0,0,0]` and require the token obtained from UDP
+    /// cmd=0x0005 during registration.
     async fn box_stream_init(&mut self) -> Result<()> {
-        info!("Sending BoxStreamInit [0,0,0,0]...");
-        let pkt = Packet::new(Command::BoxStreamInit, vec![0x00, 0x00, 0x00, 0x00]);
+        let token = self.session_token;
+        info!("Sending BoxStreamInit token={:02x?}...", token);
+        let pkt = Packet::new(Command::BoxStreamInit, token.to_vec());
         self.send_packet(&pkt).await?;
         info!("BoxStreamInit sent — waiting for BoxStreamInitAck (0x0201)");
         loop {
@@ -771,6 +1059,38 @@ impl Client {
             // Use MAC as device_id — the most stable unique identifier.
             if !info.mac_address.is_empty() {
                 info.device_id = info.mac_address.replace(':', "").to_uppercase();
+            }
+        }
+
+        // Fallback: populate empty fields from alternate data sources.
+        //
+        // Firmware 7.4.59.0 returns empty self-closing <out method="X"/> for ALL TCP queries
+        // on port 10001.  Fill in what we can from UDP registration (cmd=0x0004/0x0005) and
+        // port-9528 VersionResp.
+        if info.firmware_version.is_empty() && !self.mgmt_firmware.is_empty() {
+            info.firmware_version = self.mgmt_firmware.clone();
+        }
+        if info.ip_address.is_empty() && !self.host.is_empty() {
+            info.ip_address = self.host.clone();
+        }
+        if let Some(ref udp) = self.udp_device_info {
+            if info.device_name.is_empty() && !udp.name.is_empty() {
+                info.device_name = udp.name.clone();
+            }
+            if info.screen_width == 0 {
+                if let Some(w) = udp.screen_width { info.screen_width = w; }
+            }
+            if info.screen_height == 0 {
+                if let Some(h) = udp.screen_height { info.screen_height = h; }
+            }
+            if info.mac_address.is_empty() {
+                if let Some(ref mac) = udp.mac_address {
+                    info.mac_address = mac.clone();
+                    info.device_id = mac.replace(':', "").to_uppercase();
+                }
+            }
+            if info.firmware_version.is_empty() {
+                if let Some(ref fw) = udp.firmware_version { info.firmware_version = fw.clone(); }
             }
         }
 

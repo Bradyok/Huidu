@@ -415,6 +415,47 @@ fn parse_relay_state(s: &str) -> Result<bool, String> {
     }
 }
 
+/// Query a device's running firmware version string.
+///
+/// Strategy (in order):
+/// 1. UDP discovery — check `firmware_version` field (parsed from `SoftwareVersion` attr).
+///    If absent, also search the raw `info_xml` for alternative attribute names used by
+///    older BoxPlayer firmware (`AppVersion`, `BoxPlayerVersion`, `Version`).
+/// 2. BoxStream SDK (port 9527) — `get_device_info().firmware_version`.
+///
+/// Returns an empty string if the version cannot be determined.
+async fn query_device_firmware_version(host: &str) -> String {
+    // 1. Direct port 9528 management login — fastest path, works even when port 9527
+    //    rejects BoxStreamInit (e.g. firmware 7.4.59.0).
+    if let Ok(v) = hdplayer::client::firmware_version_via_9528(host).await {
+        if !v.is_empty() {
+            return v;
+        }
+    }
+    // 2. UDP discovery fallback
+    if let Ok(devs) = Discovery::scan(Duration::from_secs(4)).await {
+        if let Some(d) = devs.into_iter().find(|d| d.addr.to_string() == host) {
+            if let Some(v) = d.firmware_version {
+                return v;
+            }
+            for attr in &["AppVersion", "BoxPlayerVersion", "Version", "SWVersion", "FirmwareVer"] {
+                if let Some(v) = hdplayer::xml::get_attr(&d.info_xml, attr) {
+                    return v.to_string();
+                }
+            }
+        }
+    }
+    // 3. BoxStream SDK last resort
+    if let Ok(mut c) = Client::connect(host, 9527).await {
+        if let Ok(info) = c.get_device_info().await {
+            if !info.firmware_version.is_empty() {
+                return info.firmware_version;
+            }
+        }
+    }
+    String::new()
+}
+
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
     let cli = Cli::parse();
@@ -500,16 +541,10 @@ async fn main() -> anyhow::Result<()> {
         drop(raw); // release 330 MB before the upgrade re-reads the file
         println!("Firmware file version:  {fw_version}");
 
-        // ── Version: device before upgrade (via UDP discovery) ───────────────
-        // Use discovery rather than BoxStream so we don't depend on the SDK
-        // handshake succeeding (device may reject BoxStreamInit while busy).
-        let before_version = Discovery::scan(Duration::from_secs(4)).await
-            .ok()
-            .and_then(|devs| devs.into_iter().find(|d| d.addr.to_string() == host))
-            .and_then(|d| d.firmware_version)
-            .unwrap_or_default();
+        // ── Version: device before upgrade ───────────────────────────────────
+        let before_version = query_device_firmware_version(&host).await;
         if before_version.is_empty() {
-            println!("Device version before:  (not found via discovery)");
+            println!("Device version before:  (unavailable)");
         } else {
             println!("Device version before:  {before_version}");
         }
@@ -548,22 +583,58 @@ async fn main() -> anyhow::Result<()> {
             .join()
             .map_err(|_| anyhow::anyhow!("upgrade thread panicked"))??;
 
-        // ── Version: device after upgrade (via UDP discovery) ────────────────
+        // ── Version: device after upgrade ────────────────────────────────────
         println!("\nWaiting for device to come back online…");
-        let reconnect_deadline = std::time::Instant::now() + Duration::from_secs(120);
+        // The upgrade script (upgrade.sh) on some devices uses SIGHUP to signal
+        // BoxDaemon (which on this device causes a config-reload, not a restart).
+        // BoxDaemon then closes the upgrade TCP connection and reports the OLD
+        // firmware version while upgrade.sh continues copying files in the
+        // background.  A second OS-level reboot follows ~30-90 s later when
+        // upgrade.sh calls `reboot`.  We must keep polling until the firmware
+        // version CHANGES (or until we're confident the upgrade failed).
+        // Strategy:
+        //   - If the device responds with the SAME version as before, keep waiting.
+        //   - Only declare success when it reports the NEW version.
+        //   - After seeing the old version for 20+ minutes with no change, declare failure.
+        //     write_fpga on this device can take ~13 minutes while BoxDaemon stays alive.
+        let reconnect_deadline = std::time::Instant::now() + Duration::from_secs(2400);
+        let mut old_version_since: Option<std::time::Instant> = None;
         let after_version = loop {
             if std::time::Instant::now() > reconnect_deadline {
-                println!("  Timed out — device did not respond within 120 s.");
+                println!("  Timed out — device did not respond within 25 min.");
                 break String::new();
             }
-            tokio::time::sleep(Duration::from_secs(5)).await;
-            let found = Discovery::scan(Duration::from_secs(3)).await
-                .ok()
-                .and_then(|devs| devs.into_iter().find(|d| d.addr.to_string() == host))
-                .and_then(|d| d.firmware_version);
-            if let Some(v) = found {
+            tokio::time::sleep(Duration::from_secs(15)).await;
+            let v = query_device_firmware_version(&host).await;
+            if v.is_empty() {
+                // Device offline — rebooting or flashing; reset the "stuck at old" timer
+                old_version_since = None;
+                println!("  Device offline — waiting for reboot to complete…");
+                continue;
+            }
+            if v == fw_version {
+                println!("  Device is back online (firmware: {v})");
                 break v;
             }
+            if !before_version.is_empty() && v == before_version {
+                // Device is online but still reporting old firmware.
+                // This is expected during the two-stage upgrade: BoxDaemon
+                // reloads via SIGHUP while upgrade.sh copies files in the
+                // background, then calls `reboot` for the real OS reboot.
+                // Keep polling; only give up after 20 min of unchanged version.
+                // write_fpga on this device can take ~13 min while BoxDaemon stays alive.
+                let since = old_version_since.get_or_insert_with(std::time::Instant::now);
+                let elapsed = since.elapsed().as_secs();
+                println!("  Device reports old firmware ({v}) — upgrade in progress, {elapsed}s so far…");
+                if elapsed >= 1200 {
+                    println!("  Old firmware for 20+ min — upgrade did not apply.");
+                    break v;
+                }
+                continue;
+            }
+            // Some other (unexpected) version
+            println!("  Device is back online (firmware: {v})");
+            break v;
         };
 
         println!("─────────────────────────────────────────");
