@@ -663,6 +663,86 @@ pub async fn handle_sdk_command(
             ))
         }
 
+        // ── Ethernet / PPPoE / generic network config ──────────────────────────
+        "GetEthernetInfo" | "getEthernetInfo" => {
+            let (dhcp, ip, mask, gw, dns) = {
+                let s = services.read().await;
+                (s.eth0_dhcp, s.eth0_ip.clone(), s.eth0_mask.clone(),
+                 s.eth0_gateway.clone(), s.eth0_dns.clone())
+            };
+            // Prefer the live IP/mask when DHCP is in effect and we have one.
+            let live_ip = crate::protocol::discovery::get_local_ip();
+            let ip = if dhcp && live_ip != "0.0.0.0" { live_ip } else { ip };
+            ok!(&format!(
+                "<ethernet dhcp=\"{dhcp}\" ip=\"{ip}\" mask=\"{mask}\" gateway=\"{gw}\" dns=\"{dns}\"/>",
+                dhcp = if dhcp { "true" } else { "false" },
+                ip = xml_esc(&ip), mask = xml_esc(&mask),
+                gw = xml_esc(&gw), dns = xml_esc(&dns),
+            ))
+        }
+
+        "SetEthernetInfo" | "setEthernetInfo" | "SetNetworkInfo" | "setNetworkInfo" => {
+            // Accept either <ethernet .../> or <network .../> as the carrier.
+            let tag = if extract_attr(xml, "ethernet", "dhcp").is_some()
+                || extract_attr(xml, "ethernet", "ip").is_some() { "ethernet" } else { "network" };
+            let cfg = {
+                let mut state = services.write().await;
+                if let Some(v) = extract_attr(xml, tag, "dhcp") {
+                    state.eth0_dhcp = v == "true" || v == "1";
+                }
+                if let Some(v) = extract_attr(xml, tag, "ip") { state.eth0_ip = v; }
+                if let Some(v) = extract_attr(xml, tag, "mask") { state.eth0_mask = v; }
+                if let Some(v) = extract_attr(xml, tag, "gateway") { state.eth0_gateway = v; }
+                if let Some(v) = extract_attr(xml, tag, "dns") { state.eth0_dns = v; }
+                state.save_persisted();
+                (state.eth0_dhcp, state.eth0_ip.clone(), state.eth0_mask.clone(),
+                 state.eth0_gateway.clone(), state.eth0_dns.clone())
+            };
+            tokio::task::spawn_blocking(move || {
+                apply_ethernet_config(cfg.0, &cfg.1, &cfg.2, &cfg.3, &cfg.4)
+            }).await.ok();
+            ok!("")
+        }
+
+        "GetPPPoEInfo" | "getPPPoEInfo" => {
+            let (en, user, pass) = {
+                let s = services.read().await;
+                (s.pppoe_enable, s.pppoe_user.clone(), s.pppoe_password.clone())
+            };
+            ok!(&format!(
+                "<pppoe enable=\"{en}\" user=\"{user}\" password=\"{pass}\"/>",
+                en = if en { "true" } else { "false" },
+                user = xml_esc(&user), pass = xml_esc(&pass),
+            ))
+        }
+
+        "SetPPPoEInfo" | "setPPPoEInfo" => {
+            let (en, user, pass) = {
+                let mut state = services.write().await;
+                if let Some(v) = extract_attr(xml, "pppoe", "enable") {
+                    state.pppoe_enable = v == "true" || v == "1";
+                }
+                if let Some(v) = extract_attr(xml, "pppoe", "user") { state.pppoe_user = v; }
+                if let Some(v) = extract_attr(xml, "pppoe", "password") { state.pppoe_password = v; }
+                state.save_persisted();
+                (state.pppoe_enable, state.pppoe_user.clone(), state.pppoe_password.clone())
+            };
+            tokio::task::spawn_blocking(move || apply_pppoe_config(en, &user, &pass)).await.ok();
+            ok!("")
+        }
+
+        "GetStorageInfo" | "getStorageInfo" => {
+            let prog_dir = {
+                let s = services.read().await;
+                s.storage.program_dir().to_path_buf()
+            };
+            let (total, free) = get_storage_bytes(&prog_dir);
+            let used = total.saturating_sub(free);
+            ok!(&format!(
+                "<storage total=\"{total}\" free=\"{free}\" used=\"{used}\"/>"
+            ))
+        }
+
         // ── File Management ────────────────────────────────────────────────────
         "GetFiles" | "getFiles" => {
             let state = services.read().await;
@@ -843,7 +923,8 @@ pub async fn handle_sdk_command(
             ok!("")
         }
 
-        "UnlockAdminModePassword" | "unlockAdminModePassword" => {
+        "UnlockAdminModePassword" | "unlockAdminModePassword"
+        | "VerifyPassword" | "verifyPassword" => {
             let password = extract_attr(xml, "password", "value").unwrap_or_default();
             let hash_stored = services.read().await.admin_password_hash.clone();
             let unlocked = if hash_stored.is_empty() {
@@ -868,7 +949,8 @@ pub async fn handle_sdk_command(
             }
         }
 
-        "SetAdminModePassword" | "setAdminModePassword" => {
+        "SetAdminModePassword" | "setAdminModePassword"
+        | "SetPassword" | "setPassword" | "ModifyPassword" | "modifyPassword" => {
             let password = extract_attr(xml, "password", "value").unwrap_or_default();
             let mut state = services.write().await;
             state.admin_password_hash = if password.is_empty() {
@@ -921,6 +1003,39 @@ pub async fn handle_sdk_command(
                 s.gps_reading.clone()
             };
             ok!(&reading.to_xml())
+        }
+
+        "GetSensorType" | "getSensorType" => {
+            // Enumerate the sensor kinds this unit currently surfaces (by name).
+            let readings = tokio::task::spawn_blocking(read_sensor_data).await.unwrap_or_default();
+            let mut items = String::new();
+            for (name, _) in &readings {
+                let kind = if name.contains("temp") { "temperature" }
+                    else if name.to_lowercase().contains("humid") { "humidity" }
+                    else if name.starts_with("28-") { "ds18b20" }
+                    else { "generic" };
+                items.push_str(&format!(
+                    "<sensor name=\"{}\" type=\"{}\"/>", xml_esc(name), kind
+                ));
+            }
+            ok!(&format!("<sensorTypes count=\"{}\">{}</sensorTypes>", readings.len(), items))
+        }
+
+        "GetCurrentModbusValue" | "getCurrentModbusValue" => {
+            // The poller stores each source's latest read under data_sources["DS:<name>"].
+            let (sources, values) = {
+                let s = services.read().await;
+                (s.modbus_sources.clone(), s.data_sources.clone())
+            };
+            let mut items = String::new();
+            for src in &sources {
+                let val = values.get(&format!("DS:{}", src.name)).cloned().unwrap_or_default();
+                items.push_str(&format!(
+                    "<modbus name=\"{}\" register=\"{}\" value=\"{}\"/>",
+                    xml_esc(&src.name), src.register, xml_esc(&val)
+                ));
+            }
+            ok!(&format!("<modbusValues count=\"{}\">{}</modbusValues>", sources.len(), items))
         }
 
         // ── Real-time readouts (GetCurrent*) ───────────────────────────────────
@@ -1942,6 +2057,49 @@ fn xml_esc(s: &str) -> String {
 
 /// Activate or deactivate a PPPoE connection.
 /// On Linux, uses `nmcli` (NetworkManager) or `pon`/`poff` (pppd).
+/// Best-effort apply of a wired eth0 config. Persisting the values is what the
+/// CMS round-trip needs; the live apply is opportunistic (nmcli, else iproute2)
+/// and non-fatal, matching apply_wifi_config / apply_pppoe_config.
+fn apply_ethernet_config(dhcp: bool, ip: &str, mask: &str, gateway: &str, _dns: &str) {
+    #[cfg(unix)]
+    {
+        use std::process::Command;
+        if dhcp {
+            // Renew via nmcli if present, else kick udhcpc on eth0.
+            let ok = Command::new("nmcli")
+                .args(["con", "mod", "eth0", "ipv4.method", "auto"]).status()
+                .map(|s| s.success()).unwrap_or(false);
+            if !ok {
+                let _ = Command::new("udhcpc").args(["-i", "eth0", "-n", "-q"]).status();
+            }
+        } else if !ip.is_empty() {
+            // Static: prefix length from the dotted mask, then set addr + gateway.
+            let prefix = mask_to_prefix(mask).unwrap_or(24);
+            let ok = Command::new("nmcli")
+                .args(["con", "mod", "eth0", "ipv4.method", "manual",
+                       "ipv4.addresses", &format!("{ip}/{prefix}")]).status()
+                .map(|s| s.success()).unwrap_or(false);
+            if !ok {
+                let _ = Command::new("ip").args(["addr", "flush", "dev", "eth0"]).status();
+                let _ = Command::new("ip")
+                    .args(["addr", "add", &format!("{ip}/{prefix}"), "dev", "eth0"]).status();
+                if !gateway.is_empty() {
+                    let _ = Command::new("ip")
+                        .args(["route", "replace", "default", "via", gateway]).status();
+                }
+            }
+        }
+    }
+    #[cfg(not(unix))]
+    let _ = (dhcp, ip, mask, gateway);
+}
+
+/// Dotted-decimal netmask -> CIDR prefix length (e.g. "255.255.255.0" -> 24).
+fn mask_to_prefix(mask: &str) -> Option<u32> {
+    let addr: std::net::Ipv4Addr = mask.parse().ok()?;
+    Some(u32::from(addr).count_ones())
+}
+
 fn apply_pppoe_config(enable: bool, user: &str, _password: &str) {
     #[cfg(unix)]
     {
@@ -2178,6 +2336,62 @@ mod tests {
         // No programs loaded -> index -1 (not a panic / not 0).
         let resp = call_sdk("GetCurrentPlayProgramIndex").await;
         assert!(resp.contains("index=\"-1\""), "expected -1, got: {resp}");
+    }
+
+    // ── network / storage / sensor / password batch ───────────────────────────
+
+    async fn call_on(services: &Arc<RwLock<ServicesState>>, body: &str) -> String {
+        let session = Session::new();
+        let (tx, _rx) = mpsc::channel::<PlayerCommand>(8);
+        handle_sdk_command(body, &session, &tx, ".", services, 128, 64)
+            .await
+            .unwrap()
+    }
+
+    #[tokio::test]
+    async fn network_and_readout_methods_respond() {
+        let cases = [
+            ("GetEthernetInfo", "<ethernet dhcp="),
+            ("GetPPPoEInfo", "<pppoe enable="),
+            ("GetStorageInfo", "<storage total="),
+            ("GetSensorType", "<sensorTypes count="),
+            ("GetCurrentModbusValue", "<modbusValues count="),
+        ];
+        for (m, needle) in cases {
+            let resp = call_sdk(m).await;
+            assert!(resp.contains("result value=\"0\""), "{m}: not ok: {resp}");
+            assert!(resp.contains(needle), "{m}: missing `{needle}`: {resp}");
+        }
+    }
+
+    #[tokio::test]
+    async fn set_ethernet_info_roundtrips() {
+        // Use a temp program dir so save_persisted() doesn't write into the repo.
+        let dir = tempfile::tempdir().unwrap();
+        let services = Arc::new(RwLock::new(ServicesState::new(dir.path().to_path_buf())));
+        let set = "<sdk guid=\"t\"><in method=\"SetEthernetInfo\">\
+                   <ethernet dhcp=\"false\" ip=\"10.0.0.5\" mask=\"255.255.255.0\" \
+                   gateway=\"10.0.0.1\" dns=\"1.1.1.1\"/></in></sdk>";
+        assert!(call_on(&services, set).await.contains("result value=\"0\""));
+        let got = call_on(&services, "<sdk guid=\"t\"><in method=\"GetEthernetInfo\"></in></sdk>").await;
+        assert!(got.contains("dhcp=\"false\""), "{got}");
+        assert!(got.contains("ip=\"10.0.0.5\""), "{got}");
+        assert!(got.contains("gateway=\"10.0.0.1\""), "{got}");
+    }
+
+    #[tokio::test]
+    async fn verify_password_alias_ok_when_unset() {
+        // No admin password set -> VerifyPassword (alias of Unlock...) succeeds.
+        let resp = call_sdk("VerifyPassword").await;
+        assert!(resp.contains("result value=\"0\""), "{resp}");
+    }
+
+    #[test]
+    fn mask_to_prefix_works() {
+        assert_eq!(mask_to_prefix("255.255.255.0"), Some(24));
+        assert_eq!(mask_to_prefix("255.255.0.0"), Some(16));
+        assert_eq!(mask_to_prefix("255.255.255.252"), Some(30));
+        assert_eq!(mask_to_prefix("0.0.0.0"), Some(0));
     }
 
     // ── extract_brightness_schedule ──────────────────────────────────────────
