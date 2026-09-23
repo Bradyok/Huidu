@@ -1,54 +1,50 @@
 //! Port 9528 binary upgrade protocol — firmware transfer and apply.
 //!
-//! This module implements the upgrade protocol confirmed from `Upgrade Huidu.pcapng`.
-//! The protocol is entirely binary (no XML), using the same
-//! `[u16 LE length][u16 LE cmd][payload]` framing as the BoxStream protocol.
+//! Wire-confirmed against a capture of the stock HDPlayer 7.11.18.0 upgrading a
+//! C15 from 7.4.61.0 → 7.11.18.0 (`hdplayer_firmware_upgrade_20260923_1609.pcapng`,
+//! upgrade succeeded).  Framing is `[u16 LE total_length][u16 LE cmd][payload]`,
+//! the same as BoxStream.  Times below are seconds from the first SYN.
 //!
-//! ## Wire-confirmed packet sequence (PCAP timestamps)
+//! **Connection 1 (port 9528):**
 //!
-//! **First TCP connection (port 9528):**
+//! 1.  ConnectReq (0x000b) `[u32 LE 0x01000007]` → ConnectAck (0x000c) echo
+//! 2.  ClientInfoReq (0x0410) null-terminated CSV → ClientInfoAck (0x0411) `[u16 0]`
+//! 3.  NullCapQuery (0x0053) empty → `[u32 0]`;  CapQuery (0x040a) empty → `[u8 0]`
+//! 4.  UpgradeCMD mode=1 (0x0055) `[u16 1]` → UpgradeStatus (0x0056)
+//!     `[u16 1][u8 a][u8 b][u8 c][u8 d]` = the device's limit version a.b.c.d
+//!     (7.4.59.0 on this box).
+//! 5.  OpenFileAsk (0x0017) `[/tmp/Box.tar.gz\0][u64 LE size]` → `[u32 0]`.
+//!     `size` is the WHOLE `.bin` size, although only the tar.gz after the
+//!     header is streamed (see [`FirmwareParsed::declared_size`]).
+//! 6.  FileContentAsk (0x0019) × N, 9212-byte payloads; the device answers EVERY
+//!     chunk with FileContentAnswer (0x001a) `[u32 0]` (35835 / 35835).  During
+//!     the transfer the device also sends a bare 0x0060 every ~5.7 s, and the PC
+//!     sends a bare heartbeat 0x005f every ~6 s for the life of the connection.
+//!     Neither side answers the other's keepalive.  330 MB took ~34 s.
+//! 7.  CloseFileAsk (0x001b) EMPTY payload (`04 00 1b 00`) → CloseFileAnswer
+//!     (0x001c) `[u32 0]` ~0.85 s later.
+//! 8.  UpgradeCMD mode=3 `[u16 3]["killall -1 BoxDaemon; tar zxvf %s -C %s \0"]`
+//!     → UpgradeStatus `[u16 3][u32 0]` immediately.
+//! 9.  UpgradeCMD mode=2 `[u16 2]["upgrade.sh\0"]` — no reply.
+//! 10. PC polls mode=0 every 5 s (+ heartbeat every 6 s).  The device never
+//!     answers again on this connection (its services are being replaced).
+//!     HDPlayer gives up and RSTs it ~70 s after mode=2.
 //!
-//! 1.  ConnectReq (0x000b): `[u32 LE 0x01000007]`
-//! 2.  ConnectAck (0x000c): device version echo
-//! 3.  ClientInfoReq (0x0410): null-terminated CSV
-//! 4.  ClientInfoAck (0x0411): `[u16 LE 0]`
-//! 5.  NullCapQuery (0x0053): empty
-//! 6.  NullCapResp (0x0054): `[u32 LE 0]`
-//! 7.  CapQuery (0x040a): `[u16 LE 0]`
-//! 8.  CapResp (0x040b): `[u8 0]`
-//! 9.  UpgradeControl mode=1 (0x0055): `[u16 LE 1]`
-//! 10. UpgradeStatus (0x0056): 6-byte status payload
-//! 11. FileTransferReq (0x0017): `[/tmp/Box.tar.gz\0][u64 LE size]`
-//! 12. FileTransferAck (0x0018): `[u32 LE 0]`
-//! 13. FileDataChunks (0x0019): 9212-byte chunks, streaming
-//!     - Device sends periodic acks (0x001a) during transfer
-//! 14. Heartbeat (0x005f): PC confirms last chunk received
-//!     - HeartbeatAck (0x001c): device ack (or 0x0060 on older firmware)
-//! 15. UpgradeControl mode=3 (0x0055): `[u16 LE 3]["killall -1 BoxDaemon; tar zxvf %s -C %s \0"]`
-//!     (Command string comes from the `<Decompress>` tag in the .bin XML header.)
-//! 16. UpgradeStatus (0x0056): status=3 (decompress in progress)
-//! 17. UpgradeControl mode=2 (0x0055): `[u16 LE 2]["upgrade.sh\0"]`
-//!     - Device acknowledges with TCP ACK only (no UpgradeStatus for mode=2)
-//! 18. Poll UpgradeControl mode=0 every ~5 s for ~52 s — device responds with
-//!     TCP ACKs only (busy decompressing).  No UpgradeStatus during this phase.
-//!     Then ~32 s of silence (device finishes decompression).
+//! **Connection 2 (port 9528), opened ~85 s after mode=2:**
 //!
-//! **Second TCP connection (port 9528) — opens ~84 s after mode=2:**
+//! 11. ConnectReq `[u32 0x01000007]` → ConnectAck `[u32 0x01000009]` — 14 s
+//!     later, and version 9, not 7: it is the NEW firmware's BoxUpgrade replying.
+//! 12. UpgradeExec (0x0730) `[u64 LE 8]` → ExecAck (0x0731) `[u16 0]` (~10 s)
+//! 13. ClientInfoReq → ClientInfoAck (~10 s);  NullCapQuery → `[u32 0]` (~10 s)
+//! 14. Poll UpgradeCMD mode=0 every 5 s → UpgradeStatus `[u16 0][i32 result]`,
+//!     where result comes from `/root/upgrade.status` (`SendGetUpgradeResultAnswer`):
+//!     `'0'`→0 still running, `'1'`→1 SUCCESS, `'2'`→2 failed, else −1.
+//!     Got result=1 ~41 s after UpgradeExec; HDPlayer then closed (FIN).
 //!
-//! 19. ConnectReq (0x000b): `[u32 LE 0x01000007]`
-//! 20. ConnectAck (0x000c): arrives ~14.5 s later (device finishes decompress)
-//! 21. UpgradeExec (0x0730): `[u64 LE 8]`
-//! 22. UpgradeExecAck (0x0731): arrives ~10 s later
-//! 23. ClientInfoReq (0x0410): null-terminated CSV  ← REQUIRED after ExecAck
-//! 24. ClientInfoAck (0x0411): `[u16 LE 0]`
-//! 25. NullCapQuery (0x0053): empty
-//! 26. NullCapResp (0x0054): `[u32 LE 0]`
-//! 27. Poll UpgradeControl mode=0 + Heartbeat on THIS connection until
-//!     UpgradeStatus=0 (upgrade script complete, ~41 s after UpgradeExec)
-//!
-//! **IMPORTANT:** completion polling MUST happen on the second connection.
-//! The device does NOT respond with UpgradeStatus on the first connection
-//! during decompress.  Dropping conn2 after UpgradeExec aborts the upgrade.
+//! NOTE: an UpgradeStatus payload's first u16 is the ECHOED MODE, not a status.
+//! Treating it as the status (as this client used to) made every mode=0 reply
+//! look like "done".  HDPlayer also opened a second, unused socket at the same
+//! moment as connection 2; it never sent on it.
 
 use std::io::Read as _;
 use std::path::Path;
@@ -74,17 +70,43 @@ const CMD_UPGRADE_STATUS: u16 = 0x0056;
 const CMD_FILE_TRANSFER_REQ: u16 = 0x0017; // OpenFileAsk
 const CMD_FILE_TRANSFER_ACK: u16 = 0x0018;
 const CMD_FILE_DATA_CHUNK: u16 = 0x0019;    // FileContentAsk
-const CMD_CLOSE_FILE: u16 = 0x001b;         // CloseFileAsk — flushes/closes the written file
-const CMD_CLOSE_FILE_ACK: u16 = 0x001c;     // CloseFileAnswer (same code as heartbeat-ack)
-const CMD_FILE_DATA_ACK: u16 = 0x001a; // periodic ack from device during transfer
-const CMD_FILE_COMPLETE: u16 = 0x0060; // device signals file fully received
-const CMD_HEARTBEAT: u16 = 0x005f;     // PC ping
-const CMD_HEARTBEAT_ACK: u16 = 0x001c; // device pong
+const CMD_CLOSE_FILE: u16 = 0x001b;         // CloseFileAsk — device close()s + renames the file. MUST be sent with an EMPTY payload (device requires total_length == 4).
+const CMD_CLOSE_FILE_ACK: u16 = 0x001c;     // CloseFileAnswer — on port 9528 this code is ONLY ever the close answer (verified: emitted from exactly one site in BoxUpgrade).
+const CMD_FILE_DATA_ACK: u16 = 0x001a; // FileContentAnswer — device acks every data chunk
+const CMD_DEVICE_KEEPALIVE: u16 = 0x0060; // bare device keepalive, sent every ~5.7 s during the transfer; never answered
+const CMD_HEARTBEAT: u16 = 0x005f;     // bare PC keepalive; HDPlayer sends it every ~6 s for the whole session; never answered
 const CMD_UPGRADE_EXEC: u16 = 0x0730;
 const CMD_UPGRADE_EXEC_ACK: u16 = 0x0731;
 
 /// Protocol version sent in ConnectReq (frame 1420: 07 00 00 01 → LE = 0x01000007).
 const CONNECT_VERSION: u32 = 0x01000007;
+/// HDPlayer's keepalive period (0x005f), measured in the 2026-09-23 capture.
+const HEARTBEAT_EVERY: Duration = Duration::from_secs(6);
+/// Silence on connection 1 after mode=2 before we give up on it and reconnect.
+/// The device answers nothing there once `killall -1 BoxDaemon` has run.
+/// HDPlayer RST'd the connection ~70 s after mode=2.
+const CONN1_SILENCE: Duration = Duration::from_secs(60);
+/// The reconnect handshake is slow while the new firmware comes up: ConnectAck
+/// took 14 s and each later reply ~10 s in the capture.
+const CONN2_STEP_TIMEOUT: Duration = Duration::from_secs(60);
+
+/// `/root/upgrade.status` as reported in UpgradeStatus(mode=0) — see
+/// `SendGetUpgradeResultAnswer`.
+const RESULT_RUNNING: i32 = 0;
+const RESULT_SUCCESS: i32 = 1;
+const RESULT_FAILED: i32 = 2;
+
+/// Split an UpgradeStatus (0x0056) payload into `(echoed mode, i32 value)`.
+///
+/// The payload is `[u16 LE mode][4 bytes]`.  For mode=0 the 4 bytes are the
+/// i32 result (see `RESULT_*`); for mode=1 they are the limit version, one byte
+/// per dotted-quad field; for mode=3 they are 0.
+fn parse_upgrade_status(p: &[u8]) -> Option<(u16, [u8; 4])> {
+    if p.len() < 6 {
+        return None;
+    }
+    Some((u16::from_le_bytes([p[0], p[1]]), [p[2], p[3], p[4], p[5]]))
+}
 /// Data payload bytes per FileDataChunk packet (total packet = 4 header + 9212 = 9216).
 const CHUNK_SIZE: usize = 9212;
 /// Device target path for the uploaded firmware archive.
@@ -103,6 +125,11 @@ const BIN_PAYLOAD_OFFSET: usize = 678;
 struct FirmwareParsed {
     /// The raw tar.gz bytes to stream to the device.
     payload: Vec<u8>,
+    /// Size announced in OpenFileAsk (0x0017).  HDPlayer announces the size of
+    /// the WHOLE `.bin` (header included) even though it only streams the tar.gz
+    /// payload — 2026-09-23 capture: declared 330110795, sent 330110117 (diff =
+    /// the 678-byte header).  We mirror that; for raw archives it is the payload size.
+    declared_size: u64,
     /// UpgradeControl mode=3 payload: `[u16 LE 3][decompress_cmd\0]`.
     /// Read from the BIN XML header `<Decompress>` field.
     decompress_cmd: Vec<u8>,
@@ -133,6 +160,7 @@ fn parse_firmware_file(data: &[u8]) -> Result<FirmwareParsed> {
     // respond to UpgradeExec on the same connection that delivered the file.
     Ok(FirmwareParsed {
         payload: data.to_vec(),
+        declared_size: data.len() as u64,
         decompress_cmd: b"tar zxvf %s -C %s \0".to_vec(),
         script_name: b"upgrade.sh\0".to_vec(),
     })
@@ -215,6 +243,7 @@ fn parse_bin(data: &[u8]) -> Result<FirmwareParsed> {
     // the device back to idle state and causes UpgradeExec to be rejected.
     Ok(FirmwareParsed {
         payload: data[payload_offset..].to_vec(),
+        declared_size: data.len() as u64,
         decompress_cmd,
         script_name,
     })
@@ -329,20 +358,13 @@ impl Conn {
         }
     }
 
-    /// Receive next packet, skipping transparent periodic acks from device.
-    ///
-    /// Skips:
-    /// - `CMD_FILE_DATA_ACK` (0x001a): unsolicited periodic progress acks during transfer.
-    /// - `CMD_FILE_COMPLETE` (0x0060): the first copy is consumed in Phase 5; any extras
-    ///   that were pre-buffered by the Phase 4 `try_read` drain are discarded here.
-    ///
-    /// Does NOT skip `CMD_HEARTBEAT_ACK` (0x001c) so that
-    /// `conn.expect(CMD_HEARTBEAT_ACK)` in Phase 6 resolves correctly.
+    /// Receive next packet, skipping the device's transparent traffic:
+    /// per-chunk FileContentAnswers (0x001a) and bare keepalives (0x0060).
     async fn recv_skip_acks(&mut self) -> Result<(u16, Vec<u8>)> {
         loop {
             let (cmd, payload) = self.recv().await?;
             match cmd {
-                CMD_FILE_DATA_ACK | CMD_FILE_COMPLETE => {
+                CMD_FILE_DATA_ACK | CMD_DEVICE_KEEPALIVE => {
                     debug!("skip transparent cmd=0x{:04x}", cmd);
                 }
                 _ => return Ok((cmd, payload)),
@@ -351,13 +373,45 @@ impl Conn {
     }
 
     /// Receive the next packet and assert it has the expected command.
-    /// Periodic device acks (0x001a, 0x001c) are silently skipped.
+    /// Periodic device traffic (0x001a, 0x0060) is silently skipped.
     async fn expect(&mut self, expected: u16) -> Result<Vec<u8>> {
         let (cmd, payload) = self.recv_skip_acks().await?;
         if cmd != expected {
             bail!("expected cmd=0x{:04x} got cmd=0x{:04x}", expected, cmd);
         }
         Ok(payload)
+    }
+
+    /// Like [`Conn::expect`], but gives up after `limit` and keeps HDPlayer's
+    /// 6 s heartbeat going while it waits (the device can take 10–15 s per reply
+    /// while the new firmware comes up).
+    async fn expect_within(&mut self, expected: u16, limit: Duration) -> Result<Vec<u8>> {
+        let deadline = Instant::now() + limit;
+        loop {
+            let remaining = deadline.saturating_duration_since(Instant::now());
+            if remaining.is_zero() {
+                bail!("no cmd=0x{:04x} within {:?}", expected, limit);
+            }
+            match tokio::time::timeout(remaining.min(HEARTBEAT_EVERY), self.expect(expected)).await {
+                Ok(r) => return r,
+                // Cancelling mid-read is safe: recv() only drains self.buf once a
+                // whole packet is buffered, so partial reads stay in self.buf.
+                Err(_) => self.send(CMD_HEARTBEAT, &[]).await?,
+            }
+        }
+    }
+
+    /// Pull whatever the socket already has into `self.buf` without blocking.
+    fn drain_nonblocking(&mut self) -> Result<()> {
+        let mut tmp = [0u8; 65536];
+        loop {
+            match self.stream.try_read(&mut tmp) {
+                Ok(0) => bail!("Connection closed by device"),
+                Ok(n) => self.buf.extend_from_slice(&tmp[..n]),
+                Err(ref e) if e.kind() == std::io::ErrorKind::WouldBlock => return Ok(()),
+                Err(e) => return Err(e.into()),
+            }
+        }
     }
 }
 
@@ -425,11 +479,8 @@ pub struct UpgradeOptions {
     pub poll_interval: Duration,
     /// Maximum time to wait for the device to report upgrade complete.
     pub poll_timeout: Duration,
-    /// Maximum time to wait for the device to finish `tar` extraction (on conn1)
-    /// before sending UpgradeExec.  The device is silent (TCP-ACK only) while
-    /// decompressing, so this is an upper bound; the wait ends early if the
-    /// device sends an UpgradeStatus (extraction done).  Large firmware needs the
-    /// full default; a small script package finishes almost instantly.
+    /// Upper bound on how long to keep polling connection 1 after mode=2
+    /// before reconnecting (the effective wait is min(this, 60 s of silence)).
     pub decompress_wait: Duration,
     /// Progress callback: receives (bytes_sent, total_bytes).
     pub progress: Option<Box<dyn Fn(u64, u64) + Send>>,
@@ -489,22 +540,19 @@ pub async fn run_upgrade(addr: &str, port: u16, file_path: &Path, opts: UpgradeO
     report_phase(&opts, "Handshaking…");
     handshake(&mut conn).await?;
 
-    // ── Phase 2: enter upgrade mode ───────────────────────────────────────────
-    report_phase(&opts, "Entering upgrade mode…");
+    // ── Phase 2: limit-version query (UpgradeCMD mode=1) ─────────────────────
+    report_phase(&opts, "Querying limit version…");
     conn.send(CMD_UPGRADE_CTRL, &1u16.to_le_bytes()).await?;
     let st = conn.expect(CMD_UPGRADE_STATUS).await?;
-    let status_code = if st.len() >= 2 {
-        u16::from_le_bytes([st[0], st[1]])
-    } else {
-        0
-    };
-    debug!("UpgradeStatus after enter-upgrade: {}", status_code);
-    info!("Device entered upgrade mode");
+    match parse_upgrade_status(&st) {
+        Some((1, v)) => info!("Device limit version: {}.{}.{}.{}", v[0], v[1], v[2], v[3]),
+        _ => info!("Unexpected limit-version answer: {:02x?}", st),
+    }
 
-    // ── Phase 3: initiate file transfer ───────────────────────────────────────
+    // ── Phase 3: open the file on the device ─────────────────────────────────
     let mut req = Vec::with_capacity(DEVICE_FIRMWARE_PATH.len() + 8);
     req.extend_from_slice(DEVICE_FIRMWARE_PATH);
-    req.extend_from_slice(&file_size.to_le_bytes());
+    req.extend_from_slice(&fw.declared_size.to_le_bytes());
     conn.send(CMD_FILE_TRANSFER_REQ, &req).await?;
 
     let ack = conn.expect(CMD_FILE_TRANSFER_ACK).await?;
@@ -517,29 +565,21 @@ pub async fn run_upgrade(addr: &str, port: u16, file_path: &Path, opts: UpgradeO
     report_phase(&opts, &format!("Transferring {:.1} MB…", file_size as f64 / 1_000_000.0));
 
     // ── Phase 4: stream file data chunks ─────────────────────────────────────
-    // IMPORTANT: after each chunk send, drain any incoming device acks with
-    // a non-blocking try_read.  The device sends periodic CMD_FILE_DATA_ACK
-    // (0x001a) packets during the transfer.  If we never read them, our TCP
-    // receive buffer fills up, we advertise window=0 to the device, and the
-    // device (single-threaded) blocks trying to send its next ack.  While
-    // blocked, it stops reading incoming data → its receive window drops to 0
-    // → our write_all blocks → classic TCP deadlock.  try_read never waits so
-    // it adds zero latency on the hot path but keeps the buffer drained.
+    // After each chunk, drain incoming device traffic with a non-blocking read.
+    // The device answers every chunk with 0x001a and sends 0x0060 keepalives;
+    // if we never read them our receive window fills, the single-threaded
+    // device blocks on its send, stops reading, and both sides deadlock.
+    // HDPlayer keeps its 6 s heartbeat going throughout, so we do too.
     let total_chunks = (file_data.len() + CHUNK_SIZE - 1) / CHUNK_SIZE;
     let mut bytes_sent: u64 = 0;
-    let mut drain_buf = [0u8; 65536];
+    let mut next_heartbeat = Instant::now() + HEARTBEAT_EVERY;
     for (i, chunk) in file_data.chunks(CHUNK_SIZE).enumerate() {
         conn.send(CMD_FILE_DATA_CHUNK, chunk).await?;
         bytes_sent += chunk.len() as u64;
-
-        // Drain the receive buffer (non-blocking) to prevent TCP deadlock.
-        loop {
-            match conn.stream.try_read(&mut drain_buf) {
-                Ok(0) => break,
-                Ok(n) => { conn.buf.extend_from_slice(&drain_buf[..n]); }
-                Err(ref e) if e.kind() == std::io::ErrorKind::WouldBlock => break,
-                Err(e) => return Err(e.into()),
-            }
+        conn.drain_nonblocking()?;
+        if Instant::now() >= next_heartbeat {
+            conn.send(CMD_HEARTBEAT, &[]).await?;
+            next_heartbeat = Instant::now() + HEARTBEAT_EVERY;
         }
 
         if let Some(ref cb) = opts.progress {
@@ -554,152 +594,229 @@ pub async fn run_upgrade(addr: &str, port: u16, file_path: &Path, opts: UpgradeO
             );
         }
     }
-    // ── Phase 4b: wait for the last FileDataAck, THEN CloseFile ──────────────
-    // The device (BoxUpgrade: RecvOpenFileAsk 0x17 → RecvFileContentAsk 0x19 →
-    // RecvCloseFileAsk 0x1b) only *closes/flushes* the QFile on CloseFileAsk.
-    // But a packet capture of our client showed the device replying to our
-    // CloseFile with a FileDataAck (0x1a) rather than a CloseAck (0x1c) — because
-    // we sent CloseFile BEFORE the device had acked the final data chunk, so the
-    // close was processed out of order and the file was never flushed. tar then
-    // extracted an empty archive and upgrade.sh never ran (even though the device
-    // still reported status 0). So: first drain/await the final FileDataAck
-    // (0x1a) / FileComplete (0x60), then send CloseFile and await its CloseAck.
-    info!("Waiting for final FileDataAck before CloseFile…");
-    let ack_deadline = Instant::now() + Duration::from_secs(20);
-    loop {
-        if Instant::now() >= ack_deadline {
-            info!("No FileDataAck within 20 s — sending CloseFile anyway");
-            break;
+
+    // ── Phase 4b: CloseFile (empty payload) → CloseFileAnswer ────────────────
+    // CloseFile (0x001b) MUST carry an EMPTY payload: BoxUpgrade's
+    // `RecvCloseFileAsk` requires total_length == 4 (PX30 BoxUpgrade @ 0x420798
+    // `ccmp w2,#4`; RK3288 libBoxUpgrade.so @ 0x138bc `cmp r2,#4 ; bne`) and
+    // silently drops anything else, leaving /tmp/Box.tar.gz uncommitted.
+    // HDPlayer sends exactly `04 00 1b 00` and gets 0x001c back in ~0.85 s.
+    // Leftover 0x001a answers are skipped by recv_skip_acks.
+    info!("Sending CloseFile (0x001b, empty payload) to flush + commit the archive…");
+    conn.send(CMD_CLOSE_FILE, &[]).await?;
+    match tokio::time::timeout(Duration::from_secs(15), conn.recv_skip_acks()).await {
+        Ok(Ok((CMD_CLOSE_FILE_ACK, _))) => {
+            info!("CloseFileAnswer (0x001c) — archive flushed + renamed on device")
         }
-        match tokio::time::timeout(Duration::from_secs(2), conn.recv()).await {
-            Ok(Ok((CMD_FILE_DATA_ACK, _))) | Ok(Ok((CMD_FILE_COMPLETE, _))) => {
-                info!("Final FileDataAck/FileComplete received — file fully written");
-                break;
-            }
-            Ok(Ok((cmd, _))) => debug!("pre-close cmd=0x{:04x} — ignoring", cmd),
-            Ok(Err(e)) => { info!("conn hint before close: {} — continuing", e); break; }
-            Err(_) => { info!("quiet before ack — sending CloseFile"); break; }
+        Ok(Ok((cmd, _))) => {
+            bail!("expected CloseFileAnswer (0x001c) after CloseFile, got cmd=0x{:04x}", cmd)
         }
-    }
-    info!("Sending CloseFile (0x001b) to flush the uploaded archive…");
-    conn.send(CMD_CLOSE_FILE, &0u32.to_le_bytes()).await?;
-    match tokio::time::timeout(Duration::from_secs(5), conn.recv()).await {
-        Ok(Ok((CMD_CLOSE_FILE_ACK, _))) => info!("CloseAck (0x001c) — file flushed"),
-        Ok(Ok((cmd, _))) => info!("CloseFile response cmd=0x{:04x}", cmd),
-        Ok(Err(e)) => bail!("conn closed after CloseFile: {}", e),
-        Err(_) => info!("no explicit CloseFile answer — continuing"),
+        Ok(Err(e)) => bail!("connection closed after CloseFile: {}", e),
+        // No 0x001c means SendCloseFileAnswer never ran — the file is NOT
+        // committed.  Fail loudly instead of reporting a false success.
+        Err(_) => bail!(
+            "no CloseFileAnswer (0x001c) within 15 s — archive was not committed; \
+             aborting so we don't report a phantom upgrade"
+        ),
     }
 
-    // ── Phase 5: confirm file received via heartbeat ─────────────────────────
-    // PCAP: after last data chunk, client sends CMD_HEARTBEAT (0x005f) and
-    // waits for CMD_HEARTBEAT_ACK (0x001c) before proceeding to mode=3.
-    // Some firmware versions send CMD_FILE_COMPLETE (0x0060) spontaneously
-    // instead of the explicit heartbeat handshake — accept either.
-    report_phase(&opts, "Confirming file receipt…");
-    conn.send(CMD_HEARTBEAT, &[]).await?;
-    loop {
-        let (cmd, _) = conn.recv().await?;
-        match cmd {
-            CMD_FILE_DATA_ACK => {} // drain leftover periodic acks
-            CMD_HEARTBEAT_ACK => {
-                info!("Heartbeat ack — file transfer confirmed (conn1 alive)");
-                break;
-            }
-            CMD_FILE_COMPLETE => {
-                // 0x0060 = spontaneous file-complete or heartbeat-answer on
-                // older firmware.  Either way, the device has the file.
-                info!("File-complete / heartbeat-answer received — file transfer confirmed");
-                break;
-            }
-            other => {
-                debug!("Phase 5: ignoring cmd=0x{:04x} while waiting for ack", other);
-            }
-        }
-    }
-
-    // ── Phase 6: UpgradeControl mode=3 and mode=2 on the first connection ────
-    // PCAP steps 15-17: these commands MUST go on the same TCP connection that
-    // delivered the file.  Sending mode=3 on a fresh second connection returns
-    // status=0 (idle) because the device tracks upgrade state per-connection.
+    // ── Phase 5: UpgradeCMD mode=3 (unpack) and mode=2 (run script) ──────────
+    // Same connection that delivered the file.  mode=3 answers `[u16 3][u32 0]`
+    // immediately; mode=2 is never answered.
     report_phase(&opts, "Starting decompression…");
-    info!("Sending decompress command (mode=3) on conn1…");
     let mut ctrl3 = Vec::with_capacity(2 + fw.decompress_cmd.len());
     ctrl3.extend_from_slice(&3u16.to_le_bytes());
     ctrl3.extend_from_slice(&fw.decompress_cmd);
     conn.send(CMD_UPGRADE_CTRL, &ctrl3).await?;
     let st = conn.expect(CMD_UPGRADE_STATUS).await?;
-    let sc = if st.len() >= 2 { u16::from_le_bytes([st[0], st[1]]) } else { 0 };
-    info!("Decompress command accepted (status {})", sc);
-    // status=3 = in-progress (device started decompressing the 330 MB payload)
+    info!("Decompress command accepted: {:02x?}", st);
 
     let mut ctrl2 = Vec::with_capacity(2 + fw.script_name.len());
     ctrl2.extend_from_slice(&2u16.to_le_bytes());
     ctrl2.extend_from_slice(&fw.script_name);
     conn.send(CMD_UPGRADE_CTRL, &ctrl2).await?;
     info!("Upgrade script queued (mode=2)");
-    // After mode=2 (Shell/run), the device runs upgrade.sh and reports progress via
-    // UpgradeStatus. A capture of the real HDPlayer.exe upgrade shows there is NO
-    // UpgradeExec (0x0730) and NO second connection — HDPlayer simply polls
-    // UpgradeControl mode=0 (+ heartbeat) on THIS same connection until
-    // UpgradeStatus=0 (done). So we go straight to the completion poll below.
-    let mut conn2 = conn;
+    report_phase(&opts, "Upgrade script running…");
 
-    report_phase(&opts, "Upgrade script running — waiting for completion…");
-
-    // ── Phase 9: poll conn2 for completion ────────────────────────────────────
-    // PCAP: device sends UpgradeStatus=0 on conn2 when the script finishes.
-    // Poll with mode=0 + heartbeat every poll_interval until status=0.
-    info!(
-        "Polling conn2 for completion (interval={:?}, timeout={:?})",
-        opts.poll_interval, opts.poll_timeout,
-    );
+    // ── Phase 6: poll connection 1 until the device goes quiet ───────────────
+    // The Decompress command starts with `killall -1 BoxDaemon`, and upgrade.sh
+    // replaces the services, so in practice the device never answers here.
+    // We still poll (as HDPlayer does) in case a quick package finishes in
+    // place; once the socket closes, or is silent for CONN1_SILENCE (capped
+    // by decompress_wait), we move on to a fresh connection.
     let deadline = Instant::now() + opts.poll_timeout;
+    if let Some(result) = poll_result(&mut conn, &opts, CONN1_SILENCE.min(opts.decompress_wait)).await? {
+        return finish(&opts, result);
+    }
+    drop(conn);
 
-    loop {
+    // ── Phase 7: reconnect, UpgradeExec, poll for the result ─────────────────
+    // HDPlayer reconnected ~85 s after mode=2.  The reply's ConnectAck carried
+    // protocol version 9 (not 7): the NEW firmware's BoxUpgrade is answering.
+    // Every reply took 10–15 s while it came up, hence CONN2_STEP_TIMEOUT.
+    report_phase(&opts, "Reconnecting to the upgraded services…");
+    let mut conn2 = loop {
         if Instant::now() > deadline {
-            bail!(
-                "Upgrade timed out after {:?} — script did not complete",
-                opts.poll_timeout
-            );
+            bail!("Upgrade timed out after {:?} waiting to reconnect", opts.poll_timeout);
         }
-
-        if conn2.send(CMD_UPGRADE_CTRL, &0u16.to_le_bytes()).await.is_err() {
-            report_phase(&opts, "Device rebooting — upgrade applied");
-            return Ok(());
-        }
-        let _ = conn2.send(CMD_HEARTBEAT, &[]).await;
-
-        let wait_until = Instant::now() + opts.poll_interval;
-        loop {
-            let remaining = wait_until.saturating_duration_since(Instant::now());
-            if remaining.is_zero() {
-                break;
+        match reconnect_exec(addr, port).await {
+            Ok(c) => break c,
+            Err(e) => {
+                debug!("reconnect attempt failed: {} — retrying", e);
+                tokio::time::sleep(opts.poll_interval).await;
             }
-            match tokio::time::timeout(remaining, conn2.recv()).await {
-                Ok(Ok((CMD_UPGRADE_STATUS, payload))) => {
-                    let status = if payload.len() >= 2 {
-                        u16::from_le_bytes([payload[0], payload[1]])
-                    } else {
-                        0
-                    };
-                    info!("Upgrade status: {}", status);
-                    if status == 0 {
-                        report_phase(&opts, "Upgrade complete!");
-                        return Ok(());
+        }
+    };
+
+    report_phase(&opts, "Waiting for the upgrade result…");
+    let remaining = deadline.saturating_duration_since(Instant::now());
+    match poll_result(&mut conn2, &opts, remaining).await? {
+        Some(result) => finish(&opts, result),
+        None => bail!("Upgrade timed out after {:?} — no result from device", opts.poll_timeout),
+    }
+}
+
+/// Connection 2 as HDPlayer does it: ConnectReq → ConnectAck, UpgradeExec
+/// `[u64 8]` → ExecAck, ClientInfoReq → Ack, NullCapQuery → Resp.
+async fn reconnect_exec(addr: &str, port: u16) -> Result<Conn> {
+    let mut conn = Conn::connect(addr, port).await?;
+    conn.send(CMD_CONNECT_REQ, &CONNECT_VERSION.to_le_bytes()).await?;
+    let ack = conn.expect_within(CMD_CONNECT_ACK, CONN2_STEP_TIMEOUT).await?;
+    info!("ConnectAck on reconnect: {:02x?}", ack);
+
+    conn.send(CMD_UPGRADE_EXEC, &UPGRADE_EXEC_PARAM.to_le_bytes()).await?;
+    let ack = conn.expect_within(CMD_UPGRADE_EXEC_ACK, CONN2_STEP_TIMEOUT).await?;
+    info!("UpgradeExecAck: {:02x?}", ack);
+
+    conn.send(CMD_CLIENT_INFO_REQ, &build_client_info()).await?;
+    conn.expect_within(CMD_CLIENT_INFO_ACK, CONN2_STEP_TIMEOUT).await?;
+    conn.send(CMD_NULL_CAP_QUERY, &[]).await?;
+    conn.expect_within(CMD_NULL_CAP_RESP, CONN2_STEP_TIMEOUT).await?;
+    Ok(conn)
+}
+
+/// Poll UpgradeCMD mode=0 every `poll_interval` (heartbeat every 6 s) until the
+/// device reports a final result (success/failure).  Returns `Ok(None)` if the
+/// connection closes or stays silent for `silence`.
+async fn poll_result(conn: &mut Conn, opts: &UpgradeOptions, silence: Duration) -> Result<Option<i32>> {
+    let mut last_heard = Instant::now();
+    let mut next_poll = Instant::now();
+    let mut next_heartbeat = Instant::now() + HEARTBEAT_EVERY;
+    loop {
+        let now = Instant::now();
+        if now.duration_since(last_heard) >= silence {
+            info!("No reply for {:?} — leaving this connection", silence);
+            return Ok(None);
+        }
+        if now >= next_poll {
+            if conn.send(CMD_UPGRADE_CTRL, &0u16.to_le_bytes()).await.is_err() {
+                return Ok(None);
+            }
+            next_poll = now + opts.poll_interval;
+        }
+        if now >= next_heartbeat {
+            if conn.send(CMD_HEARTBEAT, &[]).await.is_err() {
+                return Ok(None);
+            }
+            next_heartbeat = now + HEARTBEAT_EVERY;
+        }
+
+        let wake = next_poll.min(next_heartbeat);
+        match tokio::time::timeout_at(wake.into(), conn.recv()).await {
+            Err(_) => {}
+            Ok(Err(e)) => {
+                info!("Connection ended: {}", e);
+                return Ok(None);
+            }
+            Ok(Ok((cmd, payload))) => {
+                last_heard = Instant::now();
+                if cmd != CMD_UPGRADE_STATUS {
+                    debug!("poll: ignoring cmd=0x{:04x}", cmd);
+                    continue;
+                }
+                match parse_upgrade_status(&payload) {
+                    Some((0, v)) => {
+                        let result = i32::from_le_bytes(v);
+                        if result == RESULT_SUCCESS || result == RESULT_FAILED {
+                            return Ok(Some(result));
+                        }
+                        // 0 = script running; -1 = status file not there (yet).
+                        let state = if result == RESULT_RUNNING { "running" } else { "unknown" };
+                        report_phase(opts, &format!("Upgrade in progress ({state})…"));
                     }
-                    report_phase(&opts, &format!("Upgrade in progress (status {})", status));
-                    break;
+                    _ => debug!("poll: other UpgradeStatus {:02x?}", payload),
                 }
-                Ok(Ok((CMD_FILE_DATA_ACK, _))) | Ok(Ok((CMD_HEARTBEAT_ACK, _))) => {}
-                Ok(Ok((cmd, _))) => {
-                    debug!("conn2 poll: unhandled cmd=0x{:04x}", cmd);
-                }
-                Ok(Err(_)) => {
-                    report_phase(&opts, "Device rebooted — upgrade applied");
-                    return Ok(());
-                }
-                Err(_) => break,
             }
         }
+    }
+}
+
+/// Map a final `/root/upgrade.status` result to success or an error.
+fn finish(opts: &UpgradeOptions, result: i32) -> Result<()> {
+    match result {
+        RESULT_SUCCESS => {
+            report_phase(opts, "Upgrade complete!");
+            Ok(())
+        }
+        _ => bail!("Device reported upgrade FAILED (upgrade.status = {})", result),
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    /// Regression guard for the port-9528 upgrade blocker.
+    ///
+    /// The device's BoxUpgrade `RecvCloseFileAsk` accepts CloseFile ONLY when the
+    /// frame's total_length field == 4 (i.e. an empty payload).  `build_packet`
+    /// sets total_length = 4 + payload.len(), so CloseFile MUST be built with an
+    /// empty payload.  A 4-byte payload (the old bug) produced total_length = 8,
+    /// which the device rejected silently — the archive was never flushed/renamed
+    /// and `tar` extracted nothing.
+    #[test]
+    fn close_file_frame_has_total_length_4() {
+        let pkt = build_packet(CMD_CLOSE_FILE, &[]);
+        // Wire bytes: [u16 LE total_length=4][u16 LE cmd=0x001b]
+        assert_eq!(pkt, vec![0x04, 0x00, 0x1b, 0x00], "CloseFile must be exactly `04 00 1B 00`");
+        let total = u16::from_le_bytes([pkt[0], pkt[1]]);
+        assert_eq!(total, 4, "device RecvCloseFileAsk requires total_length == 4");
+    }
+
+    /// UpgradeStatus payloads captured from HDPlayer 7.11.18.0 ↔ C15 (2026-09-23).
+    /// The first u16 is the echoed mode, NOT the status.
+    #[test]
+    fn upgrade_status_payloads_from_capture() {
+        // mode=1 → limit version 7.4.59.0
+        assert_eq!(parse_upgrade_status(&[0x01, 0x00, 0x07, 0x04, 0x3b, 0x00]), Some((1, [7, 4, 59, 0])));
+        // mode=3 → accepted
+        assert_eq!(parse_upgrade_status(&[0x03, 0x00, 0, 0, 0, 0]), Some((3, [0; 4])));
+        // mode=0 on connection 2 → result 1 = success
+        let (mode, v) = parse_upgrade_status(&[0x00, 0x00, 0x01, 0x00, 0x00, 0x00]).unwrap();
+        assert_eq!((mode, i32::from_le_bytes(v)), (0, RESULT_SUCCESS));
+        assert_eq!(parse_upgrade_status(&[0x00, 0x00]), None);
+    }
+
+    /// OpenFileAsk announces the whole .bin size while only the tar.gz is streamed.
+    #[test]
+    fn declared_size_is_whole_bin() {
+        let xml = b"<FirmwareInfo><Version>1.2.3.4</Version><Script>upgrade.sh</Script></FirmwareInfo>";
+        let mut bin = b"HDPLAYER".to_vec();
+        bin.extend_from_slice(&[0u8; 16]);
+        bin.extend_from_slice(&(xml.len() as u32).to_le_bytes());
+        bin.extend_from_slice(xml);
+        bin.extend_from_slice(&[0x1f, 0x8b, 0x08, 0x00, 1, 2, 3]);
+        let fw = parse_bin(&bin).unwrap();
+        assert_eq!(fw.payload, vec![0x1f, 0x8b, 0x08, 0x00, 1, 2, 3]);
+        assert_eq!(fw.declared_size, bin.len() as u64);
+    }
+
+    /// The old buggy encoding (4-byte payload) is exactly what the device rejects.
+    /// This documents the failure so nobody reintroduces a payload here.
+    #[test]
+    fn close_file_with_payload_is_the_rejected_encoding() {
+        let bad = build_packet(CMD_CLOSE_FILE, &0u32.to_le_bytes());
+        let total = u16::from_le_bytes([bad[0], bad[1]]);
+        assert_eq!(total, 8, "a 4-byte payload yields total_length=8 — the value the device silently drops");
     }
 }
