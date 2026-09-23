@@ -6,7 +6,6 @@ config BR2_PACKAGE_HUIDU_PLAYER
 	select BR2_PACKAGE_ALSA_LIB     # rodio audio playback
 	select BR2_PACKAGE_ALSA_LIB_MIXER
 	select BR2_PACKAGE_OPENSSL      # reqwest (native-tls) cloud/weather HTTPS
-	select BR2_PACKAGE_EUDEV        # serialport -> libudev on Linux
 	select BR2_PACKAGE_HUIDU_SENDER # pairs with the ttyS1 control daemon
 	help
 	  Our Rust reproduction of Huidu's BoxPlayer display player

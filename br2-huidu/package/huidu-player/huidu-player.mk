@@ -10,7 +10,7 @@
 # Native (system) library deps, resolved via pkg-config by the -sys crates:
 #   openssl   (reqwest / native-tls)
 #   alsa-lib  (rodio)
-#   eudev     (serialport -> libudev)
+# (serialport uses default-features=false, so no libudev/eudev dep.)
 #
 # NOTE: this is the heavy package. The cross-build of this dependency tree must
 # be validated in the WSL Buildroot run; treat a first `make huidu-player` as a
@@ -22,11 +22,17 @@
 HUIDU_PLAYER_VERSION = 0.1.0
 # Build from the workspace root so the huidu-protocol path dep resolves, then
 # select just the boxplayer package.
+#
+# NOTE: SITE_METHOD=local rsyncs the whole workspace root (its only hardcoded
+# exclude is .git). Run the Buildroot build from a CLEAN checkout, or `cargo
+# clean` first, so the multi-GB `target/` isn't copied on every build. A future
+# refinement is a git-archive-based export of just {huidu-player, huidu-protocol,
+# Cargo.toml, Cargo.lock}.
 HUIDU_PLAYER_SITE = $(BR2_EXTERNAL_HUIDU_PATH)/..
 HUIDU_PLAYER_SITE_METHOD = local
 HUIDU_PLAYER_LICENSE = Proprietary
 
-HUIDU_PLAYER_DEPENDENCIES = host-rustc openssl alsa-lib eudev
+HUIDU_PLAYER_DEPENDENCIES = host-rustc openssl alsa-lib
 
 # cargo-package builds the whole workspace by default; restrict to boxplayer.
 HUIDU_PLAYER_CARGO_BUILD_OPTS = -p boxplayer

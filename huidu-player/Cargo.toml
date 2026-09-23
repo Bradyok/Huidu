@@ -73,8 +73,10 @@ zip = { version = "2", default-features = false, features = ["deflate"] }
 rodio = { version = "0.19", default-features = false, features = ["mp3", "wav", "vorbis"] }
 
 [target.'cfg(unix)'.dependencies]
-# Serial port (FPGA comm) - only on Linux
-serialport = "4"
+# Serial port (GPS / modem services) - only on Linux. default-features=false
+# drops the `libudev` port-enumeration feature (and its eudev/libudev system
+# dep): we only ever open a fixed path via serialport::new(), never enumerate.
+serialport = { version = "4", default-features = false }
 
 # C standard library bindings (used by FPGA serial close(2))
 libc = "0.2"
