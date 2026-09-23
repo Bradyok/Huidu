@@ -307,7 +307,9 @@ pub fn set_rotation(angle: u16) -> String {
 // ── Volume ───────────────────────────────────────────────────────────────────
 
 pub fn set_volume(level: u8) -> String {
-    format!("<volume value=\"{}\"/>", level.min(100))
+    // Device uses the (misspelled) attribute "precent", matching GetSystemVolume's
+    // response <volume precent="100"/>. Using "value" returns kParseXmlFailed.
+    format!("<volume precent=\"{}\"/>", level.min(100))
 }
 
 pub fn get_volume() -> String {

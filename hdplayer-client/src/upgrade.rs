@@ -190,29 +190,18 @@ fn parse_bin(data: &[u8]) -> Result<FirmwareParsed> {
 
     // Search the XML region for Decompress and Script tags.
     let xml_region = std::str::from_utf8(&data[28..payload_offset]).unwrap_or("");
-    let decompress_raw = xml_text(xml_region, "Decompress")
+    let decompress = xml_text(xml_region, "Decompress")
         .unwrap_or("killall -1 BoxDaemon; tar zxvf %s -C %s");
-    // Strip any "killall ...;" prefix from the decompress command.
-    // On this device, SIGHUP causes BoxDaemon to reload config (not restart),
-    // so killall -1 is a no-op for our purposes.  SIGTERM kills BoxDaemon but
-    // new BoxDaemon has no upgrade state and rejects UpgradeExec.
-    // Best approach: strip killall entirely, send UpgradeExec on the same
-    // connection (conn1) that delivered the file — BoxDaemon still has the
-    // upgrade state in memory and accepts UpgradeExec on conn1.
-    let decompress_owned;
-    let decompress = match decompress_raw.find(';') {
-        Some(pos) => {
-            let after = decompress_raw[pos + 1..].trim_start();
-            decompress_owned = after.to_string();
-            decompress_owned.as_str()
-        }
-        None => decompress_raw,
-    };
+    // Use the <Decompress> command VERBATIM, including the "killall -1 BoxDaemon;"
+    // prefix. A capture of the real HDPlayer.exe upgrade shows it sends exactly
+    // "killall -1 BoxDaemon; tar zxvf %s -C %s " as UpgradeControl mode=3, and the
+    // upgrade succeeds. Our earlier code stripped the killall (and then relied on a
+    // bogus UpgradeExec on a second connection) — that was wrong.
     let script = xml_text(xml_region, "Script").unwrap_or("upgrade.sh");
-    info!("BIN Decompress (killall stripped): {}", decompress);
+    info!("BIN Decompress: {}", decompress);
     info!("BIN Script: {}", script);
 
-    // Build null-terminated byte vectors (trailing space matches PCAP for Decompress)
+    // Build null-terminated byte vectors (trailing space matches the HDPlayer capture)
     let mut decompress_cmd = format!("{} ", decompress).into_bytes();
     decompress_cmd.push(0);
     let mut script_name = script.as_bytes().to_vec();
@@ -573,7 +562,7 @@ pub async fn run_upgrade(addr: &str, port: u16, file_path: &Path, opts: UpgradeO
     // never created and nothing runs.  RecvCloseFileAsk requires a 4-byte payload.
     info!("Sending CloseFile (0x001b) to flush the uploaded archive…");
     conn.send(CMD_CLOSE_FILE, &0u32.to_le_bytes()).await?;
-    match tokio::time::timeout(Duration::from_secs(10), conn.recv_skip_acks()).await {
+    match tokio::time::timeout(Duration::from_secs(3), conn.recv_skip_acks()).await {
         Ok(Ok((cmd, _))) => info!("CloseFile answered (cmd=0x{:04x})", cmd),
         Ok(Err(e)) => bail!("conn closed after CloseFile: {}", e),
         Err(_) => info!("no explicit CloseFile answer — continuing"),
@@ -626,157 +615,12 @@ pub async fn run_upgrade(addr: &str, port: u16, file_path: &Path, opts: UpgradeO
     ctrl2.extend_from_slice(&fw.script_name);
     conn.send(CMD_UPGRADE_CTRL, &ctrl2).await?;
     info!("Upgrade script queued (mode=2)");
-    let mode2_sent_at = Instant::now();
-
-    // ── Phase 7a: poll conn1 while tar extracts (up to 600 s) ────────────────
-    // The decompress command (mode=3) now has no killall prefix, so BoxDaemon
-    // stays alive on conn1 with its upgrade session state intact.
-    // We poll mode=0 every 5 s to keep conn1 alive and monitor activity.
-    // The firmware payload is ~330 MB of gzip; decompressing on an ARM device
-    // can take several minutes.  We wait the full 600 s before sending
-    // UpgradeExec so upgrade.sh finds the fully extracted files.
-    report_phase(&opts, "Waiting for extraction (up to 10 min)…");
-    info!(
-        "Polling conn1 with mode=0 every 5 s — waiting up to 600 s for tar to finish…"
-    );
-    let tar_deadline = mode2_sent_at + opts.decompress_wait;
-    // Grace period before an UpgradeStatus is taken as "extraction finished" —
-    // avoids acting on a stale status echo right after mode=2.
-    let tar_grace = Duration::from_secs(8);
-    'tar_wait: loop {
-        if Instant::now() >= tar_deadline {
-            info!(
-                "{:.0} s elapsed since mode=2 — tar should be done, proceeding to UpgradeExec",
-                mode2_sent_at.elapsed().as_secs_f32(),
-            );
-            break 'tar_wait;
-        }
-        // Send a mode=0 poll to keep conn1 alive.
-        if conn.send(CMD_UPGRADE_CTRL, &0u16.to_le_bytes()).await.is_err() {
-            bail!("conn1 closed unexpectedly during tar wait — BoxDaemon died");
-        }
-        // Drain responses for up to 5 s, then send the next poll.
-        let poll_until = Instant::now() + Duration::from_secs(5);
-        loop {
-            let remaining = poll_until.saturating_duration_since(Instant::now());
-            if remaining.is_zero() { break; }
-            match tokio::time::timeout(remaining, conn.recv()).await {
-                Ok(Ok((cmd, p))) => {
-                    let sc = if p.len() >= 2 { u16::from_le_bytes([p[0], p[1]]) } else { 0 };
-                    debug!(
-                        "conn1 tar-wait poll: cmd=0x{:04x} status={} elapsed={:.0}s",
-                        cmd, sc, mode2_sent_at.elapsed().as_secs_f32(),
-                    );
-                    // The device is silent while decompressing, so an UpgradeStatus
-                    // here means extraction has finished — stop waiting and exec now.
-                    if cmd == CMD_UPGRADE_STATUS && mode2_sent_at.elapsed() >= tar_grace {
-                        info!(
-                            "UpgradeStatus={} on conn1 after {:.0}s — extraction done, proceeding to UpgradeExec",
-                            sc, mode2_sent_at.elapsed().as_secs_f32(),
-                        );
-                        break 'tar_wait;
-                    }
-                }
-                Ok(Err(e)) => {
-                    bail!("conn1 closed during tar wait: {} — BoxDaemon died unexpectedly", e);
-                }
-                Err(_) => break, // 5 s elapsed, send next poll
-            }
-        }
-    }
-
-    // ── Phase 7b: UpgradeExec on a FRESH connection (conn2) ──────────────────
-    // Canonical flow (PCAP steps 19-22): once tar extraction finishes, a NEW TCP
-    // connection opens and does ConnectReq → ConnectAck → UpgradeExec →
-    // UpgradeExecAck (0x0731); only then does the device run upgrade.sh.
-    //
-    // Sending UpgradeExec on the file-transfer connection (conn1) does NOT
-    // trigger execution on 7.4.x firmware — a packet capture showed the device
-    // merely heartbeat-acks it (0x0060) and never runs the script.  So we open
-    // conn2 for the exec and keep conn1 open meanwhile so BoxDaemon retains the
-    // upgrade session state.
-    // NOTE (from decompiling the device's BoxUpgrade): UpgradeCtrl (0x0055) modes
-    // are 0=GetUpgradeResult, 1=LimitVersion, 2=Shell(run), 3=Unpackage(decompress).
-    // The Shell (mode=2) we already sent is what runs the upgrade command
-    // asynchronously (DisposeUpgradeShellAsk → vfork+system).  UpgradeExec (0x0730)
-    // only elicits an ExecAck; it is best-effort here.
-    report_phase(&opts, "Triggering upgrade (UpgradeExec)…");
-    info!("Sending UpgradeExec (0x0730) on conn1 (best-effort)…");
-    let _ = conn.send(CMD_UPGRADE_EXEC, &UPGRADE_EXEC_PARAM.to_le_bytes()).await;
-    let exec_ack_deadline = Instant::now() + Duration::from_secs(15);
-    loop {
-        let remaining = exec_ack_deadline.saturating_duration_since(Instant::now());
-        if remaining.is_zero() { break; }
-        match tokio::time::timeout(remaining, conn.recv_skip_acks()).await {
-            Ok(Ok((CMD_UPGRADE_EXEC_ACK, _))) => { info!("ExecAck (0x0731) received"); break; }
-            Ok(Ok((CMD_UPGRADE_STATUS, _))) => { info!("UpgradeStatus after UpgradeExec"); break; }
-            Ok(Ok((cmd, _))) => { debug!("cmd=0x{:04x} after UpgradeExec", cmd); }
-            Ok(Err(_)) => break,
-            Err(_) => break,
-        }
-    }
-    let mut conn2 = conn; // reuse conn1 for the completion poll
-
-    // ── Phase 8: post-exec handshake ──────────────────────────────────────────
-    // PCAP steps 23-26: ClientInfoReq → ClientInfoAck → NullCapQuery → NullCapResp.
-    // Non-fatal: firmware 7.4.x may not respond to ClientInfoReq (device closes
-    // conn1 as soon as the upgrade script runs).  Skip any UpgradeStatus packets.
-    report_phase(&opts, "Upgrade executing — monitoring…");
-
-    let info_bytes = build_client_info();
-    if conn2.send(CMD_CLIENT_INFO_REQ, &info_bytes).await.is_ok() {
-        'client_info: loop {
-            match tokio::time::timeout(Duration::from_secs(30), conn2.recv_skip_acks()).await {
-                Ok(Ok((CMD_CLIENT_INFO_ACK, _))) => {
-                    info!("ClientInfoAck ok");
-                    break 'client_info;
-                }
-                Ok(Ok((CMD_UPGRADE_STATUS, p))) => {
-                    let sc = if p.len() >= 2 { u16::from_le_bytes([p[0], p[1]]) } else { 0 };
-                    debug!("UpgradeStatus={} before ClientInfoAck — skipping", sc);
-                }
-                Ok(Ok((cmd, _))) => {
-                    info!("unexpected cmd=0x{:04x} waiting for ClientInfoAck — skipping Phase 8", cmd);
-                    break 'client_info;
-                }
-                Ok(Err(e)) => {
-                    info!("conn closed waiting for ClientInfoAck ({}) — proceeding to Phase 9", e);
-                    break 'client_info;
-                }
-                Err(_) => {
-                    info!("ClientInfoAck timeout — skipping Phase 8");
-                    break 'client_info;
-                }
-            }
-        }
-
-        if conn2.send(CMD_NULL_CAP_QUERY, &[]).await.is_ok() {
-            'null_cap: loop {
-                match tokio::time::timeout(Duration::from_secs(30), conn2.recv_skip_acks()).await {
-                    Ok(Ok((CMD_NULL_CAP_RESP, _))) => {
-                        info!("NullCapResp — upgrade script running");
-                        break 'null_cap;
-                    }
-                    Ok(Ok((CMD_UPGRADE_STATUS, p))) => {
-                        let sc = if p.len() >= 2 { u16::from_le_bytes([p[0], p[1]]) } else { 0 };
-                        debug!("UpgradeStatus={} before NullCapResp — skipping", sc);
-                    }
-                    Ok(Ok((cmd, _))) => {
-                        info!("unexpected cmd=0x{:04x} waiting for NullCapResp — skipping", cmd);
-                        break 'null_cap;
-                    }
-                    Ok(Err(e)) => {
-                        info!("conn closed waiting for NullCapResp ({}) — proceeding", e);
-                        break 'null_cap;
-                    }
-                    Err(_) => {
-                        info!("NullCapResp timeout — proceeding to Phase 9");
-                        break 'null_cap;
-                    }
-                }
-            }
-        }
-    }
+    // After mode=2 (Shell/run), the device runs upgrade.sh and reports progress via
+    // UpgradeStatus. A capture of the real HDPlayer.exe upgrade shows there is NO
+    // UpgradeExec (0x0730) and NO second connection — HDPlayer simply polls
+    // UpgradeControl mode=0 (+ heartbeat) on THIS same connection until
+    // UpgradeStatus=0 (done). So we go straight to the completion poll below.
+    let mut conn2 = conn;
 
     report_phase(&opts, "Upgrade script running — waiting for completion…");
 
