@@ -127,6 +127,9 @@ huidu-sender run [--tty /dev/ttyS1] [--listen 127.0.0.1:7654] [--status-secs 5]
                  [--sendcard FILE] [--recvcard FILE ...]
 huidu-sender emit    <search|status|temp|hdmi|lock N|unlock N>   # print frame hex, no device
 huidu-sender oneshot <search|status|temp|hdmi>                   # send one frame, print reply
+huidu-sender strip-fpga <in.img> <out.bin> [--bitrev]           # /boot/fpga.img -> raw PS payload (offline)
+huidu-sender load-fpga  <in.img> --spidev DEV --nconfig-gpio N \
+             --nstatus-gpio N --confdone-gpio N [--msb-first]   # our write_fpga replacement
 ```
 
 `run` performs the power-on sequence (search cards → push param blobs → save →
@@ -146,6 +149,23 @@ scan/gamma tables that light a real panel. Supply the blobs (see above) for a
 lit wall.
 
 ---
+
+## FPGA bitstream loading (our `write_fpga` replacement)
+
+The LED FPGA is configured at boot from `/boot/fpga.img` — stock does this with
+the closed `write_fpga` binary and the out-of-tree `/dev/cyclone4` char driver.
+We replace both:
+
+- **Preferred:** the mainline `altera-ps-spi` driver (DT node
+  `altr,fpga-passive-serial`, already wired). `strip-fpga` removes Huidu's 8-byte
+  wrapper (`6C031646` + LE length) to hand the kernel the raw passive-serial
+  bitstream as firmware.
+- **Fallback:** `load-fpga` drives nCONFIG/nSTATUS/CONF_DONE (sysfs GPIO) and
+  clocks the payload over spidev itself — exactly what `write_fpga` did — for if
+  `altera-ps-spi` won't accept this specific Cyclone-IV bitstream.
+
+The image parse and the LSB-first bit transform are unit-tested offline; see
+`src/fpga_load.rs`. Full driver picture: `hardware/DRIVER_ENABLEMENT.md`.
 
 ## Buildroot integration (`br2-huidu`)
 
@@ -175,6 +195,10 @@ Everything below is derived from static RE and must be validated on a live unit
 before a field image:
 
 - [x] **CRC-32 polynomial** — `0xEDB88320` (resolved; verified vs zlib).
+- [ ] **FPGA-load bit order** — default LSB-first (bit-reversed); flip to
+      `--msb-first` if a unit only configures that way (`src/fpga_load.rs`).
+- [ ] **FPGA control GPIO numbers** — sysfs global numbers for nCONFIG/nSTATUS/
+      CONF_DONE (gpiochip base is unit-specific; read from the live unit).
 - [ ] **Brightness field offset** inside the 512-byte send-card blob
       (`BRIGHTNESS_OFFSET`, `src/blob.rs`). Capture-and-diff.
 - [ ] **512-byte blob field layout** for scan / gamma / geometry — or just
@@ -188,6 +212,6 @@ before a field image:
 ## Tests
 
 ```
-cargo test -p huidu-sender          # 12 frame/protocol/blob tests, incl. zlib CRC vectors
+cargo test -p huidu-sender          # 20 frame/protocol/blob/fpga tests, incl. zlib CRC vectors
 cargo run  -p huidu-sender -- emit search   # offline frame dump
 ```

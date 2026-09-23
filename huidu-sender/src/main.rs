@@ -5,6 +5,9 @@
 //!                    [--listen 127.0.0.1:7654] [--status-secs 5]
 //!   huidu-sender emit <search|status|temp|hdmi|lock N|unlock N>   # print a frame (hex), no device
 //!   huidu-sender oneshot <search|status|temp|hdmi>                # send one frame, print reply
+//!   huidu-sender strip-fpga <in.img> <out.bin> [--bitrev]         # /boot/fpga.img -> raw PS payload (offline)
+//!   huidu-sender load-fpga <in.img> --spidev DEV --nconfig-gpio N \
+//!                --nstatus-gpio N --confdone-gpio N [--msb-first]  # our write_fpga (spidev+gpio fallback)
 //!
 //! `run` performs the power-on sequence (search cards → push param blobs → save →
 //! periodic status) and serves a line protocol on --listen for the player/CMS:
@@ -61,11 +64,72 @@ fn main() {
         }
         "oneshot" => run_oneshot(&args),
         "run" => run_daemon(&args),
+        "strip-fpga" => run_strip_fpga(&args),
+        "load-fpga" => run_load_fpga(&args),
         _ => {
-            eprintln!("usage: huidu-sender <run|emit|oneshot> ...  (see source header)");
+            eprintln!("usage: huidu-sender <run|emit|oneshot|strip-fpga|load-fpga> ...  (see source header)");
             std::process::exit(2);
         }
     }
+}
+
+/// `strip-fpga <in.img> <out.bin> [--bitrev]` — parse `/boot/fpga.img`, drop the
+/// 8-byte Huidu wrapper, and write the raw passive-serial payload. Feed the
+/// output to the kernel `altera-ps-spi` firmware interface (default, driver
+/// bit-reverses itself) or pass `--bitrev` to emit the LSB-first wire bytes.
+/// Offline — no hardware.
+fn run_strip_fpga(args: &[String]) {
+    use huidu_sender::fpga_load::{ps_wire_bytes, BitOrder, FpgaImage};
+    let inp = match args.get(2) { Some(p) => p, None => { eprintln!("usage: strip-fpga <in.img> <out.bin> [--bitrev]"); std::process::exit(2); } };
+    let outp = match args.get(3) { Some(p) => p, None => { eprintln!("usage: strip-fpga <in.img> <out.bin> [--bitrev]"); std::process::exit(2); } };
+    let bitrev = args.iter().any(|a| a == "--bitrev");
+    let raw = std::fs::read(inp).unwrap_or_else(|e| { eprintln!("read {inp}: {e}"); std::process::exit(1); });
+    let img = FpgaImage::parse(&raw).unwrap_or_else(|e| { eprintln!("parse {inp}: {e}"); std::process::exit(1); });
+    let bytes = if bitrev { ps_wire_bytes(&img.payload, BitOrder::LsbFirst) } else { img.payload.clone() };
+    std::fs::write(outp, &bytes).unwrap_or_else(|e| { eprintln!("write {outp}: {e}"); std::process::exit(1); });
+    eprintln!(
+        "wrote {} payload bytes to {outp} ({}, ps-sync {})",
+        bytes.len(),
+        if bitrev { "LSB-first wire order" } else { "raw (driver bit-reverses)" },
+        if img.has_ps_sync() { "found" } else { "NOT FOUND — check image" },
+    );
+}
+
+#[cfg(unix)]
+fn run_load_fpga(args: &[String]) {
+    use huidu_sender::fpga_io::{SpiDev, SpidevPsIo, SysfsGpio};
+    use huidu_sender::fpga_load::{load, BitOrder, FpgaImage};
+
+    let inp = match args.get(2) { Some(p) => p.clone(), None => { eprintln!("usage: load-fpga <img> --spidev DEV --nconfig-gpio N --nstatus-gpio N --confdone-gpio N [--msb-first] [--speed HZ]"); std::process::exit(2); } };
+    let spidev = opt(args, "--spidev").unwrap_or("/dev/spidev0.0");
+    let speed: u32 = opt(args, "--speed").and_then(|s| s.parse().ok()).unwrap_or(12_000_000);
+    let order = if args.iter().any(|a| a == "--msb-first") { BitOrder::MsbFirst } else { BitOrder::LsbFirst };
+    let gpio = |k: &str| opt(args, k).and_then(|s| s.parse::<u32>().ok())
+        .unwrap_or_else(|| { eprintln!("{k} <global-gpio-number> is required (read from the live unit)"); std::process::exit(2); });
+    let nconfig_n = gpio("--nconfig-gpio");
+    let nstatus_n = gpio("--nstatus-gpio");
+    let confdone_n = gpio("--confdone-gpio");
+
+    let raw = std::fs::read(&inp).unwrap_or_else(|e| { eprintln!("read {inp}: {e}"); std::process::exit(1); });
+    let img = FpgaImage::parse(&raw).unwrap_or_else(|e| { eprintln!("parse {inp}: {e}"); std::process::exit(1); });
+
+    let spi = SpiDev::open(spidev, speed).unwrap_or_else(|e| { eprintln!("open {spidev}: {e}"); std::process::exit(1); });
+    let nconfig = SysfsGpio::export(nconfig_n, "out").unwrap_or_else(|e| { eprintln!("nconfig gpio{nconfig_n}: {e}"); std::process::exit(1); });
+    let nstatus = SysfsGpio::export(nstatus_n, "in").unwrap_or_else(|e| { eprintln!("nstatus gpio{nstatus_n}: {e}"); std::process::exit(1); });
+    let confdone = SysfsGpio::export(confdone_n, "in").unwrap_or_else(|e| { eprintln!("confdone gpio{confdone_n}: {e}"); std::process::exit(1); });
+    let mut io = SpidevPsIo::new(spi, nconfig, nstatus, confdone);
+
+    eprintln!("loading {} payload bytes via {spidev} @ {speed} Hz ({:?})...", img.payload.len(), order);
+    match load(&mut io, &img, order) {
+        Ok(()) => println!("FPGA configured OK (CONF_DONE asserted)"),
+        Err(e) => { eprintln!("load failed: {e}"); std::process::exit(1); }
+    }
+}
+
+#[cfg(not(unix))]
+fn run_load_fpga(_args: &[String]) {
+    eprintln!("load-fpga requires a Unix host with spidev + sysfs GPIO (use strip-fpga for the offline step)");
+    std::process::exit(1);
 }
 
 #[cfg_attr(not(unix), allow(dead_code))]

@@ -13,10 +13,16 @@
 //! - [`protocol`] — the 9-byte sub-header, function codes, and command builders.
 //! - [`serial`]   — the raw `/dev/ttyS1` port.
 //! - [`blob`]     — the 512-byte param blobs (captured or relinked from libFPGADriver).
+//! - [`fpga_load`]— our `write_fpga` replacement: parse `/boot/fpga.img` + the
+//!   passive-serial load sequence (the LED FPGA bitstream).
+//! - [`fpga_io`]  — spidev + sysfs-GPIO backend for `fpga_load` (Unix).
 
 pub mod blob;
+pub mod fpga_load;
 pub mod frame;
 pub mod protocol;
 
+#[cfg(unix)]
+pub mod fpga_io;
 #[cfg(unix)]
 pub mod serial;
