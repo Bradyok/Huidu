@@ -144,6 +144,28 @@ native-upgrade failure is fully explained by the CloseFile length bug above, ind
    then poll mode=0 for result 1/2. It also declares the whole-.bin size in OpenFile and sends the 6 s
    heartbeat throughout, as HDPlayer does.
 
+## Verified on hardware: our client upgraded C15-C21-BE371 (2026-09-23)
+
+`hdplayer -H 192.168.1.153 upgrade-native BoxPlayer_V7.11.18.0_MagicPlayer_V2.12.8.0.zbin` (the
+`upgrade.rs` flow above), captured in `our_client_upgrade_BE371_20260923_1628.pcapng`:
+
+| t (s) | step |
+|---|---|
+| 0.0 | handshake; limit version 7.4.59.0 |
+| 0.0–33.4 | 35 835 chunks, 330 MB |
+| 34.1 | CloseFile → 0x1c after 0.76 s; mode=3 → `[3][0]`; mode=2 |
+| 34.1–94.1 | conn 1 silent for 60 s → abandoned |
+| 94.1–115.1 | first reconnect attempt timed out (device restarting services) |
+| 132.8 | retry: ConnectAck `09 00 00 01` (new firmware) |
+| 137.9 | UpgradeExec `[u64 8]` → ExecAck `[00 00]`; ClientInfo, NullCap |
+| 137.9 | first mode=0 poll → result 1 = **success** |
+
+Afterwards the SDK (`hdplayer info`) reports **Firmware 7.11.18.0, FPGA 6.22.70.0**, identical to BF096,
+which stock HDPlayer upgraded.
+
+⚠️ The port-9528 "VersionResp" that `client.rs` reads during management login is this same mode=1
+reply, i.e. the **limit version**, not the running firmware. Both upgraded boxes report 7.6.31.0 there.
+`upgrade-native` now takes its before/after version from the SDK instead.
+
 Still open: whether UpgradeExec on conn 2 is *required*, or HDPlayer's habit (the device finished
-installing on its own; conn 2 only reads the result). Our Rust client's new flow has **not yet been
-run against hardware** — only HDPlayer's run above has been captured.
+installing on its own; conn 2 only reads the result).

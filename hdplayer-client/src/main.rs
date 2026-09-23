@@ -423,18 +423,21 @@ fn parse_relay_state(s: &str) -> Result<bool, String> {
 /// Query a device's running firmware version string.
 ///
 /// Strategy (in order):
-/// 1. UDP discovery — check `firmware_version` field (parsed from `SoftwareVersion` attr).
+/// 1. BoxStream SDK (port 9527) — `get_device_info().firmware_version`.
+/// 2. UDP discovery — check `firmware_version` field (parsed from `SoftwareVersion` attr).
 ///    If absent, also search the raw `info_xml` for alternative attribute names used by
 ///    older BoxPlayer firmware (`AppVersion`, `BoxPlayerVersion`, `Version`).
-/// 2. BoxStream SDK (port 9527) — `get_device_info().firmware_version`.
 ///
 /// Returns an empty string if the version cannot be determined.
 async fn query_device_firmware_version(host: &str) -> String {
-    // 1. Direct port 9528 management login — fastest path, works even when port 9527
-    //    rejects BoxStreamInit (e.g. firmware 7.4.59.0).
-    if let Ok(v) = hdplayer::client::firmware_version_via_9528(host).await {
-        if !v.is_empty() {
-            return v;
+    // Not port 9528: its "VersionResp" (UpgradeCMD mode=1) is the device's upgrade
+    // LIMIT version, not the running firmware — a box on 7.11.18.0 reports 7.6.31.0.
+    // 1. BoxStream SDK (port 9527)
+    if let Ok(mut c) = Client::connect(host, 9527).await {
+        if let Ok(info) = c.get_device_info().await {
+            if !info.firmware_version.is_empty() {
+                return info.firmware_version;
+            }
         }
     }
     // 2. UDP discovery fallback
@@ -447,14 +450,6 @@ async fn query_device_firmware_version(host: &str) -> String {
                 if let Some(v) = hdplayer::xml::get_attr(&d.info_xml, attr) {
                     return v.to_string();
                 }
-            }
-        }
-    }
-    // 3. BoxStream SDK last resort
-    if let Ok(mut c) = Client::connect(host, 9527).await {
-        if let Ok(info) = c.get_device_info().await {
-            if !info.firmware_version.is_empty() {
-                return info.firmware_version;
             }
         }
     }

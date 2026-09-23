@@ -116,8 +116,9 @@ pub struct Client {
     mgmt_stream: Option<TcpStream>,
     /// Target host IP/hostname (stored for use as fallback ip_address in DeviceDetails).
     host: String,
-    /// Firmware version string from port-9528 VersionResp (e.g. "7.4.59.0").
-    /// Used as fallback when legacy TCP query returns empty.
+    /// Upgrade limit version from port-9528 VersionResp (e.g. "7.4.59.0").
+    /// Not the running firmware, so it is no longer used as a version fallback.
+    #[allow(dead_code)]
     mgmt_firmware: String,
     /// Device info captured from UDP registration (cmd=0x0004/0x0005).
     /// Used as fallback for name, MAC, screen size when TCP queries return empty.
@@ -222,8 +223,9 @@ fn mgmt_build_client_info() -> Vec<u8> {
 /// Returns `(TcpStream, firmware_version)`.  The `TcpStream` MUST be kept
 /// alive for the duration of the port 9527 session — the device tracks
 /// authorized controllers per port-9528 connection and rejects BoxStreamInit
-/// when no such session is active.  The firmware version string (e.g.
-/// "7.4.59.0") is parsed from the VersionResp packet.
+/// when no such session is active.  The version string returned is the
+/// device's upgrade LIMIT version (UpgradeCMD mode=1 reply), e.g. "7.4.59.0" —
+/// NOT the running firmware version.
 async fn mgmt_login(host: &str) -> Result<(TcpStream, String)> {
     const MGMT_PORT: u16 = 9528;
     const CONNECT_VERSION: u32 = 0x01000007;
@@ -320,7 +322,7 @@ async fn mgmt_login(host: &str) -> Result<(TcpStream, String)> {
     {
         Ok(Ok((0x0056, ref p))) if p.len() >= 6 => {
             firmware_version = format!("{}.{}.{}.{}", p[2], p[3], p[4], p[5]);
-            info!("Port 9528 VersionResp: firmware={firmware_version}");
+            info!("Port 9528 VersionResp: limit version={firmware_version}");
         }
         Ok(Ok((0x0056, _))) => debug!("Port 9528 VersionResp ok (short payload)"),
         Ok(Ok((c, _))) => warn!("Port 9528: expected VersionResp (0x0056), got 0x{c:04x}"),
@@ -331,10 +333,9 @@ async fn mgmt_login(host: &str) -> Result<(TcpStream, String)> {
     Ok((stream, firmware_version))
 }
 
-/// Query the firmware version from a device's port-9528 management port.
-///
-/// Faster than a full BoxStream connection and works even when port 9527
-/// rejects BoxStreamInit (e.g. firmware 7.4.59.0).
+/// Query the upgrade LIMIT version from a device's port-9528 management port
+/// (the minimum firmware it will accept an upgrade to).  This is NOT the
+/// running firmware version — use the BoxStream SDK `get_device_info` for that.
 pub async fn firmware_version_via_9528(host: &str) -> Result<String> {
     let (_stream, version) = mgmt_login(host).await?;
     Ok(version)
@@ -1127,11 +1128,9 @@ impl Client {
         // Fallback: populate empty fields from alternate data sources.
         //
         // Firmware 7.4.59.0 returns empty self-closing <out method="X"/> for ALL TCP queries
-        // on port 10001.  Fill in what we can from UDP registration (cmd=0x0004/0x0005) and
-        // port-9528 VersionResp.
-        if info.firmware_version.is_empty() && !self.mgmt_firmware.is_empty() {
-            info.firmware_version = self.mgmt_firmware.clone();
-        }
+        // on port 10001.  Fill in what we can from UDP registration (cmd=0x0004/0x0005).
+        // (Not from port-9528 VersionResp: that is the upgrade LIMIT version, not the
+        // running firmware — a box on 7.11.18.0 reports 7.6.31.0 there.)
         if info.ip_address.is_empty() && !self.host.is_empty() {
             info.ip_address = self.host.clone();
         }
