@@ -340,6 +340,47 @@ pub async fn firmware_version_via_9528(host: &str) -> Result<String> {
     Ok(version)
 }
 
+/// Perform the port-9527 BoxStream *connect* handshake on a freshly-connected stream.
+///
+/// Captured verbatim from real HDPlayer.exe (see
+/// `products/BoxPlayer/v7.11.18.0/SDK_BOXSTREAM_PROTOCOL.md`). This entire handshake
+/// happens on the 9527 connection itself — it does NOT require the port-9528 login or
+/// the UDP registration token that our earlier (fabricated) implementation assumed.
+///
+///   ConnReq (0x000b) = 0x01000009  -> ConnAck (0x000c)
+///   ClientInfoReq (0x0410) = CSV   -> ClientInfoAck (0x0411)
+///   0x0300 (empty)                 -> 0x0301
+async fn box_stream_handshake(stream: &mut TcpStream) -> Result<()> {
+    // HDPlayer advertises protocol version 0x01000009 in ConnReq (we previously sent
+    // 0x01000007). The device replies with its own version in ConnAck.
+    const BOXSTREAM_VERSION: u32 = 0x01000009;
+    let mut buf = Vec::with_capacity(1024);
+
+    async fn step(stream: &mut TcpStream, buf: &mut Vec<u8>, cmd: u16, payload: &[u8]) -> Result<u16> {
+        stream.write_all(&mgmt_build_packet(cmd, payload)).await?;
+        stream.flush().await?;
+        let (rcmd, _) = tokio::time::timeout(Duration::from_secs(10), mgmt_recv_packet(stream, buf))
+            .await
+            .map_err(|_| Error::Timeout)??;
+        Ok(rcmd)
+    }
+
+    let cmd = step(stream, &mut buf, 0x000b, &BOXSTREAM_VERSION.to_le_bytes()).await?;
+    if cmd != 0x000c {
+        return Err(Error::Protocol(format!("9527: expected ConnAck (0x000c), got 0x{cmd:04x}")));
+    }
+    let cmd = step(stream, &mut buf, 0x0410, &mgmt_build_client_info()).await?;
+    if cmd != 0x0411 {
+        return Err(Error::Protocol(format!("9527: expected ClientInfoAck (0x0411), got 0x{cmd:04x}")));
+    }
+    let cmd = step(stream, &mut buf, 0x0300, &[]).await?;
+    if cmd != 0x0301 {
+        warn!("9527: expected 0x0301 after 0x0300, got 0x{cmd:04x} — continuing");
+    }
+    info!("BoxStream 9527 connect handshake complete (ready for BoxStreamInit)");
+    Ok(())
+}
+
 impl Client {
     /// Connect to a Huidu BoxPlayer at the given host and port.
     pub async fn connect(host: &str, port: u16) -> Result<Self> {
@@ -406,15 +447,20 @@ impl Client {
 
         let addr = format!("{host}:{port}");
         info!("Connecting to {addr}");
-        let stream = TcpStream::connect(&addr).await
+        let mut stream = TcpStream::connect(&addr).await
             .map_err(|e| Error::Connection(format!("TCP connect to {addr}: {e}")))?;
         stream.set_nodelay(true)?;
         info!("Connected to {addr}");
 
-        let client = Self {
+        // Real BoxStream connect handshake on THIS 9527 connection (captured from
+        // HDPlayer.exe): ConnReq(0x01000009) -> ConnAck, ClientInfoReq -> Ack, 0x0300 -> 0x0301.
+        // This replaces our earlier fabricated "port-9528 login + UDP token" assumptions.
+        box_stream_handshake(&mut stream).await?;
+
+        let mut client = Self {
             stream: Arc::new(Mutex::new(stream)),
-            // BoxStream protocol uses the literal "##GUID" placeholder (not a real UUID).
-            // Confirmed from Huidu.pcapng: all SDK requests and responses use guid="##GUID".
+            // BoxStream uses the literal "##GUID" placeholder (confirmed in the capture:
+            // every request/response uses guid="##GUID").
             client_guid: "##GUID".to_string(),
             read_buf: Vec::with_capacity(65536),
             use_legacy: false,
@@ -425,29 +471,14 @@ impl Client {
             udp_device_info,
         };
 
-        // BoxStream connect sequence (confirmed from More Huidu.pcapng):
-        //
-        //  1. TCP connect to port 9527
-        //  2. PC → Device: BoxStreamInit (0x0200) — sent IMMEDIATELY as first data packet
-        //  3. Device → PC: BoxStreamInitAck (0x0201)
-        //
-        // IMPORTANT: The device has a short acceptance window after TCP connect.  If
-        // BoxStreamInit does not arrive within ~2–3 seconds the device closes the
-        // connection (FIN) on the next periodic heartbeat tick (~5–6 s).
-        //
-        // Earlier tests showed RST when BoxStreamInit arrived immediately, but those
-        // tests were run WITHOUT the port 9528 management login.  With port 9528 login
-        // completed first, immediate BoxStreamInit is accepted.
-        //
-        // Historical note — these all failed when port 9528 login was NOT done:
-        //   BoxStreamInit before heartbeat (no port-9528) → RST
-        //   BoxStreamInit after heartbeat  (no port-9528) → FIN
-        //   BoxStreamInit after heartbeat  (with port-9528, 5.9 s delay) → FIN
-        //
-        // Brief settle delay to ensure the TCP connection is fully established on
-        // both ends before the first data write.
-        tokio::time::sleep(Duration::from_millis(200)).await;
-        info!("TCP connection settled — ready for BoxStreamInit");
+        // Acquire the device lock. HDPlayer sends TryLock immediately after GetIFVersion;
+        // without holding the lock the device accepts commands but does NOT act on them
+        // (the root cause of our "accepted but ignored" reboot/upgrade). Do a GetIFVersion
+        // first (matches HDPlayer's order) then TryLock.
+        if let Err(e) = client.sdk_cmd("GetIFVersion", &command::get_if_version()).await {
+            warn!("GetIFVersion failed ({e}) — continuing to TryLock");
+        }
+        client.try_lock().await?;
 
         Ok(client)
     }
@@ -560,6 +591,13 @@ impl Client {
             .and_then(|s| s.parse::<u32>().ok())
             .unwrap_or(0);
         info!("Legacy SDK connected (interface version {})", if_ver);
+
+        // Acquire the device lock on the legacy transport too — the lock is enforced by
+        // the SDK method dispatcher, not the transport, so without it the legacy path
+        // also returns partial data / ignores commands.
+        if let Err(e) = client.try_lock().await {
+            warn!("TryLock on legacy path failed ({e}) — commands may be ignored");
+        }
         Ok(client)
     }
 
@@ -667,9 +705,13 @@ impl Client {
     /// firmware ≥ ~7.2 reject `[0,0,0,0]` and require the token obtained from UDP
     /// cmd=0x0005 during registration.
     async fn box_stream_init(&mut self) -> Result<()> {
-        let token = self.session_token;
-        info!("Sending BoxStreamInit token={:02x?}...", token);
-        let pkt = Packet::new(Command::BoxStreamInit, token.to_vec());
+        // Captured from real HDPlayer.exe (SDK_BOXSTREAM_PROTOCOL.md): BoxStreamInit
+        // payload is a 4-byte little-endian sequence number that starts at 0 for the
+        // PC's first message — NOT the UDP registration token.  Sending the token here
+        // is what caused firmware 7.4.x to close the connection.
+        let payload = [0u8, 0, 0, 0];
+        debug!("Sending BoxStreamInit (seq=0)...");
+        let pkt = Packet::new(Command::BoxStreamInit, payload.to_vec());
         self.send_packet(&pkt).await?;
         info!("BoxStreamInit sent — waiting for BoxStreamInitAck (0x0201)");
         loop {
@@ -866,6 +908,26 @@ impl Client {
         debug!("SDK response for {method}: {} bytes", response.len());
         xml::parse_result(&response)?;
         Ok(response)
+    }
+
+    /// Acquire the device session lock (`TryLock`).
+    ///
+    /// **This is the authorization gate.** Captured from HDPlayer.exe: the device
+    /// accepts commands from any connected client but only *acts* on them once the
+    /// client holds the lock. HDPlayer calls TryLock right after connecting; our
+    /// client never did, which is why control and upgrade were accepted-but-ignored.
+    /// Works on both the BoxStream (9527) and legacy (10001) transports, since the
+    /// lock is enforced by the transport-agnostic SDK method dispatcher.
+    pub async fn try_lock(&mut self) -> Result<()> {
+        self.sdk_cmd("TryLock", "").await?;
+        info!("Device lock acquired (TryLock kSuccess)");
+        Ok(())
+    }
+
+    /// Release the device session lock (`Unlock`). Best-effort.
+    pub async fn unlock(&mut self) -> Result<()> {
+        let _ = self.sdk_cmd("Unlock", "").await;
+        Ok(())
     }
 
     /// Send a heartbeat packet.
@@ -1320,12 +1382,13 @@ impl Client {
     // ── Device Control ────────────────────────────────────────────────────
 
     pub async fn reboot(&mut self) -> Result<()> {
-        self.sdk_cmd("RebootDevice", &command::reboot_device()).await?;
+        // Method name is "Reboot" (device handler sdk::HSReboot), not "RebootDevice".
+        self.sdk_cmd("Reboot", &command::reboot_device()).await?;
         Ok(())
     }
 
     pub async fn set_device_name(&mut self, name: &str) -> Result<()> {
-        self.sdk_cmd("UpdateDevName", &command::set_device_name(name)).await?;
+        self.sdk_cmd("SetDeviceName", &command::set_device_name(name)).await?;
         Ok(())
     }
 
