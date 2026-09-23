@@ -1,0 +1,52 @@
+#!/bin/sh
+# huidu-player (boxplayer): the LED display player. Starts after huidu-sender
+# (S95) so the FPGA link is up before the first frame is pushed.
+#
+# Config in /etc/default/huidu-player. This process renders scenes and pushes
+# frames to the panel. On the C-series use OUTPUT=drm: KMS present to the VOP,
+# whose parallel RGB888 the LED FPGA latches. huidu-sender independently owns
+# ttyS1 configuration (scan/gamma/brightness).
+#
+# NOTE: the player does not yet drive huidu-sender's control socket (there is no
+# --sender flag; brightness routing player->sender is a pending code change).
+# For now the two run side by side.
+
+DAEMON=/usr/bin/boxplayer
+PIDFILE=/var/run/huidu-player.pid
+[ -x "$DAEMON" ] || exit 0
+
+PROGRAM_DIR=/root/Box
+WIDTH=128
+HEIGHT=64
+OUTPUT=drm
+DRM_DEVICE=/dev/dri/card0
+FPS=30
+DEVICE_ID=RUST-001
+EXTRA_ARGS=
+[ -f /etc/default/huidu-player ] && . /etc/default/huidu-player
+
+case "$1" in
+start)
+	printf 'Starting huidu-player: '
+	# shellcheck disable=SC2086
+	start-stop-daemon -S -q -b -m -p "$PIDFILE" -x "$DAEMON" -- \
+		--program-dir "$PROGRAM_DIR" --width "$WIDTH" --height "$HEIGHT" \
+		--output "$OUTPUT" --drm-device "$DRM_DEVICE" --fps "$FPS" \
+		--device-id "$DEVICE_ID" $EXTRA_ARGS \
+		&& echo OK || echo FAIL
+	;;
+stop)
+	printf 'Stopping huidu-player: '
+	start-stop-daemon -K -q -p "$PIDFILE" && echo OK || echo FAIL
+	rm -f "$PIDFILE"
+	;;
+restart|reload)
+	"$0" stop
+	sleep 1
+	"$0" start
+	;;
+*)
+	echo "Usage: $0 {start|stop|restart}"
+	exit 1
+	;;
+esac

@@ -56,6 +56,8 @@ BR2_PACKAGE_WPA_SUPPLICANT_NL80211=y
 BR2_PACKAGE_CHRONY=y
 # Our LED sender daemon (drives the FPGA config link on ttyS1)
 BR2_PACKAGE_HUIDU_SENDER=y
+# Our display player (renders scenes, pushes frames; pulls alsa/openssl/eudev)
+BR2_PACKAGE_HUIDU_PLAYER=y
 # Root filesystem: ext4 on eMMC
 BR2_TARGET_ROOTFS_EXT2=y
 BR2_TARGET_ROOTFS_EXT2_4=y

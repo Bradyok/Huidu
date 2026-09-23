@@ -1,0 +1,25 @@
+# huidu-player (boxplayer) defaults (sourced by /etc/init.d/S96huidu-player)
+
+# Where program/.zbin content lives (stock BoxPlayer uses /root/Box).
+PROGRAM_DIR=/root/Box
+
+# Panel geometry — override per model (C15/C35/C36 differ). This is the frame
+# the VOP outputs; it must match the physical wall / receiving-card mapping.
+WIDTH=128
+HEIGHT=64
+
+# Output sink: drm | framebuffer | png | raw.
+#   drm         - KMS present to the VOP (the correct PX30 path: the FPGA latches
+#                 the VOP's parallel RGB888; huidu-sender configures it over ttyS1).
+#   framebuffer - the player's internal fpga.send_frame path (alternate).
+# Use drm on the C-series image.
+OUTPUT=drm
+DRM_DEVICE=/dev/dri/card0
+
+FPS=30
+
+# Reported in discovery / cloud. Set per unit if using cloud; otherwise fine.
+DEVICE_ID=RUST-001
+
+# Anything extra: --cloud-url, --weather-url, --box-stream-port 0 to disable, etc.
+EXTRA_ARGS=

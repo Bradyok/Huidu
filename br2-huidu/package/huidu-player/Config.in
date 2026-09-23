@@ -1,0 +1,24 @@
+config BR2_PACKAGE_HUIDU_PLAYER
+	bool "huidu-player (boxplayer)"
+	depends on BR2_PACKAGE_HOST_RUSTC_TARGET_ARCH_SUPPORTS
+	depends on BR2_TOOLCHAIN_HAS_THREADS # tokio, rodio
+	select BR2_PACKAGE_HOST_RUSTC
+	select BR2_PACKAGE_ALSA_LIB     # rodio audio playback
+	select BR2_PACKAGE_ALSA_LIB_MIXER
+	select BR2_PACKAGE_OPENSSL      # reqwest (native-tls) cloud/weather HTTPS
+	select BR2_PACKAGE_EUDEV        # serialport -> libudev on Linux
+	select BR2_PACKAGE_HUIDU_SENDER # pairs with the ttyS1 control daemon
+	help
+	  Our Rust reproduction of Huidu's BoxPlayer display player
+	  (the `boxplayer` binary): parses program/.zbin files, renders
+	  scenes/text/images/gif with tiny-skia, plays audio, speaks the
+	  SDK/upgrade protocols, and pushes RGB frames to the panel.
+
+	  Pairs with huidu-sender: this produces the image, huidu-sender
+	  programs the FPGA over ttyS1 so the image lights the wall.
+
+	  https://github.com/Bradyok/Huidu (huidu-player crate)
+
+comment "huidu-player needs a toolchain w/ host rustc + threads"
+	depends on !BR2_PACKAGE_HOST_RUSTC_TARGET_ARCH_SUPPORTS || \
+		!BR2_TOOLCHAIN_HAS_THREADS
