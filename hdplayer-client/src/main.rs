@@ -283,6 +283,11 @@ enum Commands {
         /// Maximum seconds to wait for the device to report completion.
         #[arg(long, default_value_t = 600)]
         timeout: u64,
+        /// Maximum seconds to wait for on-device tar extraction before UpgradeExec.
+        /// Ends early once the device signals it finished. Large firmware needs the
+        /// full default; a small script package can use e.g. 60.
+        #[arg(long, default_value_t = 600)]
+        decompress_wait: u64,
         /// TCP port for the binary upgrade protocol (default 9528).
         /// Use 10001 for legacy devices that only have port 10001 open.
         #[arg(long, default_value_t = 9528)]
@@ -527,7 +532,7 @@ async fn main() -> anyhow::Result<()> {
     };
 
     // UpgradeNative connects directly to the binary upgrade port — no SDK client needed.
-    if let Commands::UpgradeNative { file, poll_interval, timeout, upgrade_port } = &cli.command {
+    if let Commands::UpgradeNative { file, poll_interval, timeout, decompress_wait, upgrade_port } = &cli.command {
         let path = std::path::Path::new(file.as_str());
         if !path.exists() {
             eprintln!("File not found: {file}");
@@ -557,6 +562,7 @@ async fn main() -> anyhow::Result<()> {
         let opts = hdplayer::upgrade::UpgradeOptions {
             poll_interval: Duration::from_secs(*poll_interval),
             poll_timeout: Duration::from_secs(*timeout),
+            decompress_wait: Duration::from_secs(*decompress_wait),
             progress: Some(Box::new(|sent, total| {
                 print!(
                     "\r  {sent}/{total} bytes ({:.1}%)  ",

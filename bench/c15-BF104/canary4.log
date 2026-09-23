@@ -1,0 +1,47 @@
+Firmware file version:  unknown
+[2m2026-09-23T11:42:32.371408Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528: connecting for management login…
+[2m2026-09-23T11:42:32.377300Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528 management login authorised (ClientInfoAck ok)
+[2m2026-09-23T11:42:32.379640Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528 VersionResp: firmware=7.4.59.0
+Device version before:  7.4.59.0
+Starting native firmware upgrade: C:/Users/Scoreboards.com/AppData/Local/Temp/claude/C--Users-Scoreboards-com-Documents-GitHub-Huidu/cc708203-c158-4e11-bceb-5a53331c0ef5/scratchpad/canary/canary.bin
+  Device: 192.168.1.249:9528
+
+  [Parsing firmware archive…]
+[2m2026-09-23T11:42:32.379878Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Parsing firmware archive…
+[2m2026-09-23T11:42:32.380160Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m BIN Decompress (killall stripped): tar zxvf %s -C %s
+[2m2026-09-23T11:42:32.380170Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m BIN Script: upgrade.sh
+[2m2026-09-23T11:42:32.380180Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Firmware payload: 453 bytes (1 chunks) extracted from C:/Users/Scoreboards.com/AppData/Local/Temp/claude/C--Users-Scoreboards-com-Documents-GitHub-Huidu/cc708203-c158-4e11-bceb-5a53331c0ef5/scratchpad/canary/canary.bin
+
+  [Connecting…]
+[2m2026-09-23T11:42:32.380195Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Connecting…
+
+  [Handshaking…]
+[2m2026-09-23T11:42:32.380880Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Handshaking…
+
+  [Entering upgrade mode…]
+[2m2026-09-23T11:42:32.383849Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Entering upgrade mode…
+[2m2026-09-23T11:42:32.384841Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Device entered upgrade mode
+
+  [Transferring 0.0 MB…]
+[2m2026-09-23T11:42:32.397311Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Transferring 0.0 MB…
+  453/453 bytes (100.0%)  [2m2026-09-23T11:42:32.397364Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Transfer: 1/1 chunks (100.0%)
+
+  [Confirming file receipt…]
+[2m2026-09-23T11:42:32.397372Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Confirming file receipt…
+[2m2026-09-23T11:42:37.478465Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m File-complete / heartbeat-answer received — file transfer confirmed
+
+  [Starting decompression…]
+[2m2026-09-23T11:42:37.478523Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Starting decompression…
+[2m2026-09-23T11:42:37.478530Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Sending decompress command (mode=3) on conn1…
+[2m2026-09-23T11:42:37.479263Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Decompress command accepted (status 3)
+[2m2026-09-23T11:42:37.479302Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Upgrade script queued (mode=2)
+
+  [Waiting for extraction (up to 10 min)…]
+[2m2026-09-23T11:42:37.479311Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Waiting for extraction (up to 10 min)…
+[2m2026-09-23T11:42:37.479314Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Polling conn1 with mode=0 every 5 s — waiting up to 600 s for tar to finish…
+[2m2026-09-23T11:42:47.483464Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m UpgradeStatus=0 on conn1 after 10s — extraction done, proceeding to UpgradeExec
+
+  [Triggering upgrade (UpgradeExec)…]
+[2m2026-09-23T11:42:47.483502Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Triggering upgrade (UpgradeExec)…
+[2m2026-09-23T11:42:47.483506Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Opening conn2 for UpgradeExec (full login → UpgradeCtrl=1 → UpgradeExec)…
+Error: Connection closed by device

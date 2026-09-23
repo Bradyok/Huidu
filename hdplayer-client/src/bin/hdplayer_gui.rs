@@ -1430,6 +1430,7 @@ async fn worker_loop(
                 let opts = hdplayer::upgrade::UpgradeOptions {
                     poll_interval: Duration::from_secs(5),
                     poll_timeout: Duration::from_secs(600),
+                    decompress_wait: Duration::from_secs(600),
                     progress: Some(Box::new(move |bytes, total| {
                         let _ = resp_prog.send(Response::UpgradeProgress { bytes, total });
                     })),

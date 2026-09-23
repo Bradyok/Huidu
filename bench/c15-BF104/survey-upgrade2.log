@@ -1,0 +1,218 @@
+Firmware file version:  unknown
+[2m2026-09-23T11:14:01.515748Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528: connecting for management login…
+[2m2026-09-23T11:14:01.519212Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 ConnectAck ok
+[2m2026-09-23T11:14:01.520495Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528 management login authorised (ClientInfoAck ok)
+[2m2026-09-23T11:14:01.521171Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 NullCapResp ok
+[2m2026-09-23T11:14:01.521920Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 CapResp ok
+[2m2026-09-23T11:14:01.523216Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528 VersionResp: firmware=7.4.59.0
+Device version before:  7.4.59.0
+Starting native firmware upgrade: packages/access-survey/access-survey_7.11.18.99.bin
+  Device: 192.168.1.249:9528
+
+  [Parsing firmware archive…]
+[2m2026-09-23T11:14:01.523486Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Parsing firmware archive…
+[2m2026-09-23T11:14:01.523748Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m BIN Decompress (killall stripped): tar zxvf %s -C %s
+[2m2026-09-23T11:14:01.523774Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m BIN Script: upgrade.sh
+[2m2026-09-23T11:14:01.523799Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Firmware payload: 2093 bytes (1 chunks) extracted from packages/access-survey/access-survey_7.11.18.99.bin
+
+  [Connecting…]
+[2m2026-09-23T11:14:01.523824Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Connecting…
+
+  [Handshaking…]
+[2m2026-09-23T11:14:01.524925Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Handshaking…
+[2m2026-09-23T11:14:01.526034Z[0m [34mDEBUG[0m [2mhdplayer::upgrade[0m[2m:[0m ConnectAck ok
+[2m2026-09-23T11:14:01.526681Z[0m [34mDEBUG[0m [2mhdplayer::upgrade[0m[2m:[0m ClientInfoAck ok
+[2m2026-09-23T11:14:01.527443Z[0m [34mDEBUG[0m [2mhdplayer::upgrade[0m[2m:[0m NullCapResp ok
+[2m2026-09-23T11:14:01.528255Z[0m [34mDEBUG[0m [2mhdplayer::upgrade[0m[2m:[0m CapB ok
+
+  [Entering upgrade mode…]
+[2m2026-09-23T11:14:01.528276Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Entering upgrade mode…
+[2m2026-09-23T11:14:01.529413Z[0m [34mDEBUG[0m [2mhdplayer::upgrade[0m[2m:[0m UpgradeStatus after enter-upgrade: 1
+[2m2026-09-23T11:14:01.529427Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Device entered upgrade mode
+
+  [Transferring 0.0 MB…]
+[2m2026-09-23T11:14:01.541847Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Transferring 0.0 MB…
+  2093/2093 bytes (100.0%)  [2m2026-09-23T11:14:01.541916Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Transfer: 1/1 chunks (100.0%)
+
+  [Confirming file receipt…]
+[2m2026-09-23T11:14:01.541925Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Confirming file receipt…
+[2m2026-09-23T11:14:06.600692Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m File-complete / heartbeat-answer received — file transfer confirmed
+
+  [Starting decompression…]
+[2m2026-09-23T11:14:06.600824Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Starting decompression…
+[2m2026-09-23T11:14:06.600829Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Sending decompress command (mode=3) on conn1…
+[2m2026-09-23T11:14:06.601728Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Decompress command accepted (status 3)
+[2m2026-09-23T11:14:06.601892Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Upgrade script queued (mode=2)
+
+  [Waiting for extraction (up to 10 min)…]
+[2m2026-09-23T11:14:06.601922Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Waiting for extraction (up to 10 min)…
+[2m2026-09-23T11:14:06.601927Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Polling conn1 with mode=0 every 5 s — waiting up to 600 s for tar to finish…
+[2m2026-09-23T11:14:06.664466Z[0m [34mDEBUG[0m [2mhdplayer::upgrade[0m[2m:[0m conn1 tar-wait poll: cmd=0x0056 status=2 elapsed=0s
+[2m2026-09-23T11:14:06.712305Z[0m [34mDEBUG[0m [2mhdplayer::upgrade[0m[2m:[0m conn1 tar-wait poll: cmd=0x0056 status=0 elapsed=0s
+[2m2026-09-23T11:14:11.605859Z[0m [34mDEBUG[0m [2mhdplayer::upgrade[0m[2m:[0m conn1 tar-wait poll: cmd=0x0056 status=0 elapsed=5s
+[2m2026-09-23T11:14:11.668361Z[0m [34mDEBUG[0m [2mhdplayer::upgrade[0m[2m:[0m conn1 tar-wait poll: cmd=0x0060 status=0 elapsed=5s
+[2m2026-09-23T11:14:16.608011Z[0m [34mDEBUG[0m [2mhdplayer::upgrade[0m[2m:[0m conn1 tar-wait poll: cmd=0x0056 status=0 elapsed=10s
+[2m2026-09-23T11:14:16.608092Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m UpgradeStatus=0 on conn1 after 10s — extraction done, proceeding to UpgradeExec
+
+  [Triggering upgrade (UpgradeExec)…]
+[2m2026-09-23T11:14:16.608106Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Triggering upgrade (UpgradeExec)…
+[2m2026-09-23T11:14:16.608109Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Sending UpgradeExec (0x0730) on conn1…
+[2m2026-09-23T11:14:16.680082Z[0m [34mDEBUG[0m [2mhdplayer::upgrade[0m[2m:[0m skip transparent cmd=0x0060
+[2m2026-09-23T11:14:21.690209Z[0m [34mDEBUG[0m [2mhdplayer::upgrade[0m[2m:[0m skip transparent cmd=0x0060
+[2m2026-09-23T11:14:26.702268Z[0m [34mDEBUG[0m [2mhdplayer::upgrade[0m[2m:[0m skip transparent cmd=0x0060
+[2m2026-09-23T11:14:31.713369Z[0m [34mDEBUG[0m [2mhdplayer::upgrade[0m[2m:[0m skip transparent cmd=0x0060
+[2m2026-09-23T11:14:36.724694Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m conn1 closed after UpgradeExec: Connection closed by device — upgrade may be running
+
+  [Upgrade executing — monitoring…]
+[2m2026-09-23T11:14:36.724753Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Upgrade executing — monitoring…
+[2m2026-09-23T11:14:36.724841Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m conn closed waiting for ClientInfoAck (Connection closed by device) — proceeding to Phase 9
+[2m2026-09-23T11:14:36.724855Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m conn closed waiting for NullCapResp (Connection closed by device) — proceeding
+
+  [Upgrade script running — waiting for completion…]
+[2m2026-09-23T11:14:36.724863Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Upgrade script running — waiting for completion…
+[2m2026-09-23T11:14:36.724866Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Polling conn2 for completion (interval=5s, timeout=180s)
+
+  [Device rebooted — upgrade applied]
+[2m2026-09-23T11:14:36.724899Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Device rebooted — upgrade applied
+
+Waiting for device to come back online…
+[2m2026-09-23T11:14:51.727165Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528: connecting for management login…
+[2m2026-09-23T11:14:51.731792Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 ConnectAck ok
+[2m2026-09-23T11:14:51.732680Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528 management login authorised (ClientInfoAck ok)
+[2m2026-09-23T11:14:51.733420Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 NullCapResp ok
+[2m2026-09-23T11:14:51.734183Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 CapResp ok
+[2m2026-09-23T11:14:51.735147Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528 VersionResp: firmware=7.4.59.0
+  Device reports old firmware (7.4.59.0) — upgrade in progress, 0s so far…
+[2m2026-09-23T11:15:06.737729Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528: connecting for management login…
+[2m2026-09-23T11:15:06.740143Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 ConnectAck ok
+[2m2026-09-23T11:15:06.740864Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528 management login authorised (ClientInfoAck ok)
+[2m2026-09-23T11:15:06.741642Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 NullCapResp ok
+[2m2026-09-23T11:15:06.742563Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 CapResp ok
+[2m2026-09-23T11:15:06.744217Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528 VersionResp: firmware=7.4.59.0
+  Device reports old firmware (7.4.59.0) — upgrade in progress, 15s so far…
+[2m2026-09-23T11:15:21.745791Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528: connecting for management login…
+[2m2026-09-23T11:15:21.748501Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 ConnectAck ok
+[2m2026-09-23T11:15:21.749289Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528 management login authorised (ClientInfoAck ok)
+[2m2026-09-23T11:15:21.749996Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 NullCapResp ok
+[2m2026-09-23T11:15:21.750770Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 CapResp ok
+[2m2026-09-23T11:15:21.751690Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528 VersionResp: firmware=7.4.59.0
+  Device reports old firmware (7.4.59.0) — upgrade in progress, 30s so far…
+[2m2026-09-23T11:15:36.752988Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528: connecting for management login…
+[2m2026-09-23T11:15:36.755157Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 ConnectAck ok
+[2m2026-09-23T11:15:36.755797Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528 management login authorised (ClientInfoAck ok)
+[2m2026-09-23T11:15:36.756461Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 NullCapResp ok
+[2m2026-09-23T11:15:36.757243Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 CapResp ok
+[2m2026-09-23T11:15:36.758339Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528 VersionResp: firmware=7.4.59.0
+  Device reports old firmware (7.4.59.0) — upgrade in progress, 45s so far…
+[2m2026-09-23T11:15:51.760306Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528: connecting for management login…
+[2m2026-09-23T11:15:51.767070Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 ConnectAck ok
+[2m2026-09-23T11:15:51.768001Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528 management login authorised (ClientInfoAck ok)
+[2m2026-09-23T11:15:51.768905Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 NullCapResp ok
+[2m2026-09-23T11:15:51.769963Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 CapResp ok
+[2m2026-09-23T11:15:51.771178Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528 VersionResp: firmware=7.4.59.0
+  Device reports old firmware (7.4.59.0) — upgrade in progress, 60s so far…
+[2m2026-09-23T11:16:06.772004Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528: connecting for management login…
+[2m2026-09-23T11:16:06.774362Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 ConnectAck ok
+[2m2026-09-23T11:16:06.775068Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528 management login authorised (ClientInfoAck ok)
+[2m2026-09-23T11:16:06.775766Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 NullCapResp ok
+[2m2026-09-23T11:16:06.776685Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 CapResp ok
+[2m2026-09-23T11:16:06.777707Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528 VersionResp: firmware=7.4.59.0
+  Device reports old firmware (7.4.59.0) — upgrade in progress, 75s so far…
+[2m2026-09-23T11:16:21.780885Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528: connecting for management login…
+[2m2026-09-23T11:16:21.788189Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 ConnectAck ok
+[2m2026-09-23T11:16:21.790140Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528 management login authorised (ClientInfoAck ok)
+[2m2026-09-23T11:16:21.791410Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 NullCapResp ok
+[2m2026-09-23T11:16:21.792758Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 CapResp ok
+[2m2026-09-23T11:16:21.794159Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528 VersionResp: firmware=7.4.59.0
+  Device reports old firmware (7.4.59.0) — upgrade in progress, 90s so far…
+[2m2026-09-23T11:16:36.796170Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528: connecting for management login…
+[2m2026-09-23T11:16:36.804297Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 ConnectAck ok
+[2m2026-09-23T11:16:36.807590Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528 management login authorised (ClientInfoAck ok)
+[2m2026-09-23T11:16:36.809162Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 NullCapResp ok
+[2m2026-09-23T11:16:36.810333Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 CapResp ok
+[2m2026-09-23T11:16:36.811901Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528 VersionResp: firmware=7.4.59.0
+  Device reports old firmware (7.4.59.0) — upgrade in progress, 105s so far…
+[2m2026-09-23T11:16:51.813655Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528: connecting for management login…
+[2m2026-09-23T11:16:51.819696Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 ConnectAck ok
+[2m2026-09-23T11:16:51.820168Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528 management login authorised (ClientInfoAck ok)
+[2m2026-09-23T11:16:51.820603Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 NullCapResp ok
+[2m2026-09-23T11:16:51.821023Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 CapResp ok
+[2m2026-09-23T11:16:51.821600Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528 VersionResp: firmware=7.4.59.0
+  Device reports old firmware (7.4.59.0) — upgrade in progress, 120s so far…
+[2m2026-09-23T11:17:06.823497Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528: connecting for management login…
+[2m2026-09-23T11:17:06.827240Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 ConnectAck ok
+[2m2026-09-23T11:17:06.829036Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528 management login authorised (ClientInfoAck ok)
+[2m2026-09-23T11:17:06.830040Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 NullCapResp ok
+[2m2026-09-23T11:17:06.831398Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 CapResp ok
+[2m2026-09-23T11:17:06.836533Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528 VersionResp: firmware=7.4.59.0
+  Device reports old firmware (7.4.59.0) — upgrade in progress, 135s so far…
+[2m2026-09-23T11:17:21.839277Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528: connecting for management login…
+[2m2026-09-23T11:17:21.842643Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 ConnectAck ok
+[2m2026-09-23T11:17:21.843866Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528 management login authorised (ClientInfoAck ok)
+[2m2026-09-23T11:17:21.844895Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 NullCapResp ok
+[2m2026-09-23T11:17:21.846175Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 CapResp ok
+[2m2026-09-23T11:17:21.847766Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528 VersionResp: firmware=7.4.59.0
+  Device reports old firmware (7.4.59.0) — upgrade in progress, 150s so far…
+[2m2026-09-23T11:17:36.850424Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528: connecting for management login…
+[2m2026-09-23T11:17:36.852500Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 ConnectAck ok
+[2m2026-09-23T11:17:36.853122Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528 management login authorised (ClientInfoAck ok)
+[2m2026-09-23T11:17:36.853757Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 NullCapResp ok
+[2m2026-09-23T11:17:36.854475Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 CapResp ok
+[2m2026-09-23T11:17:36.855368Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528 VersionResp: firmware=7.4.59.0
+  Device reports old firmware (7.4.59.0) — upgrade in progress, 165s so far…
+[2m2026-09-23T11:17:51.857220Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528: connecting for management login…
+[2m2026-09-23T11:17:51.862229Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 ConnectAck ok
+[2m2026-09-23T11:17:51.863455Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528 management login authorised (ClientInfoAck ok)
+[2m2026-09-23T11:17:51.864782Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 NullCapResp ok
+[2m2026-09-23T11:17:51.866037Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 CapResp ok
+[2m2026-09-23T11:17:51.867220Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528 VersionResp: firmware=7.4.59.0
+  Device reports old firmware (7.4.59.0) — upgrade in progress, 180s so far…
+[2m2026-09-23T11:18:06.870074Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528: connecting for management login…
+[2m2026-09-23T11:18:06.872485Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 ConnectAck ok
+[2m2026-09-23T11:18:06.873202Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528 management login authorised (ClientInfoAck ok)
+[2m2026-09-23T11:18:06.873866Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 NullCapResp ok
+[2m2026-09-23T11:18:06.874647Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 CapResp ok
+[2m2026-09-23T11:18:06.875621Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528 VersionResp: firmware=7.4.59.0
+  Device reports old firmware (7.4.59.0) — upgrade in progress, 195s so far…
+[2m2026-09-23T11:18:21.877939Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528: connecting for management login…
+[2m2026-09-23T11:18:21.884877Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 ConnectAck ok
+[2m2026-09-23T11:18:21.885828Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528 management login authorised (ClientInfoAck ok)
+[2m2026-09-23T11:18:21.886582Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 NullCapResp ok
+[2m2026-09-23T11:18:21.889145Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 CapResp ok
+[2m2026-09-23T11:18:21.892909Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528 VersionResp: firmware=7.4.59.0
+  Device reports old firmware (7.4.59.0) — upgrade in progress, 210s so far…
+[2m2026-09-23T11:18:36.894077Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528: connecting for management login…
+[2m2026-09-23T11:18:36.897754Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 ConnectAck ok
+[2m2026-09-23T11:18:36.898799Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528 management login authorised (ClientInfoAck ok)
+[2m2026-09-23T11:18:36.899541Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 NullCapResp ok
+[2m2026-09-23T11:18:36.900381Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 CapResp ok
+[2m2026-09-23T11:18:36.901324Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528 VersionResp: firmware=7.4.59.0
+  Device reports old firmware (7.4.59.0) — upgrade in progress, 225s so far…
+[2m2026-09-23T11:18:51.903173Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528: connecting for management login…
+[2m2026-09-23T11:18:51.906849Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 ConnectAck ok
+[2m2026-09-23T11:18:51.907941Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528 management login authorised (ClientInfoAck ok)
+[2m2026-09-23T11:18:51.908917Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 NullCapResp ok
+[2m2026-09-23T11:18:51.909899Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 CapResp ok
+[2m2026-09-23T11:18:51.911610Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528 VersionResp: firmware=7.4.59.0
+  Device reports old firmware (7.4.59.0) — upgrade in progress, 240s so far…
+[2m2026-09-23T11:19:06.913759Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528: connecting for management login…
+[2m2026-09-23T11:19:06.923199Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 ConnectAck ok
+[2m2026-09-23T11:19:06.924381Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528 management login authorised (ClientInfoAck ok)
+[2m2026-09-23T11:19:06.925487Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 NullCapResp ok
+[2m2026-09-23T11:19:06.927814Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 CapResp ok
+[2m2026-09-23T11:19:06.930089Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528 VersionResp: firmware=7.4.59.0
+  Device reports old firmware (7.4.59.0) — upgrade in progress, 255s so far…
+[2m2026-09-23T11:19:21.932310Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528: connecting for management login…
+[2m2026-09-23T11:19:21.939707Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 ConnectAck ok
+[2m2026-09-23T11:19:21.942214Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528 management login authorised (ClientInfoAck ok)
+[2m2026-09-23T11:19:21.944211Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 NullCapResp ok
+[2m2026-09-23T11:19:21.946321Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 CapResp ok
+[2m2026-09-23T11:19:21.948460Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528 VersionResp: firmware=7.4.59.0
+  Device reports old firmware (7.4.59.0) — upgrade in progress, 270s so far…
+[2m2026-09-23T11:19:36.950978Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528: connecting for management login…
+[2m2026-09-23T11:19:36.953325Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 ConnectAck ok
+[2m2026-09-23T11:19:36.954137Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528 management login authorised (ClientInfoAck ok)
+[2m2026-09-23T11:19:36.954813Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 NullCapResp ok
+[2m2026-09-23T11:19:36.955610Z[0m [34mDEBUG[0m [2mhdplayer::client[0m[2m:[0m Port 9528 CapResp ok
+[2m2026-09-23T11:19:36.956618Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528 VersionResp: firmware=7.4.59.0
+  Device reports old firmware (7.4.59.0) — upgrade in progress, 285s so far…

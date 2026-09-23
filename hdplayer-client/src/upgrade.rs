@@ -71,9 +71,11 @@ const CMD_CAP_A: u16 = 0x040a;
 const CMD_CAP_B: u16 = 0x040b;
 const CMD_UPGRADE_CTRL: u16 = 0x0055;
 const CMD_UPGRADE_STATUS: u16 = 0x0056;
-const CMD_FILE_TRANSFER_REQ: u16 = 0x0017;
+const CMD_FILE_TRANSFER_REQ: u16 = 0x0017; // OpenFileAsk
 const CMD_FILE_TRANSFER_ACK: u16 = 0x0018;
-const CMD_FILE_DATA_CHUNK: u16 = 0x0019;
+const CMD_FILE_DATA_CHUNK: u16 = 0x0019;    // FileContentAsk
+const CMD_CLOSE_FILE: u16 = 0x001b;         // CloseFileAsk — flushes/closes the written file
+const CMD_CLOSE_FILE_ACK: u16 = 0x001c;     // CloseFileAnswer (same code as heartbeat-ack)
 const CMD_FILE_DATA_ACK: u16 = 0x001a; // periodic ack from device during transfer
 const CMD_FILE_COMPLETE: u16 = 0x0060; // device signals file fully received
 const CMD_HEARTBEAT: u16 = 0x005f;     // PC ping
@@ -434,6 +436,12 @@ pub struct UpgradeOptions {
     pub poll_interval: Duration,
     /// Maximum time to wait for the device to report upgrade complete.
     pub poll_timeout: Duration,
+    /// Maximum time to wait for the device to finish `tar` extraction (on conn1)
+    /// before sending UpgradeExec.  The device is silent (TCP-ACK only) while
+    /// decompressing, so this is an upper bound; the wait ends early if the
+    /// device sends an UpgradeStatus (extraction done).  Large firmware needs the
+    /// full default; a small script package finishes almost instantly.
+    pub decompress_wait: Duration,
     /// Progress callback: receives (bytes_sent, total_bytes).
     pub progress: Option<Box<dyn Fn(u64, u64) + Send>>,
     /// Phase callback: called with a short human-readable status string at each
@@ -446,6 +454,7 @@ impl Default for UpgradeOptions {
         Self {
             poll_interval: Duration::from_secs(5),
             poll_timeout: Duration::from_secs(600),
+            decompress_wait: Duration::from_secs(600),
             progress: None,
             phase: None,
         }
@@ -556,6 +565,20 @@ pub async fn run_upgrade(addr: &str, port: u16, file_path: &Path, opts: UpgradeO
             );
         }
     }
+    // ── Phase 4b: CloseFile (0x001b) ─────────────────────────────────────────
+    // The device (BoxUpgrade: RecvOpenFileAsk 0x17 → RecvFileContentAsk 0x19 →
+    // RecvCloseFileAsk 0x1b) only *closes* the QFile — flushing it to disk — on
+    // CloseFileAsk.  Without this, /tmp/Box.tar.gz is left unflushed and the
+    // later `tar zxvf` extracts an incomplete/empty archive, so upgrade.sh is
+    // never created and nothing runs.  RecvCloseFileAsk requires a 4-byte payload.
+    info!("Sending CloseFile (0x001b) to flush the uploaded archive…");
+    conn.send(CMD_CLOSE_FILE, &0u32.to_le_bytes()).await?;
+    match tokio::time::timeout(Duration::from_secs(10), conn.recv_skip_acks()).await {
+        Ok(Ok((cmd, _))) => info!("CloseFile answered (cmd=0x{:04x})", cmd),
+        Ok(Err(e)) => bail!("conn closed after CloseFile: {}", e),
+        Err(_) => info!("no explicit CloseFile answer — continuing"),
+    }
+
     // ── Phase 5: confirm file received via heartbeat ─────────────────────────
     // PCAP: after last data chunk, client sends CMD_HEARTBEAT (0x005f) and
     // waits for CMD_HEARTBEAT_ACK (0x001c) before proceeding to mode=3.
@@ -616,7 +639,10 @@ pub async fn run_upgrade(addr: &str, port: u16, file_path: &Path, opts: UpgradeO
     info!(
         "Polling conn1 with mode=0 every 5 s — waiting up to 600 s for tar to finish…"
     );
-    let tar_deadline = mode2_sent_at + Duration::from_secs(600);
+    let tar_deadline = mode2_sent_at + opts.decompress_wait;
+    // Grace period before an UpgradeStatus is taken as "extraction finished" —
+    // avoids acting on a stale status echo right after mode=2.
+    let tar_grace = Duration::from_secs(8);
     'tar_wait: loop {
         if Instant::now() >= tar_deadline {
             info!(
@@ -641,6 +667,15 @@ pub async fn run_upgrade(addr: &str, port: u16, file_path: &Path, opts: UpgradeO
                         "conn1 tar-wait poll: cmd=0x{:04x} status={} elapsed={:.0}s",
                         cmd, sc, mode2_sent_at.elapsed().as_secs_f32(),
                     );
+                    // The device is silent while decompressing, so an UpgradeStatus
+                    // here means extraction has finished — stop waiting and exec now.
+                    if cmd == CMD_UPGRADE_STATUS && mode2_sent_at.elapsed() >= tar_grace {
+                        info!(
+                            "UpgradeStatus={} on conn1 after {:.0}s — extraction done, proceeding to UpgradeExec",
+                            sc, mode2_sent_at.elapsed().as_secs_f32(),
+                        );
+                        break 'tar_wait;
+                    }
                 }
                 Ok(Err(e)) => {
                     bail!("conn1 closed during tar wait: {} — BoxDaemon died unexpectedly", e);
@@ -650,44 +685,37 @@ pub async fn run_upgrade(addr: &str, port: u16, file_path: &Path, opts: UpgradeO
         }
     }
 
-    // ── Phase 7b: UpgradeExec on conn1 ───────────────────────────────────────
-    // UpgradeExec triggers upgrade.sh now that tar has finished extracting.
-    // We send it on the same connection (conn1) that delivered the file;
-    // BoxDaemon accepts UpgradeExec on conn1 because the upgrade session state
-    // is still in memory.  Our device returns UpgradeStatus (0x0056) instead
-    // of the PCAP-canonical ExecAck (0x0731) — we accept both.
+    // ── Phase 7b: UpgradeExec on a FRESH connection (conn2) ──────────────────
+    // Canonical flow (PCAP steps 19-22): once tar extraction finishes, a NEW TCP
+    // connection opens and does ConnectReq → ConnectAck → UpgradeExec →
+    // UpgradeExecAck (0x0731); only then does the device run upgrade.sh.
+    //
+    // Sending UpgradeExec on the file-transfer connection (conn1) does NOT
+    // trigger execution on 7.4.x firmware — a packet capture showed the device
+    // merely heartbeat-acks it (0x0060) and never runs the script.  So we open
+    // conn2 for the exec and keep conn1 open meanwhile so BoxDaemon retains the
+    // upgrade session state.
+    // NOTE (from decompiling the device's BoxUpgrade): UpgradeCtrl (0x0055) modes
+    // are 0=GetUpgradeResult, 1=LimitVersion, 2=Shell(run), 3=Unpackage(decompress).
+    // The Shell (mode=2) we already sent is what runs the upgrade command
+    // asynchronously (DisposeUpgradeShellAsk → vfork+system).  UpgradeExec (0x0730)
+    // only elicits an ExecAck; it is best-effort here.
     report_phase(&opts, "Triggering upgrade (UpgradeExec)…");
-    info!("Sending UpgradeExec (0x0730) on conn1…");
-    conn.send(CMD_UPGRADE_EXEC, &UPGRADE_EXEC_PARAM.to_le_bytes()).await?;
-
-    let exec_ack_deadline = Instant::now() + Duration::from_secs(120);
+    info!("Sending UpgradeExec (0x0730) on conn1 (best-effort)…");
+    let _ = conn.send(CMD_UPGRADE_EXEC, &UPGRADE_EXEC_PARAM.to_le_bytes()).await;
+    let exec_ack_deadline = Instant::now() + Duration::from_secs(15);
     loop {
         let remaining = exec_ack_deadline.saturating_duration_since(Instant::now());
-        if remaining.is_zero() {
-            bail!("No response to UpgradeExec within 120 s");
-        }
+        if remaining.is_zero() { break; }
         match tokio::time::timeout(remaining, conn.recv_skip_acks()).await {
-            Ok(Ok((CMD_UPGRADE_EXEC_ACK, _))) => {
-                info!("ExecAck (0x0731) received — upgrade executing");
-                break;
-            }
-            Ok(Ok((CMD_UPGRADE_STATUS, p))) => {
-                let sc = if p.len() >= 2 { u16::from_le_bytes([p[0], p[1]]) } else { 0 };
-                info!("UpgradeStatus={} after UpgradeExec — upgrade executing", sc);
-                break;
-            }
-            Ok(Ok((cmd, _))) => {
-                info!("cmd=0x{:04x} after UpgradeExec — skipping", cmd);
-            }
-            Ok(Err(e)) => {
-                info!("conn1 closed after UpgradeExec: {} — upgrade may be running", e);
-                break;
-            }
-            Err(_) => bail!("No response to UpgradeExec within 120 s"),
+            Ok(Ok((CMD_UPGRADE_EXEC_ACK, _))) => { info!("ExecAck (0x0731) received"); break; }
+            Ok(Ok((CMD_UPGRADE_STATUS, _))) => { info!("UpgradeStatus after UpgradeExec"); break; }
+            Ok(Ok((cmd, _))) => { debug!("cmd=0x{:04x} after UpgradeExec", cmd); }
+            Ok(Err(_)) => break,
+            Err(_) => break,
         }
     }
-
-    let mut conn2 = conn; // reuse conn1 as conn2 for Phases 8+9
+    let mut conn2 = conn; // reuse conn1 for the completion poll
 
     // ── Phase 8: post-exec handshake ──────────────────────────────────────────
     // PCAP steps 23-26: ClientInfoReq → ClientInfoAck → NullCapQuery → NullCapResp.

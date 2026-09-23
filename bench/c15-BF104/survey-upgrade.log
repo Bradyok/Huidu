@@ -1,0 +1,41 @@
+Firmware file version:  unknown
+[2m2026-09-23T11:04:19.996011Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528: connecting for management login…
+[2m2026-09-23T11:04:20.005088Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528 management login authorised (ClientInfoAck ok)
+[2m2026-09-23T11:04:20.007288Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528 VersionResp: firmware=7.4.59.0
+Device version before:  7.4.59.0
+Starting native firmware upgrade: packages/access-survey/access-survey_7.11.18.99.bin
+  Device: 192.168.1.249:9528
+
+  [Parsing firmware archive…]
+[2m2026-09-23T11:04:20.008880Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Parsing firmware archive…
+[2m2026-09-23T11:04:20.009961Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m BIN Decompress (killall stripped): tar zxvf %s -C %s
+[2m2026-09-23T11:04:20.010008Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m BIN Script: upgrade.sh
+[2m2026-09-23T11:04:20.010040Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Firmware payload: 2093 bytes (1 chunks) extracted from packages/access-survey/access-survey_7.11.18.99.bin
+
+  [Connecting…]
+[2m2026-09-23T11:04:20.010091Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Connecting…
+
+  [Handshaking…]
+[2m2026-09-23T11:04:20.013473Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Handshaking…
+
+  [Entering upgrade mode…]
+[2m2026-09-23T11:04:20.016402Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Entering upgrade mode…
+[2m2026-09-23T11:04:20.018185Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Device entered upgrade mode
+
+  [Transferring 0.0 MB…]
+[2m2026-09-23T11:04:20.021742Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Transferring 0.0 MB…
+  2093/2093 bytes (100.0%)  [2m2026-09-23T11:04:20.022002Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Transfer: 1/1 chunks (100.0%)
+
+  [Confirming file receipt…]
+[2m2026-09-23T11:04:20.022019Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Confirming file receipt…
+[2m2026-09-23T11:04:25.113597Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m File-complete / heartbeat-answer received — file transfer confirmed
+
+  [Starting decompression…]
+[2m2026-09-23T11:04:25.113689Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Starting decompression…
+[2m2026-09-23T11:04:25.113693Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Sending decompress command (mode=3) on conn1…
+[2m2026-09-23T11:04:25.115224Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Decompress command accepted (status 3)
+[2m2026-09-23T11:04:25.115397Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Upgrade script queued (mode=2)
+
+  [Waiting for extraction (up to 10 min)…]
+[2m2026-09-23T11:04:25.115428Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Waiting for extraction (up to 10 min)…
+[2m2026-09-23T11:04:25.115434Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Polling conn1 with mode=0 every 5 s — waiting up to 600 s for tar to finish…
