@@ -29,8 +29,6 @@ Upgrade Huidu.pcapng
 /products/*/v*/strings/
 /products/*/v*/decompiled/
 
-# Secrets: generated root passwords for access/upgrade packages — never commit
-*.password.txt
 
 # Built firmware upgrade packages (large; regenerate with packages/*/build.py)
 packages/**/*.bin

@@ -12,6 +12,9 @@ Format (verified: `rebuild` reproduces BoxPlayer_7_4_0_0.bin byte-identically):
   mkhdplayerbin.py rebuild PKG.bin -o OUT.bin            # re-emit from parsed parts (self-test)
   mkhdplayerbin.py build   DIR -o OUT.bin --version 7.99.0.1 [--devices C15,C35,C36] [--type BoxPlayer]
       DIR must contain the script (default upgrade.sh); it is packed with every file under DIR.
+  mkhdplayerbin.py zbin    PKG.bin [PKG2.bin ...] -o OUT.zbin
+      Wrap one or more .bin files as the outer .zbin (ZIP + fileInfo.xml) that the
+      canonical HDPlayer.exe loads. Entries are STORED (no compression), matching the stock .zbin.
 """
 
 import argparse
@@ -83,7 +86,28 @@ def main():
     b.add_argument("--script", default="upgrade.sh")
     b.add_argument("--type", action="append", dest="types")
     b.add_argument("--devices", default="C15,C35,C36")
+    z = sub.add_parser("zbin")
+    z.add_argument("bins", nargs="+")
+    z.add_argument("-o", "--output", required=True)
     a = ap.parse_args()
+
+    if a.cmd == "zbin":
+        import zipfile
+        from xml.sax.saxutils import escape as _esc
+        items = []
+        with zipfile.ZipFile(a.output, "w", zipfile.ZIP_STORED) as z:
+            for path in a.bins:
+                data = open(path, "rb").read()
+                if data[:8] != MAGIC:
+                    sys.exit(f"{path} is not an HDPLAYER .bin")
+                name = os.path.basename(path)
+                z.writestr(name, data)
+                items.append(f'    <file name="{_esc(name)}" size="{len(data)}"></file>')
+            info = '<?xml version="1.0" encoding="utf-8"?>\n<firmwareInfo>\n' + \
+                   "\n".join(items) + "\n</firmwareInfo>"
+            z.writestr("fileInfo.xml", info)
+        print(f"{a.output}: {len(a.bins)} bin(s) -> zbin for HDPlayer.exe")
+        return
 
     if a.cmd in ("info", "rebuild"):
         xml, payload = parse(open(a.pkg, "rb").read())

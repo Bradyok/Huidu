@@ -165,13 +165,29 @@ fn parse_bin(data: &[u8]) -> Result<FirmwareParsed> {
     if !data.starts_with(b"HDPLAYER") {
         bail!("Expected HDPLAYER magic in .bin file");
     }
-    if data.len() <= BIN_PAYLOAD_OFFSET {
+    if data.len() < 28 {
         bail!(".bin too short ({} bytes)", data.len());
     }
 
-    // XML metadata occupies bytes 18..678; search it for Decompress and Script tags.
-    let xml_end = BIN_PAYLOAD_OFFSET.min(data.len());
-    let xml_region = std::str::from_utf8(&data[18..xml_end]).unwrap_or("");
+    // Header: magic(8) + md5(16) + u32 LE xml_len(4) + xml + payload.
+    // Payload offset = 28 + xml_len (this is 678 for the stock BoxPlayer .bin,
+    // but varies for smaller packages we build, so compute it rather than
+    // hardcoding BIN_PAYLOAD_OFFSET).  Fall back to the legacy constant if the
+    // computed region doesn't look like the firmware XML.
+    let xml_len = u32::from_le_bytes([data[24], data[25], data[26], data[27]]) as usize;
+    let computed = 28usize.checked_add(xml_len).unwrap_or(usize::MAX);
+    let payload_offset = if computed <= data.len()
+        && std::str::from_utf8(&data[28..computed]).map_or(false, |s| s.contains("<FirmwareInfo"))
+    {
+        computed
+    } else if data.len() > BIN_PAYLOAD_OFFSET {
+        BIN_PAYLOAD_OFFSET
+    } else {
+        bail!(".bin header unrecognised (xml_len={xml_len}, size={})", data.len());
+    };
+
+    // Search the XML region for Decompress and Script tags.
+    let xml_region = std::str::from_utf8(&data[28..payload_offset]).unwrap_or("");
     let decompress_raw = xml_text(xml_region, "Decompress")
         .unwrap_or("killall -1 BoxDaemon; tar zxvf %s -C %s");
     // Strip any "killall ...;" prefix from the decompress command.
@@ -207,7 +223,7 @@ fn parse_bin(data: &[u8]) -> Result<FirmwareParsed> {
     // "HDPLAYER") causes `tar zxvf` on the device to fail immediately, which puts
     // the device back to idle state and causes UpgradeExec to be rejected.
     Ok(FirmwareParsed {
-        payload: data[BIN_PAYLOAD_OFFSET..].to_vec(),
+        payload: data[payload_offset..].to_vec(),
         decompress_cmd,
         script_name,
     })
