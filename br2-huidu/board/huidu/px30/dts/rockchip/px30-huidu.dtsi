@@ -13,7 +13,12 @@
 #include <dt-bindings/interrupt-controller/irq.h>
 #include <dt-bindings/leds/common.h>
 #include <dt-bindings/pinctrl/rockchip.h>
-#include "px30.dtsi"
+/*
+ * Buildroot copies custom DTS/DTSI to arch/arm64/boot/dts/ (not the rockchip/
+ * subdir), so the SoC dtsi is not a sibling. Reference it through the kernel's
+ * dtc include-prefixes (scripts/dtc/include-prefixes/arm64 -> arch/arm64/boot/dts).
+ */
+#include <arm64/rockchip/px30.dtsi>
 
 / {
 	aliases {
