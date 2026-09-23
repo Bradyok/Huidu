@@ -4,10 +4,11 @@
 //!   zbin-split unpack <IN.zbin> <DIR>              # decompose (writes DIR/manifest.json, tree/, meta/)
 //!   zbin-split pack   <DIR> <OUT.zbin> [--strict]  # rebuild (edits under tree/ allowed unless --strict)
 //!   zbin-split verify <DIR>                        # strict rebuild in memory; must match the original
-//!   zbin-split status <DIR>                        # list files under tree/ that differ from the original
+//!   zbin-split status <DIR>                        # list files under tree/ modified/removed/added
 //!
 //! Unedited, every layer is re-emitted bit-for-bit (the output is the original .zbin). When files
-//! under tree/ are edited, each enclosing layer regenerates its derived fields: DEFLATE is
+//! under tree/ are edited, deleted or added (a new file joins the innermost tar/zip whose
+//! directory contains it), each enclosing layer regenerates its derived fields: DEFLATE is
 //! recompressed, tar sizes/checksums, gzip CRC32/ISIZE, ZIP CRCs/sizes/offsets/central directory,
 //! the HDPLAYER/MAGICPLAYER MD5 and XML length, and the sizes in the .zbin's fileInfo.xml.
 //!
@@ -25,14 +26,16 @@ use md5::Md5;
 use preflate_rs::{ExitCode, PreflateConfig, PreflateStreamProcessor, RecreateStreamProcessor};
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
-use std::collections::HashSet;
+use std::collections::{BTreeMap, HashSet};
 use std::io::{Cursor, Read, Write};
 use std::path::{Path, PathBuf};
 use std::time::Instant;
 
 mod rawdeflate;
+#[cfg(test)]
+mod tests;
 
-const FORMAT: &str = "huidu-zbin-split/2";
+const FORMAT: &str = "huidu-zbin-split/3";
 /// GitHub warns at 50 MiB and rejects at 100 MiB; stay well under both.
 const PART_SIZE: usize = 45 * 1024 * 1024;
 /// Raw glue up to this size is stored inline (base64) in the manifest instead of meta/.
@@ -67,12 +70,14 @@ enum Node {
     TokenDeflate { size: usize, sha256: String, script: Blob, plain: Box<Node> },
     /// gzip member: header, DEFLATE body, trailer (CRC32 + ISIZE + anything after).
     Gzip { size: usize, sha256: String, header: Blob, body: Box<Node>, trailer: Blob },
-    /// tar archive: `parts` are TarMember nodes and raw glue (long-name records, dirs, links, end zeros).
-    Tar { size: usize, sha256: String, parts: Vec<Node> },
-    /// One tar member with data: 512-byte header, body, zero padding to 512.
+    /// tar archive: `parts` are TarMember nodes and raw records (dirs, links); `tail` is the
+    /// end-of-archive zeros. `dir` is its directory under tree/ (new files there become members).
+    Tar { size: usize, sha256: String, dir: String, parts: Vec<Node>, tail: Box<Node> },
+    /// One tar member with data: header (any GNU long-name/PAX records, then the 512-byte header
+    /// whose size/checksum get fixed up), body, zero padding to 512.
     TarMember { header: Blob, body: Box<Node> },
     /// ZIP archive, entries in file order; central-directory records in their own order.
-    Zip { size: usize, sha256: String, entries: Vec<ZipEntry>, cd: Vec<Blob>, eocd_at: usize, tail: Blob },
+    Zip { size: usize, sha256: String, dir: String, entries: Vec<ZipEntry>, cd: Vec<Blob>, eocd_at: usize, tail: Blob },
     /// Huidu package: `magic`, 16-byte MD5, u32 LE XML length, XML, payload.
     Vendor { size: usize, sha256: String, magic: String, md5: Blob, xml: Box<Node>, payload: Box<Node> },
 }
@@ -238,6 +243,12 @@ fn child_dir(logical: &str) -> String {
     if logical.is_empty() { String::new() } else { format!("{logical}.d/") }
 }
 
+/// Where `child_dir(logical)` lands under tree/ once sanitized (as `Ctx::reserve` does).
+fn tree_dir(logical: &str) -> String {
+    let d = child_dir(logical);
+    d.split(['/', '\\']).filter(|c| !c.is_empty() && *c != ".").map(|c| sanitize(c) + "/").collect()
+}
+
 /// Decompose `data` (logical name `logical`) into a node; never fails — worst case it is a leaf.
 fn decompose(ctx: &mut Ctx, data: &[u8], logical: &str, depth: u32) -> Node {
     if depth < MAX_DEPTH {
@@ -395,6 +406,7 @@ fn parse_zip(ctx: &mut Ctx, data: &[u8], logical: &str, depth: u32) -> Result<Op
     Ok(Some(Node::Zip {
         size: data.len(),
         sha256: sha_hex(data),
+        dir: tree_dir(logical),
         entries,
         cd,
         eocd_at: eocd - cd_end,
@@ -406,7 +418,8 @@ fn parse_zip(ctx: &mut Ctx, data: &[u8], logical: &str, depth: u32) -> Result<Op
 /// If neither preflate nor a token script reproduces it, the whole of `comp` becomes an opaque leaf.
 fn deflate_node(ctx: &mut Ctx, comp: &[u8], logical: &str, depth: u32) -> Result<(Node, usize)> {
     let t = Instant::now();
-    let (node_fn, plain, used): (Box<dyn FnOnce(Node) -> Node>, Vec<u8>, usize) = match preflate(comp) {
+    type Wrap = Box<dyn FnOnce(Node) -> Node>;
+    let (node_fn, plain, used): (Wrap, Vec<u8>, usize) = match preflate(comp) {
         Ok((chunks, plain, used)) => {
             let chunks: Vec<Chunk> = chunks
                 .into_iter()
@@ -549,6 +562,7 @@ fn parse_tar(ctx: &mut Ctx, data: &[u8], logical: &str, depth: u32) -> Result<Op
     let mut parts = Vec::new();
     let mut p = 0usize;
     let mut long_name: Option<String> = None;
+    let mut pending: Vec<u8> = Vec::new(); // GNU long-name / PAX records owned by the next member
     while p + 512 <= data.len() {
         let h = &data[p..p + 512];
         if h.iter().all(|&b| b == 0) {
@@ -575,7 +589,9 @@ fn parse_tar(ctx: &mut Ctx, data: &[u8], logical: &str, depth: u32) -> Result<Op
                 }
                 let name = long_name.take().unwrap_or(name);
                 let node = decompose(ctx, body, &format!("{dir}{name}"), depth + 1);
-                parts.push(Node::TarMember { header: ctx.blob(h), body: Box::new(node) });
+                pending.extend_from_slice(h);
+                parts.push(Node::TarMember { header: ctx.blob(&pending), body: Box::new(node) });
+                pending.clear();
             }
             b'L' | b'K' | b'x' | b'g' => {
                 if typ == b'L' {
@@ -585,17 +601,20 @@ fn parse_tar(ctx: &mut Ctx, data: &[u8], logical: &str, depth: u32) -> Result<Op
                         long_name = Some(path);
                     }
                 }
-                parts.push(ctx.raw(&data[p..pad_end]));
+                pending.extend_from_slice(&data[p..pad_end]);
             }
-            b'1'..=b'6' => parts.push(ctx.raw(h)),
+            b'1'..=b'6' => {
+                pending.extend_from_slice(h);
+                parts.push(ctx.raw(&pending));
+                pending.clear();
+            }
             t => bail!("unsupported tar member type {:?} @{p}", t as char),
         }
         p = pad_end;
     }
-    if p < data.len() {
-        parts.push(ctx.raw(&data[p..]));
-    }
-    Ok(Some(Node::Tar { size: data.len(), sha256: sha_hex(data), parts }))
+    ensure!(pending.is_empty(), "tar ends with a dangling long-name record");
+    let tail = Box::new(ctx.raw(&data[p..]));
+    Ok(Some(Node::Tar { size: data.len(), sha256: sha_hex(data), dir: tree_dir(logical), parts, tail }))
 }
 
 fn unpack(input: &Path, out: &Path) -> Result<()> {
@@ -674,8 +693,162 @@ struct Loader<'a> {
     dir: &'a Path,
     /// refuse any edit (verify / pack --strict)
     strict: bool,
+    /// new files under tree/, keyed by the (lowercased) tree dir of the tar/zip they join
+    additions: BTreeMap<String, Vec<String>>,
     edited: Vec<String>,
     warnings: Vec<String>,
+}
+
+/// Changes to tree/ relative to the manifest.
+#[derive(Default)]
+struct TreeChanges {
+    modified: Vec<String>,
+    removed: Vec<String>,
+    /// lowercased container tree dir -> new file paths (tree-relative)
+    added: BTreeMap<String, Vec<String>>,
+}
+
+/// OS/editor litter that must never be packed into firmware.
+fn is_junk(name: &str) -> bool {
+    let n = name.to_ascii_lowercase();
+    ["thumbs.db", "desktop.ini", ".ds_store"].contains(&n.as_str())
+        || n.ends_with('~')
+        || n.ends_with(".swp")
+        || n.ends_with(".orig")
+        || n.ends_with(".rej")
+}
+
+/// The on-disk leaf a (zip/tar) member body is, if it is a plain file (possibly under DEFLATE).
+fn leaf_of(n: &Node) -> Option<(&str, usize)> {
+    match n {
+        Node::File { path, parts, .. } => Some((path, *parts)),
+        Node::Deflate { plain, .. } | Node::TokenDeflate { plain, .. } => leaf_of(plain),
+        _ => None,
+    }
+}
+
+fn walk_nodes(n: &Node, f: &mut dyn FnMut(&Node)) {
+    f(n);
+    match n {
+        Node::Deflate { plain, .. } | Node::TokenDeflate { plain, .. } => walk_nodes(plain, f),
+        Node::Gzip { body, .. } | Node::TarMember { body, .. } => walk_nodes(body, f),
+        Node::Tar { parts, tail, .. } => {
+            parts.iter().for_each(|p| walk_nodes(p, f));
+            walk_nodes(tail, f)
+        }
+        Node::Zip { entries, .. } => entries.iter().for_each(|e| {
+            if let Some(b) = &e.before {
+                walk_nodes(b, f);
+            }
+            walk_nodes(&e.body, f)
+        }),
+        Node::Vendor { xml, payload, .. } => {
+            walk_nodes(xml, f);
+            walk_nodes(payload, f)
+        }
+        Node::File { .. } | Node::Raw { .. } | Node::Zeros { .. } => {}
+    }
+}
+
+/// `x.part007` -> `x`
+fn part_base(path: &str) -> Option<&str> {
+    let (base, suf) = path.rsplit_once(".part")?;
+    (suf.len() == 3 && suf.bytes().all(|b| b.is_ascii_digit())).then_some(base)
+}
+
+/// Compare tree/ against the manifest: modified, removed and newly added files.
+fn scan_tree(dir: &Path, root: &Node) -> Result<TreeChanges> {
+    // lowercased path -> (path, size, sha256, parts)
+    let mut known: BTreeMap<String, (String, usize, String, usize)> = BTreeMap::new();
+    let mut containers: Vec<String> = vec![];
+    walk_nodes(root, &mut |n| match n {
+        Node::File { path, size, sha256, parts } => {
+            known.insert(path.to_lowercase(), (path.clone(), *size, sha256.clone(), *parts));
+        }
+        Node::Tar { dir, .. } | Node::Zip { dir, .. } => containers.push(dir.to_lowercase()),
+        _ => {}
+    });
+    let tree = dir.join("tree");
+    let mut ch = TreeChanges::default();
+    let l = Loader { dir, strict: false, additions: BTreeMap::new(), edited: vec![], warnings: vec![] };
+    for (path, size, sha, parts) in known.values() {
+        let full = tree.join(path);
+        let exists = if *parts == 0 { full.exists() } else { part_path(&full, 0).exists() };
+        if !exists {
+            ch.removed.push(path.clone());
+            continue;
+        }
+        let d = l.read_parts(&full, *parts)?;
+        if d.len() != *size || sha_hex(&d) != *sha {
+            ch.modified.push(path.clone());
+        }
+    }
+    let mut stack = vec![tree.clone()];
+    while let Some(d) = stack.pop() {
+        for e in std::fs::read_dir(&d).with_context(|| format!("list {}", d.display()))? {
+            let e = e?;
+            let p = e.path();
+            if e.file_type()?.is_dir() {
+                stack.push(p);
+                continue;
+            }
+            let rel = p.strip_prefix(&tree)?.to_string_lossy().replace('\\', "/");
+            let lc = rel.to_lowercase();
+            if is_junk(&e.file_name().to_string_lossy()) || known.contains_key(&lc) {
+                continue;
+            }
+            if part_base(&lc).and_then(|b| known.get(b)).is_some_and(|k| k.3 > 0) {
+                continue;
+            }
+            let owner = containers.iter().filter(|c| lc.starts_with(c.as_str())).max_by_key(|c| c.len());
+            let owner = owner.ok_or_else(|| anyhow!("tree/{rel} is new but not inside any tar/zip directory"))?;
+            ch.added.entry(owner.clone()).or_default().push(rel);
+        }
+    }
+    for v in ch.added.values_mut() {
+        v.sort();
+    }
+    ch.modified.sort();
+    ch.removed.sort();
+    Ok(ch)
+}
+
+fn is_executable(name: &str, data: &[u8]) -> bool {
+    name.ends_with(".sh") || data.starts_with(b"\x7fELF") || data.starts_with(b"#!")
+}
+
+/// A new tar member modelled on `template` (an existing member's 512-byte header): same owner,
+/// group, mtime and format; a GNU long-name record first if the name exceeds 100 bytes.
+fn new_tar_member(template: &[u8], name: &str, data: &[u8]) -> Vec<u8> {
+    let mut out = Vec::new();
+    let nb = name.as_bytes();
+    let mut h = template.to_vec();
+    h[0..100].fill(0);
+    h[157..257].fill(0); // linkname
+    h[345..500].fill(0); // POSIX prefix / GNU atime, ctime, sparse map
+    if nb.len() > 100 {
+        let mut l = h.clone();
+        l[..13].copy_from_slice(b"././@LongLink");
+        l[100..108].copy_from_slice(b"0000644\0");
+        l[156] = b'L';
+        tar_set_size(&mut l, nb.len() + 1);
+        out.extend(l);
+        let mut body = nb.to_vec();
+        body.push(0);
+        body.resize(body.len().div_ceil(512) * 512, 0);
+        out.extend(body);
+        h[..100].copy_from_slice(&nb[..100]);
+    } else {
+        h[..nb.len()].copy_from_slice(nb);
+    }
+    let mode: &[u8] = if is_executable(name, data) { b"0000755\0" } else { b"0000644\0" };
+    h[100..108].copy_from_slice(mode);
+    h[156] = b'0';
+    tar_set_size(&mut h, data.len());
+    out.extend(h);
+    out.extend_from_slice(data);
+    out.resize(out.len().div_ceil(512) * 512, 0);
+    out
 }
 
 /// A rebuilt compressed stream: (compressed bytes, plaintext, changed-from-original).
@@ -766,12 +939,31 @@ impl Loader<'_> {
                 self.check("gzip", &out[start..], dirty, *size, sha256)?;
                 dirty
             }
-            Node::Tar { size, sha256, parts } => {
+            Node::Tar { size, sha256, dir, parts, tail } => {
                 let start = out.len();
                 let mut dirty = false;
+                let mut template = None;
                 for p in parts {
+                    if let Node::TarMember { header, body } = p {
+                        if template.is_none() {
+                            let h = self.blob(header)?;
+                            template = Some(h[h.len() - 512..].to_vec());
+                        }
+                        if self.deleted(body)? {
+                            dirty = true;
+                            continue;
+                        }
+                    }
                     dirty |= self.eval(p, out)?;
                 }
+                for rel in self.additions.remove(&dir.to_lowercase()).unwrap_or_default() {
+                    let t = template.as_ref().ok_or_else(|| anyhow!("cannot add {rel}: tar {dir} has no member to copy a header from"))?;
+                    let data = std::fs::read(self.dir.join("tree").join(&rel))?;
+                    out.extend(new_tar_member(t, &rel[dir.len()..], &data));
+                    self.edited.push(format!("{rel} (added)"));
+                    dirty = true;
+                }
+                dirty |= self.eval(tail, out)?;
                 self.check("tar", &out[start..], dirty, *size, sha256)?;
                 dirty
             }
@@ -780,7 +972,8 @@ impl Loader<'_> {
                 let mut data = Vec::new();
                 let dirty = self.eval(body, &mut data)?;
                 if dirty {
-                    tar_set_size(&mut h, data.len());
+                    let n = h.len();
+                    tar_set_size(&mut h[n - 512..], data.len());
                 }
                 out.extend(h);
                 let pad = data.len().div_ceil(512) * 512 - data.len();
@@ -788,7 +981,7 @@ impl Loader<'_> {
                 out.resize(out.len() + pad, 0);
                 dirty
             }
-            Node::Zip { size, sha256, entries, cd, eocd_at, tail } => self.eval_zip(out, entries, cd, *eocd_at, tail, *size, sha256)?,
+            Node::Zip { size, sha256, dir, entries, cd, eocd_at, tail } => self.eval_zip(out, dir, entries, cd, *eocd_at, tail, *size, sha256)?,
             Node::Vendor { size, sha256, magic, md5, xml, payload } => {
                 let start = out.len();
                 let mut x = Vec::new();
@@ -847,13 +1040,39 @@ impl Loader<'_> {
         }
     }
 
+    /// A member body that is a plain file which the user deleted from tree/.
+    fn deleted(&mut self, body: &Node) -> Result<bool> {
+        let Some((path, parts)) = leaf_of(body) else { return Ok(false) };
+        let full = self.dir.join("tree").join(path);
+        let gone = if parts == 0 { !full.exists() } else { !part_path(&full, 0).exists() };
+        if gone {
+            ensure!(!self.strict, "tree/{path} was deleted (strict mode)");
+            self.edited.push(format!("{path} (removed)"));
+        }
+        Ok(gone)
+    }
+
     #[allow(clippy::too_many_arguments)]
-    fn eval_zip(&mut self, out: &mut Vec<u8>, entries: &[ZipEntry], cd: &[Blob], eocd_at: usize, tail: &Blob, size: usize, sha256: &str) -> Result<bool> {
+    fn eval_zip(&mut self, out: &mut Vec<u8>, dir: &str, entries: &[ZipEntry], cd: &[Blob], eocd_at: usize, tail: &Blob, size: usize, sha256: &str) -> Result<bool> {
+        struct Built {
+            name: String,
+            comp: Vec<u8>,
+            plain: Vec<u8>,
+            dirty: bool,
+            method: u16,
+            /// index into `entries`, or None for a new file
+            src: Option<usize>,
+        }
         let start = out.len();
-        // Phase 1: rebuild every entry's data.
-        let mut built: Vec<(Vec<u8>, Vec<u8>, bool)> = Vec::with_capacity(entries.len());
-        for e in entries {
-            built.push(match e.method {
+        let mut dirty = false;
+        // Phase 1: rebuild every surviving entry's data; append new files.
+        let mut built: Vec<Built> = Vec::with_capacity(entries.len());
+        for (i, e) in entries.iter().enumerate() {
+            if self.deleted(&e.body)? {
+                dirty = true;
+                continue;
+            }
+            let (comp, plain, d) = match e.method {
                 8 => self.stream(&e.body)?,
                 0 => {
                     let mut d = Vec::new();
@@ -866,83 +1085,130 @@ impl Loader<'_> {
                     ensure!(!dirty, "{}: editing ZIP method-{m} entries is not supported", e.name);
                     (d, Vec::new(), false)
                 }
-            });
+            };
+            dirty |= d;
+            built.push(Built { name: e.name.clone(), comp, plain, dirty: d, method: e.method, src: Some(i) });
         }
-        let mut dirty = built.iter().any(|b| b.2);
+        for rel in self.additions.remove(&dir.to_lowercase()).unwrap_or_default() {
+            let plain = std::fs::read(self.dir.join("tree").join(&rel))?;
+            let name = rel[dir.len()..].to_string();
+            self.edited.push(format!("{rel} (added)"));
+            built.push(Built { name, comp: deflate_fresh(&plain)?, plain, dirty: true, method: 8, src: None });
+            dirty = true;
+        }
 
         // Huidu .zbin: fileInfo.xml lists every .bin with its size; keep it truthful.
         if dirty {
-            if let Some(fi) = entries.iter().position(|e| e.name == "fileInfo.xml") {
-                let mut xml = String::from_utf8(built[fi].1.clone()).context("fileInfo.xml is not UTF-8")?;
-                for (e, b) in entries.iter().zip(&built) {
-                    let key = format!("name=\"{}\" size=\"", e.name);
+            if let Some(fi) = built.iter().position(|b| b.name == "fileInfo.xml") {
+                let mut xml = String::from_utf8(built[fi].plain.clone()).context("fileInfo.xml is not UTF-8")?;
+                for b in &built {
+                    let key = format!("name=\"{}\" size=\"", b.name);
                     if let Some(p) = xml.find(&key) {
                         let vs = p + key.len();
                         let ve = vs + xml[vs..].find('"').ok_or_else(|| anyhow!("bad fileInfo.xml"))?;
-                        xml.replace_range(vs..ve, &b.1.len().to_string());
+                        xml.replace_range(vs..ve, &b.plain.len().to_string());
                     }
                 }
-                if xml.as_bytes() != built[fi].1 {
-                    let plain = xml.into_bytes();
-                    let comp = if entries[fi].method == 8 { deflate_fresh(&plain)? } else { plain.clone() };
-                    built[fi] = (comp, plain, true);
+                if xml.as_bytes() != built[fi].plain {
+                    let b = &mut built[fi];
+                    b.plain = xml.into_bytes();
+                    b.comp = if b.method == 8 { deflate_fresh(&b.plain)? } else { b.plain.clone() };
+                    b.dirty = true;
                     eprintln!("  updated fileInfo.xml sizes");
                 }
             }
         }
 
         // Phase 2: lay out local headers + data, then the central directory with fixed-up fields.
-        let mut offsets = vec![0usize; cd.len()];
-        for (e, (comp, plain, edirty)) in entries.iter().zip(&built) {
-            if let Some(b) = &e.before {
-                dirty |= self.eval(b, out)?;
+        let tmpl_local = self.blob(&entries[0].local)?;
+        let tmpl_cd = self.blob(&cd[entries[0].cd_index])?;
+        let mut cd_out: Vec<Option<Vec<u8>>> = vec![None; cd.len()];
+        let mut new_cd: Vec<Vec<u8>> = vec![];
+        let mut apk_signed = false;
+        for b in &built {
+            let crc = crc32(&b.plain) as usize;
+            let Some(i) = b.src else {
+                // New entry: sizes in the local header (no data descriptor), times/attrs from entry 0.
+                let off = out.len() - start;
+                let nb = b.name.as_bytes();
+                let flags: u16 = if b.name.is_ascii() { 0 } else { 0x800 };
+                let sizes: Vec<u8> = [crc, b.comp.len(), b.plain.len()].iter().flat_map(|&v| (v as u32).to_le_bytes()).collect();
+                let mut l = b"PK\x03\x04".to_vec();
+                l.extend(20u16.to_le_bytes());
+                l.extend(flags.to_le_bytes());
+                l.extend(8u16.to_le_bytes());
+                l.extend(&tmpl_local[10..14]);
+                l.extend(&sizes);
+                l.extend((nb.len() as u16).to_le_bytes());
+                l.extend(0u16.to_le_bytes());
+                l.extend(nb);
+                out.extend(&l);
+                out.extend(&b.comp);
+                let mut c = b"PK\x01\x02".to_vec();
+                c.extend(&tmpl_cd[4..6]); // version made by
+                c.extend(20u16.to_le_bytes());
+                c.extend(flags.to_le_bytes());
+                c.extend(8u16.to_le_bytes());
+                c.extend(&tmpl_cd[12..16]);
+                c.extend(&sizes);
+                c.extend((nb.len() as u16).to_le_bytes());
+                c.extend([0u8; 8]); // extra len, comment len, disk, internal attrs
+                c.extend(&tmpl_cd[38..42]); // external attrs
+                c.extend((off as u32).to_le_bytes());
+                c.extend(nb);
+                new_cd.push(c);
+                continue;
+            };
+            let e = &entries[i];
+            if let Some(bf) = &e.before {
+                dirty |= self.eval(bf, out)?;
             }
-            offsets[e.cd_index] = out.len() - start;
+            let off = out.len() - start;
             let mut local = self.blob(&e.local)?;
             let mut after = self.blob(&e.after)?;
-            if *edirty {
-                let (crc, flags) = (crc32(plain) as usize, u16le(&local, 6)?);
-                if flags & 8 == 0 {
+            apk_signed |= after.windows(16).any(|w| w == b"APK Sig Block 42");
+            if b.dirty {
+                if u16le(&local, 6)? & 8 == 0 {
                     put32(&mut local, 14, crc)?;
-                    put32(&mut local, 18, comp.len())?;
-                    put32(&mut local, 22, plain.len())?;
+                    put32(&mut local, 18, b.comp.len())?;
+                    put32(&mut local, 22, b.plain.len())?;
                 } else {
                     let d = if after.starts_with(b"PK\x07\x08") { 4 } else { 0 };
                     ensure!(after.len() >= d + 12, "{}: data descriptor missing", e.name);
                     put32(&mut after, d, crc)?;
-                    put32(&mut after, d + 4, comp.len())?;
-                    put32(&mut after, d + 8, plain.len())?;
-                }
-                if after.windows(16).any(|w| w == b"APK Sig Block 42") {
-                    self.warnings.push(format!("{}: APK signing block is now stale; re-sign this APK before installing", e.name));
+                    put32(&mut after, d + 4, b.comp.len())?;
+                    put32(&mut after, d + 8, b.plain.len())?;
                 }
             }
             out.extend(local);
-            out.extend(comp);
+            out.extend(&b.comp);
             out.extend(after);
-        }
-        let cd_start = out.len() - start;
-        let mut cd_edits = vec![None; cd.len()];
-        for (e, (comp, plain, edirty)) in entries.iter().zip(&built) {
-            if *edirty {
-                cd_edits[e.cd_index] = Some((crc32(plain) as usize, comp.len(), plain.len()));
-            }
-        }
-        for (i, rec) in cd.iter().enumerate() {
-            let mut r = self.blob(rec)?;
-            if let Some((crc, cs, us)) = cd_edits[i] {
+            let mut r = self.blob(&cd[e.cd_index])?;
+            if b.dirty {
                 put32(&mut r, 16, crc)?;
-                put32(&mut r, 20, cs)?;
-                put32(&mut r, 24, us)?;
+                put32(&mut r, 20, b.comp.len())?;
+                put32(&mut r, 24, b.plain.len())?;
             }
             if dirty {
-                put32(&mut r, 42, offsets[i])?;
+                put32(&mut r, 42, off)?;
             }
+            cd_out[e.cd_index] = Some(r);
+        }
+        if dirty && apk_signed {
+            self.warnings.push(format!("tree/{dir}: APK contents changed, its v2 signature is now stale; re-sign it before installing"));
+        }
+        let cd_start = out.len() - start;
+        let mut count = 0usize;
+        for r in cd_out.into_iter().flatten().chain(new_cd) {
             out.extend(r);
+            count += 1;
         }
         let cd_size = out.len() - start - cd_start;
         let mut t = self.blob(tail)?;
         if dirty {
+            ensure!(count <= 0xFFFF, "too many zip entries without zip64");
+            t[eocd_at + 8..eocd_at + 10].copy_from_slice(&(count as u16).to_le_bytes());
+            t[eocd_at + 10..eocd_at + 12].copy_from_slice(&(count as u16).to_le_bytes());
             put32(&mut t, eocd_at + 12, cd_size)?;
             put32(&mut t, eocd_at + 16, cd_start)?;
         }
@@ -958,12 +1224,18 @@ fn load_manifest(dir: &Path) -> Result<Manifest> {
     Ok(m)
 }
 
-/// Rebuild the image; returns (bytes, loader with the edit list and warnings).
+/// Rebuild the image; returns (bytes, list of edited/added/removed files).
 fn rebuild(dir: &Path, strict: bool) -> Result<(Vec<u8>, Vec<String>)> {
     let m = load_manifest(dir)?;
-    let mut l = Loader { dir, strict, edited: vec![], warnings: vec![] };
+    let changes = scan_tree(dir, &m.root)?;
+    if strict {
+        let n: usize = changes.added.values().map(Vec::len).sum();
+        ensure!(n == 0, "{n} file(s) added under tree/ (strict mode)");
+    }
+    let mut l = Loader { dir, strict, additions: changes.added, edited: vec![], warnings: vec![] };
     let mut out = Vec::with_capacity(m.size);
     let dirty = l.eval(&m.root, &mut out)?;
+    ensure!(l.additions.is_empty(), "internal: unplaced additions under {:?}", l.additions.keys());
     if !dirty {
         ensure!(out.len() == m.size && sha_hex(&out) == m.sha256, "final image sha256 mismatch");
     }
@@ -971,41 +1243,6 @@ fn rebuild(dir: &Path, strict: bool) -> Result<(Vec<u8>, Vec<String>)> {
         eprintln!("  warning: {w}");
     }
     Ok((out, l.edited))
-}
-
-fn status(dir: &Path) -> Result<Vec<String>> {
-    fn walk(n: &Node, f: &mut dyn FnMut(&str, usize, &str, usize)) {
-        match n {
-            Node::File { path, size, sha256, parts } => f(path, *size, sha256, *parts),
-            Node::Deflate { plain, .. } | Node::TokenDeflate { plain, .. } => walk(plain, f),
-            Node::Gzip { body, .. } | Node::TarMember { body, .. } => walk(body, f),
-            Node::Tar { parts, .. } => parts.iter().for_each(|p| walk(p, f)),
-            Node::Zip { entries, .. } => entries.iter().for_each(|e| {
-                if let Some(b) = &e.before {
-                    walk(b, f);
-                }
-                walk(&e.body, f)
-            }),
-            Node::Vendor { xml, payload, .. } => {
-                walk(xml, f);
-                walk(payload, f)
-            }
-            Node::Raw { .. } | Node::Zeros { .. } => {}
-        }
-    }
-    let m = load_manifest(dir)?;
-    let l = Loader { dir, strict: false, edited: vec![], warnings: vec![] };
-    let mut changed = vec![];
-    let mut err = None;
-    walk(&m.root, &mut |path, size, sha, parts| match l.read_parts(&dir.join("tree").join(path), parts) {
-        Ok(d) if d.len() == size && sha_hex(&d) == sha => {}
-        Ok(_) => changed.push(path.to_string()),
-        Err(e) => err = Some(e),
-    });
-    if let Some(e) = err {
-        return Err(e);
-    }
-    Ok(changed)
 }
 
 fn main() -> Result<()> {
@@ -1037,12 +1274,20 @@ fn main() -> Result<()> {
             Ok(())
         }
         Some("status") if args.len() == 3 => {
-            let changed = status(Path::new(&args[2]))?;
-            if changed.is_empty() {
+            let dir = Path::new(&args[2]);
+            let ch = scan_tree(dir, &load_manifest(dir)?.root)?;
+            let added: Vec<&String> = ch.added.values().flatten().collect();
+            if ch.modified.is_empty() && ch.removed.is_empty() && added.is_empty() {
                 eprintln!("clean: tree/ matches the original");
             }
-            for c in changed {
+            for c in &ch.modified {
                 println!("modified: tree/{c}");
+            }
+            for c in &ch.removed {
+                println!("removed:  tree/{c}");
+            }
+            for c in added {
+                println!("added:    tree/{c}");
             }
             Ok(())
         }

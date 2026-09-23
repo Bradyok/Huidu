@@ -1,5 +1,5 @@
 {
-  "format": "huidu-zbin-split/2",
+  "format": "huidu-zbin-split/3",
   "source_name": "BoxPlayer_V7.11.18.0_MagicPlayer_V2.12.8.0.zbin",
   "size": 346792414,
   "sha256": "cdbbd3d19d0c3c85b1a156dcb1fc10638521a1ca7bb55124f2f710085a7add4f",
@@ -7,6 +7,7 @@
     "kind": "zip",
     "size": 346792414,
     "sha256": "cdbbd3d19d0c3c85b1a156dcb1fc10638521a1ca7bb55124f2f710085a7add4f",
+    "dir": "",
     "entries": [
       {
         "name": "BoxPlayer_7_11_18_0.bin",
@@ -293,6 +294,7 @@
                   "kind": "tar",
                   "size": 331898880,
                   "sha256": "36c93b2bbe3064e521a409ee9f4c62eb0a784071e1a92eeda1786f2445a93c67",
+                  "dir": "BoxPlayer_7_11_18_0.bin.d/payload.d/",
                   "parts": [
                     {
                       "kind": "tar_member",
@@ -365,6 +367,7 @@
                             "kind": "tar",
                             "size": 104478720,
                             "sha256": "112279d0a3328238c7de8e4c7192356db9572821db6272c561d3c6ae87198a5c",
+                            "dir": "BoxPlayer_7_11_18_0.bin.d/payload.d/Android_rk3188_BoxPlayer.tar.d/",
                             "parts": [
                               {
                                 "kind": "raw",
@@ -909,6 +912,7 @@
                                   "kind": "zip",
                                   "size": 7577488,
                                   "sha256": "b54758057c2086e896b8e6c4dc7bf77916dd7154a58e1bd8af9f319f82255b0f",
+                                  "dir": "BoxPlayer_7_11_18_0.bin.d/payload.d/Android_rk3188_BoxPlayer.tar.d/cn.huidu.BoxSDKLoader.apk.d/",
                                   "entries": [
                                     {
                                       "name": "classes.dex",
@@ -3286,12 +3290,12 @@
                                   "size": 5420,
                                   "sha256": "d86ebbd8f22ede776ff54948da78f4ca8af5996dd44e3fd5c2f442877c1611d3"
                                 }
-                              },
-                              {
-                                "kind": "zeros",
-                                "len": 1536
                               }
-                            ]
+                            ],
+                            "tail": {
+                              "kind": "zeros",
+                              "len": 1536
+                            }
                           }
                         },
                         "trailer": {
@@ -3328,6 +3332,7 @@
                             "kind": "tar",
                             "size": 14407680,
                             "sha256": "2beb9ffb09d05745bef6f51068f5f48bd24fcb27e836290c980d9b15ad86d2db",
+                            "dir": "BoxPlayer_7_11_18_0.bin.d/payload.d/PX30_BoxPlayerD18.tar.d/",
                             "parts": [
                               {
                                 "kind": "raw",
@@ -4396,12 +4401,12 @@
                                   "size": 32364,
                                   "sha256": "551a30f6f7c0901e6623c0138325cffe38c2d42c2c2fe2d02ef83aa96136cf54"
                                 }
-                              },
-                              {
-                                "kind": "zeros",
-                                "len": 5632
                               }
-                            ]
+                            ],
+                            "tail": {
+                              "kind": "zeros",
+                              "len": 5632
+                            }
                           }
                         },
                         "trailer": {
@@ -4508,6 +4513,7 @@
                             "kind": "tar",
                             "size": 184023040,
                             "sha256": "a0d7226d623652feda4c8bac715ec3c392d2b570a3f129a52bc66428188f7e1b",
+                            "dir": "BoxPlayer_7_11_18_0.bin.d/payload.d/PX30_BoxPlayerD15_RC.tar.d/",
                             "parts": [
                               {
                                 "kind": "raw",
@@ -7993,6 +7999,7 @@
                                       "kind": "tar",
                                       "size": 1730560,
                                       "sha256": "63be042c4311b7a4116366211d16fb07c34563a3563ec2f75976a41f12470474",
+                                      "dir": "BoxPlayer_7_11_18_0.bin.d/payload.d/PX30_BoxPlayerD15_RC.tar.d/ssl.tar.d/",
                                       "parts": [
                                         {
                                           "kind": "raw",
@@ -14377,12 +14384,12 @@
                                             "size": 1517,
                                             "sha256": "a00b8aa918457f5e7e58457b5e2f80d640fa77cc290572aaab1ae7b4734a9528"
                                           }
-                                        },
-                                        {
-                                          "kind": "zeros",
-                                          "len": 3584
                                         }
-                                      ]
+                                      ],
+                                      "tail": {
+                                        "kind": "zeros",
+                                        "len": 3584
+                                      }
                                     }
                                   },
                                   "trailer": {
@@ -14785,12 +14792,12 @@
                                   "size": 8,
                                   "sha256": "e3da04d35fdc7024897b1983f30e8f8925f17ddcd0a21d21fd43ae9ba96e4a6a"
                                 }
-                              },
-                              {
-                                "kind": "zeros",
-                                "len": 4096
                               }
-                            ]
+                            ],
+                            "tail": {
+                              "kind": "zeros",
+                              "len": 4096
+                            }
                           }
                         },
                         "trailer": {
@@ -14928,6 +14935,7 @@
                             "kind": "tar",
                             "size": 182241280,
                             "sha256": "d0be38b4d3413f7c2c4c62aa7d658c6d9874c7525f3fd9a23fc399da49b5d239",
+                            "dir": "BoxPlayer_7_11_18_0.bin.d/payload.d/Android_rk3288_BoxPlayer.tar.d/",
                             "parts": [
                               {
                                 "kind": "raw",
@@ -15442,6 +15450,7 @@
                                   "kind": "zip",
                                   "size": 7587766,
                                   "sha256": "1b47ee5cb209729a68e902e1eebc1815c96593e2dc0ace1b08e8310bdde8be6a",
+                                  "dir": "BoxPlayer_7_11_18_0.bin.d/payload.d/Android_rk3288_BoxPlayer.tar.d/cn.huidu.BoxPlayerLoader.apk.d/",
                                   "entries": [
                                     {
                                       "name": "assets/--Added-by-androiddeployqt--/qt_cache_pregenerated_file_list",
@@ -16431,6 +16440,7 @@
                                   "kind": "zip",
                                   "size": 7577488,
                                   "sha256": "b54758057c2086e896b8e6c4dc7bf77916dd7154a58e1bd8af9f319f82255b0f",
+                                  "dir": "BoxPlayer_7_11_18_0.bin.d/payload.d/Android_rk3288_BoxPlayer.tar.d/cn.huidu.BoxSDKLoader.apk.d/",
                                   "entries": [
                                     {
                                       "name": "classes.dex",
@@ -17384,6 +17394,7 @@
                                   "kind": "zip",
                                   "size": 87933927,
                                   "sha256": "c97c01af14a75fb2d4dde397f29ba25f1b20a57b9096ddd936e2486357c74686",
+                                  "dir": "BoxPlayer_7_11_18_0.bin.d/payload.d/Android_rk3288_BoxPlayer.tar.d/com.google.android.webview.apk.d/",
                                   "entries": [
                                     {
                                       "name": "AndroidManifest.xml",
@@ -67577,6 +67588,7 @@
                                   "kind": "zip",
                                   "size": 25947315,
                                   "sha256": "726f663bd7c10b32b43ae1052a9091f038620bea74d6774f486b3c883841f53d",
+                                  "dir": "BoxPlayer_7_11_18_0.bin.d/payload.d/Android_rk3288_BoxPlayer.tar.d/framework-res.apk.d/",
                                   "entries": [
                                     {
                                       "name": "assets/images/android-logo-mask.png",
@@ -221528,12 +221540,12 @@
                                   "size": 5428,
                                   "sha256": "8c931fc8049b1962d61187e9ddc75e31b0826ea4ca08167b43d74c525fd035d1"
                                 }
-                              },
-                              {
-                                "kind": "zeros",
-                                "len": 7168
                               }
-                            ]
+                            ],
+                            "tail": {
+                              "kind": "zeros",
+                              "len": 7168
+                            }
                           }
                         },
                         "trailer": {
@@ -221584,6 +221596,7 @@
                             "kind": "tar",
                             "size": 55961600,
                             "sha256": "e8d12b6e5b1f7101c0c7365d08db460c31add99e0bfd993588ec9814ae07f805",
+                            "dir": "BoxPlayer_7_11_18_0.bin.d/payload.d/PX30_BoxPlayerD15.tar.d/",
                             "parts": [
                               {
                                 "kind": "raw",
@@ -225009,6 +225022,7 @@
                                       "kind": "tar",
                                       "size": 1730560,
                                       "sha256": "d697556fda668efd122200adff6ed827a8e9454f8ee366b2e9c0ec6355083606",
+                                      "dir": "BoxPlayer_7_11_18_0.bin.d/payload.d/PX30_BoxPlayerD15.tar.d/ssl.tar.d/",
                                       "parts": [
                                         {
                                           "kind": "raw",
@@ -231393,12 +231407,12 @@
                                             "size": 1517,
                                             "sha256": "a00b8aa918457f5e7e58457b5e2f80d640fa77cc290572aaab1ae7b4734a9528"
                                           }
-                                        },
-                                        {
-                                          "kind": "zeros",
-                                          "len": 3584
                                         }
-                                      ]
+                                      ],
+                                      "tail": {
+                                        "kind": "zeros",
+                                        "len": 3584
+                                      }
                                     }
                                   },
                                   "trailer": {
@@ -231651,12 +231665,12 @@
                                   "size": 2940,
                                   "sha256": "3988cfe0e87f62ff567f38bc0967f3b834035b501ae0474fcf2d3b8b48a8c0bb"
                                 }
-                              },
-                              {
-                                "kind": "zeros",
-                                "len": 4096
                               }
-                            ]
+                            ],
+                            "tail": {
+                              "kind": "zeros",
+                              "len": 4096
+                            }
                           }
                         },
                         "trailer": {
@@ -231707,6 +231721,7 @@
                             "kind": "tar",
                             "size": 44871680,
                             "sha256": "14260b0ecde2c864c95972fd2659b1f3bce490da4b8df280be14a9e9912d9efa",
+                            "dir": "BoxPlayer_7_11_18_0.bin.d/payload.d/Android_rk3288_9_BoxPlayer.tar.d/",
                             "parts": [
                               {
                                 "kind": "tar_member",
@@ -232221,6 +232236,7 @@
                                   "kind": "zip",
                                   "size": 7587766,
                                   "sha256": "1b47ee5cb209729a68e902e1eebc1815c96593e2dc0ace1b08e8310bdde8be6a",
+                                  "dir": "BoxPlayer_7_11_18_0.bin.d/payload.d/Android_rk3288_9_BoxPlayer.tar.d/cn.huidu.BoxPlayerLoader.apk.d/",
                                   "entries": [
                                     {
                                       "name": "assets/--Added-by-androiddeployqt--/qt_cache_pregenerated_file_list",
@@ -234088,12 +234104,12 @@
                                   "size": 2903,
                                   "sha256": "63b1a0f58388da5321c0cb6ab5c0382d7e3912ad40ad776c3f976726423eb36b"
                                 }
-                              },
-                              {
-                                "kind": "zeros",
-                                "len": 7168
                               }
-                            ]
+                            ],
+                            "tail": {
+                              "kind": "zeros",
+                              "len": 7168
+                            }
                           }
                         },
                         "trailer": {
@@ -234124,12 +234140,12 @@
                         "size": 2026,
                         "sha256": "0509b067aff629976d952e758b279c0e417d6a468cd96b211004207a55a237e0"
                       }
-                    },
-                    {
-                      "kind": "zeros",
-                      "len": 7168
                     }
-                  ]
+                  ],
+                  "tail": {
+                    "kind": "zeros",
+                    "len": 7168
+                  }
                 }
               },
               "trailer": {
@@ -234175,6 +234191,7 @@
               "kind": "zip",
               "size": 16605347,
               "sha256": "4c1fb0763171f771052256985e5ba3c1cadf7d39c268eba44faaa27bc583dd82",
+              "dir": "MagicPlayer_V2.12.8.0.bin.d/payload.d/",
               "entries": [
                 {
                   "name": "cn.huidu.device.api",
@@ -234296,6 +234313,7 @@
                       "kind": "zip",
                       "size": 14538235,
                       "sha256": "80b335be664b7370a1560d4ecdf2828c765d0ce4dcb937bbe804020fda069cfd",
+                      "dir": "MagicPlayer_V2.12.8.0.bin.d/payload.d/MagicPlayer.apk.d/",
                       "entries": [
                         {
                           "name": "META-INF/com/android/build/gradle/app-metadata.properties",
@@ -243665,6 +243683,7 @@
                               "kind": "zip",
                               "size": 2991022,
                               "sha256": "06db19c2dab62fa945d19ad43632b8f61ca8ea64b60fdbc7678d3212e124d179",
+                              "dir": "MagicPlayer_V2.12.8.0.bin.d/payload.d/MagicPlayer.apk.d/assets/services.apk.d/",
                               "entries": [
                                 {
                                   "name": "META-INF/com/android/build/gradle/app-metadata.properties",

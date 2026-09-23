@@ -35,7 +35,7 @@ replaces the whole rootfs, so treat it as a heavy operation.
 
 ## Making a modified image
 
-Edit files under `tree/`, check them with `zbin-split status <dir>`, then run `zbin-split pack <dir> out.zbin`.
+Edit, delete or add files under `tree/`, check them with `zbin-split status <dir>`, then run `zbin-split pack <dir> out.zbin`.
 Every CRC, size, tar checksum and MD5 is regenerated. See the
 [tool README](../../tools/zbin-split/README.md#editing-firmware). To get back to stock, `git checkout` the tree.
 
