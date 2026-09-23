@@ -15,6 +15,7 @@ licence, keys). Plan and rationale: [`../../CLONE_AND_RECOVERY.md`](../../CLONE_
 
 | Script | What it does | Destructive? |
 |---|---|---|
+| `cunit_dump.sh` | One-shot hardware/identity dump: resolves the `DRIVER_ENABLEMENT.md` unknowns (DTB/panel timing, GPIO bases, Wi-Fi chip, custom nodes, fpga.img, loaders) into a tarball + `FINDINGS.md` | no (read only) |
 | `rk_readback.sh` | USB/maskrom read via `rkdeveloptool`: whole `golden.img` + per-partition `<name>.img` + `partition-map.json` | no (read only) |
 | `dd_readback.sh` | Network read over ssh: `dd` each `/dev/block/by-name/*` gzip'd + `partition-map.json` | no (read only) |
 | `identity_backup.sh` | Save one unit's per-unit files (+ optional `oem`) with a manifest + sha256 | no (read only) |
