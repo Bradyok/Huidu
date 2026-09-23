@@ -1,0 +1,205 @@
+# plugins_libtable_plugin.so dynamic exports (demangled)
+B __bss_end__
+B __bss_start
+B __bss_start__
+B __end__
+B _bss_end__
+B _end
+D Hd::HTablePlugin::HTableNode::staticMetaObject
+D Hd::HTablePlugin::HTablePlugin::staticMetaObject
+D Hd::HTablePlugin::HTableRender::staticMetaObject
+D TableData::staticMetaObject
+D _edata
+T CellData::ExportData() const
+T CellData::ExtractData(QVariant const&)
+T CellData::PlaceData(QByteArray const&)
+T CellData::RestoreData(QByteArray const&)
+T Hd::HTablePlugin::HTableNode::AllFileExists()
+T Hd::HTablePlugin::HTableNode::CalcCellSize(int, int) const
+T Hd::HTablePlugin::HTableNode::CalcHeight(int) const
+T Hd::HTablePlugin::HTableNode::CalcWidth(int) const
+T Hd::HTablePlugin::HTableNode::ClearCellMerger(int, int, int, int)
+T Hd::HTablePlugin::HTableNode::Duration()
+T Hd::HTablePlugin::HTableNode::FindMergerMainCell(int, int)
+T Hd::HTablePlugin::HTableNode::GenerateImage()
+T Hd::HTablePlugin::HTableNode::GetSourceFilePath()
+T Hd::HTablePlugin::HTableNode::HTableNode()
+T Hd::HTablePlugin::HTableNode::HTableNode()
+T Hd::HTablePlugin::HTableNode::ImageCount()
+T Hd::HTablePlugin::HTableNode::InitData()
+T Hd::HTablePlugin::HTableNode::NodeAlready(int)
+T Hd::HTablePlugin::HTableNode::NoticeUpdate()
+T Hd::HTablePlugin::HTableNode::ON_SizeChange(QSize)
+T Hd::HTablePlugin::HTableNode::PageDuration()
+T Hd::HTablePlugin::HTableNode::ParseFileTag(QDomElement const&, QList<Hd::FileInfo>&, QVariant&)
+T Hd::HTablePlugin::HTableNode::RestoreData()
+T Hd::HTablePlugin::HTableNode::SetSourceFilePath(QStringList const&)
+T Hd::HTablePlugin::HTableNode::SyncCell()
+T Hd::HTablePlugin::HTableNode::UpdateCellNode(QDomElement const&, QList<Hd::FileInfo>&)
+T Hd::HTablePlugin::HTableNode::UpdateFont(QDomElement const&, int, int)
+T Hd::HTablePlugin::HTableNode::UpdateMerger(QDomElement const&)
+T Hd::HTablePlugin::HTableNode::UpdateNode(QDomElement, QList<Hd::FileInfo>&)
+T Hd::HTablePlugin::HTableNode::metaObject() const
+T Hd::HTablePlugin::HTableNode::qt_metacall(QMetaObject::Call, int, void**)
+T Hd::HTablePlugin::HTableNode::qt_metacast(char const*)
+T Hd::HTablePlugin::HTableNode::~HTableNode()
+T Hd::HTablePlugin::HTableNode::~HTableNode()
+T Hd::HTablePlugin::HTableNode::~HTableNode()
+T Hd::HTablePlugin::HTablePlugin::Create()
+T Hd::HTablePlugin::HTablePlugin::CreateAreaRender(Hd::HNode*)
+T Hd::HTablePlugin::HTablePlugin::HTablePlugin()
+T Hd::HTablePlugin::HTablePlugin::HTablePlugin()
+T Hd::HTablePlugin::HTablePlugin::metaObject() const
+T Hd::HTablePlugin::HTablePlugin::qt_metacall(QMetaObject::Call, int, void**)
+T Hd::HTablePlugin::HTablePlugin::qt_metacast(char const*)
+T Hd::HTablePlugin::HTableRender::GetDuration(int, int, EffectType, int)
+T Hd::HTablePlugin::HTableRender::GetImage(int)
+T Hd::HTablePlugin::HTableRender::HTableRender(Hd::HTablePlugin::HTableNode*)
+T Hd::HTablePlugin::HTableRender::HTableRender(Hd::HTablePlugin::HTableNode*)
+T Hd::HTablePlugin::HTableRender::InitPlayer(sdk::HContentNode*, HAreaSession*)
+T Hd::HTablePlugin::HTableRender::Pause()
+T Hd::HTablePlugin::HTableRender::PlayNext()
+T Hd::HTablePlugin::HTableRender::Start(sdk::HContentNode*, HAreaSession*, int)
+T Hd::HTablePlugin::HTableRender::Start(unsigned int, long long)
+T Hd::HTablePlugin::HTableRender::Stop()
+T Hd::HTablePlugin::HTableRender::UpdateTicker(QDateTime const&)
+T Hd::HTablePlugin::HTableRender::metaObject() const
+T Hd::HTablePlugin::HTableRender::qt_metacall(QMetaObject::Call, int, void**)
+T Hd::HTablePlugin::HTableRender::qt_metacast(char const*)
+T Hd::HTablePlugin::HTableRender::renderState()
+T Hd::HTablePlugin::HTableRender::~HTableRender()
+T Hd::HTablePlugin::HTableRender::~HTableRender()
+T Hd::HTablePlugin::HTableRender::~HTableRender()
+T TableData::Cell(int, int)
+T TableData::ExportData() const
+T TableData::Line(int)
+T TableData::RestoreData(QByteArray const&)
+T TableData::UpdateDataed() const
+T TableData::metaObject() const
+T TableData::qt_metacall(QMetaObject::Call, int, void**)
+T TableData::qt_metacast(char const*)
+T _fini
+T _init
+T non-virtual thunk to Hd::HTablePlugin::HTablePlugin::Create()
+T non-virtual thunk to Hd::HTablePlugin::HTablePlugin::CreateAreaRender(Hd::HNode*)
+T qt_plugin_instance
+T qt_plugin_query_metadata
+T virtual thunk to Hd::HTablePlugin::HTableNode::~HTableNode()
+T virtual thunk to Hd::HTablePlugin::HTableNode::~HTableNode()
+V VTT for Hd::HTablePlugin::HTableNode
+V typeinfo for Hd::HTablePlugin::HTableNode
+V typeinfo for Hd::HTablePlugin::HTablePlugin
+V typeinfo for Hd::HTablePlugin::HTableRender
+V typeinfo for Hd::IContentRender
+V typeinfo for Hd::INodePlugin
+V typeinfo for TableData
+V typeinfo name for Hd::HTablePlugin::HTableNode
+V typeinfo name for Hd::HTablePlugin::HTablePlugin
+V typeinfo name for Hd::HTablePlugin::HTableRender
+V typeinfo name for Hd::IContentRender
+V typeinfo name for Hd::INodePlugin
+V typeinfo name for ImageCell
+V typeinfo name for MergerCell
+V typeinfo name for TableData
+V vtable for Hd::HTablePlugin::HTableNode
+V vtable for Hd::HTablePlugin::HTablePlugin
+V vtable for Hd::HTablePlugin::HTableRender
+V vtable for Hd::IContentRender
+V vtable for TableData
+W CellData::~CellData()
+W CellData::~CellData()
+W Hd::HContentNode::Editable()
+W Hd::HContentNode::GetSDKTempFile(QList<QFileInfo>&)
+W Hd::HContentNode::TranscodeFinish()
+W Hd::HContentNode::UseInternalBorder()
+W Hd::HData::Level()
+W Hd::HData::Type()
+W Hd::HEffectNode::~HEffectNode()
+W Hd::HNode::InitData()
+W Hd::HNode::NodeMatch(QDomElement&)
+W Hd::HNode::ReloadAttrbute(Hd::HNode*)
+W Hd::HNode::SDKInitData(void*)
+W Hd::HTablePlugin::HTableNode::NodeMatch(QDomElement&)
+W Hd::HTablePlugin::HTableNode::Type()
+W Hd::HTablePlugin::HTablePlugin::PluginMatch(QDomElement&)
+W Hd::HTablePlugin::HTablePlugin::level()
+W Hd::HTablePlugin::HTablePlugin::type()
+W Hd::HTablePlugin::HTablePlugin::~HTablePlugin()
+W Hd::HTablePlugin::HTablePlugin::~HTablePlugin()
+W Hd::HTablePlugin::HTablePlugin::~HTablePlugin()
+W Hd::HTablePlugin::HTableRender::Remove()
+W Hd::IContentRender::AreaFinish()
+W Hd::IContentRender::PrepareData()
+W Hd::IContentRender::Restart()
+W Hd::IContentRender::Seek(long long)
+W Hd::IContentRender::SetVideoNotClear(bool)
+W Hd::IContentRender::Start(sdk::HContentNode*, HAreaSession*)
+W Hd::IContentRender::Start(sdk::HContentNode*, HAreaSession*, int)
+W Hd::IContentRender::UpdateTicker(QDateTime const&)
+W Hd::INodePlugin::AddFile(Hd::HModel*, QModelIndex&, int)
+W Hd::INodePlugin::AddFileBasisSuffix(QString, Hd::HModel*, QModelIndex&, int)
+W Hd::INodePlugin::AddFileBasisSupport(QString, Hd::HModel*, QModelIndex&, int)
+W Hd::INodePlugin::AppQuit()
+W Hd::INodePlugin::ConvertVersion(Hd::HNode*, Hd::HVersion&)
+W Hd::INodePlugin::Create(QString, Hd::HNode*)
+W Hd::INodePlugin::CreateFrameRender(Hd::HNode*)
+W Hd::INodePlugin::D3DLoseDevice()
+W Hd::INodePlugin::NewFile(Hd::HModel*, QModelIndex&, int)
+W Hd::INodePlugin::OverrideNewFile()
+W Hd::INodePlugin::SuportController(QString&)
+W Hd::INodePlugin::SupportSuffix()
+W Hd::INodePlugin::icon()
+W Hd::INodePlugin::name()
+W QByteArray::~QByteArray()
+W QByteArray::~QByteArray()
+W QList<Hd::FileInfo>::append(Hd::FileInfo const&)
+W QList<Hd::FileInfo>::detach_helper_grow(int, int)
+W QList<QByteArray>::~QList()
+W QList<QByteArray>::~QList()
+W QList<QImage>::append(QImage const&)
+W QList<QImage>::clear()
+W QList<QImage>::detach_helper_grow(int, int)
+W QList<QImage>::~QList()
+W QList<QImage>::~QList()
+W QList<QString>::QList(QList<QString> const&)
+W QList<QString>::QList(QList<QString> const&)
+W QList<QString>::detach_helper_grow(int, int)
+W QList<QString>::~QList()
+W QList<QString>::~QList()
+W QMapNode<QString, unsigned int>::destroySubTree()
+W QScopedPointerDeleter<SessionParameter>::cleanup(SessionParameter*)
+W QSharedPointer<TableData>::deref(QtSharedPointer::ExternalRefCountData*)
+W QString::QString(char const*)
+W QString::QString(char const*)
+W QString::operator==(char const*) const
+W QString::~QString()
+W QString::~QString()
+W QVector<CellData>::QVector(QVector<CellData> const&)
+W QVector<CellData>::QVector(QVector<CellData> const&)
+W QVector<CellData>::operator+=(QVector<CellData> const&)
+W QVector<CellData>::reallocData(int, int, QFlags<QArrayData::AllocationOption>)
+W QVector<CellData>::~QVector()
+W QVector<CellData>::~QVector()
+W QVector<QVector<CellData> >::QVector(QVector<QVector<CellData> > const&)
+W QVector<QVector<CellData> >::QVector(QVector<QVector<CellData> > const&)
+W QVector<QVector<CellData> >::operator+=(QVector<QVector<CellData> > const&)
+W QVector<QVector<CellData> >::reallocData(int, int, QFlags<QArrayData::AllocationOption>)
+W QtMetaTypePrivate::QMetaTypeFunctionHelper<ImageCell, true>::Construct(void*, void const*)
+W QtMetaTypePrivate::QMetaTypeFunctionHelper<ImageCell, true>::Destruct(void*)
+W QtMetaTypePrivate::QMetaTypeFunctionHelper<MergerCell, true>::Construct(void*, void const*)
+W QtMetaTypePrivate::QMetaTypeFunctionHelper<MergerCell, true>::Destruct(void*)
+W QtSharedPointer::ExternalRefCountWithCustomDeleter<HGifPlay, QtSharedPointer::NormalDeleter>::deleter(QtSharedPointer::ExternalRefCountData*)
+W QtSharedPointer::ExternalRefCountWithCustomDeleter<TableData, QtSharedPointer::NormalDeleter>::deleter(QtSharedPointer::ExternalRefCountData*)
+W TableData::~TableData()
+W TableData::~TableData()
+W TableData::~TableData()
+W non-virtual thunk to Hd::HTablePlugin::HTablePlugin::PluginMatch(QDomElement&)
+W non-virtual thunk to Hd::HTablePlugin::HTablePlugin::level()
+W non-virtual thunk to Hd::HTablePlugin::HTablePlugin::type()
+W non-virtual thunk to Hd::HTablePlugin::HTablePlugin::~HTablePlugin()
+W non-virtual thunk to Hd::HTablePlugin::HTablePlugin::~HTablePlugin()
+W operator+(QByteArray const&, QByteArray const&)
+u Hd::INodePlugin::icon()::img
+u QMetaTypeId<ImageCell>::qt_metatype_id()::metatype_id
+u QMetaTypeId<MergerCell>::qt_metatype_id()::metatype_id
+u guard variable for Hd::INodePlugin::icon()::img

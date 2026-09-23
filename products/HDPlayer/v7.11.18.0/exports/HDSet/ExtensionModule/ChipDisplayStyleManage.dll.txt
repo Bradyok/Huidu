@@ -1,0 +1,3 @@
+GetWarningColor
+GetWarningColorStyleText
+UpdateWindowShowStyle

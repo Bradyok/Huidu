@@ -1,0 +1,2 @@
+getPluginPtr
+getPluginPtrEx

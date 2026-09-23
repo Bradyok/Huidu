@@ -1,0 +1,22 @@
+#!/bin/sh
+# Bring-up report: what the mainline kernel found on this unit. Usage: huidu-hwinfo > /tmp/hwinfo.txt
+s() { echo; echo "==== $*"; sh -c "$*" 2>&1; }
+s cat /proc/device-tree/model
+s uname -a
+s cat /proc/cmdline
+s cat /proc/cpuinfo
+s free
+s lsblk -o NAME,SIZE,TYPE,PARTLABEL,PARTUUID
+s ls -l /dev/disk/by-partlabel
+s ip -br link
+s ls -l /dev/dri /dev/watchdog* /dev/ttyS* /dev/spidev* /sys/class/fpga_manager
+s modetest -c
+s cat /sys/class/drm/card*-*/status /sys/class/drm/card*-*/modes
+s ls /sys/bus/iio/devices
+s cat /sys/bus/iio/devices/iio:device0/in_voltage0_raw
+s i2cdetect -y -r 0
+s i2cdetect -y -r 1
+s lsusb
+s cat /sys/class/thermal/thermal_zone*/temp
+s gpiodetect
+s dmesg

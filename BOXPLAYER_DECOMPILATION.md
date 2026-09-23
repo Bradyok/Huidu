@@ -2,10 +2,10 @@
 
 ## Executive Summary
 
-The Huidu BoxPlayer is **NOT an Android APK** - it is a **native C++ Linux application** built on Qt 5 + OpenGL ES 2.0 that renders content via DRM/KMS direct framebuffer rendering and outputs pixel data to LED panels via FPGA hardware over serial (`/dev/ttyS1` on PX30, `/dev/cyclone4-0`/`/dev/cyclone4-1` on RK3288).
+The Huidu BoxPlayer is **NOT an Android APK** - it is a **native C++ Linux application** built on Qt 5 + OpenGL ES 2.0 that renders via DRM/KMS; on PX30 the display controller's parallel RGB output feeds the LED FPGA, which is configured over `/dev/ttyS1` and loaded over SPI (`/dev/cyclone4`). RK3288 uses `/dev/cyclone4-0`/`-1`.
 
 ### Build Environment (from compiler strings)
-- **Compiler:** GCC 6.4.0 (Buildroot 2018.02-rc3)
+- **Compiler:** GCC 6.4.0 (Buildroot 2018.02-rc3, Rockchip Linux SDK) — see *Operating System* below
 - **Qt:** 5.x (Qt5Core, Qt5Gui, Qt5Widgets, Qt5Xml, Qt5Network)
 - **Graphics:** OpenGL ES 2.0 (libGLESv2), EGL, DRM/KMS (libdrm, libgbm)
 - **Video:** FFmpeg (libavcodec 57, libavformat 57) + GStreamer 1.0 + Rockchip MPP
@@ -14,6 +14,17 @@ The Huidu BoxPlayer is **NOT an Android APK** - it is a **native C++ Linux appli
 - **Audio:** libspeex
 
 The APKs (`cn.huidu.BoxPlayerLoader.apk`) are thin Android JNI wrappers that simply bootstrap the native shared libraries on Android-based hardware variants. On pure Linux variants (PX30), the player runs as a standalone ELF binary.
+
+### Operating System (PX30: C15 / C35 / C36 / D15 / D35 …)
+
+Verified against firmware 7.11.18.0 (`firmware_extract/PX30_D15`, decompiled in `products/BoxPlayer/v7.11.18.0/`).
+
+- **Distro: Buildroot, from Rockchip's Linux SDK — not Yocto.** Every ELF's `.comment` is `GCC: (Buildroot 2018.02-rc3-gbd351b2dc-dirty) 6.4.0`; glibc (≥ 2.17), aarch64. `System/InitWayland.sh` still carries the Rockchip SDK demo launchers (`/usr/local/QLauncher/QLauncher`, `/usr/bin/Carmachine`), commented out.
+- **Init: BusyBox SysV-style `/etc/init.d/S##*`** (`S21mountall.sh`, `S50telnet`). No package manager; `upgrade.sh` copies binaries straight into `/usr/sbin`, `/usr/bin`, `/usr/lib` and `/etc/init.d`. Everything runs as root from `/root/Box/`.
+- **Display: DRM/KMS, no compositor.** `runBoxPlayer.sh` starts `BoxPlayer -platform offscreen`; `libMainWindowRender.so` drives the CRTC itself (`drmModeSetCrtc`, `drmModePageFlip`, GBM + `eglCreatePlatformWindowSurfaceEXT`) and links `libdrm`, `libgbm`, `libEGL`, `libGLESv2`, `librga` (Rockchip 2D), GStreamer 1.0 and FFmpeg 57. **Weston/Wayland is installed but unused**: `InitWayland.sh` (`weston --tty=2`, `QT_QPA_PLATFORM=wayland`) is commented out in `System/BoxPlayerInit.sh`.
+- **Kernel/boot:** Rockchip U-Boot + Android boot image on `/dev/block/by-name/boot` (`kernel_d15_ec200T.img`, page size 2048). `upgrade.sh` only rewrites the kernel when the device ID (`/root/Box/data/id`) starts with `D15`/`D35`; **C15/C35/C36 keep whatever kernel they shipped with**, so it is not in this package.
+- **One PX30 package for the whole family.** The master `upgrade.sh` picks the archive from `/proc/cpuinfo` `Hardware`; `PX30-EVB` → `PX30_BoxPlayerD15.tar.gz` ("D15" is historical). The 7.11.18.0 bundle targets `A3,C15,C35,A4,A5,A6,D15,D35,B6,C16,C36,D16,D36,C16L,C08L`; units that also act as a receiving card (C16/C36/D16/D36/C16L/C08L) get `PX30_BoxPlayerD15_RC.tar.gz`, which is not extracted in this repo. Per-model behavior is chosen at runtime from the device-type ID (`SystemConfig/dev_type`: C15=0x28, C35=0x2a, C36=0x44, D15=0x34).
+- **Remote access** is enabled by the firmware: `ssh/start-ssh` + `sshd_config` installed by `upgrade.sh`, `S50telnet` stopped at boot, plus `ngrok/` and the `cn.huidu.device.api` REST service.
 
 ---
 
@@ -513,14 +524,16 @@ sdk/
    → Clears FPGA, drops caches
    → Starts BoxDaemon (watchdog)
    → Shows BootLogo
-   → Runs BoxUpgrade check
+   → Runs BoxUpgrade check (/usr/bin/runBoxUpgrade.sh)
+   → (InitWayland.sh start — commented out; Weston never runs)
    → Starts run.sh → runBoxPlayer.sh + runBoxSDK.sh
+   → Starts start-ssh, stops S50telnet
    → Starts cn.huidu.device.api (Go REST API)
 
 2. runBoxPlayer.sh
    → export LD_LIBRARY_PATH=/root/Box/BoxPlayer
    → BoxPlayer -platform offscreen
-   (Qt offscreen rendering - no display server needed)
+   (Qt's offscreen QPA only; libMainWindowRender owns the display via DRM/KMS + GBM/EGL)
 
 3. runBoxSDK.sh
    → BoxSDK kDebug -platform offscreen
@@ -528,8 +541,11 @@ sdk/
 ```
 
 ### FPGA Communication
-- Device files: `/dev/cyclone4-0`, `/dev/cyclone4-1` (Altera/Intel Cyclone IV FPGA)
-- Protocol: Custom serial protocol over SPI/UART to FPGA
+PX30 (from the D15 kernel/DTB and libFPGADriver; details in `products/BoxPlayer/v7.11.18.0/hardware/PX30_C_SERIES_HARDWARE.md`):
+- **Pixels:** parallel **RGB888 out of the PX30 VOP** into the FPGA (DRM/KMS, `/dev/dri/card0`); LVDS/MIPI disabled. D15 timing is 1024×128 @ 12 MHz; C-series timing not yet captured. Pixels do **not** go over serial.
+- **Control/status:** UART1 `/dev/ttyS1`, 115200 8N1, CRC-framed (libFPGADriver `HSerialParam`; BootLogo also uses it).
+- **Bitstream load:** SPI0 passive serial through Huidu's `drivers/char/cyclone4.c` → single `/dev/cyclone4` (GPIO0_A0/A1/A2 = nCONFIG/nSTATUS/CONF_DONE), driven by the rootfs-only `write_fpga <img> /dev/cyclone4`; image at `/boot/fpga.img`.
+- RK3288 (Android) uses `/dev/cyclone4-0` / `/dev/cyclone4-1`.
 - Data structures: `fpga::HSendCard`, `fpga::HRecvCard`, scan tables, gamma, color correction
 - Key parameters: `s_dualScanTab`, `s_grayPriority`, `s_lightPriority`, `s_refreshPriority`, `s_scanParam`
 

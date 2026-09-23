@@ -1,0 +1,129 @@
+# plugins_libordinary_scene_plugin.so dynamic exports (demangled)
+B __bss_end__
+B __bss_start
+B __bss_start__
+B __end__
+B _bss_end__
+B _end
+D Hd::HNodeProgram::HNodeProgram::staticMetaObject
+D Hd::HOrdinarySceneNode::staticMetaObject
+D Hd::HOrdinarySceneRender::staticMetaObject
+D _edata
+T Hd::HNodeProgram::HNodeProgram::Create()
+T Hd::HNodeProgram::HNodeProgram::CreateFrameRender(Hd::HNode*)
+T Hd::HNodeProgram::HNodeProgram::HNodeProgram()
+T Hd::HNodeProgram::HNodeProgram::HNodeProgram()
+T Hd::HNodeProgram::HNodeProgram::PluginMatch(QDomElement&)
+T Hd::HNodeProgram::HNodeProgram::metaObject() const
+T Hd::HNodeProgram::HNodeProgram::qt_metacall(QMetaObject::Call, int, void**)
+T Hd::HNodeProgram::HNodeProgram::qt_metacast(char const*)
+T Hd::HNodeProgram::HNodeProgram::type()
+T Hd::HOrdinarySceneNode::AddMusicFile()
+T Hd::HOrdinarySceneNode::ClearFileList()
+T Hd::HOrdinarySceneNode::ControllerChange()
+T Hd::HOrdinarySceneNode::DeviceChange()
+T Hd::HOrdinarySceneNode::EmitAddMusicFile()
+T Hd::HOrdinarySceneNode::HOrdinarySceneNode()
+T Hd::HOrdinarySceneNode::HOrdinarySceneNode()
+T Hd::HOrdinarySceneNode::InitData()
+T Hd::HOrdinarySceneNode::PlayIndexChanged()
+T Hd::HOrdinarySceneNode::Type()
+T Hd::HOrdinarySceneNode::VolumeChanged(int)
+T Hd::HOrdinarySceneNode::metaObject() const
+T Hd::HOrdinarySceneNode::qt_metacall(QMetaObject::Call, int, void**)
+T Hd::HOrdinarySceneNode::qt_metacast(char const*)
+T Hd::HOrdinarySceneRender::DisplayFrame()
+T Hd::HOrdinarySceneRender::DrawBackground()
+T Hd::HOrdinarySceneRender::HOrdinarySceneRender(Hd::HSceneNode*)
+T Hd::HOrdinarySceneRender::HOrdinarySceneRender(Hd::HSceneNode*)
+T Hd::HOrdinarySceneRender::InitRenderer()
+T Hd::HOrdinarySceneRender::ON_PlayError()
+T Hd::HOrdinarySceneRender::OnPlayFinished()
+T Hd::HOrdinarySceneRender::OnVolumeChanged(int)
+T Hd::HOrdinarySceneRender::Pause()
+T Hd::HOrdinarySceneRender::PlayNextMusic()
+T Hd::HOrdinarySceneRender::Remove()
+T Hd::HOrdinarySceneRender::RenderId()
+T Hd::HOrdinarySceneRender::Restart()
+T Hd::HOrdinarySceneRender::Seek(long long)
+T Hd::HOrdinarySceneRender::SetPlayVolume(int)
+T Hd::HOrdinarySceneRender::Start(long long)
+T Hd::HOrdinarySceneRender::Stop()
+T Hd::HOrdinarySceneRender::layer()
+T Hd::HOrdinarySceneRender::metaObject() const
+T Hd::HOrdinarySceneRender::qt_metacall(QMetaObject::Call, int, void**)
+T Hd::HOrdinarySceneRender::qt_metacast(char const*)
+T Hd::HOrdinarySceneRender::rect()
+T Hd::HOrdinarySceneRender::setLayer(int)
+T Hd::HOrdinarySceneRender::~HOrdinarySceneRender()
+T Hd::HOrdinarySceneRender::~HOrdinarySceneRender()
+T Hd::HOrdinarySceneRender::~HOrdinarySceneRender()
+T _fini
+T _init
+T non-virtual thunk to Hd::HNodeProgram::HNodeProgram::Create()
+T non-virtual thunk to Hd::HNodeProgram::HNodeProgram::CreateFrameRender(Hd::HNode*)
+T non-virtual thunk to Hd::HNodeProgram::HNodeProgram::PluginMatch(QDomElement&)
+T non-virtual thunk to Hd::HNodeProgram::HNodeProgram::type()
+T qt_plugin_instance
+T qt_plugin_query_metadata
+V VTT for Hd::HOrdinarySceneNode
+V typeinfo for Hd::HNodeProgram::HNodeProgram
+V typeinfo for Hd::HOrdinarySceneNode
+V typeinfo for Hd::HOrdinarySceneRender
+V typeinfo for Hd::INodePlugin
+V typeinfo name for Hd::HNodeProgram::HNodeProgram
+V typeinfo name for Hd::HOrdinarySceneNode
+V typeinfo name for Hd::HOrdinarySceneRender
+V typeinfo name for Hd::INodePlugin
+V vtable for Hd::HNodeProgram::HNodeProgram
+V vtable for Hd::HOrdinarySceneNode
+V vtable for Hd::HOrdinarySceneRender
+W Hd::HData::Level()
+W Hd::HData::Type()
+W Hd::HNode::InitData()
+W Hd::HNode::NodeMatch(QDomElement&)
+W Hd::HNode::ReloadAttrbute(Hd::HNode*)
+W Hd::HNode::SDKInitData(void*)
+W Hd::HNodeProgram::HNodeProgram::level()
+W Hd::HNodeProgram::HNodeProgram::~HNodeProgram()
+W Hd::HNodeProgram::HNodeProgram::~HNodeProgram()
+W Hd::HNodeProgram::HNodeProgram::~HNodeProgram()
+W Hd::HOrdinarySceneNode::~HOrdinarySceneNode()
+W Hd::HOrdinarySceneNode::~HOrdinarySceneNode()
+W Hd::HOrdinarySceneRender::IsFinish()
+W Hd::HOrdinarySceneRender::Previous(int)
+W Hd::HOrdinarySceneRender::RenderFinish(int)
+W Hd::IFrameRender::AreaFinish()
+W Hd::IFrameRender::CheckFinish()
+W Hd::IFrameRender::PrepareData()
+W Hd::INodePlugin::AddFile(Hd::HModel*, QModelIndex&, int)
+W Hd::INodePlugin::AddFileBasisSuffix(QString, Hd::HModel*, QModelIndex&, int)
+W Hd::INodePlugin::AddFileBasisSupport(QString, Hd::HModel*, QModelIndex&, int)
+W Hd::INodePlugin::AppQuit()
+W Hd::INodePlugin::ConvertVersion(Hd::HNode*, Hd::HVersion&)
+W Hd::INodePlugin::Create(QString, Hd::HNode*)
+W Hd::INodePlugin::CreateAreaRender(Hd::HNode*)
+W Hd::INodePlugin::D3DLoseDevice()
+W Hd::INodePlugin::NewFile(Hd::HModel*, QModelIndex&, int)
+W Hd::INodePlugin::OverrideNewFile()
+W Hd::INodePlugin::SuportController(QString&)
+W Hd::INodePlugin::SupportSuffix()
+W Hd::INodePlugin::icon()
+W Hd::INodePlugin::name()
+W Hd::IPlayer::SetPlayVolume(int)
+W QList<QString>::QList(QList<QString> const&)
+W QList<QString>::QList(QList<QString> const&)
+W QList<QString>::~QList()
+W QList<QString>::~QList()
+W QMapNode<QString, QString>::destroySubTree()
+W QMapNode<QString, int>::destroySubTree()
+W QString::~QString()
+W QString::~QString()
+W QtPrivate::RefCount::deref()
+W non-virtual thunk to Hd::HNodeProgram::HNodeProgram::level()
+W non-virtual thunk to Hd::HNodeProgram::HNodeProgram::~HNodeProgram()
+W non-virtual thunk to Hd::HNodeProgram::HNodeProgram::~HNodeProgram()
+W virtual thunk to Hd::HOrdinarySceneNode::~HOrdinarySceneNode()
+W virtual thunk to Hd::HOrdinarySceneNode::~HOrdinarySceneNode()
+u Hd::INodePlugin::icon()::img
+u guard variable for Hd::INodePlugin::icon()::img

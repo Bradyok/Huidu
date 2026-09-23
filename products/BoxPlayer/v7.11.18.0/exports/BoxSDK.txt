@@ -1,0 +1,170 @@
+# BoxSDK dynamic exports (demangled)
+B __bss_end__
+B __bss_start
+B __bss_start__
+B __end__
+B _bss_end__
+B _end
+B sdk::HDaemonClient::instance_
+B sdk::HLocalUdpServer::instance_
+B sdk::HSignal::instance_
+D __data_start
+D _edata
+R _IO_stdin_used
+T HDMain
+T __libc_csu_fini
+T __libc_csu_init
+T _fini
+T _init
+T _start
+T main
+T non-virtual thunk to sdk::HDaemonClient::Stop()
+T non-virtual thunk to sdk::HDaemonClient::WorkThread()
+T non-virtual thunk to sdk::HDaemonClient::~HDaemonClient()
+T non-virtual thunk to sdk::HDaemonClient::~HDaemonClient()
+T non-virtual thunk to sdk::HLocalTcpServer::Dispose(sdk::HMainEvent::HMsgType, void*, sdk::HByteArray const&)
+T non-virtual thunk to sdk::HLocalTcpServer::~HLocalTcpServer()
+T non-virtual thunk to sdk::HLocalTcpServer::~HLocalTcpServer()
+T non-virtual thunk to sdk::HLocalUdpServer::Dispose(sdk::HMainEvent::HMsgType, void*, sdk::HByteArray const&)
+T non-virtual thunk to sdk::HLocalUdpServer::DisposeEvent(int)
+T non-virtual thunk to sdk::HLocalUdpServer::Stop()
+T non-virtual thunk to sdk::HLocalUdpServer::WorkThread()
+T non-virtual thunk to sdk::HLocalUdpServer::~HLocalUdpServer()
+T non-virtual thunk to sdk::HLocalUdpServer::~HLocalUdpServer()
+T non-virtual thunk to sdk::HLocalUdpServer::~HLocalUdpServer()
+T non-virtual thunk to sdk::HLocalUdpServer::~HLocalUdpServer()
+T non-virtual thunk to sdk::HLocalUdpServer::~HLocalUdpServer()
+T non-virtual thunk to sdk::HLocalUdpServer::~HLocalUdpServer()
+T sdk::HDaemonClient::ConnectFailed()
+T sdk::HDaemonClient::ConnectSuccess()
+T sdk::HDaemonClient::DelayConnectTimer(void*)
+T sdk::HDaemonClient::DestroyMember()
+T sdk::HDaemonClient::Disconnect()
+T sdk::HDaemonClient::Exit()
+T sdk::HDaemonClient::GetInstance()
+T sdk::HDaemonClient::HDaemonClient()
+T sdk::HDaemonClient::HDaemonClient()
+T sdk::HDaemonClient::HeartbeatTimer(void*)
+T sdk::HDaemonClient::InitMember()
+T sdk::HDaemonClient::Lock()
+T sdk::HDaemonClient::RecvPacket(sdk::HByteArray const&)
+T sdk::HDaemonClient::SendCondition()
+T sdk::HDaemonClient::SendFailed()
+T sdk::HDaemonClient::StartConnect()
+T sdk::HDaemonClient::StartDelayConnectTimer()
+T sdk::HDaemonClient::StartHeartbeatTimer()
+T sdk::HDaemonClient::Stop()
+T sdk::HDaemonClient::StopConnect()
+T sdk::HDaemonClient::StopDelayConnectTimer()
+T sdk::HDaemonClient::StopHeartbeatTimer()
+T sdk::HDaemonClient::Unlock()
+T sdk::HDaemonClient::WaitCondition()
+T sdk::HDaemonClient::WorkThread()
+T sdk::HDaemonClient::~HDaemonClient()
+T sdk::HDaemonClient::~HDaemonClient()
+T sdk::HDaemonClient::~HDaemonClient()
+T sdk::HLocalTcpServer::Accept(sdk::HIPCServer::HTcpSession*)
+T sdk::HLocalTcpServer::DestroyMember()
+T sdk::HLocalTcpServer::Disconnect(sdk::HIPCServer::HTcpSession*)
+T sdk::HLocalTcpServer::Dispose(sdk::HMainEvent::HMsgType, void*, sdk::HByteArray const&)
+T sdk::HLocalTcpServer::HLocalTcpServer(short)
+T sdk::HLocalTcpServer::HLocalTcpServer(short)
+T sdk::HLocalTcpServer::InitMember()
+T sdk::HLocalTcpServer::Request(sdk::HIPCServer::HTcpSession*, sdk::HByteArray const&)
+T sdk::HLocalTcpServer::SendSdkData(QByteArray const&, sdk::HTcpSession*, sdk::HXmlSession*)
+T sdk::HLocalTcpServer::Snapshot(QByteArray const&, sdk::HTcpSession*, sdk::HIPCServer::HTcpSession*, sdk::HXmlSession*)
+T sdk::HLocalTcpServer::SplitSdkData(QByteArray const&)
+T sdk::HLocalTcpServer::~HLocalTcpServer()
+T sdk::HLocalTcpServer::~HLocalTcpServer()
+T sdk::HLocalTcpServer::~HLocalTcpServer()
+T sdk::HLocalUdpServer::ChangeTimer(void*)
+T sdk::HLocalUdpServer::CreateWorkThread()
+T sdk::HLocalUdpServer::DestroyMember()
+T sdk::HLocalUdpServer::Dispose(sdk::HMainEvent::HMsgType, void*, sdk::HByteArray const&)
+T sdk::HLocalUdpServer::DisposeEvent(int)
+T sdk::HLocalUdpServer::DisposeXmlCmd(sdk::HByteArray const&, sdk::HByteArray*)
+T sdk::HLocalUdpServer::Event()
+T sdk::HLocalUdpServer::GetDeviceDetail(QDomDocument*, QDomElement*)
+T sdk::HLocalUdpServer::GetInstance()
+T sdk::HLocalUdpServer::HLocalUdpServer()
+T sdk::HLocalUdpServer::HLocalUdpServer()
+T sdk::HLocalUdpServer::Init(short)
+T sdk::HLocalUdpServer::InitMember()
+T sdk::HLocalUdpServer::Lock()
+T sdk::HLocalUdpServer::PushChangeMessage()
+T sdk::HLocalUdpServer::RecvCmdAsk(char const*, int)
+T sdk::HLocalUdpServer::RecvSearchAsk(char const*, int)
+T sdk::HLocalUdpServer::SendCondition()
+T sdk::HLocalUdpServer::SendPacket(char const*, int)
+T sdk::HLocalUdpServer::StartChangeTimer()
+T sdk::HLocalUdpServer::Stop()
+T sdk::HLocalUdpServer::StopChangeTimer()
+T sdk::HLocalUdpServer::Unlock()
+T sdk::HLocalUdpServer::WaitCondition()
+T sdk::HLocalUdpServer::WorkThread()
+T sdk::HLocalUdpServer::~HLocalUdpServer()
+T sdk::HLocalUdpServer::~HLocalUdpServer()
+T sdk::HLocalUdpServer::~HLocalUdpServer()
+T sdk::HMainLoop::CreateTcpServer()
+T sdk::HMainLoop::DestroyMember()
+T sdk::HMainLoop::DestroyTcpServer()
+T sdk::HMainLoop::HMainLoop(int, char**)
+T sdk::HMainLoop::HMainLoop(int, char**)
+T sdk::HMainLoop::InitMember()
+T sdk::HMainLoop::exec()
+T sdk::HMainLoop::~HMainLoop()
+T sdk::HMainLoop::~HMainLoop()
+T sdk::HSignal::ClearTombstonesFile()
+T sdk::HSignal::DestroyMember()
+T sdk::HSignal::GetInstance()
+T sdk::HSignal::HSignal()
+T sdk::HSignal::HSignal()
+T sdk::HSignal::InitMember()
+T sdk::HSignal::SignalHandle(int)
+T sdk::HSignal::~HSignal()
+T sdk::HSignal::~HSignal()
+V typeinfo for sdk::HDaemonClient
+V typeinfo for sdk::HLocalTcpServer
+V typeinfo for sdk::HLocalUdpServer
+V typeinfo for sdk::IEvent
+V typeinfo for sdk::IIPCServer
+V typeinfo for sdk::IMainEvent
+V typeinfo for sdk::ISocket
+V typeinfo for sdk::IThread
+V typeinfo name for sdk::HDaemonClient
+V typeinfo name for sdk::HLocalTcpServer
+V typeinfo name for sdk::HLocalUdpServer
+V typeinfo name for sdk::IEvent
+V typeinfo name for sdk::IIPCServer
+V typeinfo name for sdk::IMainEvent
+V typeinfo name for sdk::ISocket
+V typeinfo name for sdk::IThread
+V vtable for sdk::HDaemonClient
+V vtable for sdk::HLocalTcpServer
+V vtable for sdk::HLocalUdpServer
+V vtable for sdk::IEvent
+V vtable for sdk::IIPCServer
+V vtable for sdk::IThread
+W QByteArray::~QByteArray()
+W QByteArray::~QByteArray()
+W QList<QByteArray>::append(QByteArray const&)
+W QList<QByteArray>::detach_helper_grow(int, int)
+W QList<QByteArray>::~QList()
+W QList<QByteArray>::~QList()
+W QList<QPair<QString, QString> >::~QList()
+W QList<QPair<QString, QString> >::~QList()
+W QList<QString>::~QList()
+W QList<QString>::~QList()
+W QList<sdk::HFileInfo>::QList(QList<sdk::HFileInfo> const&)
+W QList<sdk::HFileInfo>::QList(QList<sdk::HFileInfo> const&)
+W QList<sdk::HFileInfo>::detach_helper(int)
+W QList<sdk::HFileInfo>::~QList()
+W QList<sdk::HFileInfo>::~QList()
+W QList<sdk::HIPCServer::HTcpSession*>::detach_helper_grow(int, int)
+W QList<sdk::HIPCServer::HTcpSession*>::removeAll(sdk::HIPCServer::HTcpSession* const&)
+W QString::QString(char const*)
+W QString::QString(char const*)
+W QString::~QString()
+W QString::~QString()
+W data_start
+W sdk::ISDKCmdManager()

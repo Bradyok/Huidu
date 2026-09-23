@@ -1,0 +1,13 @@
+??0CHD3DExport@@QAE@XZ
+??1CHD3DExport@@QAE@XZ
+?DrawFrameAt@CHD3DExport@@QAEHHPAIHH@Z
+?GetBorderHDImageFile@CHD3DExport@@QAEHPAU_HD3DBORDER@@PAXPAH@Z
+?GetEffectBitmapPathFromID@CHD3DExport@@QAEHHPAXPAH@Z
+?GetEffectCount@CHD3DExport@@QBEHXZ
+?GetEffectIDFromIndex@CHD3DExport@@QBEHH@Z
+?GetFileSaveName@CHD3DExport@@QAEHHHPAXPAH@Z
+?GetImageRectFromEffect@CHD3DExport@@QAEHHAAH0M@Z
+?GetTotalFrames@CHD3DExport@@QBEHXZ
+?Init@CHD3DExport@@QAEHPBU_HD3DEFFECT@@@Z
+?SaveToFile@CHD3DExport@@QAEHHHHHPAX0HH@Z
+?__autoclassinit2@CHD3DExport@@QAEXI@Z

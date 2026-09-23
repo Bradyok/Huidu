@@ -1,0 +1,638 @@
+# libMainWindowRender.so dynamic exports (demangled)
+B HVertexs::esContext
+B NativeStateDRM::should_quit_
+B __bss_end__
+B __bss_start
+B __bss_start__
+B __end__
+B _bss_end__
+B _end
+B gNative_
+B g_currentDateTime
+B g_screenSync
+B sdk::HEffectManager::instance_
+B sdk::HLoadResource::instance_
+B sdk::HMasterRFDev::instance_
+B sdk::HRenderData::instance_
+B sdk::HRenderHelper::instance_
+B sdk::HRenderTools::instance_
+B sdk::HTextureImage::instance_
+D _edata
+D sdk::HRenderData::staticMetaObject
+T AddPictureSession
+T AttachImageList
+T CreateAreaSession
+T CreatePictureSession
+T CreateRenderer
+T CreateYUVTexture()
+T DetachImageList
+T FreeAreaSession
+T FreePictureSession
+T FreeRenderer
+T GetPicImageLayerPtr
+T GetTexturePtr
+T HAreaSession::Add(HPictureSession*)
+T HAreaSession::CurrentContentFinish()
+T HAreaSession::GetNextValidIndex()
+T HAreaSession::GetNextValidIndex(int) const
+T HAreaSession::HAreaSession()
+T HAreaSession::HAreaSession()
+T HAreaSession::HasOnlyOneValidContent()
+T HAreaSession::Remove(HPictureSession*)
+T HAreaSession::SetNodeAttrs(sdk::HList<HNodeAttr> const&, void*, QString)
+T HAreaSession::~HAreaSession()
+T HAreaSession::~HAreaSession()
+T HAreaSession::~HAreaSession()
+T HDoubleImage::~HDoubleImage()
+T HDoubleImage::~HDoubleImage()
+T HFrame::EffectDispose()
+T HFrame::GetHeight()
+T HFrame::HFrame(HAreaSession*)
+T HFrame::HFrame(HAreaSession*)
+T HFrame::InitEffectParam(Frame*)
+T HFrame::InitFrame(Frame const*)
+T HFrame::InitTranslateIndex()
+T HFrame::InitVertexs()
+T HFrame::ReleaseEffectParam()
+T HFrame::ReloadEffectParam()
+T HFrame::Render(int)
+T HFrame::RotateEffect()
+T HFrame::Show()
+T HFrame::StaticEffect()
+T HFrame::TwinkleEffect()
+T HFrame::~HFrame()
+T HFrame::~HFrame()
+T HImage::HImage()
+T HImage::HImage()
+T HImage::~HImage()
+T HImage::~HImage()
+T HPictureSession::CheckFinish(bool)
+T HPictureSession::GetIndexSurface()
+T HPictureSession::GetSurface(int)
+T HPictureSession::GetSurfaceLayerID()
+T HPictureSession::HPictureSession()
+T HPictureSession::HPictureSession()
+T HPictureSession::LockData()
+T HPictureSession::UnlockData()
+T HPictureSession::~HPictureSession()
+T HPictureSession::~HPictureSession()
+T HPictureSession::~HPictureSession()
+T HProgramSession::ClearFinishFlag()
+T HProgramSession::HProgramSession()
+T HProgramSession::HProgramSession()
+T HProgramSession::~HProgramSession()
+T HProgramSession::~HProgramSession()
+T HProgramSession::~HProgramSession()
+T HVertexs::HVertexs()
+T HVertexs::HVertexs()
+T HVertexs::HVertexs(float, float, float, float)
+T HVertexs::HVertexs(float, float, float, float)
+T HVertexs::HVertexs(int, int, int, int)
+T HVertexs::HVertexs(int, int, int, int)
+T HideRender()
+T ImageListAppend
+T InitRenderer
+T InitWindow
+T InsertFrameToArea
+T KeepLastFrame(bool)
+T LoadAreaParamAgain
+T LockImageList
+T NativeStateDRM::cleanup()
+T NativeStateDRM::create_window(NativeState::WindowProperties const&)
+T NativeStateDRM::display()
+T NativeStateDRM::fb_destroy_callback(gbm_bo*, void*)
+T NativeStateDRM::fb_get_from_bo(gbm_bo*)
+T NativeStateDRM::flip()
+T NativeStateDRM::init()
+T NativeStateDRM::init_display()
+T NativeStateDRM::init_gbm()
+T NativeStateDRM::page_flip_handler(int, unsigned int, unsigned int, unsigned int, void*)
+T NativeStateDRM::quit_handler(int)
+T NativeStateDRM::should_quit()
+T NativeStateDRM::visible(bool)
+T NativeStateDRM::window(NativeState::WindowProperties&)
+T NotifyPlayManagerPlayFinish
+T PicAppendImageLayer
+T RefreshRate
+T RegisterAreaSession
+T ReloadPicSessionEffect
+T RemoveFrameFromArea
+T RemovePictureSession
+T ScreenRotation
+T SetMoreSession
+T SetPicLayerBlend
+T SetPicSessionValidData
+T SetPlayStatus
+T SetScreenSync
+T ShowRender()
+T Snapshot
+T StartRenderer
+T SwapPicImageLayerPtr
+T SwapTexturePtr
+T TakeImageListFirst
+T UnRegisterAreaSession
+T UnlockImageList
+T UnusedAreaAlpha
+T UpdateAreaSessionOrder
+T UpdateAreaSessionParam
+T UpdateImageToPanTexture
+T UpdateImageToTexture
+T UpdateImagesToPanTexture
+T UpdateImagesToTexture
+T UpdatePicSessionStartTime
+T UpdatePictureSessionEffect
+T UpdatePictureSessionFillType
+T UpdatePictureSessionSourceArea
+T UpdateTextureData
+T UpdateTextureMap
+T UpdateWindowSize
+T UsedAreaAlpha
+T _fini
+T _init
+T fbGetDisplayGeometry(wl_display*, int*, int*)
+T non-virtual thunk to sdk::HRenderData::~HRenderData()
+T non-virtual thunk to sdk::HRenderData::~HRenderData()
+T non-virtual thunk to sdk::HRenderEngine::DisposeMessage(sdk::IMessageQueue::HMessage const&)
+T non-virtual thunk to sdk::HRenderEngine::~HRenderEngine()
+T non-virtual thunk to sdk::HRenderEngine::~HRenderEngine()
+T sdk::CenterEffect::CenterEffect(int)
+T sdk::CenterEffect::CenterEffect(int)
+T sdk::CenterEffect::InitVertexIndexs(HPictureSession*, int)
+T sdk::CenterEffect::ParseEffect(HPictureSession*, int)
+T sdk::CenterEffect::Show(HPictureSession*, int)
+T sdk::DoorEffect::DoorEffect(int)
+T sdk::DoorEffect::DoorEffect(int)
+T sdk::DoorEffect::InitVertexIndexs(HPictureSession*, int)
+T sdk::DoorEffect::ParseEffect(HPictureSession*, int)
+T sdk::DoorEffect::Show(HPictureSession*, int)
+T sdk::Flicker::DisposeProgress(HPictureSession*, int)
+T sdk::Flicker::Flicker()
+T sdk::Flicker::Flicker()
+T sdk::Flicker::InitVertexIndexs(HPictureSession*, int)
+T sdk::Flicker::ParseEffect(HPictureSession*, int)
+T sdk::Flicker::Render(HPictureSession*, int, int)
+T sdk::Flicker::Show(HPictureSession*, int)
+T sdk::HClose::HClose(sdk::HClose::CloseDirection)
+T sdk::HClose::HClose(sdk::HClose::CloseDirection)
+T sdk::HClose::InitVertexIndexs(HPictureSession*, int)
+T sdk::HClose::ParseEffect(HPictureSession*, int)
+T sdk::HClose::Show(HPictureSession*, int)
+T sdk::HCondition::DestroyMember()
+T sdk::HCondition::HCondition()
+T sdk::HCondition::HCondition()
+T sdk::HCondition::InitMember()
+T sdk::HCondition::Lock()
+T sdk::HCondition::Signal()
+T sdk::HCondition::Unlock()
+T sdk::HCondition::Wait()
+T sdk::HCondition::~HCondition()
+T sdk::HCondition::~HCondition()
+T sdk::HDivide::HDivide(sdk::HDivide::DivideDirection)
+T sdk::HDivide::HDivide(sdk::HDivide::DivideDirection)
+T sdk::HDivide::InitVertexIndexs(HPictureSession*, int)
+T sdk::HDivide::ParseEffect(HPictureSession*, int)
+T sdk::HDivide::Show(HPictureSession*, int)
+T sdk::HEffectManager::DestroyMember()
+T sdk::HEffectManager::GetEffect(EffectType)
+T sdk::HEffectManager::GetInstance()
+T sdk::HEffectManager::HEffectManager()
+T sdk::HEffectManager::HEffectManager()
+T sdk::HEffectManager::InitEffect(HPictureSession*)
+T sdk::HEffectManager::InitMember()
+T sdk::HEffectManager::ReleaseEffect(HPictureSession*)
+T sdk::HEffectManager::Render(HPictureSession*, int)
+T sdk::HEffectManager::~HEffectManager()
+T sdk::HEffectManager::~HEffectManager()
+T sdk::HFade::DisposeProgress(HPictureSession*, int)
+T sdk::HFade::HFade()
+T sdk::HFade::HFade()
+T sdk::HFade::InitVertexIndexs(HPictureSession*, int)
+T sdk::HFade::ParseEffect(HPictureSession*, int)
+T sdk::HFade::Render(HPictureSession*, int, int)
+T sdk::HFade::Show(HPictureSession*, int)
+T sdk::HImmediate::DisposeProgress(HPictureSession*, int)
+T sdk::HImmediate::HImmediate()
+T sdk::HImmediate::HImmediate()
+T sdk::HImmediate::InitVertexIndexs(HPictureSession*, int)
+T sdk::HImmediate::Render(HPictureSession*, int, int)
+T sdk::HImmediate::Show(HPictureSession*, int)
+T sdk::HImmediate::~HImmediate()
+T sdk::HImmediate::~HImmediate()
+T sdk::HImmediate::~HImmediate()
+T sdk::HLoadResource::DestroyMember()
+T sdk::HLoadResource::GetInstance()
+T sdk::HLoadResource::HLoadResource()
+T sdk::HLoadResource::HLoadResource()
+T sdk::HLoadResource::InitMember()
+T sdk::HLoadResource::LoadImageToTexture(QImage const&, unsigned long long*)
+T sdk::HLoadResource::LoadImageToTexture(sdk::HLoadResource::HImageInfo*)
+T sdk::HLoadResource::LoadImagesToTextures(sdk::HList<sdk::HLoadResource::HImageInfo>*)
+T sdk::HLoadResource::~HLoadResource()
+T sdk::HLoadResource::~HLoadResource()
+T sdk::HMasterRFDev::CloseDevice()
+T sdk::HMasterRFDev::DestroyMember()
+T sdk::HMasterRFDev::GetInstance()
+T sdk::HMasterRFDev::HMasterRFDev()
+T sdk::HMasterRFDev::HMasterRFDev()
+T sdk::HMasterRFDev::InitMember()
+T sdk::HMasterRFDev::OpenDevice()
+T sdk::HMasterRFDev::PacketData(char*, int, char const*, int)
+T sdk::HMasterRFDev::SendBroadcast()
+T sdk::HMasterRFDev::SendBroadcastMaster()
+T sdk::HMasterRFDev::SendCurrentTimer()
+T sdk::HMasterRFDev::SendData(char const*, int)
+T sdk::HMasterRFDev::SendRFData(unsigned short, char const*, int)
+T sdk::HMasterRFDev::SetConfigParam()
+T sdk::HMasterRFDev::Start()
+T sdk::HMasterRFDev::Stop()
+T sdk::HMasterRFDev::~HMasterRFDev()
+T sdk::HMasterRFDev::~HMasterRFDev()
+T sdk::HMessageQueue::AsyncPush(sdk::IMessageQueue::HMessage const&)
+T sdk::HMessageQueue::Event()
+T sdk::HMessageQueue::HMessageQueue(sdk::IMessageQueue*)
+T sdk::HMessageQueue::HMessageQueue(sdk::IMessageQueue*)
+T sdk::HMessageQueue::SyncPush(sdk::IMessageQueue::HMessage const&)
+T sdk::HMessageQueue::~HMessageQueue()
+T sdk::HMessageQueue::~HMessageQueue()
+T sdk::HMessageQueue::~HMessageQueue()
+T sdk::HParalleMove::HParalleMove(sdk::HParalleMove::MoveDirection)
+T sdk::HParalleMove::HParalleMove(sdk::HParalleMove::MoveDirection)
+T sdk::HParalleMove::InitVertexIndexs(HPictureSession*, int)
+T sdk::HParalleMove::ParseEffect(HPictureSession*, int)
+T sdk::HParalleMove::Show(HPictureSession*, int)
+T sdk::HRandom::GenEffectType(int)
+T sdk::HRandom::HRandom(sdk::HEffectManager*)
+T sdk::HRandom::HRandom(sdk::HEffectManager*)
+T sdk::HRandom::InitEffectParam(HPictureSession*, int)
+T sdk::HRandom::ReleaseEffectParam(HPictureSession*, int)
+T sdk::HRandom::ReloadEffectParam(HPictureSession*, int)
+T sdk::HRandom::Render(HPictureSession*, int, int)
+T sdk::HRandom::~HRandom()
+T sdk::HRandom::~HRandom()
+T sdk::HRandom::~HRandom()
+T sdk::HRectCovert::HRectCovert(sdk::HRectCovert::CovertDirection)
+T sdk::HRectCovert::HRectCovert(sdk::HRectCovert::CovertDirection)
+T sdk::HRectCovert::InitVertexIndexs(HPictureSession*, int)
+T sdk::HRectCovert::ParseEffect(HPictureSession*, int)
+T sdk::HRectCovert::Show(HPictureSession*, int)
+T sdk::HRenderData::ActivatingProgram(sdk::HRenderData::HActivteProgram)
+T sdk::HRenderData::AddProgramList(sdk::HList<HNodeAttr> const&)
+T sdk::HRenderData::AddPrograms(sdk::HList<HNodeAttr> const&)
+T sdk::HRenderData::CheckViewport()
+T sdk::HRenderData::ClearFinishProgram()
+T sdk::HRenderData::ClearProgramList()
+T sdk::HRenderData::ClearPrograms()
+T sdk::HRenderData::DestroyMember()
+T sdk::HRenderData::GetCurrentProgram()
+T sdk::HRenderData::GetCurrentTime() const
+T sdk::HRenderData::GetFinishProgram()
+T sdk::HRenderData::GetFinishProgram(sdk::HList<HProgramSession*>*)
+T sdk::HRenderData::GetIconProgram()
+T sdk::HRenderData::GetInstance()
+T sdk::HRenderData::GetNextValidProgram()
+T sdk::HRenderData::GetPlayStatus()
+T sdk::HRenderData::GetUpdateProgram()
+T sdk::HRenderData::GetWillPlayProgram()
+T sdk::HRenderData::HRenderData()
+T sdk::HRenderData::HRenderData()
+T sdk::HRenderData::InitMember()
+T sdk::HRenderData::NormalStop()
+T sdk::HRenderData::PopActivting()
+T sdk::HRenderData::ProgramFinishSignal(HProgramSession*)
+T sdk::HRenderData::ReloadPrograms(sdk::HList<HNodeAttr> const&)
+T sdk::HRenderData::ReloadViewport()
+T sdk::HRenderData::SetCurrentProgram(void*)
+T sdk::HRenderData::SetFinishProgram(HProgramSession*)
+T sdk::HRenderData::SetPlayStatus(sdk::HRenderData::HPlayStatus)
+T sdk::HRenderData::SetSingleLoop(bool)
+T sdk::HRenderData::SetSync(bool)
+T sdk::HRenderData::SetTimezone(int)
+T sdk::HRenderData::SetUpdateIsStart()
+T sdk::HRenderData::UpdatePicSessionStartPlayTime()
+T sdk::HRenderData::UpdatePlayScheduleBegin(HProgramSession*)
+T sdk::HRenderData::UpdatePlayScheduleEnd()
+T sdk::HRenderData::metaObject() const
+T sdk::HRenderData::qt_metacall(QMetaObject::Call, int, void**)
+T sdk::HRenderData::qt_metacast(char const*)
+T sdk::HRenderData::~HRenderData()
+T sdk::HRenderData::~HRenderData()
+T sdk::HRenderData::~HRenderData()
+T sdk::HRenderEngine::AddAreaSession(sdk::IMessageQueue::HMessage const&)
+T sdk::HRenderEngine::AddPicSession(sdk::IMessageQueue::HMessage const&)
+T sdk::HRenderEngine::AsyncPush(char const*, int)
+T sdk::HRenderEngine::BeginScene()
+T sdk::HRenderEngine::CheckUVCoord(HImageSurface*, FillType, HXYRect const&)
+T sdk::HRenderEngine::CheckUVCoord(HPictureSession*)
+T sdk::HRenderEngine::CreatePicSession(sdk::IMessageQueue::HMessage const&)
+T sdk::HRenderEngine::CreateSurface(int, int, HBlendFunction)
+T sdk::HRenderEngine::DestroyMember()
+T sdk::HRenderEngine::DisposeMessage(sdk::IMessageQueue::HMessage const&)
+T sdk::HRenderEngine::EndScene()
+T sdk::HRenderEngine::FreeAreaSession(sdk::IMessageQueue::HMessage const&)
+T sdk::HRenderEngine::GetFloatTime()
+T sdk::HRenderEngine::HRenderEngine(bool)
+T sdk::HRenderEngine::HRenderEngine(bool)
+T sdk::HRenderEngine::InitMember()
+T sdk::HRenderEngine::InitShareContext(sdk::IMessageQueue::HMessage const&)
+T sdk::HRenderEngine::KeepShowPicSession(sdk::IMessageQueue::HMessage const&)
+T sdk::HRenderEngine::LoadImageToTexture(HPictureSession*, StreamFormat, void*)
+T sdk::HRenderEngine::PrintFrameRate(timeval&, timeval&, bool&, int&, int&, char const*)
+T sdk::HRenderEngine::RemovePicSession(sdk::IMessageQueue::HMessage const&)
+T sdk::HRenderEngine::Render()
+T sdk::HRenderEngine::RenderLoop()
+T sdk::HRenderEngine::RenderProgram(HProgramSession*)
+T sdk::HRenderEngine::RotationMsg(sdk::IMessageQueue::HMessage const&)
+T sdk::HRenderEngine::SetShow(bool)
+T sdk::HRenderEngine::SetTicker(void (*)(long long, char*, void*))
+T sdk::HRenderEngine::ShowRender(sdk::IMessageQueue::HMessage const&)
+T sdk::HRenderEngine::SnapShotAndroid()
+T sdk::HRenderEngine::SnapShotPX30()
+T sdk::HRenderEngine::SnapShotRawPX30()
+T sdk::HRenderEngine::Snapshot()
+T sdk::HRenderEngine::Snapshot(QString const&, int, int, void*, bool)
+T sdk::HRenderEngine::Stop()
+T sdk::HRenderEngine::SyncPush(char const*, int)
+T sdk::HRenderEngine::UVFillFull(HImageSurface*)
+T sdk::HRenderEngine::UVFillTile(HImageSurface*, HXYRect const&)
+T sdk::HRenderEngine::UpdateARGBToTexture(sdk::IMessageQueue::HMessage const&)
+T sdk::HRenderEngine::UpdateARGBToTextures(sdk::IMessageQueue::HMessage const&)
+T sdk::HRenderEngine::WorkThread()
+T sdk::HRenderEngine::~HRenderEngine()
+T sdk::HRenderEngine::~HRenderEngine()
+T sdk::HRenderEngine::~HRenderEngine()
+T sdk::HRenderHelper::DestroyMember()
+T sdk::HRenderHelper::GetInstance()
+T sdk::HRenderHelper::GetRenderInstance()
+T sdk::HRenderHelper::GetResourceInstance()
+T sdk::HRenderHelper::HRenderHelper()
+T sdk::HRenderHelper::HRenderHelper()
+T sdk::HRenderHelper::InitMember()
+T sdk::HRenderHelper::InitRender()
+T sdk::HRenderHelper::SupportMulRender()
+T sdk::HRenderHelper::~HRenderHelper()
+T sdk::HRenderHelper::~HRenderHelper()
+T sdk::HRenderTools::CopyTexture(unsigned int)
+T sdk::HRenderTools::CreateEGLImage(void*)
+T sdk::HRenderTools::CreateProgramObject(char const*, char const*)
+T sdk::HRenderTools::DestroyEGLImage(void*)
+T sdk::HRenderTools::DestroyMember()
+T sdk::HRenderTools::GetInstance()
+T sdk::HRenderTools::HRenderTools()
+T sdk::HRenderTools::HRenderTools()
+T sdk::HRenderTools::InitESContext()
+T sdk::HRenderTools::InitESContext(sdk::HESContext*, sdk::HESContext*)
+T sdk::HRenderTools::InitESShareContext()
+T sdk::HRenderTools::InitGLStatus()
+T sdk::HRenderTools::InitMember()
+T sdk::HRenderTools::InitPipeline(sdk::HESContext::HShellType)
+T sdk::HRenderTools::LoadProgramObject()
+T sdk::HRenderTools::LoadShader(unsigned int, char const*)
+T sdk::HRenderTools::LoadTexture(char const*, int, int, unsigned int)
+T sdk::HRenderTools::ReleaseTexture(unsigned int)
+T sdk::HRenderTools::ReloadViewport()
+T sdk::HRenderTools::ShutDownESContext(sdk::HESContext*)
+T sdk::HRenderTools::~HRenderTools()
+T sdk::HRenderTools::~HRenderTools()
+T sdk::HShutter::HShutter(sdk::HShutter::ShutterDirection)
+T sdk::HShutter::HShutter(sdk::HShutter::ShutterDirection)
+T sdk::HShutter::InitVertexIndexs(HPictureSession*, int)
+T sdk::HShutter::ParseEffect(HPictureSession*, int)
+T sdk::HShutter::Show(HPictureSession*, int)
+T sdk::HSlantCovert::HSlantCovert(sdk::HSlantCovert::CovertDirection)
+T sdk::HSlantCovert::HSlantCovert(sdk::HSlantCovert::CovertDirection)
+T sdk::HSlantCovert::InitVertexIndexs(HPictureSession*, int)
+T sdk::HSlantCovert::ParseEffect(HPictureSession*, int)
+T sdk::HSlantCovert::Show(HPictureSession*, int)
+T sdk::HTSeriesMove::CheckProgress(HPictureSession*, int)
+T sdk::HTSeriesMove::DeleteSession(sdk::HTSeriesMove::HRenderSession*)
+T sdk::HTSeriesMove::DisposeProgress(HPictureSession*, int)
+T sdk::HTSeriesMove::DownDraw(HPictureSession*, int)
+T sdk::HTSeriesMove::DrawImage(HPictureSession*, unsigned int, float)
+T sdk::HTSeriesMove::DrawImage(HPictureSession*, unsigned int, unsigned int, float)
+T sdk::HTSeriesMove::DrawImageSuperLong(HPictureSession*, unsigned int, float)
+T sdk::HTSeriesMove::DrawImageSuperLong(HPictureSession*, unsigned int, unsigned int, float)
+T sdk::HTSeriesMove::FindRenderSession(HPictureSession*)
+T sdk::HTSeriesMove::HTSeriesMove(sdk::HTSeriesMove::MoveDirection)
+T sdk::HTSeriesMove::HTSeriesMove(sdk::HTSeriesMove::MoveDirection)
+T sdk::HTSeriesMove::ImmediateShow(HPictureSession*, HImageSurface*)
+T sdk::HTSeriesMove::InitEffectParam(HPictureSession*, int)
+T sdk::HTSeriesMove::InitTranslateIndex(HPictureSession*, int)
+T sdk::HTSeriesMove::LeftDraw(HPictureSession*, int)
+T sdk::HTSeriesMove::LeftDrawSuperLong(HPictureSession*, int)
+T sdk::HTSeriesMove::NewSession()
+T sdk::HTSeriesMove::ReleaseEffectParam(HPictureSession*, int)
+T sdk::HTSeriesMove::ReloadEffectParam(HPictureSession*, int)
+T sdk::HTSeriesMove::Render(HPictureSession*, int, int)
+T sdk::HTSeriesMove::RightDraw(HPictureSession*, int)
+T sdk::HTSeriesMove::RightDrawSuperLong(HPictureSession*, int)
+T sdk::HTSeriesMove::Show(HPictureSession*, int)
+T sdk::HTSeriesMove::UpDraw(HPictureSession*, int)
+T sdk::HTSeriesMove::UpDrawSuperLong(HPictureSession*, int)
+T sdk::HTSeriesMove::~HTSeriesMove()
+T sdk::HTSeriesMove::~HTSeriesMove()
+T sdk::HTSeriesMove::~HTSeriesMove()
+T sdk::HTextureImage::CreateDumb(int, unsigned int, int, int)
+T sdk::HTextureImage::CreateGLTarget(sdk::HTextureImage::HDumbSession*, int, int)
+T sdk::HTextureImage::CreateSession(unsigned int, int, int)
+T sdk::HTextureImage::DestroyDumb(int, sdk::HTextureImage::HDumbSession*)
+T sdk::HTextureImage::DestroyGLTarget(sdk::HTextureImage::HDumbSession*)
+T sdk::HTextureImage::DestroySession(void*)
+T sdk::HTextureImage::GetInstance()
+T sdk::HTextureImage::HTextureImage()
+T sdk::HTextureImage::HTextureImage()
+T sdk::HTextureImage::UpdateEGLContent(void*, int, int, int, int, int, int)
+T sdk::HTextureImage::UpdateEGLContent(void*, void*, int, int, int, int, int)
+T sdk::HTextureImage::~HTextureImage()
+T sdk::HTextureImage::~HTextureImage()
+T sdk::IEffect::CheckProgress(HPictureSession*, int)
+T sdk::IEffect::CreateNotClear(HPictureSession*)
+T sdk::IEffect::DisposeProgress(HPictureSession*, int)
+T sdk::IEffect::DrawImage(HPictureSession*, HImageSurface*, HImageSurface*, int)
+T sdk::IEffect::DrawImage(HPictureSession*, HImageSurface*, int)
+T sdk::IEffect::GetIndexSurface(HPictureSession*)
+T sdk::IEffect::InitEffectParam(HPictureSession*, int)
+T sdk::IEffect::InitEffectSession(HPictureSession*, int)
+T sdk::IEffect::InitNotClear(HPictureSession*, int)
+T sdk::IEffect::InitTranslateIndex(HPictureSession*, int)
+T sdk::IEffect::InitVertexIndexs(HPictureSession*, HImageSurface*, int)
+T sdk::IEffect::ReleaseEffectParam(HPictureSession*, int)
+T sdk::IEffect::ReleaseNotClear(HPictureSession*)
+T sdk::IEffect::ReloadEffectParam(HPictureSession*, int)
+T sdk::IEffect::Render(HPictureSession*, int, int)
+T sdk::IEffect::Show(HPictureSession*, int)
+T sdk::RotationEffect::InitVertexIndexs(HPictureSession*, int)
+T sdk::RotationEffect::ParseEffect(HPictureSession*, int)
+T sdk::RotationEffect::RotationEffect()
+T sdk::RotationEffect::RotationEffect()
+T sdk::RotationEffect::Show(HPictureSession*, int)
+V typeinfo for HAreaSession
+V typeinfo for HPictureSession
+V typeinfo for HProgramSession
+V typeinfo for NativeState
+V typeinfo for NativeStateDRM
+V typeinfo for sdk::CenterEffect
+V typeinfo for sdk::DoorEffect
+V typeinfo for sdk::Flicker
+V typeinfo for sdk::HClose
+V typeinfo for sdk::HDivide
+V typeinfo for sdk::HFade
+V typeinfo for sdk::HImmediate
+V typeinfo for sdk::HMessageQueue
+V typeinfo for sdk::HParalleMove
+V typeinfo for sdk::HRandom
+V typeinfo for sdk::HRectCovert
+V typeinfo for sdk::HRenderData
+V typeinfo for sdk::HRenderEngine
+V typeinfo for sdk::HShutter
+V typeinfo for sdk::HSlantCovert
+V typeinfo for sdk::HTSeriesMove
+V typeinfo for sdk::IEffect
+V typeinfo for sdk::IEvent
+V typeinfo for sdk::IMessageQueue
+V typeinfo for sdk::IThread
+V typeinfo for sdk::RotationEffect
+V typeinfo name for HAreaSession
+V typeinfo name for HPictureSession
+V typeinfo name for HProgramSession
+V typeinfo name for NativeState
+V typeinfo name for NativeStateDRM
+V typeinfo name for sdk::CenterEffect
+V typeinfo name for sdk::DoorEffect
+V typeinfo name for sdk::Flicker
+V typeinfo name for sdk::HClose
+V typeinfo name for sdk::HDivide
+V typeinfo name for sdk::HFade
+V typeinfo name for sdk::HImmediate
+V typeinfo name for sdk::HMessageQueue
+V typeinfo name for sdk::HParalleMove
+V typeinfo name for sdk::HRandom
+V typeinfo name for sdk::HRectCovert
+V typeinfo name for sdk::HRenderData
+V typeinfo name for sdk::HRenderEngine
+V typeinfo name for sdk::HShutter
+V typeinfo name for sdk::HSlantCovert
+V typeinfo name for sdk::HTSeriesMove
+V typeinfo name for sdk::IEffect
+V typeinfo name for sdk::IEvent
+V typeinfo name for sdk::IMessageQueue
+V typeinfo name for sdk::IThread
+V typeinfo name for sdk::RotationEffect
+V vtable for HAreaSession
+V vtable for HPictureSession
+V vtable for HProgramSession
+V vtable for NativeStateDRM
+V vtable for sdk::CenterEffect
+V vtable for sdk::DoorEffect
+V vtable for sdk::Flicker
+V vtable for sdk::HClose
+V vtable for sdk::HDivide
+V vtable for sdk::HFade
+V vtable for sdk::HImmediate
+V vtable for sdk::HMessageQueue
+V vtable for sdk::HParalleMove
+V vtable for sdk::HRandom
+V vtable for sdk::HRectCovert
+V vtable for sdk::HRenderData
+V vtable for sdk::HRenderEngine
+V vtable for sdk::HShutter
+V vtable for sdk::HSlantCovert
+V vtable for sdk::HTSeriesMove
+V vtable for sdk::IEffect
+V vtable for sdk::RotationEffect
+W NativeStateDRM::~NativeStateDRM()
+W NativeStateDRM::~NativeStateDRM()
+W NativeStateDRM::~NativeStateDRM()
+W QByteArray::~QByteArray()
+W QByteArray::~QByteArray()
+W QList<HAreaSession*>::QList(QList<HAreaSession*> const&)
+W QList<HAreaSession*>::QList(QList<HAreaSession*> const&)
+W QList<HAreaSession*>::detach_helper_grow(int, int)
+W QList<HAreaSession*>::removeAll(HAreaSession* const&)
+W QList<HAreaSession*>::~QList()
+W QList<HAreaSession*>::~QList()
+W QList<HDoubleImage*>::append(HDoubleImage* const&)
+W QList<HDoubleImage*>::detach()
+W QList<HImageSurface*>::QList(QList<HImageSurface*> const&)
+W QList<HImageSurface*>::QList(QList<HImageSurface*> const&)
+W QList<HImageSurface*>::append(HImageSurface* const&)
+W QList<HImageSurface*>::detach_helper_grow(int, int)
+W QList<HImageSurface*>::~QList()
+W QList<HImageSurface*>::~QList()
+W QList<HNodeAttr>::QList(QList<HNodeAttr> const&)
+W QList<HNodeAttr>::QList(QList<HNodeAttr> const&)
+W QList<HNodeAttr>::~QList()
+W QList<HNodeAttr>::~QList()
+W QList<HPictureSession*>::QList(QList<HPictureSession*> const&)
+W QList<HPictureSession*>::QList(QList<HPictureSession*> const&)
+W QList<HProgramSession*>::QList(QList<HProgramSession*> const&)
+W QList<HProgramSession*>::QList(QList<HProgramSession*> const&)
+W QList<HProgramSession*>::append(HProgramSession* const&)
+W QList<HProgramSession*>::detach_helper_grow(int, int)
+W QList<HProgramSession*>::~QList()
+W QList<HProgramSession*>::~QList()
+W QList<QImage*>::detach_helper_grow(int, int)
+W QList<QSize>::detach_helper_grow(int, int)
+W QList<QString>::QList(QList<QString> const&)
+W QList<QString>::QList(QList<QString> const&)
+W QList<QString>::~QList()
+W QList<QString>::~QList()
+W QList<fpga::HRect>::detach_helper(int)
+W QList<fpga::HRect>::~QList()
+W QList<fpga::HRect>::~QList()
+W QList<sdk::HRandom::HRandomSession>::append(sdk::HRandom::HRandomSession const&)
+W QList<sdk::HRandom::HRandomSession>::detach_helper(int)
+W QList<sdk::HRandom::HRandomSession>::detach_helper_grow(int, int)
+W QList<sdk::HRenderTools::HTexture>::append(sdk::HRenderTools::HTexture const&)
+W QList<sdk::HRenderTools::HTexture>::detach_helper(int)
+W QList<sdk::HRenderTools::HTexture>::detach_helper_grow(int, int)
+W QList<sdk::HRenderTools::HTexture>::~QList()
+W QList<sdk::HRenderTools::HTexture>::~QList()
+W QList<sdk::HTSeriesMove::HRenderSession*>::append(sdk::HTSeriesMove::HRenderSession* const&)
+W QList<sdk::HTSeriesMove::HRenderSession*>::removeAll(sdk::HTSeriesMove::HRenderSession* const&)
+W QList<sdk::IMessageQueue::HMessage>::append(sdk::IMessageQueue::HMessage const&)
+W QList<sdk::IMessageQueue::HMessage>::detach_helper(int)
+W QList<sdk::IMessageQueue::HMessage>::detach_helper_grow(int, int)
+W QList<sdk::IMessageQueue::HMessage>::~QList()
+W QList<sdk::IMessageQueue::HMessage>::~QList()
+W QString::~QString()
+W QString::~QString()
+W sdk::CenterEffect::~CenterEffect()
+W sdk::CenterEffect::~CenterEffect()
+W sdk::CenterEffect::~CenterEffect()
+W sdk::DoorEffect::~DoorEffect()
+W sdk::DoorEffect::~DoorEffect()
+W sdk::DoorEffect::~DoorEffect()
+W sdk::Flicker::~Flicker()
+W sdk::Flicker::~Flicker()
+W sdk::Flicker::~Flicker()
+W sdk::HClose::~HClose()
+W sdk::HClose::~HClose()
+W sdk::HClose::~HClose()
+W sdk::HDivide::~HDivide()
+W sdk::HDivide::~HDivide()
+W sdk::HDivide::~HDivide()
+W sdk::HFade::~HFade()
+W sdk::HFade::~HFade()
+W sdk::HFade::~HFade()
+W sdk::HImmediate::ParseEffect(HPictureSession*, int)
+W sdk::HMulScreenTimesParam::Calc(QDateTime const&)
+W sdk::HParalleMove::~HParalleMove()
+W sdk::HParalleMove::~HParalleMove()
+W sdk::HParalleMove::~HParalleMove()
+W sdk::HRandom::InitVertexIndexs(HPictureSession*, int)
+W sdk::HRandom::ParseEffect(HPictureSession*, int)
+W sdk::HRectCovert::~HRectCovert()
+W sdk::HRectCovert::~HRectCovert()
+W sdk::HRectCovert::~HRectCovert()
+W sdk::HShutter::~HShutter()
+W sdk::HShutter::~HShutter()
+W sdk::HShutter::~HShutter()
+W sdk::HSlantCovert::~HSlantCovert()
+W sdk::HSlantCovert::~HSlantCovert()
+W sdk::HSlantCovert::~HSlantCovert()
+W sdk::HTSeriesMove::InitEffectSession(HPictureSession*, int)
+W sdk::HTSeriesMove::InitVertexIndexs(HPictureSession*, int)
+W sdk::HTSeriesMove::ParseEffect(HPictureSession*, int)
+W sdk::RotationEffect::~RotationEffect()
+W sdk::RotationEffect::~RotationEffect()
+W sdk::RotationEffect::~RotationEffect()

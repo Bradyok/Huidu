@@ -1,0 +1,48 @@
+# libBasicCore.so dynamic exports (demangled)
+B __bss_end__
+B __bss_start
+B __bss_start__
+B __end__
+B _bss_end__
+B _end
+D _edata
+T _fini
+T _init
+T sdk::HByteArray::HByteArray()
+T sdk::HByteArray::HByteArray()
+T sdk::HByteArray::HByteArray(QByteArray const&)
+T sdk::HByteArray::HByteArray(QByteArray const&)
+T sdk::HByteArray::HByteArray(char const*)
+T sdk::HByteArray::HByteArray(char const*)
+T sdk::HByteArray::HByteArray(char const*, int)
+T sdk::HByteArray::HByteArray(char const*, int)
+T sdk::HByteArray::HByteArray(int)
+T sdk::HByteArray::HByteArray(int)
+T sdk::HByteArray::HByteArray(int, char)
+T sdk::HByteArray::HByteArray(int, char)
+T sdk::HByteArray::HByteArray(sdk::HByteArray const&)
+T sdk::HByteArray::HByteArray(sdk::HByteArray const&)
+T sdk::HDir::HDir()
+T sdk::HDir::HDir()
+T sdk::HDir::HDir(QString const&)
+T sdk::HDir::HDir(QString const&)
+T sdk::HDir::HDir(sdk::HDir const&)
+T sdk::HDir::HDir(sdk::HDir const&)
+T sdk::HDir::entryInfoList(QFlags<QDir::Filter>, QFlags<QDir::SortFlag>) const
+T sdk::HFileInfo::HFileInfo()
+T sdk::HFileInfo::HFileInfo()
+T sdk::HFileInfo::HFileInfo(QFile const&)
+T sdk::HFileInfo::HFileInfo(QFile const&)
+T sdk::HFileInfo::HFileInfo(QFileInfo const&)
+T sdk::HFileInfo::HFileInfo(QFileInfo const&)
+T sdk::HFileInfo::HFileInfo(QString const&)
+T sdk::HFileInfo::HFileInfo(QString const&)
+T sdk::HFileInfo::HFileInfo(sdk::HDir const&, QString const&)
+T sdk::HFileInfo::HFileInfo(sdk::HDir const&, QString const&)
+T sdk::HFileInfo::HFileInfo(sdk::HFileInfo const&)
+T sdk::HFileInfo::HFileInfo(sdk::HFileInfo const&)
+W QList<QFileInfo>::~QList()
+W QList<QFileInfo>::~QList()
+W QList<sdk::HFileInfo>::detach_helper_grow(int, int)
+W QList<sdk::HFileInfo>::~QList()
+W QList<sdk::HFileInfo>::~QList()

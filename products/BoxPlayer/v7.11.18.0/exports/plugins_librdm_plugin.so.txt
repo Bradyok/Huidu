@@ -1,0 +1,189 @@
+# plugins_librdm_plugin.so dynamic exports (demangled)
+B __bss_end__
+B __bss_start
+B __bss_start__
+B __end__
+B _bss_end__
+B _end
+D Hd::HRDMNode::staticMetaObject
+D Hd::HRDMPlugin::staticMetaObject
+D Hd::HRDMRender::staticMetaObject
+D Hd::HRdmRequestThread::staticMetaObject
+D _edata
+T Hd::HRDMDraw::DrawImage(QByteArray const&)
+T Hd::HRDMDraw::DrawImage(QByteArray const&, int)
+T Hd::HRDMDraw::HRDMDraw(Hd::HRDMNode*)
+T Hd::HRDMDraw::HRDMDraw(Hd::HRDMNode*)
+T Hd::HRDMDraw::~HRDMDraw()
+T Hd::HRDMDraw::~HRDMDraw()
+T Hd::HRDMNode::CurlDataUpdate()
+T Hd::HRDMNode::Duration()
+T Hd::HRDMNode::GetAlign()
+T Hd::HRDMNode::GetDataRefresh()
+T Hd::HRDMNode::GetDataSource()
+T Hd::HRDMNode::GetDisplayTimes()
+T Hd::HRDMNode::GetEffectType()
+T Hd::HRDMNode::GetFontColor()
+T Hd::HRDMNode::GetFontSize()
+T Hd::HRDMNode::GetLastSourceText()
+T Hd::HRDMNode::GetSpeed()
+T Hd::HRDMNode::HRDMNode()
+T Hd::HRDMNode::HRDMNode()
+T Hd::HRDMNode::InitData()
+T Hd::HRDMNode::RefreshData()
+T Hd::HRDMNode::RequestTimer()
+T Hd::HRDMNode::SetAlign(Qt::AlignmentFlag)
+T Hd::HRDMNode::SetDataRefresh(int)
+T Hd::HRDMNode::SetDataSource(QString const&)
+T Hd::HRDMNode::SetDisplayTimes(int)
+T Hd::HRDMNode::SetEffectType(int)
+T Hd::HRDMNode::SetFontColor(unsigned int)
+T Hd::HRDMNode::SetFontSize(int)
+T Hd::HRDMNode::SetSpeed(int)
+T Hd::HRDMNode::UpdateNode(QDomElement, QList<Hd::FileInfo>&)
+T Hd::HRDMNode::metaObject() const
+T Hd::HRDMNode::qt_metacall(QMetaObject::Call, int, void**)
+T Hd::HRDMNode::qt_metacast(char const*)
+T Hd::HRDMNode::~HRDMNode()
+T Hd::HRDMNode::~HRDMNode()
+T Hd::HRDMNode::~HRDMNode()
+T Hd::HRDMPlugin::Create()
+T Hd::HRDMPlugin::CreateAreaRender(Hd::HNode*)
+T Hd::HRDMPlugin::HRDMPlugin()
+T Hd::HRDMPlugin::HRDMPlugin()
+T Hd::HRDMPlugin::PluginMatch(QDomElement&)
+T Hd::HRDMPlugin::metaObject() const
+T Hd::HRDMPlugin::qt_metacall(QMetaObject::Call, int, void**)
+T Hd::HRDMPlugin::qt_metacast(char const*)
+T Hd::HRDMRender::HRDMRender(Hd::HRDMNode*)
+T Hd::HRDMRender::HRDMRender(Hd::HRDMNode*)
+T Hd::HRDMRender::IconvImage(QVariant const&)
+T Hd::HRDMRender::InitPlay()
+T Hd::HRDMRender::Start(sdk::HContentNode*, HAreaSession*, int)
+T Hd::HRDMRender::Stop()
+T Hd::HRDMRender::UpdateTicker(QDateTime const&)
+T Hd::HRDMRender::VariantEqual(QVariant const&, QVariant const&)
+T Hd::HRDMRender::metaObject() const
+T Hd::HRDMRender::qt_metacall(QMetaObject::Call, int, void**)
+T Hd::HRDMRender::qt_metacast(char const*)
+T Hd::HRDMRender::~HRDMRender()
+T Hd::HRDMRender::~HRDMRender()
+T Hd::HRDMRender::~HRDMRender()
+T Hd::HRdmRequestThread::ClearCurl()
+T Hd::HRdmRequestThread::CurlWriteCallback(void*, unsigned int, unsigned int, void*)
+T Hd::HRdmRequestThread::DataUpdated()
+T Hd::HRdmRequestThread::GetData()
+T Hd::HRdmRequestThread::HRdmRequestThread()
+T Hd::HRdmRequestThread::HRdmRequestThread()
+T Hd::HRdmRequestThread::IconveUnicode(QByteArray const&)
+T Hd::HRdmRequestThread::ParseCurl()
+T Hd::HRdmRequestThread::ParseHeader(char*, unsigned long, unsigned long, void*)
+T Hd::HRdmRequestThread::ProgressCallback(void*, unsigned long long, unsigned long long, unsigned long long, unsigned long long)
+T Hd::HRdmRequestThread::SetData(QByteArray const&)
+T Hd::HRdmRequestThread::UpdateData()
+T Hd::HRdmRequestThread::metaObject() const
+T Hd::HRdmRequestThread::qt_metacall(QMetaObject::Call, int, void**)
+T Hd::HRdmRequestThread::qt_metacast(char const*)
+T Hd::HRdmRequestThread::~HRdmRequestThread()
+T Hd::HRdmRequestThread::~HRdmRequestThread()
+T Hd::HRdmRequestThread::~HRdmRequestThread()
+T _fini
+T _init
+T non-virtual thunk to Hd::HRDMPlugin::Create()
+T non-virtual thunk to Hd::HRDMPlugin::CreateAreaRender(Hd::HNode*)
+T non-virtual thunk to Hd::HRDMPlugin::PluginMatch(QDomElement&)
+T qt_plugin_instance
+T qt_plugin_query_metadata
+T virtual thunk to Hd::HRDMNode::~HRDMNode()
+T virtual thunk to Hd::HRDMNode::~HRDMNode()
+V VTT for Hd::HRDMNode
+V typeinfo for Hd::HRDMNode
+V typeinfo for Hd::HRDMPlugin
+V typeinfo for Hd::HRDMRender
+V typeinfo for Hd::HRdmRequestThread
+V typeinfo for Hd::IContentRender
+V typeinfo for Hd::INodePlugin
+V typeinfo for sdk::HQtThreadTask
+V typeinfo name for Hd::HRDMNode
+V typeinfo name for Hd::HRDMPlugin
+V typeinfo name for Hd::HRDMRender
+V typeinfo name for Hd::HRdmRequestThread
+V typeinfo name for Hd::IContentRender
+V typeinfo name for Hd::INodePlugin
+V typeinfo name for sdk::HQtThreadTask
+V vtable for Hd::HRDMNode
+V vtable for Hd::HRDMPlugin
+V vtable for Hd::HRDMRender
+V vtable for Hd::HRdmRequestThread
+V vtable for Hd::IContentRender
+V vtable for sdk::HQtThreadTask
+W Hd::HContentNode::Editable()
+W Hd::HContentNode::GetSDKTempFile(QList<QFileInfo>&)
+W Hd::HContentNode::TranscodeFinish()
+W Hd::HContentNode::UseInternalBorder()
+W Hd::HData::Level()
+W Hd::HData::Type()
+W Hd::HNode::InitData()
+W Hd::HNode::NodeMatch(QDomElement&)
+W Hd::HNode::ReloadAttrbute(Hd::HNode*)
+W Hd::HNode::SDKInitData(void*)
+W Hd::HRDMNode::Type()
+W Hd::HRDMPlugin::level()
+W Hd::HRDMPlugin::type()
+W Hd::HRDMPlugin::~HRDMPlugin()
+W Hd::HRDMPlugin::~HRDMPlugin()
+W Hd::HRDMPlugin::~HRDMPlugin()
+W Hd::HRDMRender::Pause()
+W Hd::HRDMRender::PlayNext()
+W Hd::HRDMRender::Remove()
+W Hd::HRDMRender::Start(unsigned int, long long)
+W Hd::HRDMRender::renderState()
+W Hd::IContentRender::AreaFinish()
+W Hd::IContentRender::PrepareData()
+W Hd::IContentRender::Restart()
+W Hd::IContentRender::Seek(long long)
+W Hd::IContentRender::SetVideoNotClear(bool)
+W Hd::IContentRender::Start(sdk::HContentNode*, HAreaSession*)
+W Hd::IContentRender::Start(sdk::HContentNode*, HAreaSession*, int)
+W Hd::IContentRender::UpdateTicker(QDateTime const&)
+W Hd::INodePlugin::AddFile(Hd::HModel*, QModelIndex&, int)
+W Hd::INodePlugin::AddFileBasisSuffix(QString, Hd::HModel*, QModelIndex&, int)
+W Hd::INodePlugin::AddFileBasisSupport(QString, Hd::HModel*, QModelIndex&, int)
+W Hd::INodePlugin::AppQuit()
+W Hd::INodePlugin::ConvertVersion(Hd::HNode*, Hd::HVersion&)
+W Hd::INodePlugin::Create(QString, Hd::HNode*)
+W Hd::INodePlugin::CreateFrameRender(Hd::HNode*)
+W Hd::INodePlugin::D3DLoseDevice()
+W Hd::INodePlugin::NewFile(Hd::HModel*, QModelIndex&, int)
+W Hd::INodePlugin::OverrideNewFile()
+W Hd::INodePlugin::SuportController(QString&)
+W Hd::INodePlugin::SupportSuffix()
+W Hd::INodePlugin::icon()
+W Hd::INodePlugin::name()
+W QByteArray::~QByteArray()
+W QByteArray::~QByteArray()
+W QList<QImage>::QList(QList<QImage> const&)
+W QList<QImage>::QList(QList<QImage> const&)
+W QList<QImage>::append(QImage const&)
+W QList<QImage>::detach_helper(int)
+W QList<QImage>::detach_helper_grow(int, int)
+W QList<QImage>::~QList()
+W QList<QImage>::~QList()
+W QList<QString>::~QList()
+W QList<QString>::~QList()
+W QScopedPointerDeleter<sdk::HQtThread>::cleanup(sdk::HQtThread*)
+W QSharedPointer<Hd::HRdmRequestThread>::deref(QtSharedPointer::ExternalRefCountData*)
+W QString::~QString()
+W QString::~QString()
+W QtPrivate::QFunctorSlotObject<sdk::HQtThreadTask::Run<Hd::HRdmRequestThread, void (Hd::HRdmRequestThread::*)()>(Hd::HRdmRequestThread*, void (Hd::HRdmRequestThread::*)())::{lambda()#1}, 0, QtPrivate::List<>, void>::impl(int, QtPrivate::QSlotObjectBase*, QObject*, void**, bool*)
+W QtPrivate::QSlotObject<void (Hd::HRDMNode::*)(), QtPrivate::List<>, void>::impl(int, QtPrivate::QSlotObjectBase*, QObject*, void**, bool*)
+W QtSharedPointer::ExternalRefCountWithCustomDeleter<Hd::HRdmRequestThread, QtSharedPointer::NormalDeleter>::deleter(QtSharedPointer::ExternalRefCountData*)
+W non-virtual thunk to Hd::HRDMPlugin::level()
+W non-virtual thunk to Hd::HRDMPlugin::type()
+W non-virtual thunk to Hd::HRDMPlugin::~HRDMPlugin()
+W non-virtual thunk to Hd::HRDMPlugin::~HRDMPlugin()
+W sdk::HQtThreadTask::~HQtThreadTask()
+W sdk::HQtThreadTask::~HQtThreadTask()
+W sdk::HQtThreadTask::~HQtThreadTask()
+u Hd::INodePlugin::icon()::img
+u guard variable for Hd::INodePlugin::icon()::img

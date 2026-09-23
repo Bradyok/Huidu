@@ -1,0 +1,126 @@
+# plugins_libscreen_plugin.so dynamic exports (demangled)
+B __bss_end__
+B __bss_start
+B __bss_start__
+B __end__
+B _bss_end__
+B _end
+D Hd::HNodeScreen::HScreenPlugin::staticMetaObject
+D _edata
+T Hd::HNodeScreen::AM335xCx0GetVideoCovertPara(int, Hd::HNodeScreen::HD_MideaInfo&)
+T Hd::HNodeScreen::AM335xDx0GetVideoCovertPara(int, Hd::HNodeScreen::HD_MideaInfo&)
+T Hd::HNodeScreen::HScreenPlugin::AppQuit()
+T Hd::HNodeScreen::HScreenPlugin::CanConvertTo(QString, QString)
+T Hd::HNodeScreen::HScreenPlugin::Create()
+T Hd::HNodeScreen::HScreenPlugin::GetDeviceIndex(QString)
+T Hd::HNodeScreen::HScreenPlugin::GrayScale(QString)
+T Hd::HNodeScreen::HScreenPlugin::HScreenPlugin()
+T Hd::HNodeScreen::HScreenPlugin::HScreenPlugin()
+T Hd::HNodeScreen::HScreenPlugin::Interface(QString)
+T Hd::HNodeScreen::HScreenPlugin::MaxAcreage(QString)
+T Hd::HNodeScreen::HScreenPlugin::MaxSize(QString)
+T Hd::HNodeScreen::HScreenPlugin::MaxVideoArea(QString)
+T Hd::HNodeScreen::HScreenPlugin::MinSize(QString)
+T Hd::HNodeScreen::HScreenPlugin::NeedTranscoding(QString)
+T Hd::HNodeScreen::HScreenPlugin::Other(QString)
+T Hd::HNodeScreen::HScreenPlugin::StorageCapacity(QString)
+T Hd::HNodeScreen::HScreenPlugin::SuportAlphaBlend(QString)
+T Hd::HNodeScreen::HScreenPlugin::SuportAreaAlpha(QString)
+T Hd::HNodeScreen::HScreenPlugin::SuportAudio(QString)
+T Hd::HNodeScreen::HScreenPlugin::SuportBackgroudMusic(QString)
+T Hd::HNodeScreen::HScreenPlugin::SuportDeviceModel()
+T Hd::HNodeScreen::HScreenPlugin::SuportDeviceModel(QString)
+T Hd::HNodeScreen::HScreenPlugin::SuportVideoOverlay(QString)
+T Hd::HNodeScreen::HScreenPlugin::TextTransparent(QString)
+T Hd::HNodeScreen::HScreenPlugin::Translate()
+T Hd::HNodeScreen::HScreenPlugin::metaObject() const
+T Hd::HNodeScreen::HScreenPlugin::qt_metacall(QMetaObject::Call, int, void**)
+T Hd::HNodeScreen::HScreenPlugin::qt_metacast(char const*)
+T Hd::HNodeScreen::HScreenPlugin::~HScreenPlugin()
+T Hd::HNodeScreen::HScreenPlugin::~HScreenPlugin()
+T Hd::HNodeScreen::HScreenPlugin::~HScreenPlugin()
+T Hd::HNodeScreen::iMax6GetVideoCovertPara(int, Hd::HNodeScreen::HD_MideaInfo&)
+T Hd::HScreenNode::HScreenNode()
+T Hd::HScreenNode::HScreenNode()
+T Hd::HScreenNode::NodeMatch(QDomElement&)
+T Hd::HScreenNode::Type()
+T _fini
+T _init
+T non-virtual thunk to Hd::HNodeScreen::HScreenPlugin::AppQuit()
+T non-virtual thunk to Hd::HNodeScreen::HScreenPlugin::CanConvertTo(QString, QString)
+T non-virtual thunk to Hd::HNodeScreen::HScreenPlugin::Create()
+T non-virtual thunk to Hd::HNodeScreen::HScreenPlugin::GrayScale(QString)
+T non-virtual thunk to Hd::HNodeScreen::HScreenPlugin::Interface(QString)
+T non-virtual thunk to Hd::HNodeScreen::HScreenPlugin::MaxAcreage(QString)
+T non-virtual thunk to Hd::HNodeScreen::HScreenPlugin::MaxSize(QString)
+T non-virtual thunk to Hd::HNodeScreen::HScreenPlugin::MaxVideoArea(QString)
+T non-virtual thunk to Hd::HNodeScreen::HScreenPlugin::MinSize(QString)
+T non-virtual thunk to Hd::HNodeScreen::HScreenPlugin::NeedTranscoding(QString)
+T non-virtual thunk to Hd::HNodeScreen::HScreenPlugin::Other(QString)
+T non-virtual thunk to Hd::HNodeScreen::HScreenPlugin::StorageCapacity(QString)
+T non-virtual thunk to Hd::HNodeScreen::HScreenPlugin::SuportAlphaBlend(QString)
+T non-virtual thunk to Hd::HNodeScreen::HScreenPlugin::SuportAreaAlpha(QString)
+T non-virtual thunk to Hd::HNodeScreen::HScreenPlugin::SuportAudio(QString)
+T non-virtual thunk to Hd::HNodeScreen::HScreenPlugin::SuportBackgroudMusic(QString)
+T non-virtual thunk to Hd::HNodeScreen::HScreenPlugin::SuportDeviceModel()
+T non-virtual thunk to Hd::HNodeScreen::HScreenPlugin::SuportDeviceModel(QString)
+T non-virtual thunk to Hd::HNodeScreen::HScreenPlugin::SuportVideoOverlay(QString)
+T non-virtual thunk to Hd::HNodeScreen::HScreenPlugin::TextTransparent(QString)
+T non-virtual thunk to Hd::HNodeScreen::HScreenPlugin::~HScreenPlugin()
+T non-virtual thunk to Hd::HNodeScreen::HScreenPlugin::~HScreenPlugin()
+T qt_plugin_instance
+T qt_plugin_query_metadata
+V VTT for Hd::HScreenNode
+V typeinfo for Hd::HNodeScreen::HScreenPlugin
+V typeinfo for Hd::HScreenNode
+V typeinfo for Hd::IControllerPlugin
+V typeinfo for Hd::INodePlugin
+V typeinfo name for Hd::HNodeScreen::HScreenPlugin
+V typeinfo name for Hd::HScreenNode
+V typeinfo name for Hd::IControllerPlugin
+V typeinfo name for Hd::INodePlugin
+V vtable for Hd::HNodeScreen::HScreenPlugin
+V vtable for Hd::HScreenNode
+W Hd::HData::Level()
+W Hd::HData::Type()
+W Hd::HNode::InitData()
+W Hd::HNode::NodeMatch(QDomElement&)
+W Hd::HNode::ReloadAttrbute(Hd::HNode*)
+W Hd::HNode::SDKInitData(void*)
+W Hd::HNodeScreen::DeviceType::~DeviceType()
+W Hd::HNodeScreen::DeviceType::~DeviceType()
+W Hd::HNodeScreen::HScreenPlugin::type()
+W Hd::HScreenNode::~HScreenNode()
+W Hd::HScreenNode::~HScreenNode()
+W Hd::IControllerPlugin::Description(QString)
+W Hd::IControllerPlugin::ProductImage(QString)
+W Hd::IControllerPlugin::SizeHite(QString)
+W Hd::IControllerPlugin::level()
+W Hd::INodePlugin::AddFile(Hd::HModel*, QModelIndex&, int)
+W Hd::INodePlugin::AddFileBasisSuffix(QString, Hd::HModel*, QModelIndex&, int)
+W Hd::INodePlugin::AddFileBasisSupport(QString, Hd::HModel*, QModelIndex&, int)
+W Hd::INodePlugin::ConvertVersion(Hd::HNode*, Hd::HVersion&)
+W Hd::INodePlugin::Create(QString, Hd::HNode*)
+W Hd::INodePlugin::CreateAreaRender(Hd::HNode*)
+W Hd::INodePlugin::CreateFrameRender(Hd::HNode*)
+W Hd::INodePlugin::D3DLoseDevice()
+W Hd::INodePlugin::NewFile(Hd::HModel*, QModelIndex&, int)
+W Hd::INodePlugin::OverrideNewFile()
+W Hd::INodePlugin::PluginMatch(QDomElement&)
+W Hd::INodePlugin::SuportController(QString&)
+W Hd::INodePlugin::SupportSuffix()
+W Hd::INodePlugin::icon()
+W Hd::INodePlugin::name()
+W QList<QString>::QList(QList<QString> const&)
+W QList<QString>::QList(QList<QString> const&)
+W QList<QString>::append(QString const&)
+W QList<QString>::detach_helper_grow(int, int)
+W QList<QString>::~QList()
+W QList<QString>::~QList()
+W QString::~QString()
+W QString::~QString()
+W non-virtual thunk to Hd::HNodeScreen::HScreenPlugin::type()
+W virtual thunk to Hd::HScreenNode::~HScreenNode()
+W virtual thunk to Hd::HScreenNode::~HScreenNode()
+u Hd::INodePlugin::icon()::img
+u guard variable for Hd::INodePlugin::icon()::img

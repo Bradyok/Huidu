@@ -22,3 +22,21 @@ BoxPlayer_V7.11.18.0_MagicPlayer_V2.12.8.0.zbin
 Upgrade Huidu.pcapng
 /fw_repack_work
 /target/release
+
+# HDPlayer release archive (tools/hdplayer_release.py): binaries, strings and
+# decompiled C stay local; MANIFEST.json, VERSION_DIFF.md and exports/ are committed
+/products/*/v*/full/
+/products/*/v*/strings/
+/products/*/v*/decompiled/
+
+# Secrets: generated root passwords for access/upgrade packages — never commit
+*.password.txt
+
+# Built firmware upgrade packages (large; regenerate with packages/*/build.py)
+packages/**/*.bin
+*.bin
+custom_upgrade.tar.gz
+
+# Buildroot / WSL build outputs live outside the repo (~/huidu-br); ignore any local copy
+br2-huidu/output*/
+br2-huidu/dl/

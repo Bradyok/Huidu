@@ -1,0 +1,7 @@
+#!/bin/sh
+# Feed the dw_wdt. Stock BoxDaemon feeds /dev/watchdog; if the bootloader armed it, the kernel
+# (WATCHDOG_HANDLE_BOOT_ENABLED) pings it only until the device is opened, so start early.
+case "$1" in
+start) [ -c /dev/watchdog ] && start-stop-daemon -S -q -b -x /sbin/watchdog -- -F -T 20 -t 5 /dev/watchdog ;;
+stop) start-stop-daemon -K -q -x /sbin/watchdog ;;
+esac

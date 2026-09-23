@@ -1,0 +1,134 @@
+# plugins_libsinglelinetext_plugin.so dynamic exports (demangled)
+B __bss_end__
+B __bss_start
+B __bss_start__
+B __end__
+B _bss_end__
+B _end
+D Hd::HTextPlugin::HSingleLineTextNode::staticMetaObject
+D Hd::HTextPlugin::HSingleLineTextPlugin::staticMetaObject
+D Hd::HTextPlugin::HSingleLineTextRender::staticMetaObject
+D _edata
+T Hd::HTextPlugin::HSingleLineTextNode::AllFileExists()
+T Hd::HTextPlugin::HSingleLineTextNode::CoverToSDKFormate(QDomElement&, Hd::GetProgramModel)
+T Hd::HTextPlugin::HSingleLineTextNode::Duration()
+T Hd::HTextPlugin::HSingleLineTextNode::HSingleLineTextNode()
+T Hd::HTextPlugin::HSingleLineTextNode::HSingleLineTextNode()
+T Hd::HTextPlugin::HSingleLineTextNode::InitData()
+T Hd::HTextPlugin::HSingleLineTextNode::NodeMatch(QDomElement&)
+T Hd::HTextPlugin::HSingleLineTextNode::Type()
+T Hd::HTextPlugin::HSingleLineTextNode::UpdateNode(QDomElement, QList<Hd::FileInfo>&)
+T Hd::HTextPlugin::HSingleLineTextNode::metaObject() const
+T Hd::HTextPlugin::HSingleLineTextNode::qt_metacall(QMetaObject::Call, int, void**)
+T Hd::HTextPlugin::HSingleLineTextNode::qt_metacast(char const*)
+T Hd::HTextPlugin::HSingleLineTextNode::~HSingleLineTextNode()
+T Hd::HTextPlugin::HSingleLineTextNode::~HSingleLineTextNode()
+T Hd::HTextPlugin::HSingleLineTextNode::~HSingleLineTextNode()
+T Hd::HTextPlugin::HSingleLineTextPlugin::Create()
+T Hd::HTextPlugin::HSingleLineTextPlugin::CreateAreaRender(Hd::HNode*)
+T Hd::HTextPlugin::HSingleLineTextPlugin::HSingleLineTextPlugin()
+T Hd::HTextPlugin::HSingleLineTextPlugin::HSingleLineTextPlugin()
+T Hd::HTextPlugin::HSingleLineTextPlugin::PluginMatch(QDomElement&)
+T Hd::HTextPlugin::HSingleLineTextPlugin::level()
+T Hd::HTextPlugin::HSingleLineTextPlugin::metaObject() const
+T Hd::HTextPlugin::HSingleLineTextPlugin::qt_metacall(QMetaObject::Call, int, void**)
+T Hd::HTextPlugin::HSingleLineTextPlugin::qt_metacast(char const*)
+T Hd::HTextPlugin::HSingleLineTextPlugin::type()
+T Hd::HTextPlugin::HSingleLineTextRender::GetImage(int)
+T Hd::HTextPlugin::HSingleLineTextRender::GetImageCounts()
+T Hd::HTextPlugin::HSingleLineTextRender::GetPlayFileName(int)
+T Hd::HTextPlugin::HSingleLineTextRender::HSingleLineTextRender(Hd::HTextPlugin::HSingleLineTextNode*)
+T Hd::HTextPlugin::HSingleLineTextRender::HSingleLineTextRender(Hd::HTextPlugin::HSingleLineTextNode*)
+T Hd::HTextPlugin::HSingleLineTextRender::Start(sdk::HContentNode*, HAreaSession*, int)
+T Hd::HTextPlugin::HSingleLineTextRender::Stop()
+T Hd::HTextPlugin::HSingleLineTextRender::TTSInit()
+T Hd::HTextPlugin::HSingleLineTextRender::TTSPause(bool)
+T Hd::HTextPlugin::HSingleLineTextRender::TTSStart()
+T Hd::HTextPlugin::HSingleLineTextRender::TTSStop()
+T Hd::HTextPlugin::HSingleLineTextRender::UpdateTicker(QDateTime const&)
+T Hd::HTextPlugin::HSingleLineTextRender::metaObject() const
+T Hd::HTextPlugin::HSingleLineTextRender::qt_metacall(QMetaObject::Call, int, void**)
+T Hd::HTextPlugin::HSingleLineTextRender::qt_metacast(char const*)
+T Hd::HTextPlugin::HSingleLineTextRender::~HSingleLineTextRender()
+T Hd::HTextPlugin::HSingleLineTextRender::~HSingleLineTextRender()
+T Hd::HTextPlugin::HSingleLineTextRender::~HSingleLineTextRender()
+T _fini
+T _init
+T non-virtual thunk to Hd::HTextPlugin::HSingleLineTextPlugin::Create()
+T non-virtual thunk to Hd::HTextPlugin::HSingleLineTextPlugin::CreateAreaRender(Hd::HNode*)
+T non-virtual thunk to Hd::HTextPlugin::HSingleLineTextPlugin::PluginMatch(QDomElement&)
+T non-virtual thunk to Hd::HTextPlugin::HSingleLineTextPlugin::level()
+T non-virtual thunk to Hd::HTextPlugin::HSingleLineTextPlugin::type()
+T qt_plugin_instance
+T qt_plugin_query_metadata
+T virtual thunk to Hd::HTextPlugin::HSingleLineTextNode::~HSingleLineTextNode()
+T virtual thunk to Hd::HTextPlugin::HSingleLineTextNode::~HSingleLineTextNode()
+V VTT for Hd::HTextPlugin::HSingleLineTextNode
+V typeinfo for Hd::HTextPlugin::HSingleLineTextNode
+V typeinfo for Hd::HTextPlugin::HSingleLineTextPlugin
+V typeinfo for Hd::HTextPlugin::HSingleLineTextRender
+V typeinfo for Hd::IContentRender
+V typeinfo for Hd::INodePlugin
+V typeinfo name for Hd::HTextPlugin::HSingleLineTextNode
+V typeinfo name for Hd::HTextPlugin::HSingleLineTextPlugin
+V typeinfo name for Hd::HTextPlugin::HSingleLineTextRender
+V typeinfo name for Hd::IContentRender
+V typeinfo name for Hd::INodePlugin
+V vtable for Hd::HTextPlugin::HSingleLineTextNode
+V vtable for Hd::HTextPlugin::HSingleLineTextPlugin
+V vtable for Hd::HTextPlugin::HSingleLineTextRender
+V vtable for Hd::IContentRender
+W Hd::HContentNode::Editable()
+W Hd::HContentNode::GetSDKTempFile(QList<QFileInfo>&)
+W Hd::HContentNode::TranscodeFinish()
+W Hd::HContentNode::UseInternalBorder()
+W Hd::HData::Level()
+W Hd::HData::Type()
+W Hd::HNode::InitData()
+W Hd::HNode::NodeMatch(QDomElement&)
+W Hd::HNode::ReloadAttrbute(Hd::HNode*)
+W Hd::HNode::SDKInitData(void*)
+W Hd::HTextEffectNode::Editable()
+W Hd::HTextEffectNode::GeneratorFinish()
+W Hd::HTextPlugin::HSingleLineTextPlugin::~HSingleLineTextPlugin()
+W Hd::HTextPlugin::HSingleLineTextPlugin::~HSingleLineTextPlugin()
+W Hd::HTextPlugin::HSingleLineTextPlugin::~HSingleLineTextPlugin()
+W Hd::HTextPlugin::HSingleLineTextRender::Pause()
+W Hd::HTextPlugin::HSingleLineTextRender::PlayNext()
+W Hd::HTextPlugin::HSingleLineTextRender::Remove()
+W Hd::HTextPlugin::HSingleLineTextRender::Start(unsigned int, long long)
+W Hd::HTextPlugin::HSingleLineTextRender::renderState()
+W Hd::IContentRender::AreaFinish()
+W Hd::IContentRender::PrepareData()
+W Hd::IContentRender::Restart()
+W Hd::IContentRender::Seek(long long)
+W Hd::IContentRender::SetVideoNotClear(bool)
+W Hd::IContentRender::Start(sdk::HContentNode*, HAreaSession*)
+W Hd::IContentRender::Start(sdk::HContentNode*, HAreaSession*, int)
+W Hd::IContentRender::UpdateTicker(QDateTime const&)
+W Hd::INodePlugin::AddFile(Hd::HModel*, QModelIndex&, int)
+W Hd::INodePlugin::AddFileBasisSuffix(QString, Hd::HModel*, QModelIndex&, int)
+W Hd::INodePlugin::AddFileBasisSupport(QString, Hd::HModel*, QModelIndex&, int)
+W Hd::INodePlugin::AppQuit()
+W Hd::INodePlugin::ConvertVersion(Hd::HNode*, Hd::HVersion&)
+W Hd::INodePlugin::Create(QString, Hd::HNode*)
+W Hd::INodePlugin::CreateFrameRender(Hd::HNode*)
+W Hd::INodePlugin::D3DLoseDevice()
+W Hd::INodePlugin::NewFile(Hd::HModel*, QModelIndex&, int)
+W Hd::INodePlugin::OverrideNewFile()
+W Hd::INodePlugin::SuportController(QString&)
+W Hd::INodePlugin::SupportSuffix()
+W Hd::INodePlugin::icon()
+W Hd::INodePlugin::name()
+W QList<QImage>::~QList()
+W QList<QImage>::~QList()
+W QList<QString>::QList(QList<QString> const&)
+W QList<QString>::QList(QList<QString> const&)
+W QList<QString>::~QList()
+W QList<QString>::~QList()
+W QString::~QString()
+W QString::~QString()
+W non-virtual thunk to Hd::HTextPlugin::HSingleLineTextPlugin::~HSingleLineTextPlugin()
+W non-virtual thunk to Hd::HTextPlugin::HSingleLineTextPlugin::~HSingleLineTextPlugin()
+u Hd::INodePlugin::icon()::img
+u guard variable for Hd::INodePlugin::icon()::img

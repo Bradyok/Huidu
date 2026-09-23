@@ -1,0 +1,1 @@
+GammaV2_Variable_BitWidth_Exponent

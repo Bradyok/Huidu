@@ -1,0 +1,61 @@
+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+/*
+ * Huidu C15 (PX30).
+ *
+ * Board description is inherited from the D15 stock DTB (px30-huidu.dtsi).
+ * TODO capture from unit: the C15's own DTB (/proc/device-tree or the RSCE
+ * resource in its boot partition) - panel timing, GPIOs, PHY, extra nodes
+ * (/dev/mdio_gpio, /dev/audio_switch) may all differ.
+ */
+
+/dts-v1/;
+#include "px30-huidu.dtsi"
+
+/ {
+	model = "Huidu C15";
+	compatible = "huidu,c15", "rockchip,px30";
+
+	/*
+	 * The "panel" is the LED FPGA's parallel RGB888 input.
+	 * TODO capture from unit: C15 timing is unknown. The whole block below
+	 * is the D15 stock timing used as a placeholder (stock bus-format
+	 * 0x1013 = MEDIA_BUS_FMT_BGR888_1X24, rgb-mode "p888").
+	 */
+	panel: panel {
+		compatible = "huidu,c15-fpga-rgb", "panel-dpi";
+		power-supply = <&vcc3v3_lcd>;
+		width-mm = <217>;
+		height-mm = <136>;
+
+		/* TODO capture from unit (placeholder = D15: 1024x128 @ 12 MHz, 60 Hz) */
+		panel-timing {
+			clock-frequency = <12000000>;
+			hactive = <1024>;
+			vactive = <128>;
+			hfront-porch = <75>;
+			hsync-len = <76>;
+			hback-porch = <75>;
+			vfront-porch = <11>;
+			vsync-len = <10>;
+			vback-porch = <11>;
+			hsync-active = <1>;
+			vsync-active = <1>;
+			de-active = <0>;
+			pixelclk-active = <0>;
+		};
+
+		port {
+			panel_in_vopb: endpoint {
+				remote-endpoint = <&vopb_out_rgb>;
+			};
+		};
+	};
+};
+
+/* VOPB (vop@ff460000) feeds the internal RGB output, as stock route-rgb did */
+&vopb_out {
+	vopb_out_rgb: endpoint@2 {
+		reg = <2>;
+		remote-endpoint = <&panel_in_vopb>;
+	};
+};

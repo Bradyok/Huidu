@@ -1,0 +1,19 @@
+# BoxPlayer dynamic exports (demangled)
+B __bss_end__
+B __bss_start
+B __bss_start__
+B __end__
+B _bss_end__
+B _end
+D __data_start
+D _edata
+R _IO_stdin_used
+T __libc_csu_fini
+T __libc_csu_init
+T _fini
+T _init
+T _start
+T main
+W QString::~QString()
+W QString::~QString()
+W data_start

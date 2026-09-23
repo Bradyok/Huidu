@@ -1,0 +1,123 @@
+# plugins_libdocument_plugin.so dynamic exports (demangled)
+B __bss_end__
+B __bss_start
+B __bss_start__
+B __end__
+B _bss_end__
+B _end
+D Hd::HDocumentPlugin::HDocumentNode::staticMetaObject
+D Hd::HDocumentPlugin::HDocumentPlugin::staticMetaObject
+D Hd::HDocumentPlugin::HDocumentRender::staticMetaObject
+D _edata
+T Hd::HDocumentPlugin::HDocumentNode::Duration()
+T Hd::HDocumentPlugin::HDocumentNode::FileListIsEmpty()
+T Hd::HDocumentPlugin::HDocumentNode::HDocumentNode()
+T Hd::HDocumentPlugin::HDocumentNode::HDocumentNode()
+T Hd::HDocumentPlugin::HDocumentNode::Type()
+T Hd::HDocumentPlugin::HDocumentNode::metaObject() const
+T Hd::HDocumentPlugin::HDocumentNode::qt_metacall(QMetaObject::Call, int, void**)
+T Hd::HDocumentPlugin::HDocumentNode::qt_metacast(char const*)
+T Hd::HDocumentPlugin::HDocumentNode::~HDocumentNode()
+T Hd::HDocumentPlugin::HDocumentNode::~HDocumentNode()
+T Hd::HDocumentPlugin::HDocumentNode::~HDocumentNode()
+T Hd::HDocumentPlugin::HDocumentPlugin::Create()
+T Hd::HDocumentPlugin::HDocumentPlugin::CreateAreaRender(Hd::HNode*)
+T Hd::HDocumentPlugin::HDocumentPlugin::HDocumentPlugin()
+T Hd::HDocumentPlugin::HDocumentPlugin::HDocumentPlugin()
+T Hd::HDocumentPlugin::HDocumentPlugin::metaObject() const
+T Hd::HDocumentPlugin::HDocumentPlugin::qt_metacall(QMetaObject::Call, int, void**)
+T Hd::HDocumentPlugin::HDocumentPlugin::qt_metacast(char const*)
+T Hd::HDocumentPlugin::HDocumentRender::GetImage(int)
+T Hd::HDocumentPlugin::HDocumentRender::GetPlayFileName(int)
+T Hd::HDocumentPlugin::HDocumentRender::HDocumentRender(Hd::HDocumentPlugin::HDocumentNode*)
+T Hd::HDocumentPlugin::HDocumentRender::HDocumentRender(Hd::HDocumentPlugin::HDocumentNode*)
+T Hd::HDocumentPlugin::HDocumentRender::InitPlayer(sdk::HContentNode*, HAreaSession*)
+T Hd::HDocumentPlugin::HDocumentRender::Pause()
+T Hd::HDocumentPlugin::HDocumentRender::Start(sdk::HContentNode*, HAreaSession*, int)
+T Hd::HDocumentPlugin::HDocumentRender::Stop()
+T Hd::HDocumentPlugin::HDocumentRender::UpdateTicker(QDateTime const&)
+T Hd::HDocumentPlugin::HDocumentRender::metaObject() const
+T Hd::HDocumentPlugin::HDocumentRender::qt_metacall(QMetaObject::Call, int, void**)
+T Hd::HDocumentPlugin::HDocumentRender::qt_metacast(char const*)
+T Hd::HDocumentPlugin::HDocumentRender::~HDocumentRender()
+T Hd::HDocumentPlugin::HDocumentRender::~HDocumentRender()
+T Hd::HDocumentPlugin::HDocumentRender::~HDocumentRender()
+T _fini
+T _init
+T non-virtual thunk to Hd::HDocumentPlugin::HDocumentPlugin::Create()
+T non-virtual thunk to Hd::HDocumentPlugin::HDocumentPlugin::CreateAreaRender(Hd::HNode*)
+T qt_plugin_instance
+T qt_plugin_query_metadata
+T virtual thunk to Hd::HDocumentPlugin::HDocumentNode::~HDocumentNode()
+T virtual thunk to Hd::HDocumentPlugin::HDocumentNode::~HDocumentNode()
+V VTT for Hd::HDocumentPlugin::HDocumentNode
+V typeinfo for Hd::HDocumentPlugin::HDocumentNode
+V typeinfo for Hd::HDocumentPlugin::HDocumentPlugin
+V typeinfo for Hd::HDocumentPlugin::HDocumentRender
+V typeinfo for Hd::IContentRender
+V typeinfo for Hd::INodePlugin
+V typeinfo name for Hd::HDocumentPlugin::HDocumentNode
+V typeinfo name for Hd::HDocumentPlugin::HDocumentPlugin
+V typeinfo name for Hd::HDocumentPlugin::HDocumentRender
+V typeinfo name for Hd::IContentRender
+V typeinfo name for Hd::INodePlugin
+V vtable for Hd::HDocumentPlugin::HDocumentNode
+V vtable for Hd::HDocumentPlugin::HDocumentPlugin
+V vtable for Hd::HDocumentPlugin::HDocumentRender
+V vtable for Hd::IContentRender
+W Hd::HContentNode::Editable()
+W Hd::HContentNode::GetSDKTempFile(QList<QFileInfo>&)
+W Hd::HContentNode::TranscodeFinish()
+W Hd::HContentNode::UseInternalBorder()
+W Hd::HData::Level()
+W Hd::HData::Type()
+W Hd::HDocumentPlugin::HDocumentNode::HaveSourcFile()
+W Hd::HDocumentPlugin::HDocumentPlugin::level()
+W Hd::HDocumentPlugin::HDocumentPlugin::type()
+W Hd::HDocumentPlugin::HDocumentPlugin::~HDocumentPlugin()
+W Hd::HDocumentPlugin::HDocumentPlugin::~HDocumentPlugin()
+W Hd::HDocumentPlugin::HDocumentPlugin::~HDocumentPlugin()
+W Hd::HDocumentPlugin::HDocumentRender::PlayNext()
+W Hd::HDocumentPlugin::HDocumentRender::Remove()
+W Hd::HDocumentPlugin::HDocumentRender::Start(unsigned int, long long)
+W Hd::HDocumentPlugin::HDocumentRender::renderState()
+W Hd::HEffectNode::~HEffectNode()
+W Hd::HNode::InitData()
+W Hd::HNode::NodeMatch(QDomElement&)
+W Hd::HNode::ReloadAttrbute(Hd::HNode*)
+W Hd::HNode::SDKInitData(void*)
+W Hd::IContentRender::AreaFinish()
+W Hd::IContentRender::PrepareData()
+W Hd::IContentRender::Restart()
+W Hd::IContentRender::Seek(long long)
+W Hd::IContentRender::SetVideoNotClear(bool)
+W Hd::IContentRender::Start(sdk::HContentNode*, HAreaSession*)
+W Hd::IContentRender::Start(sdk::HContentNode*, HAreaSession*, int)
+W Hd::IContentRender::UpdateTicker(QDateTime const&)
+W Hd::INodePlugin::AddFile(Hd::HModel*, QModelIndex&, int)
+W Hd::INodePlugin::AddFileBasisSuffix(QString, Hd::HModel*, QModelIndex&, int)
+W Hd::INodePlugin::AddFileBasisSupport(QString, Hd::HModel*, QModelIndex&, int)
+W Hd::INodePlugin::AppQuit()
+W Hd::INodePlugin::ConvertVersion(Hd::HNode*, Hd::HVersion&)
+W Hd::INodePlugin::Create(QString, Hd::HNode*)
+W Hd::INodePlugin::CreateFrameRender(Hd::HNode*)
+W Hd::INodePlugin::D3DLoseDevice()
+W Hd::INodePlugin::NewFile(Hd::HModel*, QModelIndex&, int)
+W Hd::INodePlugin::OverrideNewFile()
+W Hd::INodePlugin::PluginMatch(QDomElement&)
+W Hd::INodePlugin::SuportController(QString&)
+W Hd::INodePlugin::SupportSuffix()
+W Hd::INodePlugin::icon()
+W Hd::INodePlugin::name()
+W QList<QString>::~QList()
+W QList<QString>::~QList()
+W QMapNode<QString, unsigned int>::destroySubTree()
+W QScopedPointerDeleter<SessionParameter>::cleanup(SessionParameter*)
+W QString::~QString()
+W QString::~QString()
+W non-virtual thunk to Hd::HDocumentPlugin::HDocumentPlugin::level()
+W non-virtual thunk to Hd::HDocumentPlugin::HDocumentPlugin::type()
+W non-virtual thunk to Hd::HDocumentPlugin::HDocumentPlugin::~HDocumentPlugin()
+W non-virtual thunk to Hd::HDocumentPlugin::HDocumentPlugin::~HDocumentPlugin()
+u Hd::INodePlugin::icon()::img
+u guard variable for Hd::INodePlugin::icon()::img

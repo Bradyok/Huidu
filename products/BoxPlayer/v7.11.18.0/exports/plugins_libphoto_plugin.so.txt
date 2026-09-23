@@ -1,0 +1,158 @@
+# plugins_libphoto_plugin.so dynamic exports (demangled)
+B __bss_end__
+B __bss_start
+B __bss_start__
+B __end__
+B _bss_end__
+B _end
+D Hd::HPhotoPlugin::HPhotoNode::staticMetaObject
+D Hd::HPhotoPlugin::HPhotoPlugin::staticMetaObject
+D Hd::HPhotoPlugin::HPhotoRender::staticMetaObject
+D _edata
+T Hd::HPhotoPlugin::HPhotoNode::AfterUpdate(bool)
+T Hd::HPhotoPlugin::HPhotoNode::AllFileExists()
+T Hd::HPhotoPlugin::HPhotoNode::CoverToSDKFormate(QDomElement&, Hd::GetProgramModel)
+T Hd::HPhotoPlugin::HPhotoNode::Duration()
+T Hd::HPhotoPlugin::HPhotoNode::GetFillType()
+T Hd::HPhotoPlugin::HPhotoNode::GetFrameCounts()
+T Hd::HPhotoPlugin::HPhotoNode::GetGifDuration()
+T Hd::HPhotoPlugin::HPhotoNode::GetHeight()
+T Hd::HPhotoPlugin::HPhotoNode::GetIsGif()
+T Hd::HPhotoPlugin::HPhotoNode::GetKeepRatio()
+T Hd::HPhotoPlugin::HPhotoNode::GetSDKTempFile(QList<QFileInfo>&)
+T Hd::HPhotoPlugin::HPhotoNode::GetSourceFilePath()
+T Hd::HPhotoPlugin::HPhotoNode::GetTempPath()
+T Hd::HPhotoPlugin::HPhotoNode::GetThumbnail()
+T Hd::HPhotoPlugin::HPhotoNode::GetWidth()
+T Hd::HPhotoPlugin::HPhotoNode::HPhotoNode()
+T Hd::HPhotoPlugin::HPhotoNode::HPhotoNode()
+T Hd::HPhotoPlugin::HPhotoNode::ImageChanged()
+T Hd::HPhotoPlugin::HPhotoNode::InitData()
+T Hd::HPhotoPlugin::HPhotoNode::KeepRatioChanged(bool)
+T Hd::HPhotoPlugin::HPhotoNode::LoadGIFResource()
+T Hd::HPhotoPlugin::HPhotoNode::NodeMatch(QDomElement&)
+T Hd::HPhotoPlugin::HPhotoNode::ReLoadGIFResource()
+T Hd::HPhotoPlugin::HPhotoNode::SetConvertImage(QString)
+T Hd::HPhotoPlugin::HPhotoNode::SetFillType(FillType)
+T Hd::HPhotoPlugin::HPhotoNode::SetKeepRatio(bool)
+T Hd::HPhotoPlugin::HPhotoNode::StopPlay()
+T Hd::HPhotoPlugin::HPhotoNode::Type()
+T Hd::HPhotoPlugin::HPhotoNode::UpdateNode(QDomElement, QList<Hd::FileInfo>&)
+T Hd::HPhotoPlugin::HPhotoNode::metaObject() const
+T Hd::HPhotoPlugin::HPhotoNode::qt_metacall(QMetaObject::Call, int, void**)
+T Hd::HPhotoPlugin::HPhotoNode::qt_metacast(char const*)
+T Hd::HPhotoPlugin::HPhotoNode::~HPhotoNode()
+T Hd::HPhotoPlugin::HPhotoNode::~HPhotoNode()
+T Hd::HPhotoPlugin::HPhotoNode::~HPhotoNode()
+T Hd::HPhotoPlugin::HPhotoPlugin::Create()
+T Hd::HPhotoPlugin::HPhotoPlugin::CreateAreaRender(Hd::HNode*)
+T Hd::HPhotoPlugin::HPhotoPlugin::HPhotoPlugin()
+T Hd::HPhotoPlugin::HPhotoPlugin::HPhotoPlugin()
+T Hd::HPhotoPlugin::HPhotoPlugin::PluginMatch(QDomElement&)
+T Hd::HPhotoPlugin::HPhotoPlugin::metaObject() const
+T Hd::HPhotoPlugin::HPhotoPlugin::qt_metacall(QMetaObject::Call, int, void**)
+T Hd::HPhotoPlugin::HPhotoPlugin::qt_metacast(char const*)
+T Hd::HPhotoPlugin::HPhotoRender::HPhotoRender(Hd::HPhotoPlugin::HPhotoNode*)
+T Hd::HPhotoPlugin::HPhotoRender::HPhotoRender(Hd::HPhotoPlugin::HPhotoNode*)
+T Hd::HPhotoPlugin::HPhotoRender::InitPlayer(sdk::HContentNode*, HAreaSession*)
+T Hd::HPhotoPlugin::HPhotoRender::MergeLeftRight(QPixmap const&, QPixmap const&)
+T Hd::HPhotoPlugin::HPhotoRender::MergeTopBottom(QPixmap const&, QPixmap const&)
+T Hd::HPhotoPlugin::HPhotoRender::Pause()
+T Hd::HPhotoPlugin::HPhotoRender::ProcessImage(QString const&)
+T Hd::HPhotoPlugin::HPhotoRender::Start(sdk::HContentNode*, HAreaSession*, int)
+T Hd::HPhotoPlugin::HPhotoRender::Stop()
+T Hd::HPhotoPlugin::HPhotoRender::UpdateTicker(QDateTime const&)
+T Hd::HPhotoPlugin::HPhotoRender::metaObject() const
+T Hd::HPhotoPlugin::HPhotoRender::qt_metacall(QMetaObject::Call, int, void**)
+T Hd::HPhotoPlugin::HPhotoRender::qt_metacast(char const*)
+T Hd::HPhotoPlugin::HPhotoRender::~HPhotoRender()
+T Hd::HPhotoPlugin::HPhotoRender::~HPhotoRender()
+T Hd::HPhotoPlugin::HPhotoRender::~HPhotoRender()
+T _fini
+T _init
+T non-virtual thunk to Hd::HPhotoPlugin::HPhotoPlugin::Create()
+T non-virtual thunk to Hd::HPhotoPlugin::HPhotoPlugin::CreateAreaRender(Hd::HNode*)
+T non-virtual thunk to Hd::HPhotoPlugin::HPhotoPlugin::PluginMatch(QDomElement&)
+T qt_plugin_instance
+T qt_plugin_query_metadata
+T virtual thunk to Hd::HPhotoPlugin::HPhotoNode::~HPhotoNode()
+T virtual thunk to Hd::HPhotoPlugin::HPhotoNode::~HPhotoNode()
+V VTT for Hd::HPhotoPlugin::HPhotoNode
+V typeinfo for Hd::HPhotoPlugin::HPhotoNode
+V typeinfo for Hd::HPhotoPlugin::HPhotoPlugin
+V typeinfo for Hd::HPhotoPlugin::HPhotoRender
+V typeinfo for Hd::IContentRender
+V typeinfo for Hd::INodePlugin
+V typeinfo name for Hd::HPhotoPlugin::HPhotoNode
+V typeinfo name for Hd::HPhotoPlugin::HPhotoPlugin
+V typeinfo name for Hd::HPhotoPlugin::HPhotoRender
+V typeinfo name for Hd::IContentRender
+V typeinfo name for Hd::INodePlugin
+V vtable for Hd::HPhotoPlugin::HPhotoNode
+V vtable for Hd::HPhotoPlugin::HPhotoPlugin
+V vtable for Hd::HPhotoPlugin::HPhotoRender
+V vtable for Hd::IContentRender
+W Hd::HContentNode::Editable()
+W Hd::HContentNode::GetSDKTempFile(QList<QFileInfo>&)
+W Hd::HContentNode::TranscodeFinish()
+W Hd::HContentNode::UseInternalBorder()
+W Hd::HData::Level()
+W Hd::HData::Type()
+W Hd::HEffectNode::~HEffectNode()
+W Hd::HNode::InitData()
+W Hd::HNode::NodeMatch(QDomElement&)
+W Hd::HNode::ReloadAttrbute(Hd::HNode*)
+W Hd::HNode::SDKInitData(void*)
+W Hd::HPhotoPlugin::HPhotoNode::HaveSourcFile()
+W Hd::HPhotoPlugin::HPhotoPlugin::level()
+W Hd::HPhotoPlugin::HPhotoPlugin::type()
+W Hd::HPhotoPlugin::HPhotoPlugin::~HPhotoPlugin()
+W Hd::HPhotoPlugin::HPhotoPlugin::~HPhotoPlugin()
+W Hd::HPhotoPlugin::HPhotoPlugin::~HPhotoPlugin()
+W Hd::HPhotoPlugin::HPhotoRender::PlayNext()
+W Hd::HPhotoPlugin::HPhotoRender::Remove()
+W Hd::HPhotoPlugin::HPhotoRender::Start(unsigned int, long long)
+W Hd::HPhotoPlugin::HPhotoRender::renderState()
+W Hd::HSendFileInfo::~HSendFileInfo()
+W Hd::HSendFileInfo::~HSendFileInfo()
+W Hd::IContentRender::AreaFinish()
+W Hd::IContentRender::PrepareData()
+W Hd::IContentRender::Restart()
+W Hd::IContentRender::Seek(long long)
+W Hd::IContentRender::SetVideoNotClear(bool)
+W Hd::IContentRender::Start(sdk::HContentNode*, HAreaSession*)
+W Hd::IContentRender::Start(sdk::HContentNode*, HAreaSession*, int)
+W Hd::IContentRender::UpdateTicker(QDateTime const&)
+W Hd::INodePlugin::AddFile(Hd::HModel*, QModelIndex&, int)
+W Hd::INodePlugin::AddFileBasisSuffix(QString, Hd::HModel*, QModelIndex&, int)
+W Hd::INodePlugin::AddFileBasisSupport(QString, Hd::HModel*, QModelIndex&, int)
+W Hd::INodePlugin::AppQuit()
+W Hd::INodePlugin::ConvertVersion(Hd::HNode*, Hd::HVersion&)
+W Hd::INodePlugin::Create(QString, Hd::HNode*)
+W Hd::INodePlugin::CreateFrameRender(Hd::HNode*)
+W Hd::INodePlugin::D3DLoseDevice()
+W Hd::INodePlugin::NewFile(Hd::HModel*, QModelIndex&, int)
+W Hd::INodePlugin::OverrideNewFile()
+W Hd::INodePlugin::SuportController(QString&)
+W Hd::INodePlugin::SupportSuffix()
+W Hd::INodePlugin::icon()
+W Hd::INodePlugin::name()
+W QByteArray::~QByteArray()
+W QByteArray::~QByteArray()
+W QList<Hd::FileInfo>::append(Hd::FileInfo const&)
+W QList<Hd::FileInfo>::detach_helper_grow(int, int)
+W QList<Hd::HSendFileInfo>::QList(QList<Hd::HSendFileInfo> const&)
+W QList<Hd::HSendFileInfo>::QList(QList<Hd::HSendFileInfo> const&)
+W QList<Hd::HSendFileInfo>::detach_helper(int)
+W QList<Hd::HSendFileInfo>::~QList()
+W QList<Hd::HSendFileInfo>::~QList()
+W QList<QFileInfo>::detach_helper_grow(int, int)
+W QMapNode<QString, unsigned int>::destroySubTree()
+W QString::~QString()
+W QString::~QString()
+W non-virtual thunk to Hd::HPhotoPlugin::HPhotoPlugin::level()
+W non-virtual thunk to Hd::HPhotoPlugin::HPhotoPlugin::type()
+W non-virtual thunk to Hd::HPhotoPlugin::HPhotoPlugin::~HPhotoPlugin()
+W non-virtual thunk to Hd::HPhotoPlugin::HPhotoPlugin::~HPhotoPlugin()
+u Hd::INodePlugin::icon()::img
+u guard variable for Hd::INodePlugin::icon()::img

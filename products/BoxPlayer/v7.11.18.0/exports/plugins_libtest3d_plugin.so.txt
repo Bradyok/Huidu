@@ -1,0 +1,135 @@
+# plugins_libtest3d_plugin.so dynamic exports (demangled)
+B __bss_end__
+B __bss_start
+B __bss_start__
+B __end__
+B _bss_end__
+B _end
+D Hd::HText3DNode::staticMetaObject
+D Hd::HText3DPlugin::staticMetaObject
+D Hd::HText3DRender::staticMetaObject
+D _edata
+T HImageReader::Clear()
+T HImageReader::GetNextImage(QImage*)
+T HImageReader::GetValid()
+T HImageReader::HImageReader()
+T HImageReader::HImageReader()
+T HImageReader::Init(QString const&)
+T HImageReader::IsEnd()
+T HImageReader::Load()
+T HImageReader::Print()
+T HImageReader::Reset()
+T HImageReader::~HImageReader()
+T HImageReader::~HImageReader()
+T Hd::HText3DNode::Duration()
+T Hd::HText3DNode::HText3DNode()
+T Hd::HText3DNode::HText3DNode()
+T Hd::HText3DNode::InitData()
+T Hd::HText3DNode::SetDuration(int)
+T Hd::HText3DNode::Type()
+T Hd::HText3DNode::metaObject() const
+T Hd::HText3DNode::qt_metacall(QMetaObject::Call, int, void**)
+T Hd::HText3DNode::qt_metacast(char const*)
+T Hd::HText3DNode::~HText3DNode()
+T Hd::HText3DNode::~HText3DNode()
+T Hd::HText3DNode::~HText3DNode()
+T Hd::HText3DPlugin::Create()
+T Hd::HText3DPlugin::CreateAreaRender(Hd::HNode*)
+T Hd::HText3DPlugin::HText3DPlugin()
+T Hd::HText3DPlugin::HText3DPlugin()
+T Hd::HText3DPlugin::level()
+T Hd::HText3DPlugin::metaObject() const
+T Hd::HText3DPlugin::name()
+T Hd::HText3DPlugin::qt_metacall(QMetaObject::Call, int, void**)
+T Hd::HText3DPlugin::qt_metacast(char const*)
+T Hd::HText3DPlugin::type()
+T Hd::HText3DPlugin::~HText3DPlugin()
+T Hd::HText3DPlugin::~HText3DPlugin()
+T Hd::HText3DPlugin::~HText3DPlugin()
+T Hd::HText3DRender::HText3DRender(Hd::HText3DNode*)
+T Hd::HText3DRender::HText3DRender(Hd::HText3DNode*)
+T Hd::HText3DRender::Start(sdk::HContentNode*, HAreaSession*, int)
+T Hd::HText3DRender::Stop()
+T Hd::HText3DRender::UpdateTicker(QDateTime const&)
+T Hd::HText3DRender::metaObject() const
+T Hd::HText3DRender::qt_metacall(QMetaObject::Call, int, void**)
+T Hd::HText3DRender::qt_metacast(char const*)
+T Hd::HText3DRender::~HText3DRender()
+T Hd::HText3DRender::~HText3DRender()
+T Hd::HText3DRender::~HText3DRender()
+T _fini
+T _init
+T non-virtual thunk to Hd::HText3DPlugin::Create()
+T non-virtual thunk to Hd::HText3DPlugin::CreateAreaRender(Hd::HNode*)
+T non-virtual thunk to Hd::HText3DPlugin::level()
+T non-virtual thunk to Hd::HText3DPlugin::name()
+T non-virtual thunk to Hd::HText3DPlugin::type()
+T non-virtual thunk to Hd::HText3DPlugin::~HText3DPlugin()
+T non-virtual thunk to Hd::HText3DPlugin::~HText3DPlugin()
+T qCleanupResources_text3d_plugin()
+T qInitResources_text3d_plugin()
+T qt_plugin_instance
+T qt_plugin_query_metadata
+T virtual thunk to Hd::HText3DNode::~HText3DNode()
+T virtual thunk to Hd::HText3DNode::~HText3DNode()
+V VTT for Hd::HText3DNode
+V typeinfo for Hd::HText3DNode
+V typeinfo for Hd::HText3DPlugin
+V typeinfo for Hd::HText3DRender
+V typeinfo for Hd::IContentRender
+V typeinfo for Hd::INodePlugin
+V typeinfo name for Hd::HText3DNode
+V typeinfo name for Hd::HText3DPlugin
+V typeinfo name for Hd::HText3DRender
+V typeinfo name for Hd::IContentRender
+V typeinfo name for Hd::INodePlugin
+V vtable for Hd::HText3DNode
+V vtable for Hd::HText3DPlugin
+V vtable for Hd::HText3DRender
+V vtable for Hd::IContentRender
+W Hd::HContentNode::Editable()
+W Hd::HContentNode::GetSDKTempFile(QList<QFileInfo>&)
+W Hd::HContentNode::TranscodeFinish()
+W Hd::HContentNode::UseInternalBorder()
+W Hd::HData::Level()
+W Hd::HData::Type()
+W Hd::HNode::InitData()
+W Hd::HNode::NodeMatch(QDomElement&)
+W Hd::HNode::ReloadAttrbute(Hd::HNode*)
+W Hd::HNode::SDKInitData(void*)
+W Hd::HText3DNode::UseInternalBorder()
+W Hd::HText3DRender::Pause()
+W Hd::HText3DRender::PlayNext()
+W Hd::HText3DRender::Remove()
+W Hd::HText3DRender::Start(unsigned int, long long)
+W Hd::HText3DRender::renderState()
+W Hd::HTextEffectNode::Editable()
+W Hd::HTextEffectNode::GeneratorFinish()
+W Hd::IContentRender::AreaFinish()
+W Hd::IContentRender::PrepareData()
+W Hd::IContentRender::Restart()
+W Hd::IContentRender::Seek(long long)
+W Hd::IContentRender::SetVideoNotClear(bool)
+W Hd::IContentRender::Start(sdk::HContentNode*, HAreaSession*)
+W Hd::IContentRender::Start(sdk::HContentNode*, HAreaSession*, int)
+W Hd::IContentRender::UpdateTicker(QDateTime const&)
+W Hd::INodePlugin::AddFile(Hd::HModel*, QModelIndex&, int)
+W Hd::INodePlugin::AddFileBasisSuffix(QString, Hd::HModel*, QModelIndex&, int)
+W Hd::INodePlugin::AddFileBasisSupport(QString, Hd::HModel*, QModelIndex&, int)
+W Hd::INodePlugin::AppQuit()
+W Hd::INodePlugin::ConvertVersion(Hd::HNode*, Hd::HVersion&)
+W Hd::INodePlugin::Create(QString, Hd::HNode*)
+W Hd::INodePlugin::CreateFrameRender(Hd::HNode*)
+W Hd::INodePlugin::D3DLoseDevice()
+W Hd::INodePlugin::NewFile(Hd::HModel*, QModelIndex&, int)
+W Hd::INodePlugin::OverrideNewFile()
+W Hd::INodePlugin::PluginMatch(QDomElement&)
+W Hd::INodePlugin::SuportController(QString&)
+W Hd::INodePlugin::SupportSuffix()
+W Hd::INodePlugin::icon()
+W QList<QString>::~QList()
+W QList<QString>::~QList()
+W QString::~QString()
+W QString::~QString()
+u Hd::INodePlugin::icon()::img
+u guard variable for Hd::INodePlugin::icon()::img

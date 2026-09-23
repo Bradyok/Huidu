@@ -1,0 +1,143 @@
+# plugins_libtemperatures_plugin.so dynamic exports (demangled)
+B __bss_end__
+B __bss_start
+B __bss_start__
+B __end__
+B _bss_end__
+B _end
+D Hd::HTemperaturePlugin::HTemperatureNode::staticMetaObject
+D Hd::HTemperaturePlugin::HTemperaturePlugin::staticMetaObject
+D Hd::HTemperaturePlugin::HTemperatureRender::staticMetaObject
+D _edata
+T Hd::HTemperaturePlugin::HTemperatureNode::AttrChanged()
+T Hd::HTemperaturePlugin::HTemperatureNode::Duration()
+T Hd::HTemperaturePlugin::HTemperatureNode::HTemperatureNode()
+T Hd::HTemperaturePlugin::HTemperatureNode::HTemperatureNode()
+T Hd::HTemperaturePlugin::HTemperatureNode::InitData()
+T Hd::HTemperaturePlugin::HTemperatureNode::NodeSizeChange(QSize)
+T Hd::HTemperaturePlugin::HTemperatureNode::SetAdjust(int)
+T Hd::HTemperaturePlugin::HTemperatureNode::SetCentigrade(int)
+T Hd::HTemperaturePlugin::HTemperatureNode::SetFahrenheit(int)
+T Hd::HTemperaturePlugin::HTemperatureNode::SetMultiple(int, bool)
+T Hd::HTemperaturePlugin::HTemperatureNode::SetSpace(int)
+T Hd::HTemperaturePlugin::HTemperatureNode::SetSwapArea(int, bool)
+T Hd::HTemperaturePlugin::HTemperatureNode::SetTempColor(int)
+T Hd::HTemperaturePlugin::HTemperatureNode::SetTempFont(QString)
+T Hd::HTemperaturePlugin::HTemperatureNode::SetTempSize(int)
+T Hd::HTemperaturePlugin::HTemperatureNode::SetTemperatureTakeInteger(int)
+T Hd::HTemperaturePlugin::HTemperatureNode::SetTemperatureValue(int)
+T Hd::HTemperaturePlugin::HTemperatureNode::SetTextColor(int)
+T Hd::HTemperaturePlugin::HTemperatureNode::SetTextFont(QString)
+T Hd::HTemperaturePlugin::HTemperatureNode::SetTextSize(int)
+T Hd::HTemperaturePlugin::HTemperatureNode::SetTopText(QString)
+T Hd::HTemperaturePlugin::HTemperatureNode::TextChanged()
+T Hd::HTemperaturePlugin::HTemperatureNode::Type()
+T Hd::HTemperaturePlugin::HTemperatureNode::UpdateNode(QDomElement, QList<Hd::FileInfo>&)
+T Hd::HTemperaturePlugin::HTemperatureNode::metaObject() const
+T Hd::HTemperaturePlugin::HTemperatureNode::qt_metacall(QMetaObject::Call, int, void**)
+T Hd::HTemperaturePlugin::HTemperatureNode::qt_metacast(char const*)
+T Hd::HTemperaturePlugin::HTemperaturePlugin::Create()
+T Hd::HTemperaturePlugin::HTemperaturePlugin::CreateAreaRender(Hd::HNode*)
+T Hd::HTemperaturePlugin::HTemperaturePlugin::HTemperaturePlugin()
+T Hd::HTemperaturePlugin::HTemperaturePlugin::HTemperaturePlugin()
+T Hd::HTemperaturePlugin::HTemperaturePlugin::metaObject() const
+T Hd::HTemperaturePlugin::HTemperaturePlugin::qt_metacall(QMetaObject::Call, int, void**)
+T Hd::HTemperaturePlugin::HTemperaturePlugin::qt_metacast(char const*)
+T Hd::HTemperaturePlugin::HTemperatureRender::DrawBackground()
+T Hd::HTemperaturePlugin::HTemperatureRender::DrawBackgroundImage(int, int, QPixmap)
+T Hd::HTemperaturePlugin::HTemperatureRender::DrawTempImage()
+T Hd::HTemperaturePlugin::HTemperatureRender::GetTemperature()
+T Hd::HTemperaturePlugin::HTemperatureRender::HTemperatureRender(Hd::HTemperaturePlugin::HTemperatureNode*)
+T Hd::HTemperaturePlugin::HTemperatureRender::HTemperatureRender(Hd::HTemperaturePlugin::HTemperatureNode*)
+T Hd::HTemperaturePlugin::HTemperatureRender::InitLoad()
+T Hd::HTemperaturePlugin::HTemperatureRender::InitTempValue(int)
+T Hd::HTemperaturePlugin::HTemperatureRender::Pause()
+T Hd::HTemperaturePlugin::HTemperatureRender::Start(sdk::HContentNode*, HAreaSession*, int)
+T Hd::HTemperaturePlugin::HTemperatureRender::Stop()
+T Hd::HTemperaturePlugin::HTemperatureRender::UpdatePlayTemperature()
+T Hd::HTemperaturePlugin::HTemperatureRender::UpdateTempValueChanged(HSensorInterface::SensorType, int)
+T Hd::HTemperaturePlugin::HTemperatureRender::metaObject() const
+T Hd::HTemperaturePlugin::HTemperatureRender::qt_metacall(QMetaObject::Call, int, void**)
+T Hd::HTemperaturePlugin::HTemperatureRender::qt_metacast(char const*)
+T Hd::HTemperaturePlugin::HTemperatureRender::~HTemperatureRender()
+T Hd::HTemperaturePlugin::HTemperatureRender::~HTemperatureRender()
+T Hd::HTemperaturePlugin::HTemperatureRender::~HTemperatureRender()
+T _fini
+T _init
+T non-virtual thunk to Hd::HTemperaturePlugin::HTemperaturePlugin::Create()
+T non-virtual thunk to Hd::HTemperaturePlugin::HTemperaturePlugin::CreateAreaRender(Hd::HNode*)
+T qt_plugin_instance
+T qt_plugin_query_metadata
+V VTT for Hd::HTemperaturePlugin::HTemperatureNode
+V typeinfo for Hd::HTemperaturePlugin::HTemperatureNode
+V typeinfo for Hd::HTemperaturePlugin::HTemperaturePlugin
+V typeinfo for Hd::HTemperaturePlugin::HTemperatureRender
+V typeinfo for Hd::IContentRender
+V typeinfo for Hd::INodePlugin
+V typeinfo name for Hd::HTemperaturePlugin::HTemperatureNode
+V typeinfo name for Hd::HTemperaturePlugin::HTemperaturePlugin
+V typeinfo name for Hd::HTemperaturePlugin::HTemperatureRender
+V typeinfo name for Hd::IContentRender
+V typeinfo name for Hd::INodePlugin
+V vtable for Hd::HTemperaturePlugin::HTemperatureNode
+V vtable for Hd::HTemperaturePlugin::HTemperaturePlugin
+V vtable for Hd::HTemperaturePlugin::HTemperatureRender
+V vtable for Hd::IContentRender
+W Hd::HContentNode::Editable()
+W Hd::HContentNode::GetSDKTempFile(QList<QFileInfo>&)
+W Hd::HContentNode::TranscodeFinish()
+W Hd::HContentNode::UseInternalBorder()
+W Hd::HData::Level()
+W Hd::HData::Type()
+W Hd::HNode::InitData()
+W Hd::HNode::NodeMatch(QDomElement&)
+W Hd::HNode::ReloadAttrbute(Hd::HNode*)
+W Hd::HNode::SDKInitData(void*)
+W Hd::HTemperaturePlugin::HTemperatureNode::~HTemperatureNode()
+W Hd::HTemperaturePlugin::HTemperatureNode::~HTemperatureNode()
+W Hd::HTemperaturePlugin::HTemperaturePlugin::level()
+W Hd::HTemperaturePlugin::HTemperaturePlugin::type()
+W Hd::HTemperaturePlugin::HTemperaturePlugin::~HTemperaturePlugin()
+W Hd::HTemperaturePlugin::HTemperaturePlugin::~HTemperaturePlugin()
+W Hd::HTemperaturePlugin::HTemperaturePlugin::~HTemperaturePlugin()
+W Hd::HTemperaturePlugin::HTemperatureRender::PlayNext()
+W Hd::HTemperaturePlugin::HTemperatureRender::Remove()
+W Hd::HTemperaturePlugin::HTemperatureRender::Start(unsigned int, long long)
+W Hd::HTemperaturePlugin::HTemperatureRender::renderState()
+W Hd::IContentRender::AreaFinish()
+W Hd::IContentRender::PrepareData()
+W Hd::IContentRender::Restart()
+W Hd::IContentRender::Seek(long long)
+W Hd::IContentRender::SetVideoNotClear(bool)
+W Hd::IContentRender::Start(sdk::HContentNode*, HAreaSession*)
+W Hd::IContentRender::Start(sdk::HContentNode*, HAreaSession*, int)
+W Hd::IContentRender::UpdateTicker(QDateTime const&)
+W Hd::INodePlugin::AddFile(Hd::HModel*, QModelIndex&, int)
+W Hd::INodePlugin::AddFileBasisSuffix(QString, Hd::HModel*, QModelIndex&, int)
+W Hd::INodePlugin::AddFileBasisSupport(QString, Hd::HModel*, QModelIndex&, int)
+W Hd::INodePlugin::AppQuit()
+W Hd::INodePlugin::ConvertVersion(Hd::HNode*, Hd::HVersion&)
+W Hd::INodePlugin::Create(QString, Hd::HNode*)
+W Hd::INodePlugin::CreateFrameRender(Hd::HNode*)
+W Hd::INodePlugin::D3DLoseDevice()
+W Hd::INodePlugin::NewFile(Hd::HModel*, QModelIndex&, int)
+W Hd::INodePlugin::OverrideNewFile()
+W Hd::INodePlugin::PluginMatch(QDomElement&)
+W Hd::INodePlugin::SuportController(QString&)
+W Hd::INodePlugin::SupportSuffix()
+W Hd::INodePlugin::icon()
+W Hd::INodePlugin::name()
+W QList<Hd::FileInfo>::append(Hd::FileInfo const&)
+W QList<Hd::FileInfo>::detach_helper_grow(int, int)
+W QList<QString>::~QList()
+W QList<QString>::~QList()
+W QString::~QString()
+W QString::~QString()
+W non-virtual thunk to Hd::HTemperaturePlugin::HTemperaturePlugin::level()
+W non-virtual thunk to Hd::HTemperaturePlugin::HTemperaturePlugin::type()
+W non-virtual thunk to Hd::HTemperaturePlugin::HTemperaturePlugin::~HTemperaturePlugin()
+W non-virtual thunk to Hd::HTemperaturePlugin::HTemperaturePlugin::~HTemperaturePlugin()
+W virtual thunk to Hd::HTemperaturePlugin::HTemperatureNode::~HTemperatureNode()
+W virtual thunk to Hd::HTemperaturePlugin::HTemperatureNode::~HTemperatureNode()
+u Hd::INodePlugin::icon()::img
+u guard variable for Hd::INodePlugin::icon()::img

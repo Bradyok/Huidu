@@ -1,0 +1,16 @@
+[2m2026-09-23T10:42:47.523826Z[0m [32m INFO[0m [2mhuidu_protocol::discovery[0m[2m:[0m UDP registration: sent triggers to 192.168.1.249:9527, waiting for cmd=0x0002...
+[2m2026-09-23T10:42:47.524807Z[0m [32m INFO[0m [2mhuidu_protocol::discovery[0m[2m:[0m UDP registration: sent cmd=0x0003 acknowledgment
+[2m2026-09-23T10:42:48.272304Z[0m [32m INFO[0m [2mhuidu_protocol::discovery[0m[2m:[0m UDP registration: sent cmd=0x0006 + cmd=0x0341 — registration complete (token=[57, 0, 0, 0])
+[2m2026-09-23T10:42:48.272388Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m UDP registration complete — session token: [39, 00, 00, 00]
+[2m2026-09-23T10:42:48.272394Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Waiting 5s for device to process UDP registration...
+[2m2026-09-23T10:42:53.274022Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528: connecting for management login…
+[2m2026-09-23T10:42:53.280319Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528 management login authorised (ClientInfoAck ok)
+[2m2026-09-23T10:42:53.283358Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528 VersionResp: firmware=7.4.59.0
+[2m2026-09-23T10:42:53.283400Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528 management login complete — device will accept BoxStreamInit
+[2m2026-09-23T10:42:53.283408Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Connecting to 192.168.1.249:9527
+[2m2026-09-23T10:42:53.287089Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Connected to 192.168.1.249:9527
+[2m2026-09-23T10:42:53.488649Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m TCP connection settled — ready for BoxStreamInit
+Connected to 192.168.1.249:9527
+[2m2026-09-23T10:42:53.488792Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Sending BoxStreamInit token=[39, 00, 00, 00]...
+[2m2026-09-23T10:42:53.488937Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m BoxStreamInit sent — waiting for BoxStreamInitAck (0x0201)
+Error: Connection failed: connection closed by device

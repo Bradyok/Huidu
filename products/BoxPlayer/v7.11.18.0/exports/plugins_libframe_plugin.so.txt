@@ -1,0 +1,120 @@
+# plugins_libframe_plugin.so dynamic exports (demangled)
+B __bss_end__
+B __bss_start
+B __bss_start__
+B __end__
+B _bss_end__
+B _end
+D Hd::HFramePlugin::FrameRender::staticMetaObject
+D Hd::HFramePlugin::HFramePlugin::staticMetaObject
+D _edata
+T Hd::HFramePlugin::FramePluginNode::FramePluginNode()
+T Hd::HFramePlugin::FramePluginNode::FramePluginNode()
+T Hd::HFramePlugin::FramePluginNode::InitData()
+T Hd::HFramePlugin::FramePluginNode::NodeMatch(QDomElement&)
+T Hd::HFramePlugin::FramePluginNode::Type()
+T Hd::HFramePlugin::FrameRender::AreaFinish()
+T Hd::HFramePlugin::FrameRender::CheckFinish()
+T Hd::HFramePlugin::FrameRender::FrameRender(Hd::HFramePlugin::FramePluginNode*)
+T Hd::HFramePlugin::FrameRender::FrameRender(Hd::HFramePlugin::FramePluginNode*)
+T Hd::HFramePlugin::FrameRender::GetSyncInfo(int&, long long&)
+T Hd::HFramePlugin::FrameRender::IsFinish()
+T Hd::HFramePlugin::FrameRender::ON_AlphaChaned(int)
+T Hd::HFramePlugin::FrameRender::ON_FrameChanged()
+T Hd::HFramePlugin::FrameRender::Pause()
+T Hd::HFramePlugin::FrameRender::Play(int)
+T Hd::HFramePlugin::FrameRender::PlayNext()
+T Hd::HFramePlugin::FrameRender::PrepareData()
+T Hd::HFramePlugin::FrameRender::Previous(int)
+T Hd::HFramePlugin::FrameRender::ReloadAtrrbute()
+T Hd::HFramePlugin::FrameRender::Remove()
+T Hd::HFramePlugin::FrameRender::RenderFinish(int)
+T Hd::HFramePlugin::FrameRender::RenderId()
+T Hd::HFramePlugin::FrameRender::Restart()
+T Hd::HFramePlugin::FrameRender::Seek(long long)
+T Hd::HFramePlugin::FrameRender::Start(long long)
+T Hd::HFramePlugin::FrameRender::Stop()
+T Hd::HFramePlugin::FrameRender::layer()
+T Hd::HFramePlugin::FrameRender::metaObject() const
+T Hd::HFramePlugin::FrameRender::qt_metacall(QMetaObject::Call, int, void**)
+T Hd::HFramePlugin::FrameRender::qt_metacast(char const*)
+T Hd::HFramePlugin::FrameRender::rect()
+T Hd::HFramePlugin::FrameRender::setLayer(int)
+T Hd::HFramePlugin::FrameRender::~FrameRender()
+T Hd::HFramePlugin::FrameRender::~FrameRender()
+T Hd::HFramePlugin::FrameRender::~FrameRender()
+T Hd::HFramePlugin::HFramePlugin::Create()
+T Hd::HFramePlugin::HFramePlugin::CreateFrameRender(Hd::HNode*)
+T Hd::HFramePlugin::HFramePlugin::HFramePlugin()
+T Hd::HFramePlugin::HFramePlugin::HFramePlugin()
+T Hd::HFramePlugin::HFramePlugin::PluginMatch(QDomElement&)
+T Hd::HFramePlugin::HFramePlugin::metaObject() const
+T Hd::HFramePlugin::HFramePlugin::qt_metacall(QMetaObject::Call, int, void**)
+T Hd::HFramePlugin::HFramePlugin::qt_metacast(char const*)
+T _fini
+T _init
+T non-virtual thunk to Hd::HFramePlugin::HFramePlugin::Create()
+T non-virtual thunk to Hd::HFramePlugin::HFramePlugin::CreateFrameRender(Hd::HNode*)
+T non-virtual thunk to Hd::HFramePlugin::HFramePlugin::PluginMatch(QDomElement&)
+T qt_plugin_instance
+T qt_plugin_query_metadata
+V VTT for Hd::HFramePlugin::FramePluginNode
+V typeinfo for Hd::HFramePlugin::FramePluginNode
+V typeinfo for Hd::HFramePlugin::FrameRender
+V typeinfo for Hd::HFramePlugin::HFramePlugin
+V typeinfo for Hd::INodePlugin
+V typeinfo name for Hd::HFramePlugin::FramePluginNode
+V typeinfo name for Hd::HFramePlugin::FrameRender
+V typeinfo name for Hd::HFramePlugin::HFramePlugin
+V typeinfo name for Hd::INodePlugin
+V vtable for Hd::HFramePlugin::FramePluginNode
+V vtable for Hd::HFramePlugin::FrameRender
+V vtable for Hd::HFramePlugin::HFramePlugin
+W Hd::HContentNode::UseInternalBorder()
+W Hd::HData::Level()
+W Hd::HData::Type()
+W Hd::HFramePlugin::FramePluginNode::~FramePluginNode()
+W Hd::HFramePlugin::FramePluginNode::~FramePluginNode()
+W Hd::HFramePlugin::HFramePlugin::level()
+W Hd::HFramePlugin::HFramePlugin::type()
+W Hd::HFramePlugin::HFramePlugin::~HFramePlugin()
+W Hd::HFramePlugin::HFramePlugin::~HFramePlugin()
+W Hd::HFramePlugin::HFramePlugin::~HFramePlugin()
+W Hd::HNode::InitData()
+W Hd::HNode::NodeMatch(QDomElement&)
+W Hd::HNode::ReloadAttrbute(Hd::HNode*)
+W Hd::HNode::SDKInitData(void*)
+W Hd::IContentRender::AreaFinish()
+W Hd::IContentRender::PrepareData()
+W Hd::IContentRender::Seek(long long)
+W Hd::IContentRender::SetVideoNotClear(bool)
+W Hd::INodePlugin::AddFile(Hd::HModel*, QModelIndex&, int)
+W Hd::INodePlugin::AddFileBasisSuffix(QString, Hd::HModel*, QModelIndex&, int)
+W Hd::INodePlugin::AddFileBasisSupport(QString, Hd::HModel*, QModelIndex&, int)
+W Hd::INodePlugin::AppQuit()
+W Hd::INodePlugin::ConvertVersion(Hd::HNode*, Hd::HVersion&)
+W Hd::INodePlugin::Create(QString, Hd::HNode*)
+W Hd::INodePlugin::CreateAreaRender(Hd::HNode*)
+W Hd::INodePlugin::D3DLoseDevice()
+W Hd::INodePlugin::NewFile(Hd::HModel*, QModelIndex&, int)
+W Hd::INodePlugin::OverrideNewFile()
+W Hd::INodePlugin::SuportController(QString&)
+W Hd::INodePlugin::SupportSuffix()
+W Hd::INodePlugin::icon()
+W Hd::INodePlugin::name()
+W QList<Hd::HNode*>::QList(QList<Hd::HNode*> const&)
+W QList<Hd::HNode*>::QList(QList<Hd::HNode*> const&)
+W QList<Hd::HNode*>::~QList()
+W QList<Hd::HNode*>::~QList()
+W QString::~QString()
+W QString::~QString()
+W QWeakPointer<QObject>::~QWeakPointer()
+W QWeakPointer<QObject>::~QWeakPointer()
+W non-virtual thunk to Hd::HFramePlugin::HFramePlugin::level()
+W non-virtual thunk to Hd::HFramePlugin::HFramePlugin::type()
+W non-virtual thunk to Hd::HFramePlugin::HFramePlugin::~HFramePlugin()
+W non-virtual thunk to Hd::HFramePlugin::HFramePlugin::~HFramePlugin()
+W virtual thunk to Hd::HFramePlugin::FramePluginNode::~FramePluginNode()
+W virtual thunk to Hd::HFramePlugin::FramePluginNode::~FramePluginNode()
+u Hd::INodePlugin::icon()::img
+u guard variable for Hd::INodePlugin::icon()::img

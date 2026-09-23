@@ -1,0 +1,134 @@
+# plugins_libwps_plugin.so dynamic exports (demangled)
+B __bss_end__
+B __bss_start
+B __bss_start__
+B __end__
+B _bss_end__
+B _end
+D Hd::HWpsPlugins::HWpsNode::staticMetaObject
+D Hd::HWpsPlugins::HWpsPlugin::staticMetaObject
+D Hd::HWpsPlugins::HWpsRender::staticMetaObject
+D _edata
+T Hd::HWpsPlugins::HWpsNode::Duration()
+T Hd::HWpsPlugins::HWpsNode::ErrorInfo(QString const&)
+T Hd::HWpsPlugins::HWpsNode::HWpsNode()
+T Hd::HWpsPlugins::HWpsNode::HWpsNode()
+T Hd::HWpsPlugins::HWpsNode::InitData()
+T Hd::HWpsPlugins::HWpsNode::NodeAlready(int)
+T Hd::HWpsPlugins::HWpsNode::ON_SizeChange(QSize)
+T Hd::HWpsPlugins::HWpsNode::PageDuration()
+T Hd::HWpsPlugins::HWpsNode::PlayIndex(int)
+T Hd::HWpsPlugins::HWpsNode::SetSourceFilePath(QStringList const&)
+T Hd::HWpsPlugins::HWpsNode::UpdateAllData()
+T Hd::HWpsPlugins::HWpsNode::UpdatePageInfo(int, int)
+T Hd::HWpsPlugins::HWpsNode::UpdateProgress(int)
+T Hd::HWpsPlugins::HWpsNode::metaObject() const
+T Hd::HWpsPlugins::HWpsNode::qt_metacall(QMetaObject::Call, int, void**)
+T Hd::HWpsPlugins::HWpsNode::qt_metacast(char const*)
+T Hd::HWpsPlugins::HWpsNode::~HWpsNode()
+T Hd::HWpsPlugins::HWpsNode::~HWpsNode()
+T Hd::HWpsPlugins::HWpsNode::~HWpsNode()
+T Hd::HWpsPlugins::HWpsPlugin::Create()
+T Hd::HWpsPlugins::HWpsPlugin::CreateAreaRender(Hd::HNode*)
+T Hd::HWpsPlugins::HWpsPlugin::HWpsPlugin()
+T Hd::HWpsPlugins::HWpsPlugin::HWpsPlugin()
+T Hd::HWpsPlugins::HWpsPlugin::metaObject() const
+T Hd::HWpsPlugins::HWpsPlugin::qt_metacall(QMetaObject::Call, int, void**)
+T Hd::HWpsPlugins::HWpsPlugin::qt_metacast(char const*)
+T Hd::HWpsPlugins::HWpsRender::GetImage(int)
+T Hd::HWpsPlugins::HWpsRender::HWpsRender(Hd::HWpsPlugins::HWpsNode*)
+T Hd::HWpsPlugins::HWpsRender::HWpsRender(Hd::HWpsPlugins::HWpsNode*)
+T Hd::HWpsPlugins::HWpsRender::InitPlayer(sdk::HContentNode*, HAreaSession*)
+T Hd::HWpsPlugins::HWpsRender::Pause()
+T Hd::HWpsPlugins::HWpsRender::PlayNext()
+T Hd::HWpsPlugins::HWpsRender::Remove()
+T Hd::HWpsPlugins::HWpsRender::Start(sdk::HContentNode*, HAreaSession*, int)
+T Hd::HWpsPlugins::HWpsRender::Stop()
+T Hd::HWpsPlugins::HWpsRender::UpdateTicker(QDateTime const&)
+T Hd::HWpsPlugins::HWpsRender::metaObject() const
+T Hd::HWpsPlugins::HWpsRender::qt_metacall(QMetaObject::Call, int, void**)
+T Hd::HWpsPlugins::HWpsRender::qt_metacast(char const*)
+T Hd::HWpsPlugins::HWpsRender::renderState()
+T Hd::HWpsPlugins::HWpsRender::~HWpsRender()
+T Hd::HWpsPlugins::HWpsRender::~HWpsRender()
+T Hd::HWpsPlugins::HWpsRender::~HWpsRender()
+T _fini
+T _init
+T non-virtual thunk to Hd::HWpsPlugins::HWpsPlugin::Create()
+T non-virtual thunk to Hd::HWpsPlugins::HWpsPlugin::CreateAreaRender(Hd::HNode*)
+T qt_plugin_instance
+T qt_plugin_query_metadata
+T virtual thunk to Hd::HWpsPlugins::HWpsNode::~HWpsNode()
+T virtual thunk to Hd::HWpsPlugins::HWpsNode::~HWpsNode()
+V VTT for Hd::HWpsPlugins::HWpsNode
+V typeinfo for Hd::HWpsPlugins::HWpsNode
+V typeinfo for Hd::HWpsPlugins::HWpsPlugin
+V typeinfo for Hd::HWpsPlugins::HWpsRender
+V typeinfo for Hd::IContentRender
+V typeinfo for Hd::INodePlugin
+V typeinfo name for Hd::HWpsPlugins::HWpsNode
+V typeinfo name for Hd::HWpsPlugins::HWpsPlugin
+V typeinfo name for Hd::HWpsPlugins::HWpsRender
+V typeinfo name for Hd::IContentRender
+V typeinfo name for Hd::INodePlugin
+V vtable for Hd::HWpsPlugins::HWpsNode
+V vtable for Hd::HWpsPlugins::HWpsPlugin
+V vtable for Hd::HWpsPlugins::HWpsRender
+V vtable for Hd::IContentRender
+W Hd::HContentNode::Editable()
+W Hd::HContentNode::GetSDKTempFile(QList<QFileInfo>&)
+W Hd::HContentNode::TranscodeFinish()
+W Hd::HContentNode::UseInternalBorder()
+W Hd::HData::Level()
+W Hd::HData::Type()
+W Hd::HEffectNode::~HEffectNode()
+W Hd::HNode::InitData()
+W Hd::HNode::NodeMatch(QDomElement&)
+W Hd::HNode::ReloadAttrbute(Hd::HNode*)
+W Hd::HNode::SDKInitData(void*)
+W Hd::HWpsPlugins::HWpsNode::AllFileExists()
+W Hd::HWpsPlugins::HWpsNode::Type()
+W Hd::HWpsPlugins::HWpsPlugin::level()
+W Hd::HWpsPlugins::HWpsPlugin::type()
+W Hd::HWpsPlugins::HWpsPlugin::~HWpsPlugin()
+W Hd::HWpsPlugins::HWpsPlugin::~HWpsPlugin()
+W Hd::HWpsPlugins::HWpsPlugin::~HWpsPlugin()
+W Hd::HWpsPlugins::HWpsRender::Start(unsigned int, long long)
+W Hd::IContentRender::AreaFinish()
+W Hd::IContentRender::PrepareData()
+W Hd::IContentRender::Restart()
+W Hd::IContentRender::Seek(long long)
+W Hd::IContentRender::SetVideoNotClear(bool)
+W Hd::IContentRender::Start(sdk::HContentNode*, HAreaSession*)
+W Hd::IContentRender::Start(sdk::HContentNode*, HAreaSession*, int)
+W Hd::IContentRender::UpdateTicker(QDateTime const&)
+W Hd::INodePlugin::AddFile(Hd::HModel*, QModelIndex&, int)
+W Hd::INodePlugin::AddFileBasisSuffix(QString, Hd::HModel*, QModelIndex&, int)
+W Hd::INodePlugin::AddFileBasisSupport(QString, Hd::HModel*, QModelIndex&, int)
+W Hd::INodePlugin::AppQuit()
+W Hd::INodePlugin::ConvertVersion(Hd::HNode*, Hd::HVersion&)
+W Hd::INodePlugin::Create(QString, Hd::HNode*)
+W Hd::INodePlugin::CreateFrameRender(Hd::HNode*)
+W Hd::INodePlugin::D3DLoseDevice()
+W Hd::INodePlugin::NewFile(Hd::HModel*, QModelIndex&, int)
+W Hd::INodePlugin::OverrideNewFile()
+W Hd::INodePlugin::PluginMatch(QDomElement&)
+W Hd::INodePlugin::SuportController(QString&)
+W Hd::INodePlugin::SupportSuffix()
+W Hd::INodePlugin::icon()
+W Hd::INodePlugin::name()
+W QList<QString>::QList(QList<QString> const&)
+W QList<QString>::QList(QList<QString> const&)
+W QList<QString>::detach_helper_grow(int, int)
+W QList<QString>::~QList()
+W QList<QString>::~QList()
+W QMapNode<QString, unsigned int>::destroySubTree()
+W QScopedPointerDeleter<SessionParameter>::cleanup(SessionParameter*)
+W QString::~QString()
+W QString::~QString()
+W non-virtual thunk to Hd::HWpsPlugins::HWpsPlugin::level()
+W non-virtual thunk to Hd::HWpsPlugins::HWpsPlugin::type()
+W non-virtual thunk to Hd::HWpsPlugins::HWpsPlugin::~HWpsPlugin()
+W non-virtual thunk to Hd::HWpsPlugins::HWpsPlugin::~HWpsPlugin()
+u Hd::INodePlugin::icon()::img
+u guard variable for Hd::INodePlugin::icon()::img

@@ -1,0 +1,188 @@
+# plugins_libewatch_plugin.so dynamic exports (demangled)
+B __bss_end__
+B __bss_start
+B __bss_start__
+B __end__
+B _bss_end__
+B _end
+D Hd::HEWatchPlugin::HEWatchGenerate::staticMetaObject
+D Hd::HEWatchPlugin::HEWatchNode::staticMetaObject
+D Hd::HEWatchPlugin::HEWatchPlugin::staticMetaObject
+D Hd::HEWatchPlugin::HEWatchRender::staticMetaObject
+D _edata
+R Hd::HEWatchPlugin::HEWatchGenerate::LINE_WIDTH_RATIO
+R Hd::HEWatchPlugin::HEWatchGenerate::MAX_TEXT_SIZE
+R Hd::HEWatchPlugin::HEWatchGenerate::MIN_TEXT_SIZE
+R Hd::HEWatchPlugin::HEWatchGenerate::NUM_WIDTH_RATIO
+R Hd::HEWatchPlugin::HEWatchGenerate::SKEW_RADIAN
+R Hd::HEWatchPlugin::HEWatchGenerate::SPACE_RATIO
+T Hd::HEWatchPlugin::HEWatchGenerate::CreateBottomLine(float, float, float, float)
+T Hd::HEWatchPlugin::HEWatchGenerate::CreateLeftBottomLine(float, float, float, float)
+T Hd::HEWatchPlugin::HEWatchGenerate::CreateLeftTopLine(float, float, float, float)
+T Hd::HEWatchPlugin::HEWatchGenerate::CreateMidLine(float, float, float, float)
+T Hd::HEWatchPlugin::HEWatchGenerate::CreateNumber(int, bool)
+T Hd::HEWatchPlugin::HEWatchGenerate::CreateRightBottomLine(float, float, float, float)
+T Hd::HEWatchPlugin::HEWatchGenerate::CreateRightTopLine(float, float, float, float)
+T Hd::HEWatchPlugin::HEWatchGenerate::CreateTopLine(float, float, float, float)
+T Hd::HEWatchPlugin::HEWatchGenerate::GetDots(bool, bool)
+T Hd::HEWatchPlugin::HEWatchGenerate::GetDotsSize(bool)
+T Hd::HEWatchPlugin::HEWatchGenerate::GetDotsSpace(bool)
+T Hd::HEWatchPlugin::HEWatchGenerate::GetLengthRatio(int)
+T Hd::HEWatchPlugin::HEWatchGenerate::GetNumber(int, bool)
+T Hd::HEWatchPlugin::HEWatchGenerate::GetNumberSize(bool) const
+T Hd::HEWatchPlugin::HEWatchGenerate::GetNumberSpace(bool)
+T Hd::HEWatchPlugin::HEWatchGenerate::GetPureDots(bool, bool)
+T Hd::HEWatchPlugin::HEWatchGenerate::GetSkew()
+T Hd::HEWatchPlugin::HEWatchGenerate::GetSpace(bool)
+T Hd::HEWatchPlugin::HEWatchGenerate::GetTextLength(bool)
+T Hd::HEWatchPlugin::HEWatchGenerate::GetTextSize(bool)
+T Hd::HEWatchPlugin::HEWatchGenerate::HEWatchGenerate(Hd::HEWatchPlugin::HEWatchNode*)
+T Hd::HEWatchPlugin::HEWatchGenerate::HEWatchGenerate(Hd::HEWatchPlugin::HEWatchNode*)
+T Hd::HEWatchPlugin::HEWatchGenerate::Number(int, int, QColor, QColor)
+T Hd::HEWatchPlugin::HEWatchGenerate::NumerBit(int)
+T Hd::HEWatchPlugin::HEWatchGenerate::UpdateData()
+T Hd::HEWatchPlugin::HEWatchGenerate::fitTextSize(int, int, int, int, int)
+T Hd::HEWatchPlugin::HEWatchGenerate::metaObject() const
+T Hd::HEWatchPlugin::HEWatchGenerate::qt_metacall(QMetaObject::Call, int, void**)
+T Hd::HEWatchPlugin::HEWatchGenerate::qt_metacast(char const*)
+T Hd::HEWatchPlugin::HEWatchNode::AllFileExists()
+T Hd::HEWatchPlugin::HEWatchNode::DrawMsImage(QPixmap&, QDateTime const&, bool, QSize const&)
+T Hd::HEWatchPlugin::HEWatchNode::Duration()
+T Hd::HEWatchPlugin::HEWatchNode::GenerateImage()
+T Hd::HEWatchPlugin::HEWatchNode::GenerteFinish()
+T Hd::HEWatchPlugin::HEWatchNode::GetCreateDirPath()
+T Hd::HEWatchPlugin::HEWatchNode::GetSourceFilePath()
+T Hd::HEWatchPlugin::HEWatchNode::GetTimeImage(QDateTime const&, QSize&, bool)
+T Hd::HEWatchPlugin::HEWatchNode::HEWatchNode()
+T Hd::HEWatchPlugin::HEWatchNode::HEWatchNode()
+T Hd::HEWatchPlugin::HEWatchNode::InitData()
+T Hd::HEWatchPlugin::HEWatchNode::NodeAlready(int)
+T Hd::HEWatchPlugin::HEWatchNode::ON_SizeChange(QSize)
+T Hd::HEWatchPlugin::HEWatchNode::ReGenerate()
+T Hd::HEWatchPlugin::HEWatchNode::SetSourceFilePath(QString const&)
+T Hd::HEWatchPlugin::HEWatchNode::metaObject() const
+T Hd::HEWatchPlugin::HEWatchNode::qt_metacall(QMetaObject::Call, int, void**)
+T Hd::HEWatchPlugin::HEWatchNode::qt_metacast(char const*)
+T Hd::HEWatchPlugin::HEWatchNode::~HEWatchNode()
+T Hd::HEWatchPlugin::HEWatchNode::~HEWatchNode()
+T Hd::HEWatchPlugin::HEWatchNode::~HEWatchNode()
+T Hd::HEWatchPlugin::HEWatchPlugin::Create()
+T Hd::HEWatchPlugin::HEWatchPlugin::CreateAreaRender(Hd::HNode*)
+T Hd::HEWatchPlugin::HEWatchPlugin::HEWatchPlugin()
+T Hd::HEWatchPlugin::HEWatchPlugin::HEWatchPlugin()
+T Hd::HEWatchPlugin::HEWatchPlugin::metaObject() const
+T Hd::HEWatchPlugin::HEWatchPlugin::qt_metacall(QMetaObject::Call, int, void**)
+T Hd::HEWatchPlugin::HEWatchPlugin::qt_metacast(char const*)
+T Hd::HEWatchPlugin::HEWatchRender::GetImage(bool)
+T Hd::HEWatchPlugin::HEWatchRender::HEWatchRender(Hd::HEWatchPlugin::HEWatchNode*)
+T Hd::HEWatchPlugin::HEWatchRender::HEWatchRender(Hd::HEWatchPlugin::HEWatchNode*)
+T Hd::HEWatchPlugin::HEWatchRender::Pause()
+T Hd::HEWatchPlugin::HEWatchRender::PlayNext()
+T Hd::HEWatchPlugin::HEWatchRender::Remove()
+T Hd::HEWatchPlugin::HEWatchRender::Start(sdk::HContentNode*, HAreaSession*, int)
+T Hd::HEWatchPlugin::HEWatchRender::Stop()
+T Hd::HEWatchPlugin::HEWatchRender::ThreadRun()
+T Hd::HEWatchPlugin::HEWatchRender::ThreadStop()
+T Hd::HEWatchPlugin::HEWatchRender::ThreadUpdate()
+T Hd::HEWatchPlugin::HEWatchRender::UpdateTicker(QDateTime const&)
+T Hd::HEWatchPlugin::HEWatchRender::metaObject() const
+T Hd::HEWatchPlugin::HEWatchRender::qt_metacall(QMetaObject::Call, int, void**)
+T Hd::HEWatchPlugin::HEWatchRender::qt_metacast(char const*)
+T Hd::HEWatchPlugin::HEWatchRender::renderState()
+T Hd::HEWatchPlugin::HEWatchRender::~HEWatchRender()
+T Hd::HEWatchPlugin::HEWatchRender::~HEWatchRender()
+T Hd::HEWatchPlugin::HEWatchRender::~HEWatchRender()
+T _fini
+T _init
+T non-virtual thunk to Hd::HEWatchPlugin::HEWatchPlugin::Create()
+T non-virtual thunk to Hd::HEWatchPlugin::HEWatchPlugin::CreateAreaRender(Hd::HNode*)
+T qt_plugin_instance
+T qt_plugin_query_metadata
+T virtual thunk to Hd::HEWatchPlugin::HEWatchNode::~HEWatchNode()
+T virtual thunk to Hd::HEWatchPlugin::HEWatchNode::~HEWatchNode()
+V VTT for Hd::HEWatchPlugin::HEWatchNode
+V typeinfo for Hd::HEWatchPlugin::HEWatchGenerate
+V typeinfo for Hd::HEWatchPlugin::HEWatchNode
+V typeinfo for Hd::HEWatchPlugin::HEWatchPlugin
+V typeinfo for Hd::HEWatchPlugin::HEWatchRender
+V typeinfo for Hd::IContentRender
+V typeinfo for Hd::INodePlugin
+V typeinfo for sdk::HQtThreadTask
+V typeinfo name for Hd::HEWatchPlugin::HEWatchGenerate
+V typeinfo name for Hd::HEWatchPlugin::HEWatchNode
+V typeinfo name for Hd::HEWatchPlugin::HEWatchPlugin
+V typeinfo name for Hd::HEWatchPlugin::HEWatchRender
+V typeinfo name for Hd::IContentRender
+V typeinfo name for Hd::INodePlugin
+V typeinfo name for sdk::HQtThreadTask
+V vtable for Hd::HEWatchPlugin::HEWatchGenerate
+V vtable for Hd::HEWatchPlugin::HEWatchNode
+V vtable for Hd::HEWatchPlugin::HEWatchPlugin
+V vtable for Hd::HEWatchPlugin::HEWatchRender
+V vtable for Hd::IContentRender
+V vtable for sdk::HQtThreadTask
+W Hd::HContentNode::Editable()
+W Hd::HContentNode::GetSDKTempFile(QList<QFileInfo>&)
+W Hd::HContentNode::TranscodeFinish()
+W Hd::HContentNode::UseInternalBorder()
+W Hd::HData::Level()
+W Hd::HData::Type()
+W Hd::HEWatchPlugin::HEWatchGenerate::~HEWatchGenerate()
+W Hd::HEWatchPlugin::HEWatchGenerate::~HEWatchGenerate()
+W Hd::HEWatchPlugin::HEWatchGenerate::~HEWatchGenerate()
+W Hd::HEWatchPlugin::HEWatchNode::Type()
+W Hd::HEWatchPlugin::HEWatchPlugin::level()
+W Hd::HEWatchPlugin::HEWatchPlugin::type()
+W Hd::HEWatchPlugin::HEWatchPlugin::~HEWatchPlugin()
+W Hd::HEWatchPlugin::HEWatchPlugin::~HEWatchPlugin()
+W Hd::HEWatchPlugin::HEWatchPlugin::~HEWatchPlugin()
+W Hd::HEWatchPlugin::HEWatchRender::Start(unsigned int, long long)
+W Hd::HEffectNode::~HEffectNode()
+W Hd::HNode::InitData()
+W Hd::HNode::NodeMatch(QDomElement&)
+W Hd::HNode::ReloadAttrbute(Hd::HNode*)
+W Hd::HNode::SDKInitData(void*)
+W Hd::IContentRender::AreaFinish()
+W Hd::IContentRender::PrepareData()
+W Hd::IContentRender::Restart()
+W Hd::IContentRender::Seek(long long)
+W Hd::IContentRender::SetVideoNotClear(bool)
+W Hd::IContentRender::Start(sdk::HContentNode*, HAreaSession*)
+W Hd::IContentRender::Start(sdk::HContentNode*, HAreaSession*, int)
+W Hd::IContentRender::UpdateTicker(QDateTime const&)
+W Hd::INodePlugin::AddFile(Hd::HModel*, QModelIndex&, int)
+W Hd::INodePlugin::AddFileBasisSuffix(QString, Hd::HModel*, QModelIndex&, int)
+W Hd::INodePlugin::AddFileBasisSupport(QString, Hd::HModel*, QModelIndex&, int)
+W Hd::INodePlugin::AppQuit()
+W Hd::INodePlugin::ConvertVersion(Hd::HNode*, Hd::HVersion&)
+W Hd::INodePlugin::Create(QString, Hd::HNode*)
+W Hd::INodePlugin::CreateFrameRender(Hd::HNode*)
+W Hd::INodePlugin::D3DLoseDevice()
+W Hd::INodePlugin::NewFile(Hd::HModel*, QModelIndex&, int)
+W Hd::INodePlugin::OverrideNewFile()
+W Hd::INodePlugin::PluginMatch(QDomElement&)
+W Hd::INodePlugin::SuportController(QString&)
+W Hd::INodePlugin::SupportSuffix()
+W Hd::INodePlugin::icon()
+W Hd::INodePlugin::name()
+W QList<QString>::QList(QList<QString> const&)
+W QList<QString>::QList(QList<QString> const&)
+W QList<QString>::append(QString const&)
+W QList<QString>::detach_helper_grow(int, int)
+W QList<QString>::~QList()
+W QList<QString>::~QList()
+W QMapNode<QString, unsigned int>::destroySubTree()
+W QScopedPointerDeleter<sdk::HQtThread>::cleanup(sdk::HQtThread*)
+W QString::~QString()
+W QString::~QString()
+W QtPrivate::QFunctorSlotObject<sdk::HQtThreadTask::Run<Hd::HEWatchPlugin::HEWatchRender, void (Hd::HEWatchPlugin::HEWatchRender::*)()>(Hd::HEWatchPlugin::HEWatchRender*, void (Hd::HEWatchPlugin::HEWatchRender::*)())::{lambda()#1}, 0, QtPrivate::List<>, void>::impl(int, QtPrivate::QSlotObjectBase*, QObject*, void**, bool*)
+W QtPrivate::QSlotObject<void (Hd::HEWatchPlugin::HEWatchNode::*)(), QtPrivate::List<>, void>::impl(int, QtPrivate::QSlotObjectBase*, QObject*, void**, bool*)
+W non-virtual thunk to Hd::HEWatchPlugin::HEWatchPlugin::level()
+W non-virtual thunk to Hd::HEWatchPlugin::HEWatchPlugin::type()
+W non-virtual thunk to Hd::HEWatchPlugin::HEWatchPlugin::~HEWatchPlugin()
+W non-virtual thunk to Hd::HEWatchPlugin::HEWatchPlugin::~HEWatchPlugin()
+W sdk::HQtThreadTask::~HQtThreadTask()
+W sdk::HQtThreadTask::~HQtThreadTask()
+W sdk::HQtThreadTask::~HQtThreadTask()
+u Hd::INodePlugin::icon()::img
+u guard variable for Hd::INodePlugin::icon()::img
