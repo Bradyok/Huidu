@@ -923,6 +923,107 @@ pub async fn handle_sdk_command(
             ok!(&reading.to_xml())
         }
 
+        // ── Real-time readouts (GetCurrent*) ───────────────────────────────────
+        // Live telemetry a CMS/dashboard polls. Each mirrors state the player
+        // already tracks; hardware-backed ones read sysfs like GetSensorInfo.
+        "GetCurrentDateTime" | "getCurrentDateTime"
+        | "GetCurrentTime" | "getCurrentTime" => {
+            let now = chrono::Local::now();
+            let dt = now.format("%Y-%m-%d %H:%M:%S").to_string();
+            let tz = { services.read().await.timezone_offset };
+            ok!(&format!("<time value=\"{dt}\" timezone=\"{tz}\"/>"))
+        }
+
+        "GetCurrentVolume" | "getCurrentVolume" => {
+            let vol = { services.read().await.volume };
+            ok!(&format!("<volume value=\"{vol}\"/>"))
+        }
+
+        "GetCurrentLuminance" | "getCurrentLuminance" => {
+            // Current applied brightness (0..255). Units without an ambient light
+            // sensor report the set level, which is what stock does.
+            let level = { services.read().await.brightness.get_level() };
+            ok!(&format!("<luminance value=\"{level}\"/>"))
+        }
+
+        "GetCurrentTemperature" | "getCurrentTemperature" => {
+            let t = tokio::task::spawn_blocking(current_temperature_c).await.unwrap_or(None);
+            match t {
+                Some(c) => ok!(&format!("<temperature value=\"{c}\" unit=\"C\"/>")),
+                None => ok!("<temperature value=\"\" unit=\"C\"/>"),
+            }
+        }
+
+        "GetCurrentHumity" | "getCurrentHumity" => {
+            // Humidity comes from an optional sensor; report it if read_sensor_data
+            // surfaced one, else empty.
+            let h = tokio::task::spawn_blocking(|| {
+                read_sensor_data()
+                    .into_iter()
+                    .find(|(n, _)| n.to_lowercase().contains("humid"))
+                    .map(|(_, v)| v)
+            })
+            .await
+            .unwrap_or(None);
+            ok!(&format!("<humidity value=\"{}\"/>", h.unwrap_or_default()))
+        }
+
+        "GetCurrentGPSInfo" | "getCurrentGPSInfo" => {
+            let reading = { services.read().await.gps_reading.clone() };
+            ok!(&reading.to_xml())
+        }
+
+        "GetCurrentProtocolVersion" | "getCurrentProtocolVersion" => {
+            ok!("<version value=\"0x1000000\"/>")
+        }
+
+        "GetCurrentVersion" | "getCurrentVersion" => {
+            ok!("<version value=\"7.11.18.0\"/>")
+        }
+
+        "GetCurrentPlayProgramIndex" | "getCurrentPlayProgramIndex" => {
+            let idx = {
+                let s = services.read().await;
+                s.programs
+                    .iter()
+                    .position(|p| p.guid == s.current_program_guid)
+                    .map(|i| i as i32)
+                    .unwrap_or(-1)
+            };
+            ok!(&format!("<program index=\"{idx}\"/>"))
+        }
+
+        "GetCurrentProgram" | "getCurrentProgram" => {
+            let (guid, name) = {
+                let s = services.read().await;
+                let g = s.current_program_guid.clone();
+                let n = s
+                    .programs
+                    .iter()
+                    .find(|p| p.guid == g)
+                    .map(|p| p.name.clone())
+                    .unwrap_or_default();
+                (g, n)
+            };
+            ok!(&format!(
+                "<program guid=\"{}\" name=\"{}\"/>",
+                xml_esc(&guid),
+                xml_esc(&name)
+            ))
+        }
+
+        "GetCurrentImage" | "getCurrentImage" => {
+            // The current rendered frame (PNG) — same buffer as GetScreenshot.
+            let state = services.read().await;
+            let buf = state.screenshot.lock().await;
+            if buf.is_empty() {
+                ok!("<image format=\"png\" data=\"\"/>")
+            } else {
+                let b64 = base64::engine::general_purpose::STANDARD.encode(&*buf);
+                ok!(&format!("<image format=\"png\" data=\"{b64}\"/>"))
+            }
+        }
+
         "GetRelayInfo" | "getRelayInfo" => {
             let pins = {
                 let s = services.read().await;
@@ -1460,6 +1561,19 @@ fn read_mem_info() -> Option<(u8, u64)> {
     let used_kb = total_kb.saturating_sub(avail_kb);
     let pct = ((used_kb * 100 / total_kb) as u8).min(100);
     Some((pct, total_kb / 1024))
+}
+
+/// Best-available board/CPU temperature in °C for the GetCurrent* readouts.
+/// Cross-platform wrapper over [`read_cpu_temp_c`] (returns `None` off-device).
+fn current_temperature_c() -> Option<i32> {
+    #[cfg(unix)]
+    {
+        read_cpu_temp_c()
+    }
+    #[cfg(not(unix))]
+    {
+        None
+    }
 }
 
 /// Read CPU temperature in degrees Celsius from a thermal zone sysfs node.
@@ -2018,6 +2132,52 @@ mod tests {
         assert_eq!(sources.len(), 2);
         assert_eq!(sources.get("score").map(|s| s.as_str()), Some("3-1"));
         assert_eq!(sources.get("team").map(|s| s.as_str()), Some("Home"));
+    }
+
+    // ── GetCurrent* real-time readout handlers (end-to-end) ───────────────────
+
+    async fn call_sdk(method: &str) -> String {
+        let session = Session::new();
+        let (tx, _rx) = mpsc::channel::<PlayerCommand>(8);
+        let services = Arc::new(RwLock::new(ServicesState::new(std::path::PathBuf::from("."))));
+        let xml = format!("<sdk guid=\"t\"><in method=\"{method}\"></in></sdk>");
+        handle_sdk_command(&xml, &session, &tx, ".", &services, 128, 64)
+            .await
+            .unwrap()
+    }
+
+    #[tokio::test]
+    async fn getcurrent_methods_respond() {
+        // (method, substring the payload must contain; "" = only check ok+echo)
+        let cases = [
+            ("GetCurrentVolume", "<volume value=\"80\""), // default volume in ServicesState::new
+            ("GetCurrentLuminance", "<luminance value="),
+            ("GetCurrentTemperature", "<temperature "),
+            ("GetCurrentHumity", "<humidity value="),
+            ("GetCurrentDateTime", "<time value="),
+            ("GetCurrentTime", "<time value="),
+            ("GetCurrentGPSInfo", ""),
+            ("GetCurrentProtocolVersion", "0x1000000"),
+            ("GetCurrentVersion", "7.11.18.0"),
+            ("GetCurrentPlayProgramIndex", "<program index="),
+            ("GetCurrentProgram", "<program guid="),
+            ("GetCurrentImage", "<image format=\"png\""),
+        ];
+        for (m, needle) in cases {
+            let resp = call_sdk(m).await;
+            assert!(resp.contains("result value=\"0\""), "{m}: not ok: {resp}");
+            assert!(resp.contains(&format!("method=\"{m}\"")), "{m}: bad echo: {resp}");
+            if !needle.is_empty() {
+                assert!(resp.contains(needle), "{m}: missing `{needle}` in: {resp}");
+            }
+        }
+    }
+
+    #[tokio::test]
+    async fn getcurrentplayprogramindex_is_minus_one_when_empty() {
+        // No programs loaded -> index -1 (not a panic / not 0).
+        let resp = call_sdk("GetCurrentPlayProgramIndex").await;
+        assert!(resp.contains("index=\"-1\""), "expected -1, got: {resp}");
     }
 
     // ── extract_brightness_schedule ──────────────────────────────────────────
