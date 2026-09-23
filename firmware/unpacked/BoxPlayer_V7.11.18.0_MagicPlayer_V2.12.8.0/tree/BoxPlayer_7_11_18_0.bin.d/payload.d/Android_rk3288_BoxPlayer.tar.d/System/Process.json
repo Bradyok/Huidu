@@ -1,0 +1,9 @@
+{
+    "ProcessArgs":
+    {
+        "Process":  [["/system/root/Box/System/libBoxDaemon.so", "BoxDaemon"]],
+        "Process":  [["/system/root/Box/System/libBoxUpgrade.so", "BoxUpgrade"]],
+        "Process":  [["/system/root/Box/System/libBootLogo.so", "BootLogo"]],
+        "Process":  [["/system/root/Box/BoxPlayer/libBoxSDK.so", "BoxSDK", "-qws"]]
+    }
+}

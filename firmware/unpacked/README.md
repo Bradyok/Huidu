@@ -1,0 +1,40 @@
+# Unpacked firmware (plain git, rebuilds byte-identically)
+
+The official Huidu `.zbin` images are too big for GitHub (331 MiB), so the repo carries them
+exploded into readable files by [`tools/zbin-split`](../../tools/zbin-split/README.md). Every file
+is under 45 MiB, no LFS. `zbin-split pack` rebuilds the original `.zbin`, same SHA-256, ready to
+flash with HDPlayer.exe.
+
+```sh
+cargo build --release --manifest-path tools/zbin-split/Cargo.toml
+tools/zbin-split/target/release/zbin-split pack \
+    firmware/unpacked/BoxPlayer_V7.11.18.0_MagicPlayer_V2.12.8.0 \
+    BoxPlayer_V7.11.18.0_MagicPlayer_V2.12.8.0.zbin
+```
+
+## Images
+
+| Directory | Version | `.zbin` size | SHA-256 of rebuilt `.zbin` | DeviceType |
+|---|---|---|---|---|
+| `BoxPlayer_V7.11.18.0_MagicPlayer_V2.12.8.0/` | BoxPlayer 7.11.18.0 + MagicPlayer 2.12.8.0 | 346,792,414 B | `cdbbd3d19d0c3c85b1a156dcb1fc10638521a1ca7bb55124f2f710085a7add4f` | BoxPlayer: A3,C15,C35,A4,A5,A6,D15,D35,B6,C16,C36,D16,D36,C16L,C08L · MagicPlayer: A7,A8,A3L,A4L,A5L,A6L,B6L,H4K,H6,H8,B8L,C16H |
+
+Source: `C:\Program Files\HDPlayer_7.11.18.0\BoxPlayer_V7.11.18.0_MagicPlayer_V2.12.8.0.zbin`
+(stock HDPlayer 7.11.18.0 install). Keep local copies in `firmware/official/`, which is git-ignored.
+
+Where things are inside `tree/`:
+- `BoxPlayer_7_11_18_0.bin.d/_header.xml.hdr`: the HDPLAYER header (magic, MD5, XML with version,
+  `<Decompress>`, `<Script>` and device list).
+- `BoxPlayer_7_11_18_0.bin.d/payload.d/`: the payload tar. `upgrade.sh` picks one of the
+  per-SoC archives below by reading `/proc/cpuinfo` and `/root/Box/data/id`.
+- `…/payload.d/<Platform>.tar.d/`: RK3188, RK3288, RK3288 Android 9, PX30 D15, D15_RC (C16/C36/D16/D36/C16L/C08L)
+  and D18. Each is a BoxPlayer tree, with APKs unpacked as `*.apk.d/`.
+- `MagicPlayer_V2.12.8.0.bin.d/payload.d/`: MagicPlayer.apk, `cn.huidu.device.api`, HSDKProxys, `upgrade.sh`.
+
+This is 7.11.18.0. The live C15 units in this project run 7.4.59/61.0. A full cross-train flash
+replaces the whole rootfs, so treat it as a heavy operation.
+
+## Git notes
+
+`.gitattributes` here sets `* -text` so git never rewrites line endings, and `.gitignore` re-includes
+the `*.bin`/`*.apk` names the root rules would drop. On Windows, clone with `core.longpaths=true`
+(some paths are about 190 characters inside the repo).

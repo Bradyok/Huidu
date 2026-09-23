@@ -1,0 +1,87 @@
+Signature-Version: 1.0
+X-Android-APK-Signed: 2
+SHA-256-Digest-Manifest: 8iPVOl07bkCO15YZtBOuwzr7R5fadwzkHa10zbZVfeE=
+Created-By: 1.0 (Android)
+
+Name: lib/armeabi-v7a/libplugins_imageformats_libqtga.so
+SHA-256-Digest: T8apyohgQzoJo8DrJAr43fbcjDidUWyH4ERonYPZ2x8=
+
+Name: AndroidManifest.xml
+SHA-256-Digest: /xWgId/bWoMlBSPaPy+n3dwbzaIspfJ9Z4WCscJaIPs=
+
+Name: lib/armeabi-v7a/libgnustl_shared.so
+SHA-256-Digest: G3vAuAbGT/GHFDc1K4CsPb1Ab1nzUxmDlBA/T3yqnI0=
+
+Name: lib/armeabi-v7a/libQt5AndroidExtras.so
+SHA-256-Digest: dEJLhgpQHCxycrjLUQeWCMbgp3FRhhpu8bLDI2Jzm1I=
+
+Name: res/layout/splash.xml
+SHA-256-Digest: 2inzuS3kAxOlQDfkETv1B03frM57WBfMvWplDYw1mBg=
+
+Name: lib/armeabi-v7a/libQt5Widgets.so
+SHA-256-Digest: XJpvTP1PlLhtnOIRo1Ian8zi0KPiq7Rb7I/VRpd9RpM=
+
+Name: lib/armeabi-v7a/libplugins_imageformats_libqjpeg.so
+SHA-256-Digest: d8tFDHq9qYP7s9KakSXonA45KrYobRrXggG39LJxY00=
+
+Name: assets/--Added-by-androiddeployqt--/debugger.command
+SHA-256-Digest: Yo5Iih25KFavidHmDBDxQrsd5zVkblHmmUEj/IWhL+k=
+
+Name: lib/armeabi-v7a/libBoxPlayerLoader.so
+SHA-256-Digest: KkSfwI+1C8choXo9PBdYP8p82ptdryrNopNxZNiDV+0=
+
+Name: lib/armeabi-v7a/libplugins_imageformats_libqwbmp.so
+SHA-256-Digest: hjE+0fW4yobSuSnB0exitDMOOnqltCnlYv+X0RnSHhM=
+
+Name: lib/armeabi-v7a/libQt5Xml.so
+SHA-256-Digest: SCKU0TvODDVjjteEilyyyhejzUVIf0OhtGqaEZdfPu4=
+
+Name: lib/armeabi-v7a/libplugins_imageformats_libqtiff.so
+SHA-256-Digest: hNh1aPxPgurC2Jetql7XKKWVurc0IuxH8rrCMIvZV6g=
+
+Name: lib/armeabi-v7a/libplugins_styles_libqandroidstyle.so
+SHA-256-Digest: T+j4JoyB6D6NN6DP1wsBSFECMKe7nTDJ3FcP8CMysVE=
+
+Name: res/layout/activity_main.xml
+SHA-256-Digest: 6i0FXUp06HUHDCOVZ/TWLvWLg/pGhzcUM4ZrRviZn6g=
+
+Name: lib/armeabi-v7a/libplugins_bearer_libqandroidbearer.so
+SHA-256-Digest: yBe1HeW9/z/NuX7IZ0QAZmgDaBjHZyH3utC0cpo6eFg=
+
+Name: lib/armeabi-v7a/libQt5Gui.so
+SHA-256-Digest: FxcdP/1KPwpUjhE7Nbrkwd+HYIbfZ+/fyH/zHlc5p+U=
+
+Name: lib/armeabi-v7a/libplugins_imageformats_libqgif.so
+SHA-256-Digest: BewvNEheHP6AhLY7SEtNiSkzo4CWV1M8uwdBnz74cHA=
+
+Name: lib/armeabi-v7a/libQt5Core.so
+SHA-256-Digest: F2AgGA689vW7hbE4xvNytDVjr2hHszoCB9uHIQtjXIo=
+
+Name: lib/armeabi-v7a/libgdbserver.so
+SHA-256-Digest: AIfITz0GrL800uDNG2HEjBvGYK17z5ga8UR+UYehNoo=
+
+Name: lib/armeabi-v7a/libplugins_imageformats_libqico.so
+SHA-256-Digest: pzcUKw59yZAogJ0Wl/g1NDbrELBvCqCBJpYK5QL9qws=
+
+Name: lib/armeabi-v7a/libQt5Network.so
+SHA-256-Digest: R05s8VrifLaPBHiEiuR+xNvTPy6SXWPy++jKUgBJH58=
+
+Name: assets/--Added-by-androiddeployqt--/qt_cache_pregenerated_file_l
+ ist
+SHA-256-Digest: mO/PR39A9+ET8K73bDv0G1ST9VVkeP/DKcG/l08Mq40=
+
+Name: lib/armeabi-v7a/libplugins_platforms_android_libqtforandroid.so
+SHA-256-Digest: 1KVaMg3wLmPct0yDQGimBvuXOcWL+NN4VKKmV3psgag=
+
+Name: resources.arsc
+SHA-256-Digest: i1XKpmtYNifZTpdTYiXLuxnkQzNZG3X23DwaNhz5+qA=
+
+Name: lib/armeabi-v7a/libplugins_imageformats_libqicns.so
+SHA-256-Digest: FqkC37mIlIzz9O6HP0q3GxPWHhmXSNK3Yzltg5Lme7g=
+
+Name: classes.dex
+SHA-256-Digest: iYFKGOLu2U0is9CSk0w0nSNjRmV/qKALpIidqcbb/Bs=
+
+Name: lib/armeabi-v7a/libplugins_imageformats_libqwebp.so
+SHA-256-Digest: 1otLsc1c8p2DYkEr15RiQDlfcvaB1qwTQMLPQmGgh84=
+

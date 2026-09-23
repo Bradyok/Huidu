@@ -1,0 +1,3 @@
+# Exploded firmware trees must round-trip byte-for-byte: never let git rewrite line endings
+# or diff them as text. (Overrides the repo-wide `* text=auto`.)
+* -text

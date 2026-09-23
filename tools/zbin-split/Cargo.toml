@@ -1,0 +1,21 @@
+[package]
+name = "zbin-split"
+version = "0.1.0"
+edition = "2021"
+description = "Split a Huidu .zbin firmware bundle into GitHub-sized, human-readable files and rebuild it byte-identically"
+
+# Standalone (not a member of the repo workspace): it wants opt-level 3, not the
+# workspace's size-optimised release profile, because preflate is CPU-heavy.
+[workspace]
+
+[dependencies]
+anyhow = "1"
+base64 = "0.22"
+preflate-rs = "=0.7.6"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sha2 = "0.10"
+
+[profile.release]
+opt-level = 3
+debug = false
