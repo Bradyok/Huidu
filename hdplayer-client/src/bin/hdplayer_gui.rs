@@ -1438,7 +1438,10 @@ async fn worker_loop(
                         let _ = resp_phase.send(Response::UpgradePhase(msg.to_string()));
                     })),
                 };
-                match hdplayer::upgrade::run_upgrade(&host, &file, opts).await {
+                // Default binary-upgrade port. The GUI has no port selector, so
+                // pass 9528 literally (the standard port; CLI exposes --upgrade-port).
+                // `&file` (PathBuf) coerces to the `&Path` the signature expects.
+                match hdplayer::upgrade::run_upgrade(&host, 9528, file.as_path(), opts).await {
                     Ok(()) => { let _ = resp_tx.send(Response::UpgradeComplete); }
                     Err(e) => { let _ = resp_tx.send(Response::Error(format!("Upgrade failed: {e}"))); }
                 }

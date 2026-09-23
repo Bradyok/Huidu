@@ -53,7 +53,7 @@ use std::time::{Duration, Instant};
 use anyhow::{bail, Result};
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 use tokio::net::TcpStream;
-use tracing::{debug, info};
+use tracing::{debug, info, warn};
 
 // ── Command codes confirmed from Upgrade Huidu.pcapng ────────────────────────
 
@@ -136,6 +136,11 @@ struct FirmwareParsed {
     /// UpgradeControl mode=2 payload: `[u16 LE 2][script_name\0]`.
     /// Read from the BIN XML header `<Script>` field.
     script_name: Vec<u8>,
+    /// Firmware `<Version>` string from the BIN XML (e.g. "7.11.18.0"), if present.
+    /// Used by the pre-flight version-limit gate in [`run_upgrade`].
+    version: Option<String>,
+    /// Firmware `<DeviceType>` CSV from the BIN XML (advisory list of models), if present.
+    device_type: Option<String>,
 }
 
 /// Parse a firmware file and extract the uploadable payload + device commands.
@@ -163,32 +168,81 @@ fn parse_firmware_file(data: &[u8]) -> Result<FirmwareParsed> {
         declared_size: data.len() as u64,
         decompress_cmd: b"tar zxvf %s -C %s \0".to_vec(),
         script_name: b"upgrade.sh\0".to_vec(),
+        version: None,
+        device_type: None,
     })
+}
+
+/// Choose the firmware `.bin` entry inside a `.zbin` (ZIP) archive.
+///
+/// Selection order:
+/// 1. a `BoxPlayer*.bin` entry (the stock Linux controller firmware), else
+/// 2. if there is exactly ONE `*.bin` entry, use it (e.g. an `access_pw_*.bin`
+///    single-file access package), else
+/// 3. error — zero `.bin` entries, or several with none named `BoxPlayer*`.
+fn select_zbin_bin<R: std::io::Read + std::io::Seek>(
+    archive: &mut zip::ZipArchive<R>,
+) -> Result<String> {
+    let mut box_player: Option<String> = None;
+    let mut bins: Vec<String> = Vec::new();
+    for i in 0..archive.len() {
+        if let Ok(f) = archive.by_index(i) {
+            let name = f.name().to_string();
+            if name.ends_with(".bin") {
+                if name.starts_with("BoxPlayer") && box_player.is_none() {
+                    box_player = Some(name.clone());
+                }
+                bins.push(name);
+            }
+        }
+    }
+    if let Some(bp) = box_player {
+        return Ok(bp);
+    }
+    match bins.len() {
+        1 => Ok(bins.into_iter().next().unwrap()),
+        0 => bail!("No .bin entry found inside .zbin"),
+        n => bail!(
+            "{n} .bin entries in .zbin and none named BoxPlayer*.bin — cannot choose which to upgrade with"
+        ),
+    }
 }
 
 fn parse_zbin(data: &[u8]) -> Result<FirmwareParsed> {
     let cursor = std::io::Cursor::new(data);
     let mut archive = zip::ZipArchive::new(cursor)?;
 
-    // Find BoxPlayer*.bin (the Linux controller firmware)
-    let bin_name = (0..archive.len())
-        .find_map(|i| {
-            archive.by_index(i).ok().and_then(|f| {
-                let name = f.name().to_string();
-                if name.starts_with("BoxPlayer") && name.ends_with(".bin") {
-                    Some(name)
-                } else {
-                    None
-                }
-            })
-        })
-        .ok_or_else(|| anyhow::anyhow!("No BoxPlayer*.bin found inside .zbin"))?;
+    let bin_name = select_zbin_bin(&mut archive)?;
 
     info!("Extracting {} from .zbin…", bin_name);
     let mut entry = archive.by_name(&bin_name)?;
     let mut bin_data = Vec::new();
     entry.read_to_end(&mut bin_data)?;
     parse_bin(&bin_data)
+}
+
+/// Compute the payload offset (== end of the XML region) for an HDPLAYER `.bin`.
+///
+/// Header layout: magic(8) + md5(16) + u32 LE xml_len(4) + xml + payload, so the
+/// payload begins at `28 + xml_len`.  This is 678 for the stock BoxPlayer `.bin`
+/// but varies for smaller packages, so we compute it and validate the region
+/// contains `<FirmwareInfo`.  Falls back to the legacy [`BIN_PAYLOAD_OFFSET`]
+/// constant when the computed region doesn't look like the firmware XML.
+fn bin_payload_offset(data: &[u8]) -> Option<usize> {
+    if data.len() >= 28 {
+        let xml_len = u32::from_le_bytes([data[24], data[25], data[26], data[27]]) as usize;
+        let computed = 28usize.checked_add(xml_len).unwrap_or(usize::MAX);
+        if computed <= data.len()
+            && std::str::from_utf8(&data[28..computed]).map_or(false, |s| s.contains("<FirmwareInfo"))
+        {
+            return Some(computed);
+        }
+    }
+    if data.len() > BIN_PAYLOAD_OFFSET {
+        Some(BIN_PAYLOAD_OFFSET)
+    } else {
+        None
+    }
 }
 
 fn parse_bin(data: &[u8]) -> Result<FirmwareParsed> {
@@ -199,25 +253,13 @@ fn parse_bin(data: &[u8]) -> Result<FirmwareParsed> {
         bail!(".bin too short ({} bytes)", data.len());
     }
 
-    // Header: magic(8) + md5(16) + u32 LE xml_len(4) + xml + payload.
-    // Payload offset = 28 + xml_len (this is 678 for the stock BoxPlayer .bin,
-    // but varies for smaller packages we build, so compute it rather than
-    // hardcoding BIN_PAYLOAD_OFFSET).  Fall back to the legacy constant if the
-    // computed region doesn't look like the firmware XML.
-    let xml_len = u32::from_le_bytes([data[24], data[25], data[26], data[27]]) as usize;
-    let computed = 28usize.checked_add(xml_len).unwrap_or(usize::MAX);
-    let payload_offset = if computed <= data.len()
-        && std::str::from_utf8(&data[28..computed]).map_or(false, |s| s.contains("<FirmwareInfo"))
-    {
-        computed
-    } else if data.len() > BIN_PAYLOAD_OFFSET {
-        BIN_PAYLOAD_OFFSET
-    } else {
-        bail!(".bin header unrecognised (xml_len={xml_len}, size={})", data.len());
-    };
+    let payload_offset = bin_payload_offset(data)
+        .ok_or_else(|| anyhow::anyhow!(".bin header unrecognised (size={})", data.len()))?;
 
     // Search the XML region for Decompress and Script tags.
     let xml_region = std::str::from_utf8(&data[28..payload_offset]).unwrap_or("");
+    let version = xml_text(xml_region, "Version").map(str::to_string);
+    let device_type = xml_text(xml_region, "DeviceType").map(str::to_string);
     let decompress = xml_text(xml_region, "Decompress")
         .unwrap_or("killall -1 BoxDaemon; tar zxvf %s -C %s");
     // Use the <Decompress> command VERBATIM, including the "killall -1 BoxDaemon;"
@@ -246,6 +288,8 @@ fn parse_bin(data: &[u8]) -> Result<FirmwareParsed> {
         declared_size: data.len() as u64,
         decompress_cmd,
         script_name,
+        version,
+        device_type,
     })
 }
 
@@ -264,34 +308,53 @@ fn xml_text<'a>(xml: &'a str, tag: &str) -> Option<&'a str> {
 /// formats.  Returns `None` if the format is unrecognised or the `<Version>` tag is absent.
 pub fn firmware_file_version(data: &[u8]) -> Option<String> {
     if data.starts_with(b"PK\x03\x04") {
-        // .zbin → find BoxPlayer*.bin inside and recurse on its contents
+        // .zbin → pick the firmware .bin (BoxPlayer*, else a single *.bin)
         let cursor = std::io::Cursor::new(data);
         let mut archive = zip::ZipArchive::new(cursor).ok()?;
-        let bin_name = (0..archive.len()).find_map(|i| {
-            archive.by_index(i).ok().and_then(|f| {
-                let name = f.name().to_string();
-                if name.starts_with("BoxPlayer") && name.ends_with(".bin") {
-                    Some(name)
-                } else {
-                    None
-                }
-            })
-        })?;
-        // Extract version from the filename — no decompression required.
+        let bin_name = select_zbin_bin(&mut archive).ok()?;
+        // Fast path for the stock naming — version is in the filename, no unzip:
         // "BoxPlayer_7_11_18_0.bin"  → "7.11.18.0"
         // "BoxPlayer_V7.11.18.0.bin" → "7.11.18.0"
-        let stem = bin_name
-            .strip_prefix("BoxPlayer_").unwrap_or(&bin_name)
-            .strip_suffix(".bin").unwrap_or(&bin_name);
-        let stem = stem.strip_prefix('V').unwrap_or(stem);
-        return Some(stem.replace('_', "."));
+        if let Some(rest) = bin_name.strip_prefix("BoxPlayer_") {
+            let stem = rest.strip_suffix(".bin").unwrap_or(rest);
+            let stem = stem.strip_prefix('V').unwrap_or(stem);
+            return Some(stem.replace('_', "."));
+        }
+        // Other single-.bin packages: read the entry and parse its XML <Version>.
+        let mut entry = archive.by_name(&bin_name).ok()?;
+        let mut bin_data = Vec::new();
+        entry.read_to_end(&mut bin_data).ok()?;
+        return firmware_file_version(&bin_data);
     }
-    if data.starts_with(b"HDPLAYER") && data.len() > 18 {
-        let xml_end = BIN_PAYLOAD_OFFSET.min(data.len());
-        let xml_region = std::str::from_utf8(&data[18..xml_end]).ok()?;
+    if data.starts_with(b"HDPLAYER") {
+        // Compute the XML region the same way parse_bin does (28..28+xml_len,
+        // with the BIN_PAYLOAD_OFFSET fallback) so version parsing works for
+        // packages whose header isn't the stock 678 bytes.
+        let offset = bin_payload_offset(data)?;
+        let xml_region = std::str::from_utf8(&data[28..offset]).ok()?;
         return xml_text(xml_region, "Version").map(str::to_string);
     }
     None
+}
+
+/// Parse a dotted-quad version "a.b.c.d" into a big-endian u32 (field0 the most
+/// significant byte), matching the device's `inet_addr`-style numeric comparison
+/// of firmware version vs. its limit version.  Returns `None` unless the string
+/// is exactly 4 fields, each a 0–255 integer.
+fn version_quad_to_u32(s: &str) -> Option<u32> {
+    let mut bytes = [0u8; 4];
+    let mut n = 0usize;
+    for (i, part) in s.trim().split('.').enumerate() {
+        if i >= 4 {
+            return None; // more than 4 fields
+        }
+        bytes[i] = part.trim().parse::<u8>().ok()?;
+        n = i + 1;
+    }
+    if n != 4 {
+        return None; // fewer than 4 fields
+    }
+    Some(u32::from_be_bytes(bytes))
 }
 
 /// UpgradeExec parameter observed in capture (frame 103931: 08 00 00 00 00 00 00 00 → u64=8).
@@ -544,9 +607,43 @@ pub async fn run_upgrade(addr: &str, port: u16, file_path: &Path, opts: UpgradeO
     report_phase(&opts, "Querying limit version…");
     conn.send(CMD_UPGRADE_CTRL, &1u16.to_le_bytes()).await?;
     let st = conn.expect(CMD_UPGRADE_STATUS).await?;
-    match parse_upgrade_status(&st) {
-        Some((1, v)) => info!("Device limit version: {}.{}.{}.{}", v[0], v[1], v[2], v[3]),
-        _ => info!("Unexpected limit-version answer: {:02x?}", st),
+    let device_limit: Option<[u8; 4]> = match parse_upgrade_status(&st) {
+        Some((1, v)) => {
+            info!("Device limit version: {}.{}.{}.{}", v[0], v[1], v[2], v[3]);
+            Some(v)
+        }
+        _ => {
+            info!("Unexpected limit-version answer: {:02x?}", st);
+            None
+        }
+    };
+
+    // ── Phase 2b: pre-flight gates (before uploading 330 MB) ─────────────────
+    // The device compares the firmware's own <Version> against its limit version
+    // as a big-endian dotted-quad (inet_addr) numeric compare and SILENTLY skips
+    // the upgrade if the firmware is older.  Do the same compare here so we fail
+    // fast with a clear message instead of uploading and reporting phantom success.
+    if let Some(limit) = device_limit {
+        match fw.version.as_deref().and_then(version_quad_to_u32) {
+            Some(fw_v) => {
+                let dev_v = u32::from_be_bytes(limit);
+                if fw_v < dev_v {
+                    bail!(
+                        "firmware {} is below device limit {}.{}.{}.{}; device would silently skip the upgrade",
+                        fw.version.as_deref().unwrap_or("?"),
+                        limit[0], limit[1], limit[2], limit[3],
+                    );
+                }
+            }
+            None => warn!(
+                "firmware version {:?} is not a 4-field numeric quad — skipping version-limit gate",
+                fw.version,
+            ),
+        }
+    }
+    // Device-type list is advisory only (never a hard block); log it for context.
+    if let Some(ref dt) = fw.device_type {
+        info!("Firmware supported device types: {}", dt);
     }
 
     // ── Phase 3: open the file on the device ─────────────────────────────────
@@ -818,5 +915,74 @@ mod tests {
         let bad = build_packet(CMD_CLOSE_FILE, &0u32.to_le_bytes());
         let total = u16::from_le_bytes([bad[0], bad[1]]);
         assert_eq!(total, 8, "a 4-byte payload yields total_length=8 — the value the device silently drops");
+    }
+
+    /// Build a synthetic HDPLAYER `.bin` with a caller-controlled XML body so the
+    /// header size differs from the stock 678 bytes.
+    fn synth_bin(xml: &str, payload: &[u8]) -> Vec<u8> {
+        let mut bin = b"HDPLAYER".to_vec();
+        bin.extend_from_slice(&[0u8; 16]); // md5 placeholder
+        bin.extend_from_slice(&(xml.len() as u32).to_le_bytes());
+        bin.extend_from_slice(xml.as_bytes());
+        bin.extend_from_slice(payload);
+        bin
+    }
+
+    /// Fix 1: a .zbin containing a single NON-BoxPlayer `.bin` must parse.
+    #[test]
+    fn zbin_with_single_non_boxplayer_bin_parses() {
+        use std::io::Write as _;
+        let xml = "<FirmwareInfo><Version>3.2.1.0</Version><Script>upgrade.sh</Script>\
+                   <Decompress>tar zxvf %s -C %s</Decompress></FirmwareInfo>";
+        let inner = synth_bin(xml, &[0x1f, 0x8b, 0x08, 0x00, 9, 8, 7]);
+
+        let mut cur = std::io::Cursor::new(Vec::new());
+        {
+            let mut zw = zip::ZipWriter::new(&mut cur);
+            let opts = zip::write::SimpleFileOptions::default()
+                .compression_method(zip::CompressionMethod::Stored);
+            zw.start_file("access_pw_20260101.bin", opts).unwrap();
+            zw.write_all(&inner).unwrap();
+            zw.finish().unwrap();
+        }
+        let zbin = cur.into_inner();
+
+        let fw = parse_firmware_file(&zbin).expect("single non-BoxPlayer .bin must parse");
+        assert_eq!(fw.payload, vec![0x1f, 0x8b, 0x08, 0x00, 9, 8, 7]);
+        assert_eq!(fw.version.as_deref(), Some("3.2.1.0"));
+        // firmware_file_version should also read the version out of the inner XML.
+        assert_eq!(firmware_file_version(&zbin).as_deref(), Some("3.2.1.0"));
+    }
+
+    /// Fix 2: version must parse for a .bin whose header size != 678.
+    #[test]
+    fn firmware_version_for_non_678_header() {
+        let xml = "<FirmwareInfo><Version>7.11.18.0</Version><Script>upgrade.sh</Script></FirmwareInfo>";
+        let bin = synth_bin(xml, &[0x1f, 0x8b, 0x08, 0x00, 1, 2, 3]);
+        assert!(bin.len() < BIN_PAYLOAD_OFFSET, "synthetic header must be smaller than the legacy 678");
+        assert_eq!(firmware_file_version(&bin).as_deref(), Some("7.11.18.0"));
+        // parse_bin should also surface the version/device_type it now carries.
+        let xml2 = "<FirmwareInfo><Version>7.11.18.0</Version><DeviceType>C15,C35</DeviceType>\
+                    <Script>upgrade.sh</Script></FirmwareInfo>";
+        let bin2 = synth_bin(xml2, &[0x1f, 0x8b, 0x08, 0x00]);
+        let fw = parse_bin(&bin2).unwrap();
+        assert_eq!(fw.version.as_deref(), Some("7.11.18.0"));
+        assert_eq!(fw.device_type.as_deref(), Some("C15,C35"));
+    }
+
+    /// Fix 4: dotted-quad comparison mirrors the device's big-endian numeric compare.
+    #[test]
+    fn version_quad_compare() {
+        let ge = |a: &str, b: &str| version_quad_to_u32(a).unwrap() >= version_quad_to_u32(b).unwrap();
+        assert!(ge("7.11.18.99", "7.6.31.0"));       // newer minor
+        assert!(!ge("7.4.61.99", "7.6.31.0"));       // older minor
+        assert!(ge("7.6.31.0", "7.6.31.0"));         // equal
+        // field0 is the most significant byte
+        assert!(ge("8.0.0.0", "7.255.255.255"));
+        // malformed → None (caller treats as "skip gate, proceed")
+        assert_eq!(version_quad_to_u32("7.6.31"), None);       // too few fields
+        assert_eq!(version_quad_to_u32("7.6.31.0.1"), None);   // too many fields
+        assert_eq!(version_quad_to_u32("7.6.x.0"), None);      // non-numeric
+        assert_eq!(version_quad_to_u32("7.6.256.0"), None);    // field out of byte range
     }
 }
