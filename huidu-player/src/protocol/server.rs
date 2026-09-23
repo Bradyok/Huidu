@@ -17,6 +17,46 @@ use crate::services::manager::ServicesState;
 
 const MAX_PACKET_SIZE: usize = 9 * 1024;
 
+/// Finish the active file transfer: verify the received bytes against the
+/// declared size + MD5 and, only if intact, write the file into `program_dir`.
+/// Returns the `FileEndAnswer` result code — `0` on success, non-zero (which the
+/// sender treats as a failed transfer and retries) on a size/MD5 mismatch or a
+/// write error. A corrupt transfer is **never** written to disk.
+fn finish_file_transfer(session: &mut Session, program_dir: &str) -> u32 {
+    let Some(transfer) = session.complete_file_transfer() else {
+        return 0;
+    };
+    match transfer.verify() {
+        Ok(()) => {
+            let _ = std::fs::create_dir_all(program_dir);
+            let dest = std::path::Path::new(program_dir).join(&transfer.filename);
+            match std::fs::write(&dest, &transfer.data) {
+                Ok(()) => {
+                    info!(
+                        "File transfer complete: {} ({} bytes)",
+                        transfer.filename,
+                        transfer.data.len()
+                    );
+                    0
+                }
+                Err(e) => {
+                    warn!("File write failed for {}: {}", transfer.filename, e);
+                    crate::protocol::session::FILE_CONTENT_ERROR
+                }
+            }
+        }
+        Err(code) => {
+            warn!(
+                "File transfer rejected: {} ({} bytes) failed size/MD5 verify (code {}); not written",
+                transfer.filename,
+                transfer.data.len(),
+                code
+            );
+            code
+        }
+    }
+}
+
 pub async fn run(
     port: u16,
     player_tx: mpsc::Sender<PlayerCommand>,
@@ -187,33 +227,7 @@ async fn handle_connection(
             }
 
             Command::FileEndAsk => {
-                let result: u32 = if let Some(transfer) = session.complete_file_transfer() {
-                    let md5_ok = if !transfer.md5.is_empty() {
-                        let computed = format!("{:x}", md5::compute(&transfer.data));
-                        if computed != transfer.md5.to_lowercase() {
-                            warn!(
-                                "MD5 mismatch for {}: expected={} computed={}",
-                                transfer.filename, transfer.md5, computed
-                            );
-                            false
-                        } else {
-                            true
-                        }
-                    } else {
-                        true
-                    };
-
-                    let dest = std::path::Path::new(&program_dir).join(&transfer.filename);
-                    info!(
-                        "File transfer complete: {} ({} bytes, md5_ok={})",
-                        transfer.filename, transfer.data.len(), md5_ok
-                    );
-                    let _ = std::fs::create_dir_all(&program_dir);
-                    let _ = std::fs::write(&dest, &transfer.data);
-                    0u32
-                } else {
-                    0u32
-                };
+                let result = finish_file_transfer(&mut session, &program_dir);
                 let mut resp = Vec::new();
                 WriteBytesExt::write_u32::<LittleEndian>(&mut resp, result).unwrap();
                 Some(Packet::new(Command::FileEndAnswer, resp).to_bytes())
@@ -483,37 +497,7 @@ async fn handle_box_stream(
             }
 
             Command::FileEndAsk => {
-                let result: u32 =
-                    if let Some(transfer) = session.complete_file_transfer() {
-                        let md5_ok = if !transfer.md5.is_empty() {
-                            let computed =
-                                format!("{:x}", md5::compute(&transfer.data));
-                            if computed != transfer.md5.to_lowercase() {
-                                warn!(
-                                    "BoxStream MD5 mismatch for {}: expected={} computed={}",
-                                    transfer.filename, transfer.md5, computed
-                                );
-                                false
-                            } else {
-                                true
-                            }
-                        } else {
-                            true
-                        };
-                        let dest =
-                            std::path::Path::new(&program_dir).join(&transfer.filename);
-                        info!(
-                            "BoxStream file complete: {} ({} bytes, md5_ok={})",
-                            transfer.filename,
-                            transfer.data.len(),
-                            md5_ok
-                        );
-                        let _ = std::fs::create_dir_all(&program_dir);
-                        let _ = std::fs::write(&dest, &transfer.data);
-                        0u32
-                    } else {
-                        0u32
-                    };
+                let result = finish_file_transfer(&mut session, &program_dir);
                 let mut resp = Vec::new();
                 WriteBytesExt::write_u32::<LittleEndian>(&mut resp, result).unwrap();
                 stream
