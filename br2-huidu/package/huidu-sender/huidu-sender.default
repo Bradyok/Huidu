@@ -1,0 +1,19 @@
+# huidu-sender defaults (sourced by /etc/init.d/S95huidu-sender)
+
+# FPGA control link. On the PX30 C-series the sender card is on ttyS1 @115200 8N1.
+TTY=/dev/ttyS1
+
+# Line-control socket for the player/CMS (brightness / status / search / lock).
+LISTEN=127.0.0.1:7654
+
+# How often to poll send-card status (seconds).
+STATUS_SECS=5
+
+# Captured 512-byte send-card param blob (holds global config incl. brightness).
+# Capture from a correctly-configured stock unit and drop it here, then set:
+#SENDCARD=/etc/huidu/sendcard.blob
+
+# Space-separated recv-card param blobs, one per receiving card (scan/gamma).
+#RECVCARDS="/etc/huidu/recv0.blob /etc/huidu/recv1.blob"
+SENDCARD=
+RECVCARDS=

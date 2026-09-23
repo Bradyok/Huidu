@@ -1,0 +1,54 @@
+#!/bin/sh
+# huidu-sender: bring up the LED wall over /dev/ttyS1 and serve line control on
+# 127.0.0.1:7654. Starts late (S95) so the tty, watchdog and network are up.
+#
+# Config lives in /etc/default/huidu-sender (TTY, LISTEN, blob paths). Without a
+# captured send-card/recv-card blob the daemon still frames control commands and
+# reads status — enough to prove the link on a bench unit — but cannot push the
+# scan/gamma tables that light a real panel. Drop captured blobs into
+# /etc/huidu/ and point the vars at them.
+
+DAEMON=/usr/bin/huidu-sender
+PIDFILE=/var/run/huidu-sender.pid
+[ -x "$DAEMON" ] || exit 0
+
+TTY=/dev/ttyS1
+LISTEN=127.0.0.1:7654
+STATUS_SECS=5
+SENDCARD=
+RECVCARDS=
+[ -f /etc/default/huidu-sender ] && . /etc/default/huidu-sender
+
+build_args() {
+	set -- run --tty "$TTY" --listen "$LISTEN" --status-secs "$STATUS_SECS"
+	[ -n "$SENDCARD" ] && [ -f "$SENDCARD" ] && set -- "$@" --sendcard "$SENDCARD"
+	for c in $RECVCARDS; do
+		[ -f "$c" ] && set -- "$@" --recvcard "$c"
+	done
+	ARGS="$@"
+}
+
+case "$1" in
+start)
+	[ -c "$TTY" ] || { echo "huidu-sender: $TTY not present"; exit 1; }
+	build_args
+	printf 'Starting huidu-sender: '
+	# shellcheck disable=SC2086
+	start-stop-daemon -S -q -b -m -p "$PIDFILE" -x "$DAEMON" -- $ARGS \
+		&& echo OK || echo FAIL
+	;;
+stop)
+	printf 'Stopping huidu-sender: '
+	start-stop-daemon -K -q -p "$PIDFILE" && echo OK || echo FAIL
+	rm -f "$PIDFILE"
+	;;
+restart|reload)
+	"$0" stop
+	sleep 1
+	"$0" start
+	;;
+*)
+	echo "Usage: $0 {start|stop|restart}"
+	exit 1
+	;;
+esac

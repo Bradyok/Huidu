@@ -1,0 +1,61 @@
+Firmware file version:  unknown
+[2m2026-09-23T14:04:13.624426Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528: connecting for management login…
+[2m2026-09-23T14:04:13.628723Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528 management login authorised (ClientInfoAck ok)
+[2m2026-09-23T14:04:13.631189Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528 VersionResp: firmware=7.4.59.0
+Device version before:  7.4.59.0
+Starting native firmware upgrade: C:/Users/Scoreboards.com/AppData/Local/Temp/claude/C--Users-Scoreboards-com-Documents-GitHub-Huidu/cc708203-c158-4e11-bceb-5a53331c0ef5/scratchpad/bd.bin
+  Device: 192.168.1.249:9528
+
+  [Parsing firmware archive…]
+[2m2026-09-23T14:04:13.631397Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Parsing firmware archive…
+[2m2026-09-23T14:04:13.631691Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m BIN Decompress: killall -1 BoxDaemon; tar zxvf %s -C %s
+[2m2026-09-23T14:04:13.631701Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m BIN Script: upgrade.sh
+[2m2026-09-23T14:04:13.631712Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Firmware payload: 281 bytes (1 chunks) extracted from C:/Users/Scoreboards.com/AppData/Local/Temp/claude/C--Users-Scoreboards-com-Documents-GitHub-Huidu/cc708203-c158-4e11-bceb-5a53331c0ef5/scratchpad/bd.bin
+
+  [Connecting…]
+[2m2026-09-23T14:04:13.631724Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Connecting…
+
+  [Handshaking…]
+[2m2026-09-23T14:04:13.641900Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Handshaking…
+
+  [Entering upgrade mode…]
+[2m2026-09-23T14:04:13.644716Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Entering upgrade mode…
+[2m2026-09-23T14:04:13.645623Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Device entered upgrade mode
+
+  [Transferring 0.0 MB…]
+[2m2026-09-23T14:04:13.657367Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Transferring 0.0 MB…
+  281/281 bytes (100.0%)  [2m2026-09-23T14:04:13.657417Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Transfer: 1/1 chunks (100.0%)
+[2m2026-09-23T14:04:13.657421Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Sending CloseFile (0x001b) to flush the uploaded archive…
+[2m2026-09-23T14:04:16.659765Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m no explicit CloseFile answer — continuing
+
+  [Confirming file receipt…]
+[2m2026-09-23T14:04:16.659828Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Confirming file receipt…
+[2m2026-09-23T14:04:18.658060Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m File-complete / heartbeat-answer received — file transfer confirmed
+
+  [Starting decompression…]
+[2m2026-09-23T14:04:18.658107Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Starting decompression…
+[2m2026-09-23T14:04:18.658111Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Sending decompress command (mode=3) on conn1…
+[2m2026-09-23T14:04:18.658847Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Decompress command accepted (status 3)
+[2m2026-09-23T14:04:18.658891Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Upgrade script queued (mode=2)
+
+  [Upgrade script running — waiting for completion…]
+[2m2026-09-23T14:04:18.658900Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Upgrade script running — waiting for completion…
+[2m2026-09-23T14:04:18.658903Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Polling conn2 for completion (interval=5s, timeout=20s)
+[2m2026-09-23T14:04:18.770291Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Upgrade status: 2
+
+  [Upgrade in progress (status 2)]
+[2m2026-09-23T14:04:18.770331Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Upgrade in progress (status 2)
+[2m2026-09-23T14:04:18.770727Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Upgrade status: 0
+
+  [Upgrade complete!]
+[2m2026-09-23T14:04:18.770737Z[0m [32m INFO[0m [2mhdplayer::upgrade[0m[2m:[0m Upgrade complete!
+
+Waiting for device to come back online…
+[2m2026-09-23T14:04:33.773909Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528: connecting for management login…
+[2m2026-09-23T14:04:33.776915Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528 management login authorised (ClientInfoAck ok)
+[2m2026-09-23T14:04:33.779281Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528 VersionResp: firmware=7.4.59.0
+  Device reports old firmware (7.4.59.0) — upgrade in progress, 0s so far…
+[2m2026-09-23T14:04:48.781069Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528: connecting for management login…
+[2m2026-09-23T14:04:48.785648Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528 management login authorised (ClientInfoAck ok)
+[2m2026-09-23T14:04:48.787869Z[0m [32m INFO[0m [2mhdplayer::client[0m[2m:[0m Port 9528 VersionResp: firmware=7.4.59.0
+  Device reports old firmware (7.4.59.0) — upgrade in progress, 15s so far…

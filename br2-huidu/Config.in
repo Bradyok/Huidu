@@ -1,0 +1,5 @@
+menu "Huidu PX30 packages"
+
+source "$BR2_EXTERNAL_HUIDU_PATH/package/huidu-sender/Config.in"
+
+endmenu

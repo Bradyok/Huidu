@@ -5,6 +5,7 @@ members = [
     "hdset-client",
     "huidu-player",
     "hdsign-client",
+    "huidu-sender",
 ]
 resolver = "2"
 

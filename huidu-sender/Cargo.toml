@@ -1,0 +1,17 @@
+[package]
+name = "huidu-sender"
+version = "0.1.0"
+edition = "2021"
+description = "Huidu LED sender-card control over /dev/ttyS1 (the FPGA config link used by BoxPlayer)."
+
+[[bin]]
+name = "huidu-sender"
+path = "src/main.rs"
+
+[lib]
+name = "huidu_sender"
+path = "src/lib.rs"
+
+[dependencies]
+# Kept minimal for aarch64 static-musl cross builds (Buildroot / NovaOS).
+libc = "0.2"

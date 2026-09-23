@@ -1887,6 +1887,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "huidu-sender"
+version = "0.1.0"
+dependencies = [
+ "libc",
+]
+
+[[package]]
 name = "hyper"
 version = "1.8.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -5735,3 +5742,43 @@ dependencies = [
  "syn",
  "winnow",
 ]
+
+[[patch.unused]]
+name = "kcl-dynamicmodemanager-client"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "kcl-syscontrol-client"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "kcl-videoprocessing-client"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "page-engine"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "venus-plugin"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "venus-protocol"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "vp-vpmp2"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "vpmp-nucleus"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "vtx"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "pixelhue-client"
+version = "0.1.0"

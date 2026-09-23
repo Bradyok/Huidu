@@ -1,0 +1,22 @@
+config BR2_PACKAGE_HUIDU_SENDER
+	bool "huidu-sender"
+	depends on BR2_PACKAGE_HOST_RUSTC_TARGET_ARCH_SUPPORTS
+	select BR2_PACKAGE_HOST_RUSTC
+	help
+	  Our own LED sender-card control daemon for the Huidu PX30
+	  controllers (C15 / C35 / C36). Drives the FPGA config link on
+	  /dev/ttyS1 (scan tables, gamma, brightness, geometry, card
+	  params, status) — the same link the stock BoxPlayer uses via
+	  libFPGADriver.so. Pixels do NOT go over this link; they reach
+	  the panel as the SoC VOP's parallel-RGB888 output, so any KMS
+	  client can produce the image while this daemon brings the LED
+	  wall up and keeps it configured.
+
+	  Runs as S95huidu-sender and serves a line-control socket on
+	  127.0.0.1:7654 (brightness / status / search / lock / unlock)
+	  for the player/CMS.
+
+	  https://github.com/Bradyok/Huidu (huidu-sender crate)
+
+comment "huidu-sender needs a toolchain w/ host rustc"
+	depends on !BR2_PACKAGE_HOST_RUSTC_TARGET_ARCH_SUPPORTS

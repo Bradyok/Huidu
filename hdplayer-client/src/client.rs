@@ -1342,7 +1342,7 @@ impl Client {
 
     /// Set the NTP server used for automatic time synchronisation.
     pub async fn set_ntp_server(&mut self, server: &str) -> Result<()> {
-        self.sdk_cmd("SetNtpServer", &command::set_ntp_server(server)).await?;
+        self.sdk_cmd("SetNtpServerAddr", &command::set_ntp_server(server)).await?;
         Ok(())
     }
 
@@ -1398,7 +1398,7 @@ impl Client {
     }
 
     pub async fn set_volume(&mut self, level: u8) -> Result<()> {
-        self.sdk_cmd("SetVolume", &command::set_volume(level)).await?;
+        self.sdk_cmd("SetSystemVolume", &command::set_volume(level)).await?;
         Ok(())
     }
 
