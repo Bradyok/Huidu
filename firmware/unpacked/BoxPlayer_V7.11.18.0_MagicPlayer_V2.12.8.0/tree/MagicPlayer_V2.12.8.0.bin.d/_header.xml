@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FirmwareInfo>
+  <Type>MagicPlayer</Type>
+  <Script>upgrade.sh</Script>
+  <Decompress>unzip</Decompress>
+  <DeviceType>A7,A8,A3L,A4L,A5L,A6L,B6L,H4K,H6,H8,B8L,C16H</DeviceType>
+  <Version>2.12.8.0</Version>
+  <Description></Description>
+</FirmwareInfo>
