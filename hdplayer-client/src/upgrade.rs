@@ -554,16 +554,38 @@ pub async fn run_upgrade(addr: &str, port: u16, file_path: &Path, opts: UpgradeO
             );
         }
     }
-    // ── Phase 4b: CloseFile (0x001b) ─────────────────────────────────────────
+    // ── Phase 4b: wait for the last FileDataAck, THEN CloseFile ──────────────
     // The device (BoxUpgrade: RecvOpenFileAsk 0x17 → RecvFileContentAsk 0x19 →
-    // RecvCloseFileAsk 0x1b) only *closes* the QFile — flushing it to disk — on
-    // CloseFileAsk.  Without this, /tmp/Box.tar.gz is left unflushed and the
-    // later `tar zxvf` extracts an incomplete/empty archive, so upgrade.sh is
-    // never created and nothing runs.  RecvCloseFileAsk requires a 4-byte payload.
+    // RecvCloseFileAsk 0x1b) only *closes/flushes* the QFile on CloseFileAsk.
+    // But a packet capture of our client showed the device replying to our
+    // CloseFile with a FileDataAck (0x1a) rather than a CloseAck (0x1c) — because
+    // we sent CloseFile BEFORE the device had acked the final data chunk, so the
+    // close was processed out of order and the file was never flushed. tar then
+    // extracted an empty archive and upgrade.sh never ran (even though the device
+    // still reported status 0). So: first drain/await the final FileDataAck
+    // (0x1a) / FileComplete (0x60), then send CloseFile and await its CloseAck.
+    info!("Waiting for final FileDataAck before CloseFile…");
+    let ack_deadline = Instant::now() + Duration::from_secs(20);
+    loop {
+        if Instant::now() >= ack_deadline {
+            info!("No FileDataAck within 20 s — sending CloseFile anyway");
+            break;
+        }
+        match tokio::time::timeout(Duration::from_secs(2), conn.recv()).await {
+            Ok(Ok((CMD_FILE_DATA_ACK, _))) | Ok(Ok((CMD_FILE_COMPLETE, _))) => {
+                info!("Final FileDataAck/FileComplete received — file fully written");
+                break;
+            }
+            Ok(Ok((cmd, _))) => debug!("pre-close cmd=0x{:04x} — ignoring", cmd),
+            Ok(Err(e)) => { info!("conn hint before close: {} — continuing", e); break; }
+            Err(_) => { info!("quiet before ack — sending CloseFile"); break; }
+        }
+    }
     info!("Sending CloseFile (0x001b) to flush the uploaded archive…");
     conn.send(CMD_CLOSE_FILE, &0u32.to_le_bytes()).await?;
-    match tokio::time::timeout(Duration::from_secs(3), conn.recv_skip_acks()).await {
-        Ok(Ok((cmd, _))) => info!("CloseFile answered (cmd=0x{:04x})", cmd),
+    match tokio::time::timeout(Duration::from_secs(5), conn.recv()).await {
+        Ok(Ok((CMD_CLOSE_FILE_ACK, _))) => info!("CloseAck (0x001c) — file flushed"),
+        Ok(Ok((cmd, _))) => info!("CloseFile response cmd=0x{:04x}", cmd),
         Ok(Err(e)) => bail!("conn closed after CloseFile: {}", e),
         Err(_) => info!("no explicit CloseFile answer — continuing"),
     }
