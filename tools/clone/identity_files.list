@@ -1,0 +1,22 @@
+# Per-unit identity files for Huidu PX30 C-series (C15/C35/C36).
+# SINGLE SOURCE OF TRUTH for identity_backup.sh and identity_restore.sh.
+#
+# Format: <required|optional>  <device-absolute-path>   # comment
+# - required : backup FAILS if the file is missing (this is the master identity).
+# - optional : a warning is logged if missing (not all units have every file).
+#
+# Derived from decompiling System/BoxUpgrade / libCore / libSDKServices
+# (see CLONE_AND_RECOVERY.md and products/BoxPlayer/v7.11.18.0/hardware/).
+# The identity chain is: /root/Box/data/id  ->  MAC (GenMACWithID) -> /boot/dev_mac.
+#
+# The `oem` partition is NOT listed here (it is a raw partition, not a file);
+# back it up with identity_backup.sh --oem-dev /dev/block/by-name/oem (ssh) or
+# --oem-img <file> (local), because libSDKServices UpdateMACAddress writes it.
+
+required  /root/Box/data/id                                 # 16-byte master ID (e.g. C15-C21-BF104)
+optional  /boot/dev_mac                                     # MAC cached here, regenerable from the ID
+optional  /root/Box/data/license.ini                        # per-unit licence
+optional  /root/usb_dev/HDPlayerUsbExport/tips/device.key   # per-unit device key
+optional  /root/Box/config/dev_info.xml                     # device info
+optional  /root/Box/config/device_locker                    # HDPlayer/SDK management password
+optional  /root/Box/data/permanentConfig.xml                # cloud server + display name (may be per-site)
