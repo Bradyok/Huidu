@@ -1,0 +1,15 @@
+# Standalone crate — not part of the repo's root workspace.
+[workspace]
+
+[package]
+name = "boxupgrade-model"
+version = "0.1.0"
+edition = "2021"
+description = "Faithful Rust port of the semantic core of Huidu libBoxUpgrade (HDPLAYER firmware package verify + version gate + run/skip decision)"
+
+[dependencies]
+md5 = "0.7"
+
+[lib]
+name = "boxupgrade_model"
+path = "src/lib.rs"
