@@ -23,10 +23,21 @@ pub fn new_guid() -> String {
 /// ```
 /// Note: encoding is `UTF-8` (uppercase) as seen in the wire capture.
 pub fn sdk_request(guid: &str, method: &str, body: &str) -> String {
+    sdk_request_attr(guid, method, "", body)
+}
+
+/// Like [`sdk_request`] but with extra attributes on the `<in>` element.
+///
+/// `in_attrs` is inserted verbatim after the method attribute, e.g.
+/// `" delay=\"10\""` yields `<in method="Reboot" delay="10">`. The node-huidu-sdk
+/// reference client sends `Reboot` this way (`<in method="Reboot" delay="10"/>`);
+/// our degraded decompile shows only PLT thunks for the reboot handler, so the
+/// working client is the authoritative source for this wire format.
+pub fn sdk_request_attr(guid: &str, method: &str, in_attrs: &str, body: &str) -> String {
     format!(
         "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\
 <sdk guid=\"{guid}\">\
-<in method=\"{method}\">{body}</in>\
+<in method=\"{method}\"{in_attrs}>{body}</in>\
 </sdk>"
     )
 }

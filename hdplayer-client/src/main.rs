@@ -111,6 +111,15 @@ enum Commands {
     /// Sync device time to current local time
     SyncTime,
 
+    /// Send a raw SDK method and print the response (diagnostics/discovery)
+    SdkRaw {
+        /// SDK method name (e.g. GetAllMethodNames)
+        method: String,
+        /// Optional XML body for the <in> element
+        #[arg(default_value = "")]
+        body: String,
+    },
+
     /// Set the NTP server used for automatic time synchronisation
     SetNtpServer {
         /// NTP server hostname or IP (e.g. pool.ntp.org, time.google.com)
@@ -811,6 +820,11 @@ async fn main() -> anyhow::Result<()> {
         Commands::SetName { name } => {
             client.set_device_name(name).await?;
             println!("Device name set to '{name}'");
+        }
+
+        Commands::SdkRaw { method, body } => {
+            let resp = client.sdk_raw(method, body).await?;
+            println!("{resp}");
         }
 
         Commands::SyncTime => {

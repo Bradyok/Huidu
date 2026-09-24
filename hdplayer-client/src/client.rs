@@ -1381,8 +1381,41 @@ impl Client {
     // ── Device Control ────────────────────────────────────────────────────
 
     pub async fn reboot(&mut self) -> Result<()> {
-        // Method name is "Reboot" (device handler sdk::HSReboot), not "RebootDevice".
-        self.sdk_cmd("Reboot", &command::reboot_device()).await?;
+        self.reboot_after(10).await
+    }
+
+    /// Send an arbitrary SDK method with a given body and return the raw response
+    /// (diagnostic / discovery helper — e.g. `GetAllMethodNames`).
+    pub async fn sdk_raw(&mut self, method: &str, body: &str) -> Result<String> {
+        let xml_str = xml::sdk_request(&self.client_guid, method, body);
+        let response = self.send_xml_request(&xml_str).await?;
+        Ok(response)
+    }
+
+    /// Reboot the device after `delay` seconds.
+    ///
+    /// Method name is "Reboot" (device handler sdk::HSReboot). The reference
+    /// node-huidu-sdk sends the delay as an attribute on the `<in>` element
+    /// (`<in method="Reboot" delay="10"/>`), not as body content; our earlier
+    /// empty-body form was accepted only intermittently, so we now match the
+    /// working client's wire format.
+    pub async fn reboot_after(&mut self, delay: u32) -> Result<()> {
+        // NOTE: reboot is NOT exposed via the local SDK on C15/BoxPlayer 7.11.
+        // Empirically, "Reboot" (node-huidu-sdk's name, for a different model),
+        // "DeviceReboot" (this firmware's MReboot.cpp label), AND the discovery
+        // method "GetAllMethodNames" all return kUnsupportMethod on the 9527/9528
+        // path. The reboot capability exists in the binary but is reachable only
+        // via the cloud/OMS platform (HPlatformService::DecodeReboot), which is
+        // inactive on LAN-only units. So this call currently fails; there is no
+        // known way to remotely reboot the box via SDK. Kept for reference.
+        let xml_str = xml::sdk_request_attr(
+            &self.client_guid,
+            "DeviceReboot",
+            &format!(" delay=\"{delay}\""),
+            "",
+        );
+        let response = self.send_xml_request(&xml_str).await?;
+        xml::parse_result(&response)?;
         Ok(())
     }
 

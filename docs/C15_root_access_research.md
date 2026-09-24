@@ -187,6 +187,38 @@ eth0 commands), and the file-write / upgrade mechanism is fully mapped.
    ssid/psk write or the pppd chat-script `$apn` write can be leveraged on an
    ethernet unit, and whether their bring-up ever runs.
 
+## 4a. Remote reboot is NOT available (blocks the fresh-window lever)
+
+We hoped to reboot via SDK to reproduce the fresh-boot window (the only state where
+the upgrade script has ever run). Result: **the C15 does not expose reboot over the
+local SDK.** On the 9527/9528 path, `Reboot` (the node-huidu-sdk method name, for a
+*different* controller model), `DeviceReboot` (this firmware's `OldSDK/MReboot.cpp`
+label), and even the discovery method `GetAllMethodNames` all return
+**`kUnsupportMethod`**. The reboot code exists in the binary but is wired only to the
+cloud/OMS path (`HPlatformService::DecodeReboot`), which is inactive on LAN-only units.
+
+Correction to an earlier note: our SDK `reboot` has **never actually rebooted** the box
+— every call errored; a prior "box came back at t+32s" reading was a poll artifact (the
+box was up throughout). **Consequence: the reboot-then-flash "fresh window" experiment
+cannot be performed remotely** — it needs a physical power-cycle.
+
+Third-party SDK review (alparslanahmed/huidu-led, KryQ/node-huidu-sdk): both are
+content-push clients covering a **subset** of the command surface we already mapped from
+the firmware; neither offers an auth bypass, password-set, shell, factory-reset, or a
+different upgrade/root path. `huidu-led` targets an older HD2020/Gen6 controller, not the
+PX30 C15. Net new value: the `<in ... delay="N">` reboot attribute form (which the C15
+rejects anyway) and confirmation we're ahead of these implementations.
+
+## 4b. Bottom line
+
+Every **remote software** path to root on an already-running 7.11 C15 is now closed:
+SSH defaults, arbitrary-write, NTP/eth0 injection, SDK reboot — all dead; the upgrade
+script uploads + runs `cmd1` but its script step no-ops on a live box, and we cannot
+remotely reboot to hit the fresh window. Remaining realistic routes require **physical
+access**: (a) power-cycle + flash the small access image within the fresh boot window;
+(b) serial console (UART) for a root shell / boot interruption; (c) USB/loader recovery
+to flash the `px30-custom-os` image. All three need hands on the unit.
+
 ## 5. Tooling produced
 
 - `hdplayer-client/src/command.rs` — corrected `set_ntp_server` and `set_eth0_info`
@@ -194,6 +226,9 @@ eth0 commands), and the file-write / upgrade mechanism is fully mapped.
 - Hand-rolled 9528 file-transfer client (session scratchpad `putfile.py`) — confirms
   the fixed-destination write behaviour.
 - SSH default-password sweep script (session scratchpad `ssh_defaults.py`).
+- `hdplayer sdk-raw <method> [body]` — sends an arbitrary SDK method and prints the raw
+  response; used to probe method support (`GetAllMethodNames` → `kUnsupportMethod`, etc.).
+  Plus `xml::sdk_request_attr` for extra `<in>` attributes and `client.reboot_after`.
 
 > Note: large packet captures (`*.pcapng`, hundreds of MB) and `*.log` files from
 > this work are intentionally **not** committed.

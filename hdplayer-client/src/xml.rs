@@ -5,7 +5,7 @@
 //! so callers can use `?` without an explicit conversion.
 
 pub use huidu_protocol::xml::{
-    new_guid, sdk_request, sdk_response, sdk_error_response,
+    new_guid, sdk_request, sdk_request_attr, sdk_response, sdk_error_response,
     parse_out_body, extract_method, extract_guid,
     get_attr, get_tag_text,
     xml_escape, xml_unescape,
