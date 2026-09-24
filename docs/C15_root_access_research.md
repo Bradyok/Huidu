@@ -197,10 +197,25 @@ label), and even the discovery method `GetAllMethodNames` all return
 **`kUnsupportMethod`**. The reboot code exists in the binary but is wired only to the
 cloud/OMS path (`HPlatformService::DecodeReboot`), which is inactive on LAN-only units.
 
-Correction to an earlier note: our SDK `reboot` has **never actually rebooted** the box
-— every call errored; a prior "box came back at t+32s" reading was a poll artifact (the
-box was up throughout). **Consequence: the reboot-then-flash "fresh window" experiment
-cannot be performed remotely** — it needs a physical power-cycle.
+Correction to an earlier note: our SDK `reboot` (method `Reboot`/`DeviceReboot`) has
+**never actually rebooted** the box — every call errored; a prior "box came back at
+t+32s" reading was a poll artifact.
+
+**UPDATE — the real reboot API is reboot *policies*.** `GetRebootPloys` returns
+**kSuccess** with a schedule schema:
+`<reboot value=""/><timezone/><correction/><hour/><minute/><second/><ms/><index/><delay/><week/>`.
+So the reboot module IS registered and callable via `Get/SetRebootPloys` — the direct
+`Reboot`/`DeviceReboot` method names (and `GetAllMethodNames`) are simply not in this
+firmware's dispatcher. `SetRebootPloys` is therefore the correct way to reboot a C15
+(schedule/delay-based; clear with `reboot value="0"` to avoid a recurring reboot).
+
+**Fresh-window flash result (physical power-cycle of both C15s):** a racer flashed the
+access image ~8–13s after 9528 returned (and per boot order `runBoxUpgrade.sh` starts
+9528 *before* `run.sh`/BoxPlayer, so this was an early window). **Both boxes: root NOT
+set.** Combined with Team 3's finding that every upgrade mechanic is correct and `cmd1`
+runs, this is strong evidence the block is the **7.11 firmware's network script-upgrade
+behavior itself** (not box-idle-vs-running); the lone success was **7.4-firmware**
+-specific. Definitive confirmation still requires `upgradeLog.ini` (needs a shell).
 
 Third-party SDK review (alparslanahmed/huidu-led, KryQ/node-huidu-sdk): both are
 content-push clients covering a **subset** of the command surface we already mapped from
