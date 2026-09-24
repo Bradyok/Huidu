@@ -68,15 +68,51 @@ Picks DIR_A if `declaredSize ≤ freeSpace(DIR_A)*0x80000`, else DIR_B
 it, else `""`. Binary has **no `/tmp` string** — `/tmp/Box.tar.gz` is purely the
 client's chosen OpenFile path. Log strings: `fireware dir: %s.`, `not enought space!`.
 
+### Everything runs as root (no privilege separation)
+
+The boot chain (`BoxPlayerInit.sh` → `BoxDaemon`, `run.sh` → `runBoxPlayer.sh`/
+`runBoxSDK.sh`, `start-ssh`, `cn.huidu.device.*`) performs root-only ops
+(`echo > /proc/sys`, `mount`, `sysctl -w`, `killall`) with **no privilege drop**
+anywhere (no `su`/`setuidgid`/`start-stop-daemon --chuid`/`nobody`). App home is
+`/root/Box`. So BoxPlayer/BoxDaemon/BoxUpgrade/sshd all run as **root** — replacing
+BoxPlayer with our own agent, or getting the upgrade script to run, yields root.
+Privilege is not the blocker.
+
 ### The open puzzle (why cmd2 no-ops on running-7.11)
 
 A small script-only image never runs cmd2 on a running-7.11 box (no reboot, root pw
 never set) — via **both** our client and genuine HDPlayer. Yet the file **write
 succeeds** (`code=0`, committed), proving `GetFirewareDir` returns a valid writable
 dir for a small file. The only confirmed success ever was a big image on a **fresh
-7.4** box. Root cause still under investigation (see open questions). The device
-records the exact `cmd1[%s], cmd2[%s]` and `fireware dir` in
-`/root/Box/config/upgradeLog.ini`, which we can't read without a shell.
+7.4** box.
+
+**Deep trace verdict (all mechanical theories DISPROVEN):**
+- `GetFirewareDir` is called **once** (in `SendOpenFileAnswer`), cached to `this+0x2c`
+  (dir) and `this+0x1c` (`<fire>/Box.tar.gz`); mode-2/`DisposeUpgradeShellAsk` reuse
+  the cache — tar source, `-C` dir, and cmd2 all derive from the **same** dir the file
+  was written to. No open-vs-run mismatch; the declared size only steers that one
+  selection, which succeeded (code 0).
+- **No** version/limit/state gate on the mode-2 path (the USB path *is* version-gated;
+  the network path is not). cmd2 (`this+0x44`) is built **unconditionally**.
+- The observed "status 0" is `cmd1`'s own `echo "0" > /root/upgrade.status`, which
+  **proves `DisposeUpgradeShellAsk` ran and `system(cmd1)` executed**.
+- `killall -1 BoxDaemon` is **benign** — SIGHUP to *BoxDaemon* (a separate process that
+  handles it; the updater is *BoxUpgrade*); the working 7.4→7.11 flash also carried it.
+- Archive layout correct: payload gzip @ offset 287, single top-level `upgrade.sh`;
+  reconstructed cmd1/cmd2 paths all agree at `<fire>/UpgradeDir/upgrade.sh`.
+- `SendCloseFileAnswer`'s post-rename `system()` is a fixed no-arg (sync-class), not an
+  `rm` — archive isn't deleted before untar.
+
+**Residual cause:** a **runtime property of the already-running-7.11 box** (BoxPlayer/
+BoxSDK live) that static artifacts can't reveal — something between `cmd1`'s `echo` and
+the script taking effect, present on a live box and absent on a fresh idle one. The only
+ground truth that discriminates it is `/root/Box/config/upgradeLog.ini`
+(`cmd1[%s], cmd2[%s].`, `fireware dir: %s.`), unreadable without a shell.
+
+**Highest-value untried lever:** **reboot then flash within the fresh boot window** —
+reproduces the only condition under which cmd2 has ever run (fresh, idle box). A
+one-token control test (strip `killall -1 BoxDaemon` from `<Decompress>`) is predicted
+NOT to help.
 
 ---
 
