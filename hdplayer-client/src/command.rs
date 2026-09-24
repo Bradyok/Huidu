@@ -140,6 +140,32 @@ pub fn get_eth0_info() -> String {
 }
 
 /// Set Ethernet configuration.
+///
+/// The device parser (`old::HMEthernet::SetEth0Info` → `old::ParseAddressInfo`,
+/// libBoxIOServices.so) does NOT accept the flat `<eth0 .../>` attribute form.
+/// It expects the same element-per-field layout that `old::GenEthernetInfo`
+/// emits for `GetEth0Info` (confirmed from the live Huidu.pcapng capture):
+///
+/// ```xml
+/// <enable value="true"/>
+/// <dhcp auto="1"/>
+/// <ip addr="192.168.1.104"/>
+/// <netmask addr="255.255.255.0"/>
+/// <gateway addr="192.168.1.1"/>
+/// <dns addr="192.168.1.1"/>
+/// ```
+///
+/// Each address field is its own element carrying an `addr` attribute; the
+/// netmask element is named `netmask` (not `mask`), and the DHCP flag is
+/// `<dhcp auto="1|0"/>` (numeric `1`/`0`, attribute `auto`), not
+/// `dhcp="true|false"`. Sending the old flat form makes the device return
+/// error 0x16 (kParseXmlFailed). This is the inverse of the `GetEth0Info`
+/// round-trip parsed in `client::get_eth0_info`. The `mac` element is
+/// device-provided and read-only ("not support update mac address"), so it is
+/// not sent.
+///
+/// Address values are passed through verbatim (only XML-special chars are
+/// escaped, so e.g. a stray `"` becomes `&quot;` and the device un-escapes it).
 pub fn set_eth0_info(
     dhcp: bool,
     ip: &str,
@@ -148,9 +174,14 @@ pub fn set_eth0_info(
     dns: &str,
 ) -> String {
     format!(
-        "<eth0 dhcp=\"{}\" ip=\"{ip}\" mask=\"{mask}\" \
-         gateway=\"{gateway}\" dns=\"{dns}\"/>",
-        if dhcp { "true" } else { "false" }
+        "<enable value=\"true\"/><dhcp auto=\"{}\"/>\
+         <ip addr=\"{}\"/><netmask addr=\"{}\"/>\
+         <gateway addr=\"{}\"/><dns addr=\"{}\"/>",
+        if dhcp { "1" } else { "0" },
+        xml::xml_escape(ip),
+        xml::xml_escape(mask),
+        xml::xml_escape(gateway),
+        xml::xml_escape(dns),
     )
 }
 
@@ -190,8 +221,22 @@ pub fn get_ntp_server() -> String {
     String::new()
 }
 
+/// Set the NTP server address list.
+///
+/// The device parser (`sdk::ParseNtpServerAddr`, libCore.so) requires a
+/// `<server>` container holding one or more `<item>` elements, each with BOTH
+/// a `host` AND a `port` attribute. Missing either attribute — or sending the
+/// old `<ntp server="X"/>` form — makes the device return error 0x16
+/// (kParseXmlFailed). This matches `sdk::GenNtpServerAddr`, which serialises the
+/// list as `<server><item host="..." port="..."/></server>`.
+///
+/// `server` is passed through verbatim (only XML-special chars are escaped);
+/// `port` defaults to the standard NTP port 123.
 pub fn set_ntp_server(server: &str) -> String {
-    format!("<ntp server=\"{}\"/>", xml::xml_escape(server))
+    format!(
+        "<server><item host=\"{}\" port=\"123\"/></server>",
+        xml::xml_escape(server)
+    )
 }
 
 // ── FPGA Hardware Config ──────────────────────────────────────────────────────
@@ -578,18 +623,33 @@ mod tests {
 
     #[test]
     fn test_set_eth0_info_static() {
+        // Device (old::ParseAddressInfo) requires element-per-field with `addr`
+        // attributes, netmask (not mask), and <dhcp auto="0|1"/>; the old flat
+        // <eth0 .../> form returns kParseXmlFailed. Mirrors the GetEth0Info
+        // round-trip serialised by old::GenEthernetInfo.
         let xml = set_eth0_info(false, "192.168.1.10", "255.255.255.0", "192.168.1.1", "8.8.8.8");
-        assert!(xml.contains("dhcp=\"false\""));
-        assert!(xml.contains("ip=\"192.168.1.10\""));
-        assert!(xml.contains("mask=\"255.255.255.0\""));
-        assert!(xml.contains("gateway=\"192.168.1.1\""));
-        assert!(xml.contains("dns=\"8.8.8.8\""));
+        assert_eq!(
+            xml,
+            "<enable value=\"true\"/><dhcp auto=\"0\"/>\
+             <ip addr=\"192.168.1.10\"/><netmask addr=\"255.255.255.0\"/>\
+             <gateway addr=\"192.168.1.1\"/><dns addr=\"8.8.8.8\"/>"
+        );
+        // The rejected legacy schema must NOT reappear.
+        assert!(!xml.contains("<eth0"));
+        assert!(!xml.contains("mask=\""));
     }
 
     #[test]
     fn test_set_eth0_info_dhcp() {
         let xml = set_eth0_info(true, "", "", "", "");
-        assert!(xml.contains("dhcp=\"true\""));
+        assert!(xml.contains("<dhcp auto=\"1\"/>"));
+    }
+
+    #[test]
+    fn test_set_eth0_info_xml_escape() {
+        // A value with an XML-special char must be encoded (device un-escapes it).
+        let xml = set_eth0_info(false, "1.2.3.4\"", "", "", "");
+        assert!(xml.contains("<ip addr=\"1.2.3.4&quot;\"/>"));
     }
 
     // ── set_data_source_info ──────────────────────────────────────────────────
@@ -651,6 +711,24 @@ mod tests {
     #[test]
     fn test_set_boot_logo_name() {
         assert_eq!(set_boot_logo_name("logo.png"), "<bootLogo name=\"logo.png\"/>");
+    }
+
+    // ── set_ntp_server ────────────────────────────────────────────────────────
+
+    #[test]
+    fn test_set_ntp_server_schema() {
+        // Device (sdk::ParseNtpServerAddr) requires <server><item host="" port=""/></server>
+        // with BOTH host and port; the old <ntp server="X"/> form returns kParseXmlFailed.
+        assert_eq!(
+            set_ntp_server("pool.ntp.org"),
+            "<server><item host=\"pool.ntp.org\" port=\"123\"/></server>"
+        );
+    }
+
+    #[test]
+    fn test_set_ntp_server_xml_escape() {
+        let xml = set_ntp_server("a<b&c");
+        assert_eq!(xml, "<server><item host=\"a&lt;b&amp;c\" port=\"123\"/></server>");
     }
 
     // ── set_wifi ──────────────────────────────────────────────────────────────
