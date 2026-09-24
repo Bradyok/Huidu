@@ -94,8 +94,7 @@ Config values that reach a **root shell** (from static audit):
 | Field (SDK) | Shell template | Trigger | Notes |
 |---|---|---|---|
 | ntp server | `ntpdate <server>` via SystemCmd | **cloud only** (`CheckMulit`); the on-box periodic sync is `sdk::HNtpdate`, a **native NTP client** (no shell) | Dead end on LAN-only units |
-| eth0 dns | `echo "nameserver ##dns" > /etc/resolv.conf` | network apply | appears to only run on change / restart — see open questions |
-| eth0 ip/gateway | `ifconfig ##ip …` / `route add default gw ##gateway` | network apply | changing these risks connectivity |
+| eth0 dns/ip/gateway | `ifconfig ##ip …; route add default gw ##gateway; echo "nameserver ##dns" > /etc/resolv.conf` (one `system()`) | apply is **immediate & unconditional** on `SetEth0Info` (`HEthernet::SetAddrInfo`→`HNetTools::SetNetAddress`) | ❌ **DEAD END — not injectable.** `sdk::HnAddrInfo::Convert` runs `Inet_aton()` on ip/netmask/gateway/dns and stores 4-byte ints; the shell string is rebuilt via `Inet_ntoa`, so every value is a clean dotted-quad. **Confirmed empirically** on BE371: both a `dns=…$()…` and a `gateway=…;cmd;` payload were accepted but did NOT execute (root pw not set). (An earlier audit that called this injectable missed the `Inet_aton` numericisation.) |
 | wifi ssid/psk | written unescaped into `wpa_supplicant.conf` | wifi bring-up | config-directive injection, not direct shell; ethernet box |
 | set_time_info | `date -s "%s"; hwclock -w` | on set | **SAFE** — value round-trips through QDateTime (good sanitisation model) |
 
@@ -130,8 +129,9 @@ by the live device.
 | Read `upgradeLog.ini` via SDK/USB | ❌ No route (only `*.log` readback exists; wrong file). USB export = config clone (`BoxPlayer.bin`, hwsetting, `device.key`), no logs |
 | adb / telnet / other services | ❌ Not present (only 22/9527/9528 open) |
 | NTP value → root shell | ❌ Dead on LAN units (native NTP client; shell path is cloud-only) |
-| eth0 DNS value → root shell | ⏳ Sink exists but did not fire on a same-IP static set — trigger under investigation |
-| 9528 script upgrade | ⏳ Mechanism fully mapped; cmd2 no-op on running-7.11 unexplained despite valid write |
+| eth0 field → root shell | ❌ Dead — values `Inet_aton`-numericised before the shell command; tested dns + gateway payloads on hardware, neither executed |
+| wifi ssid/psk / pppoe apn → conf file | ⚠️ Genuine *verbatim* writes into `wpa_supplicant.conf` / pppd chat-script, but into config FILES, not a shell (launch commands are fixed literals); ethernet unit, so these paths may be inactive. pppoe user/password are never consumed by the firmware. Untested |
+| 9528 script upgrade | ⏳ Mechanism fully mapped; cmd2 no-op on running-7.11 unexplained despite valid write (under investigation) |
 
 Positive: the SDK config channel is **unblocked** (device now accepts our NTP and
 eth0 commands), and the file-write / upgrade mechanism is fully mapped.
@@ -140,14 +140,16 @@ eth0 commands), and the file-write / upgrade mechanism is fully mapped.
 
 ## 4. Open questions (being investigated)
 
-1. **eth0 apply trigger**: does the resolv.conf/ifconfig/route apply only run on a
-   changed value or dhcp↔static toggle? How to force it. Is the dns value
-   shell-evaluated in place (`$()`/`;`)?
-2. **Best-triggered config sink**: which setter runs a root shell command
-   immediately & unconditionally on set.
-3. **Upgrade cmd2 non-execution**: why cmd2 no-ops on running-7.11 despite a valid
-   write — different `GetFirewareDir` size arg at open vs mode3/mode2? a state gate?
-   `killall -1 BoxDaemon` interfering? path mismatch?
+1. ✅ *Answered.* eth0 apply is immediate & unconditional, but the values are
+   `Inet_aton`-numericised → not injectable (see §2/§3).
+2. ✅ *Answered.* The audit's "most reliable sink" (eth0) is numericised; the only
+   remaining verbatim writes are into **config files** (wifi/pppoe), not a shell.
+3. **Upgrade cmd2 non-execution** (still open): why cmd2 no-ops on running-7.11
+   despite a valid write — different `GetFirewareDir` size arg at open vs
+   mode3/mode2? a state gate? `killall -1 BoxDaemon` interfering? path mismatch?
+4. **wifi/pppoe conf-file injection** (untested): whether the `wpa_supplicant.conf`
+   ssid/psk write or the pppd chat-script `$apn` write can be leveraged on an
+   ethernet unit, and whether their bring-up ever runs.
 
 ## 5. Tooling produced
 
